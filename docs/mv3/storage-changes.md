@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Storage Changes. Manifest V3 Guide"
 description: "Handle storage changes with the chrome.storage API in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/storage-changes/"
+last_modified_at: 2026-01-15
 ---
 
 Storage API Changes in Manifest V3

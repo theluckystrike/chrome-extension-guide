@@ -3,6 +3,7 @@ layout: post
 title: "Build a Theme Switcher for Chrome Extensions: Complete 2025 Guide"
 description: "Learn how to build a theme switcher extension for Chrome with dark light mode functionality. Step-by-step guide covering theme toggle extension development, user preferences, and best practices for 2025."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "theme switcher extension, dark light mode chrome, theme toggle extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Message Passing Patterns. Request/Response, Port, and External Messaging"
 description: "Master message passing in Chrome extensions with sendMessage, connect/port, onMessageExternal, and cross-extension messaging patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/message-passing-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Message Passing Patterns. Request/Response, Port, and External Messaging

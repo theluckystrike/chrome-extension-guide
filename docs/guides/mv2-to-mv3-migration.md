@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension MV2 to MV3 Migration. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/mv2-to-mv3-migration/"
+last_modified_at: 2026-01-15
 ---
 Complete MV2 to MV3 Migration Guide
 

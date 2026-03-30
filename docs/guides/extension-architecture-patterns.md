@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Architecture Patterns. MVC, MVVM & Event-Driven. Developer Guide"
 description: "Master Chrome extension architecture patterns including MVC, MVVM, and event-driven designs with practical code examples and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/extension-architecture-patterns/"
+last_modified_at: 2026-01-15
 ---
 Extension Architecture Patterns
 

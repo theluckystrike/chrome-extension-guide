@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Fetch Interceptor: Monitor and Modify API Calls"
 description: "Learn how to build a Chrome extension fetch interceptor to monitor, log, and modify API calls in real-time. Complete guide with code examples."
 date: 2025-05-12
+last_modified_at: 2025-05-12
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [fetch, interceptor, chrome-extension]
 keywords: "chrome extension fetch interceptor, intercept fetch chrome, modify api calls extension, chrome extension api monitor, request interceptor extension"

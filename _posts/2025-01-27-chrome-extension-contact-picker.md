@@ -3,6 +3,7 @@ layout: post
 title: "Contact Picker API in Chrome Extensions: Complete Guide to Accessing User Contacts"
 description: "Learn how to implement the Contact Picker API in Chrome extensions to access user contacts. This comprehensive guide covers the contacts API, address book integration, Manifest V3 permissions, and best practices for building contact picker extensions."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "contact picker extension, address book chrome, contacts api extension, chrome contacts api, contact picker chrome extension, chrome address book api"

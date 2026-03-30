@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Context Menus: Dynamic Right-Click Menus Guide"
 description: "Build powerful context menus for Chrome extensions. Learn dynamic menus, nested items, click handlers, content script integration, and stateful menu patterns with TypeScript."
 permalink: /guides/chrome-extension-context-menus/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Context Menus: Dynamic Right-Click Menus Guide

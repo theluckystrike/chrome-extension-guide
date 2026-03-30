@@ -3,6 +3,7 @@ layout: post
 title: "Build a Chrome Extension with Angular: Complete Framework Guide 2025"
 description: "Learn to build Chrome extensions with Angular in 2025. This guide covers Angular CLI setup, Manifest V3, popup development, content scripts, and deployment."
 date: 2025-03-09
+last_modified_at: 2025-03-09
 categories: [Chrome-Extensions, Frameworks]
 tags: [angular, chrome-extension, tutorial]
 keywords: "chrome extension angular, angular chrome extension, build extension angular, angular popup chrome, angular chrome extension tutorial"

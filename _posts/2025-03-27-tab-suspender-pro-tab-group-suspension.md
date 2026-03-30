@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro with Chrome Tab Groups: Suspend by Group"
 description: "Learn how Tab Suspender Pro integrates with Chrome Tab Groups to let you suspend entire tab groups at once, create group-specific rules, and organize suspended tabs efficiently."
 date: 2025-03-27
+last_modified_at: 2025-03-27
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, tab-groups, organization]
 author: theluckystrike

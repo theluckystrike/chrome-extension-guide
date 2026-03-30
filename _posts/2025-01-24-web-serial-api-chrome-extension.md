@@ -3,6 +3,7 @@ layout: post
 title: "Web Serial API in Chrome Extensions: Connect to Arduino and Hardware"
 description: "Learn how to use the Web Serial API in Chrome extensions to connect to Arduino, microcontrollers, and hardware devices. A comprehensive guide for building hardware-integrated extensions."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [guides, chrome-extensions, hardware, arduino]
 tags: [web serial api extension, arduino chrome extension, serial port extension, hardware chrome extension, chrome serial communication, serial port api]
 keywords: "web serial api extension, arduino chrome extension, serial port extension, hardware chrome extension"

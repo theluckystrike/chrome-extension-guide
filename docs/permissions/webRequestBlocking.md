@@ -6,6 +6,7 @@ permalink: /permissions/webRequestBlocking/
 category: permissions
 order: 50
 canonical_url: "https://bestchromeextensions.com/permissions/webRequestBlocking/"
+last_modified_at: 2026-01-15
 ---
 
 webRequestBlocking Permission (MV2 Only)

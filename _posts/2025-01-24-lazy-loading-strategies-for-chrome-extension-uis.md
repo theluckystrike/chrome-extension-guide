@@ -3,6 +3,7 @@ layout: post
 title: "Lazy Loading Strategies for Chrome Extension UIs: Complete Guide"
 description: "Master lazy loading strategies for Chrome extension UIs. Learn dynamic imports, code splitting, and performance optimization techniques to build faster, more efficient extensions."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, Performance]
 tags: [chrome-extension, optimization]
 keywords: "lazy loading extension, dynamic import chrome extension, code splitting extension"

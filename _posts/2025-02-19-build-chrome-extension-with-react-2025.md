@@ -3,6 +3,7 @@ layout: post
 title: "Build a Chrome Extension with React in 2025: Step-by-Step Guide"
 description: "Learn how to build a Chrome extension with React in 2025. Complete tutorial covering project setup, components, state management, Chrome APIs, and deployment."
 date: 2025-02-19
+last_modified_at: 2025-02-19
 categories: [Chrome-Extensions, Frameworks]
 tags: [react, chrome-extension, tutorial]
 author: theluckystrike

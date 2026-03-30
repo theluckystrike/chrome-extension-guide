@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Preact for Tiny Bundles: Complete Guide"
 description: "Learn how to build lightweight Chrome extensions using Preact for incredibly small bundle sizes. Master preact chrome extension development, preact popup creation, and lightweight extension UI optimization techniques."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework]
 keywords: "preact chrome extension, lightweight extension ui, preact popup, chrome extension preact, preact chrome extension tutorial, build chrome extension with preact"

@@ -3,6 +3,7 @@ layout: post
 title: "WebGL in Chrome Extensions: Add 3D Graphics to Your Browser Extension"
 description: "Learn how to integrate WebGL into Chrome extensions for stunning 3D graphics. This guide covers canvas setup, Three.js integration, performance optimization, and real-world examples for building WebGL-powered extensions."
 date: 2025-05-08
+last_modified_at: 2025-05-08
 categories: [Chrome-Extensions, Graphics]
 tags: [webgl, 3d, chrome-extension]
 keywords: "chrome extension webgl, 3d graphics chrome extension, webgl extension popup, chrome extension canvas 3d, build webgl extension"

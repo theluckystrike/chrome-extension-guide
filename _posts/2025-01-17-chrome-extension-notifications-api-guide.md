@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Notifications API: Complete Guide for Developers"
 description: "Master the Chrome Extension Notifications API with this comprehensive tutorial. Learn how to create rich notifications, implement push notifications, handle user interactions, and follow best practices for building engaging Chrome extensions."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome notifications api tutorial, push notifications chrome extension, chrome extension notification guide, chrome.webNotifications API, Manifest V3 notifications"

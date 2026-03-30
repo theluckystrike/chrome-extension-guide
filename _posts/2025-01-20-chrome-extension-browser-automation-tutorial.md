@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Browser Automation Tutorial: Master Web Task Automation"
 description: "Learn how to build a powerful browser automation extension for Chrome. This comprehensive tutorial covers creating macro extensions, automating web tasks, and building your own browser automation tool from scratch."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "browser automation extension, automate web tasks chrome, macro extension, chrome automation tutorial, web task automation"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Keyboard Shortcuts Api. Best Practices"
 description: "Configure keyboard shortcuts with the Commands API."
 canonical_url: "https://bestchromeextensions.com/patterns/keyboard-shortcuts-api/"
+last_modified_at: 2026-01-15
 ---
 
 Keyboard Shortcuts API Patterns

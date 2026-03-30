@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Email Marketing. Build and Monetize Your User List"
 description: "Build an email list from your Chrome extension users. Opt-in strategies, welcome sequences, upgrade campaigns, and email-driven monetization for extension developers."
 date: 2025-03-01
+last_modified_at: 2025-03-01
 categories: [guides, marketing]
 tags: [email-marketing, extension-marketing, user-list, conversion-emails, chrome-extension-growth]
 author: theluckystrike

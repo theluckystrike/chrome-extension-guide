@@ -3,6 +3,7 @@ layout: post
 title: "Build a Language Learning Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful language learning extension for Chrome. This comprehensive guide covers vocabulary capture, translate selection features, and how to create an effective vocabulary chrome extension from scratch."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "language learning extension, vocabulary chrome, translate selection, build chrome extension, chrome extension tutorial"

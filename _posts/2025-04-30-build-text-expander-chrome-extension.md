@@ -3,6 +3,7 @@ layout: post
 title: "Build a Text Expander Chrome Extension: Type Shortcuts, Get Full Text"
 description: "Learn to build a text expander Chrome extension that automatically expands typed shortcuts into full text. Complete guide with code examples and implementation details."
 date: 2025-04-30
+last_modified_at: 2025-04-30
 categories: [Chrome-Extensions, Productivity]
 tags: [text-expander, productivity, chrome-extension]
 keywords: "chrome extension text expander, text shortcut chrome, build text expander extension, typing shortcut chrome extension, auto expand text chrome"

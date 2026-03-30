@@ -3,6 +3,7 @@ layout: post
 title: "Build a JSON Editor Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful JSON Editor Chrome Extension from scratch. This comprehensive guide covers JSON tree viewers, editing features, and how to publish your extension to the Chrome Web Store."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "json editor extension, edit json chrome, json tree viewer, chrome extension json editor, build json chrome extension"

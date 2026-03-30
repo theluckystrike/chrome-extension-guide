@@ -3,6 +3,7 @@ layout: default
 title: "Fix Slow Chrome With Too Many Tabs: Complete Memory Management Guide (2026)"
 description: "Learn how to fix slow Chrome caused by too many tabs. Reduce memory usage by 80% with Tab Suspender Pro and proven optimization techniques."
 permalink: /guides/fix-slow-chrome-too-many-tabs/
+last_modified_at: 2026-01-15
 ---
 
 Fix Slow Chrome With Too Many Tabs: Complete Memory Management Guide

@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Local Storage vs Chrome Storage API: Complete Guide"
 description: "Learn the differences between Chrome Extension Local Storage and Chrome Storage API. Discover best practices for extension data persistence, performance optimization, and when to use each storage method."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, ui, tutorial]
 keywords: "chrome extension local storage, chrome storage api vs localStorage, extension data persistence, chrome.storage API, localStorage chrome extension"

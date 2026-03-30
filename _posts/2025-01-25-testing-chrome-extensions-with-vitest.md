@@ -3,6 +3,7 @@ layout: post
 title: "Testing Chrome Extensions with Vitest: Fast & Modern Testing Guide"
 description: "Learn how to test Chrome extensions using Vitest, the blazing fast testing framework. This comprehensive guide covers setup, mocking Chrome APIs, content script testing, service worker testing, and best practices for lightning-fast extension testing."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing, tooling]
 keywords: "vitest chrome extension, vitest extension test, fast extension testing, vitest chrome api mock, chrome extension unit testing vitest"

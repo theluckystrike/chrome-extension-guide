@@ -3,6 +3,7 @@ layout: default
 title: "Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integration"
 description: "Master automated testing for Chrome extensions with Puppeteer and Playwright. Learn to test popups, content scripts, service workers, mock Chrome APIs, and set up CI pipelines with GitHub Actions."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-automated-testing-puppeteer-playwright/"
+last_modified_at: 2026-01-15
 ---
 
 Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integration

@@ -3,6 +3,7 @@ layout: post
 title: "Building Offline-Capable Chrome Extensions: A Complete Guide"
 description: "Learn how to build offline-capable Chrome extensions using service workers, Cache API, and IndexedDB. Create reliable extensions that work without internet connectivity using Manifest V3 patterns."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension offline, service worker cache extension, offline chrome extension, chrome extension manifest v3, chrome extension pwa, chrome extension storage offline]
 keywords: "chrome extension offline, service worker cache extension, offline chrome extension, chrome extension manifest v3, chrome extension Cache API, chrome extension IndexedDB, chrome extension offline storage, chrome extension pwa support"

@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Keyboard-Only Workflow: No Mouse Required"
 description: "Master Tab Suspender Pro without touching your mouse. Complete keyboard shortcuts guide for chrome tab management, suspend/resume workflows, and Vimium integration."
 date: 2025-05-06
+last_modified_at: 2025-05-06
 categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, keyboard, workflow]
 author: theluckystrike

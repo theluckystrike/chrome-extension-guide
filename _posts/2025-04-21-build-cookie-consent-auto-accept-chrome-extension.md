@@ -3,6 +3,7 @@ layout: post
 title: "Build a Cookie Consent Auto-Accept Chrome Extension: Skip Cookie Banners"
 description: "Learn to build a cookie consent auto-accept Chrome extension that automatically skips annoying cookie banners. Complete guide with code examples."
 date: 2025-04-21
+last_modified_at: 2025-04-21
 categories: [Chrome-Extensions, Tutorials]
 tags: [cookies, consent, chrome-extension]
 keywords: "chrome extension cookie consent, auto accept cookies chrome, skip cookie banner extension, chrome extension cookie popup, cookie consent blocker"

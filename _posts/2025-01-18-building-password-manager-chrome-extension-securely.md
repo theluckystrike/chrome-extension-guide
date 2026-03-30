@@ -3,6 +3,7 @@ layout: post
 title: "Building a Password Manager Chrome Extension Securely: Complete Developer Guide"
 description: "Learn how to build a secure chrome password manager extension from scratch. Cover encryption, credential storage, best practices, and implementation with Manifest V3."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome password manager extension, secure password extension, credential storage extension, build password manager chrome extension, chrome extension encryption"

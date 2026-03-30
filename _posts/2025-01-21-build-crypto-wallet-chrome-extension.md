@@ -3,6 +3,7 @@ layout: post
 title: "Build a Crypto Wallet Chrome Extension: Web3 Integration Guide"
 description: "Learn how to build a cryptocurrency wallet Chrome extension with Web3 integration. This comprehensive guide covers Ethereum wallet implementation, secure key management, blockchain interactions, and best practices for building production-ready crypto wallet extensions."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [tutorials, chrome-extensions, web3]
 tags: [crypto wallet extension, web3 chrome extension, ethereum extension, blockchain chrome extension, wallet development, dapp integration]
 keywords: "crypto wallet extension, web3 chrome extension, ethereum extension, blockchain chrome extension, chrome extension wallet, web3 integration guide"

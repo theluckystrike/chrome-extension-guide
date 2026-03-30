@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro: How to Suspend All Tabs at Once and Save Gigabytes of RAM"
 description: "Learn how Tab Suspender Pro's suspend all feature lets you suspend all chrome tabs instantly, freeing gigabytes of RAM with one click. Boost performance now."
 date: 2025-03-12
+last_modified_at: 2025-03-12
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, suspend-all, chrome-performance]
 keywords: "suspend all tabs chrome, tab suspender pro suspend all, close all tabs save memory, one click suspend chrome tabs, tab suspender bulk suspend"

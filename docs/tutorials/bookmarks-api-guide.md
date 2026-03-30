@@ -3,6 +3,7 @@ layout: default
 title: "Working with Bookmarks in Chrome Extensions. Developer Guide"
 description: "A comprehensive tutorial on using the Chrome Bookmarks API in extensions. Learn to create, read, update, delete bookmarks, organize folders, and handle bookmark events."
 canonical_url: "https://bestchromeextensions.com/tutorials/bookmarks-api-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Working with Bookmarks in Chrome Extensions

@@ -2,6 +2,7 @@
 layout: default
 title: Webext Packages Overview. Chrome Extension Development
 description: Complete comparison of @theluckystrike webext packages for Chrome extension development. Learn when to use each package and how to install them.
+last_modified_at: 2026-01-15
 ---
 
 Webext Packages Overview

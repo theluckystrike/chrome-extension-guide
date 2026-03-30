@@ -5,6 +5,7 @@ description: Discover how chrome tabs draining battery laptop can destroy your b
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-tab-freezing-save-battery-laptop/"
 
+last_modified_at: 2026-01-15
 ---
 
 Chrome Tab Freezing to Save Battery. The Complete Laptop User's Guide

@@ -5,6 +5,7 @@ description: Master state management in Chrome extensions with real code example
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-state-management/"
 
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension State Management: A detailed look

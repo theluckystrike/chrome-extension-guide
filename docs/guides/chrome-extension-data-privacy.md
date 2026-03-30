@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Data Privacy. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-data-privacy/"
+last_modified_at: 2026-01-15
 ---
 Data Privacy Guide for Chrome Extensions
 

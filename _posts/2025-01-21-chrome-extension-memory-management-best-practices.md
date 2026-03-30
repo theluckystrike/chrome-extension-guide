@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Memory Management Best Practices. Reduce RAM Usage by 80%"
 description: "Complete guide to memory management in Chrome extensions. Learn to profile memory, fix leaks, optimize scripts, and build extensions that use minimal RAM."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [guides, performance]
 tags: [memory-management, chrome-extensions, performance, ram-usage, memory-leaks]
 seo_title: "Chrome Extension Memory Management Best Practices | 2025"

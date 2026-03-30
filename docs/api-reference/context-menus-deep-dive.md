@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Context Menus detailed look"
 description: "Advanced Chrome Context Menus API patterns covering dynamic menus, event handling, nested submenus, and Manifest V3 best practices."
 canonical_url: "https://bestchromeextensions.com/api-reference/context-menus-deep detailed look/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.contextMenus detailed look

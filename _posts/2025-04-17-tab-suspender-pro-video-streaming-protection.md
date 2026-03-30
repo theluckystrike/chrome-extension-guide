@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro and Video Streaming: Never Interrupt Your Movies"
 description: "Learn how Tab Suspender Pro intelligently protects video tabs like YouTube and Netflix from accidental suspension. Never interrupt your streaming again with smart video detection."
 date: 2025-04-17
+last_modified_at: 2025-04-17
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, video, streaming]
 keywords: "tab suspender pro video, youtube tab suspend, netflix chrome tab, video streaming tab suspender, chrome suspend video tabs"

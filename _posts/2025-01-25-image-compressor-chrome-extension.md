@@ -3,6 +3,7 @@ layout: post
 title: "Build an Image Compressor Chrome Extension: Complete 2025 Developer Guide"
 description: "Learn how to build a powerful image compressor Chrome extension with our comprehensive 2025 guide. Master image compression, WebP conversion, and create a browser tool that compresses images directly in Chrome without uploading to external servers."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, chrome-extensions, development, tools]
 tags: [image compressor extension, compress images chrome, webp converter extension, chrome extension development, image optimization, browser tools]
 keywords: "image compressor extension, compress images chrome, webp converter extension, image compression tool, chrome extension image optimizer, bulk image compression, webp conversion chrome"

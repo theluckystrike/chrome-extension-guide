@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Screenshot Guidelines. Publishing Guide"
 description: "Create effective screenshots and promotional images for your Chrome Web Store listing that convert visitors to users."
 canonical_url: "https://bestchromeextensions.com/publishing/screenshot-guidelines/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Web Store Screenshot Guidelines

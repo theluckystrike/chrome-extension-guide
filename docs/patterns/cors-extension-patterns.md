@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Cors Extension Patterns. Best Practices"
 description: "Handle CORS issues in Chrome extensions with background scripts and proxy patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/cors-extension-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 CORS Handling Patterns in Chrome Extensions

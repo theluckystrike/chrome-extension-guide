@@ -3,6 +3,7 @@ layout: default
 title: "Chrome DevTools API Complete Reference"
 description: "The Chrome DevTools API extends Chrome Developer Tools with custom panels, sidebars, network tools, and inspection capabilities for debugging extensions."
 canonical_url: "https://bestchromeextensions.com/api-reference/devtools-api/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.devtools API Reference

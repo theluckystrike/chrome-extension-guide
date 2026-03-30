@@ -6,6 +6,7 @@ permalink: /permissions/contentSettings/
 category: permissions
 order: 8
 canonical_url: "https://bestchromeextensions.com/permissions/contentSettings/"
+last_modified_at: 2026-01-15
 ---
 
 contentSettings Permission

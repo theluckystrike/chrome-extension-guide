@@ -3,6 +3,7 @@ layout: post
 title: "Build a Unit Converter Chrome Extension: Convert Measurements on Any Page"
 description: "Learn how to build a unit converter Chrome extension that converts measurements on any webpage. Complete tutorial with code examples and best practices."
 date: 2025-05-06
+last_modified_at: 2025-05-06
 categories: [Chrome-Extensions, Tutorials]
 tags: [converter, utilities, chrome-extension]
 keywords: "chrome extension unit converter, convert units chrome, measurement converter extension, build converter chrome, unit conversion chrome extension"

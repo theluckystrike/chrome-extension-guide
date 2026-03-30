@@ -3,6 +3,7 @@ layout: post
 title: "Build an Image Optimizer Chrome Extension: Complete Guide"
 description: "Learn how to build a powerful image optimizer extension for Chrome. This comprehensive guide covers image compression, webp converter functionality, and how to create a tool that compresses images directly in your browser."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "image optimizer extension, compress images chrome, webp converter extension"

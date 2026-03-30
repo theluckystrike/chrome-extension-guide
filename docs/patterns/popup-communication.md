@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Popup Communication. Best Practices"
 description: "Communicate between popups and background scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-communication/"
+last_modified_at: 2026-01-15
 ---
 
 Popup Communication

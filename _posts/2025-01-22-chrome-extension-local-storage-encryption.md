@@ -3,6 +3,7 @@ layout: post
 title: "Encrypted Local Storage in Chrome Extensions: Complete Guide for Secure Data Chrome"
 description: "Learn how to implement encrypted storage in Chrome extensions to protect sensitive user data. Discover best practices for encryption extension development, secure data handling, and proven cryptographic methods for browser extensions."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions]
 tags: [chrome-extension]
 keywords: "encrypted storage extension, secure data chrome, encryption extension, chrome extension encrypted storage, secure local storage chrome extension, browser extension encryption"

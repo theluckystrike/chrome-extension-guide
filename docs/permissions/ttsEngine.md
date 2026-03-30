@@ -6,6 +6,7 @@ permalink: /permissions/ttsEngine/
 category: permissions
 order: 46
 canonical_url: "https://bestchromeextensions.com/permissions/ttsEngine/"
+last_modified_at: 2026-01-15
 ---
 
 ttsEngine Permission

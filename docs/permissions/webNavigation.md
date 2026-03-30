@@ -6,6 +6,7 @@ permalink: /permissions/webNavigation/
 category: permissions
 order: 48
 canonical_url: "https://bestchromeextensions.com/permissions/webNavigation/"
+last_modified_at: 2026-01-15
 ---
 
 webNavigation Permission

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Script Lifecycle. Best Practices"
 description: "Manage content script lifecycle effectively."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-lifecycle/"
+last_modified_at: 2026-01-15
 ---
 
 Content Script Lifecycle Management

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Oauth Identity. Best Practices"
 description: "Implement OAuth 2.0 for user authentication."
 canonical_url: "https://bestchromeextensions.com/patterns/oauth-identity/"
+last_modified_at: 2026-01-15
 ---
 
 OAuth and Identity Patterns

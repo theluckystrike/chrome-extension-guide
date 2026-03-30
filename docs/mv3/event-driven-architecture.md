@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Event Driven Architecture. Manifest V3 Guide"
 description: "Build event-driven architectures with service workers in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/event-driven-architecture/"
+last_modified_at: 2026-01-15
 ---
 
 Event-Driven Architecture in MV3

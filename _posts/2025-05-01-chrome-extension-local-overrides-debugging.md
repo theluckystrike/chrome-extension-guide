@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Local Overrides: Persist DevTools Changes Across Reloads"
 description: "Learn how to use Chrome extension local overrides to persist DevTools changes across page reloads. Master file overrides for efficient debugging and testing."
 date: 2025-05-01
+last_modified_at: 2025-05-01
 categories: [Chrome-Extensions, Development]
 tags: [overrides, debugging, chrome-extension]
 keywords: "chrome extension local overrides, persist devtools changes, chrome local override extension, chrome extension file override, override website files chrome"

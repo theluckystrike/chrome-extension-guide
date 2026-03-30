@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Startup Performance. Best Practices"
 description: "Optimize extension startup performance."
 canonical_url: "https://bestchromeextensions.com/patterns/startup-performance/"
+last_modified_at: 2026-01-15
 ---
 
 Startup Performance Patterns

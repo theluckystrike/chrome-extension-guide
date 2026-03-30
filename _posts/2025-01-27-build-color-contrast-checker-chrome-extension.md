@@ -3,6 +3,7 @@ layout: post
 title: "Build a Color Contrast Checker Chrome Extension: Complete Guide"
 description: "Learn how to build a color contrast checker extension that helps developers ensure WCAG compliance. This comprehensive guide covers accessibility color standards, contrast ratio calculations, and publishing your extension to the Chrome Web Store."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "contrast checker extension, wcag contrast chrome, accessibility color"

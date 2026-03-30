@@ -3,6 +3,7 @@ layout: post
 title: "Build a CSV Parser Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful CSV parser Chrome extension from scratch. This comprehensive guide covers manifest V3, file parsing, data visualization, and deployment. Perfect for developers looking to create a csv viewer chrome extension."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "csv parser extension, csv viewer chrome, spreadsheet extension, chrome extension development, parse csv chrome"

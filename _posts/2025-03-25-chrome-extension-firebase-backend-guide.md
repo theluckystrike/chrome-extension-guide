@@ -3,6 +3,7 @@ layout: post
 title: "Using Firebase with Chrome Extensions: Authentication, Database, and Hosting"
 description: "Learn how to integrate Firebase with Chrome extensions for authentication, Firestore database, and hosting. Complete guide with code examples for building backend-powered extensions."
 date: 2025-03-25
+last_modified_at: 2025-03-25
 categories: [Chrome-Extensions, Backend]
 tags: [firebase, backend, chrome-extension]
 keywords: "chrome extension firebase, firebase chrome extension, chrome extension backend firebase, firebase auth chrome extension, firestore chrome extension"

@@ -3,6 +3,7 @@ layout: post
 title: "Build a GitHub Notification Chrome Extension"
 description: "Learn how to build a GitHub notification Chrome extension that monitors pull requests, issues, and repository activity. This comprehensive guide covers GitHub API integration, Chrome extension architecture, and real-time notifications."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, GitHub-Integration]
 tags: [chrome-extension, github, tutorial, pull-request-notifications]
 keywords: "github notifier extension, github chrome extension, pull request notifications, github notifications chrome, github api extension"

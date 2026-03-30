@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Scripting API Complete Reference"
 description: "The Chrome Scripting API injects JavaScript and CSS into web pages, replacing executeScript and insertCSS with a powerful, structured interface for content manipulation."
 canonical_url: "https://bestchromeextensions.com/api-reference/scripting-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Scripting API Reference

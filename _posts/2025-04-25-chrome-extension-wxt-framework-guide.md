@@ -3,6 +3,7 @@ layout: post
 title: "WXT Framework for Chrome Extensions: Next-Gen Development Experience"
 description: "Discover WXT, the modern framework for building Chrome extensions. Learn how WXT simplifies extension development with hot reload, TypeScript support, and smooth bundling."
 date: 2025-04-25
+last_modified_at: 2025-04-25
 categories: [Chrome-Extensions, Frameworks]
 tags: [wxt, framework, chrome-extension]
 keywords: "wxt chrome extension, wxt framework, chrome extension framework wxt, wxt extension development, modern chrome extension framework"

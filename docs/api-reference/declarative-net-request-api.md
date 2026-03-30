@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Declarative Net Request API Complete Reference"
 description: "The Chrome Declarative Net Request API blocks, redirects, and modifies network requests using declarative rules, replacing webRequest blocking in Manifest V3 with privacy-preserving performance."
 canonical_url: "https://bestchromeextensions.com/api-reference/declarative-net-request-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Declarative Net Request API Reference

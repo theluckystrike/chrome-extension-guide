@@ -6,6 +6,7 @@ permalink: /permissions/contextMenus/
 category: permissions
 order: 9
 canonical_url: "https://bestchromeextensions.com/permissions/contextMenus/"
+last_modified_at: 2026-01-15
 ---
 
 contextMenus Permission Reference

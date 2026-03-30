@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Native Messaging. Best Practices"
 description: "Communicate with native applications via native messaging."
 canonical_url: "https://bestchromeextensions.com/patterns/native-messaging/"
+last_modified_at: 2026-01-15
 ---
 
 Native Messaging Patterns

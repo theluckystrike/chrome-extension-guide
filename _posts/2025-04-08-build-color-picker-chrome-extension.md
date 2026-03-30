@@ -3,6 +3,7 @@ layout: post
 title: "Build a Color Picker Chrome Extension: Eye Dropper and Palette Generator"
 description: "Learn to build a color picker Chrome extension with eye dropper functionality and palette generator. Complete tutorial with code examples."
 date: 2025-04-08
+last_modified_at: 2025-04-08
 categories: [Chrome-Extensions, Tutorials]
 tags: [color-picker, design, chrome-extension]
 keywords: "chrome extension color picker, build eye dropper extension, color picker chrome, chrome extension eyedropper, color palette chrome extension"

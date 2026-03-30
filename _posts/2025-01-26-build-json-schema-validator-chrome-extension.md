@@ -3,6 +3,7 @@ layout: post
 title: "Build a JSON Schema Validator Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful JSON Schema Validator Chrome extension from scratch. This comprehensive guide covers Manifest V3, schema validation, API testing, and publishing your developer tool to the Chrome Web Store."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "json schema validator extension, schema checker chrome, api validator, json schema validation tool, chrome developer tools extension"

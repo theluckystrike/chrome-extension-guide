@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Svelte. Complete Developer Guide (2025)"
 description: "Build lightweight Chrome extensions with Svelte. Zero runtime overhead, reactive stores for chrome.storage, content script injection, and blazing-fast popup UIs."
 date: 2025-02-03
+last_modified_at: 2025-02-03
 categories: [tutorials, frameworks]
 tags: [svelte, chrome-extension, svelte-chrome-extension, lightweight-extension, reactive-stores]
 author: theluckystrike

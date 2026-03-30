@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Security Policy. Manifest V3 Guide"
 description: "Understand and work with Content Security Policy restrictions in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/content-security-policy/"
+last_modified_at: 2026-01-15
 ---
 
 MV3 Content Security Policy

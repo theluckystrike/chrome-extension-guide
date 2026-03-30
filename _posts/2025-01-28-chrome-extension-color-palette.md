@@ -3,6 +3,7 @@ layout: post
 title: "Build a Color Palette Generator Chrome Extension: Complete Guide"
 description: "Learn how to build a color palette generator Chrome extension from scratch. This comprehensive guide covers Manifest V3, color extraction, scheme generation, and publishing your extension to the Chrome Web Store."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "color palette extension, color scheme chrome, palette generator, chrome extension color picker, build color extension"

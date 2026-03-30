@@ -3,6 +3,7 @@ layout: post
 title: "Build an Animation Inspector Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful animation inspector extension for Chrome. Debug CSS animations, analyze transitions, and inspect keyframes with this comprehensive developer's guide."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "animation inspector extension, css animation chrome, transition debugger, chrome animation tool, css keyframe inspector"

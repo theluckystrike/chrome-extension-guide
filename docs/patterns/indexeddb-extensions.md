@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Indexeddb Extensions. Best Practices"
 description: "Use IndexedDB for persistent client-side storage in Chrome extension content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/indexeddb-extensions/"
+last_modified_at: 2026-01-15
 ---
 
 IndexedDB in Extensions

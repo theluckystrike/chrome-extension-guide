@@ -3,6 +3,7 @@ layout: post
 title: "Build an NFT Gallery Chrome Extension with OpenSea API"
 description: "Learn how to build a powerful NFT gallery Chrome extension using the OpenSea API. This comprehensive guide covers Web3 integration, API authentication, portfolio tracking, and creating a smooth NFT viewing experience in your browser."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [tutorials, chrome-extensions, web3]
 tags: [nft gallery extension, nft chrome extension, opensea api extension, web3 nft viewer, chrome extension tutorial, blockchain, ethereum]
 keywords: "nft gallery extension, nft chrome extension, opensea api extension, web3 nft viewer, nft portfolio tracker chrome extension, build nft extension, open sea api tutorial, chrome extension web3"

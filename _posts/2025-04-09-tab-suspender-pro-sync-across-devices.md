@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Settings Sync: Same Configuration Across All Devices"
 description: "Learn how to sync Tab Suspender Pro settings across all your devices using Chrome sync. Keep your tab suspension rules, whitelist, and preferences consistent on every computer."
 date: 2025-04-09
+last_modified_at: 2025-04-09
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, sync, cross-device]
 keywords: "tab suspender pro sync, sync chrome extension settings, tab suspender settings devices, chrome extension sync data, tab suspender cross device"

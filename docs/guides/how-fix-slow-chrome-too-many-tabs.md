@@ -5,6 +5,7 @@ description: Is Chrome running slow with too many tabs? Learn how to fix slow Ch
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/how-fix-slow-chrome-too-many-tabs/"
 
+last_modified_at: 2026-01-15
 ---
 
 How to Fix Slow Chrome with Too Many Tabs. Tab Suspender Guide

@@ -3,6 +3,7 @@ layout: post
 title: "Manifest V2 to V3 Migration Checklist: Complete Chrome Extension Update Guide"
 description: "Complete checklist for migrating Chrome extensions from Manifest V2 to V3. Covers service workers, new APIs, deprecated features, and step-by-step migration."
 date: 2025-03-22
+last_modified_at: 2025-03-22
 categories: [Chrome-Extensions, Migration]
 tags: [manifest-v3, migration, chrome-extension]
 keywords: "manifest v2 to v3 migration, chrome extension mv3 update, manifest v3 migration checklist, upgrade chrome extension mv3, mv2 deprecated chrome"

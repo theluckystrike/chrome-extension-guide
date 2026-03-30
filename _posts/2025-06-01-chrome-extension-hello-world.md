@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Hello World"
 description: "Build your first Chrome extension from scratch. Learn manifest.json basics, create popups, add interactivity, and load it in Chrome for testing in 2025."
 date: 2025-06-01
+last_modified_at: 2025-06-01
 categories: [tutorial]
 tags: [beginner, hello-world, manifest-v3, getting-started, first-extension]
 ---

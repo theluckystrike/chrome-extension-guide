@@ -3,6 +3,7 @@ layout: post
 title: "Build an SVG Converter Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful SVG converter Chrome extension that transforms raster images to vector graphics. Step-by-step tutorial covering image processing, canvas manipulation, and Chrome extension development."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 author: theluckystrike

@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Gamers Who Browse: Maximize Chrome Gaming Performance"
 description: "Discover how Tab Suspender Pro enhances gaming performance by managing browser resources. Learn to browse while gaming without lag, optimize Chrome for gaming, and boost FPS with smart tab management."
 date: 2025-01-30
+last_modified_at: 2025-01-30
 categories: [Chrome-Extensions, Tab-Suspender-Pro]
 tags: [tab-suspender-pro, performance, productivity]
 ---

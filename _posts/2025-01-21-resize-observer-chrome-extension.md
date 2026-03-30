@@ -3,6 +3,7 @@ layout: post
 title: "ResizeObserver in Chrome Extensions: Responsive UI Components"
 description: "Learn how to implement ResizeObserver in Chrome extensions to create truly responsive UI components that adapt dynamically to container size changes. Master responsive extension UI with practical examples and best practices."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [guides, chrome-extensions, development]
 tags: [resize observer extension, responsive extension ui, dynamic sizing extension, chrome extension development, ui components]
 keywords: "resize observer extension, responsive extension ui, dynamic sizing extension, ResizeObserver chrome extension, responsive popup ui"

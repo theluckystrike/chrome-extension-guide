@@ -3,6 +3,7 @@ layout: post
 title: "Web Share API in Chrome Extensions: Native Sharing Made Easy"
 description: "Learn how to implement the Web Share API in Chrome extensions for native sharing capabilities. This guide covers the Web Share Target API, share targets, file handling, and practical implementation patterns for Manifest V3 extensions."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [tutorials, chrome-extensions]
 tags: [web share api extension, native share chrome, share target extension, manifest v3, chrome extension api, sharing functionality]
 keywords: "web share api extension, native share chrome, share target extension, web share target api chrome, chrome extension sharing"

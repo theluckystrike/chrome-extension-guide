@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Teachers: Manage Research Tabs During Lesson Planning"
 description: "Discover how Tab Suspender Pro helps teachers manage research tabs, lesson plans, and classroom resources efficiently. Boost productivity with smart browser tab management for educators."
 date: 2025-04-01
+last_modified_at: 2025-04-01
 categories: [Chrome-Extensions, Education]
 tags: [tab-suspender-pro, education, teachers]
 keywords: "tab suspender pro teachers, chrome tabs for teachers, teacher browser management, tab suspender education, educator chrome extension"

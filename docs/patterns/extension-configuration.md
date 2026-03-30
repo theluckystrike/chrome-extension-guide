@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Configuration. Best Practices"
 description: "Implement flexible configuration patterns for Chrome extensions using chrome.storage, managed storage, and feature flags."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-configuration/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Configuration Patterns

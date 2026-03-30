@@ -3,6 +3,7 @@ layout: post
 title: "DeclarativeNetRequest API Complete Tutorial: Master Chrome Network Rules in Manifest V3"
 description: "Learn how to use the DeclarativeNetRequest API to block network requests, modify headers, and implement content filtering in your Chrome extensions. This comprehensive tutorial covers everything from basic setup to advanced network rule configuration for Manifest V3."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "declarativeNetRequest tutorial, chrome network rules, mv3 network blocking, chrome.declarativeNetRequest API, Manifest V3 network request modification"

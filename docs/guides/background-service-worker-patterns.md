@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Background Service Worker Patterns. Alarms, Keep-Alive, and State Persistence"
 description: "Master Chrome extension service worker patterns for MV3. Learn about chrome.alarms API, keep-alive strategies, state persistence, and building solid background task handling."
 canonical_url: "https://bestchromeextensions.com/guides/background-service-worker-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Background Service Worker Patterns. Alarms, Keep-Alive, and State Persistence

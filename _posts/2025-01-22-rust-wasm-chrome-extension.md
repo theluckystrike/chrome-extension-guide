@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Rust and WebAssembly"
 description: "Learn how to build high-performance Chrome extensions using Rust and WebAssembly. This comprehensive guide covers wasm rust extension development, performance optimization, and practical implementation for modern browser extensions."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [guides, chrome-extensions, rust, webassembly]
 tags: [rust chrome extension, wasm rust extension, webassembly rust chrome, rust wasm, chrome extension development, webassembly]
 keywords: "rust chrome extension, wasm rust extension, webassembly rust chrome, rust webassembly, chrome extension rust"

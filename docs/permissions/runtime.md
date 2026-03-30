@@ -6,6 +6,7 @@ permalink: /permissions/runtime/
 category: permissions
 order: 34
 canonical_url: "https://bestchromeextensions.com/permissions/runtime/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.runtime API Reference

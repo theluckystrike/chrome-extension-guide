@@ -3,6 +3,7 @@ layout: post
 title: "Design Patterns for Chrome Extension Development: A Comprehensive Guide"
 description: "Master essential design patterns for Chrome extension development. Learn how to implement observer pattern, factory pattern, and more to build scalable, maintainable extensions."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Architecture]
 tags: [chrome-extension, architecture, patterns]
 keywords: "chrome extension design patterns, observer pattern extension, factory pattern chrome, chrome extension architecture, design patterns for chrome extensions"

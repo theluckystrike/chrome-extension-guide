@@ -3,6 +3,7 @@ layout: post
 title: "Build a Markdown Preview Chrome Extension: Live Rendering in Browser"
 description: "Learn how to build a markdown preview Chrome extension with live rendering. This comprehensive guide covers Manifest V3, popup development, and integrating marked.js for real-time markdown viewing in your browser."
 date: 2025-04-11
+last_modified_at: 2025-04-11
 categories: [Chrome-Extensions, Tutorials]
 tags: [markdown, preview, chrome-extension]
 keywords: "chrome extension markdown, markdown preview chrome, build markdown extension, chrome extension render markdown, markdown viewer chrome"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Feature Flags. Best Practices"
 description: "Implement feature flags for gradual rollout and testing."
 canonical_url: "https://bestchromeextensions.com/patterns/feature-flags/"
+last_modified_at: 2026-01-15
 ---
 
 Feature Flag Patterns

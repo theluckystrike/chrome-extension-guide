@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension E2E Testing with Playwright: Complete Guide"
 description: "Master playwright chrome extension testing with this comprehensive guide. Learn e2e test extension workflows, setting up Playwright for extension testing, automating extension interactions, and best practices for reliable extension tests."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing, tooling]
 keywords: "playwright chrome extension, e2e test extension, playwright extension testing, chrome extension e2e testing, testing chrome extension with playwright, extension automation testing"

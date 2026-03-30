@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Supabase Backend Tutorial: Build a Serverless Extension Backend"
 description: "Learn how to integrate Supabase with Chrome extensions for secure authentication, real-time data sync, and serverless backend functionality. Complete guide for Manifest V3 extensions."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "chrome extension supabase, supabase auth extension, serverless extension backend, chrome extension backend tutorial, supabase chrome extension"

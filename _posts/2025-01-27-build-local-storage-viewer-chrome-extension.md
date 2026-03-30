@@ -3,6 +3,7 @@ layout: post
 title: "Build a Local Storage Viewer Chrome Extension"
 description: "Learn how to create a powerful Local Storage Viewer Chrome Extension from scratch. This comprehensive developer guide covers web storage APIs, manifest V3 configuration, storage inspection, and best practices for building developer tools."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "localstorage viewer, storage inspector chrome, web storage extension, chrome storage api, local storage inspector"

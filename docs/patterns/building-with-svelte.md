@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Building With Svelte. Best Practices"
 description: "Build Chrome extensions with Svelte framework."
 canonical_url: "https://bestchromeextensions.com/patterns/building-with-svelte/"
+last_modified_at: 2026-01-15
 ---
 
 Building Chrome Extensions with Svelte

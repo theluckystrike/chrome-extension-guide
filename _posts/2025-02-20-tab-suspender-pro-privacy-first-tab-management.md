@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro: The Privacy-First Tab Manager That Never Phones Home"
 description: "Discover Tab Suspender Pro, the privacy-focused Chrome tab manager that saves memory without tracking. Zero data collection, minimal permissions, and full transparency."
 date: 2025-02-20
+last_modified_at: 2025-02-20
 categories: [Chrome-Extensions, Privacy]
 tags: [tab-suspender-pro, privacy, security, tab management, chrome extension privacy]
 keywords: "tab suspender pro privacy, private tab manager chrome, chrome extension privacy, no tracking tab suspender, privacy focused chrome extensions"

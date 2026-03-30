@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Sessions Api. Best Practices"
 description: "Use the Sessions API to track browser sessions."
 canonical_url: "https://bestchromeextensions.com/patterns/sessions-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Sessions API Patterns

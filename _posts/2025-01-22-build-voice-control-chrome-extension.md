@@ -3,6 +3,7 @@ layout: post
 title: "Build a Voice Control Chrome Extension: Complete Implementation Guide"
 description: "Learn how to build a powerful voice control Chrome extension with hands-free navigation, custom voice commands, and speech-to-action functionality. Step-by-step tutorial with practical examples."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "voice control extension, voice commands chrome, speech to action extension, chrome voice assistant, voice activated chrome extension"

@@ -3,6 +3,7 @@ layout: post
 title: "How Ad Blocker Chrome Extensions Work Under the Hood"
 description: "Discover the technical mechanisms behind ad blocker Chrome extensions. Learn how declarativeNetRequest works, explore the filter list system, and understand the internal architecture of modern ad blocking technology."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "how ad blockers work, chrome ad blocker extension, declarativeNetRequest ad blocking"

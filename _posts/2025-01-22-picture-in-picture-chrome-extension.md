@@ -3,6 +3,7 @@ layout: post
 title: "Picture-in-Picture Chrome Extension: Build a Floating Video Player"
 description: "Learn how to build a Picture-in-Picture Chrome extension that creates a floating video player. This comprehensive guide covers the Document Picture-in-Picture API, Chrome extension development, and step-by-step implementation for creating a powerful pip video player extension."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, picture-in-picture, video]
 keywords: "picture in picture extension, pip chrome extension, floating video chrome, pip video player, Document Picture-in-Picture API, chrome extension pip, floating video player extension"

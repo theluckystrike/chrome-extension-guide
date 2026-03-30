@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Feature Chart: Every Feature at a Glance"
 description: "Comprehensive Tab Suspender Pro feature comparison chart. Discover all capabilities including auto-suspension, whitelist options, detection features, UI customization, and keyboard shortcuts for Chrome tab management."
 date: 2025-05-14
+last_modified_at: 2025-05-14
 categories: [Chrome-Extensions, Reference]
 tags: [tab-suspender-pro, features, reference]
 keywords: "tab suspender pro features, tab suspender feature list, tab suspender pro capabilities, chrome tab suspender features, tab management features"

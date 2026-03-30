@@ -3,6 +3,7 @@ layout: default
 title: "Working with Browser History in Chrome Extensions"
 description: "Learn how to use the chrome.history API to search, add, delete history entries, handle visit details, and build analytics features with privacy best practices."
 canonical_url: "https://bestchromeextensions.com/tutorials/history-api-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Working with Browser History in Chrome Extensions

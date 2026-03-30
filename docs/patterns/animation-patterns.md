@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Animation Patterns. Best Practices"
 description: "Create smooth animations in extension popups and content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/animation-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Animation and Transition Patterns for Chrome Extensions

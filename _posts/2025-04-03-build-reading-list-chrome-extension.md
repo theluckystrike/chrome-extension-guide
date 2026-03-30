@@ -3,6 +3,7 @@ layout: post
 title: "Build a Reading List Chrome Extension: Save Articles for Later"
 description: "Learn to build a Chrome extension for saving articles to a reading list. Complete tutorial covering Manifest V3, chrome.storage API, content scripts, and best practices for creating a read later extension."
 date: 2025-04-03
+last_modified_at: 2025-04-03
 categories: [Chrome-Extensions, Tutorials]
 tags: [reading-list, bookmarks, chrome-extension]
 keywords: "chrome extension reading list, save articles chrome extension, read later chrome extension, bookmark reading list extension, chrome reading queue"

@@ -3,6 +3,7 @@ layout: default
 title: "Offscreen Documents in Chrome Extensions. Complete Guide"
 description: "Learn how to use the chrome.offscreen API for DOM operations, audio playback, clipboard access, canvas manipulation, and geolocation in Chrome Extension service workers."
 canonical_url: "https://bestchromeextensions.com/tutorials/offscreen-documents-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Offscreen Documents in Chrome Extensions

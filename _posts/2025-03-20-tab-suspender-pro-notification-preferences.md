@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Notification Settings: Stay Informed Without Interruption"
 description: "Learn how to configure Tab Suspender Pro notifications for optimal browser experience. Control alerts, customize triggers, enable DND mode, and manage badge counts."
 date: 2025-03-20
+last_modified_at: 2025-03-20
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, notifications, settings]
 keywords: "tab suspender pro notifications, tab suspender notification settings, chrome extension notification control, tab suspend notification, tab suspender pro alerts"

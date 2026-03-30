@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Navigation Url Handling. Best Practices"
 description: "Handle navigation events and URL changes with the webNavigation API."
 canonical_url: "https://bestchromeextensions.com/patterns/navigation-url-handling/"
+last_modified_at: 2026-01-15
 ---
 
 Navigation and URL Handling Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Push Notification Chrome Extension Guide: Complete Implementation Tutorial"
 description: "Learn how to implement push notifications in Chrome extensions with this comprehensive guide. Master the Web Push API, Chrome Notifications API, and build engaging notification experiences for your extension users."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions]
 tags: [chrome-extension]
 keywords: "push notification extension, web push chrome, notification api extension, chrome push notifications, chrome extension notifications"

@@ -3,6 +3,7 @@ layout: post
 title: "Headless Testing Chrome Extensions: Automated CI/CD Quality Assurance"
 description: "Master chrome extension headless testing with our comprehensive guide. Learn automated CI/CD pipelines, headless browser testing, and build solid extension test pipelines for quality assurance."
 date: 2025-05-07
+last_modified_at: 2025-05-07
 categories: [Chrome-Extensions, Testing]
 tags: [headless, testing, chrome-extension]
 keywords: "chrome extension headless testing, headless chrome extension test, automated extension testing CI, chrome extension test pipeline, headless browser extension"

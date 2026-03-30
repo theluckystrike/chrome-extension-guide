@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Runtime API Complete Reference"
 description: "The Chrome Runtime API provides core extension lifecycle management, messaging between contexts, resource URL resolution, and platform utilities available to every extension."
 canonical_url: "https://bestchromeextensions.com/api-reference/runtime-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Runtime API Complete Reference

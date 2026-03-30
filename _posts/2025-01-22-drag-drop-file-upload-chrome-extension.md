@@ -3,6 +3,7 @@ layout: post
 title: "Drag and Drop File Upload in Chrome Extensions: Complete Implementation Guide 2025"
 description: "Master drag and drop file upload in Chrome extensions with our comprehensive 2025 guide. Learn how to implement file upload extension features, handle drag and drop extension interactions, and build solid file handler chrome functionality."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [guides, chrome-extensions, development]
 tags: [drag drop chrome extension, file upload extension, drag and drop extension, file handler chrome, chrome extension development]
 keywords: "drag drop chrome extension, file upload extension, drag and drop extension, file handler chrome"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Rtl Localization. Best Practices"
 description: "Implement right-to-left (RTL) localization support for Chrome extensions targeting Arabic, Hebrew, and other RTL languages."
 canonical_url: "https://bestchromeextensions.com/patterns/rtl-localization/"
+last_modified_at: 2026-01-15
 ---
 
 RTL and Advanced Localization Patterns

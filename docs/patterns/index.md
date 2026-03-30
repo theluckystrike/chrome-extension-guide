@@ -2,6 +2,7 @@
 title: "Chrome Extension Design Patterns"
 slug: /patterns/
 description: "Proven design patterns and best practices for Chrome extensions. Learn architectural patterns, communication patterns, state management, and performance optimization techniques."
+last_modified_at: 2026-01-15
 ---
 
 # Chrome Extension Design Patterns

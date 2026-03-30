@@ -3,6 +3,7 @@ layout: post
 title: "Advanced i18n Workflow for Chrome Extensions: A Complete Translation Management Guide"
 description: "Master the advanced i18n workflow for Chrome extensions with professional translation management, locale management extension tools, and automation strategies. Learn how to scale your multi-language extension efficiently."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "i18n workflow extension, translation management, locale management extension"

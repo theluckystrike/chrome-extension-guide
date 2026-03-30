@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Multitaskers: Manage Dozens of Projects Simultaneously"
 description: "Master tab suspender pro multitasking with our comprehensive guide. Learn to manage many projects chrome with organized browser tabs, boost productivity and streamline your workflow."
 date: 2025-04-18
+last_modified_at: 2025-04-18
 categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, multitasking, projects]
 keywords: "tab suspender pro multitasking, manage many projects chrome, multitasking browser tabs, tab suspender project management, chrome tab organization projects"

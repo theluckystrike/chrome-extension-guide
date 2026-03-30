@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Proxy API: Route Traffic Through Custom Proxies"
 description: "Master the Chrome Extension Proxy API with this comprehensive 2025 guide. Learn how to route browser traffic through custom proxies, implement proxy settings programmatically, and build powerful proxy extension development solutions."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [guides, chrome-extensions, proxy, development]
 tags: [chrome proxy api, proxy extension development, route traffic chrome extension, chrome extension proxy, network routing]
 keywords: "chrome proxy api, proxy extension development, route traffic chrome extension"

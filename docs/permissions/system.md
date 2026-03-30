@@ -6,6 +6,7 @@ permalink: /permissions/system/
 category: permissions
 order: 40
 canonical_url: "https://bestchromeextensions.com/permissions/system/"
+last_modified_at: 2026-01-15
 ---
 
 System.* Permissions (Chrome Extension API)

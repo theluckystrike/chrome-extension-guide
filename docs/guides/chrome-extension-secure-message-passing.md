@@ -3,6 +3,7 @@ layout: default
 title: "Secure Message Passing in Chrome Extensions: Validate, Sanitize, and Authenticate"
 description: "Master secure message passing in Chrome extensions with this comprehensive guide covering sender validation, schema validation, native messaging security, and TypeScript patterns."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-secure-message-passing/"
+last_modified_at: 2026-01-15
 ---
 
 Secure Message Passing in Chrome Extensions: Validate, Sanitize, and Authenticate

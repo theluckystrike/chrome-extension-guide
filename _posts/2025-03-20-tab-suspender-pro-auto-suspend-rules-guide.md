@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Auto-Suspend Rules: Smart Tab Management on Autopilot"
 description: "Master Tab Suspender Pro auto-suspend rules for intelligent chrome tab management. Learn time-based, URL, and count threshold configurations."
 date: 2025-03-20
+last_modified_at: 2025-03-20
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, auto-suspend, rules]
 keywords: "tab suspender pro auto suspend, automatic tab suspension rules, smart tab suspender, tab suspender pro rules, chrome automatic tab management"

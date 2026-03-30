@@ -3,6 +3,7 @@ layout: post
 title: "WebGPU in Chrome Extensions: GPU-Accelerated Computing"
 description: "Discover how to use WebGPU in Chrome extensions for powerful GPU computing. Learn the WebGPU API, implement GPU-accelerated features, and build high-performance extensions that harness the full power of modern graphics hardware."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [guides, chrome-extensions, webgpu, gpu-computing]
 tags: [webgpu chrome extension, gpu computing extension, webgpu api extension, chrome extension gpu, webgpu compute shaders, chrome extension performance]
 keywords: "webgpu chrome extension, gpu computing extension, webgpu api extension"

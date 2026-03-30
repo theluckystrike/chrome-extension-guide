@@ -3,6 +3,7 @@ layout: post
 title: "Build a Page Speed Analyzer Chrome Extension: Lighthouse Metrics at a Glance"
 description: "Learn how to build a page speed analyzer Chrome extension that displays Lighthouse metrics. Step-by-step guide covering Web Vitals, Performance API, and real-time page analysis."
 date: 2025-04-16
+last_modified_at: 2025-04-16
 categories: [Chrome-Extensions, Performance]
 tags: [page-speed, lighthouse, chrome-extension]
 keywords: "chrome extension page speed, build performance extension, lighthouse chrome extension, page speed analyzer, web vitals chrome extension"

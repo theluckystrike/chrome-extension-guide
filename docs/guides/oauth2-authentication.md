@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension OAuth2 Authentication. How to Sign In Users with Google, GitHub, and More"
 description: "A comprehensive guide to implementing OAuth2 authentication in Chrome extensions using chrome.identity API, launchWebAuthFlow, token storage, refresh flows, and multi-provider setups."
 canonical_url: "https://bestchromeextensions.com/guides/oauth2-authentication/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension OAuth2 Authentication. How to Sign In Users with Google, GitHub, and More

@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Screen Capture: Build a Screenshot and Recording Tool"
 description: "Master chrome.tabCapture API to build powerful screenshot and screen recording Chrome extensions. Learn capture methods, media streams, implementation best practices, and advanced features."
 date: 2025-03-11
+last_modified_at: 2025-03-11
 categories: [Chrome-Extensions, APIs]
 tags: [screen-capture, screenshot, chrome-extension]
 keywords: "chrome extension screen capture, screenshot chrome extension, screen recording extension, chrome extension capture tab, chrome.tabCapture API"

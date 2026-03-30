@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro vs Tab Wrangler: Suspend or Close Tabs Automatically?"
 description: "Compare Tab Suspender Pro vs Tab Wrangler for automatic tab management. Discover which Chrome extension saves more memory and suits your workflow better in 2025."
 date: 2025-03-05
+last_modified_at: 2025-03-05
 categories: [Chrome-Extensions, Comparisons]
 tags: [tab-suspender-pro, tab-wrangler, comparison]
 keywords: "tab suspender pro vs tab wrangler, tab wrangler alternative, auto close tabs chrome, tab suspender vs tab wrangler, best tab manager 2025"

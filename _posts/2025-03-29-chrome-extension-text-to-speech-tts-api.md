@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Text-to-Speech (TTS) API: Build a Screen Reader"
 description: "Learn how to build a chrome extension text to speech screen reader using the chrome.tts API. Complete guide with code examples for chrome extension read aloud functionality."
 date: 2025-03-29
+last_modified_at: 2025-03-29
 categories: [Chrome-Extensions, APIs]
 tags: [tts, text-to-speech, chrome-extension]
 keywords: "chrome extension text to speech, tts API chrome extension, chrome extension read aloud, screen reader chrome extension, chrome.tts API guide"

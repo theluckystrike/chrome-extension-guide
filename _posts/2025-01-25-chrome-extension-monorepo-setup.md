@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Monorepo Setup with Turborepo and pnpm"
 description: "Learn how to set up a Chrome extension monorepo using Turborepo and pnpm workspaces. Build scalable, maintainable browser extensions with shared code, efficient builds, and streamlined development workflows."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [tutorials, chrome-extensions, development-tools]
 tags: [chrome extension monorepo, turborepo extension, pnpm workspace extension, monorepo browser extension, Turborepo, pnpm, web development, build tools]
 keywords: "chrome extension monorepo, turborepo extension, pnpm workspace extension, monorepo browser extension, Turborepo pnpm, Chrome extension build setup"

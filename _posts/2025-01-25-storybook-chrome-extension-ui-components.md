@@ -3,6 +3,7 @@ layout: post
 title: "Storybook for Chrome Extension UI Components: Complete Guide"
 description: "Learn how to build, test, and document Chrome extension UI components using Storybook. Discover component library patterns, visual testing strategies, and best practices for creating maintainable extension interfaces."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing]
 keywords: "storybook chrome extension, component library extension, ui testing extension, chrome extension ui components, storybook component library, extension component testing"

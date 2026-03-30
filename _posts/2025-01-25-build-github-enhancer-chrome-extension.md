@@ -3,6 +3,7 @@ layout: post
 title: "Build a GitHub Enhancer Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a GitHub enhancer Chrome extension to boost your productivity. This comprehensive guide covers Manifest V3, GitHub API integration, content scripts, and best practices for creating powerful github tools chrome extension."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "github enhancer extension, github tools chrome, github productivity extension"

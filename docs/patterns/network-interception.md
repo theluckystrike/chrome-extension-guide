@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Network Interception. Best Practices"
 description: "Intercept and modify network requests with the Declarative Net Request API."
 canonical_url: "https://bestchromeextensions.com/patterns/network-interception/"
+last_modified_at: 2026-01-15
 ---
 
 Network Request Interception Patterns

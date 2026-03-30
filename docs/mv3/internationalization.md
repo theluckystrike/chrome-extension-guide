@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Internationalization. Manifest V3 Guide"
 description: "Implement internationalization in Manifest V3 extensions."
 canonical_url: "https://bestchromeextensions.com/mv3/internationalization/"
+last_modified_at: 2026-01-15
 ---
 
 Internationalization in Chrome Extensions (MV3)

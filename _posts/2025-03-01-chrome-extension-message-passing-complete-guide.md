@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Message Passing: Communication Between Components Guide"
 description: "Master chrome extension message passing with chrome.runtime.sendMessage and ports. Learn content script background communication patterns for Manifest V3."
 date: 2025-03-01
+last_modified_at: 2025-03-01
 categories: [Chrome-Extensions, Development]
 tags: [message-passing, chrome-extension, tutorial]
 keywords: "chrome extension message passing, chrome.runtime.sendMessage, chrome extension communication, message passing content script background, chrome extension ports"

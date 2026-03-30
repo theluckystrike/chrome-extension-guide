@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension State Management. Best Practices"
 description: "Centralized state management patterns for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/state-management/"
+last_modified_at: 2026-01-15
 ---
 
 State Management Patterns

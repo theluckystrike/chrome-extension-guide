@@ -4,6 +4,7 @@ description: Master lazy loading and code splitting techniques for Chrome extens
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-lazy-loading-code-splitting/"
 
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Lazy Loading: Dynamic Imports and Code Splitting for Faster Startup

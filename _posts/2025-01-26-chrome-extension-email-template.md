@@ -3,6 +3,7 @@ layout: post
 title: "Build an Email Template Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful email template Chrome extension from scratch. This comprehensive guide covers Gmail template chrome extension development, email snippet extension features, and best practices for creating productivity-enhancing email tools."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "email template extension, gmail template chrome, email snippet extension, chrome extension email templates, build email extension chrome"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Csp Workarounds. Best Practices"
 description: "Navigate Content Security Policy restrictions in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/csp-workarounds/"
+last_modified_at: 2026-01-15
 ---
 
 CSP Workarounds in Chrome Extensions (MV3)

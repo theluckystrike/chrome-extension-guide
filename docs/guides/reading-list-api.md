@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Reading List API. How to Add and Manage Reading List Items"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/reading-list-api/"
+last_modified_at: 2026-01-15
 ---
 Reading List API Guide
 

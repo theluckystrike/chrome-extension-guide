@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Publishing Guide. Publishing Guide"
 description: "Complete guide to publishing your Chrome extension to the Chrome Web Store."
 canonical_url: "https://bestchromeextensions.com/publishing/publishing-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Web Store Publishing Guide

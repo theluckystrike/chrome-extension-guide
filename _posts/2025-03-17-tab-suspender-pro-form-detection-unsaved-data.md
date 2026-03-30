@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Form Detection: Never Lose Unsaved Form Data"
 description: "Learn how Tab Suspender Pro's intelligent form detection protects your unsaved data, preventing accidental data loss when tabs suspend automatically."
 date: 2025-03-17
+last_modified_at: 2025-03-17
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, form-detection, data-protection]
 canonical_url: "https://bestchromeextensions.com/2025/03/17/tab-suspender-pro-form-detection-unsaved-data/"

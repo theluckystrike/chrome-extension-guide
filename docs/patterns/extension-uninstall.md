@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Uninstall. Best Practices"
 description: "Handle extension uninstallation and gather feedback."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-uninstall/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Uninstall Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Cookie Editor Chrome Extension"
 description: "Learn how to build a powerful Cookie Editor Chrome Extension from scratch. This comprehensive guide covers cookie management, editing, deletion, and advanced features for Chrome extensions."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Development-Tutorial]
 tags: [chrome-extension, tutorial, cookie-editor]
 keywords: "cookie editor extension, manage cookies chrome, edit cookies extension"

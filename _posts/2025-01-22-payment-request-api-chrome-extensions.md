@@ -3,6 +3,7 @@ layout: post
 title: "Payment Request API in Chrome Extensions: Complete Implementation Guide"
 description: "Learn how to implement the Payment Request API in Chrome extensions. This comprehensive guide covers payment request extension development, checkout integration, and web payment Chrome implementation for modern e-commerce extensions."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions, API]
 tags: [chrome-extension, api]
 keywords: "payment request extension, checkout extension, web payment chrome, payment request api chrome extension, chrome payment api, payment integration extension"

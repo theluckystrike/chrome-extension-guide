@@ -6,6 +6,7 @@ permalink: /permissions/readingList/
 category: permissions
 order: 33
 canonical_url: "https://bestchromeextensions.com/permissions/readingList/"
+last_modified_at: 2026-01-15
 ---
 
 readingList Permission

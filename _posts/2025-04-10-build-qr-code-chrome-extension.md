@@ -3,6 +3,7 @@ layout: post
 title: "Build a QR Code Generator Chrome Extension: Share Links Instantly"
 description: "Learn how to build a QR code generator Chrome extension from scratch. This step-by-step tutorial covers Manifest V3, QR code generation libraries, and publishing to the Chrome Web Store."
 date: 2025-04-10
+last_modified_at: 2025-04-10
 categories: [Chrome-Extensions, Tutorials]
 tags: [qr-code, generator, chrome-extension]
 keywords: "chrome extension qr code, qr code generator chrome, build qr extension, chrome extension generate qr, share url qr chrome"

@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro and Bookmarks: Save Suspended Tabs as Bookmark Folders"
 description: "Learn how Tab Suspender Pro integrates with Chrome bookmarks to save suspended tab sessions as organized bookmark folders. Preserve your workflow across devices."
 date: 2025-04-27
+last_modified_at: 2025-04-27
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, bookmarks, integration]
 keywords: "tab suspender pro bookmarks, save suspended tabs bookmarks, tab suspender bookmark integration, chrome bookmark tab sessions, organize tabs bookmarks"

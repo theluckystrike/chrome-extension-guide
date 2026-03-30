@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Memory Optimization: Developer Guide to Reducing Memory Usage"
 description: "Developer guide to building memory-efficient Chrome extensions. Memory profiling, leak detection, garbage collection, and Tab Suspender Pro architecture."
 permalink: /guides/chrome-memory-optimization-developer-guide/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Memory Optimization: A Developer Guide

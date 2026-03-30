@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Keyboard Shortcuts: Commands API & Custom Hotkeys"
 description: "Implement keyboard shortcuts in Chrome extensions. Learn the Commands API, global shortcuts, user-configurable bindings, and advanced chord patterns with TypeScript."
 permalink: /guides/chrome-extension-keyboard-shortcuts/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Keyboard Shortcuts: Commands API & Custom Hotkeys

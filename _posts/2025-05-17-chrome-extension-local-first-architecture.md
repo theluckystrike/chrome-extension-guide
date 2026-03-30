@@ -3,6 +3,7 @@ layout: post
 title: "Local-First Chrome Extensions: Build Extensions That Work Offline"
 description: "Learn to build local-first chrome extensions that work offline using service workers, IndexedDB, and cache API. Comprehensive 2025 guide for developers."
 date: 2025-05-17
+last_modified_at: 2025-05-17
 categories: [Chrome-Extensions, Architecture]
 tags: [local-first, offline, chrome-extension]
 keywords: "chrome extension offline, local first extension, chrome extension no internet, offline chrome extension, service worker offline extension"

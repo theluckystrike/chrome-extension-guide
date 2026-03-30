@@ -3,6 +3,7 @@ layout: default
 title: "How to Manage 100+ Chrome Tabs Without Slowing Down Your Computer"
 description: "Practical strategies for managing 100+ Chrome tabs. Overcome tab hoarding with Tab Suspender Pro, tab groups, and productivity workflows."
 permalink: /guides/manage-100-plus-chrome-tabs/
+last_modified_at: 2026-01-15
 ---
 
 How to Manage 100+ Chrome Tabs Without Slowing Down Your Computer

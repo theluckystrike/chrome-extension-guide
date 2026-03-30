@@ -3,6 +3,7 @@ layout: post
 title: "Implementing OAuth2 in Chrome Extensions: Complete Authentication Guide"
 description: "Learn how to implement secure OAuth2 authentication in Chrome Extensions with Manifest V3. Complete guide covering Google OAuth, token management, and best practices."
 date: 2025-02-20
+last_modified_at: 2025-02-20
 categories: [Chrome-Extensions, Authentication]
 tags: [oauth2, authentication, chrome-extension, chrome extension oauth2, chrome extension authentication, google oauth chrome extension, chrome extension login, oauth2 manifest v3]
 keywords: "chrome extension oauth2, chrome extension authentication, google oauth chrome extension, chrome extension login, oauth2 manifest v3"

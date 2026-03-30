@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Network Activity Detection: Don't Suspend Active Downloads"
 description: "Learn how Tab Suspender Pro's intelligent network activity detection prevents suspension of tabs with active downloads, streaming videos, and real-time connections. Optimize your browser without interrupting important transfers."
 date: 2025-03-24
+last_modified_at: 2025-03-24
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, network-detection, smart-features]
 keywords: "tab suspender pro network detection, suspend tab downloading, tab suspender active download, chrome tab network activity, tab suspender smart detection"

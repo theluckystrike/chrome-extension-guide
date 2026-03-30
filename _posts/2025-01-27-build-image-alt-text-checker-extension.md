@@ -3,6 +3,7 @@ layout: post
 title: "Build an Image Alt Text Checker Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a powerful alt text checker extension for Chrome. This comprehensive guide covers accessibility image checking, img alt attribute validation, and Chrome extension development for web accessibility compliance."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "alt text checker extension, accessibility images chrome, img alt extension, chrome extension development, web accessibility"

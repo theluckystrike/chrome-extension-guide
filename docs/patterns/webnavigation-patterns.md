@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Webnavigation Patterns. Best Practices"
 description: "Use webNavigation API for advanced navigation tracking."
 canonical_url: "https://bestchromeextensions.com/patterns/webnavigation-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Web Navigation API Patterns

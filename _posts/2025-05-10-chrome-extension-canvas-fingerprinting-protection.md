@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Canvas Fingerprinting Protection: Privacy Guide"
 description: "Discover how Chrome extension canvas fingerprinting protection works, the best anti-fingerprinting extensions, and effective browser fingerprint blockers for enhanced privacy."
 date: 2025-05-10
+last_modified_at: 2025-05-10
 categories: [Chrome-Extensions, Privacy]
 tags: [fingerprinting, privacy, chrome-extension]
 keywords: "chrome extension canvas fingerprinting, fingerprint protection chrome, anti fingerprinting extension, browser fingerprint blocker, canvas fingerprint chrome"

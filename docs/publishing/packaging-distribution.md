@@ -2,6 +2,7 @@
 title: "Chrome Extension Packaging & Distribution. CRX Files, Self-Hosting, and Enterprise Deployment"
 slug: /publishing/packaging-distribution/
 description: "Learn how to package Chrome extensions as CRX files, self-host extensions with update_url, and deploy via enterprise policies and group policies for managed Chrome environments."
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Packaging & Distribution. CRX Files, Self-Hosting, and Enterprise Deployment

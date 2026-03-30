@@ -3,6 +3,7 @@ layout: post
 title: "Build a Responsive Design Tester Chrome Extension: Preview All Screen Sizes"
 description: "Learn to build a responsive design tester Chrome extension that previews websites across mobile, tablet, and desktop viewports. Complete guide with code examples."
 date: 2025-04-29
+last_modified_at: 2025-04-29
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [responsive, design, chrome-extension]
 keywords: "chrome extension responsive design, responsive tester chrome, screen size preview extension, build responsive extension, mobile preview chrome"

@@ -3,6 +3,7 @@ layout: post
 title: "Web Workers in Chrome Extensions: Offload Heavy Processing"
 description: "Learn how to implement web workers in Chrome extensions to offload heavy computations, improve performance, and create responsive user experiences. Complete 2025 guide with examples."
 date: 2025-03-28
+last_modified_at: 2025-03-28
 categories: [Chrome-Extensions, Performance]
 tags: [web-workers, performance, chrome-extension]
 keywords: "chrome extension web worker, web worker chrome extension, offload processing chrome extension, chrome extension heavy computation, parallel processing extension"

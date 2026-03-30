@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Windows API. How to Create and Manage Browser Windows"
 description: "Master the chrome.windows API for creating, updating, and managing browser windows in Chrome extensions. Covers window types, focused windows, incognito mode, and multi-monitor support."
 canonical_url: "https://bestchromeextensions.com/guides/windows-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Windows API. How to Create and Manage Browser Windows

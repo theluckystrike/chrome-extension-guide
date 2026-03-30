@@ -3,6 +3,7 @@ layout: post
 title: "Prism.js Syntax Highlighting in Extensions: Complete Implementation Guide"
 description: "Master Prism.js syntax highlighting in Chrome extensions with this comprehensive guide. Learn how to implement code highlight chrome features, integrate syntax highlight extension capabilities, and create professional code viewing experiences."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "prism js extension, code highlight chrome, syntax highlight extension"

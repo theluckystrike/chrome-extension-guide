@@ -3,6 +3,7 @@ layout: post
 title: "Build a PDF Viewer Chrome Extension: Complete Tutorial with pdf.js"
 description: "Learn to build a powerful PDF viewer Chrome extension using pdf.js. This comprehensive tutorial covers manifest setup, content scripts, rendering, and deployment."
 date: 2025-03-19
+last_modified_at: 2025-03-19
 categories: [Chrome-Extensions, Tutorials]
 tags: [pdf, pdfjs, chrome-extension]
 keywords: "chrome extension pdf viewer, pdf.js chrome extension, build pdf reader extension, chrome extension open pdf, pdf extension chrome"

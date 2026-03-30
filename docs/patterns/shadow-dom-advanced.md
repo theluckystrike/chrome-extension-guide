@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Shadow Dom Advanced. Best Practices"
 description: "Advanced shadow DOM patterns for extension UI components."
 canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-advanced/"
+last_modified_at: 2026-01-15
 ---
 
 Shadow DOM Advanced Patterns for Chrome Extensions

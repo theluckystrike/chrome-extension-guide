@@ -5,6 +5,7 @@ description: Learn how to build Chrome extensions from scratch. Step-by-step tut
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/getting-started/"
 date: 2026-03-23
+last_modified_at: 2026-03-23
 ---
 
 Chrome Extension Getting Started

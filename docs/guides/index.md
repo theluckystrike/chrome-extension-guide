@@ -2,6 +2,7 @@
 title: "Chrome Extension Development Guides"
 slug: /guides/
 description: "In-depth development guides for Chrome extensions covering setup, debugging, security, performance, and advanced patterns. Learn to build production-ready extensions."
+last_modified_at: 2026-01-15
 ---
 
 # Chrome Extension Development Guides

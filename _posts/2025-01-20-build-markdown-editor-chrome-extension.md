@@ -3,6 +3,7 @@ layout: post
 title: "Build a Markdown Editor Chrome Extension: Complete Step-by-Step Guide"
 description: "Learn how to build a powerful markdown editor extension with live preview. This comprehensive tutorial covers markdown preview chrome functionality, rich text editing, and browser extension development from scratch."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "markdown editor extension, markdown preview chrome, md editor extension, build chrome extension markdown, markdown chrome extension tutorial"

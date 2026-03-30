@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Alarms API: Schedule Tasks and Periodic Events"
 description: "Learn how to use the Chrome Extension Alarms API to schedule tasks, create periodic events, and implement time-based automation in your Chrome extensions. Complete developer guide with practical examples."
 date: 2025-02-24
+last_modified_at: 2025-02-24
 categories: [Chrome-Extensions, APIs]
 tags: [alarms, scheduling, chrome-extension]
 keywords: "chrome extension alarms API, schedule tasks chrome extension, periodic events chrome extension, chrome.alarms API guide, chrome extension timer, background tasks chrome extension, manifest v3 alarms, scheduled automation"

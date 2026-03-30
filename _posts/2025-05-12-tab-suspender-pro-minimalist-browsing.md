@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Minimalist Browsing: Less Tabs, More Focus"
 description: "Discover how Tab Suspender Pro transforms your Chrome experience into a minimalist powerhouse. Learn to reduce tab clutter, boost focus, and create a streamlined browsing environment that enhances productivity."
 date: 2025-05-12
+last_modified_at: 2025-05-12
 categories: [Chrome-Extensions, Lifestyle]
 tags: [tab-suspender-pro, minimalism, focus]
 ---

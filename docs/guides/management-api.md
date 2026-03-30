@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Management API. Developer Guide"
 description: "Learn how to use the Chrome Extension Management API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/management-api/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Management API
 

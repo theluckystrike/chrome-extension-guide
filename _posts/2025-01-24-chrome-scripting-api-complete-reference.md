@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Scripting API Complete Reference: Dynamic Code Injection in MV3"
 description: "Master the Chrome Scripting API for Manifest V3. Learn executeScript, insertCSS, registerContentScripts, and dynamic code injection patterns with practical examples and best practices."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3]
 keywords: "chrome.scripting api, executeScript mv3, dynamic script injection, registerContentScripts, chrome extension scripting, manifest v3 scripting"

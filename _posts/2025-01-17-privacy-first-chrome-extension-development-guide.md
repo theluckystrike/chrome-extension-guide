@@ -3,6 +3,7 @@ layout: post
 title: "Privacy-First Chrome Extension Development Guide: Protecting User Data in 2025"
 description: "Master chrome extension privacy and user data protection. Learn GDPR compliance, secure data handling, minimal permissions, and building trust with privacy-conscious users."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, Development, Privacy]
 tags: [chrome-extension, privacy, security, GDPR, guide]
 keywords: "chrome extension privacy, extension user data protection, GDPR chrome extension, chrome extension security best practices, privacy-first extension development"

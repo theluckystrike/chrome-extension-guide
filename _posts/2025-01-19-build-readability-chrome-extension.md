@@ -3,6 +3,7 @@ layout: post
 title: "Build a Readability Chrome Extension: Complete 2025 Developer Guide"
 description: "Learn how to build a readability Chrome extension from scratch. This comprehensive tutorial covers reader mode extension development, clean article view implementation, and best practices for creating user-friendly readability extensions using modern web technologies."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "readability extension, reader mode extension, clean article view, chrome extension development, reader mode chrome extension"

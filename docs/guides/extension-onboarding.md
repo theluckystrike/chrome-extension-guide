@@ -2,6 +2,7 @@
 layout: guide
 title: Chrome Extension User Onboarding. How to Convert Installs into Active Users
 description: Learn how to design effective user onboarding flows that turn new install into engaged, active users. Covers welcome pages, permission timing, feature discovery, and success metrics.
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension User Onboarding. How to Convert Installs into Active Users

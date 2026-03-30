@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Debugging Patterns. Best Practices"
 description: "Master debugging techniques for Chrome extensions across all execution contexts."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-debugging-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Debugging Patterns

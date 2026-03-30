@@ -3,6 +3,7 @@ layout: post
 title: "Modal Dialog Patterns in Chrome Extensions: A Comprehensive UI Guide"
 description: "Master modal dialog patterns in Chrome extensions with our detailed guide. Learn how to create popup modal chrome interfaces, implement dialog UI extension patterns, and build user-friendly modal dialog extensions that enhance user experience."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "modal dialog extension, popup modal chrome, dialog ui extension"

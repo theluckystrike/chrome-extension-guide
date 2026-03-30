@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Omnibox API: Add Custom Commands to the Address Bar"
 description: "Learn how to use the Chrome Extension Omnibox API to create custom address bar commands. Build powerful search suggestions and boost user engagement with this comprehensive guide."
 date: 2025-03-10
+last_modified_at: 2025-03-10
 categories: [Chrome-Extensions, APIs]
 tags: [omnibox, address-bar, chrome-extension]
 keywords: "chrome extension omnibox, omnibox API chrome, address bar commands chrome extension, chrome extension custom search, chrome omnibox suggestions"

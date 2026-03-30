@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with SolidJS: Reactive and Fast"
 description: "Discover how to build high-performance Chrome extensions using SolidJS. Learn why SolidJS is an excellent choice for extension UI development with its fine-grained reactivity and minimal bundle size."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [tutorials, chrome-extensions, solidjs]
 tags: [solidjs chrome extension, solid js extension, reactive extension ui, manifest v3, web components]
 keywords: "solidjs chrome extension, solid js extension, reactive extension ui, chrome extension solidjs tutorial"

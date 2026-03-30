@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Streaming Sse Patterns. Best Practices"
 description: "Implement Server-Sent Events for real-time streaming in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/streaming-sse-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Streaming and Server-Sent Events in Chrome Extensions

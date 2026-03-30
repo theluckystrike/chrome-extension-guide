@@ -3,6 +3,7 @@ layout: post
 title: "Build a Session Manager Chrome Extension: Complete 2025 Tutorial"
 description: "Learn how to build a session manager extension that lets you save tabs session, restore tabs chrome, and organize your browsing workflow. Step-by-step tutorial with code examples."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "session manager extension, save tabs session, restore tabs chrome, chrome tab manager, chrome session manager tutorial"

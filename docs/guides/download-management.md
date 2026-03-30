@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Download Management. Developer Guide"
 description: "Learn Chrome extension download management with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/download-management/"
+last_modified_at: 2026-01-15
 ---
 Download Management in Chrome Extensions
 

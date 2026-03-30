@@ -5,6 +5,7 @@ description: Master Chrome extension background service workers in Manifest V3. 
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/background-service-worker/"
 
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Background Service Worker Guide

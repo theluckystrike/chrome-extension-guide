@@ -3,6 +3,7 @@ layout: post
 title: "Build a Time Tracker Chrome Extension: Monitor Your Browsing Habits"
 description: "Learn to build a powerful time tracking Chrome extension that monitors website usage, tracks browsing habits, and boosts productivity in 2025."
 date: 2025-04-12
+last_modified_at: 2025-04-12
 categories: [Chrome-Extensions, Tutorials]
 tags: [time-tracker, productivity, chrome-extension]
 keywords: "chrome extension time tracker, time tracking chrome extension, build time tracker extension, website time monitor chrome, browsing time chrome extension"

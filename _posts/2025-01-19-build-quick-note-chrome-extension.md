@@ -3,6 +3,7 @@ layout: post
 title: "Build a Quick Note Chrome Extension: Complete Step-by-Step Tutorial"
 description: "Learn how to build a quick note Chrome extension from scratch. This comprehensive tutorial covers note taking extension development with quick notes chrome and browser notepad extension features."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "note taking extension, quick notes chrome, browser notepad extension, build chrome extension notes, chrome extension development tutorial"

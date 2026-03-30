@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Badge Management. Best Practices"
 description: "Manage extension badges for user notifications."
 canonical_url: "https://bestchromeextensions.com/patterns/badge-management/"
+last_modified_at: 2026-01-15
 ---
 
 Badge Management Patterns

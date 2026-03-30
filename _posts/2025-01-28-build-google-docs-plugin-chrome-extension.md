@@ -3,6 +3,7 @@ layout: post
 title: "Build a Google Docs Plugin Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a Google Docs plugin Chrome extension with this comprehensive guide. Discover how to create powerful document tools, integrate with Google Docs API, and publish your docs enhancer chrome extension."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "google docs extension, docs enhancer chrome, document tools, google docs plugin, chrome extension google docs"

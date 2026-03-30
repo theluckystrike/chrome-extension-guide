@@ -3,6 +3,7 @@ layout: default
 title: "Tab Suspender Pro Enterprise Deployment Guide. IT Admin Implementation"
 description: "Complete enterprise deployment guide for Tab Suspender Pro. Learn to configure Chrome Enterprise policies, force-install via admin console, pre-configure whitelist domains, and monitor fleet-wide extension health."
 canonical_url: "https://bestchromeextensions.com/guides/tab-suspender-pro-enterprise-deployment-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Tab Suspender Pro Enterprise Deployment Guide

@@ -3,6 +3,7 @@ layout: default
 title: "The Complete Manifest V3 Migration Guide"
 description: "Everything you need to migrate a Chrome extension from Manifest V2 to Manifest V3. Written by a developer who migrated 20 production extensions."
 canonical_url: "https://bestchromeextensions.com/guides/complete-manifest-v3-migration-guide/"
+last_modified_at: 2026-01-15
 ---
 
 The Complete Manifest V3 Migration Guide

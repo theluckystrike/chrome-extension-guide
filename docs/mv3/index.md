@@ -2,6 +2,7 @@
 title: "Manifest V3 Migration Guide"
 slug: /mv3/
 description: "Complete guide to migrating Chrome extensions from Manifest V2 to Manifest V3. Learn about service workers, declarative net request, promise-based APIs, and all MV3 changes."
+last_modified_at: 2026-01-15
 ---
 
 # Manifest V3 Migration Guide

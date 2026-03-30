@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Tabs API. Complete Guide to Managing Browser Tabs"
 description: "A comprehensive developer guide for managing browser tabs using the Chrome Extension Tabs API with practical examples for query, create, update, remove, and event handling."
 canonical_url: "https://bestchromeextensions.com/guides/tabs-api-deep detailed look/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Tabs API. Complete Guide to Managing Browser Tabs

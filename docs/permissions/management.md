@@ -6,6 +6,7 @@ permalink: /permissions/management/
 category: permissions
 order: 24
 canonical_url: "https://bestchromeextensions.com/permissions/management/"
+last_modified_at: 2026-01-15
 ---
 
 management Permission

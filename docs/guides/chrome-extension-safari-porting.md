@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Safari Porting. Developer Guide"
 description: "Learn Chrome extension safari porting with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-safari-porting/"
+last_modified_at: 2026-01-15
 ---
 Porting Chrome Extensions to Safari Web Extensions
 

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Quick Notes Chrome Extension: Complete Step-by-Step Tutorial"
 description: "Learn how to build a quick notes extension for Chrome with this comprehensive tutorial. Create a fast notepad chrome extension with inline notes functionality using Manifest V3."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "quick notes extension, fast notepad chrome, inline notes extension, build chrome extension tutorial"

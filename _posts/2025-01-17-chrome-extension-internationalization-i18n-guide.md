@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Internationalization: Complete i18n Guide for Global Users"
 description: "Learn how to implement internationalization (i18n) in Chrome extensions to reach global users. This comprehensive guide covers manifest configuration, message passing, locale file management, and best practices for multi-language browser extensions."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension i18n, internationalization chrome extension, localize browser extension, multi-language chrome extension"

@@ -3,6 +3,7 @@ layout: post
 title: "Build a URL Shortener Chrome Extension: Complete Tutorial with API Integration"
 description: "Learn how to build a URL shortener Chrome extension with Bitly API integration. Step-by-step tutorial covers Manifest V3, popup UI, API calls, and publishing."
 date: 2025-04-05
+last_modified_at: 2025-04-05
 categories: [Chrome-Extensions, Tutorials]
 tags: [url-shortener, tutorial, chrome-extension]
 keywords: "chrome extension url shortener, build url shortener extension, shorten links chrome extension, chrome extension bitly, url shortener tutorial"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Messaging Protocols. Best Practices"
 description: "Design message passing protocols between extension components."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-messaging-protocols/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Messaging Protocols

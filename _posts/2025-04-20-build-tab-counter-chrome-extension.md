@@ -3,6 +3,7 @@ layout: post
 title: "Build a Tab Counter Chrome Extension: Track Your Open Tab Count"
 description: "Learn how to build a tab counter Chrome extension that displays your open tab count in the toolbar badge. Complete tutorial with code examples."
 date: 2025-04-20
+last_modified_at: 2025-04-20
 categories: [Chrome-Extensions, Tutorials]
 tags: [tab-counter, productivity, chrome-extension]
 keywords: "chrome extension tab counter, count open tabs chrome, tab counter badge chrome, how many tabs chrome, tab count extension"

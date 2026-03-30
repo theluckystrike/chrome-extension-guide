@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension vs PWA: Comprehensive Feature Comparison Guide for 2025"
 description: "Discover the key differences between Chrome extensions and Progressive Web Apps (PWAs). Learn when to use PWA vs extension, their capabilities, limitations, and how to choose the right technology for your web project in 2025."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development, pwa, progressive-web-app, web-development]
 keywords: "chrome extension vs pwa, progressive web app vs extension, when to use pwa, chrome extension features, pwa capabilities, web app technology comparison"

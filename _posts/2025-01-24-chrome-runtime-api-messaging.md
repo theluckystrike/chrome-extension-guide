@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Runtime API: Complete Guide to Extension Messaging and Lifecycle"
 description: "Master the Chrome Runtime API for extension messaging, lifecycle events, and cross-component communication. Covers sendMessage, connect, onInstalled, and advanced messaging patterns."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3]
 keywords: "chrome.runtime api, extension messaging, onInstalled event, runtime connect, sendMessage, chrome extension communication"

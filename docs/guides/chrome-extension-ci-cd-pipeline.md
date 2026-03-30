@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension CI/CD Pipeline: Automated Testing and Publishing"
 description: "Build a complete CI/CD pipeline for Chrome extensions with GitHub Actions. Automate linting, testing, building, packaging, and publishing to Chrome Web Store."
 permalink: /guides/chrome-extension-ci-cd-pipeline/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension CI/CD Pipeline: Automated Testing and Publishing

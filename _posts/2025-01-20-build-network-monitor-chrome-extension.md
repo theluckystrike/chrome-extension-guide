@@ -3,6 +3,7 @@ layout: post
 title: "Build a Network Monitor Chrome Extension"
 description: "Learn how to build a network monitor Chrome extension from scratch. This comprehensive guide covers HTTP request logging, network traffic monitoring, and creating powerful developer tools for analyzing browser requests."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [guides, chrome-extensions, development-tools]
 tags: [network monitor extension, http request logger chrome, network traffic extension, chrome devtools, web development, api monitoring]
 keywords: "network monitor extension, http request logger chrome, network traffic extension"

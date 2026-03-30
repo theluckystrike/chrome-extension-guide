@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Tab Groups API: Programmatic Tab Organization"
 description: "Master the Chrome Tab Groups API for building powerful tab organization extensions. Learn chrome.tabGroups methods, Manifest V3 permissions, programmatic group creation, color customization, and real-world implementation patterns."
 date: 2025-03-08
+last_modified_at: 2025-03-08
 categories: [Chrome-Extensions, APIs]
 tags: [tab-groups, chrome-extension, tutorial]
 keywords: "chrome extension tab groups, chrome.tabGroups API, tab groups chrome extension, organize tabs programmatically, chrome tab group extension"

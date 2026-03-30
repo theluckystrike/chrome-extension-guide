@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Internationalization (i18n). How to Translate Your Extension"
 description: "Learn how to internationalize your Chrome extension with chrome.i18n API, _locales directory structure, messages.json format, RTL support, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/internationalization/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Internationalization (i18n). How to Translate Your Extension

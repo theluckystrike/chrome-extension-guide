@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Proxy Settings detailed look. Best Practices"
 description: "Configure proxy settings programmatically in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings-deep detailed look/"
+last_modified_at: 2026-01-15
 ---
 
 Proxy Settings detailed look

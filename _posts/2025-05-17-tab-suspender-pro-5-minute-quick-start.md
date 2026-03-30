@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro 5-Minute Quick Start: From Install to Optimized in Minutes"
 description: "Get Tab Suspender Pro up and running in just 5 minutes. Learn fast setup, whitelist configuration, keyboard shortcuts and optimization tips."
 date: 2025-05-17
+last_modified_at: 2025-05-17
 categories: [Chrome-Extensions, Quick-Start]
 tags: [tab-suspender-pro, quick-start, beginner]
 keywords: "tab suspender pro quick start, tab suspender pro setup fast, get started tab suspender, tab suspender pro easy setup, quick install tab suspender"

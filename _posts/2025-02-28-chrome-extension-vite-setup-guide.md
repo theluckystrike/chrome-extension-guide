@@ -3,6 +3,7 @@ layout: post
 title: "Build Chrome Extensions with Vite: Fast Development Setup Guide 2025"
 description: "Learn how to set up a blazing-fast Chrome extension development environment using Vite. This guide covers hot reload, Manifest V3 support, TypeScript integration, and production builds for 2025."
 date: 2025-02-28
+last_modified_at: 2025-02-28
 categories: [Chrome-Extensions, Build-Tools]
 tags: [vite, chrome-extension, build-tools]
 keywords: "chrome extension vite, vite chrome extension, fast chrome extension build, vite manifest v3, chrome extension hot reload vite"

@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Offscreen API: Access DOM APIs from Service Workers"
 description: "Learn how to use the Chrome Extension Offscreen API in Manifest V3 to access DOM APIs from service workers. Complete guide with examples for chrome.offscreen document creation and management."
 date: 2025-03-08
+last_modified_at: 2025-03-08
 categories: [Chrome-Extensions, APIs]
 tags: [offscreen, manifest-v3, chrome-extension]
 keywords: "chrome extension offscreen API, offscreen document chrome, chrome extension DOM access mv3, offscreen API manifest v3, chrome.offscreen"

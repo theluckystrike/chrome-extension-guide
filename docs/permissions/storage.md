@@ -6,6 +6,7 @@ permalink: /permissions/storage/
 category: permissions
 order: 39
 canonical_url: "https://bestchromeextensions.com/permissions/storage/"
+last_modified_at: 2026-01-15
 ---
 
 storage Permission Reference

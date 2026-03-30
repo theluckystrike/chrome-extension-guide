@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Privacy Policy. How to Write One That Passes CWS Review"
 description: "Learn how to write a privacy policy that passes Chrome Web Store review. Covers required disclosures, data collection types, GDPR/CCPA compliance, templates, and hosting options."
 canonical_url: "https://bestchromeextensions.com/publishing/privacy-policy-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Privacy Policy. How to Write One That Passes CWS Review

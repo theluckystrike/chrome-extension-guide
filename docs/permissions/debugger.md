@@ -6,6 +6,7 @@ permalink: /permissions/debugger/
 category: permissions
 order: 11
 canonical_url: "https://bestchromeextensions.com/permissions/debugger/"
+last_modified_at: 2026-01-15
 ---
 
 debugger Permission. Chrome Extension Reference

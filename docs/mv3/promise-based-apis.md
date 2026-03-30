@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Promise Based Apis. Manifest V3 Guide"
 description: "Master promise-based APIs in Manifest V3 for asynchronous operations."
 canonical_url: "https://bestchromeextensions.com/mv3/promise-based-apis/"
+last_modified_at: 2026-01-15
 ---
 
 Promise-Based APIs in MV3

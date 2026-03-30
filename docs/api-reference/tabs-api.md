@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Tabs API Complete Reference"
 description: "The Chrome Tabs API creates, modifies, queries, and rearranges browser tabs, providing access to tab properties like URL, title, favicon, and loading status."
 canonical_url: "https://bestchromeextensions.com/api-reference/tabs-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Tabs API Reference

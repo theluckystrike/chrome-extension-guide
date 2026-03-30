@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Keyboard Shortcuts: The Power User's Complete Reference"
 description: "Master Tab Suspender Pro keyboard shortcuts for Chrome. Learn default hotkeys, customization, workflow integration, and how to build muscle memory for maximum productivity."
 date: 2025-02-27
+last_modified_at: 2025-02-27
 categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, keyboard-shortcuts, productivity]
 author: theluckystrike

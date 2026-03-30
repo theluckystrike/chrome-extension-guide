@@ -3,6 +3,7 @@ layout: default
 title: "Prevent XSS in Chrome Extensions: Input Sanitization and Secure DOM Manipulation"
 description: "Master XSS prevention in Chrome extensions with this comprehensive guide covering DOMPurify, Trusted Types, message sanitization, CSP, and modern browser security APIs."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-xss-prevention-input-sanitization/"
+last_modified_at: 2026-01-15
 ---
 
 Prevent XSS in Chrome Extensions: Input Sanitization and Secure DOM Manipulation

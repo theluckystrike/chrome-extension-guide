@@ -3,6 +3,7 @@ layout: post
 title: "WebAuthn in Chrome Extensions: Complete Guide to Passkeys and FIDO2"
 description: "Learn how to implement WebAuthn in Chrome extensions for secure passwordless authentication. This comprehensive guide covers passkey chrome extension development, FIDO2 integration, and best practices for biometric authentication."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api]
 keywords: "webauthn extension, passkey chrome extension, fido2 extension, chrome webauthn api, passkey authentication chrome extension, web authentication chrome"

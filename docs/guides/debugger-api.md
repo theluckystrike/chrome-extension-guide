@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Debugger API. Developer Guide"
 description: "Learn how to use the Chrome Extension Debugger API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/debugger-api/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Debugger API
 

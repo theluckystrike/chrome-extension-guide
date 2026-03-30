@@ -6,6 +6,7 @@ permalink: /permissions/clipboardWrite/
 category: permissions
 order: 6
 canonical_url: "https://bestchromeextensions.com/permissions/clipboardWrite/"
+last_modified_at: 2026-01-15
 ---
 
 clipboardWrite Permission

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Action Api. Manifest V3 Guide"
 description: "Use the Action API for toolbar buttons in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/action-api/"
+last_modified_at: 2026-01-15
 ---
 
 MV3 Action API Guide

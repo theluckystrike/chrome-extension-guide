@@ -3,6 +3,7 @@ layout: default
 title: "Building Context Menus in Chrome Extensions. Developer Guide"
 description: "A comprehensive tutorial on building context menus in Chrome extensions. Learn to use chrome.contextMenus API, create different menu item types, handle clicks, and implement best practices."
 canonical_url: "https://bestchromeextensions.com/tutorials/context-menus-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Building Context Menus in Chrome Extensions

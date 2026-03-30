@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Submission Process. Publishing Guide"
 description: "Complete step-by-step guide to submitting your Chrome extension to the Chrome Web Store for review and publication."
 canonical_url: "https://bestchromeextensions.com/publishing/submission-process/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Web Store Submission Process

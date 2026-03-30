@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Service Worker Tips. Manifest V3 Guide"
 description: "Best practices for Chrome extension service workers in Manifest V3 including lifecycle, debugging, and keep-alive."
 canonical_url: "https://bestchromeextensions.com/mv3/service-worker-tips/"
+last_modified_at: 2026-01-15
 ---
 
 MV3 Service Worker Tips

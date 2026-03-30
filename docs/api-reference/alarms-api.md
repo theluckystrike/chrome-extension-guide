@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Alarms API Complete Reference"
 description: "The Chrome Alarms API schedules code to run periodically or at a specified time, providing reliable background task execution that survives service worker termination in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/api-reference/alarms-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Alarms API Reference

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Storage API detailed look"
 description: "An in-depth guide to the Chrome Storage API covering all four storage areas, quota management, change listeners, migration patterns, and advanced usage for extension data persistence."
 canonical_url: "https://bestchromeextensions.com/api-reference/storage-api-deep detailed look/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Storage API detailed look

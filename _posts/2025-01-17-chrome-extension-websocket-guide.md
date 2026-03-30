@@ -3,6 +3,7 @@ layout: post
 title: "Real-time Chrome Extensions with WebSocket API: Complete 2025 Guide"
 description: "Master chrome extension websocket integration with our comprehensive 2025 guide. Learn how to build real-time data chrome extension using WebSocket connections, implement persistent communication channels, and create responsive extensions that keep users updated instantly."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [guides, chrome-extensions, development, real-time]
 tags: [chrome extension websocket, real-time data chrome extension, websocket chrome extension, chrome extension real-time communication, webSocket API chrome extension, real-time chrome extension tutorial]
 keywords: "chrome extension websocket, real-time data chrome extension, websocket chrome extension, chrome extension real-time communication, webSocket API extension"

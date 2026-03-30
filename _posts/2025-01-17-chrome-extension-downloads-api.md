@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Downloads API Tutorial for Extension Developers"
 description: "Master the Chrome Downloads API with this comprehensive tutorial. Learn how to manage downloads in Chrome extensions, implement file download functionality, handle download events, and follow best practices for building solid download features in your Chrome extension."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome downloads api, manage downloads chrome extension, file download extension, chrome.downloads API tutorial, Chrome extension download manager, Manifest V3 downloads"

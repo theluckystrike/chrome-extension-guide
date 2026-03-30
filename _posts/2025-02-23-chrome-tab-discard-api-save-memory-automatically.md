@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Tab Discard API: How Extensions Save Memory by Suspending Tabs"
 description: "Master the Chrome Tab Discard API to build powerful extensions that automatically suspend inactive tabs, reduce memory usage by 80%, and optimize browser performance."
 date: 2025-02-23
+last_modified_at: 2025-02-23
 categories: [Chrome-Extensions, Performance]
 tags: [chrome-tabs-api, tab-discard, memory-optimization, chrome-extension]
 keywords: "chrome tab discard api, chrome.tabs.discard, auto suspend chrome tabs, chrome extension save memory, tab suspension chrome api, reduce chrome memory usage extension"

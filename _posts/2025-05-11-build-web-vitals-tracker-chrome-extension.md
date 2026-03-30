@@ -3,6 +3,7 @@ layout: post
 title: "Build a Web Vitals Tracker Chrome Extension: Monitor LCP, FID, and CLS"
 description: "Learn to build a powerful Web Vitals tracker Chrome extension. Monitor LCP, FID, and CLS metrics in real-time for better SEO and user experience."
 date: 2025-05-11
+last_modified_at: 2025-05-11
 categories: [Chrome-Extensions, SEO]
 tags: [web-vitals, performance, chrome-extension]
 keywords: "chrome extension web vitals, core web vitals extension, LCP FID CLS chrome, build web vitals extension, google web vitals tracker"

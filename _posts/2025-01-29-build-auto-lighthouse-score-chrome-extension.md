@@ -3,6 +3,7 @@ layout: post
 title: "Build an Auto Lighthouse Score Chrome Extension: Complete Guide"
 description: "Learn how to build a Chrome extension that automatically measures Lighthouse performance scores for every page you visit. Master Core Web Vitals, automation, and web vitals extension development."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "lighthouse auto extension, performance score chrome, web vitals extension"

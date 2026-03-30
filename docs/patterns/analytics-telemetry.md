@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Analytics Telemetry. Best Practices"
 description: "Implement analytics and telemetry in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/analytics-telemetry/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Analytics and Telemetry

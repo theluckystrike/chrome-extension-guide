@@ -3,6 +3,7 @@ layout: post
 title: "Build a CSS Properties Viewer Chrome Extension"
 description: "Learn how to build a CSS properties viewer Chrome extension from scratch. This comprehensive guide covers Manifest V3, content scripts, DOM manipulation, and how to inspect CSS chrome for any website."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [css viewer extension, chrome extension development, css tool extension, inspect css chrome, web development tools]
 keywords: "css viewer extension, inspect css chrome, css tool extension, chrome extension css, inspect element chrome, css properties viewer"

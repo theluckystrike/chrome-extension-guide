@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Service Workers: The Complete 2025 Migration Guide"
 description: "Master the Chrome extension service worker migration in 2025. Complete guide covering Manifest V3 background script conversion, event handling, debugging, and best practices."
 date: 2025-02-17
+last_modified_at: 2025-02-17
 categories: [Chrome-Extensions, Tutorials]
 tags: [manifest-v3, service-worker, chrome-extension]
 keywords: "chrome extension service worker, manifest v3 service worker, background script to service worker, chrome extension mv3 migration"

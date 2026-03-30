@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Declarative Content. Best Practices"
 description: "Use declarative content for conditional script injection."
 canonical_url: "https://bestchromeextensions.com/patterns/declarative-content/"
+last_modified_at: 2026-01-15
 ---
 
 DeclarativeContent API Patterns

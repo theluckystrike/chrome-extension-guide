@@ -2,6 +2,7 @@
 layout: guide
 title: "Chrome Extension Feature Flags. How to Roll Out Features Safely"
 description: "Learn how to implement feature flags in Chrome extensions for safe, controlled feature rollouts, A/B testing, and emergency kill switches."
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Feature Flags. How to Roll Out Features Safely

@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Accessibility (a11y): Build Extensions Everyone Can Use"
 description: "Learn how to build accessible chrome extensions with our comprehensive a11y guide. Master WCAG compliance, screen reader support, keyboard navigation, and accessible popup design."
 date: 2025-03-12
+last_modified_at: 2025-03-12
 categories: [Chrome-Extensions, Accessibility]
 tags: [accessibility, a11y, chrome-extension]
 keywords: "chrome extension accessibility, a11y chrome extension, accessible popup chrome, screen reader chrome extension, WCAG chrome extension"

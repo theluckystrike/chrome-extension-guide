@@ -3,6 +3,7 @@ layout: post
 title: "Build a Local Font Viewer Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a local font viewer Chrome extension that displays system fonts directly in your browser. This comprehensive guide covers Chrome extension development, font enumeration APIs, and best practices for creating a font browser extension."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "local font viewer extension, system fonts chrome, font browser extension"

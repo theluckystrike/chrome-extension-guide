@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Clipboard Patterns. Best Practices"
 description: "Read and write clipboard content in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/clipboard-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Clipboard API Patterns

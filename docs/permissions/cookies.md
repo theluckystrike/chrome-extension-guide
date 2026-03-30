@@ -6,6 +6,7 @@ permalink: /permissions/cookies/
 category: permissions
 order: 10
 canonical_url: "https://bestchromeextensions.com/permissions/cookies/"
+last_modified_at: 2026-01-15
 ---
 
 cookies Permission Reference

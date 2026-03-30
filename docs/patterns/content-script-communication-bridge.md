@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Script Communication Bridge. Best Practices"
 description: "Bridge communication between content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-communication-bridge/"
+last_modified_at: 2026-01-15
 ---
 
 Content Script Communication Bridge

@@ -3,6 +3,7 @@ layout: post
 title: "WebSocket Communication in Chrome Extensions: Real-Time Data Guide"
 description: "Master WebSocket communication in Chrome extensions with this comprehensive 2025 guide. Learn how to implement real-time data streaming, live updates, and persistent connections in your extension's service worker."
 date: 2025-04-01
+last_modified_at: 2025-04-01
 categories: [Chrome-Extensions, Networking]
 tags: [websocket, real-time, chrome-extension]
 keywords: "chrome extension websocket, websocket chrome extension, real-time data chrome extension, chrome extension live updates, websocket service worker extension"

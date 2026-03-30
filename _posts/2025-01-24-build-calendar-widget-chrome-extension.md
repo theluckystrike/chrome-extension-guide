@@ -3,6 +3,7 @@ layout: post
 title: "Build a Calendar Widget Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful calendar chrome extension and schedule widget for Chrome. This comprehensive guide covers Manifest V3, local storage, event management, and publishing your daily planner extension to the Chrome Web Store."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "calendar chrome extension, schedule widget, daily planner extension, build chrome extension calendar, chrome extension development tutorial"

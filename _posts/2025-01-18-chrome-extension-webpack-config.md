@@ -3,6 +3,7 @@ layout: post
 title: "Webpack Configuration for Chrome Extensions: Complete 2025 Guide"
 description: "Master webpack configuration for Chrome extensions with this comprehensive guide. Learn how to bundle extension assets, optimize build processes, handle multiple entry points, and create production-ready builds for Manifest V3."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "webpack chrome extension, extension build tools, bundle extension, chrome extension webpack config, webpack manifest v3"

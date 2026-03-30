@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro: How to Restore Suspended Tabs Instantly"
 description: "Learn how to restore suspended tabs in Tab Suspender Pro with click-to-restore, keyboard shortcuts, auto-restore, and selective restoration techniques."
 date: 2025-03-18
+last_modified_at: 2025-03-18
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, restore, tab-management]
 canonical_url: "https://bestchromeextensions.com/2025/03/18/tab-suspender-pro-restore-suspended-tabs/"

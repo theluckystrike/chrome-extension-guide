@@ -3,6 +3,7 @@ layout: post
 title: "Jotai Atomic State in Chrome Extensions: Complete Implementation Guide"
 description: "Learn how to implement Jotai atomic state management in Chrome extensions. Master jotai chrome extension patterns, atomic state extension architecture, and jotai popup state management for scalable MV3 extensions."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "jotai chrome extension, atomic state extension, jotai popup state, chrome extension state management, react state chrome extension"

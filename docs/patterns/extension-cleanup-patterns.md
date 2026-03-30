@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Cleanup Patterns. Best Practices"
 description: "Clean up resources when extensions or tabs are closed."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-cleanup-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Cleanup and Teardown Patterns for Chrome Extensions

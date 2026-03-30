@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Service Worker Lifecycle. Best Practices"
 description: "Understand the service worker lifecycle in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/patterns/service-worker-lifecycle/"
+last_modified_at: 2026-01-15
 ---
 
 Service Worker Lifecycle Patterns

@@ -2,6 +2,7 @@
 layout: guide
 title: "A/B Testing in Chrome Extensions: Feature Flags, Experiments, and Statistical Significance"
 description: "Learn how to implement solid A/B testing in Chrome extensions with feature flag architecture, random assignment, chrome.storage persistence, server-side bucketing, and statistical significance analysis."
+last_modified_at: 2026-01-15
 ---
 
 A/B Testing in Chrome Extensions: Feature Flags, Experiments, and Statistical Significance

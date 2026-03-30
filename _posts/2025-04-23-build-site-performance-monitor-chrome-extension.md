@@ -3,6 +3,7 @@ layout: post
 title: "Build a Site Performance Monitor Chrome Extension: Core Web Vitals Dashboard"
 description: "Learn how to build a powerful site performance monitor Chrome extension that tracks Core Web Vitals metrics. This comprehensive guide covers web vitals API, performance monitoring, real-time dashboard creation, and deployment."
 date: 2025-04-23
+last_modified_at: 2025-04-23
 categories: [Chrome-Extensions, Performance]
 tags: [web-vitals, performance, chrome-extension]
 keywords: "chrome extension performance monitor, core web vitals extension, site speed chrome extension, build performance extension, web vitals dashboard chrome"

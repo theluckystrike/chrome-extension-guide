@@ -3,6 +3,7 @@ layout: post
 title: "Cross-Origin Requests in Chrome Extensions: Complete CORS & Fetch API Guide"
 description: "Master cross-origin requests in Chrome extensions with this comprehensive guide. Learn how to use the Fetch API, handle CORS, configure host permissions in Manifest V3, and avoid common pitfalls when making network requests from extension contexts."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension cors, cross origin extension, fetch api chrome extension, chrome extension cross origin requests, manifest v3 host permissions"

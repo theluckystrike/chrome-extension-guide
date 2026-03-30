@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Notification Patterns. Best Practices"
 description: "Create and manage notifications in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/notification-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Notification Patterns

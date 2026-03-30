@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Service Worker Lifecycle: Complete MV3 Guide 2025"
 description: "Master Chrome extension service workers in MV3. Learn lifecycle management, state persistence, idle timeout solutions, and debugging techniques with TypeScript examples."
 date: 2025-02-22
+last_modified_at: 2025-02-22
 categories: [Chrome-Extensions, MV3]
 tags: [service-worker, manifest-v3, chrome-extension, background-script]
 keywords: "chrome extension service worker, mv3 service worker lifecycle, chrome extension background script mv3, service worker idle timeout chrome extension, manifest v3 service worker"

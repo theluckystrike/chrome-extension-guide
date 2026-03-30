@@ -3,6 +3,7 @@ layout: post
 title: "Using npm Packages in Chrome Extensions: Complete Dependency Guide"
 description: "Learn how to integrate npm packages into Chrome extensions. This guide covers bundling, Node.js modules, third-party libraries, and best practices for Manifest V3."
 date: 2025-04-02
+last_modified_at: 2025-04-02
 categories: [Chrome-Extensions, Development]
 tags: [npm, packages, chrome-extension]
 keywords: "chrome extension npm, npm packages chrome extension, use npm in chrome extension, chrome extension node modules, third party libraries chrome extension"

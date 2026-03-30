@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Rollup Setup. Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
 canonical_url: "https://bestchromeextensions.com/guides/rollup-extension-setup/"
+last_modified_at: 2026-01-15
 ---
 Rollup Setup for Chrome Extensions
 

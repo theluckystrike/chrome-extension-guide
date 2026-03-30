@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Manifest Content Scripts Config. Best Practices"
 description: "Configure content scripts in manifest.json."
 canonical_url: "https://bestchromeextensions.com/patterns/manifest-content-scripts-config/"
+last_modified_at: 2026-01-15
 ---
 
 Content Script Manifest Configuration Patterns

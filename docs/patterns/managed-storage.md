@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Managed Storage. Best Practices"
 description: "Use Chrome Managed Storage for enterprise-deployed extensions with admin-controlled settings."
 canonical_url: "https://bestchromeextensions.com/patterns/managed-storage/"
+last_modified_at: 2026-01-15
 ---
 
 Managed Storage Patterns for Enterprise Extensions

@@ -6,6 +6,7 @@ permalink: /permissions/declarativeContent/
 category: permissions
 order: 12
 canonical_url: "https://bestchromeextensions.com/permissions/declarativeContent/"
+last_modified_at: 2026-01-15
 ---
 
 declarativeContent Permission

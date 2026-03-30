@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Security Best Practices. Developer Guide"
 description: "Secure your Chrome extension with this security guide covering best practices, vulnerability prevention, and audit procedures."
 canonical_url: "https://bestchromeextensions.com/guides/security-best-practices/"
+last_modified_at: 2026-01-15
 ---
 Security Best Practices for Chrome Extensions
 

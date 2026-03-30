@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Top Sites. Best Practices"
 description: "Access and display top sites from Chrome history using the Top Sites API for quick access features."
 canonical_url: "https://bestchromeextensions.com/patterns/top-sites/"
+last_modified_at: 2026-01-15
 ---
 
 Top Sites API Patterns

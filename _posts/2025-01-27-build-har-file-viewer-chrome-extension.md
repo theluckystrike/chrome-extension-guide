@@ -3,6 +3,7 @@ layout: post
 title: "Build an HAR File Viewer Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful HAR file viewer Chrome extension from scratch. This comprehensive guide covers HTTP archive parsing, network trace visualization, and creating developer tools with Chrome's extension APIs."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "har viewer extension, network trace chrome, http archive viewer"

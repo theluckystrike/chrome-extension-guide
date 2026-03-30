@@ -3,6 +3,7 @@ layout: post
 title: "Build an Email Open Tracker Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful email open tracker extension for Chrome that notifies you when recipients open your emails. This comprehensive guide covers email tracking pixel implementation, Gmail integration, Manifest V3 development, and privacy-compliant email analytics."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, email-tracker]
 keywords: "email tracker extension, email open notification, gmail tracker chrome, email tracking pixel, email open tracker, chrome extension email analytics, gmail tracking extension"

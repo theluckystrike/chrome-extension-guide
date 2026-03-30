@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Popup UI Design Best Practices: A Complete Guide"
 description: "Master Chrome extension popup design with our comprehensive guide. Learn popup UI patterns, design principles, and techniques to create beautiful extension popups that users love. Includes code examples and best practices for Manifest V3."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, ui, tutorial]
 keywords: "chrome extension popup design, popup ui patterns, beautiful extension popup, chrome extension ui design, extension popup best practices, manifest v3 popup, popup design patterns"

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Data Export Chrome Extension: CSV, JSON and PDF"
 description: "Learn how to build a powerful data export extension that allows users to export web data to CSV, JSON, and PDF formats. This comprehensive tutorial covers chrome.storage API, file generation, download handling, and extension architecture."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "data export extension, export to csv chrome, web data exporter extension, chrome extension csv export, json export chrome extension, pdf export chrome extension"

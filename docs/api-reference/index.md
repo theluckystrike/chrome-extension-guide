@@ -2,6 +2,7 @@
 title: "Chrome Extension API Reference. All APIs Explained"
 slug: /api-reference/
 description: "Complete reference for Chrome Extension APIs including action, alarms, bookmarks, cookies, runtime, tabs, and more. Find method signatures, event listeners, and usage examples."
+last_modified_at: 2026-01-15
 ---
 
 # Chrome Extension API Reference. All APIs Explained

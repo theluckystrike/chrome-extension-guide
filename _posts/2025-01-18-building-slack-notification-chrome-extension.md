@@ -3,6 +3,7 @@ layout: post
 title: "Building a Slack Notification Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful Slack notification Chrome extension from scratch. This comprehensive tutorial covers Slack API integration, real-time notifications, OAuth authentication, and best practices for creating smooth slack chrome extension experiences."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "slack chrome extension, notification extension, slack integration, chrome extension slack api, slack webhooks chrome, slack notification chrome extension tutorial"

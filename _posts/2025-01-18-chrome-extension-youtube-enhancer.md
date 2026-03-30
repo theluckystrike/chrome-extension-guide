@@ -3,6 +3,7 @@ layout: post
 title: "Build a YouTube Enhancer Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful YouTube Enhancer Chrome extension from scratch. This comprehensive tutorial covers video controls, custom playback features, UI enhancements, and best practices for creating a professional YouTube chrome extension."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "youtube chrome extension, youtube enhancer, video controls extension, build youtube extension, chrome extension video player"

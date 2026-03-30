@@ -3,6 +3,7 @@ layout: post
 title: "Using Canvas API in Chrome Extensions for Drawing and Graphics"
 description: "Master the Canvas API in Chrome extensions with our comprehensive guide. Learn how to build powerful drawing extensions, implement graphics functionality, and create interactive canvas experiences in your Chrome extensions."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [guides, chrome-extensions, development]
 tags: [chrome extension canvas, drawing extension, canvas api extension, graphics chrome extension, HTML5 canvas, chrome extension graphics]
 keywords: "chrome extension canvas, drawing extension, canvas api extension, graphics chrome extension, HTML5 canvas chrome extension, chrome extension drawing"

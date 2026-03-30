@@ -3,6 +3,7 @@ layout: post
 title: "Build a Spotify Controller Chrome Extension: Complete Guide to Music Control Extensions"
 description: "Learn how to build a Spotify controller Chrome extension from scratch. This comprehensive guide covers Spotify Web API integration, music control extension development, creating a spotify mini player chrome, and building a fully functional music controller with playback controls."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "spotify controller extension, spotify mini player chrome, music control extension, build spotify extension, chrome extension spotify player, spotify web api chrome extension"

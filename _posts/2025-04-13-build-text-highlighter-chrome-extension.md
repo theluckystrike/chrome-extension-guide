@@ -3,6 +3,7 @@ layout: post
 title: "Build a Text Highlighter Chrome Extension: Annotate and Save Web Content"
 description: "Learn how to build a text highlighter Chrome extension from scratch. This comprehensive guide covers DOM manipulation, localStorage, color selection, and publishing to the Chrome Web Store."
 date: 2025-04-13
+last_modified_at: 2025-04-13
 categories: [Chrome-Extensions, Tutorials]
 tags: [highlighter, annotation, chrome-extension]
 keywords: "chrome extension text highlighter, highlight text chrome extension, web annotation extension, build highlighter extension, chrome extension annotate"

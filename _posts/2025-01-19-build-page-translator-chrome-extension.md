@@ -3,6 +3,7 @@ layout: post
 title: "Build a Page Translator Chrome Extension. Complete Tutorial (2025)"
 description: "Learn how to build a powerful page translator Chrome extension from scratch. This comprehensive guide covers translation APIs, content script injection, language detection, and Chrome Web Store publishing."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 author: theluckystrike

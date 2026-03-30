@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Caching Strategies. Best Practices"
 description: "Implement effective caching strategies for Chrome extensions using storage and cache APIs."
 canonical_url: "https://bestchromeextensions.com/patterns/caching-strategies/"
+last_modified_at: 2026-01-15
 ---
 
 Caching Strategies for Chrome Extensions

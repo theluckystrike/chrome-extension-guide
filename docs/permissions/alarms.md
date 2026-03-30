@@ -6,6 +6,7 @@ permalink: /permissions/alarms/
 category: permissions
 order: 2
 canonical_url: "https://bestchromeextensions.com/permissions/alarms/"
+last_modified_at: 2026-01-15
 ---
 
 alarms Permission Reference

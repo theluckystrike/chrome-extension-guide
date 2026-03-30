@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Web Request API: Intercept and Modify Network Requests"
 description: "Master the Chrome Extension Web Request API to intercept, block, and modify network requests. Learn declarativeNetRequest, practical examples, and best practices for building powerful network-modifying extensions in 2025."
 date: 2025-02-21
+last_modified_at: 2025-02-21
 categories: [Chrome-Extensions, APIs]
 tags: [web-request, network, chrome-extension]
 keywords: "chrome extension web request, intercept network requests chrome, chrome extension modify requests, declarativeNetRequest chrome extension"

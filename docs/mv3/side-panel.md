@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Side Panel. Manifest V3 Guide"
 description: "Implement side panels in Manifest V3 with the chrome.sidePanel API."
 canonical_url: "https://bestchromeextensions.com/mv3/side-panel/"
+last_modified_at: 2026-01-15
 ---
 
 Side Panel API in Chrome Extensions

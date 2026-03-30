@@ -3,6 +3,7 @@ layout: post
 title: "Build a ChatGPT Sidebar Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful ChatGPT sidebar Chrome extension with this comprehensive developer guide. Integrate OpenAI's GPT models directly into your browser for smooth AI assistance on any webpage."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "chatgpt sidebar extension, ai sidebar chrome, openai assistant"

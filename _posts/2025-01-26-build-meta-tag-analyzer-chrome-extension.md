@@ -3,6 +3,7 @@ layout: post
 title: "Build a Meta Tag Analyzer Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful meta tag analyzer extension for Chrome. This step-by-step tutorial covers SEO meta tag checking, Open Graph validation, and how to analyze meta description and title tags directly in your browser."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "meta tag analyzer extension, seo meta checker chrome, open graph checker extension"

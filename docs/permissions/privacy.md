@@ -6,6 +6,7 @@ permalink: /permissions/privacy/
 category: permissions
 order: 31
 canonical_url: "https://bestchromeextensions.com/permissions/privacy/"
+last_modified_at: 2026-01-15
 ---
 
 privacy Permission

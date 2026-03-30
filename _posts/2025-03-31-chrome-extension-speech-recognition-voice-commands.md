@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Speech Recognition: Add Voice Commands to Your Browser"
 description: "Learn how to build Chrome extensions with speech recognition and voice commands using the Web Speech API. A comprehensive guide for developers in 2025."
 date: 2025-03-31
+last_modified_at: 2025-03-31
 categories: [Chrome-Extensions, APIs]
 tags: [speech-recognition, voice, chrome-extension]
 keywords: "chrome extension speech recognition, voice commands chrome extension, speech to text chrome extension, chrome extension voice control, web speech API extension"

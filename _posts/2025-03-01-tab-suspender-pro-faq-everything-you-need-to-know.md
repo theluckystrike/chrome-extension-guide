@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro FAQ: Everything You Need to Know Before Installing"
 description: "Get answers to all your Tab Suspender Pro questions. Learn if it is safe, free, how it works, and how it compares to Chrome built-in features."
 date: 2025-03-01
+last_modified_at: 2025-03-01
 categories: [Chrome-Extensions, FAQ]
 tags: [tab-suspender-pro, faq, chrome-extension]
 keywords: "tab suspender pro faq, tab suspender pro questions, is tab suspender pro safe, how does tab suspender pro work, tab suspender pro free"

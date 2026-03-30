@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Permissions: A detailed look. Developer Guide"
 description: "Master Chrome extension permissions with this comprehensive tutorial covering required vs optional permissions, host access, activeTab, declarativeContent, runtime requests, and minimum-privilege strategies."
 canonical_url: "https://bestchromeextensions.com/tutorials/permissions-deep detailed look/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Permissions: A detailed look

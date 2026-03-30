@@ -3,6 +3,7 @@ layout: default
 title: "Idle Permission"
 description: "API Detects when user is idle or screen is locked"
 canonical_url: "https://bestchromeextensions.com/permissions/idle/"
+last_modified_at: 2026-01-15
 --- Returns Promise resolving to `"active"`, `"idle"`, or `"..."
 permalink: /permissions/idle/
 category: permissions

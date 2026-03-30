@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Custom Keybindings: Global Shortcuts for Any Action"
 description: "Master chrome extension keybindings with our comprehensive guide. Learn how to set custom keyboard shortcuts, create global hotkeys, and boost productivity."
 date: 2025-05-02
+last_modified_at: 2025-05-02
 categories: [Chrome-Extensions, Productivity]
 tags: [keybindings, shortcuts, chrome-extension]
 keywords: "chrome extension keybindings, custom keyboard shortcuts extension, chrome extension hotkeys, global shortcuts chrome, chrome extension key commands"

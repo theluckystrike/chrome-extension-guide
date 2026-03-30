@@ -3,6 +3,7 @@ layout: post
 title: "Build a Reading Speed Calculator Extension: Complete WPM Guide"
 description: "Learn how to build a reading speed calculator extension that estimates reading time in words per minute. This comprehensive tutorial covers Chrome extension development with practical examples for creating your own reading time estimator."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "reading speed extension, reading time estimator, words per minute chrome, chrome extension tutorial, build reading calculator"

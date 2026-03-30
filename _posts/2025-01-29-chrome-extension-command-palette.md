@@ -3,6 +3,7 @@ layout: post
 title: "Build a Command Palette Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a command palette Chrome extension with our comprehensive 2025 guide. Master command bar chrome development, implement spotlight search extension features, and create powerful UI patterns for better user productivity."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "command palette extension, command bar chrome, spotlight search extension, chrome extension command palette, command bar extension"

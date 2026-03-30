@@ -3,6 +3,7 @@ layout: post
 title: "Testing Chrome Extensions with Jest and Puppeteer: A Complete Guide"
 description: "Learn how to effectively test Chrome extensions using Jest and Puppeteer. This comprehensive guide covers unit testing, integration testing, and end-to-end testing strategies for solid extension development."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "jest chrome extension testing, puppeteer extension test, testing chrome extensions, chrome extension unit testing, puppeteer chrome extension, jest puppeteer chrome extension"

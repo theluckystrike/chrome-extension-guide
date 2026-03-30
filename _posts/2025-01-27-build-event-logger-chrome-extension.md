@@ -3,6 +3,7 @@ layout: post
 title: "Build an Event Logger Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful event logger Chrome extension that captures DOM events, JavaScript events, and helps debug interactive elements. Complete tutorial with code examples and best practices."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "event logger extension, dom event chrome, javascript events debugger"

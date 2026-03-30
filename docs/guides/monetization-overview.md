@@ -3,6 +3,7 @@ layout: default
 title: "How to Monetize Your Chrome Extension - Complete Guide"
 description: "Master every Chrome extension monetization model: freemium, subscription, one-time purchase, affiliate, sponsorship, and SaaS. Includes code snippets, case studies, and links to detailed implementation playbooks."
 permalink: /guides/monetization-overview/
+last_modified_at: 2026-01-15
 ---
 
 How to Monetize Your Chrome Extension - Complete Guide

@@ -3,6 +3,7 @@ layout: post
 title: "Ethical Web Scraping with Chrome Extensions: A Developer Guide"
 description: "Master ethical web scraping with Chrome extensions using our comprehensive 2025 developer guide. Learn data extraction best practices, responsible scraping techniques, and build compliant web scraper chrome extensions that respect website resources and legal boundaries."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [guides, chrome-extensions, development, web-scraping]
 tags: [ethical web scraping extension, data extraction chrome, web scraper chrome extension guide, chrome extension scraping, responsible data collection, web scraping best practices]
 keywords: "ethical web scraping extension, data extraction chrome, web scraper chrome extension guide, chrome extension scraping, responsible data collection"

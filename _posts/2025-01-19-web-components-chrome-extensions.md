@@ -3,6 +3,7 @@ layout: post
 title: "Web Components in Chrome Extensions: Complete Guide for Developers"
 description: "Learn how to use Web Components in Chrome Extensions for modern, framework-agnostic UI development. Master Shadow DOM, Custom Elements, and HTML Templates for building powerful extensions."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "web components chrome extension, shadow dom extension, custom elements extension, chrome extension web components tutorial, shadow dom chrome extension"

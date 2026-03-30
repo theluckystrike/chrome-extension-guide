@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Declarative Content API Complete Guide"
 description: "Master the Chrome Declarative Content API to build powerful extensions that react to page content automatically. Learn how to create page action rules, implement conditional extension actions, and optimize your extension's performance."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api]
 keywords: "declarative content extension, page action rules, conditional extension action, chrome declarativeContent api, chrome.contentSettings api"

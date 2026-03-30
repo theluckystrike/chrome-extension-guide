@@ -3,6 +3,7 @@ layout: default
 title: "Service Worker Lifecycle Mastery. Complete Guide for MV3 Extensions"
 description: "Master the Chrome Extension service worker lifecycle in Manifest V3. Learn to keep service workers alive, persist state, debug issues, and optimize performance."
 canonical_url: "https://bestchromeextensions.com/guides/service-worker-lifecycle-mastery/"
+last_modified_at: 2026-01-15
 ---
 
 Service Worker Lifecycle Mastery

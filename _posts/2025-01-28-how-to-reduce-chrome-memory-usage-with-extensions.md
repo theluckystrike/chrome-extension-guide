@@ -4,6 +4,7 @@ title: "How to Reduce Chrome Memory Usage with Extensions. Save Up to 80% RAM"
 seo_title: "Reduce Chrome Memory Usage | Save Up to 80% RAM Guide"
 description: "Practical guide to reducing Chrome memory usage. Best extensions for RAM management, tab suspension, and memory optimization. Benchmarks and real-world results."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [guides, performance]
 tags: [chrome-memory, ram-usage, tab-suspender, memory-optimization, browser-performance]
 author: theluckystrike

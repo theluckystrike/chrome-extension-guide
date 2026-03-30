@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Storage Patterns for Extensions. Developer Guide"
 description: "Master chrome.storage API with patterns for local, sync, and session storage, quota management, structured data, migrations, and change listeners."
 canonical_url: "https://bestchromeextensions.com/tutorials/chrome-storage-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Storage Patterns for Extensions

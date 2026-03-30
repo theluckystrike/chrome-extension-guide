@@ -3,6 +3,7 @@ layout: post
 title: "Build an Audio Recorder Chrome Extension"
 description: "Learn how to build a powerful audio recorder Chrome extension using the MediaRecorder API. This comprehensive guide covers Manifest V3, microphone permissions, audio processing, and publishing to the Chrome Web Store."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [audio recorder extension, chrome extension development, mediarecorder api, voice recorder, manifest v3, tutorial]
 keywords: "audio recorder extension, record audio chrome, voice recorder extension, chrome audio recording, MediaRecorder API tutorial"

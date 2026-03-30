@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Old Computers: Complete Guide to Revive Your Slow PC"
 description: "Learn how Tab Suspender Pro can dramatically improve performance on aging computers and laptops. Discover tips to reduce Chrome memory usage and revive slow PCs with tab suspension technology."
 date: 2025-01-30
+last_modified_at: 2025-01-30
 categories: [Chrome-Extensions, Tab-Suspender-Pro]
 tags: [tab-suspender-pro, performance, productivity]
 canonical_url: "https://bestchromeextensions.com/2025/01/30/tab-suspender-pro-old-computers/"

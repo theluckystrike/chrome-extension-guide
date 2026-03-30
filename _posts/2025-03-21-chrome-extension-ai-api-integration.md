@@ -3,6 +3,7 @@ layout: post
 title: "Integrating AI APIs in Chrome Extensions: OpenAI, Claude, and Gemini"
 description: "Learn how to integrate OpenAI, Claude, and Gemini AI APIs into Chrome extensions. Complete guide to building AI-powered extensions with ChatGPT, Claude, and Gemini for enhanced browser functionality."
 date: 2025-03-21
+last_modified_at: 2025-03-21
 categories: [Chrome-Extensions, AI]
 tags: [ai, api-integration, chrome-extension]
 keywords: "chrome extension AI, AI chrome extension, openai chrome extension, chatgpt chrome extension build, AI API chrome extension"

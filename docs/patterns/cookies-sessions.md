@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Cookies Sessions. Best Practices"
 description: "Manage cookies and sessions in Chrome extensions for authentication."
 canonical_url: "https://bestchromeextensions.com/patterns/cookies-sessions/"
+last_modified_at: 2026-01-15
 ---
 
 Cookies and Sessions Patterns

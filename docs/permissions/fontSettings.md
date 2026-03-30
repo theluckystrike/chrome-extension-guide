@@ -6,6 +6,7 @@ permalink: /permissions/fontSettings/
 category: permissions
 order: 18
 canonical_url: "https://bestchromeextensions.com/permissions/fontSettings/"
+last_modified_at: 2026-01-15
 ---
 
 fontSettings Permission

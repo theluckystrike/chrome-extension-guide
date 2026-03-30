@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide"
 description: "Learn to build production-ready Chrome extensions using TypeScript and Manifest V3. Covers project setup, service workers, content scripts, popup pages, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-development-typescript-2026/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Development Tutorial with TypeScript. Complete 2026 Guide

@@ -2,6 +2,7 @@
 layout: default
 title: "Chrome Extension Remote Config. How to Update Settings Without Republishing"
 description: "Learn how to implement remote configuration for Chrome extensions to update settings, feature flags, and behavior without requiring users to reinstall or update your extension."
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Remote Config. How to Update Settings Without Republishing
 

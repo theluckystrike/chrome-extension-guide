@@ -4,6 +4,7 @@ description: Learn how to create cross-browser extensions using WebExtension API
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/multi-browser-extension/"
 
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Cross-Browser Development

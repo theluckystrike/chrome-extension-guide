@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Screenshot Capture API Tutorial: Complete Guide"
 description: "Learn how to build a Chrome extension that captures screenshots using the Capture Visible Tab API. Step-by-step tutorial covering Manifest V3, permissions, user privacy, and best practices for screen capture extensions."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, ui, tutorial]
 keywords: "chrome extension screenshot, capture visible tab, screen capture extension api"

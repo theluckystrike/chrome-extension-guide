@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Retry Patterns. Best Practices"
 description: "Implement retry and backoff strategies for network requests."
 canonical_url: "https://bestchromeextensions.com/patterns/retry-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Retry Patterns

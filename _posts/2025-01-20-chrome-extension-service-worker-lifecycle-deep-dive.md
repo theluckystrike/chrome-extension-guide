@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Service Worker Lifecycle detailed look: A Complete Guide"
 description: "Master the Chrome Extension Service Worker lifecycle in Manifest V3. Learn how MV3 service workers initialize, persist, terminate, and handle events. Includes best practices for building solid extension background services."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "service worker lifecycle, mv3 service worker, extension background service, chrome extension background worker, manifest v3 service worker, chrome extension event handling, service worker termination, extension lifecycle management"

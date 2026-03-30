@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Common Errors and How to Fix Them"
 description: "Troubleshoot the most common Chrome extension errors with this comprehensive guide covering manifest issues, runtime errors, permission problems, and their solutions."
 canonical_url: "https://bestchromeextensions.com/guides/common-errors/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Common Errors and How to Fix Them

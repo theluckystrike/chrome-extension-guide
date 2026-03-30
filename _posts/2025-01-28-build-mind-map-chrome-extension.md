@@ -3,6 +3,7 @@ layout: post
 title: "Build a Mind Map Chrome Extension: Complete Guide to Brainstorming in Your Browser"
 description: "Learn how to build a powerful mind map Chrome extension for brainstorming and thought organization. This comprehensive guide covers Manifest V3, canvas rendering, local storage, and user interaction design."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity, project]
 keywords: "mind map extension, brainstorm chrome, thought organizer extension, chrome mind mapping tool, visual brainstorming extension"

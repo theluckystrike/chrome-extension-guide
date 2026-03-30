@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Storybook Integration. Developer Guide"
 description: "Learn Chrome extension storybook integration with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-storybook/"
+last_modified_at: 2026-01-15
 ---
 Setting Up Storybook for Chrome Extension Development
 

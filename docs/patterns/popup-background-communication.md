@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Popup-Background Communication. Patterns for Shared State"
 description: "Patterns for communicating between popup and background service worker in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-background-communication/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Popup-Background Communication. Patterns for Shared State

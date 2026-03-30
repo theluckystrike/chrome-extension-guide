@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Declarative Net Request Advanced. Best Practices"
 description: "Advanced declarative net request patterns for network filtering."
 canonical_url: "https://bestchromeextensions.com/patterns/declarative-net-request-advanced/"
+last_modified_at: 2026-01-15
 ---
 
 DeclarativeNetRequest Advanced Patterns

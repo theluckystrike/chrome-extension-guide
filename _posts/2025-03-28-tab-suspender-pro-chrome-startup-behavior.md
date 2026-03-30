@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Startup Behavior: Manage Tabs When Chrome Launches"
 description: "Learn how Tab Suspender Pro handles Chrome startup tab restoration, configure suspension delay, prevent resource spikes on launch, and optimize lazy loading for better browser performance."
 date: 2025-03-28
+last_modified_at: 2025-03-28
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, startup, configuration]
 keywords: "tab suspender pro startup, chrome startup tabs, tab suspender launch behavior, chrome restore tabs startup, tab suspender pro boot settings"

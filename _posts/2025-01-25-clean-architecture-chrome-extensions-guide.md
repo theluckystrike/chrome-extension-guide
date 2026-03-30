@@ -3,6 +3,7 @@ layout: post
 title: "Clean Architecture for Chrome Extensions: A Maintainable Design Guide"
 description: "Learn how to apply clean architecture principles to Chrome extensions. This comprehensive guide covers hexagonal architecture, dependency injection, and patterns for building maintainable, testable extension code."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Architecture]
 tags: [chrome-extension, architecture, patterns]
 keywords: "clean architecture extension, hexagonal architecture chrome, extension architecture patterns"

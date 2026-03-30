@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Webworker Offloading. Best Practices"
 description: "Offload heavy computation to Web Workers."
 canonical_url: "https://bestchromeextensions.com/patterns/webworker-offloading/"
+last_modified_at: 2026-01-15
 ---
 
 Web Worker Offloading Patterns

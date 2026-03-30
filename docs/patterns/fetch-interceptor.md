@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Fetch Interceptor. Best Practices"
 description: "Intercept and modify fetch requests in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/fetch-interceptor/"
+last_modified_at: 2026-01-15
 ---
 
 Fetch/XHR Interception Patterns

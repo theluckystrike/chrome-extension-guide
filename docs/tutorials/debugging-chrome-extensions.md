@@ -3,6 +3,7 @@ layout: default
 title: "Debugging Chrome Extensions: Tips, Tools, and Techniques"
 description: "Learn how to debug Chrome extensions effectively with this comprehensive tutorial covering DevTools, service worker inspection, content script debugging, and common error fixes."
 canonical_url: "https://bestchromeextensions.com/tutorials/debugging-chrome-extensions/"
+last_modified_at: 2026-01-15
 ---
 
 Debugging Chrome Extensions: Tips, Tools, and Techniques

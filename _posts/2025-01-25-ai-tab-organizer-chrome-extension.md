@@ -3,6 +3,7 @@ layout: post
 title: "Build an AI-Powered Tab Organizer Chrome Extension"
 description: "Learn how to build an AI-powered tab organizer Chrome extension that automatically groups and manages your browser tabs using artificial intelligence. This comprehensive guide covers smart tab grouping, auto organize tabs chrome, and implementation with modern web technologies."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, chrome-extensions, productivity, ai]
 tags: [ai tab organizer, smart tab grouping, auto organize tabs chrome, tab management, artificial intelligence, chrome extension development, machine learning]
 keywords: "ai tab organizer, smart tab grouping, auto organize tabs chrome, ai chrome extension, tab management ai, automatic tab organizer"

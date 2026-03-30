@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension WXT Framework. Developer Guide"
 description: "Set up your Chrome extension project with this configuration guide covering tools, frameworks, and best practices for development."
 canonical_url: "https://bestchromeextensions.com/guides/wxt-framework-setup/"
+last_modified_at: 2026-01-15
 ---
 WXT Framework Setup
 

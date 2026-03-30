@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Side Panel API Tutorial for Extension Developers"
 description: "Master the Chrome Side Panel API with this comprehensive tutorial for extension developers. Learn how to build powerful side panel extensions using Manifest V3, implement user interactions, and create smooth browsing experiences."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, Development, Tutorials]
 tags: [chrome-extension, side-panel, manifest-v3, tutorial, development]
 keywords: "chrome side panel api, extension sidepanel tutorial, chrome extension side panel, manifest v3 side panel, chrome sidepanel api guide"

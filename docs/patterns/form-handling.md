@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Form Handling. Best Practices"
 description: "Handle form submissions in extension pages."
 canonical_url: "https://bestchromeextensions.com/patterns/form-handling/"
+last_modified_at: 2026-01-15
 ---
 
 Form Handling Patterns for Chrome Extensions

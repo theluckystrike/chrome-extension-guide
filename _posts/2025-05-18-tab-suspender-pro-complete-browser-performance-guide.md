@@ -3,6 +3,7 @@ layout: post
 title: "Complete Browser Performance Guide: Tab Suspender Pro + Chrome Optimization"
 description: "Master browser performance with Tab Suspender Pro and Chrome optimization. Learn flags, cache strategies, and techniques to speed up Chrome in 2025."
 date: 2025-05-18
+last_modified_at: 2025-05-18
 categories: [Chrome-Extensions, Performance]
 tags: [tab-suspender-pro, performance, optimization]
 keywords: "browser performance guide, chrome performance optimization, tab suspender performance tips, speed up chrome 2025, chrome optimization guide"

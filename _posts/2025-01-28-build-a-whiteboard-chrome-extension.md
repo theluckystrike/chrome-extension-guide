@@ -3,6 +3,7 @@ layout: post
 title: "Build a Whiteboard Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a whiteboard Chrome extension from scratch. This comprehensive guide covers canvas drawing, eraser tools, color selection, export features, and deployment to the Chrome Web Store."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "whiteboard extension, drawing board chrome, collaborative whiteboard, chrome extension drawing canvas, build whiteboard chrome extension"

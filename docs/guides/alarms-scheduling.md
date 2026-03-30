@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Alarms & Scheduling. Developer Guide"
 description: "Learn Chrome extension alarms & scheduling with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/alarms-scheduling/"
+last_modified_at: 2026-01-15
 ---
 Background Scheduling with chrome.alarms
 

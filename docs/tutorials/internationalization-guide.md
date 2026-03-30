@@ -3,6 +3,7 @@ layout: default
 title: "Internationalizing Your Chrome Extension. Developer Guide"
 description: "Learn how to build a multilingual Chrome extension with complete i18n support, RTL languages, locale fallback, and Chrome Web Store localization."
 canonical_url: "https://bestchromeextensions.com/tutorials/internationalization-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Internationalizing Your Chrome Extension

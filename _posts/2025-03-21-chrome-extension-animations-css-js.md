@@ -3,6 +3,7 @@ layout: post
 title: "Adding Animations to Chrome Extensions: CSS and JavaScript Techniques"
 description: "Learn how to add stunning animations to Chrome extensions using CSS and JavaScript. Master popup transitions, smooth UI effects, and create engaging user experiences with our comprehensive guide to chrome extension animation techniques."
 date: 2025-03-21
+last_modified_at: 2025-03-21
 categories: [Chrome-Extensions, Design]
 tags: [animation, css, chrome-extension]
 keywords: "chrome extension animation, animate chrome extension, css animation popup chrome, chrome extension transition effects, smooth UI chrome extension"

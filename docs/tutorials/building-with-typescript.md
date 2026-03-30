@@ -3,6 +3,7 @@ layout: default
 title: "Building Chrome Extensions with TypeScript. Developer Guide"
 description: "A comprehensive tutorial for building Chrome extensions with TypeScript, covering project setup, tsconfig configuration, typed Chrome APIs, messaging patterns, storage wrappers, and build tooling."
 canonical_url: "https://bestchromeextensions.com/tutorials/building-with-typescript/"
+last_modified_at: 2026-01-15
 ---
 
 Building Chrome Extensions with TypeScript

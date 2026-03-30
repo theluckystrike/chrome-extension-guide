@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Onboarding. Best Practices"
 description: "Design effective onboarding flows for new extension users."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-onboarding/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Onboarding Patterns

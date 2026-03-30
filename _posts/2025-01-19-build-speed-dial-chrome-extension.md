@@ -3,6 +3,7 @@ layout: post
 title: "Build a Speed Dial Chrome Extension"
 description: "Learn how to create a custom Speed Dial Chrome Extension from scratch. This comprehensive tutorial covers speed dial functionality, bookmark management, quick access features, and best practices for building a user-friendly speed dial extension using Manifest V3."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "speed dial extension, quick access chrome, bookmark dial extension, chrome speed dial, speed dial chrome extension tutorial"

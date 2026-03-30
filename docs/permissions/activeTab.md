@@ -6,6 +6,7 @@ permalink: /permissions/activeTab/
 category: permissions
 order: 1
 canonical_url: "https://bestchromeextensions.com/permissions/activeTab/"
+last_modified_at: 2026-01-15
 ---
 
 activeTab Permission Reference

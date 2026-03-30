@@ -3,6 +3,7 @@ layout: post
 title: "Build an Advanced Reading List Chrome Extension"
 description: "Learn how to build a powerful reading list Chrome extension with advanced features like offline support, smart categorization, article parsing, and cross-device sync. Create your own read later chrome extension with this comprehensive guide."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "reading list extension, read later chrome, save articles extension"

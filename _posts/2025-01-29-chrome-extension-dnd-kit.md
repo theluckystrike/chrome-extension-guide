@@ -3,6 +3,7 @@ layout: post
 title: "Complete Guide to dnd-kit Drag and Drop in Chrome Extensions"
 description: "Learn how to implement powerful drag and drop functionality in Chrome extensions using dnd-kit. This comprehensive guide covers sortable lists, draggable elements, and best practices for building intuitive user interfaces."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "dnd kit extension, drag drop library chrome, sortable extension, dnd-kit chrome extension, react drag and drop chrome"

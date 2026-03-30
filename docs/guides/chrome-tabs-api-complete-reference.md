@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Tabs API Complete Guide: Query, Group, Move, and Manage Tabs"
 description: "Master the Chrome Tabs API with this complete reference. Learn chrome.tabs.query patterns, tab groups API, lifecycle events, moving/pinning/discarding, tab capture, cross-window management, and real code examples for building powerful tab manager extensions."
 permalink: /guides/chrome-tabs-api-complete-reference/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Tabs API Complete Guide: Query, Group, Move, and Manage Tabs

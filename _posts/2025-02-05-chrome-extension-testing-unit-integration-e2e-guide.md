@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Testing. Unit, Integration, and E2E Testing Complete Guide"
 description: "Master Chrome extension testing. Unit tests with Vitest, integration tests with chrome API mocks, E2E tests with Puppeteer and Playwright. CI pipeline setup included."
 date: 2025-02-05
+last_modified_at: 2025-02-05
 categories: [guides, testing]
 tags: [extension-testing, vitest, puppeteer, playwright, chrome-extension-testing]
 author: theluckystrike

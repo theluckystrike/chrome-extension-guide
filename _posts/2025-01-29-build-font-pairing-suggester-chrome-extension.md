@@ -3,6 +3,7 @@ layout: post
 title: "Build a Font Pairing Suggester Chrome Extension"
 description: "Learn how to build a font pairing suggester Chrome extension that helps designers and developers discover perfect typography combinations. This comprehensive guide covers Google Fonts integration, real-time preview, and publishing to the Chrome Web Store."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "font pairing extension, typography helper chrome, google fonts extension, font combination tool, chrome extension typography"

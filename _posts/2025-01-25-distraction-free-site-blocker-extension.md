@@ -3,6 +3,7 @@ layout: post
 title: "Build a Distraction-Free Site Blocker Chrome Extension"
 description: "Learn how to build a powerful site blocker extension for Chrome to block distracting sites and boost productivity. This comprehensive guide covers Manifest V3, blocking APIs, focus mode implementation, and deployment."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, chrome-extensions, productivity]
 tags: [site blocker extension, block distracting sites, focus mode chrome, chrome extension development, productivity tools, website blocker]
 keywords: "site blocker extension, block distracting sites, focus mode chrome, chrome extension blocker, distraction free browser, productivity chrome extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Proxy Settings. Best Practices"
 description: "Configure proxy settings for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings/"
+last_modified_at: 2026-01-15
 ---
 
 Proxy Settings API Patterns

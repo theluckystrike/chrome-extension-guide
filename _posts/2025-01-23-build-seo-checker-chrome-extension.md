@@ -3,6 +3,7 @@ layout: post
 title: "Build an SEO Checker Chrome Extension. Complete 2025 Tutorial"
 description: "Learn how to build a powerful SEO checker Chrome extension from scratch. This comprehensive guide covers on-page SEO analysis, meta tag validation, content auditing, and Chrome Web Store deployment."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 author: theluckystrike

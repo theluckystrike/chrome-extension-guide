@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Freelancers: Manage Client Tabs Across Projects"
 description: "Discover how Tab Suspender Pro helps freelancers manage multiple client projects efficiently. Learn to organize browser tabs, suspend inactive work, and boost productivity."
 date: 2025-04-20
+last_modified_at: 2025-04-20
 categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, freelancer, productivity]
 keywords: "tab suspender pro freelancer, freelancer browser tabs, manage client tabs chrome, tab suspender project management, freelance chrome extension"

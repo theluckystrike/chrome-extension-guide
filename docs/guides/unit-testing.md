@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Unit Testing. How to Test With Jest and Puppeteer"
 description: "A comprehensive guide to unit testing Chrome extensions using Jest, Vitest, and Puppeteer. Learn testing patterns, mocking Chrome APIs, and best practices."
 canonical_url: "https://bestchromeextensions.com/guides/unit-testing/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Unit Testing. How to Test With Jest and Puppeteer

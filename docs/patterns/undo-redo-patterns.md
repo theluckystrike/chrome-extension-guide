@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Undo Redo Patterns. Best Practices"
 description: "Implement undo/redo functionality in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/undo-redo-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Undo/Redo Patterns for Chrome Extensions

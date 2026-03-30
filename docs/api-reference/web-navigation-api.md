@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Web Navigation API Complete Reference"
 description: "The Chrome Web Navigation API tracks navigation events in tabs with detailed lifecycle information, enabling extensions to monitor and respond to page loads and frame updates."
 canonical_url: "https://bestchromeextensions.com/api-reference/web-navigation-api/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.webNavigation API Reference

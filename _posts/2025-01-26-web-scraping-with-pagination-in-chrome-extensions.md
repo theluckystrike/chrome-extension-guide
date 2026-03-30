@@ -3,6 +3,7 @@ layout: post
 title: "Web Scraping with Pagination in Chrome Extensions: Complete Guide"
 description: "Learn how to build Chrome extensions that can scrape multiple pages using pagination. This comprehensive guide covers pagination detection, automated page navigation, data extraction from paginated content, and best practices for multi-page scraper chrome extensions."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "pagination scraping extension, multi-page scraper chrome, crawl pages extension"

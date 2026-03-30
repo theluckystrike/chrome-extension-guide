@@ -6,6 +6,7 @@ permalink: /permissions/sidePanel/
 category: permissions
 order: 38
 canonical_url: "https://bestchromeextensions.com/permissions/sidePanel/"
+last_modified_at: 2026-01-15
 ---
 
 sidePanel Permission

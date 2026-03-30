@@ -3,6 +3,7 @@ layout: post
 title: "D3.js Data Visualization in Chrome Extensions: Complete Guide"
 description: "Learn how to integrate D3.js data visualization into Chrome extensions. This comprehensive guide covers creating interactive charts, data-driven visualizations, and building powerful chart extensions using D3.js and Chrome extension APIs."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "d3 chrome extension, data visualization extension, chart extension, d3.js chrome, interactive charts chrome extension"

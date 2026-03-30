@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Review Acquisition. How to Get 5-Star Ratings"
 description: "Proven strategies to get more Chrome Web Store reviews. Timing review prompts, in-extension feedback flows, responding to negative reviews, and review velocity hacks."
 date: 2025-02-21
+last_modified_at: 2025-02-21
 categories: [guides, growth]
 tags: [extension-reviews, chrome-web-store-reviews, user-feedback, rating-optimization, social-proof]
 author: theluckystrike

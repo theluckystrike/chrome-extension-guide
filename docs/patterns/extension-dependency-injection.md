@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Dependency Injection. Best Practices"
 description: "Implement dependency injection for cleaner extension architecture."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-dependency-injection/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Dependency Injection Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with React in 2025: Complete Tutorial"
 description: "Learn how to build powerful Chrome extensions using React in 2025. This comprehensive tutorial covers react chrome extension setup, react popup extension development, and modern best practices for Manifest V3."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension react, react chrome extension tutorial, react popup extension, react chrome extension 2025, build chrome extension with react"

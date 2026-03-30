@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Drag And Drop. Best Practices"
 description: "Implement drag and drop in extension UIs."
 canonical_url: "https://bestchromeextensions.com/patterns/drag-and-drop/"
+last_modified_at: 2026-01-15
 ---
 
 Drag and Drop in Extensions

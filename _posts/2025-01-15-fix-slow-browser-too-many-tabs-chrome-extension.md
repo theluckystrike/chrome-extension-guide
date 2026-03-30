@@ -4,6 +4,7 @@ title: "Fix Slow Browser From Too Many Tabs: Best Chrome Extensions for 2025"
 seo_title: "Fix Slow Browser | Best Chrome Extensions for Too Many Tabs 2025"
 description: "Fix slow Chrome browser from too many tabs with the best extensions. Learn to reduce memory usage, improve performance, and manage tabs effectively in 2025."
 date: 2025-01-15
+last_modified_at: 2025-01-15
 categories: [productivity, chrome-extensions, browser-performance]
 tags: [fix slow browser too many tabs, chrome tab management extension, reduce chrome memory usage, tab suspender extension, browser optimization, tab management]
 keywords: "fix slow browser too many tabs, chrome tab management extension, reduce chrome memory usage, tab suspender extension, chrome browser slow fix, browser performance optimization"

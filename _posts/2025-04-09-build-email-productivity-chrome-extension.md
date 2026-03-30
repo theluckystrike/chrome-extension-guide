@@ -3,6 +3,7 @@ layout: post
 title: "Build an Email Productivity Chrome Extension: Enhance Gmail and Outlook"
 description: "Learn to build a powerful email productivity Chrome extension that integrates with Gmail and Outlook. This comprehensive guide covers Manifest V3, email APIs, tracking features, and publishing to the Chrome Web Store."
 date: 2025-04-09
+last_modified_at: 2025-04-09
 categories: [Chrome-Extensions, Tutorials]
 tags: [email, gmail, chrome-extension]
 keywords: "chrome extension email, gmail chrome extension build, email productivity extension, chrome extension gmail tools, email tracker chrome extension"

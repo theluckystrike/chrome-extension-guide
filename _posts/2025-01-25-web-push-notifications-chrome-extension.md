@@ -3,6 +3,7 @@ layout: post
 title: "Implementing Web Push Notifications in Chrome Extensions"
 description: "Learn how to implement web push notifications in Chrome extensions using the Push API. This comprehensive tutorial covers service workers, VAPID authentication, notification options, and real-world implementation patterns for extension developers."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension push notifications, web push api, push api chrome extension, notification extension tutorial, manifest v3, service workers]
 keywords: "web push notification extension, push api chrome extension, notification extension tutorial, chrome push notification implementation, chrome extension push notifications service worker"

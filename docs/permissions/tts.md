@@ -6,6 +6,7 @@ permalink: /permissions/tts/
 category: permissions
 order: 45
 canonical_url: "https://bestchromeextensions.com/permissions/tts/"
+last_modified_at: 2026-01-15
 ---
 
 tts Permission. Chrome Extension Reference

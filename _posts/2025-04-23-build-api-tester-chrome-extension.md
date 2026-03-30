@@ -3,6 +3,7 @@ layout: post
 title: "Build an API Tester Chrome Extension: Postman Alternative in Your Browser"
 description: "Learn how to build a powerful API tester Chrome extension from scratch. This comprehensive guide covers HTTP methods, request headers, authentication, and creating your own Postman alternative as a browser extension."
 date: 2025-04-23
+last_modified_at: 2025-04-23
 categories: [Chrome-Extensions, Tutorials]
 tags: [api-tester, http, chrome-extension]
 keywords: "chrome extension api tester, api testing chrome, build postman extension, chrome extension http client, rest api chrome extension"

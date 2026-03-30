@@ -3,6 +3,7 @@ layout: post
 title: "Voice Command Chrome Extension: Hands-Free Browser Navigation"
 description: "Learn how to build and use voice command Chrome extensions for hands-free browser navigation. This comprehensive guide covers speech recognition API, implementation patterns, and top voice control extensions for Chrome in 2025."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [tutorials, chrome-extensions, productivity]
 tags: [voice command extension, hands-free browser, speech control chrome, chrome extension tutorial, voice recognition]
 keywords: "voice command extension, hands-free browser, speech control chrome, voice control chrome extension, chrome speech recognition"

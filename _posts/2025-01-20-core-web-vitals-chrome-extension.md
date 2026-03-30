@@ -3,6 +3,7 @@ layout: post
 title: "Core Web Vitals Chrome Extension: Measure LCP, FID and CLS"
 description: "Learn how to build a Core Web Vitals Chrome extension to measure LCP, FID, and CLS metrics. This comprehensive guide covers web vitals extension development, performance metrics measurement, and real-user monitoring techniques."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [guides, chrome-extensions, web-development, performance]
 tags: [web vitals extension, core web vitals chrome, performance metrics extension, LCP, FID, CLS, web performance, chrome extension development]
 keywords: "web vitals extension, core web vitals chrome, performance metrics extension, LCP extension, FID measurement, CLS tracking, Chrome web vitals"

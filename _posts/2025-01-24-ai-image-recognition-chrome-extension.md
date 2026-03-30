@@ -3,6 +3,7 @@ layout: post
 title: "Build an AI Image Recognition Chrome Extension with TensorFlow.js"
 description: "Learn how to build a powerful AI image recognition Chrome extension using TensorFlow.js. This comprehensive guide covers machine learning integration, image classification, and deploying ML-powered extensions for real-time object detection in your browser."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [guides, chrome-extensions, machine-learning, tensorflow]
 tags: [ai image recognition extension, tensorflow js chrome extension, ml image classifier extension, machine learning chrome extension, image classification, object detection, TF.js, mobile net]
 keywords: "ai image recognition extension, tensorflow js chrome extension, ml image classifier extension, machine learning chrome extension, image classification tensorflow, chrome extension ML, object detection browser"

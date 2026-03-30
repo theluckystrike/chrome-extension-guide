@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Omnibox Api. Best Practices"
 description: "Implement custom search suggestions in the Chrome omnibox (address bar)."
 canonical_url: "https://bestchromeextensions.com/patterns/omnibox-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Omnibox API Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Building a Tab Manager Chrome Extension. Step-by-Step Tutorial (2025)"
 description: "Learn to build a full-featured tab manager Chrome extension. Covers tab grouping, search, suspend/restore, keyboard shortcuts, and Chrome Web Store publishing."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [tutorials]
 tags: [tab-manager, chrome-extension-tutorial, tab-groups, chrome-tabs-api, browser-extension]
 seo_title: "Build a Tab Manager Chrome Extension | 2025 Tutorial"

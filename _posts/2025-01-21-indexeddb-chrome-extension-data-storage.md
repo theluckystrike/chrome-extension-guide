@@ -3,6 +3,7 @@ layout: post
 title: "IndexedDB in Chrome Extensions: Complete Guide to Client-Side Database Storage"
 description: "Master IndexedDB in Chrome Extensions with our comprehensive 2025 guide. Learn how to implement client database storage, manage large datasets offline, and build powerful Chrome extensions with persistent data capabilities."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "indexeddb chrome extension, indexed db extension, client database extension, chrome extension storage API, offline data storage chrome extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Design System. Developer Guide"
 description: "Learn Chrome extension design system with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-design-system/"
+last_modified_at: 2026-01-15
 ---
 Design System for Chrome Extensions
 

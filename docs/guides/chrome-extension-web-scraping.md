@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Web Scraping: Data Extraction with Content Scripts"
 description: "Build data extraction Chrome extensions using content scripts. Learn DOM scraping, dynamic content handling, pagination, and ethical scraping practices with TypeScript."
 permalink: /guides/chrome-extension-web-scraping/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Web Scraping: Data Extraction with Content Scripts

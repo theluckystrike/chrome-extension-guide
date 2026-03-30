@@ -3,6 +3,7 @@ layout: post
 title: "Build a Distraction-Free Site Blocker Extension: Complete 2025 Guide"
 description: "Learn how to build a powerful site blocker extension for Chrome in 2025. This comprehensive tutorial covers blocking distracting websites, implementing focus mode, and creating a productivity tool that actually works."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "site blocker extension, block distracting sites, focus mode chrome, chrome extension tutorial, productivity extension"

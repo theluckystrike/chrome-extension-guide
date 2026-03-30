@@ -3,6 +3,7 @@ layout: post
 title: "Error Tracking and Monitoring for Chrome Extensions: The Complete Guide"
 description: "Learn how to implement comprehensive error tracking and crash reporting for Chrome extensions. Discover best practices for monitoring, debugging, and improving extension reliability using modern tools and techniques."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension error tracking, extension crash reporting, chrome extension monitoring, chrome extension debugging, manifest v3 error handling, extension reliability"

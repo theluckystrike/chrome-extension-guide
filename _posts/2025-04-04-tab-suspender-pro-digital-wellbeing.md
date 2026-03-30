@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Digital Wellbeing: Reduce Browser Overwhelm"
 description: "Discover how Tab Suspender Pro helps combat browser tab anxiety, reduce mental clutter, and practice mindful browsing for improved focus and digital wellness."
 date: 2025-04-04
+last_modified_at: 2025-04-04
 categories: [Chrome-Extensions, Wellbeing]
 tags: [tab-suspender-pro, digital-wellbeing, productivity]
 author: theluckystrike

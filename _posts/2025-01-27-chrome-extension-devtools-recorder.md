@@ -3,6 +3,7 @@ layout: post
 title: "Chrome DevTools Recorder Extension Integration: Complete Developer Guide"
 description: "Master Chrome DevTools Recorder Extension Integration with this comprehensive guide. Learn how to build test recorder Chrome extensions, capture user flows, and integrate automation testing into your development workflow."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api]
 keywords: "devtools recorder extension, test recorder chrome, user flow recorder, chrome devtools recorder, chrome extension recorder integration"

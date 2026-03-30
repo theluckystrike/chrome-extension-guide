@@ -3,6 +3,7 @@ layout: post
 title: "Manifest V3 Service Worker Patterns and Anti-Patterns. What Works and What Doesn't"
 description: "Essential patterns for Manifest V3 service workers. Learn state management, alarm-based scheduling, message passing, and how to avoid common anti-patterns."
 date: 2025-01-30
+last_modified_at: 2025-01-30
 categories: [guides, manifest-v3]
 tags: [manifest-v3, service-worker-patterns, chrome-extensions, background-scripts, state-management]
 author: theluckystrike

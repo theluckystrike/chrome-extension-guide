@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Options Page. How to Build a Settings UI"
 description: "A comprehensive guide to building Chrome extension options pages, covering embedded vs full-page layouts, chrome.storage integration, form design patterns, save/load implementations, and dark mode support."
 canonical_url: "https://bestchromeextensions.com/guides/options-page/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Options Page. How to Build a Settings UI

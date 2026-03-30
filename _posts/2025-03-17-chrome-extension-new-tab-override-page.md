@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension New Tab Override: Build a Custom New Tab Page"
 description: "Learn how to create a chrome extension new tab override to build custom new tab page extension with our comprehensive step-by-step tutorial for developers."
 date: 2025-03-17
+last_modified_at: 2025-03-17
 categories: [Chrome-Extensions, Tutorials]
 tags: [new-tab, override, chrome-extension]
 keywords: "chrome extension new tab, new tab override chrome extension, custom new tab page extension, chrome extension override pages, chrome newtab page"

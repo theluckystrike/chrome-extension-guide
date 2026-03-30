@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Web Store SEO. Rank Higher and Get More Installs in 2025"
 description: "Complete Chrome Web Store SEO guide for 2025. Learn how to optimize your listing title, description, screenshots, and reviews to rank higher and dramatically increase extension installs."
 date: 2025-01-31
+last_modified_at: 2025-01-31
 categories: [Chrome-Extensions, Publishing]
 tags: [chrome-web-store-seo, extension-marketing, cws-listing, extension-installs, app-store-optimization]
 keywords: "chrome web store seo, cws seo, chrome extension marketing, extension store optimization, get more extension installs, chrome extension ranking"

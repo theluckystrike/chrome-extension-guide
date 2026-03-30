@@ -3,6 +3,7 @@ layout: post
 title: "Building a ChatGPT Chrome Extension: Complete Integration Guide"
 description: "Learn how to build a powerful ChatGPT Chrome extension with OpenAI API integration. This comprehensive tutorial covers Manifest V3, AI integration, content scripts, and publishing to the Chrome Web Store."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "chatgpt chrome extension, ai chrome extension, openai extension, chatgpt integration, build ai extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Architecture Patterns"
 description: "Learn the essential architecture patterns for building solid Chrome extensions. Covers popup design, service workers, content scripts, side panels, DevTools integration, and modular code sharing."
 canonical_url: "https://bestchromeextensions.com/tutorials/extension-architecture-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Architecture Patterns

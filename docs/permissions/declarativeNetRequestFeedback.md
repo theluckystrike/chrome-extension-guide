@@ -6,6 +6,7 @@ permalink: /permissions/declarativeNetRequestFeedback/
 category: permissions
 order: 14
 canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequestFeedback/"
+last_modified_at: 2026-01-15
 ---
 
 declarativeNetRequestFeedback Permission. Chrome Extension Reference

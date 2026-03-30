@@ -2,6 +2,7 @@
 title: "Chrome Extension Publishing Guide"
 slug: /publishing/
 description: "Complete guide to publishing Chrome extensions on the Chrome Web Store. Learn about submission process, listing optimization, beta testing, and avoiding common rejections."
+last_modified_at: 2026-01-15
 ---
 
 # Chrome Extension Publishing Guide

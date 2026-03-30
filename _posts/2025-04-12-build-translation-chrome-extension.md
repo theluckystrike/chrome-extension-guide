@@ -3,6 +3,7 @@ layout: post
 title: "Build a Translation Chrome Extension: Translate Selected Text Instantly"
 description: "Learn how to build a Chrome extension that translates selected text instantly. This step-by-step guide covers Manifest V3, content scripts, translation APIs, and publishing your extension to the Chrome Web Store."
 date: 2025-04-12
+last_modified_at: 2025-04-12
 categories: [Chrome-Extensions, Tutorials]
 tags: [translation, language, chrome-extension]
 keywords: "chrome extension translate, build translation extension, translate text chrome extension, chrome extension translator, language translation chrome"

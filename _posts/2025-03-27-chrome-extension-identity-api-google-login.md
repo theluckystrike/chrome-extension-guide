@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Identity API: Implement Google Sign-In Smoothly"
 description: "Learn how to implement Google Sign-In in Chrome extensions using the Identity API. Complete tutorial covering chrome.identity, OAuth setup, and best practices for secure user authentication in 2025."
 date: 2025-03-27
+last_modified_at: 2025-03-27
 categories: [Chrome-Extensions, Authentication]
 tags: [identity, google-login, chrome-extension]
 keywords: "chrome extension identity API, google sign in chrome extension, chrome.identity, chrome extension google login, google OAuth extension"

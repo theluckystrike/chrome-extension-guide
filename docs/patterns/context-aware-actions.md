@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Context Aware Actions. Best Practices"
 description: "Implement context-aware actions based on page and user state."
 canonical_url: "https://bestchromeextensions.com/patterns/context-aware-actions/"
+last_modified_at: 2026-01-15
 ---
 
 Context-Aware Extension Actions

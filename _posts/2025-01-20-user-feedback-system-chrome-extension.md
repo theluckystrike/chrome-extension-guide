@@ -3,6 +3,7 @@ layout: post
 title: "Build a User Feedback System in Your Chrome Extension: Complete Guide"
 description: "Learn how to build a comprehensive user feedback system in your Chrome extension. This guide covers in-app feedback forms, user surveys, ratings, feedback collection best practices, and implementation patterns for Manifest V3 extensions."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "extension feedback system, user survey chrome extension, in-app feedback extension, chrome extension feedback form, user rating chrome extension, collect feedback chrome extension, chrome extension user feedback, extension review system"

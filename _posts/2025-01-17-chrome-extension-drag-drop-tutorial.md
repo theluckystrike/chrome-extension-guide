@@ -3,6 +3,7 @@ layout: post
 title: "Drag and Drop in Chrome Extensions: Complete Tutorial"
 description: "Master drag and drop in Chrome extensions with this comprehensive tutorial. Learn how to implement the HTML5 Drag and Drop API, handle file drops, create draggable elements, and build intuitive user interfaces for your Chrome extensions."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome extension drag drop, drag api chrome extension, chrome extension file drop, html5 drag and drop chrome extension, chrome extension drag and drop tutorial"

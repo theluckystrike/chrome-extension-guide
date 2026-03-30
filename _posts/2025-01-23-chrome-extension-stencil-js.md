@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with StencilJS Web Components"
 description: "Learn how to use StencilJS web components to build modern, efficient Chrome extensions. Discover the benefits of compiled web components, shared component libraries, and best practices for integrating StencilJS with Manifest V3."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [tutorials, chrome-extensions, stenciljs]
 tags: [stenciljs chrome extension, stencil web components extension, compiled web components chrome, web components, chrome extension development, manifest v3]
 keywords: "stenciljs chrome extension, stencil web components extension, compiled web components chrome, stenciljs tutorial, web components chrome extension"

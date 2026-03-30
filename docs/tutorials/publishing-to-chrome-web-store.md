@@ -3,6 +3,7 @@ layout: default
 title: "Publishing Your Chrome Extension to the Chrome Web Store"
 description: "A comprehensive step-by-step guide to publishing your Chrome extension. Learn about developer account setup, asset preparation, manifest requirements, privacy policies, review process, and update workflows."
 canonical_url: "https://bestchromeextensions.com/tutorials/publishing-to-chrome-web-store/"
+last_modified_at: 2026-01-15
 ---
 Publishing Your Chrome Extension to the Chrome Web Store
 

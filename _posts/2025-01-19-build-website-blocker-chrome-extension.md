@@ -3,6 +3,7 @@ layout: post
 title: "Build a Website Blocker Chrome Extension. Complete Step-by-Step Tutorial"
 description: "Learn how to build a powerful website blocker Chrome extension with focus timers, custom blocklists, and productivity analytics. Perfect for developers looking to create focus extension for Chrome."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 author: theluckystrike

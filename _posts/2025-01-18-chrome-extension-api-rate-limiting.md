@@ -3,6 +3,7 @@ layout: post
 title: "API Rate Limiting in Chrome Extensions: The Complete 2025 Implementation Guide"
 description: "Master chrome extension rate limiting with our comprehensive guide. Learn how to throttle API calls in extensions, implement efficient rate limiting strategies, and avoid getting blocked by APIs. Includes code examples and best practices for 2025."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension rate limiting, throttle api calls extension, chrome extension API rate limit, rate limiting chrome extension, API throttling extension"

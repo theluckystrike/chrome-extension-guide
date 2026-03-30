@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension OAuth2 Authentication: Connect to Google, GitHub & More"
 description: "Learn how to implement OAuth2 authentication in Chrome extensions. Complete guide covering Chrome Identity API, Google login, GitHub OAuth, and secure token management for Manifest V3 extensions."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [tutorials, chrome-extensions, authentication]
 tags: [chrome extension oauth2, extension authentication, chrome identity api, google login chrome extension, manifest v3, oauth tutorial]
 keywords: "chrome extension oauth2, extension authentication, chrome identity api, google login chrome extension, github oauth chrome extension, manifest v3 authentication"

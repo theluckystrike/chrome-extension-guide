@@ -3,6 +3,7 @@ layout: post
 title: "Server-Sent Events in Chrome Extensions: Complete Guide"
 description: "Learn how to implement Server-Sent Events (SSE) in Chrome extensions for real-time updates. Comprehensive guide covering setup, best practices, and common use cases for extension developers."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "sse chrome extension, server sent events extension, real-time updates extension, chrome extension sse, event source chrome extension"

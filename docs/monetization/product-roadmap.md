@@ -3,6 +3,7 @@ layout: default
 title: "Building a Product Roadmap for Chrome Extensions"
 description: "A comprehensive guide to creating and managing product roadmaps for Chrome extensions, covering MVP definition, prioritization frameworks, release planning, and user feedback loops."
 canonical_url: "https://bestchromeextensions.com/monetization/product-roadmap/"
+last_modified_at: 2026-01-15
 ---
 
 Building a Product Roadmap for Chrome Extensions

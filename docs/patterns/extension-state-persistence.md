@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension State Persistence. Best Practices"
 description: "Persist and sync extension state across sessions and devices."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-state-persistence/"
+last_modified_at: 2026-01-15
 ---
 
 Extension State Persistence Patterns

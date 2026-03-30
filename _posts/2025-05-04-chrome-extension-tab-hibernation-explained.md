@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Tab Hibernation Explained: How Tab Suspenders Save Your Computer"
 description: "Discover chrome tab hibernation extensions that freeze inactive tabs, reduce RAM usage by 80%, and speed up your browser. Learn how tab sleep mode works and find the best tools in 2025."
 date: 2025-05-04
+last_modified_at: 2025-05-04
 categories: [Chrome-Extensions, Explainers]
 tags: [tab-hibernation, performance, chrome-extension]
 keywords: "chrome tab hibernation, tab hibernation extension, chrome tab sleep mode, hibernating browser tabs, tab freezing chrome"

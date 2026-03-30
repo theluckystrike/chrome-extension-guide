@@ -6,6 +6,7 @@ permalink: /permissions/search/
 category: permissions
 order: 36
 canonical_url: "https://bestchromeextensions.com/permissions/search/"
+last_modified_at: 2026-01-15
 ---
 
 search Permission

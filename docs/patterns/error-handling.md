@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Error Handling. Patterns for Solid Error Recovery"
 description: "Comprehensive error handling in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/error-handling/"
+last_modified_at: 2026-01-15
 ---
 
 Error Handling Patterns

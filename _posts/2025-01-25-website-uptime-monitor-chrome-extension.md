@@ -3,6 +3,7 @@ layout: post
 title: "Build a Website Uptime Monitor Chrome Extension"
 description: "Learn how to build a website uptime monitor Chrome extension from scratch. This comprehensive guide covers creating a website monitor extension, uptime checker Chrome tools, and site down checker extensions with practical code examples and best practices."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, chrome-extensions, development, tools]
 tags: [website monitor extension, uptime checker chrome, site down checker extension, chrome extension development, website monitoring, uptime monitoring]
 keywords: "website monitor extension, uptime checker chrome, site down checker extension, chrome extension development, build chrome extension, website monitoring tool"

@@ -56,6 +56,14 @@ exclude:
   - merge-all2.sh
   - examples/
   - vendor/
+  - popup.html
+  - popup.css
+  - popup.js
+  - content.js
+  - manifest.json
+  - marked.min.js
+  - highlight.min.js
+  - icons/
 
 collections:
   docs:

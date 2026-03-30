@@ -3,6 +3,7 @@ layout: post
 title: "Marked.js Markdown in Chrome Extensions: Complete Implementation Guide"
 description: "Learn how to integrate Marked.js for rendering Markdown in Chrome extensions. Complete guide to building MD viewer extensions with marked js library, including code examples, best practices, and performance optimization."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "marked js extension, markdown render chrome, md viewer extension, marked.js chrome extension, markdown renderer extension"

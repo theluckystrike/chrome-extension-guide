@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Script To Service Worker Patterns. Best Practices"
 description: "Communicate from content scripts to service workers."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-to-service-worker-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Content Script to Service Worker Communication Patterns

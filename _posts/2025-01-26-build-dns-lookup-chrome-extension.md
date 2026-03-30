@@ -3,6 +3,7 @@ layout: post
 title: "Build a DNS Lookup Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a DNS lookup Chrome extension from scratch. This comprehensive guide covers domain info chrome tools, whois extension development, and practical implementation using JavaScript and Chrome APIs."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "dns lookup extension, domain info chrome, whois extension, chrome extension development, DNS checker chrome"

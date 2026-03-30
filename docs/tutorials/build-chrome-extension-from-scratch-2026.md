@@ -3,6 +3,7 @@ layout: default
 title: "How to Build a Chrome Extension from Scratch in 2026 - Beginner Tutorial"
 description: "Learn how to build a Chrome extension from scratch in 2026. This beginner tutorial covers Manifest V3, popup creation, content scripts, background service workers, and publishing to the Chrome Web Store."
 canonical_url: "https://bestchromeextensions.com/docs/tutorials/build-chrome-extension-from-scratch-2026/"
+last_modified_at: 2026-01-15
 ---
 
 How to Build a Chrome Extension from Scratch in 2026 - Beginner Tutorial

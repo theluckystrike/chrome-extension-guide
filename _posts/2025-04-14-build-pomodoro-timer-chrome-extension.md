@@ -3,6 +3,7 @@ layout: post
 title: "Build a Pomodoro Timer Chrome Extension: Focus Intervals in Your Browser"
 description: "Learn how to build a Pomodoro timer Chrome extension with Manifest V3. This step-by-step guide covers the Pomodoro technique, timer logic, browser notifications, and how to publish your productivity extension."
 date: 2025-04-14
+last_modified_at: 2025-04-14
 categories: [Chrome-Extensions, Productivity]
 tags: [pomodoro, timer, chrome-extension]
 keywords: "chrome extension pomodoro, pomodoro timer chrome, build timer extension, focus timer chrome extension, pomodoro technique chrome"

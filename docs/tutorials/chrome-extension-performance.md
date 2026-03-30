@@ -3,6 +3,7 @@ layout: default
 title: "Performance Optimization for Chrome Extensions"
 description: "Learn how to optimize Chrome extensions for better performance. Cover memory usage, DOM manipulation, lazy loading, service worker lifecycle, bundle size, anti-patterns, and Chrome DevTools profiling."
 canonical_url: "https://bestchromeextensions.com/tutorials/chrome-extension-performance/"
+last_modified_at: 2026-01-15
 ---
 
 Performance Optimization for Chrome Extensions

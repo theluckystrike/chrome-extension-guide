@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Testing Mv3 Extensions. Manifest V3 Guide"
 description: "Testing strategies for Manifest V3 Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/mv3/testing-mv3-extensions/"
+last_modified_at: 2026-01-15
 ---
 
 Testing MV3 Extensions

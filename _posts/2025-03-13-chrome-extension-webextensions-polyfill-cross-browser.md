@@ -3,6 +3,7 @@ layout: post
 title: "WebExtensions Polyfill: Write Cross-Browser Extensions with One Codebase"
 description: "Learn how to use WebExtensions polyfill to create cross-browser extensions that work smoothly on Chrome, Firefox, Edge, and Opera. Save time with a single codebase."
 date: 2025-03-13
+last_modified_at: 2025-03-13
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [polyfill, cross-browser, chrome-extension]
 keywords: "webextensions polyfill, cross browser extension, chrome firefox extension, browser extension polyfill, write extension all browsers"

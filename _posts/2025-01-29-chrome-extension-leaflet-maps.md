@@ -3,6 +3,7 @@ layout: post
 title: "Leaflet Maps in Chrome Extensions: Complete Implementation Guide for 2025"
 description: "Master leaflet chrome extension development with our comprehensive guide. Learn how to integrate interactive map chrome features, build powerful map extensions, and use Leaflet.js for creating feature-rich mapping applications in Chrome."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "leaflet chrome extension, map extension, interactive map chrome, leaflet maps chrome, chrome extension map integration"

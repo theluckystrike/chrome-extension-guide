@@ -5,6 +5,7 @@ description: "Discover how tab suspension technology can extend your laptop batt
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/tab-suspender-pro-battery-life-impact/"
 
+last_modified_at: 2026-01-15
 ---
 
 How Tab Suspension Extends Laptop Battery Life by 2+ Hours

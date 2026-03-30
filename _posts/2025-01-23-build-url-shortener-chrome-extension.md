@@ -3,6 +3,7 @@ layout: post
 title: "Build a URL Shortener Chrome Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a powerful url shortener extension from scratch. This comprehensive guide covers link shortener chrome extension development, API integration, UI design, and deployment. Perfect for developers looking to create a short url extension in 2025."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "url shortener extension, link shortener chrome, short url extension, chrome extension development, build url shortener"

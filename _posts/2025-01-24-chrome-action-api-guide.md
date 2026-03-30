@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Action API Guide: Popup, Badge, and Click Handling"
 description: "Complete guide to the Chrome Action API for Manifest V3. Learn how to manage popups, badges, icons, click handlers, and migrate from browserAction to action."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial, manifest-v3]
 keywords: "chrome.action api, extension popup api, browserAction to action migration, chrome extension badge, toolbar icon api"

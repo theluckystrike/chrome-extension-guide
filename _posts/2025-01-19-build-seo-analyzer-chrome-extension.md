@@ -3,6 +3,7 @@ layout: post
 title: "Build an SEO Analyzer Chrome Extension. Complete Tutorial (2025)"
 description: "Learn how to build a powerful SEO analyzer Chrome extension from scratch. This comprehensive tutorial covers on-page SEO analysis, meta tag checking, content scoring, and Chrome Web Store publishing."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 author: theluckystrike

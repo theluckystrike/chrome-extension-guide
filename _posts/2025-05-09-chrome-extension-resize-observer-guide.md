@@ -3,6 +3,7 @@ layout: post
 title: "ResizeObserver in Chrome Extensions: Responsive Popups and Panels"
 description: "Master ResizeObserver in Chrome extensions to build responsive popups and panels that adapt dynamically to container size changes. Practical examples and best practices."
 date: 2025-05-09
+last_modified_at: 2025-05-09
 categories: [Chrome-Extensions, APIs]
 tags: [resize-observer, responsive, chrome-extension]
 keywords: "chrome extension resize observer, responsive popup chrome, chrome extension resize, dynamic popup size, ResizeObserver extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Web Accessible Resources in Chrome Extensions. Tutorial"
 description: "Learn how to use web accessible resources in Chrome Extensions to inject UI, load assets, and secure your extension in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/tutorials/web-accessible-resources/"
+last_modified_at: 2026-01-15
 ---
 
 Web Accessible Resources in Chrome Extensions

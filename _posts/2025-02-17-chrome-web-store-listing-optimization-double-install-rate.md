@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Web Store Listing Optimization. Double Your Install Rate"
 description: "Optimize your Chrome Web Store listing for maximum installs. Title formulas, description templates, screenshot strategies, and A/B testing techniques that work."
 date: 2025-02-17
+last_modified_at: 2025-02-17
 categories: [guides, publishing]
 tags: [chrome-web-store, cws-optimization, extension-listing, install-rate, app-store-optimization]
 author: theluckystrike

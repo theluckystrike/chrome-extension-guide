@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Handle Multiple Tabs Simultaneously: Complete TypeScript Guide"
 description: "Master multi-tab management in Chrome extensions with TypeScript. Learn to track, coordinate, and control multiple tabs efficiently with real-world examples from Tab Suspender Pro."
 permalink: /guides/chrome-extension-handle-multiple-tabs-simultaneously/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Handle Multiple Tabs Simultaneously: Complete TypeScript Guide

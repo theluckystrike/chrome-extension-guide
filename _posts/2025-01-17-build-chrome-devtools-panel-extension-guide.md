@@ -3,6 +3,7 @@ layout: post
 title: "Build a Chrome DevTools Panel Extension"
 description: "Learn how to create a custom Chrome DevTools Panel Extension from scratch. This comprehensive developer guide covers panel architecture, debugging integration, and best practices for building powerful developer tools."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome devtools extension, devtools panel tutorial, chrome developer tools extension, custom devtools panel"

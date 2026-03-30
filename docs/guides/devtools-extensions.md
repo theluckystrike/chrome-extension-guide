@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension DevTools Extensions. Developer Guide"
 description: "Learn Chrome extension devtools extensions with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/devtools-extensions/"
+last_modified_at: 2026-01-15
 ---
 Building DevTools Extensions
 

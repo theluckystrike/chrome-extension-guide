@@ -3,6 +3,7 @@ layout: post
 title: "Build a Social Share Chrome Extension"
 description: "Learn how to build a social share extension for Chrome that enables users to share web pages to social media platforms. This comprehensive guide covers Manifest V3, browser APIs, share dialogs, and best practices for creating a polished sharing experience."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [tutorials, chrome-extensions]
 tags: [social share extension, share page chrome, social media sharing extension, chrome extension tutorial, manifest v3]
 keywords: "social share extension, share page chrome, social media sharing extension, build chrome extension share, chrome extension social sharing"

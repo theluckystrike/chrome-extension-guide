@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension WebAuthn. Developer Guide"
 description: "Learn Chrome extension webauthn with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/webauthn-extensions/"
+last_modified_at: 2026-01-15
 ---
 WebAuthn & FIDO2 in Chrome Extensions
 

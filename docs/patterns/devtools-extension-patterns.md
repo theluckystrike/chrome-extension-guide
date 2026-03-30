@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Devtools Extension Patterns. Best Practices"
 description: "Build custom DevTools panels and extensions for advanced debugging."
 canonical_url: "https://bestchromeextensions.com/patterns/devtools-extension-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 DevTools Extension Patterns

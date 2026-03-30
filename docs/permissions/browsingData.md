@@ -6,6 +6,7 @@ permalink: /permissions/browsingData/
 category: permissions
 order: 4
 canonical_url: "https://bestchromeextensions.com/permissions/browsingData/"
+last_modified_at: 2026-01-15
 ---
 
 browsingData Permission

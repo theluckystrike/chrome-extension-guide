@@ -3,6 +3,7 @@ layout: post
 title: "CRXJS Vite Plugin: The Fastest Way to Build Chrome Extensions"
 description: "Learn how CRXJS Vite plugin revolutionizes Chrome extension development with lightning-fast builds, automatic reloading, and smooth Manifest V3 support."
 date: 2025-04-26
+last_modified_at: 2025-04-26
 categories: [Chrome-Extensions, Build-Tools]
 tags: [crxjs, vite, chrome-extension]
 keywords: "crxjs chrome extension, crxjs vite plugin, fast chrome extension build, crxjs tutorial, chrome extension vite crxjs"

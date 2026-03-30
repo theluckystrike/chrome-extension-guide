@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Web Accessible Resources Patterns. Best Practices"
 description: "Advanced patterns for web accessible resources."
 canonical_url: "https://bestchromeextensions.com/patterns/web-accessible-resources-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Web Accessible Resources Advanced Patterns (MV3)

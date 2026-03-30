@@ -3,6 +3,7 @@ layout: post
 title: "Build a Meta Tag Viewer Chrome Extension: SEO Head Tag Inspector"
 description: "Learn how to build a meta tag viewer Chrome extension for SEO. This comprehensive guide covers head tag checker tools, meta tag inspector development, and best practices for SEO meta analysis in Chrome."
 date: 2025-04-29
+last_modified_at: 2025-04-29
 categories: [Chrome-Extensions, SEO]
 tags: [meta-tags, seo, chrome-extension]
 keywords: "chrome extension meta tags, meta tag viewer chrome, seo meta inspector, build meta extension, head tag checker chrome"

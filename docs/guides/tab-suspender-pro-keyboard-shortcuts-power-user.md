@@ -3,6 +3,7 @@ layout: default
 title: "Tab Suspender Pro Keyboard Shortcuts: Complete Power User Guide"
 description: "Master Tab Suspender Pro keyboard shortcuts for Chrome. Learn default bindings, custom configuration, suspend workflows, and power user techniques for maximum productivity in 2026."
 permalink: /guides/tab-suspender-pro-keyboard-shortcuts-power-user/
+last_modified_at: 2026-01-15
 ---
 
 Tab Suspender Pro Keyboard Shortcuts: Complete Power User Guide

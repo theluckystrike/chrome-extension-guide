@@ -3,6 +3,7 @@ layout: post
 title: "Build a Coupon Finder Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful coupon finder extension that automatically discovers and applies promo codes. This comprehensive guide covers Manifest V3, content scripts, message passing, and best practices for deal finder chrome extensions."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "coupon finder extension, deal finder chrome, promo code extension"

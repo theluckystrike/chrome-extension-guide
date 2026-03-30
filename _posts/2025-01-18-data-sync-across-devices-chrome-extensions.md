@@ -3,6 +3,7 @@ layout: post
 title: "Data Sync Across Devices in Chrome Extensions: Complete 2025 Guide"
 description: "Master chrome extension sync storage and learn how to sync data across browsers. This comprehensive guide covers Chrome Storage API, cross-device synchronization patterns, and best practices for building smooth data sync in your extensions."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "chrome extension sync storage, sync data across browsers, chrome storage sync, cross-device data synchronization, chrome extension data persistence"

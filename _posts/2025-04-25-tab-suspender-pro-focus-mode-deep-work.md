@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Focus Mode: Enable Deep Work with One Click"
 description: "Learn how Tab Suspender Pro Focus Mode transforms your Chrome browser into a distraction-free productivity powerhouse. Suspend all non-essential tabs, schedule focus sessions, and combine with Pomodoro for maximum deep work output."
 date: 2025-04-25
+last_modified_at: 2025-04-25
 categories: [Chrome-Extensions, Productivity]
 tags: [tab-suspender-pro, focus-mode, deep-work]
 author: theluckystrike

@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Gamers: Free Up RAM and Boost FPS While Browsing"
 description: "Discover how Tab Suspender Pro frees up RAM for gaming, boosts FPS, and optimizes Chrome for peak gaming performance. Complete guide for gamers with benchmarks."
 date: 2025-03-11
+last_modified_at: 2025-03-11
 categories: [Chrome-Extensions, Gaming]
 tags: [tab-suspender-pro, gaming, performance]
 keywords: "tab suspender pro gaming, free ram for gaming chrome, chrome tabs slow gaming, tab suspender boost fps, reduce chrome memory gaming"

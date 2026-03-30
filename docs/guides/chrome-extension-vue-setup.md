@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Vue Setup. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-vue-setup/"
+last_modified_at: 2026-01-15
 ---
 Setting Up Vue 3 for Chrome Extension Development
 

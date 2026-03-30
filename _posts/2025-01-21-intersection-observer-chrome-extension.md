@@ -3,6 +3,7 @@ layout: post
 title: "IntersectionObserver in Chrome Extensions: Lazy Loading and Scroll Detection"
 description: "Master IntersectionObserver in Chrome extensions with our comprehensive guide. Learn how to implement lazy loading, scroll detection, and improve extension performance using this powerful browser API in 2025."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [guides, chrome-extensions, development, performance]
 tags: [intersection observer extension, lazy load extension, scroll detection chrome, chrome extension lazy loading, intersection observer api, scroll detection extension]
 keywords: "intersection observer extension, lazy load extension, scroll detection chrome"

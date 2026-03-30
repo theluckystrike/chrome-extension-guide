@@ -3,6 +3,7 @@ layout: post
 title: "Build a Word Counter Chrome Extension: Count Text on Any Webpage"
 description: "Learn how to build a word counter Chrome extension that counts text on any webpage. Step-by-step guide covering Manifest V3, content scripts, and character counting."
 date: 2025-04-14
+last_modified_at: 2025-04-14
 categories: [Chrome-Extensions, Tutorials]
 tags: [word-counter, text, chrome-extension]
 keywords: "chrome extension word counter, count words chrome, text counter chrome extension, build word count extension, character counter chrome"

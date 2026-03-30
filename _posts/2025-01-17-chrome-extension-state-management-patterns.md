@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension State Management: Patterns for Complex Extensions"
 description: "Master chrome extension state management with proven patterns for Manifest V3. Learn extension data flow, chrome storage patterns, background script state, and build scalable extensions."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [tutorials, chrome-extensions]
 tags: [chrome extension state management, extension data flow, chrome storage patterns, background script state, manifest v3, state management]
 keywords: "chrome extension state management, extension data flow, chrome storage patterns, background script state, manifest v3 state"

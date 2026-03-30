@@ -3,6 +3,7 @@ layout: post
 title: "Build a CSS Properties Inspector Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a CSS Properties Inspector Chrome Extension from scratch. This comprehensive guide covers computed styles, CSS debugging, DOM inspection, and how to create powerful developer tools using Chrome's APIs."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions]
 tags: [chrome-extension, developer-tools]
 keywords: "css inspector extension, computed styles chrome, css debugger, chrome extension development, developer tools extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Update Handling. Best Practices"
 description: "Handle extension updates and notify users."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-update-handling/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Update Handling

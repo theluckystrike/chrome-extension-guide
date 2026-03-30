@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Windows API Complete Reference"
 description: "The Chrome Windows API creates, modifies, queries, and monitors browser windows, working closely with the Tabs API to manage the window-tab hierarchy."
 canonical_url: "https://bestchromeextensions.com/api-reference/windows-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Windows API Reference

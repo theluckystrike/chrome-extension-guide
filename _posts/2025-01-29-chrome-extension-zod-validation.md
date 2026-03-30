@@ -3,6 +3,7 @@ layout: post
 title: "Zod Schema Validation in Chrome Extensions: Complete Type-Safe Guide 2025"
 description: "Master zod schema validation in chrome extensions with our comprehensive 2025 guide. Learn how to implement type-safe extension development, validate configuration, messages, and user input using zod for solid chrome extensions."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "zod extension, schema validation chrome, type-safe extension, chrome extension validation, zod chrome extension, type-safe chrome extension development"

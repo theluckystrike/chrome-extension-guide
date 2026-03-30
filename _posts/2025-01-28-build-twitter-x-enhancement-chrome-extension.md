@@ -3,6 +3,7 @@ layout: post
 title: "Build a Twitter/X Enhancement Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a Twitter/X enhancement Chrome extension from scratch. This comprehensive guide covers the Twitter API, Chrome extension development, content scripts, and best practices for creating powerful social media tools."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "twitter tools extension, x enhancement chrome, social media tool, twitter chrome extension, x.com tools, build twitter extension"

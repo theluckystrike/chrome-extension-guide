@@ -3,6 +3,7 @@ layout: post
 title: "Build a JSON Viewer Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a powerful JSON viewer Chrome extension from scratch. This comprehensive tutorial covers Manifest V3, content scripts, syntax highlighting, tree navigation, and publishing to the Chrome Web Store."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, project]
 keywords: "json viewer chrome extension, json formatter extension, pretty json extension, build chrome extension, chrome extension development"

@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Local Overrides with Extensions: A Developer Guide"
 description: "Master chrome local overrides with extensions. Learn how to override website files, implement local file replacement in Chrome, and debug web applications effectively using Chrome DevTools overrides."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [guides, chrome-extensions, development-tools]
 tags: [chrome local overrides, override website files, local file replacement chrome, chrome devtools, web development, debugging]
 keywords: "chrome local overrides, override website files, local file replacement chrome, chrome devtools overrides"

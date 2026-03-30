@@ -3,6 +3,7 @@ layout: post
 title: "Build a Lighthouse Runner Chrome Extension: Complete 2025 Tutorial"
 description: "Learn how to build a Lighthouse Runner Chrome Extension from scratch. This comprehensive tutorial covers performance audit chrome tools, integrating Lighthouse API, creating user-friendly interfaces, and deploying your extension to the Chrome Web Store."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "lighthouse extension, performance audit chrome, web performance extension, lighthouse chrome extension, build chrome extension lighthouse, lighthouse runner extension"

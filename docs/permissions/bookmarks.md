@@ -6,6 +6,7 @@ permalink: /permissions/bookmarks/
 category: permissions
 order: 3
 canonical_url: "https://bestchromeextensions.com/permissions/bookmarks/"
+last_modified_at: 2026-01-15
 ---
 
 bookmarks Permission. Chrome Extension Reference

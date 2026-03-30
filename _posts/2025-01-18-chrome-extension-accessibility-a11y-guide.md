@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Accessibility (A11y) Guide: Building Inclusive Extensions"
 description: "Master Chrome extension accessibility with our comprehensive A11y guide. Learn WCAG compliance, ARIA implementation, keyboard navigation, screen reader support, and best practices for building inclusive Chrome extensions."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension accessibility, a11y extension development, chrome extension a11y, wcag chrome extension, accessible chrome extension development"

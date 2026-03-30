@@ -3,6 +3,7 @@ layout: post
 title: "Build Screen Sharing Extension with WebRTC: Complete Guide"
 description: "Learn how to build a powerful screen sharing Chrome extension using WebRTC. This comprehensive guide covers desktop capture API, stream handling, permissions, and real-world implementation patterns for 2025."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "screen sharing chrome extension, webrtc screen capture, share screen extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Notifications API Complete Reference"
 description: "The Chrome Notifications API creates rich desktop notifications using templates, displaying system-level alerts outside the browser window with icons, titles, and messages."
 canonical_url: "https://bestchromeextensions.com/api-reference/notifications-api/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Notifications API Reference

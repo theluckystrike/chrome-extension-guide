@@ -3,6 +3,7 @@ layout: post
 title: "Build a Responsive Design Tester Extension"
 description: "Learn how to create a powerful Responsive Design Tester Extension for Chrome. This comprehensive guide covers viewport simulation, device presets, touch emulation, and Manifest V3 best practices for building professional mobile testing tools."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "responsive tester extension, mobile view chrome, device simulator extension, responsive design testing tool, chrome responsive tester, viewport tester chrome extension, mobile emulator extension"

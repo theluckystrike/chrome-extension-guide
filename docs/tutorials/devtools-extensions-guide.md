@@ -3,6 +3,7 @@ layout: default
 title: "Building DevTools Extensions for Chrome"
 description: "A comprehensive tutorial on building Chrome DevTools extensions. Learn to create custom panels, sidebars, use the inspectedWindow API, evaluate code in page context, intercept network requests, and extend the Elements panel."
 canonical_url: "https://bestchromeextensions.com/tutorials/devtools-extensions-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Building DevTools Extensions for Chrome

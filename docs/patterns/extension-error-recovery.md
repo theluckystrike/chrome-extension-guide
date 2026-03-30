@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Error Recovery. Best Practices"
 description: "Recover gracefully from errors in extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-error-recovery/"
+last_modified_at: 2026-01-15
 ---
 
 Error Recovery Patterns

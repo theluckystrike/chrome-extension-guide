@@ -3,6 +3,7 @@ layout: post
 title: "Puppeteer Core in Chrome Extension Backend: Complete Guide for 2025"
 description: "Master puppeteer core extension development with this comprehensive guide. Learn browser automation chrome techniques, headless chrome extension backend setup, and advanced automation patterns for powerful extensions."
 date: 2025-01-30
+last_modified_at: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "puppeteer core extension, browser automation chrome, headless chrome extension, puppeteer chrome extension backend, chrome extension automation"

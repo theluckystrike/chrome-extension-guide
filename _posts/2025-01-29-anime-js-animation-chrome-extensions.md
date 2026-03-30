@@ -3,6 +3,7 @@ layout: post
 title: "Anime.js Animation in Chrome Extensions: Complete Guide"
 description: "Learn how to integrate Anime.js animation library in Chrome extensions for smooth, performant animations. Create engaging user experiences with this comprehensive guide."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "anime js extension, animation library chrome, smooth animation extension, anime.js chrome extension tutorial"

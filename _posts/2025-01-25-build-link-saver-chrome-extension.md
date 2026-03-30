@@ -3,6 +3,7 @@ layout: post
 title: "Build a Link Saver Chrome Extension: Complete 2025 Developer Guide"
 description: "Learn how to build a link saver Chrome extension from scratch. This comprehensive guide covers manifest V3, local storage, popup UI, and best practices for creating a bookmark alternative extension that saves links directly from your browser."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, chrome-extensions, productivity, tutorials]
 tags: [link saver extension, save links chrome, bookmark alternative extension, chrome extension development, manifest v3, local storage]
 keywords: "link saver extension, save links chrome, bookmark alternative extension, chrome extension tutorial, build chrome extension 2025"

@@ -4,6 +4,7 @@ title: "Chrome Extension Service Worker Lifecycle detailed look. Complete Guide 
 seo_title: "Chrome Extension Service Worker Lifecycle | Manifest V3 Guide"
 description: "Master the Chrome extension service worker lifecycle. Install, activate, idle, terminate events. Persistent state patterns, alarm-based keepalive, and migration from background pages."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, manifest-v3]
 tags: [service-worker, manifest-v3, background-scripts, extension-lifecycle, chrome-extensions]
 author: theluckystrike

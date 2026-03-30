@@ -3,6 +3,7 @@ layout: post
 title: "Web Animation API in Chrome Extensions: Smooth UI Transitions"
 description: "Master the Web Animation API for Chrome extensions. Learn how to create smooth UI transitions, implement performant animations, and build engaging user experiences using the WAAPI in your Chrome extensions."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [Chrome-Extensions, Web-Development, Animation]
 tags: [chrome-extension, animation, tutorial, web-animation-api]
 keywords: "web animation api extension, animation chrome extension, smooth transitions extension, WAAPI chrome extension, chrome extension ui animation"

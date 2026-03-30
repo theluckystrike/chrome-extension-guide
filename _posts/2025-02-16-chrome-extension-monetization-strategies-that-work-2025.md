@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Monetization Strategies That Actually Work in 2025"
 description: "Proven monetization strategies for Chrome extensions. Freemium, subscriptions, one-time purchases, sponsorships, and affiliate models with real revenue numbers."
 date: 2025-02-16
+last_modified_at: 2025-02-16
 categories: [guides, monetization]
 tags: [extension-monetization, chrome-extension-revenue, freemium-model, subscription-extensions, extension-business]
 author: theluckystrike

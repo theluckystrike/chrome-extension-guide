@@ -3,6 +3,7 @@ layout: post
 title: "Build a QR Code Generator Chrome Extension: Complete Developer Guide"
 description: "Learn how to create a powerful qr code generator extension from scratch. This comprehensive tutorial covers manifest v3, JavaScript implementation, UI design, and publishing your qr chrome extension to the Chrome Web Store."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "qr code generator extension, qr chrome extension, create qr code extension, qr code chrome extension, chrome extension qr code generator"

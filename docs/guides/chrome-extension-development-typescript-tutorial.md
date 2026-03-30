@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Development Tutorial with TypeScript: Complete Guide for 2026"
 description: "Learn how to build Chrome extensions with TypeScript in 2026. This comprehensive tutorial covers manifest configuration, content scripts, background service workers, popup design, and modern development workflows."
 permalink: /guides/chrome-extension-development-typescript-tutorial/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Development Tutorial with TypeScript: Complete Guide for 2026

@@ -3,6 +3,7 @@ layout: default
 title: "The Ultimate Chrome Extension Development Guide (2026). From Zero to Published"
 description: "Learn how to build Chrome extensions from scratch with this comprehensive 2026 guide covering Manifest V3, content scripts, background workers, popup UI, storage, messaging, testing, and publishing."
 canonical_url: "https://bestchromeextensions.com/guides/ultimate-getting-started-guide/"
+last_modified_at: 2026-01-15
 ---
 
 The Ultimate Chrome Extension Development Guide (2026). From Zero to Published

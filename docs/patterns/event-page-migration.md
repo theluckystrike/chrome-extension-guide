@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Event Page Migration. Best Practices"
 description: "Migrate from persistent background pages to event pages (service workers) with this comprehensive guide."
 canonical_url: "https://bestchromeextensions.com/patterns/event-page-migration/"
+last_modified_at: 2026-01-15
 ---
 
 Event Page to Service Worker Migration Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension DOM Manipulation Guide: Master Content Script DOM Access"
 description: "Learn how to manipulate DOM in Chrome extensions using content scripts. This comprehensive guide covers DOM manipulation extension techniques, modifying page content, and best practices for content script DOM operations in Manifest V3."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "dom manipulation extension, modify page chrome extension, content script dom, chrome extension dom manipulation, manipulate webpage chrome extension"

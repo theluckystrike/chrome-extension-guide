@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Web Store Screenshots Guide: Create Listings That Convert"
 description: "Learn how to create compelling Chrome extension screenshots that drive installs. Discover best practices for store listing design, image optimization, and conversion strategies."
 date: 2025-03-03
+last_modified_at: 2025-03-03
 categories: [Chrome-Extensions, Marketing]
 tags: [chrome-web-store, screenshots, marketing]
 keywords: "chrome web store screenshots, chrome extension screenshots, extension store listing design, chrome web store images, chrome extension promotional images"

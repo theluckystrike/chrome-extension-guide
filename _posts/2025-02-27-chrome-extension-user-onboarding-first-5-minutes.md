@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension User Onboarding. The First 5 Minutes That Matter Most"
 description: "Design an onboarding flow that retains users. Welcome pages, permission requests, feature tours, and activation metrics for Chrome extension success."
 date: 2025-02-27
+last_modified_at: 2025-02-27
 categories: [guides, ux]
 tags: [user-onboarding, extension-ux, retention, activation, chrome-extension-design]
 author: theluckystrike

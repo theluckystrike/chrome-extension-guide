@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Popup Data Loading. Best Practices"
 description: "Optimize data loading patterns for extension popups."
 canonical_url: "https://bestchromeextensions.com/patterns/popup-data-loading/"
+last_modified_at: 2026-01-15
 ---
 
 Popup Data Loading Patterns

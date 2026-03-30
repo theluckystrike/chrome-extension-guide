@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension GitHub Integration: Complete Tutorial for 2025"
 description: "Learn how to build powerful Chrome extensions that integrate with GitHub API. This comprehensive tutorial covers authentication, repository management, issue tracking, and best practices for Manifest V3 extensions."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "chrome extension github api, github chrome extension, chrome extension github integration, github api chrome extension, manifest v3 github"

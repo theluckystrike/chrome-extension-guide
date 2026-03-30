@@ -3,6 +3,7 @@ layout: post
 title: "Build a GitHub Productivity Chrome Extension: Enhance Your Developer Workflow"
 description: "Learn how to build a powerful GitHub productivity Chrome extension from scratch. This comprehensive guide covers manifest setup, API integration, content scripts, and best practices for creating developer tools that speed up your GitHub workflow."
 date: 2025-04-08
+last_modified_at: 2025-04-08
 categories: [Chrome-Extensions, Tutorials]
 tags: [github, developer-tools, chrome-extension]
 keywords: "chrome extension github, github chrome extension build, github productivity extension, chrome extension github tools, developer chrome extension github"

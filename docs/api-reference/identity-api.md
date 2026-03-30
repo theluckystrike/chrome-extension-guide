@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Identity API Complete Reference"
 description: "The Chrome Identity API provides OAuth2 and OpenID Connect authentication for extensions, enabling access to Google APIs and third-party services with built-in token management."
 canonical_url: "https://bestchromeextensions.com/api-reference/identity-api/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.identity API Reference

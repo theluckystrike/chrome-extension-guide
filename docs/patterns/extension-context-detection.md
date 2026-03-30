@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Context Detection. Best Practices"
 description: "Detect execution context in Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-context-detection/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Context Detection

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension User Scripts Patterns. Best Practices"
 description: "Manage and inject user scripts with the User Scripts API."
 canonical_url: "https://bestchromeextensions.com/patterns/user-scripts-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 UserScripts API Patterns (Chrome 120+)

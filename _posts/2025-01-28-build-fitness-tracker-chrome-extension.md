@@ -3,6 +3,7 @@ layout: post
 title: "Build a Fitness Tracker Chrome Extension: Complete Development Guide"
 description: "Learn how to build a fitness tracker Chrome extension from scratch. This comprehensive guide covers workout logging, exercise tracking, and creating a Chrome extension that helps users monitor their fitness journey."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "fitness tracker extension, workout log chrome, exercise extension, chrome extension fitness tracker, workout tracking extension"

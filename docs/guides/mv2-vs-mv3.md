@@ -3,6 +3,7 @@ layout: default
 title: "Manifest V2 vs V3. Complete Comparison for Chrome Extension Developers"
 description: "A comprehensive comparison of Manifest V2 vs V3 for Chrome extension developers. Learn about service workers, declarativeNetRequest, breaking changes, and migration strategies."
 canonical_url: "https://bestchromeextensions.com/guides/mv2-vs-mv3/"
+last_modified_at: 2026-01-15
 ---
 
 Manifest V2 vs V3. Complete Comparison for Chrome Extension Developers

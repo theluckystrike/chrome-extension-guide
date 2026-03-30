@@ -3,6 +3,7 @@ layout: post
 title: "Build an Accessibility Overlay Chrome Extension: Complete 2025 Tutorial"
 description: "Learn how to build a powerful accessibility overlay Chrome extension from scratch. This comprehensive guide covers WCAG compliance, a11y checker tools, and creating an accessibility overlay extension that helps users identify and fix accessibility issues on any website."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "accessibility overlay extension, a11y checker chrome, wcag overlay extension, chrome accessibility tool, web accessibility checker"

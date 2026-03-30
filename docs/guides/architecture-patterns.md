@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Architecture Patterns. Developer Guide"
 description: "Learn Chrome extension architecture patterns with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/architecture-patterns/"
+last_modified_at: 2026-01-15
 ---
 Extension Architecture Patterns
 

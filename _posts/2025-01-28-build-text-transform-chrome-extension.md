@@ -3,6 +3,7 @@ layout: post
 title: "Build a Text Transform Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a text transform Chrome extension from scratch. This comprehensive guide covers case conversion, text formatting, and utility extensions using Manifest V3 with practical code examples."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "text transform extension, case converter chrome, text formatter, chrome extension text manipulation, uppercase lowercase converter extension, chrome extension utility"

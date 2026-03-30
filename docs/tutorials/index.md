@@ -2,6 +2,7 @@
 title: "Chrome Extension Tutorials. Step by Step"
 slug: /tutorials/
 description: "Hands-on tutorials for building Chrome extensions from scratch. Follow step-by-step guides to create bookmark managers, password managers, productivity tools, and more."
+last_modified_at: 2026-01-15
 ---
 
 # Chrome Extension Tutorials. Step by Step

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension E2e Testing Patterns. Best Practices"
 description: "End-to-end testing patterns for Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/e2e-testing-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 End-to-End Testing Patterns for Chrome Extensions

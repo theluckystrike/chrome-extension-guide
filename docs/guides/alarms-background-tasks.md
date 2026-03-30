@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Alarms API. How to Schedule Background Tasks in MV3"
 description: "Master the Chrome Alarms API for scheduling background tasks in Manifest V3 extensions. Learn about periodic tasks, service worker lifecycle management, and offscreen documents."
 canonical_url: "https://bestchromeextensions.com/guides/alarms-background-tasks/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Alarms API. How to Schedule Background Tasks in MV3

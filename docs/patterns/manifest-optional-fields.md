@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Manifest Optional Fields. Best Practices"
 description: "Explore optional manifest.json fields for enhanced extension functionality."
 canonical_url: "https://bestchromeextensions.com/patterns/manifest-optional-fields/"
+last_modified_at: 2026-01-15
 ---
 
 Optional Manifest.json Fields

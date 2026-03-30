@@ -3,6 +3,7 @@ layout: post
 title: "Build a Window Resizer Chrome Extension for Responsive Design"
 description: "Learn how to build a window resizer Chrome extension for responsive design testing. Complete guide covering Manifest V3, popup UI, window management API, and best practices for browser resize extensions."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [tutorials, chrome-extensions]
 tags: [window resizer extension, resize browser chrome, responsive design extension, chrome extension development, chrome extension manifest v3, window management api, browser resize tool, responsive testing tool]
 keywords: "window resizer extension, resize browser chrome, responsive design extension, chrome extension window management, browser resize tool, responsive testing chrome extension, manifest v3 window api, chrome extension development guide"

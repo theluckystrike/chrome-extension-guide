@@ -6,6 +6,7 @@ permalink: /permissions/commands/
 category: permissions
 order: 7
 canonical_url: "https://bestchromeextensions.com/permissions/commands/"
+last_modified_at: 2026-01-15
 ---
 
 commands (Manifest Key)

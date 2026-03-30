@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension with React or Preact. How to Build Modern Extension UIs"
 description: "A comprehensive guide to building Chrome extensions with React and Preact, covering popup development, options pages, content script injection, state management, and bundle optimization."
 canonical_url: "https://bestchromeextensions.com/guides/react-preact-extension/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension with React or Preact. How to Build Modern Extension UIs

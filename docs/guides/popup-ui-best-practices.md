@@ -1,6 +1,7 @@
 ---
 title: Chrome Extension Popup UI. Design Patterns and Best Practices
 description: A comprehensive guide to building high-quality popup UIs for Chrome extensions
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Popup UI. Design Patterns and Best Practices

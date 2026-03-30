@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Permissions detailed look. Optional Permissions & Escalation UX"
 description: "Master Chrome extension permissions with this comprehensive guide covering optional permissions, permission escalation patterns, user experience best practices, and manifest V3 compliance."
 canonical_url: "https://bestchromeextensions.com/guides/extension-permissions-deep detailed look/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Permissions detailed look. Optional Permissions & Escalation UX
 

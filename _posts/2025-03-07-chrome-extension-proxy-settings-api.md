@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Proxy Settings API: Build a VPN-Like Extension"
 description: "Learn how to use the Chrome Proxy Settings API to build powerful VPN-like extensions. Master network proxy configuration, handle proxy authentication, and create privacy-focused browser tools."
 date: 2025-03-07
+last_modified_at: 2025-03-07
 categories: [Chrome-Extensions, APIs]
 tags: [proxy, network, chrome-extension]
 keywords: "chrome extension proxy, chrome proxy API, proxy settings chrome extension, build vpn chrome extension, chrome extension network proxy"

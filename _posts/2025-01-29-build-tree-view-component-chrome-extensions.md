@@ -3,6 +3,7 @@ layout: post
 title: "Build a Tree View Component for Chrome Extensions: Complete Guide"
 description: "Learn how to build a tree view component for Chrome extensions with nested list functionality. Complete guide covering hierarchy display, recursive rendering, expand/collapse animations, and best practices for UI development in Chrome extensions."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui]
 keywords: "tree view extension, hierarchy display chrome, nested list component, chrome extension tree view, recursive tree component, expandable tree chrome extension"

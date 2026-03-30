@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Permissions Model. Developer Guide"
 description: "Manage Chrome extension permissions with this guide covering manifest declarations, optional permissions, and security best practices."
 canonical_url: "https://bestchromeextensions.com/guides/permissions-model/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Permissions Model
 

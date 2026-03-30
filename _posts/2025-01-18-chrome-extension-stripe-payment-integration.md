@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Stripe-integration) Payment-integration) Integration Guide"
 description: "Learn how to integrate Stripe-integration) payments-integration) into your Chrome extension. This comprehensive guide covers monetization strategies, in-extension purchases, subscription-model) handling, and best practices for implementing secure payment-integration) flows."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [tutorials, chrome-extensions, monetization]
 tags: [chrome extension payment-integration), stripe-integration) chrome extension, monetize extension payments-integration), in-extension purchases, payment-integration) integration, stripe-integration), monetization]
 keywords: "chrome extension payment-integration), stripe-integration) chrome extension, monetize extension payments-integration), in-extension purchases, chrome extension stripe-integration) integration, chrome extension monetization, stripe-integration) subscriptions chrome"

@@ -3,6 +3,7 @@ layout: post
 title: "Image Manipulation in Chrome Extensions: Canvas API and Processing Guide"
 description: "Master image manipulation in Chrome extensions with our comprehensive Canvas API guide. Learn to resize, filter, and process images efficiently for powerful extensions."
 date: 2025-03-27
+last_modified_at: 2025-03-27
 categories: [Chrome-Extensions, Media]
 tags: [canvas, image-processing, chrome-extension]
 keywords: "chrome extension image manipulation, canvas API chrome extension, image processing extension, resize image chrome extension, chrome extension canvas"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension User Scripts Api. Best Practices"
 description: "Use the User Scripts API for user-defined scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/user-scripts-api/"
+last_modified_at: 2026-01-15
 ---
 
 User Scripts API Patterns

@@ -6,6 +6,7 @@ permalink: /permissions/scripting/
 category: permissions
 order: 35
 canonical_url: "https://bestchromeextensions.com/permissions/scripting/"
+last_modified_at: 2026-01-15
 ---
 
 scripting Permission Reference

@@ -2,6 +2,7 @@
 layout: guide
 title: Chrome Extension A/B Testing. How to Test Features and Optimize Conversions
 description: Learn how to implement A/B testing in Chrome extensions to experiment with features, optimize user experience, and make data-driven development decisions.
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension A/B Testing. How to Test Features and Optimize Conversions

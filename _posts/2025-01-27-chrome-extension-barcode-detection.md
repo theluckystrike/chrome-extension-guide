@@ -3,6 +3,7 @@ layout: post
 title: "Complete Guide to Barcode Detection API in Chrome Extensions"
 description: "Learn how to build a powerful barcode scanner extension using the Barcode Detection API in Chrome. This comprehensive guide covers QR code reading, barcode formats, implementation best practices, and real-world examples for Chrome extensions."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "barcode scanner extension, qr reader chrome, barcode api extension"

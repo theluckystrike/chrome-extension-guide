@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Built-in AI APIs. Developer Guide"
 description: "Learn how to use the Chrome Extension Chrome Built In Ais API with this developer guide covering methods, permissions, and implementation examples."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-built-in-ai-apis/"
+last_modified_at: 2026-01-15
 ---
 Chrome Built-in AI APIs
 

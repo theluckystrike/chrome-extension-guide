@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Event Driven Messaging. Best Practices"
 description: "Design event-driven architectures for extension components."
 canonical_url: "https://bestchromeextensions.com/patterns/event-driven-messaging/"
+last_modified_at: 2026-01-15
 ---
 
 Event-Driven Messaging Patterns

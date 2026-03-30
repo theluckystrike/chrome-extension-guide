@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Background Service Workers. Developer Guide"
 description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
 canonical_url: "https://bestchromeextensions.com/guides/background-patterns/"
+last_modified_at: 2026-01-15
 ---
 Background Service Worker Patterns
 

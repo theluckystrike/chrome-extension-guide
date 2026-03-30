@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Migration Checklist. Manifest V3 Guide"
 description: "Checklist for migrating Chrome extensions from Manifest V2 to V3."
 canonical_url: "https://bestchromeextensions.com/mv3/migration-checklist/"
+last_modified_at: 2026-01-15
 ---
 
 MV2 to MV3 Migration Checklist

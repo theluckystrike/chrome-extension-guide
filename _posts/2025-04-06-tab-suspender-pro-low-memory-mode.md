@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Low Memory Mode: Emergency RAM Recovery"
 description: "Discover Tab Suspender Pro Low Memory Mode for emergency RAM recovery. Learn how chrome low memory mode prevents crashes and optimizes browser performance."
 date: 2025-04-06
+last_modified_at: 2025-04-06
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, low-memory, emergency]
 keywords: "tab suspender pro low memory, chrome low memory mode, emergency tab suspension, chrome out of memory fix, tab suspender ram recovery"

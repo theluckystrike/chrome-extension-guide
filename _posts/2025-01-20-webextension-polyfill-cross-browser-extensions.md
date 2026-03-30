@@ -3,6 +3,7 @@ layout: post
 title: "WebExtension Polyfill for Cross-Browser Extensions: Complete Guide 2025"
 description: "Learn how to use WebExtension Polyfill to create extensions that work smoothly across Chrome, Firefox, Safari, and Edge. Master cross-browser extension development with practical examples and best practices."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "webextension polyfill, cross browser extension, firefox chrome extension, browser extension compatibility, extension development cross browser"

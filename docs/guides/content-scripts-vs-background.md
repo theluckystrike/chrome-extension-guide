@@ -3,6 +3,7 @@ layout: default
 title: "Content Scripts vs Background Workers. When to Use Each"
 description: "Complete comparison of content scripts vs background service workers in Chrome extensions. Learn when to use each, communication patterns, use cases, and best practices for extension architecture."
 canonical_url: "https://bestchromeextensions.com/guides/content-scripts-vs-background/"
+last_modified_at: 2026-01-15
 ---
 
 Content Scripts vs Background Workers. When to Use Each

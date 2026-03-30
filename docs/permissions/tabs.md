@@ -6,6 +6,7 @@ permalink: /permissions/tabs/
 category: permissions
 order: 43
 canonical_url: "https://bestchromeextensions.com/permissions/tabs/"
+last_modified_at: 2026-01-15
 ---
 
 tabs Permission Reference

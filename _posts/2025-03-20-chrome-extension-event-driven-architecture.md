@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Event-Driven Architecture: Efficient Resource Usage"
 description: "Master chrome extension event-driven architecture in 2025. Learn how event pages work, implement lifecycle events, optimize resource usage with chrome extension events, and build efficient extensions that save memory and battery."
 date: 2025-03-20
+last_modified_at: 2025-03-20
 categories: [Chrome-Extensions, Architecture]
 tags: [events, architecture, chrome-extension]
 keywords: "chrome extension event driven, chrome extension events, event page chrome extension, chrome extension lifecycle events, efficient chrome extension"

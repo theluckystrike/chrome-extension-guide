@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro: The Ultimate Guide to Managing Chrome Tabs and Saving Memory"
 description: "The complete guide to Tab Suspender Pro for Chrome. Learn how it works, key features, installation, configuration, use cases for developers, students, researchers, and remote workers, plus FAQ and troubleshooting."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [guides, tools]
 tags: [tab-suspender-pro, chrome-extensions, browser-performance, tab-management, memory-optimization, productivity]
 author: theluckystrike

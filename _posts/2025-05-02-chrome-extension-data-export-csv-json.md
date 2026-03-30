@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Data Export: Generate CSV and JSON Files from Webpages"
 description: "Learn how to build a chrome extension to export data to CSV and JSON formats. Complete guide covering web scraping, data extraction, and file generation in Chrome."
 date: 2025-05-02
+last_modified_at: 2025-05-02
 categories: [Chrome-Extensions, Data]
 tags: [export, csv, chrome-extension]
 keywords: "chrome extension export data, export to csv chrome, chrome extension generate json, web scraping export chrome, download data chrome extension"

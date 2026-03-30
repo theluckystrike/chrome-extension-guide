@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Commands API: Define Global Keyboard Shortcuts"
 description: "Master the Chrome Extension Commands API to create global keyboard shortcuts for your extension. Learn implementation, best practices, and how to enhance user productivity with the chrome.commands API."
 date: 2025-03-14
+last_modified_at: 2025-03-14
 categories: [Chrome-Extensions, APIs]
 tags: [commands, keyboard-shortcuts, chrome-extension]
 keywords: "chrome extension commands API, chrome extension keyboard shortcuts, global hotkey chrome extension, chrome.commands API, extension shortcut keys"

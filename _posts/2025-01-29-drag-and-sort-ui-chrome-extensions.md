@@ -3,6 +3,7 @@ layout: post
 title: "Drag and Sort UI in Chrome Extensions: Complete Implementation Guide"
 description: "Master drag sort extension UI patterns for Chrome. Learn how to implement reorder list chrome functionality, build sortable interface extension components, and create intuitive drag-and-drop experiences users love."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "drag sort extension, reorder list chrome, sortable interface extension"

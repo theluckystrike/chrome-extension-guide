@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Ab Testing. Best Practices"
 description: "Implement A/B testing patterns for Chrome extensions to experiment with features."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-ab-testing/"
+last_modified_at: 2026-01-15
 ---
 
 A/B Testing Patterns for Chrome Extensions

@@ -3,6 +3,7 @@ layout: default
 title: "Mastering Content Scripts in Chrome Extensions. Developer Guide"
 description: "A comprehensive guide to mastering content scripts in Chrome extensions: injection methods, isolated worlds, DOM access patterns, CSS injection, run_at timing, matching patterns, dynamic registration, page context communication, and shadow DOM interaction."
 canonical_url: "https://bestchromeextensions.com/tutorials/content-scripts-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Mastering Content Scripts in Chrome Extensions

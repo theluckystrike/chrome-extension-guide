@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices"
 description: "A comprehensive developer guide to building WCAG-compliant Chrome extensions with proper ARIA roles, keyboard navigation, screen reader support, focus management, and accessibility testing."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-accessibility-a11y/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices

@@ -3,6 +3,7 @@ layout: post
 title: "React Query in Chrome Extensions: Complete Data Fetching Guide for 2025"
 description: "Master React Query in Chrome Extensions with our comprehensive 2025 guide. Learn TanStack Query for extension data fetching, state management, caching strategies, and build powerful data-driven extensions."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "react query chrome extension, data fetching extension, tanstack query extension"

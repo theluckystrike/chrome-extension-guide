@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Debugging Guide. DevTools Tips and Tricks"
 description: "Master Chrome extension debugging with this comprehensive guide covering DevTools, service worker inspection, content script debugging, and advanced troubleshooting techniques."
 canonical_url: "https://bestchromeextensions.com/guides/debugging-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Debugging Guide. DevTools Tips and Tricks

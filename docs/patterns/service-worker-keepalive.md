@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Service Worker Keepalive. Best Practices"
 description: "Keep service workers alive for long-running operations."
 canonical_url: "https://bestchromeextensions.com/patterns/service-worker-keepalive/"
+last_modified_at: 2026-01-15
 ---
 
 Service Worker Keep-Alive Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Price Tracker Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a price tracker Chrome extension from scratch. This comprehensive guide covers Manifest V3, price monitoring, alert notifications, and publishing to the Chrome Web Store."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "price tracker extension, price alert chrome, amazon price tracker"

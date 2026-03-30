@@ -3,6 +3,7 @@ layout: post
 title: "Build a Lorem Ipsum Generator Chrome Extension: Complete Guide"
 description: "Learn how to build a Lorem Ipsum Generator Chrome Extension from scratch. This comprehensive guide covers Manifest V3, popup UI, content generation logic, and publishing your extension to the Chrome Web Store."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "lorem ipsum extension, placeholder text chrome, content filler, build chrome extension, chrome extension development tutorial"

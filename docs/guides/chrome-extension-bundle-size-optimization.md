@@ -4,6 +4,7 @@ title: "Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and C
 description: "Master Chrome extension bundle size optimization with tree-shaking, code splitting, and compression techniques. Learn webpack, vite, and rollup configurations to stay under Chrome Web Store limits."
 canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-bundle-size-optimization/"
 proficiency_level: "Intermediate"
+last_modified_at: 2026-01-15
 ---
 
 Reduce Chrome Extension Bundle Size: Tree-Shaking, Code Splitting, and Compression

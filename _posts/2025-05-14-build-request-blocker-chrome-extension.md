@@ -3,6 +3,7 @@ layout: post
 title: "Build a Request Blocker Chrome Extension: Block Trackers and Unwanted Scripts"
 description: "Learn how to build a request blocker Chrome extension to block trackers, ads, and unwanted scripts. A complete guide with code examples and implementation details."
 date: 2025-05-14
+last_modified_at: 2025-05-14
 categories: [Chrome-Extensions, Privacy]
 tags: [request-blocker, privacy, chrome-extension]
 keywords: "chrome extension request blocker, block trackers chrome, script blocker chrome extension, request filter extension, chrome extension block scripts"

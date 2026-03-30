@@ -3,6 +3,7 @@ layout: post
 title: "Build a Content Blocker Chrome Extension: Complete Developer's Guide"
 description: "Learn how to build a content blocker Chrome extension with our comprehensive developer's guide. Master element hiding, page cleaning, and create powerful content filtering extensions using Manifest V3."
 date: 2025-01-20
+last_modified_at: 2025-01-20
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "content blocker extension, element hider chrome, page cleaner extension, chrome content blocker tutorial, build ad blocker chrome extension"

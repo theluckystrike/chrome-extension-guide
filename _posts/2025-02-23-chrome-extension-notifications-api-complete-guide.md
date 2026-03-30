@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Notifications API: Push Alerts and Desktop Notifications Guide"
 description: "Learn to implement push alerts and desktop notifications in Chrome extensions with this complete developer guide. Master the Notifications API for engaging user experiences."
 date: 2025-02-23
+last_modified_at: 2025-02-23
 categories: [Chrome-Extensions, APIs]
 tags: [notifications, chrome-extension, tutorial]
 keywords: "chrome extension notifications, chrome notifications API, desktop notifications chrome extension, push notification chrome extension"

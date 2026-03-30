@@ -3,6 +3,7 @@ layout: post
 title: "Build a Recipe Saver Chrome Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a recipe saver Chrome extension from scratch. This comprehensive guide covers manifest V3, recipe extraction, data storage, and cooking extension development for creating powerful recipe management tools."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "recipe saver extension, save recipes chrome, cooking extension, chrome extension recipe, build recipe saver, manifest v3, recipe management"

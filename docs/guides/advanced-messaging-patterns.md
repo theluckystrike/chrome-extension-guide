@@ -3,6 +3,7 @@ layout: default
 title: "Advanced Chrome Extension Messaging Patterns. Developer Guide"
 description: "Master advanced Chrome extension messaging patterns including port-based connections, typed protocols, error handling, and performance optimization for production extensions."
 canonical_url: "https://bestchromeextensions.com/guides/advanced-messaging-patterns/"
+last_modified_at: 2026-01-15
 ---
 Advanced Messaging Patterns in Chrome Extensions
 

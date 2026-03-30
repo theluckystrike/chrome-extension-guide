@@ -3,6 +3,7 @@ layout: post
 title: "CI/CD for Chrome Extensions with GitHub Actions: Complete 2025 Guide"
 description: "Learn how to automate your Chrome extension deployment with GitHub Actions. This comprehensive guide covers continuous integration, automated testing, build pipelines, and one-click deployment to the Chrome Web Store."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, guide]
 keywords: "chrome extension github actions, ci cd extension deployment, automated chrome extension build, github actions chrome web store"

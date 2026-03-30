@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Font Settings Api. Best Practices"
 description: "Access and modify user font settings with the Font Settings API."
 canonical_url: "https://bestchromeextensions.com/patterns/font-settings-api/"
+last_modified_at: 2026-01-15
 ---
 
 Font Settings API in Chrome Extensions

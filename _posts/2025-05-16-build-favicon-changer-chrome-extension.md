@@ -3,6 +3,7 @@ layout: post
 title: "Build a Favicon Changer Chrome Extension: Customize Tab Icons"
 description: "Learn how to build a Chrome extension that changes favicons dynamically. This tutorial covers Manifest V3, the Favicon API, and creating a custom tab icon changer."
 date: 2025-05-16
+last_modified_at: 2025-05-16
 categories: [Chrome-Extensions, Tutorials]
 tags: [favicon, customization, chrome-extension]
 keywords: "chrome extension favicon, change favicon chrome, custom tab icon extension, build favicon extension, chrome extension tab icon"

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Password Strength Checker Extension: Complete Tutorial"
 description: "Learn how to build a password strength extension, password security checker, and password analyzer Chrome extension with this step-by-step tutorial. Protect users with real-time password analysis."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "password strength extension, password security checker, password analyzer chrome, build password strength checker chrome extension"

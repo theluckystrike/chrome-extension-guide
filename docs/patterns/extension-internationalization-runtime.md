@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Extension Internationalization Runtime. Best Practices"
 description: "Implement runtime internationalization for dynamic translations."
 canonical_url: "https://bestchromeextensions.com/patterns/extension-internationalization-runtime/"
+last_modified_at: 2026-01-15
 ---
 
 Runtime Internationalization Patterns

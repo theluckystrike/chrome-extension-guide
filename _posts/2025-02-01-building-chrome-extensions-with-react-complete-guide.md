@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with React. Complete Developer Guide (2025)"
 description: "Step-by-step guide to building Chrome extensions with React. Covers project setup, popup UI, content scripts, state management, hot reload, and production."
 date: 2025-02-01
+last_modified_at: 2025-02-01
 categories: [tutorials, frameworks]
 tags: [react, chrome-extension, react-chrome-extension, popup-ui, content-scripts]
 author: theluckystrike

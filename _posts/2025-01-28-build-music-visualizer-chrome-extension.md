@@ -3,6 +3,7 @@ layout: post
 title: "Build a Music Visualizer Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a music visualizer Chrome extension from scratch. This comprehensive guide covers audio visualization techniques, waveform rendering, and Manifest V3 implementation for creating stunning audio-reactive extensions."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "music visualizer extension, audio visualization chrome, waveform extension"

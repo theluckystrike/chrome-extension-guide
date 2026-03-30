@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Command Palette. Best Practices"
 description: "Build command palettes for quick access to features."
 canonical_url: "https://bestchromeextensions.com/patterns/command-palette/"
+last_modified_at: 2026-01-15
 ---
 
 Command Palette Pattern

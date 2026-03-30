@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Dynamic Content Scripts. Manifest V3 Guide"
 description: "Register and manage content scripts dynamically at runtime with chrome.scripting API in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/dynamic-content-scripts/"
+last_modified_at: 2026-01-15
 ---
 
 Dynamic Content Scripts in MV3

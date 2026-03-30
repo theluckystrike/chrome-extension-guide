@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Windows API: Manage Browser Windows Programmatically"
 description: "Master the Chrome Extension Windows API to programmatically create, modify, and manage browser windows. Learn chrome.windows methods for powerful extension development."
 date: 2025-03-18
+last_modified_at: 2025-03-18
 categories: [Chrome-Extensions, APIs]
 tags: [windows, chrome-extension, tutorial]
 keywords: "chrome extension windows API, chrome.windows, manage browser windows extension, open window chrome extension, chrome extension popup window"

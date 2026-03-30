@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Scripting API: Programmatic Script and CSS Injection. Developer Guide"
 description: "A comprehensive guide to the Chrome Scripting API: executeScript, insertCSS/removeCSS, registerContentScripts, world targeting, injection targets, and migrating from MV2."
 canonical_url: "https://bestchromeextensions.com/tutorials/scripting-api-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Scripting API: Programmatic Script and CSS Injection

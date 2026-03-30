@@ -3,6 +3,7 @@ layout: post
 title: "Error Monitoring Chrome Extensions with Sentry: Complete Setup Guide"
 description: "Learn how to implement error monitoring in Chrome extensions using Sentry. This guide covers setup, configuration, best practices, and advanced features for reliable crash reporting."
 date: 2025-04-26
+last_modified_at: 2025-04-26
 categories: [Chrome-Extensions, Monitoring]
 tags: [sentry, monitoring, chrome-extension]
 keywords: "chrome extension sentry, error monitoring extension, sentry chrome extension, crash reporting extension, chrome extension error tracking"

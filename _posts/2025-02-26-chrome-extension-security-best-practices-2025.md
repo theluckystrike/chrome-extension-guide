@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Security Best Practices: Protect Your Users in 2025"
 description: "Master chrome extension security in 2025 with our comprehensive guide. Learn to protect users from vulnerabilities, implement secure permissions, configure CSP, and follow extension security best practices for safe browsing."
 date: 2025-02-26
+last_modified_at: 2025-02-26
 categories: [Chrome-Extensions, Security]
 tags: [security, best-practices, chrome-extension]
 keywords: "chrome extension security, secure chrome extension, chrome extension vulnerabilities, extension security best practices, chrome extension permissions security"

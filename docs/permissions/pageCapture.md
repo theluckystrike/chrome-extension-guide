@@ -6,6 +6,7 @@ permalink: /permissions/pageCapture/
 category: permissions
 order: 28
 canonical_url: "https://bestchromeextensions.com/permissions/pageCapture/"
+last_modified_at: 2026-01-15
 ---
 
 pageCapture Permission

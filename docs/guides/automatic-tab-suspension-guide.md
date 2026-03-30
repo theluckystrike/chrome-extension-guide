@@ -3,6 +3,7 @@ layout: default
 title: "Automatic Tab Suspension in Chrome: Complete Setup Guide for 2026"
 description: "Master automatic tab suspension in Chrome. Configure freeze timers, whitelists, and visual indicators to save memory and extend battery life."
 permalink: /guides/automatic-tab-suspension-guide/
+last_modified_at: 2026-01-15
 ---
 
 Automatic Tab Suspension in Chrome: Complete Setup Guide

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Website Theme Editor Chrome Extension: Customize Any Site"
 description: "Learn how to build a powerful website theme editor Chrome extension that lets users customize colors, fonts, and styles on any website. Complete 2025 guide with code examples and best practices."
 date: 2025-04-07
+last_modified_at: 2025-04-07
 categories: [Chrome-Extensions, Tutorials]
 tags: [theme-editor, css, chrome-extension]
 keywords: "chrome extension theme editor, customize website chrome extension, css editor chrome extension, website theme chrome extension, change website colors extension"

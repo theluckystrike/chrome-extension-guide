@@ -6,6 +6,7 @@ permalink: /permissions/declarativeNetRequest/
 category: permissions
 order: 13
 canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequest/"
+last_modified_at: 2026-01-15
 ---
 
 declarativeNetRequest Permission. Chrome Extension Reference

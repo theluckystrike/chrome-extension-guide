@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension vs Electron App: Which Should You Build?"
 description: "Discover whether to build a chrome extension or electron app in 2025. Compare development complexity, distribution, capabilities, and find the perfect fit for your project."
 date: 2025-04-04
+last_modified_at: 2025-04-04
 categories: [Chrome-Extensions, Comparisons]
 tags: [electron, desktop-apps, comparison]
 keywords: "chrome extension vs electron, electron or chrome extension, desktop app vs chrome extension, chrome extension vs desktop app, should I build extension or app"

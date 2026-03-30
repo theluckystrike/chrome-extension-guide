@@ -3,6 +3,7 @@ layout: default
 title: "Building Popup and Options Pages for Chrome Extensions"
 description: "A comprehensive tutorial covering popup vs options page differences, popup lifecycle, options page types, UI frameworks, responsive design, settings storage, and dark mode support."
 canonical_url: "https://bestchromeextensions.com/tutorials/popup-and-options-pages/"
+last_modified_at: 2026-01-15
 ---
 
 Building Popup and Options Pages for Chrome Extensions

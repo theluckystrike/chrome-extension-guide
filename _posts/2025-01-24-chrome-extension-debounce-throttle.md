@@ -3,6 +3,7 @@ layout: post
 title: "Mastering Debounce and Throttle in Chrome Extensions - Complete Guide"
 description: "Learn how to implement debounce and throttle techniques in Chrome extensions to optimize event handling, reduce resource consumption, and improve performance. Includes practical code examples and best practices."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [Chrome-Extensions, Performance]
 tags: [chrome-extension, optimization]
 author: theluckystrike

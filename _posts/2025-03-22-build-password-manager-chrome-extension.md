@@ -3,6 +3,7 @@ layout: post
 title: "Build a Password Manager Chrome Extension: Security-First Approach"
 description: "Learn how to build a secure password manager Chrome extension from scratch. This comprehensive guide covers encryption, secure storage, credential autofill, and security-first architecture for protecting user passwords."
 date: 2025-03-22
+last_modified_at: 2025-03-22
 categories: [Chrome-Extensions, Security]
 tags: [password-manager, security, chrome-extension]
 keywords: "chrome extension password manager, build password manager extension, secure password chrome extension, credential manager chrome, password vault extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Landing Page. Convert Visitors to Installs"
 description: "Build a high-converting landing page for your Chrome extension. Hero sections, social proof, feature showcases, SEO, and CTA optimization for maximum installs."
 date: 2025-02-23
+last_modified_at: 2025-02-23
 categories: [guides, marketing]
 tags: [landing-page, extension-marketing, conversion-optimization, extension-website, chrome-extension-promotion]
 author: theluckystrike

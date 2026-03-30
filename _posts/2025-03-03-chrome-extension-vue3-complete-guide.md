@@ -3,6 +3,7 @@ layout: post
 title: "Build a Chrome Extension with Vue 3: Complete Tutorial for 2025"
 description: "Build Chrome extensions with Vue 3 in 2025. Complete tutorial covering project setup, popup UI, state management, and Chrome Web Store publishing."
 date: 2025-03-03
+last_modified_at: 2025-03-03
 categories: [Chrome-Extensions, Frameworks]
 tags: [vue, chrome-extension, tutorial]
 keywords: "chrome extension vue 3, vue chrome extension, build extension vue, vue 3 popup chrome extension, vue chrome extension tutorial"

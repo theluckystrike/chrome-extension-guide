@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Security Policy Errors. Troubleshooting Guide"
 description: "Resolve Content Security Policy (CSP) errors in Chrome extensions with this detailed troubleshooting guide covering common violations, manifest configuration, and workarounds."
 canonical_url: "https://bestchromeextensions.com/guides/csp-troubleshooting/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Content Security Policy Errors. Troubleshooting Guide

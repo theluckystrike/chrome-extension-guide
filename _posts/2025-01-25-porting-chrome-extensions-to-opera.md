@@ -3,6 +3,7 @@ layout: post
 title: "Porting Chrome Extensions to Opera: Complete 2025 Guide"
 description: "Learn how to port Chrome extensions to Opera with our comprehensive 2025 guide. Master opera extension development, understand opera addon compatibility, and use chromium opera extension APIs for successful cross-browser deployment."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "opera extension development, opera addon, chromium opera extension"

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Video Downloader Chrome Extension: Complete Tutorial 2025"
 description: "Learn how to build a video downloader Chrome extension from scratch. This comprehensive guide covers Manifest V3, media detection, download handling, and best practices for creating a media grabber extension."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "video downloader extension, download video chrome, media grabber extension, chrome extension tutorial, build chrome extension"

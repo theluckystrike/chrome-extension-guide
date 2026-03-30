@@ -3,6 +3,7 @@ layout: post
 title: "How to Publish a Chrome Extension on the Web Store: 2025 Step-by-Step Guide"
 description: "Learn how to publish your Chrome extension to the Web Store in 2025. This comprehensive guide covers the Chrome Developer Dashboard, submission requirements, review process, and best practices for a successful launch."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [Chrome-Extensions, Publishing]
 tags: [chrome-web-store, publishing, submission, developer-dashboard]
 keywords: "publish chrome extension, chrome web store submission, submit extension to chrome store, chrome developer dashboard guide, publish extension 2025"

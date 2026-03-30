@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Script React. Best Practices"
 description: "Integrate React with content scripts for dynamic DOM manipulation in web pages."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-react/"
+last_modified_at: 2026-01-15
 ---
 
 Integrating React into Chrome Extension Content Scripts

@@ -3,6 +3,7 @@ layout: default
 title: "How to Market Your Chrome Extension. From 0 to 10,000 Users"
 description: "Complete marketing playbook for Chrome extensions. Content marketing, Product Hunt launch, Reddit strategy, SEO, cross-promotion, and paid acquisition channels."
 date: 2025-02-18
+last_modified_at: 2025-02-18
 categories: [guides, marketing]
 tags: [extension-marketing, chrome-extension-growth, product-hunt, user-acquisition, extension-promotion]
 author: theluckystrike

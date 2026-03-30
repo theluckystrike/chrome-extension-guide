@@ -3,6 +3,7 @@ layout: post
 title: "Build a Text Expander Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a text expander Chrome extension from scratch. This comprehensive tutorial covers snippet management, typing shortcuts, keyboard automation, and Chrome extension development best practices using Manifest V3."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "text expander extension, snippet manager chrome, typing shortcuts extension, chrome extension text expansion, snippet chrome extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension DOM Inspector. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-dom-inspector/"
+last_modified_at: 2026-01-15
 ---
 Building a DOM Inspector Extension
 

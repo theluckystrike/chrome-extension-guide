@@ -3,6 +3,7 @@ layout: post
 title: "MutationObserver in Chrome Extensions: Complete Guide to DOM Change Detection"
 description: "Learn how to use MutationObserver in Chrome extensions to detect and monitor DOM changes in real-time. Master DOM change detection, monitor page changes in extension, and build dynamic content detection features."
 date: 2025-01-21
+last_modified_at: 2025-01-21
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, api]
 keywords: "mutation observer extension, dom change detection, monitor page changes extension, chrome extension mutation observer, detect DOM changes extension, observe DOM changes chrome extension"

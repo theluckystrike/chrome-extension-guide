@@ -3,6 +3,7 @@ layout: post
 title: "Sharp Image Processing in Chrome Extensions: Complete Guide for Developers"
 description: "Learn how to implement sharp image processing in Chrome extensions. Master image resize, optimization, and transformation using Sharp library for high-performance chrome extensions."
 date: 2025-01-30
+last_modified_at: 2025-01-30
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, npm-packages]
 keywords: "sharp image extension, image resize chrome, image optimization extension, sharp chrome extension, image processing chrome extension"

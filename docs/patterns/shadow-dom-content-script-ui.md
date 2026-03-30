@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Shadow Dom Content Script Ui. Best Practices"
 description: "Create isolated UI components in shadow DOM from content scripts."
 canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-content-script-ui/"
+last_modified_at: 2026-01-15
 ---
 
 Shadow DOM UI Patterns for Content Scripts

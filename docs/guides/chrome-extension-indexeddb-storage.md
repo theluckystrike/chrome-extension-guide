@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently"
 description: "Master IndexedDB for Chrome extensions. Learn efficient storage of large datasets, schema design, transactions, indexing, Dexie.js integration, offline-first patterns, and migration strategies."
 canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-indexeddb-storage/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently

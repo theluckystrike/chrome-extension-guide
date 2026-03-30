@@ -3,6 +3,7 @@ layout: post
 title: "Build a Local API Mock Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful local API mock Chrome extension that intercepts network requests, returns fake responses, and speeds up frontend development. Complete tutorial with code examples."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, Developer-Tools]
 tags: [chrome-extension, developer-tools]
 keywords: "api mock extension, mock server chrome, fake api extension, chrome extension api mock, local api mock chrome extension, mock network requests chrome extension"

@@ -3,6 +3,7 @@ layout: post
 title: "Display Capture API in Chrome Extensions: Complete Guide 2025"
 description: "Learn how to implement display capture in Chrome extensions using the getDisplayMedia API. Complete guide covering screen recording, window capture, and audio capture for Chrome extensions."
 date: 2025-01-27
+last_modified_at: 2025-01-27
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, modern-web]
 keywords: "display capture extension, screen recording chrome, getDisplayMedia extension, chrome display capture api, screen capture chrome extension"

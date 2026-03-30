@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension SEO. How to Rank Your Extension on Google Search"
 description: "Get your Chrome extension found on Google, not just the Chrome Web Store. Landing page SEO, schema markup, backlink strategies, and content marketing for extensions."
 date: 2025-02-28
+last_modified_at: 2025-02-28
 categories: [guides, seo]
 tags: [extension-seo, google-ranking, chrome-extension-marketing, search-optimization, backlinks]
 author: theluckystrike

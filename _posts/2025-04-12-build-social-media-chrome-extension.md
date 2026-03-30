@@ -3,6 +3,7 @@ layout: post
 title: "Build a Social Media Dashboard Chrome Extension: Twitter, LinkedIn, and More"
 description: "Learn how to build a powerful social media dashboard Chrome extension that integrates Twitter, LinkedIn, and other platforms. Complete guide covering API integration, Manifest V3, and best practices."
 date: 2025-04-12
+last_modified_at: 2025-04-12
 categories: [Chrome-Extensions, Tutorials]
 tags: [social-media, dashboard, chrome-extension]
 keywords: "chrome extension social media, social media dashboard extension, twitter chrome extension, linkedin chrome extension, social media tools chrome"

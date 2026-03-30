@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Memory Management. Avoid Leaks and Crashes"
 description: "Learn effective memory management techniques for Chrome extensions to prevent memory leaks, reduce crashes, and ensure stable performance."
 canonical_url: "https://bestchromeextensions.com/guides/memory-management/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Memory Management. Avoid Leaks and Crashes
 

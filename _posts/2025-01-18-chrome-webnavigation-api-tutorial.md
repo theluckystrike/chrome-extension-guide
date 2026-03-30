@@ -3,6 +3,7 @@ layout: post
 title: "Chrome WebNavigation API for Extension Developers: Complete Tutorial"
 description: "Master the Chrome WebNavigation API to track page loads, monitor navigation events, and build powerful detection extensions. Learn implementation patterns, use cases, and best practices."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome webnavigation api, page load detection extension, navigation events chrome, chrome extension navigation tracking, webnavigation api tutorial"

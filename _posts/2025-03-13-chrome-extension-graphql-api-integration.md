@@ -3,6 +3,7 @@ layout: post
 title: "Integrating GraphQL APIs in Chrome Extensions: Complete Guide"
 description: "Learn how to integrate GraphQL APIs in Chrome Extensions with this comprehensive 2025 guide. Master Apollo Client setup, popup queries, and content script data fetching for powerful extension development."
 date: 2025-03-13
+last_modified_at: 2025-03-13
 categories: [Chrome-Extensions, APIs]
 tags: [graphql, api-integration, chrome-extension]
 keywords: "chrome extension graphql, graphql chrome extension, chrome extension API integration, graphql popup chrome, apollo chrome extension"

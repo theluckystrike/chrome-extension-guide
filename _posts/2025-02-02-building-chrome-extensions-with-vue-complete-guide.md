@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Vue.js. Complete Developer Guide (2025)"
 description: "Build Chrome extensions with Vue 3 and the Composition API. Covers popup UI, content scripts, Pinia state management, production builds, and deployment."
 date: 2025-02-02
+last_modified_at: 2025-02-02
 categories: [tutorials, frameworks]
 tags: [vue, vue3, chrome-extension, vue-chrome-extension, composition-api]
 author: theluckystrike

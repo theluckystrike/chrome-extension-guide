@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Url Matching Patterns. Best Practices"
 description: "Match URLs with patterns for content script injection."
 canonical_url: "https://bestchromeextensions.com/patterns/url-matching-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 URL Matching Patterns in Chrome Extensions

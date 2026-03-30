@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Web Store Publishing Checklist: Get Your Extension Approved Fast in 2025"
 description: "Complete checklist for publishing Chrome extensions in 2025. Learn the review process, common rejection reasons, and best practices to get your extension approved quickly."
 date: 2025-02-28
+last_modified_at: 2025-02-28
 categories: [Chrome-Extensions, Publishing]
 tags: [chrome-web-store, publishing, checklist]
 keywords: "chrome web store publish, publish chrome extension, chrome extension review process, chrome web store checklist, submit chrome extension"

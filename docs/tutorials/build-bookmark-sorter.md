@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Bookmark Sorter. Developer Guide"
 description: "Learn how to build a Chrome extension with this step-by-step tutorial covering setup, implementation, and deployment."
 canonical_url: "https://bestchromeextensions.com/tutorials/build-bookmark-sorter/"
+last_modified_at: 2026-01-15
 ---
 Build a Bookmark Sorter Extension
 

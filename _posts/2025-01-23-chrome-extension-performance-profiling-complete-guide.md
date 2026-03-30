@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Performance Profiling. Find and Fix Bottlenecks"
 description: "Master Chrome DevTools for extension profiling. Learn CPU profiling, memory snapshots, network analysis, service worker lifecycle, and content script optimization."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [guides, performance]
 tags: [performance-profiling, chrome-devtools, cpu-profiling, memory-profiling, extension-debugging]
 seo_title: "Chrome Extension Performance Profiling Complete Guide | 2025"

@@ -6,6 +6,7 @@ permalink: /permissions/identity/
 category: permissions
 order: 22
 canonical_url: "https://bestchromeextensions.com/permissions/identity/"
+last_modified_at: 2026-01-15
 ---
 
 identity Permission. Chrome Extension Reference

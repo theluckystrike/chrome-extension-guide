@@ -3,6 +3,7 @@ layout: post
 title: "Build a Live Markdown Preview Chrome Extension"
 description: "Learn how to build a powerful live markdown preview chrome extension with this comprehensive guide. Create a markdown renderer extension that renders markdown in real-time as you type, complete with code highlighting and GitHub-flavored markdown support."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [guides, chrome-extensions, development-tools]
 tags: [markdown preview extension, live markdown chrome, markdown renderer extension, chrome extension development, markdown editor, markdown previewer]
 keywords: "markdown preview extension, live markdown chrome, markdown renderer extension"

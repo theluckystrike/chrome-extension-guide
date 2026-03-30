@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Localization Workflow Guide: From Setup to Publishing"
 description: "Master the complete localization workflow for Chrome extensions. Learn how to set up _locales, configure chrome i18n messages, manage translation files, and optimize your extension for global markets."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "extension localization, chrome i18n messages, _locales setup, chrome extension localization workflow, internationalize chrome extension"

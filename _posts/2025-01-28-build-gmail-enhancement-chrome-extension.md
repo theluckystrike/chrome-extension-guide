@@ -3,6 +3,7 @@ layout: post
 title: "Build a Gmail Enhancement Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful Gmail enhancement Chrome extension from scratch. This comprehensive guide covers the Gmail API, Manifest V3, content scripts, and best practices for creating email tools that boost productivity."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Integration]
 tags: [chrome-extension, integration]
 keywords: "gmail enhancer extension, email tools chrome, gmail productivity, build gmail chrome extension, gmail api chrome extension"

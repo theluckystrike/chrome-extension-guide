@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Share Target API: Receive Shared Content from Other Apps"
 description: "Learn how to use the Chrome Extension Share Target API to receive shared content from other apps. Build extensions that accept text, links, images and files shared from any application on mobile or desktop."
 date: 2025-05-10
+last_modified_at: 2025-05-10
 categories: [Chrome-Extensions, APIs]
 tags: [share-target, sharing, chrome-extension]
 keywords: "chrome extension share target, share to extension chrome, receive shared data extension, chrome extension share API, web share target extension"

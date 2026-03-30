@@ -3,6 +3,7 @@ layout: post
 title: "Event-Driven Architecture in Chrome Extensions: A Complete Guide"
 description: "Master event-driven architecture in Chrome extensions. Learn how to use the Chrome Events API, implement extension event handling, and build responsive event driven extension systems."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "event driven extension, chrome events api, extension event handling, chrome extension events, manifest v3 events"

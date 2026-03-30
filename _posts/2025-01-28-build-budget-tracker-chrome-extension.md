@@ -3,6 +3,7 @@ layout: post
 title: "Build a Budget Tracker Chrome Extension: Complete Development Guide"
 description: "Learn how to build a powerful budget tracker Chrome extension with our comprehensive tutorial. Master expense manager Chrome development, create finance extensions, and launch your first productivity tool in 2025."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "budget tracker extension, expense manager chrome, finance extension, build chrome extension, chrome extension development"

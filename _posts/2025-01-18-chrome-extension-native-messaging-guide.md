@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Native Messaging: Complete Guide to Host Communication"
 description: "Master Chrome Extension Native Messaging with this comprehensive tutorial. Learn how to build native host applications, establish secure communication channels between extensions and desktop apps, and implement best practices for smooth desktop integration."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome native messaging, extension native host, communicate with desktop app extension, chrome native messaging tutorial, native messaging host chrome extension"

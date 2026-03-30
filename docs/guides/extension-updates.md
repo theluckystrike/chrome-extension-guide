@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Updates. How to Handle Version Upgrades and Data Migration"
 description: "A comprehensive guide to handling Chrome extension updates, version upgrades, data migration scripts, breaking changes, and rollback strategies."
 canonical_url: "https://bestchromeextensions.com/guides/extension-updates/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Updates. How to Handle Version Upgrades and Data Migration

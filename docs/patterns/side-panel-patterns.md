@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Side Panel Patterns. Best Practices"
 description: "Advanced patterns for side panel development."
 canonical_url: "https://bestchromeextensions.com/patterns/side-panel-patterns/"
+last_modified_at: 2026-01-15
 ---
 
 Advanced Side Panel Patterns

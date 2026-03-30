@@ -3,6 +3,7 @@ layout: default
 title: "Building Omnibox Extensions for Chrome. Complete Tutorial"
 description: "A comprehensive tutorial on building Chrome extension omnibox experiences: keyword registration, input events, suggestions, rich suggestions, and integrating with search APIs."
 canonical_url: "https://bestchromeextensions.com/tutorials/omnibox-api-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Building Omnibox Extensions for Chrome

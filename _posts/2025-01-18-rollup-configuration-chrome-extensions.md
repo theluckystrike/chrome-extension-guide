@@ -3,6 +3,7 @@ layout: post
 title: "Rollup Configuration for Chrome Extensions: Complete Guide"
 description: "Master rollup configuration for Chrome extensions with this comprehensive guide. Learn how to set up Rollup with Manifest V3, optimize your extension bundler, and create efficient builds for production."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions]
 tags: [chrome-extension, development]
 keywords: "rollup chrome extension, rollup mv3, extension bundler, chrome extension build tool"

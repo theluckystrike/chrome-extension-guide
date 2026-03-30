@@ -3,6 +3,7 @@ layout: post
 title: "Build a Regex Tester Chrome Extension: Interactive Pattern Matching Tool"
 description: "Learn how to build a regex tester Chrome extension from scratch. This comprehensive guide covers Manifest V3, interactive pattern matching, real-time regex validation, and publishing your tool to the Chrome Web Store."
 date: 2025-04-05
+last_modified_at: 2025-04-05
 categories: [Chrome-Extensions, Tutorials]
 tags: [regex, tools, chrome-extension]
 keywords: "chrome extension regex tester, regex chrome extension, build regex tester extension, regular expression chrome, pattern matching extension"

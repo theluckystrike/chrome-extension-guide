@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Troubleshooting: Fix Every Common Issue in Minutes"
 description: "Having trouble with Tab Suspender Pro? Learn how to fix tabs not suspending, whitelist issues, sync problems, and more with our comprehensive troubleshooting guide."
 date: 2025-02-23
+last_modified_at: 2025-02-23
 categories: [Chrome-Extensions, Troubleshooting]
 tags: [tab-suspender-pro, troubleshooting, fix]
 keywords: "tab suspender pro not working, tab suspender troubleshooting, chrome tab suspender issues, fix tab suspender, tab suspender pro help"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Lazy Loading. Load Resources On Demand for Better Performance"
 description: "Master lazy loading patterns for Chrome Extensions: dynamic imports, conditional script loading, deferred CSS, lazy images, and popup optimization."
 canonical_url: "https://bestchromeextensions.com/patterns/lazy-loading/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Lazy Loading

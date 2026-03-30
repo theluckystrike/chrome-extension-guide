@@ -3,6 +3,7 @@ layout: post
 title: "Plasmo Framework for Chrome Extensions: Build Extensions Like Web Apps"
 description: "Discover Plasmo Framework, the modern way to build Chrome extensions using React. Learn how to use hot reloading, TypeScript, and web development workflows to create powerful browser extensions faster."
 date: 2025-04-26
+last_modified_at: 2025-04-26
 categories: [Chrome-Extensions, Frameworks]
 tags: [plasmo, framework, chrome-extension]
 keywords: "plasmo chrome extension, plasmo framework, build extension plasmo, plasmo react extension, modern chrome extension plasmo"

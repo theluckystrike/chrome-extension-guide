@@ -2,6 +2,7 @@
 title: "Chrome Extension CI/CD Pipeline. Automated Testing and CWS Publishing with GitHub Actions"
 slug: /publishing/cicd-pipeline/
 description: "Learn how to build a solid CI/CD pipeline for Chrome extensions using GitHub Actions, covering automated testing, zip packaging, CWS API upload, semantic versioning, and environment secret management."
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension CI/CD Pipeline. Automated Testing and CWS Publishing with GitHub Actions

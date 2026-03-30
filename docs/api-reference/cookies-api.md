@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Cookies API Complete Reference"
 description: "The Chrome Cookies API provides complete CRUD operations for querying, setting, and modifying browser cookies with domain and path filtering."
 canonical_url: "https://bestchromeextensions.com/api-reference/cookies-api/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.cookies API Reference

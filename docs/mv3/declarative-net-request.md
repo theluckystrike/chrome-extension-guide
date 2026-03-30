@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Declarative Net Request. Manifest V3 Guide"
 description: "Use Declarative Net Request API for network request filtering in Manifest V3."
 canonical_url: "https://bestchromeextensions.com/mv3/declarative-net-request/"
+last_modified_at: 2026-01-15
 ---
 
 Declarative Net Request (DNR)

@@ -5,6 +5,7 @@ description: Learn how Tab Suspender Pro can cut Chrome memory consumption by up
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/tab-suspender-pro-reduce-memory/"
 
+last_modified_at: 2026-01-15
 ---
 
 How Tab Suspender Pro Reduces Chrome Memory Usage by 80%. Complete Guide

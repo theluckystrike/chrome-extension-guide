@@ -3,6 +3,7 @@ layout: post
 title: "Using Web Components and Shadow DOM in Chrome Extensions"
 description: "Master Web Components and Shadow DOM for Chrome extensions. Learn to build encapsulated, conflict-free popup UIs with custom elements and shadow DOM."
 date: 2025-02-26
+last_modified_at: 2025-02-26
 categories: [Chrome-Extensions, Web-Components]
 tags: [web-components, shadow-dom, chrome-extension]
 keywords: "chrome extension web components, shadow dom chrome extension, custom elements chrome extension, web components extension popup"

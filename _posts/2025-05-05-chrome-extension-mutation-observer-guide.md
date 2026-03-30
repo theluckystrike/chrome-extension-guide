@@ -3,6 +3,7 @@ layout: post
 title: "MutationObserver in Chrome Extensions: React to DOM Changes in Real Time"
 description: "Learn how to use MutationObserver in Chrome extensions to detect and react to DOM changes in real time. Build dynamic, responsive extensions that monitor page changes efficiently."
 date: 2025-05-05
+last_modified_at: 2025-05-05
 categories: [Chrome-Extensions, APIs]
 tags: [mutation-observer, dom, chrome-extension]
 keywords: "chrome extension mutation observer, MutationObserver chrome extension, detect dom changes extension, chrome extension watch dom, react to page changes extension"

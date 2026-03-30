@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Background Queue Processing. Best Practices"
 description: "Process tasks in the background with queue-based patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/background-queue-processing/"
+last_modified_at: 2026-01-15
 ---
 
 Background Queue Processing Patterns

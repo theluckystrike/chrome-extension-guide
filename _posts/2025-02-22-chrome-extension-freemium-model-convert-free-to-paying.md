@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Freemium Model. Convert Free Users to Paying Customers"
 description: "Design a freemium Chrome extension that converts. Feature gating strategies, upgrade prompts, pricing tiers, conversion funnels, and real-world freemium benchmarks."
 date: 2025-02-22
+last_modified_at: 2025-02-22
 categories: [guides, monetization]
 tags: [freemium, conversion-optimization, feature-gating, extension-pricing, chrome-extension-business]
 author: theluckystrike

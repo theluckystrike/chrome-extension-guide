@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Version Management. Publishing Guide"
 description: "Manage extension versions effectively for smooth updates and rollbacks."
 canonical_url: "https://bestchromeextensions.com/publishing/version-management/"
+last_modified_at: 2026-01-15
 ---
 
 Version Management Strategies

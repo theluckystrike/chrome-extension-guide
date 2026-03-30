@@ -3,6 +3,7 @@ layout: post
 title: "Unit Testing Chrome Extensions with Jest: Complete Testing Guide"
 description: "Learn how to unit test Chrome extensions using Jest. This guide covers setting up Jest, mocking Chrome APIs, testing content scripts, service workers, and popup code for solid extension development."
 date: 2025-03-14
+last_modified_at: 2025-03-14
 categories: [Chrome-Extensions, Testing]
 tags: [jest, unit-testing, chrome-extension]
 keywords: "chrome extension jest, unit test chrome extension, jest chrome extension, test chrome extension code, chrome extension testing framework"

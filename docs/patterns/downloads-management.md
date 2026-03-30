@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Downloads Management. Best Practices"
 description: "Manage file downloads from extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
+last_modified_at: 2026-01-15
 ---
 
 Downloads Management Patterns

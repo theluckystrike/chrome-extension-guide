@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Permissions Explained: What Every Developer Needs to Know"
 description: "Master chrome extension permissions in Manifest V3. Learn about required vs optional permissions, permission warnings, security best practices, and how to request permissions properly for your extension."
 date: 2025-03-01
+last_modified_at: 2025-03-01
 categories: [Chrome-Extensions, Security]
 tags: [permissions, security, chrome-extension, manifest-v3]
 keywords: "chrome extension permissions, chrome extension required permissions, optional permissions chrome extension, chrome extension permission warnings, manifest v3 permissions"

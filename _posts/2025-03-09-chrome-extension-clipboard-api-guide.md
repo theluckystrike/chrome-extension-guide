@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Clipboard API: Copy, Paste, and Manage Clipboard Data"
 description: "Master the Chrome Extension Clipboard API with this comprehensive guide. Learn to read, write, and manage clipboard data in your Chrome extensions with practical code examples and best practices."
 date: 2025-03-09
+last_modified_at: 2025-03-09
 categories: [Chrome-Extensions, APIs]
 tags: [clipboard, chrome-extension, tutorial]
 keywords: "chrome extension clipboard, clipboard API chrome extension, copy paste chrome extension, chrome extension read clipboard, clipboard manager extension"

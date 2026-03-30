@@ -3,6 +3,7 @@ layout: post
 title: "Build a Tab Session Manager Chrome Extension: Save and Restore Tab Groups"
 description: "Learn how to build a chrome extension session manager to save and restore tab groups. Complete 2025 guide with code examples for saving tab sessions, managing windows, and implementing a tab session saver."
 date: 2025-04-30
+last_modified_at: 2025-04-30
 categories: [Chrome-Extensions, Tutorials]
 tags: [session-manager, tabs, chrome-extension]
 keywords: "chrome extension session manager, save tab session chrome, restore tabs chrome extension, tab session saver, chrome extension save windows"

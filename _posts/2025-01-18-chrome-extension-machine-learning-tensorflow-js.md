@@ -3,6 +3,7 @@ layout: post
 title: "Machine Learning in Chrome Extensions with TensorFlow.js"
 description: "Learn how to integrate machine learning into Chrome extensions using TensorFlow.js. This comprehensive guide covers AI-powered extensions, browser-based ML, and practical implementations for modern web developers."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [tutorials, chrome-extensions, machine-learning]
 tags: [chrome extension machine learning, tensorflow js extension, ai chrome extension, ml browser extension, tensorflow.js, browser ml, web ml, artificial intelligence]
 keywords: "chrome extension machine learning, tensorflow js extension, ai chrome extension, ml browser extension, tensorflow.js chrome, browser-based machine learning, web ml tutorial"

@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro Scheduled Suspension: Time-Based Tab Management Rules"
 description: "Master time-based tab suspension in Tab Suspender Pro with scheduling rules for work hours, lunch breaks, weekends, and timezone handling."
 date: 2025-05-15
+last_modified_at: 2025-05-15
 categories: [Chrome-Extensions, Features]
 tags: [tab-suspender-pro, scheduling, time-management]
 canonical_url: "https://bestchromeextensions.com/2025/05/15/tab-suspender-pro-scheduled-suspension/"

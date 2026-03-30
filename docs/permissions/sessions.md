@@ -6,6 +6,7 @@ permalink: /permissions/sessions/
 category: permissions
 order: 37
 canonical_url: "https://bestchromeextensions.com/permissions/sessions/"
+last_modified_at: 2026-01-15
 ---
 
 sessions Permission

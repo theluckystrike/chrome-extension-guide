@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Keyboard Shortcuts. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/commands-keyboard-shortcuts/"
+last_modified_at: 2026-01-15
 ---
 Keyboard Shortcuts & Commands Guide
 

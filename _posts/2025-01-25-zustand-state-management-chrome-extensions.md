@@ -3,6 +3,7 @@ layout: post
 title: "Zustand State Management in Chrome Extensions: A Complete Guide"
 description: "Learn how to implement Zustand state management in Chrome extensions for lightweight, efficient, and scalable extension development. Perfect for managing popup state and extension-wide data."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, State-Management]
 tags: [chrome-extension, state-management]
 keywords: "zustand chrome extension, lightweight state management, zustand popup"

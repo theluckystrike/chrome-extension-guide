@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Printing Api. Best Practices"
 description: "Handle printing from Chrome extensions with the Printing API."
 canonical_url: "https://bestchromeextensions.com/patterns/printing-api/"
+last_modified_at: 2026-01-15
 ---
 
 Printing API Patterns

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Speech Recognition Chrome Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a powerful speech recognition Chrome extension with voice-to-text capabilities. This comprehensive 2025 tutorial covers Web Speech API, Manifest V3, microphone permissions, and real-world dictation chrome extension development."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "speech recognition extension, voice to text chrome, dictation chrome extension"

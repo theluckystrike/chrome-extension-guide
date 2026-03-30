@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension TypeScript Setup. Type-Safe Extension Development"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/typescript-setup/"
+last_modified_at: 2026-01-15
 ---
 TypeScript Configuration for Chrome Extensions
 

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Site-Specific Search Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a site-specific search Chrome extension that allows users to search within any website. This comprehensive guide covers Manifest V3, content scripts, messaging APIs, and deployment to the Chrome Web Store."
 date: 2025-01-28
+last_modified_at: 2025-01-28
 categories: [Chrome-Extensions, Productivity]
 tags: [chrome-extension, productivity]
 keywords: "site search extension, custom search chrome, search within site, chrome extension development, site-specific search"

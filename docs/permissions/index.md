@@ -2,6 +2,7 @@
 title: "Complete Chrome Extension Permissions Reference"
 slug: /permissions/
 description: "Comprehensive guide to all Chrome extension permissions, including activeTab, alarms, bookmarks, cookies, and more. Learn when to use each permission and how..."
+last_modified_at: 2026-01-15
 ---
 
 # Complete Chrome Extension Permissions Reference

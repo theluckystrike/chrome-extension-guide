@@ -3,6 +3,7 @@ layout: post
 title: "Building Chrome Extensions with Angular. Complete Developer Guide (2025)"
 description: "Build enterprise-grade Chrome extensions with Angular. Dependency injection, RxJS for messaging, Angular Material UI, and TypeScript-first extension development."
 date: 2025-02-04
+last_modified_at: 2025-02-04
 categories: [tutorials, frameworks]
 tags: [angular, chrome-extension, angular-chrome-extension, rxjs, typescript-extension]
 author: theluckystrike

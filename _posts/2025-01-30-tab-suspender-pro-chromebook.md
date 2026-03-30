@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro for Chromebook Users: The Ultimate Guide to Chrome OS Tab Management"
 description: "Discover how Tab Suspender Pro transforms Chromebook performance by automatically suspending inactive tabs. Boost speed, extend battery life, and maximize productivity with this essential Chrome OS tab management solution."
 date: 2025-01-30
+last_modified_at: 2025-01-30
 categories: [Chrome-Extensions, Tab-Suspender-Pro]
 tags: [tab-suspender-pro, performance, productivity]
 canonical_url: "https://bestchromeextensions.com/2025/01/30/tab-suspender-pro-chromebook/"

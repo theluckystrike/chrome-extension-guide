@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Window Management API: Complete 2025 Developer Guide"
 description: "Master the Chrome Window Management API for building powerful window management extensions. Learn how to create multi-window experiences, control window positions, sizes, and states with our comprehensive developer guide."
 date: 2025-01-22
+last_modified_at: 2025-01-22
 categories: [Chrome-Extensions]
 tags: [chrome-extension]
 keywords: "window management extension, window api chrome, multi window extension"

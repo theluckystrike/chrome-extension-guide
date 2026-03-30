@@ -3,6 +3,7 @@ layout: post
 title: "Framer Motion Animation in Chrome Extensions: Complete Guide 2025"
 description: "Learn how to implement Framer Motion animations in Chrome extensions. Master animation react chrome techniques, build stunning motion library extension interfaces with this comprehensive 2025 guide."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, Libraries]
 tags: [chrome-extension, libraries]
 keywords: "framer motion extension, animation react chrome, motion library extension, framer motion chrome extension, react animation chrome, chrome extension animation library"

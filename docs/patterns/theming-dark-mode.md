@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Theming Dark Mode. Best Practices"
 description: "Implement dark mode and theme synchronization for extensions."
 canonical_url: "https://bestchromeextensions.com/patterns/theming-dark-mode/"
+last_modified_at: 2026-01-15
 ---
 
 Theming and Dark Mode Patterns

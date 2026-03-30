@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension with Supabase Backend: Auth, Database, and Real-Time"
 description: "Learn how to build a Chrome extension with Supabase backend. Connect your extension to Supabase for secure authentication, database storage, and real-time updates."
 date: 2025-03-28
+last_modified_at: 2025-03-28
 categories: [Chrome-Extensions, Backend]
 tags: [supabase, backend, chrome-extension]
 keywords: "chrome extension supabase, supabase chrome extension, chrome extension database supabase, supabase auth extension, real-time chrome extension"

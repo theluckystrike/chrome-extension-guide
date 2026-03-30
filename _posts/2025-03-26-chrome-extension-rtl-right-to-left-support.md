@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension RTL Support: Build Extensions for Arabic and Hebrew Users"
 description: "Master chrome extension RTL support with our comprehensive guide. Learn how to build right-to-left extensions for Arabic and Hebrew users, implement RTL layout in Chrome popup, and localize your extension for RTL languages effectively."
 date: 2025-03-26
+last_modified_at: 2025-03-26
 categories: [Chrome-Extensions, Localization]
 tags: [rtl, localization, chrome-extension]
 keywords: "chrome extension rtl, right to left chrome extension, arabic chrome extension, hebrew extension support, rtl layout chrome popup"

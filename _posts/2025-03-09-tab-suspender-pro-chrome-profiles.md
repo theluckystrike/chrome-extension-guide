@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro with Multiple Chrome Profiles: Setup and Tips"
 description: "Learn how to configure Tab Suspender Pro for multiple Chrome profiles. Setup per-profile settings, sync preferences, and optimize tab management for work and personal browsing."
 date: 2025-03-09
+last_modified_at: 2025-03-09
 categories: [Chrome-Extensions, Guides]
 tags: [tab-suspender-pro, chrome-profiles, configuration]
 author: theluckystrike

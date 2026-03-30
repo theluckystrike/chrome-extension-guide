@@ -3,6 +3,7 @@ layout: post
 title: "Build a Tab Search Chrome Extension. Complete 2025 Tutorial"
 description: "Learn how to build a powerful tab search extension for Chrome. This step-by-step guide covers the Chrome Tabs API, search functionality, keyboard shortcuts, and how to publish your extension to the Chrome Web Store."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 author: theluckystrike

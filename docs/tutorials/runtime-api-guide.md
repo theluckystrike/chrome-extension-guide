@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Runtime API: The Extension Lifecycle Hub"
 description: "A comprehensive guide to chrome.runtime API covering lifecycle events, message passing, extension URLs, and best practices for building solid Chrome extensions."
 canonical_url: "https://bestchromeextensions.com/tutorials/runtime-api-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Runtime API: The Extension Lifecycle Hub

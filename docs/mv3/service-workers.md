@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Service Workers. Manifest V3 Guide"
 description: "Understand service workers in Manifest V3 for background processing."
 canonical_url: "https://bestchromeextensions.com/mv3/service-workers/"
+last_modified_at: 2026-01-15
 ---
 
 MV3 Service Workers: A Complete Migration Guide

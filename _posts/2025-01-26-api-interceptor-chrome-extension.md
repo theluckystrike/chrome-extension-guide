@@ -3,6 +3,7 @@ layout: post
 title: "Build an API Request Interceptor Chrome Extension"
 description: "Learn how to build a powerful API request interceptor Chrome extension from scratch. This comprehensive guide covers the DeclarativeNetRequest API, webRequest API for older Manifest versions, request modification, header injection, and practical implementation examples for intercepting and modifying HTTP requests in Chrome extensions."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, API-Guide, Development-Tutorial]
 tags: [api-interceptor, http-requests, network, declarativeNetRequest, manifest-v3]
 keywords: "api interceptor extension, http request modifier chrome, request interceptor extension, chrome extension network interception, modify http requests chrome extension"

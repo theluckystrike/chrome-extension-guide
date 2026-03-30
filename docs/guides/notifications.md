@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Notifications. How to Send Desktop Alerts and Updates"
 description: "Learn how to use the chrome.notifications API to send desktop notifications in Chrome extensions. Covers notification types, buttons, images, event handlers, and limits."
 canonical_url: "https://bestchromeextensions.com/guides/notifications/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Notifications. How to Send Desktop Alerts and Updates

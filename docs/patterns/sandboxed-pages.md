@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Sandboxed Pages. Best Practices"
 description: "Use sandboxed pages for secure user-generated content."
 canonical_url: "https://bestchromeextensions.com/patterns/sandboxed-pages/"
+last_modified_at: 2026-01-15
 ---
 
 Sandboxed Pages in Chrome Extensions

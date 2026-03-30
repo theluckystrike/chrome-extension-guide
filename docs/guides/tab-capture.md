@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Tab Capture. Developer Guide"
 description: "Learn Chrome extension tab capture with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/tab-capture/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Tab Capture API
 

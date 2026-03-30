@@ -3,6 +3,7 @@ layout: post
 title: "Build Chrome Extensions with Plasmo Framework: Complete 2025 Guide"
 description: "Learn how to build Chrome extensions efficiently using Plasmo Framework. Discover why Plasmo is the best extension framework 2025 with hot reloading, TypeScript support, and effortless Manifest V3 deployment."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Framework]
 tags: [chrome-extension, framework, tooling]
 keywords: "plasmo chrome extension, plasmo framework, extension framework 2025, chrome extension development framework, build chrome extension with plasmo"

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Screenshot Annotation Chrome Extension: Complete Developer Guide"
 description: "Learn how to build a powerful screenshot annotation extension for Chrome. This comprehensive tutorial covers capture, markup tools, canvas rendering, export features, and best practices for creating a professional screenshot annotation extension."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial]
 keywords: "screenshot annotation extension, markup chrome extension, screen capture annotate, chrome extension screenshot tools, screenshot markup chrome, build screenshot extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Offscreen Documents. How to Use DOM APIs in MV3 Service Workers"
 description: "Learn how to use the chrome.offscreen API to access DOM APIs in Chrome MV3 service workers. Covering audio playback, clipboard access, DOM parsing, and lifecycle management."
 canonical_url: "https://bestchromeextensions.com/guides/offscreen-documents/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Offscreen Documents. How to Use DOM APIs in MV3 Service Workers

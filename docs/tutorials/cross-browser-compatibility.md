@@ -3,6 +3,7 @@ layout: default
 title: "Cross-Browser Extension Development. Tutorial"
 description: "Learn how to build cross-browser Chrome extensions that work in Chrome, Firefox, Safari, and Edge with this comprehensive tutorial."
 canonical_url: "https://bestchromeextensions.com/tutorials/cross-browser-compatibility/"
+last_modified_at: 2026-01-15
 ---
 
 Cross-Browser Extension Development

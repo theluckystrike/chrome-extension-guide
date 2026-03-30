@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Cross Browser Compatibility. Best Practices"
 description: "Build extensions that work across Chrome, Firefox, and Edge."
 canonical_url: "https://bestchromeextensions.com/patterns/cross-browser-compatibility/"
+last_modified_at: 2026-01-15
 ---
 
 Cross-Browser Compatibility

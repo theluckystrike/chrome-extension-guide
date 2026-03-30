@@ -3,6 +3,7 @@ layout: post
 title: "Integrate Stripe Payments in Chrome Extensions: Monetization Guide"
 description: "Learn how to integrate Stripe payments in Chrome extensions for smooth monetization. Step-by-step guide covering in-app purchases, subscriptions, and payment processing."
 date: 2025-03-26
+last_modified_at: 2025-03-26
 categories: [Chrome-Extensions, Monetization]
 tags: [stripe, payments, chrome-extension]
 keywords: "chrome extension stripe, payment chrome extension, stripe integration extension, monetize chrome extension stripe, chrome extension in-app purchases"

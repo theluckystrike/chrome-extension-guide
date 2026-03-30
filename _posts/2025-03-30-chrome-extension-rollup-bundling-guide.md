@@ -3,6 +3,7 @@ layout: post
 title: "Bundling Chrome Extensions with Rollup: Tree-Shaking and Code Splitting"
 description: "Learn how to bundle Chrome extensions using Rollup for optimized performance. Master tree-shaking, code splitting, and manifest configuration."
 date: 2025-03-30
+last_modified_at: 2025-03-30
 categories: [Chrome-Extensions, Build-Tools]
 tags: [rollup, bundling, chrome-extension]
 keywords: "chrome extension rollup, rollup chrome extension, chrome extension tree shaking, rollup bundle extension, rollup manifest v3"

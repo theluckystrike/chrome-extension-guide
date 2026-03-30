@@ -2,6 +2,7 @@
 title: Building a GitHub UI Enhancer Extension
 description: Learn how to build a Chrome extension that enhances GitHub with file tree sidebar, copy button, repo size display, and enhanced diffs.
 canonical_url: "https://bestchromeextensions.com/tutorials/build-github-enhancer/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Building a GitHub UI Enhancer Extension. Complete Developer's Guide

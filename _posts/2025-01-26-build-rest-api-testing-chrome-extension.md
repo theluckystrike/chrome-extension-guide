@@ -3,6 +3,7 @@ layout: post
 title: "Build a REST API Testing Chrome Extension: A Complete Developer's Guide"
 description: "Learn how to build a powerful REST API testing Chrome extension that serves as a Postman alternative. This comprehensive guide covers architecture, implementation, and deployment of your own API client extension."
 date: 2025-01-26
+last_modified_at: 2025-01-26
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, developer-tools]
 keywords: "rest api tester extension, postman alternative chrome, api client extension"

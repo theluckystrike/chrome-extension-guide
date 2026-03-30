@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Development with Vue.js Guide: Build Modern Extensions"
 description: "Learn how to build Chrome extensions with Vue.js in 2025. This comprehensive guide covers Vue popup extensions, component architecture, state management, and best practices for production-ready extensions."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Development]
 tags: [chrome-extension, development, guide]
 keywords: "chrome extension vue, vuejs chrome extension, vue popup extension, vue chrome extension tutorial, manifest v3 vue"

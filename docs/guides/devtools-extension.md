@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension DevTools Panel. How to Build Custom Developer Tools"
 description: "Learn how to build custom Chrome DevTools panels with the chrome.devtools API. Create panels, inspect elements, extend the network panel, and add custom sidebars."
 canonical_url: "https://bestchromeextensions.com/guides/devtools-extension/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension DevTools Panel. How to Build Custom Developer Tools
 

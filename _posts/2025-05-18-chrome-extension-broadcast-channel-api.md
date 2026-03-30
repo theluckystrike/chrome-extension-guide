@@ -3,6 +3,7 @@ layout: post
 title: "BroadcastChannel API in Chrome Extensions: Cross-Context Communication"
 description: "Master the BroadcastChannel API for smooth cross-context communication in Chrome extensions. Learn to send messages between tabs, service workers, and extension contexts efficiently."
 date: 2025-05-18
+last_modified_at: 2025-05-18
 categories: [Chrome-Extensions, APIs]
 tags: [broadcast-channel, communication, chrome-extension]
 keywords: "chrome extension broadcast channel, cross context communication extension, broadcast channel API chrome, chrome extension message between tabs, extension context communication"

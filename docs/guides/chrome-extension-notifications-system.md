@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Notifications: Badges, Alarms, and Alert Systems"
 description: "Master Chrome extension notifications. Learn the Notifications API, badge management, alarm scheduling, in-page toasts, and smart notification timing with TypeScript."
 permalink: /guides/chrome-extension-notifications-system/
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Notifications: Badges, Alarms, and Alert Systems

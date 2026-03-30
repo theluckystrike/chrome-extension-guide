@@ -3,6 +3,7 @@ layout: post
 title: "Web Components in Chrome Extensions: Complete Guide with TypeScript"
 description: "Learn how to build modern Chrome extensions using Web Components and TypeScript. This guide covers Shadow DOM, Custom Elements, HTML Templates, and best practices for extension development."
 date: 2026-03-09
+last_modified_at: 2026-03-09
 categories: [tutorials, chrome-extensions, web-components]
 tags: [web components, chrome extension, TypeScript, custom elements, shadow dom, tutorial]
 keywords: "web components chrome extension, custom elements chrome extension, TypeScript chrome extension, shadow dom extension"

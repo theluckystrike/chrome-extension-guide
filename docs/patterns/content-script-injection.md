@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Content Script Injection. Best Practices"
 description: "Advanced content script injection techniques and patterns."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-injection/"
+last_modified_at: 2026-01-15
 ---
 
 Content Script Injection Patterns

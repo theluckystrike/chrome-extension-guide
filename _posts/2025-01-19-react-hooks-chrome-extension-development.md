@@ -3,6 +3,7 @@ layout: post
 title: "React Hooks for Chrome Extension Development: useState, useEffect and Custom Hooks"
 description: "Master React hooks in Chrome extensions with our comprehensive guide. Learn how to use useState, useEffect, and create custom hooks for efficient extension development in Manifest V3."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [tutorials, chrome-extensions]
 tags: [react hooks chrome extension, useEffect chrome extension, custom hooks extension, chrome extension react, manifest v3 react]
 keywords: "react hooks chrome extension, useEffect chrome extension, custom hooks extension, chrome extension react hooks, useState chrome extension, react chrome extension development"

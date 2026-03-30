@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Geolocation API: Build Location-Aware Extensions"
 description: "Master the chrome extension geolocation API with this comprehensive 2025 guide. Learn to build location-aware extensions, handle geolocation permissions, and implement user location features in Chrome extensions."
 date: 2025-04-01
+last_modified_at: 2025-04-01
 categories: [Chrome-Extensions, APIs]
 tags: [geolocation, location, chrome-extension]
 keywords: "chrome extension geolocation, location API chrome extension, chrome extension user location, geolocation permission extension, location aware chrome extension"

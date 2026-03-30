@@ -6,6 +6,7 @@ permalink: /permissions/gcm/
 category: permissions
 order: 19
 canonical_url: "https://bestchromeextensions.com/permissions/gcm/"
+last_modified_at: 2026-01-15
 ---
 
 gcm Permission

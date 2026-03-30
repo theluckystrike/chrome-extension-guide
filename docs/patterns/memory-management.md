@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Memory Management. Best Practices"
 description: "Implement memory management to prevent memory leaks."
 canonical_url: "https://bestchromeextensions.com/patterns/memory-management/"
+last_modified_at: 2026-01-15
 ---
 
 Memory Management in Chrome Extensions

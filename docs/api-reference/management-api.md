@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Management API Complete Reference"
 description: "The Chrome Management API queries and controls installed extensions and apps, enabling features like extension enabling, disabling, and uninstallation management."
 canonical_url: "https://bestchromeextensions.com/api-reference/management-api/"
+last_modified_at: 2026-01-15
 ---
 
 chrome.management API Reference

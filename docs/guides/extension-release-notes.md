@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Release Notes. Developer Guide"
 description: "A comprehensive developer guide for building Chrome extensions with practical examples, code patterns, and expert recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/extension-release-notes/"
+last_modified_at: 2026-01-15
 ---
 Writing Effective Release Notes for Chrome Extensions
 

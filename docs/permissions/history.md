@@ -6,6 +6,7 @@ permalink: /permissions/history/
 category: permissions
 order: 21
 canonical_url: "https://bestchromeextensions.com/permissions/history/"
+last_modified_at: 2026-01-15
 ---
 
 history Permission. Chrome Extension Reference

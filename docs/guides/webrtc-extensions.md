@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension WebRTC. Developer Guide"
 description: "Learn Chrome extension webrtc with this developer guide covering implementation, best practices, and code examples."
 canonical_url: "https://bestchromeextensions.com/guides/webrtc-extensions/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extensions and WebRTC
 

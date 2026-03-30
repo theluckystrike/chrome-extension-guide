@@ -3,6 +3,7 @@ layout: default
 title: "Building Side Panel Extensions in Chrome. Complete Tutorial"
 description: "Learn how to build Chrome extensions with side panels. This comprehensive tutorial covers the chrome.sidePanel API, per-tab vs global panels, lifecycle management, UI design, messaging, and responsive design patterns."
 canonical_url: "https://bestchromeextensions.com/tutorials/side-panel-guide/"
+last_modified_at: 2026-01-15
 ---
 
 Building Side Panel Extensions in Chrome

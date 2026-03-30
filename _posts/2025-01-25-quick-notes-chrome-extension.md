@@ -3,6 +3,7 @@ layout: post
 title: "Build a Quick Notes Chrome Extension: Complete 2025 Developer's Guide"
 description: "Learn how to build a quick notes extension for Chrome with this comprehensive 2025 guide. Create a fast notepad chrome extension with inline notes functionality, local storage, and modern Manifest V3 architecture."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [guides, chrome-extensions, productivity]
 tags: [quick notes extension, fast notepad chrome, inline notes extension, chrome notepad, notes app chrome, sticky notes chrome]
 keywords: "quick notes extension, fast notepad chrome, inline notes extension, chrome notes app, sticky notes chrome"

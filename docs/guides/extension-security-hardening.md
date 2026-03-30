@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Security Hardening Guide. Protect Your Users"
 description: "Master security best practices for Chrome extensions including Content Security Policy, XSS prevention, secure messaging, permission minimization, code signing, and data protection strategies."
 canonical_url: "https://bestchromeextensions.com/guides/extension-security-hardening/"
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Security Hardening Guide. Protect Your Users

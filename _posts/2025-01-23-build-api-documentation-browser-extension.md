@@ -3,6 +3,7 @@ layout: post
 title: "Build an API Documentation Browser Extension: Complete Guide"
 description: "Learn how to build a powerful API documentation browser extension that integrates Swagger, OpenAPI, and custom docs directly into Chrome. This comprehensive guide covers Manifest V3, content script injection, doc parsing, search functionality, and offline capabilities."
 date: 2025-01-23
+last_modified_at: 2025-01-23
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project]
 keywords: "api docs extension, swagger chrome extension, api browser extension, openapi viewer chrome extension, api documentation browser, rest api documentation tool"

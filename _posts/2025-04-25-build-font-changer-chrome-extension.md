@@ -3,6 +3,7 @@ layout: post
 title: "Build a Font Changer Chrome Extension: Customize Website Typography"
 description: "Learn how to build a font changer Chrome extension that lets users customize website typography. Complete guide covering Manifest V3, content scripts, CSS injection, and publishing."
 date: 2025-04-25
+last_modified_at: 2025-04-25
 categories: [Chrome-Extensions, Tutorials]
 tags: [fonts, typography, chrome-extension]
 keywords: "chrome extension change font, font changer chrome, custom font chrome extension, override website font chrome, typography extension chrome"

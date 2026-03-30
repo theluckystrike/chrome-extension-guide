@@ -3,6 +3,7 @@ layout: post
 title: "Web Audio API in Chrome Extensions: Build Audio Processing Tools"
 description: "Learn to use Web Audio API in Chrome extensions. Build audio visualizations, effects, real-time sound processing and manipulation tools."
 date: 2025-05-05
+last_modified_at: 2025-05-05
 categories: [Chrome-Extensions, APIs]
 tags: [web-audio, audio, chrome-extension]
 keywords: "chrome extension web audio, web audio API extension, audio processing chrome, chrome extension sound, build audio extension chrome"

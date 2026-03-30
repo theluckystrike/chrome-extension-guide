@@ -3,6 +3,7 @@ layout: post
 title: "Advanced Chrome Extension Debugging Techniques: A Complete Guide"
 description: "Master advanced Chrome extension debugging techniques using Chrome DevTools. Learn to debug service workers, content scripts, background processes, and resolve common extension issues efficiently."
 date: 2025-01-17
+last_modified_at: 2025-01-17
 categories: [tutorials, chrome-extensions]
 tags: [debug chrome extension, chrome extension devtools debugging, chrome extension debugging, manifest v3 debugging, service worker debugging, content script debugging]
 keywords: "debug chrome extension, chrome extension devtools debugging, chrome extension debugging techniques, manifest v3 debugging, service worker debugging, content script debugging"

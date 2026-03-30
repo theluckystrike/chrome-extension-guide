@@ -3,6 +3,7 @@ layout: post
 title: "Build a Website Security Scanner Chrome Extension: Complete 2025 Guide"
 description: "Learn how to build a powerful website security scanner Chrome extension. This comprehensive guide covers vulnerability detection, security analysis, and best practices for creating a solid security scanner extension in 2025."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions]
 tags: [chrome-extension, utility]
 keywords: "security scanner extension, vulnerability checker chrome, site security, chrome extension security scanner, website vulnerability scanner, chrome security extension, build security extension"

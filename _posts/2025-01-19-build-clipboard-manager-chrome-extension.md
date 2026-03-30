@@ -3,6 +3,7 @@ layout: post
 title: "Build a Clipboard Manager Chrome Extension: Complete Step-by-Step Tutorial"
 description: "Learn how to build a clipboard manager extension from scratch. This comprehensive tutorial covers clipboard history chrome features, copy paste manager development, and Chrome extension storage implementation."
 date: 2025-01-19
+last_modified_at: 2025-01-19
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, project, tutorial]
 keywords: "clipboard manager extension, clipboard history chrome, copy paste manager, chrome extension clipboard, build clipboard extension"

@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Web Workers. Developer Guide"
 description: "Master Chrome extension service workers with this guide covering lifecycle, messaging, and background task implementation."
 canonical_url: "https://bestchromeextensions.com/guides/web-workers-extensions/"
+last_modified_at: 2026-01-15
 ---
 Web Workers in Chrome Extensions
 

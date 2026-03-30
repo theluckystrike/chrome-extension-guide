@@ -3,6 +3,7 @@ layout: default
 title: "Building Accessible Chrome Extensions"
 description: "Learn how to build accessible Chrome extensions with proper ARIA attributes, keyboard navigation, screen reader support, focus management, color contrast, and WCAG compliance."
 canonical_url: "https://bestchromeextensions.com/tutorials/accessibility-in-extensions/"
+last_modified_at: 2026-01-15
 ---
 
 Building Accessible Chrome Extensions

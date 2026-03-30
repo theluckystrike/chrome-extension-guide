@@ -3,6 +3,7 @@ layout: post
 title: "How to Keep 100+ Tabs Open in Chrome Without Crashing"
 description: "Practical guide to running 100+ Chrome tabs without crashing, freezing, or slowing down your computer. Covers memory optimization, Tab Suspender Pro, tab groups, system settings, and workflow strategies."
 date: 2025-01-24
+last_modified_at: 2025-01-24
 categories: [guides, productivity]
 tags: [chrome-tabs, browser-performance, memory-optimization, tab-suspender-pro, tab-management, productivity, chrome-extensions]
 author: theluckystrike

@@ -3,6 +3,7 @@ layout: post
 title: "Build a Dark Mode Chrome Extension: Invert Colors and Apply Themes"
 description: "Learn to build a dark mode Chrome extension with color inversion and custom themes. Step-by-step tutorial covering Manifest V3, content scripts, and CSS techniques."
 date: 2025-03-30
+last_modified_at: 2025-03-30
 categories: [Chrome-Extensions, Tutorials]
 tags: [dark-mode, theme, chrome-extension]
 author: theluckystrike

@@ -3,6 +3,7 @@ layout: post
 title: "Virtual List Rendering in Chrome Extensions: A Complete Guide"
 description: "Master virtual list rendering in Chrome extensions with this comprehensive guide. Learn how to implement virtualized scrolling, handle infinite lists efficiently, and optimize performance for large datasets in your extension."
 date: 2025-01-29
+last_modified_at: 2025-01-29
 categories: [Chrome-Extensions, UI]
 tags: [chrome-extension, ui, patterns]
 keywords: "virtual list extension, virtualized scroll chrome, infinite list extension, chrome extension virtual list, virtualized scrolling extension"

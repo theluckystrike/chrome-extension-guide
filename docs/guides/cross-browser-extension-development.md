@@ -3,6 +3,7 @@ layout: default
 title: "Cross-Browser Extension Development. Complete Guide"
 description: "A comprehensive guide to building browser extensions across Chrome, Firefox, Safari, and Edge using WebExtensions APIs with practical code examples and compatibility patterns."
 canonical_url: "https://bestchromeextensions.com/guides/cross-browser-extension-development/"
+last_modified_at: 2026-01-15
 ---
 
 Cross-Browser Extension Development

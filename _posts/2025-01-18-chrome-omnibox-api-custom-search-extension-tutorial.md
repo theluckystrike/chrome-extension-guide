@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Omnibox API Custom Search Extension Tutorial"
 description: "Master the Chrome Omnibox API with this comprehensive tutorial. Learn how to build custom search extensions that integrate directly into Chrome's address bar, providing instant search capabilities and a smooth user experience."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, API-Guide]
 tags: [chrome-extension, api, tutorial]
 keywords: "chrome omnibox api, address bar extension, custom search chrome extension, omnibox extension tutorial, chrome address bar search"

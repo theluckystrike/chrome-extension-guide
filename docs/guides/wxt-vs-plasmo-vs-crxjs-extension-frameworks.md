@@ -3,6 +3,7 @@ layout: default
 title: "WXT vs Plasmo vs CRXJS: Best Chrome Extension Framework in 2026"
 description: "Comprehensive comparison of WXT, Plasmo, and CRXJS frameworks for Chrome extension development in 2026. Architecture, HMR, TypeScript, bundle size, and recommendations."
 canonical_url: "https://bestchromeextensions.com/guides/wxt-vs-plasmo-vs-crxjs-extension-frameworks/"
+last_modified_at: 2026-01-15
 ---
 
 WXT vs Plasmo vs CRXJS: Best Chrome Extension Framework in 2026

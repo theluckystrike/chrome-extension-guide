@@ -3,6 +3,7 @@ layout: post
 title: "Tab Suspender Pro vs Auto Tab Discard: Which Saves More Memory?"
 description: "Compare Tab Suspender Pro vs Auto Tab Discard to find the best Chrome extension for memory savings. Learn which tool suspends tabs effectively and saves more RAM."
 date: 2025-03-11
+last_modified_at: 2025-03-11
 categories: [Chrome-Extensions, Comparisons]
 tags: [tab-suspender-pro, auto-tab-discard, comparison]
 keywords: "tab suspender pro vs auto tab discard, auto tab discard alternative, chrome auto discard extension, tab suspender vs discard, best tab memory extension"

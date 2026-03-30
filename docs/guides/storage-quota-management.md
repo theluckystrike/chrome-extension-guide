@@ -5,6 +5,7 @@ description: Learn about Chrome extension storage quotas, including local storag
 layout: default
 canonical_url: "https://bestchromeextensions.com/docs/guides/storage-quota-management/"
 
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Storage Quota. Limits, Best Practices, and Data Management

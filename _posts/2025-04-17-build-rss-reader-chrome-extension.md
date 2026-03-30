@@ -3,6 +3,7 @@ layout: post
 title: "Build an RSS Reader Chrome Extension: Subscribe to Any Website's Feed"
 description: "Learn how to build a powerful RSS reader Chrome extension from scratch. This step-by-step tutorial covers feed parsing, subscription management, and publishing to the Chrome Web Store."
 date: 2025-04-17
+last_modified_at: 2025-04-17
 categories: [Chrome-Extensions, Tutorials]
 tags: [rss, reader, chrome-extension]
 keywords: "chrome extension rss reader, build rss extension, rss feed chrome extension, rss reader chrome, chrome extension feed reader"

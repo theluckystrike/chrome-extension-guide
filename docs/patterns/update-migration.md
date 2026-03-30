@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Update Migration. Best Practices"
 description: "Handle extension updates and migrations smoothly."
 canonical_url: "https://bestchromeextensions.com/patterns/update-migration/"
+last_modified_at: 2026-01-15
 ---
 
 Extension Update and Migration Strategies

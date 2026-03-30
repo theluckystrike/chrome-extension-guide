@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Update Strategies"
 description: "Learn how to effectively manage Chrome extension updates including auto-update mechanisms, version management, data migration, handling breaking changes, and rollback planning."
 canonical_url: "https://bestchromeextensions.com/tutorials/extension-update-strategies/"
+last_modified_at: 2026-01-15
 ---
 Chrome Extension Update Strategies
 

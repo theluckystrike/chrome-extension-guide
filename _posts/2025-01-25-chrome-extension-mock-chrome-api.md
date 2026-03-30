@@ -3,6 +3,7 @@ layout: post
 title: "Mocking Chrome APIs for Extension Testing: Complete Guide"
 description: "Learn how to effectively mock Chrome APIs for extension testing. Master fake chrome api implementations, chrome extension unit test strategies, and build reliable tests for your Chrome extensions."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Testing]
 tags: [chrome-extension, testing]
 keywords: "mock chrome api, chrome extension unit test, fake chrome api, mocking chrome extension apis, chrome extension testing best practices"

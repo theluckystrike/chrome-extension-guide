@@ -3,6 +3,7 @@ layout: default
 title: "Chrome Extension Debugging Techniques. Developer Guide"
 description: "Master Chrome extension debugging and testing with this guide covering tools, techniques, and common issues."
 canonical_url: "https://bestchromeextensions.com/guides/advanced-debugging/"
+last_modified_at: 2026-01-15
 ---
 Advanced Debugging Techniques for Chrome Extensions
 

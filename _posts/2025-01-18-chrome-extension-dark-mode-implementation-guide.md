@@ -3,6 +3,7 @@ layout: post
 title: "Chrome Extension Dark Mode Implementation Guide"
 description: "Learn how to implement dark mode in Chrome extensions. This comprehensive guide covers CSS injection, dynamic theme switching, user preferences, and best practices for creating dark theme extensions that work smoothly across all websites."
 date: 2025-01-18
+last_modified_at: 2025-01-18
 categories: [Chrome-Extensions, Tutorial]
 tags: [chrome-extension, tutorial, guide]
 keywords: "chrome extension dark mode, dark theme extension, css injection dark mode"

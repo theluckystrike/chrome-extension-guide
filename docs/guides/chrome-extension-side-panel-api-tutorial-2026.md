@@ -8,6 +8,7 @@ og-title: "Chrome Extension Side Panel API Tutorial 2026"
 og-description: "Complete guide to building Chrome extensions with Side Panel API using TypeScript. Real-world examples from production extensions."
 author: "theluckystrike"
 updated: 2026-01-15
+last_modified_at: 2026-01-15
 ---
 
 Chrome Extension Side Panel API Tutorial 2026: Complete Guide with TypeScript

@@ -3,6 +3,7 @@ layout: post
 title: "Porting Chrome Extensions to Safari: Complete 2025 Guide"
 description: "Learn how to port Chrome extensions to Safari with our comprehensive 2025 guide. Master safari web extension development, understand xcrun safari extension tools, and use WebExtensions API for successful cross-browser deployment."
 date: 2025-01-25
+last_modified_at: 2025-01-25
 categories: [Chrome-Extensions, Cross-Browser]
 tags: [chrome-extension, cross-browser, porting]
 keywords: "port chrome extension safari, safari web extension, xcrun safari extension"
