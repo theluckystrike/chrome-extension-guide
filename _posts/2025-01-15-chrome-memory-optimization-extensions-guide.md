@@ -151,7 +151,7 @@ Consider Alternative Browser Configurations
 
 If memory remains a severe constraint, consider running Chrome with flags that reduce memory usage. The --single-process flag runs Chrome in a single process, dramatically reducing memory overhead at the cost of stability. The --disable-extensions flag disables all extensions for troubleshooting or minimal memory usage.
 
-These advanced configurations are not recommended for everyday use but can be useful in specific scenarios or for users with extremely limited resources.
+These advanced configurations are not recommended for everyday use but can be useful in specific scenarios or for users with extremely limited resources. It is also worth checking whether your Chrome profile folder itself has grown excessively large on disk, which is a separate problem from RAM usage but equally damaging to performance. If your profile is taking up multiple gigabytes, this <a href="https://claudecodeguides.com/chrome-profile-too-large/">guide to diagnosing and fixing an oversized Chrome profile</a> covers the exact folders to clean up.
 
 ---
 
