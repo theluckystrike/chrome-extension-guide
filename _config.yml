@@ -12,6 +12,7 @@ kramdown:
 
 include:
   - google1a218412aeef37cf.html
+  - _redirects
 
 twitter:
   username: _alphashark_
