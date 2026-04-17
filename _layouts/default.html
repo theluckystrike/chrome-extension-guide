@@ -49,11 +49,11 @@
   }
   </script>
   {% endif %}
-  {% if page.title %}
+  {% if page.layout == 'post' %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": {{ page.title | jsonify }},
     "description": {{ page.description | default: page.title | jsonify }},
     "datePublished": "{{ page.date | date_to_xmlschema }}",
@@ -81,6 +81,24 @@
     }
   }
   </script>
+  {% endif %}
+  {% if page.url == '/about/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": {{ page.title | jsonify }},
+    "description": {{ page.description | default: page.title | jsonify }},
+    "url": "{{ page.url | absolute_url }}",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": {{ site.title | jsonify }},
+      "url": "{{ site.url }}"
+    }
+  }
+  </script>
+  {% endif %}
+  {% if page.title and page.url != "/" %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -159,7 +177,7 @@
     {{ content }}
   </main>
   <footer>
-    <p><a href="https://chrometipsguide.com">Chrome Tips</a> &middot; <a href="https://securetoolsguide.com">Security Tools</a> &middot; <a href="https://bestremotetools.com">AI Tools</a> &middot; <a href="https://welikeremotestack.com">Remote Work</a> &middot; <a href="https://claudecodeguides.com">Claude Code</a></p>
+    <p><a href="https://chrometipsguide.com" rel="nofollow noopener" target="_blank">Chrome Tips</a> &middot; <a href="https://securetoolsguide.com" rel="nofollow noopener" target="_blank">Security Tools</a> &middot; <a href="https://bestremotetools.com" rel="nofollow noopener" target="_blank">AI Tools</a> &middot; <a href="https://welikeremotestack.com" rel="nofollow noopener" target="_blank">Remote Work</a> &middot; <a href="https://claudecodeguides.com" rel="nofollow noopener" target="_blank">Claude Code</a></p>
     <p>&copy; 2026 Chrome Extension Guide &middot; <a href="/about/">About</a></p>
   </footer>
   <script>

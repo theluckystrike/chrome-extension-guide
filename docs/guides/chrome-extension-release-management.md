@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Chrome Extension Release Management: Versioning, Rollouts & Hotfixes"
-description: "Master Chrome extension release management. Learn versioning, staged rollouts, beta testing, hotfix processes, and migration planning for reliable extension updates."
+description: "Chrome extension release management guide. Covers versioning, staged rollouts, beta testing, hotfix processes, and migration planning for reliable updates."
 permalink: /guides/chrome-extension-release-management/
 last_modified_at: 2026-01-15
 ---

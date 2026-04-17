@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Chrome Extension Content Script Communication Bridge. Best Practices"
-description: "Bridge communication between content scripts."
+description: "Patterns for bridging Chrome extension content scripts and page JavaScript. Covers postMessage, CustomEvent, DOM signaling, and security best practices."
 canonical_url: "https://bestchromeextensions.com/patterns/content-script-communication-bridge/"
 last_modified_at: 2026-01-15
 ---

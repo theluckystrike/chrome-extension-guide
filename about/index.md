@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "About"
-description: "Independent Chrome extension reviews and guides."
+title: "About Best Chrome Extensions"
+description: "About Best Chrome Extensions. Independent reviews, performance benchmarks, and developer guides for Chrome extensions. No paid placements or affiliate rankings."
 permalink: /about/
 ---
 

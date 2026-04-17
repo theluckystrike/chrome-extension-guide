@@ -1,6 +1,6 @@
-title: "Chrome Extension Guide"
-tagline: "Find Extensions Worth Installing — Reviews, Tutorials & Dev Guides"
-description: "In-depth Chrome extension reviews, development tutorials, and curated recommendations. Find the best extensions for productivity, privacy, and web development with honest testing."
+title: "Best Chrome Extensions - Guides & Tutorials for Developers"
+tagline: "Find Extensions Worth Installing — Guides, Tutorials & Dev Resources"
+description: "Comprehensive guides and tutorials for Chrome extension development. Learn to build, test, publish, and optimize browser extensions for productivity, privacy, and web development."
 url: "https://bestchromeextensions.com"
 baseurl: ""
 google_analytics: "G-XXXXXXXXXX"
@@ -65,6 +65,9 @@ exclude:
   - marked.min.js
   - highlight.min.js
   - icons/
+  - sitemap-manual-backup.xml
+  - plan-agent3.md
+  - plan-archive-agent3.md
 
 collections:
   docs:

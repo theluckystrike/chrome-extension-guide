@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Chrome Extension Downloads Management. Best Practices"
-description: "Manage file downloads from extensions."
+description: "Chrome extension Downloads API patterns. Learn to start, monitor, pause, resume, and batch-manage file downloads with working JavaScript code examples."
 canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
 last_modified_at: 2026-01-15
 ---

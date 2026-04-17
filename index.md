@@ -1,7 +1,10 @@
 ---
 layout: home
-title: "Chrome Extension Guide — Find Extensions Worth Installing"
-description: "Independent Chrome extension reviews. Permission audits, performance testing, honest recommendations."
+title: "Chrome Extension Guide - Best Extensions, Tutorials & Dev Guides"
+description: "Comprehensive guides and tutorials for Chrome extension development. Learn to build, test, publish, and optimize browser extensions."
+sitemap:
+  priority: 1.0
+  changefreq: daily
 ---
 
 # Chrome Extension Guide
