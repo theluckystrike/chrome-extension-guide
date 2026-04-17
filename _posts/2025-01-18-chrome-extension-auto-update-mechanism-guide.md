@@ -40,7 +40,7 @@ Version Number Format
 
 Chrome accepts version numbers in the format of up to four dot-separated integers, such as "1.0.0.0" or "2.1.3". Each segment represents different levels of the release: major version, minor version, patch version, and build number. When comparing versions, Chrome treats them as numbers, so "1.10.0" is considered newer than "1.9.5" because 10 is greater than 9.
 
-Best practices for version management include always incrementing the version number when publishing changes, using semantic versioning to communicate the nature of changes, and maintaining a changelog that documents what changed in each version.
+Best practices for version management include always incrementing the version number when publishing changes, using semantic versioning to communicate the nature of changes, and maintaining a changelog that documents what changed in each version. For a deeper dive into versioning strategies, staged rollouts, and the complete release lifecycle, see our [Chrome extension release management guide](/guides/chrome-extension-release-management/).
 
 Manifest Version Considerations
 

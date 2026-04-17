@@ -7,6 +7,17 @@ last_modified_at: 2025-01-29
 categories: [guides, security]
 tags: [chrome-permissions, extension-security, manifest-permissions, activeTab, host-permissions]
 author: theluckystrike
+faq:
+  - question: "What are the three categories of Chrome extension permissions?"
+    answer: "Chrome extension permissions fall into three categories: required permissions (granted at install, declared in the permissions array), optional permissions (requested at runtime via optional_permissions), and host permissions (control which websites an extension can access)."
+  - question: "What does the activeTab permission do in a Chrome extension?"
+    answer: "The activeTab permission grants temporary access to the currently active tab only when the user explicitly invokes the extension, such as clicking the icon or using a keyboard shortcut. Access disappears when you navigate away or close the tab."
+  - question: "Why should developers use activeTab instead of broad host permissions?"
+    answer: "Using activeTab avoids the alarming 'Read and change all your data on all websites' installation warning, improves conversion rates, and limits potential damage if the extension is compromised since access is temporary and user-initiated."
+  - question: "What is the optional permissions pattern and why does it improve user trust?"
+    answer: "The optional permissions pattern requests permissions at runtime when the user needs them, rather than at installation. This lets users see exactly why access is needed and choose to deny it without losing basic functionality, demonstrating transparency and respect for privacy."
+  - question: "What is permission escalation in Chrome extensions?"
+    answer: "Permission escalation is when an extension gains more access over time than initially granted, or a compromised extension abuses its existing permissions. Extensions with broad permissions like all_urls represent a larger attack surface if compromised."
 ---
 
 Chrome Extension Permissions Explained. Complete Security Guide for Users and Developers
@@ -142,5 +153,7 @@ For more detailed information about specific permissions, see the [Complete Chro
 Take Action
 
 Ready to build a secure Chrome extension with proper permissions? Start by reviewing your current extension's manifest.json and identifying any permissions that can be removed or made optional. Test the optional permissions pattern in your next project and see how users respond to the increased transparency. Your users will thank you for respecting their privacy and security.
+
+If your extension uses the downloads permission, see our [downloads management patterns](/docs/patterns/downloads-management/) for secure file handling practices. When you are ready to publish, our [release management guide](/guides/chrome-extension-release-management/) covers the CWS review process, permissions justification, staged rollouts, and hotfix workflows.
 
 *Built by theluckystrike at zovo.one*

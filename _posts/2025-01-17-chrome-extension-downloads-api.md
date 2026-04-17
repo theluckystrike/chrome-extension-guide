@@ -64,7 +64,7 @@ For testing purposes during development, you can also use the "downloads" permis
 
 Understanding Permission Behavior
 
-It's important to understand that the "downloads" permission alone does not allow your extension to access the contents of downloaded files or the user's file system beyond what Chrome's built-in download manager provides. The permission simply grants your extension the ability to interact with Chrome's download system, the actual file operations are still performed by Chrome itself, which provides an important security boundary.
+It's important to understand that the "downloads" permission alone does not allow your extension to access the contents of downloaded files or the user's file system beyond what Chrome's built-in download manager provides. The permission simply grants your extension the ability to interact with Chrome's download system, the actual file operations are still performed by Chrome itself, which provides an important security boundary. To understand how the downloads permission fits into Chrome's broader security model, see our [Chrome extension permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/).
 
 This design means that your extension can initiate downloads, receive information about downloads, and even cancel or remove downloads, but it cannot directly read or manipulate the downloaded files without additional permissions. If your extension needs to process downloaded files, you will need to request appropriate file access permissions or use the File System Access API.
 
@@ -383,7 +383,7 @@ Conclusion {#conclusion}
 
 The Chrome Downloads API is a powerful tool that enables extension developers to build sophisticated download management functionality. Through this comprehensive tutorial, you've learned how to configure your extension for downloads, initiate downloads with various options, monitor download progress in real-time, and manage existing downloads effectively.
 
-The key to building successful download extensions lies in proper error handling, attention to user experience, and following security best practices. By implementing the patterns and techniques covered in this guide, you'll be well-equipped to create download features that are reliable, user-friendly, and secure.
+The key to building successful download extensions lies in proper error handling, attention to user experience, and following security best practices. By implementing the patterns and techniques covered in this guide, you'll be well-equipped to create download features that are reliable, user-friendly, and secure. For additional patterns including batch downloads, filename generation, and shelf control, check out our [downloads management best practices](/docs/patterns/downloads-management/).
 
 ---
 

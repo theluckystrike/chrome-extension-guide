@@ -89,7 +89,7 @@ Let us begin by creating the manifest.json file with all necessary permissions a
 }
 ```
 
-This manifest declares the permissions our extension needs. The storage permission allows us to save user preferences and export history. The activeTab permission gives us access to the current tab for data extraction. The scripting permission enables us to inject and execute content scripts. The downloads permission lets us programmatically trigger file downloads. The host permissions grant access to all URLs so the extension can work on any website.
+This manifest declares the permissions our extension needs. The storage permission allows us to save user preferences and export history. The activeTab permission gives us access to the current tab for data extraction. The scripting permission enables us to inject and execute content scripts. The downloads permission lets us programmatically trigger file downloads. The host permissions grant access to all URLs so the extension can work on any website. For advanced download patterns like batch queuing, filename generation, and progress tracking, refer to our [downloads management patterns](/docs/patterns/downloads-management/).
 
 ---
 

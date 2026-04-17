@@ -68,7 +68,7 @@ Every Chrome extension begins with a manifest.json file that defines the extensi
 }
 ```
 
-The critical permissions here include "activeTab" to access the current tab's content, "scripting" to execute JavaScript within pages, and "downloads" to save files to your computer. Without these permissions, your extension cannot extract or export any data.
+The critical permissions here include "activeTab" to access the current tab's content, "scripting" to execute JavaScript within pages, and "downloads" to save files to your computer. Without these permissions, your extension cannot extract or export any data. For a deeper look at managing file downloads programmatically, including batch queuing and progress monitoring, see our [Chrome extension downloads management patterns](/docs/patterns/downloads-management/).
 
 Content Script for Data Extraction
 

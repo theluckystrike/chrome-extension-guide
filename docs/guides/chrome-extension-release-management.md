@@ -4,6 +4,17 @@ title: "Chrome Extension Release Management: Versioning, Rollouts & Hotfixes"
 description: "Chrome extension release management guide. Covers versioning, staged rollouts, beta testing, hotfix processes, and migration planning for reliable updates."
 permalink: /guides/chrome-extension-release-management/
 last_modified_at: 2026-01-15
+faq:
+  - question: "What versioning format should I use for Chrome extensions?"
+    answer: "Chrome supports both semantic versioning (MAJOR.MINOR.PATCH) and a four-part format (MAJOR.MINOR.BUILD.PATCH). The four-part format offers more granular control and aligns with Chrome's native version interpretation, making it better for extensions with frequent updates."
+  - question: "How do staged rollouts work for Chrome extensions?"
+    answer: "Chrome Web Store supports deploying to a percentage of users gradually. Start with 5% and monitor for 24-48 hours, then expand to 25%, 50%, and finally 100%. Halt the rollout if error rates increase by more than 10% or user ratings drop significantly."
+  - question: "How do I handle data migration between Chrome extension versions?"
+    answer: "Use chrome.runtime.onInstalled to detect updates, then run migration functions that transform stored data from the old schema to the new one. Register migrations with from/to versions and apply them in order to preserve user data during upgrades."
+  - question: "What are common reasons for Chrome Web Store submission rejection?"
+    answer: "Common rejection reasons include excessive or unjustified permissions, misleading functionality that differs from the store listing, poor user experience, security issues like exposed API keys, and violations of Chrome Web Store policies regarding spam or deceptive behavior."
+  - question: "How should I handle hotfixes for Chrome extensions?"
+    answer: "Create a hotfix branch from the current stable release tag, make the minimal fix needed, run your test suite, and submit to CWS with a clear explanation. Have template communications ready including status page updates and in-extension notifications for affected users."
 ---
 
 Chrome Extension Release Management
@@ -350,7 +361,7 @@ Common rejection reasons include: excessive or unjustified permissions, misleadi
 
 Permissions Justification
 
-Every permission you request requires clear justification in the Chrome Web Store developer dashboard. Explain why each permission is necessary for your extension's core functionality. Request permissions incrementally, add new permissions only when needed for new features, and explain the specific use case for each.
+Every permission you request requires clear justification in the Chrome Web Store developer dashboard. Explain why each permission is necessary for your extension's core functionality. Request permissions incrementally, add new permissions only when needed for new features, and explain the specific use case for each. For a thorough understanding of how each permission category works and strategies for minimizing install warnings, see our [Chrome extension permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/).
 
 Avoid requesting host permissions for `*://*/*` unless absolutely necessary. Instead, limit permissions to specific domains or use the activeTab permission which only grants access when the user explicitly invokes your extension.
 

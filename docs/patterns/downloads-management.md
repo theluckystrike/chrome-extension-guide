@@ -4,6 +4,15 @@ title: "Chrome Extension Downloads Management. Best Practices"
 description: "Chrome extension Downloads API patterns. Learn to start, monitor, pause, resume, and batch-manage file downloads with working JavaScript code examples."
 canonical_url: "https://bestchromeextensions.com/patterns/downloads-management/"
 last_modified_at: 2026-01-15
+faq:
+  - question: "How do I start a download in a Chrome extension?"
+    answer: "Use chrome.downloads.download() with a URL and optional parameters like filename, saveAs (to show a Save As dialog), and method. The function returns a downloadId you can use to track progress."
+  - question: "How do I monitor download progress in a Chrome extension?"
+    answer: "Listen to the chrome.downloads.onChanged event, which fires when download properties change. Check downloadDelta.state for status updates and downloadDelta.bytesReceived to calculate percentage progress."
+  - question: "What are the possible download states in the Chrome Downloads API?"
+    answer: "Downloads transition through three states: in_progress (actively downloading), interrupted (stopped due to an error), and complete (finished successfully)."
+  - question: "How do I batch download multiple files with concurrency control?"
+    answer: "Create a download queue and limit active downloads using Promise.race. Maintain an array of active download promises, start new downloads as slots open, and wait for any to complete before starting the next."
 ---
 
 Downloads Management Patterns
@@ -166,7 +175,9 @@ Related Documentation {#related-documentation}
 - [Downloads API Reference](../api-reference/downloads-api.md)
 - [Downloads Permissions](../permissions/downloads.md)
 - [Download Management Guide](../guides/download-management.md)
--e 
+- [Chrome Extension Permissions Security Guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/) -- understand which permissions your download extension needs and how to minimize security warnings
+- [Chrome Extension Release Management](/guides/chrome-extension-release-management/) -- versioning, staged rollouts, and hotfix processes for shipping download features safely
+
 ---
 
 *Part of the Chrome Extension Guide by theluckystrike. Built at zovo.one.*

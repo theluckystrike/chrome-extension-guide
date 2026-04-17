@@ -48,7 +48,7 @@ Host permissions allow your extension to access specific websites or all website
 }
 ```
 
-Host permissions trigger the most concerning permission warnings. Use `<all_urls>` only as a last resort.
+Host permissions trigger the most concerning permission warnings. Use `<all_urls>` only as a last resort. Our [complete permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/) explains why host permissions carry the highest risk and how to use the optional permissions pattern to minimize warnings.
 
 Types of host permission patterns:
 - Specific domains: `"https://example.com/*"` - Only runs on example.com

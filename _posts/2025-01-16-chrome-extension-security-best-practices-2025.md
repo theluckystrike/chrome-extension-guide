@@ -8,6 +8,17 @@ categories: [Chrome-Extensions, Security]
 tags: [security, permissions, chrome-extension, best-practices]
 keywords: "chrome extension security, extension permissions best practices, secure chrome extension development, browser extension security audit, chrome extension vulnerabilities, CSP chrome extension"
 canonical_url: "https://bestchromeextensions.com/2025/01/16/chrome-extension-security-best-practices-2025/"
+faq:
+  - question: "What are the most common Chrome extension security vulnerabilities?"
+    answer: "The most common vulnerabilities include cross-site scripting (XSS), CORS misconfigurations, insecure storage practices, and privilege escalation through excessive permissions. Extensions are especially vulnerable to XSS because they run with elevated privileges and interact with multiple web pages."
+  - question: "How do I configure Content Security Policy for a Chrome extension in Manifest V3?"
+    answer: "Define CSP in your manifest.json under content_security_policy with an extension_pages directive. A secure baseline is script-src 'self'; object-src 'self'. Never use unsafe-eval unless absolutely necessary, and avoid unsafe-inline for scripts."
+  - question: "How should Chrome extensions store sensitive data securely?"
+    answer: "Use chrome.storage.session for ephemeral sensitive data that should not persist across browser sessions, and never store plaintext passwords or API keys. Use the Identity API for OAuth2 authentication and implement token refresh mechanisms."
+  - question: "What is content script isolation and why does it matter?"
+    answer: "Content scripts share the DOM with host pages but have separate JavaScript contexts. Malicious pages can override built-in functions your script relies on or send crafted messages. Use message validation, Shadow DOM for UI elements, and sanitize all inputs to prevent attacks."
+  - question: "What should a Chrome extension security audit checklist include?"
+    answer: "A thorough audit should cover manifest configuration (permissions, CSP, host permissions), code quality (input validation, message validation), data handling (encryption, cleanup on uninstall), third-party dependencies (updates, known vulnerabilities), and authentication flows."
 ---
 
 Chrome Extension Security Best Practices: Protect Your Users in 2025

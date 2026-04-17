@@ -791,4 +791,6 @@ Key takeaways from this guide:
 
 With these skills, you can build download managers that compete with standalone applications, whether you need simple batch downloading or complex resumable transfers. The chrome.downloads API is well-documented and constantly improving, making it an excellent choice for any extension that handles file downloads.
 
+For ready-to-use code snippets covering batch downloads, progress tracking, and file type handling, see our [downloads management patterns reference](/docs/patterns/downloads-management/).
+
 Start building your download manager today, and explore the endless possibilities of programmatic download management in Chrome extensions.

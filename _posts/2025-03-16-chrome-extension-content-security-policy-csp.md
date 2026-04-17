@@ -28,7 +28,7 @@ The CSP policy is defined through HTTP headers or meta tags and consists of dire
 
 Why CSP Matters for Chrome Extensions
 
-Chrome extensions handle sensitive data and operate with permissions that regular web pages don't have. From accessing browser tabs and managing downloads to reading browsing history and modifying web page content, extensions can perform powerful operations that make them attractive targets for attackers. Without a solid CSP configuration, a single vulnerability could allow attackers to hijack your extension's privileges and compromise user data.
+Chrome extensions handle sensitive data and operate with permissions that regular web pages don't have. From accessing browser tabs and managing downloads to reading browsing history and modifying web page content, extensions can perform powerful operations that make them attractive targets for attackers. For a full breakdown of what each permission grants and how to minimize your extension's attack surface, see our [Chrome extension permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/). Without a solid CSP configuration, a single vulnerability could allow attackers to hijack your extension's privileges and compromise user data.
 
 Google has recognized these risks and progressively tightened CSP requirements with each Manifest version. In Manifest V2, developers had more flexibility but also more responsibility. With Manifest V3, Google imposed stricter defaults to protect users from potentially harmful extensions. This means understanding and properly implementing CSP is now a requirement for getting your extension approved in the Chrome Web Store.
 

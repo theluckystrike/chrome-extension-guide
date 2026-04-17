@@ -26,7 +26,7 @@ Implementing CI/CD for your Chrome extension provides numerous benefits that dir
 
 GitHub Actions enables you to run tests on multiple operating systems and Node.js versions simultaneously, ensuring your extension works correctly across different environments. With matrix builds, you can test against Node.js 18, 20, and 22 on both Ubuntu, macOS, and Windows runners, catching environment-specific issues before they affect users. This comprehensive testing coverage would be time-prohibitive to perform manually for every pull request.
 
-Beyond testing, CI/CD pipelines automate the build process, generating production-ready extension packages with proper versioning and asset optimization. Automated builds eliminate the "it works on my machine" problem by using consistent, controlled build environments. Every release follows identical steps, ensuring reproducibility and reducing deployment-related bugs.
+Beyond testing, CI/CD pipelines automate the build process, generating production-ready extension packages with proper versioning and asset optimization. Automated builds eliminate the "it works on my machine" problem by using consistent, controlled build environments. Every release follows identical steps, ensuring reproducibility and reducing deployment-related bugs. For a comprehensive look at versioning strategies, staged rollouts, beta testing, and hotfix workflows that complement your CI/CD pipeline, see our [Chrome extension release management guide](/guides/chrome-extension-release-management/).
 
 ---
 

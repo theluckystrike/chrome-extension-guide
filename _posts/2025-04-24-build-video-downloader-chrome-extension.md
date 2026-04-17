@@ -79,7 +79,7 @@ Create a new folder for your extension and add the manifest.json file. This conf
 }
 ```
 
-The manifest version 3 is the current standard for Chrome extensions. We've included permissions for activeTab (to access the current page), scripting (to inject detection scripts), and downloads (to save video files). The host_permissions with `<all_urls>` allows your extension to work on any website.
+The manifest version 3 is the current standard for Chrome extensions. We've included permissions for activeTab (to access the current page), scripting (to inject detection scripts), and downloads (to save video files). The host_permissions with `<all_urls>` allows your extension to work on any website. If you want to add advanced download features like pause/resume, batch queuing, and progress bars, our [downloads management patterns guide](/docs/patterns/downloads-management/) covers these in detail.
 
 Extension Folder Structure
 

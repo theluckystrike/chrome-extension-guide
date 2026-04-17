@@ -8,6 +8,17 @@ categories: [Chrome-Extensions, Development]
 tags: [manifest-v3, migration, chrome-extension-development, manifest v3 migration guide, mv2 to mv3 migration, manifest v3 service worker]
 keywords: "manifest v3 migration guide, chrome extension manifest v3, mv2 to mv3 migration, manifest v3 service worker, manifest v3 changes"
 canonical_url: "https://bestchromeextensions.com/2025/01/16/manifest-v3-migration-complete-guide-2025/"
+faq:
+  - question: "What is the difference between Manifest V2 and Manifest V3 background scripts?"
+    answer: "Manifest V2 uses persistent background pages that stay loaded continuously in memory. Manifest V3 replaces these with ephemeral service workers that activate only when needed and terminate when idle, reducing memory consumption."
+  - question: "How do I replace webRequest with declarativeNetRequest in Manifest V3?"
+    answer: "Instead of actively intercepting requests with webRequest, you define rules declaratively in a JSON rules file and reference it in your manifest.json under declarative_net_request. Chrome handles the matching and modification without your extension reading request content."
+  - question: "Why does my extension lose state when the service worker restarts in MV3?"
+    answer: "Service workers terminate when idle, so global variables are lost. Store all important state using chrome.storage.local or chrome.storage.session instead of relying on in-memory variables."
+  - question: "How do I replace setTimeout and setInterval in a Manifest V3 service worker?"
+    answer: "Use the chrome.alarms API instead of setTimeout and setInterval, since service workers can terminate at any time, causing timers to be lost before they fire."
+  - question: "What is chrome.storage.session in Manifest V3?"
+    answer: "chrome.storage.session is a new storage API in Manifest V3 that provides session-scoped storage which clears when the browser closes. It is ideal for temporary data that does not need to persist across browser restarts."
 ---
 
 Manifest V3 Migration Guide: Update Your Chrome Extension in 2025

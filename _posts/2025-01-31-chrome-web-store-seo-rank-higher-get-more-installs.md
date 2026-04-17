@@ -30,7 +30,7 @@ Install Velocity measures how quickly your extension gains new users over a give
 
 User Ratings and Reviews directly impact your ranking. Extensions with higher average ratings (4+ stars) and more reviews tend to rank higher. Google has confirmed that review signals are used in ranking, though the exact weight distribution remains proprietary.
 
-User Retention and Engagement metrics matter even after installation. Google tracks whether users keep your extension active, how often they use it, and whether they uninstall it quickly. Extensions with low uninstall rates signal quality and receive ranking boosts.
+User Retention and Engagement metrics matter even after installation. Google tracks whether users keep your extension active, how often they use it, and whether they uninstall it quickly. Extensions with low uninstall rates signal quality and receive ranking boosts. Maintaining a consistent release cadence with staged rollouts and clear changelogs also signals an active project to both users and the CWS algorithm. Our [Chrome extension release management guide](/guides/chrome-extension-release-management/) covers versioning, rollout strategies, and changelog best practices.
 
 Listing Quality encompasses factors like screenshot quality, the completeness of your description, and whether your promotional tiles meet specifications. A professional, complete listing signals quality to the algorithm.
 

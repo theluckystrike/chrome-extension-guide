@@ -48,7 +48,7 @@ This is perhaps the most concerning permission from a user perspective, and for 
 
 Extensions with this permission can also modify webpage content, which means they can alter what you see, inject new content, or change how websites function. While many legitimate extensions need this permission to work properly (such as website customizers, productivity tools, and certain automation extensions), this permission also presents significant privacy and security risks if the extension is malicious.
 
-Before granting this permission, consider whether the extension truly needs access to all websites. Some extensions only need to work on specific websites and could function with narrower permissions.
+Before granting this permission, consider whether the extension truly needs access to all websites. Some extensions only need to work on specific websites and could function with narrower permissions. For a developer-focused breakdown of each permission type, including activeTab vs host permissions and the optional permissions pattern, see our [complete permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/).
 
 Access Your Tabs and Browsing Activity
 

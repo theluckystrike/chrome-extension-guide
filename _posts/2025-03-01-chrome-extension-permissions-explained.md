@@ -58,7 +58,7 @@ Common warnings include alerts about accessing data on all websites, accessing b
 
 To minimize permission warnings, carefully evaluate every permission you request. Ask yourself whether each permission is truly necessary for your extension's core functionality. Review your host permissions and restrict them to only the domains you absolutely need. Consider using optional permissions for features that would trigger warnings but are not essential to your extension's primary purpose.
 
-When you must request permissions that trigger warnings, provide clear documentation in your extension's store listing explaining why each permission is necessary. Transparency builds trust, and users who understand why an extension needs certain permissions are more likely to proceed with installation. Include this information in your extension's description, and consider adding an on-first-run page that explains your permission requirements in user-friendly language.
+When you must request permissions that trigger warnings, provide clear documentation in your extension's store listing explaining why each permission is necessary. Transparency builds trust, and users who understand why an extension needs certain permissions are more likely to proceed with installation. Include this information in your extension's description, and consider adding an on-first-run page that explains your permission requirements in user-friendly language. For a broader perspective on how users evaluate extension safety, including real-world examples and permission escalation risks, read our [Chrome extension permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/).
 
 ---
 
