@@ -1,4 +1,4 @@
-title: "Best Chrome Extensions - Guides & Tutorials for Developers"
+title: "Best Chrome Extensions Guide"
 tagline: "Find Extensions Worth Installing — Guides, Tutorials & Dev Resources"
 description: "Comprehensive guides and tutorials for Chrome extension development. Learn to build, test, publish, and optimize browser extensions for productivity, privacy, and web development."
 url: "https://bestchromeextensions.com"
@@ -26,6 +26,9 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-feed
+
+feed:
+  posts_limit: 50
 
 permalink: "/:year/:month/:day/:title/"
 

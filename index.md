@@ -1,6 +1,6 @@
 ---
 layout: home
-title: "Chrome Extension Guide - Best Extensions, Tutorials & Dev Guides"
+title: "Chrome Extension Guide"
 description: "Comprehensive guides and tutorials for Chrome extension development. Learn to build, test, publish, and optimize browser extensions."
 sitemap:
   priority: 1.0
