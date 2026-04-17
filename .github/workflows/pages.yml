@@ -58,12 +58,15 @@ jobs:
     steps:
       - name: Submit to IndexNow
         run: |
-          SITE_URL="https://theluckystrike.github.io/chrome-extension-guide"
+          SITE_URL="https://bestchromeextensions.com"
           KEY="c4ded4558ba249bbbd828bbfd67ebe80"
+          HOST="bestchromeextensions.com"
           SITEMAP_URL="${SITE_URL}/sitemap.xml"
+          MAX_URLS=10000
+          BATCH_SIZE=100
 
           # Fetch sitemap and extract URLs
-          curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+' | head -10000 > /tmp/urls.txt
+          curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+' | head -${MAX_URLS} > /tmp/urls.txt
           URL_COUNT=$(wc -l < /tmp/urls.txt)
 
           if [ "$URL_COUNT" -eq 0 ]; then
@@ -71,14 +74,40 @@ jobs:
             exit 0
           fi
 
-          # Build JSON payload file (avoids argument list too long)
-          jq -R -s --arg host "theluckystrike.github.io" --arg key "$KEY" --arg keyloc "${SITE_URL}/${KEY}.txt" \
-            '{host: $host, key: $key, keyLocation: $keyloc, urlList: (split("\n") | map(select(length > 0)))}' \
-            /tmp/urls.txt > /tmp/indexnow-payload.json
+          echo "Found $URL_COUNT URLs in sitemap"
 
-          # Submit to IndexNow using file-based payload
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
-            -H "Content-Type: application/json" \
-            -d @/tmp/indexnow-payload.json)
+          # Submit in batches of BATCH_SIZE (IndexNow best practice)
+          BATCH_NUM=0
+          TOTAL_SUBMITTED=0
+          while [ "$TOTAL_SUBMITTED" -lt "$URL_COUNT" ]; do
+            BATCH_NUM=$((BATCH_NUM + 1))
+            if [ "$BATCH_NUM" -gt 200 ]; then
+              echo "Safety: max batch limit reached"
+              break
+            fi
 
-          echo "Submitted $URL_COUNT URLs to IndexNow (HTTP $RESPONSE)"
+            SKIP=$((TOTAL_SUBMITTED))
+            tail -n +$((SKIP + 1)) /tmp/urls.txt | head -${BATCH_SIZE} > /tmp/batch.txt
+            BATCH_COUNT=$(wc -l < /tmp/batch.txt)
+
+            if [ "$BATCH_COUNT" -eq 0 ]; then
+              break
+            fi
+
+            # Build JSON payload
+            jq -R -s --arg host "$HOST" --arg key "$KEY" --arg keyloc "${SITE_URL}/${KEY}.txt" \
+              '{host: $host, key: $key, keyLocation: $keyloc, urlList: (split("\n") | map(select(length > 0)))}' \
+              /tmp/batch.txt > /tmp/indexnow-payload.json
+
+            RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
+              -H "Content-Type: application/json" \
+              -d @/tmp/indexnow-payload.json)
+
+            echo "Batch $BATCH_NUM: submitted $BATCH_COUNT URLs (HTTP $RESPONSE)"
+            TOTAL_SUBMITTED=$((TOTAL_SUBMITTED + BATCH_COUNT))
+
+            # Rate limit: 1s between batches
+            sleep 1
+          done
+
+          echo "Total: submitted $TOTAL_SUBMITTED of $URL_COUNT URLs in $BATCH_NUM batches"
