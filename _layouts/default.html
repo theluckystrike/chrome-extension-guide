@@ -49,39 +49,7 @@
   }
   </script>
   {% endif %}
-  {% if page.layout == 'post' %}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": {{ page.title | jsonify }},
-    "description": {{ page.description | default: page.title | jsonify }},
-    "datePublished": "{{ page.date | date_to_xmlschema }}",
-    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
-    "author": {
-      "@type": "Person",
-      "name": {{ page.author | default: site.author.name | default: "Michael Lip" | jsonify }}
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": {{ site.title | jsonify }}
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ page.url | absolute_url }}"
-    },
-    "inLanguage": "en-US",
-    {% if page.tags %}"keywords": {{ page.tags | join: ", " | jsonify }},{% endif %}
-    {% if page.categories %}"articleSection": {{ page.categories | first | jsonify }},{% endif %}
-    "wordCount": {{ content | number_of_words }},
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": {{ site.title | jsonify }},
-      "url": "{{ site.url }}"
-    }
-  }
-  </script>
-  {% endif %}
+  {%- comment -%}BlogPosting schema handled by jekyll-seo-tag via {% seo %} above{%- endcomment -%}
   {% if page.url == '/about/' %}
   <script type="application/ld+json">
   {
