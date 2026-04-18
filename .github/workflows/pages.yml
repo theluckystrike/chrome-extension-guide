@@ -66,7 +66,8 @@ jobs:
           BATCH_SIZE=100
 
           # Fetch sitemap and extract URLs
-          curl -s "$SITEMAP_URL" | grep -oP '(?<=<loc>)[^<]+' | head -${MAX_URLS} > /tmp/urls.txt
+          curl -sf "$SITEMAP_URL" -o /tmp/sitemap.xml || { echo "::warning::Sitemap fetch failed"; exit 0; }
+          grep -oP '(?<=<loc>)[^<]+' /tmp/sitemap.xml | head -${MAX_URLS} > /tmp/urls.txt
           URL_COUNT=$(wc -l < /tmp/urls.txt)
 
           if [ "$URL_COUNT" -eq 0 ]; then
@@ -79,6 +80,7 @@ jobs:
           # Submit in batches of BATCH_SIZE (IndexNow best practice)
           BATCH_NUM=0
           TOTAL_SUBMITTED=0
+          FAIL_COUNT=0
           while [ "$TOTAL_SUBMITTED" -lt "$URL_COUNT" ]; do
             BATCH_NUM=$((BATCH_NUM + 1))
             if [ "$BATCH_NUM" -gt 200 ]; then
@@ -103,11 +105,24 @@ jobs:
               -H "Content-Type: application/json" \
               -d @/tmp/indexnow-payload.json)
 
-            echo "Batch $BATCH_NUM: submitted $BATCH_COUNT URLs (HTTP $RESPONSE)"
             TOTAL_SUBMITTED=$((TOTAL_SUBMITTED + BATCH_COUNT))
+
+            if [ "$RESPONSE" = "200" ] || [ "$RESPONSE" = "202" ]; then
+              echo "Batch $BATCH_NUM: $BATCH_COUNT URLs OK (HTTP $RESPONSE) [total: $TOTAL_SUBMITTED]"
+            elif [ "$RESPONSE" = "429" ]; then
+              echo "Batch $BATCH_NUM: rate limited (HTTP 429), waiting 5s"
+              sleep 5
+              continue
+            else
+              FAIL_COUNT=$((FAIL_COUNT + 1))
+              echo "Batch $BATCH_NUM: FAILED $BATCH_COUNT URLs (HTTP $RESPONSE) [failures: $FAIL_COUNT]"
+            fi
 
             # Rate limit: 1s between batches
             sleep 1
           done
 
-          echo "Total: submitted $TOTAL_SUBMITTED of $URL_COUNT URLs in $BATCH_NUM batches"
+          echo "Total: submitted $TOTAL_SUBMITTED of $URL_COUNT URLs in $BATCH_NUM batches, $FAIL_COUNT failures"
+          if [ "$FAIL_COUNT" -gt 0 ]; then
+            echo "::warning::IndexNow had $FAIL_COUNT failed batches"
+          fi

@@ -3,7 +3,7 @@ tagline: "Find Extensions Worth Installing — Guides, Tutorials & Dev Resources
 description: "Comprehensive guides and tutorials for Chrome extension development. Learn to build, test, publish, and optimize browser extensions for productivity, privacy, and web development."
 url: "https://bestchromeextensions.com"
 baseurl: ""
-google_analytics: "G-XXXXXXXXXX"
+# google_analytics: "G-XXXXXXXXXX"  # Disabled: placeholder ID injects broken gtag.js on every page
 theme: minima
 markdown: kramdown
 highlighter: rouge

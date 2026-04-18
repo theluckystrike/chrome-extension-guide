@@ -363,7 +363,7 @@ Permissions Justification
 
 Every permission you request requires clear justification in the Chrome Web Store developer dashboard. Explain why each permission is necessary for your extension's core functionality. Request permissions incrementally, add new permissions only when needed for new features, and explain the specific use case for each. For a thorough understanding of how each permission category works and strategies for minimizing install warnings, see our [Chrome extension permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/).
 
-Avoid requesting host permissions for `*://*/*` unless absolutely necessary. Instead, limit permissions to specific domains or use the activeTab permission which only grants access when the user explicitly invokes your extension.
+Avoid requesting host permissions for `*://*/*` unless absolutely necessary. Instead, limit permissions to specific domains or use the activeTab permission which only grants access when the user explicitly invokes your extension. For extensions that handle file downloads, review the [downloads management pattern](/docs/patterns/downloads-management/) to ensure your download flows follow best practices before submission.
 
 Responding to Reviewer Feedback
 
