@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Side Panel API Complete Reference"
 description: "The Chrome Side Panel API provides a persistent side panel UI that displays alongside web content, offering an integrated experience for extensions that need to display information while users browse."
-canonical_url: "https://bestchromeextensions.com/api-reference/side-panel-api/"
 last_modified_at: 2026-01-15
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Reading List Api. Best Practices"
 description: "Access Chrome Reading List with the Reading List API."
-canonical_url: "https://bestchromeextensions.com/patterns/reading-list-api/"
 last_modified_at: 2026-01-15
 ---
 

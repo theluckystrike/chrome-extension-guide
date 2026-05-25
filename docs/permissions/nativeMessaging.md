@@ -5,7 +5,6 @@ description: "Enables communication between extension and native applications Tw
 permalink: /permissions/nativeMessaging/
 category: permissions
 order: 25
-canonical_url: "https://bestchromeextensions.com/permissions/nativeMessaging/"
 last_modified_at: 2026-01-15
 ---
 

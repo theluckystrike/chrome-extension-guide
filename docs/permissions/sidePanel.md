@@ -5,7 +5,6 @@ description: "API 114+ None. this permission does not trigger a warning at ins..
 permalink: /permissions/sidePanel/
 category: permissions
 order: 38
-canonical_url: "https://bestchromeextensions.com/permissions/sidePanel/"
 last_modified_at: 2026-01-15
 ---
 

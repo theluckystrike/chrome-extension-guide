@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Advanced I18n. Best Practices"
 description: "Advanced internationalization patterns for multi-language extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/advanced-i18n/"
 last_modified_at: 2026-01-15
 ---
 

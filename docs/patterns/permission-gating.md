@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Permission Gating. Best Practices"
 description: "Request permissions progressively with permission gating patterns."
-canonical_url: "https://bestchromeextensions.com/patterns/permission-gating/"
 last_modified_at: 2026-01-15
 ---
 

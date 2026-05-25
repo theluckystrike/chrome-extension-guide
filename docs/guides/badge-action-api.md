@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Badge & Action API. How to Update Icons, Badges, and Tooltips"
 description: "A comprehensive developer guide for building Chrome extensions using the chrome.action API, covering badge text, dynamic icons, badge colors, and per-tab configurations."
-canonical_url: "https://bestchromeextensions.com/guides/badge-action-api/"
 last_modified_at: 2026-01-15
 ---
 

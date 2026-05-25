@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Devtools Panels. Best Practices"
 description: "Create custom DevTools panels for extension debugging."
-canonical_url: "https://bestchromeextensions.com/patterns/devtools-panels/"
 last_modified_at: 2026-01-15
 ---
 

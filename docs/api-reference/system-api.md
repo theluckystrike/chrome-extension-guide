@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome System API Complete Reference"
 description: "The Chrome System API provides access to system hardware and resource information including CPU, memory, storage devices, and display configurations."
-canonical_url: "https://bestchromeextensions.com/api-reference/system-api/"
 last_modified_at: 2026-01-15
 ---
 

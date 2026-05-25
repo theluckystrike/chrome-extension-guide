@@ -2,7 +2,6 @@
 layout: default
 title: "OAuth2 Authentication in Chrome Extensions. Developer Guide"
 description: "Learn how to implement OAuth2 authentication in Chrome Extensions using chrome.identity API, including Google APIs and third-party providers."
-canonical_url: "https://bestchromeextensions.com/tutorials/oauth2-in-extensions/"
 last_modified_at: 2026-01-15
 ---
 

@@ -2,8 +2,6 @@
 title: "Chrome Extension Lazy Loading: Dynamic Imports and Code Splitting for Faster Startup"
 description: Master lazy loading and code splitting techniques for Chrome extensions. Learn how to reduce startup time by 60%+ using dynamic imports, on-demand rendering, and framework-specific patterns for React, Vue, and Svelte extensions.
 layout: default
-canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-lazy-loading-code-splitting/"
-
 last_modified_at: 2026-01-15
 ---
 

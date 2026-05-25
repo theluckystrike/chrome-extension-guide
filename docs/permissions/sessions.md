@@ -5,7 +5,6 @@ description: "Permission string: Grants access to API Query and restore recently
 permalink: /permissions/sessions/
 category: permissions
 order: 37
-canonical_url: "https://bestchromeextensions.com/permissions/sessions/"
 last_modified_at: 2026-01-15
 ---
 

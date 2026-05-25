@@ -5,7 +5,6 @@ description: "Access to the API for controlling per-site content settings (cooki
 permalink: /permissions/contentSettings/
 category: permissions
 order: 8
-canonical_url: "https://bestchromeextensions.com/permissions/contentSettings/"
 last_modified_at: 2026-01-15
 ---
 

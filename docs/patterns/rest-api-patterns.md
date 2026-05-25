@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Rest Api Patterns. Best Practices"
 description: "Consume REST APIs securely in Chrome extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/rest-api-patterns/"
 last_modified_at: 2026-01-15
 ---
 

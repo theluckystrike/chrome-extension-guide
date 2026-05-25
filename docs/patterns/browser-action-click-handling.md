@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Browser Action Click Handling. Best Practices"
 description: "Handle browser action (toolbar button) clicks with popup, badge, and command patterns."
-canonical_url: "https://bestchromeextensions.com/patterns/browser-action-click-handling/"
 last_modified_at: 2026-01-15
 ---
 

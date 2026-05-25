@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Storage Migration. Best Practices"
 description: "Migrate between storage APIs safely."
-canonical_url: "https://bestchromeextensions.com/patterns/storage-migration/"
 last_modified_at: 2026-01-15
 ---
 

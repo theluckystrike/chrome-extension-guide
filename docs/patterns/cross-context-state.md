@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Cross Context State. Best Practices"
 description: "Share state across extension contexts."
-canonical_url: "https://bestchromeextensions.com/patterns/cross-context-state/"
 last_modified_at: 2026-01-15
 ---
 

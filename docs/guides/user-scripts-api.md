@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension User Scripts API. How to Inject User-Provided Scripts"
 description: "A comprehensive developer guide for using the chrome.userScripts API to inject user-provided scripts, including MAIN world execution, script registration, and security best practices."
-canonical_url: "https://bestchromeextensions.com/guides/user-scripts-api/"
 last_modified_at: 2026-01-15
 ---
 

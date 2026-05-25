@@ -1,10 +1,7 @@
 ---
-
 layout: default
 title: "Chrome Extension Storage API Tutorial: Sync vs Local. Complete TypeScript Guide"
 description: "Master chrome.storage.sync vs chrome.storage.local in this comprehensive TypeScript tutorial. Learn when to use each storage type, real-world patterns, and how Tab Suspender Pro manages extension state."
-canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/"
-
 last_modified_at: 2026-01-15
 ---
 

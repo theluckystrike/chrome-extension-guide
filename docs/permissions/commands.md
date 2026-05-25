@@ -5,7 +5,6 @@ description: "is a manifest key (not a entry) that defines keyboard shortcuts. E
 permalink: /permissions/commands/
 category: permissions
 order: 7
-canonical_url: "https://bestchromeextensions.com/permissions/commands/"
 last_modified_at: 2026-01-15
 ---
 

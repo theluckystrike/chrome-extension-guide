@@ -5,7 +5,6 @@ description: "Enables blocking/modifying network requests in listeners."
 permalink: /permissions/webRequestBlocking/
 category: permissions
 order: 50
-canonical_url: "https://bestchromeextensions.com/permissions/webRequestBlocking/"
 last_modified_at: 2026-01-15
 ---
 

@@ -5,7 +5,6 @@ description: ": : Access to API. configure Chrome's proxy settings : High. route
 permalink: /permissions/proxy/
 category: permissions
 order: 32
-canonical_url: "https://bestchromeextensions.com/permissions/proxy/"
 last_modified_at: 2026-01-15
 ---
 

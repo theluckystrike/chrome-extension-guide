@@ -5,7 +5,6 @@ description: "Access to the API for capturing the visible area of a tab as a med
 permalink: /permissions/tabCapture/
 category: permissions
 order: 41
-canonical_url: "https://bestchromeextensions.com/permissions/tabCapture/"
 last_modified_at: 2026-01-15
 ---
 

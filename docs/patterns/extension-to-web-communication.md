@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Extension To Web Communication. Best Practices"
 description: "Communicate from extensions to web pages."
-canonical_url: "https://bestchromeextensions.com/patterns/extension-to-web-communication/"
 last_modified_at: 2026-01-15
 ---
 

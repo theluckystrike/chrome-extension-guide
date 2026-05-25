@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Authentication Patterns. Best Practices"
 description: "Implement OAuth and authentication flows in Chrome extensions securely."
-canonical_url: "https://bestchromeextensions.com/patterns/authentication-patterns/"
 last_modified_at: 2026-01-15
 ---
 

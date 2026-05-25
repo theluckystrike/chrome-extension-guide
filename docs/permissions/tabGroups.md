@@ -5,7 +5,6 @@ description: "The permission grants extensions access to the API, which enables 
 permalink: /permissions/tabGroups/
 category: permissions
 order: 42
-canonical_url: "https://bestchromeextensions.com/permissions/tabGroups/"
 last_modified_at: 2026-01-15
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Testing Patterns. Best Practices"
 description: "Testing patterns for Chrome extension development."
-canonical_url: "https://bestchromeextensions.com/patterns/testing-patterns/"
 last_modified_at: 2026-01-15
 ---
 

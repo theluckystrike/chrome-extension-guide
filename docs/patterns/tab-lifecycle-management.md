@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Tab Lifecycle Management. Best Practices"
 description: "Manage tab lifecycle events effectively."
-canonical_url: "https://bestchromeextensions.com/patterns/tab-lifecycle-management/"
 last_modified_at: 2026-01-15
 ---
 

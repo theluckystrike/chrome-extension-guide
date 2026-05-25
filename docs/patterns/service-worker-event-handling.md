@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Service Worker Event Handling. Best Practices"
 description: "Handle service worker events properly."
-canonical_url: "https://bestchromeextensions.com/patterns/service-worker-event-handling/"
 last_modified_at: 2026-01-15
 ---
 

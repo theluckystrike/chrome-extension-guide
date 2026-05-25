@@ -1,10 +1,7 @@
 ---
-
 title: Chrome Extension Storage Quota. Limits, Best Practices, and Data Management
 description: Learn about Chrome extension storage quotas, including local storage limits, sync storage constraints, and strategies for efficient data management.
 layout: default
-canonical_url: "https://bestchromeextensions.com/docs/guides/storage-quota-management/"
-
 last_modified_at: 2026-01-15
 ---
 

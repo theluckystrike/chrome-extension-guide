@@ -541,7 +541,6 @@ Native messaging bridges Chrome Extensions with native applications, enabling po
 layout: default
 title: "Chrome Extension Native Messaging. How to Communicate with Desktop Apps"
 description: "Learn how to build native messaging hosts to enable Chrome extensions to communicate with desktop applications using stdio."
-canonical_url: "https://bestchromeextensions.com/guides/native-messaging/"
 ---
 
 Chrome Extension Native Messaging. How to Communicate with Desktop Apps

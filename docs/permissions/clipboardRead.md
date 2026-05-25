@@ -5,7 +5,6 @@ description: "Allows reading clipboard content using or . 'Read data you copy an
 permalink: /permissions/clipboardRead/
 category: permissions
 order: 5
-canonical_url: "https://bestchromeextensions.com/permissions/clipboardRead/"
 last_modified_at: 2026-01-15
 ---
 

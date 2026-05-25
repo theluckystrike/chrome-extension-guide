@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Common Rejections. Publishing Guide"
 description: "Understand and avoid the most common Chrome Web Store rejection reasons."
-canonical_url: "https://bestchromeextensions.com/publishing/common-rejections/"
 last_modified_at: 2026-01-15
 ---
 

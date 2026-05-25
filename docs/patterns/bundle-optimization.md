@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Bundle Optimization. Best Practices"
 description: "Optimize extension bundle size with code splitting, tree shaking, and lazy loading."
-canonical_url: "https://bestchromeextensions.com/patterns/bundle-optimization/"
 last_modified_at: 2026-01-15
 ---
 

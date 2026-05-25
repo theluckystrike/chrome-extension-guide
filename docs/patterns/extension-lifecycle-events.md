@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Extension Lifecycle Events. Best Practices"
 description: "Handle extension lifecycle events."
-canonical_url: "https://bestchromeextensions.com/patterns/extension-lifecycle-events/"
 last_modified_at: 2026-01-15
 ---
 

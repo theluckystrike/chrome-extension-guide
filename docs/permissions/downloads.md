@@ -5,7 +5,6 @@ description: "Grants access to API Start downloads programmatically from any ext
 permalink: /permissions/downloads/
 category: permissions
 order: 17
-canonical_url: "https://bestchromeextensions.com/permissions/downloads/"
 last_modified_at: 2026-01-15
 ---
 

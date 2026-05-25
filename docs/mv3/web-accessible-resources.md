@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Web Accessible Resources. Manifest V3 Guide"
 description: "Configure web accessible resources in Manifest V3 for content script and page access."
-canonical_url: "https://bestchromeextensions.com/mv3/web-accessible-resources/"
 last_modified_at: 2026-01-15
 ---
 

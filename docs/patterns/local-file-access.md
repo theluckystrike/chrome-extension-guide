@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Local File Access. Best Practices"
 description: "Access local files from Chrome extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/local-file-access/"
 last_modified_at: 2026-01-15
 ---
 

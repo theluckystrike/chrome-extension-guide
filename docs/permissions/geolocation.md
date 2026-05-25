@@ -5,7 +5,6 @@ description: ": (optional permission in MV3) Enables in extension pages MV3 chal
 permalink: /permissions/geolocation/
 category: permissions
 order: 20
-canonical_url: "https://bestchromeextensions.com/permissions/geolocation/"
 last_modified_at: 2026-01-15
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Theme Sync. Best Practices"
 description: "Synchronize extension themes with browser themes."
-canonical_url: "https://bestchromeextensions.com/patterns/theme-sync/"
 last_modified_at: 2026-01-15
 ---
 

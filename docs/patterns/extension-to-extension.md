@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Extension To Extension. Best Practices"
 description: "Implement communication between different Chrome extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/extension-to-extension/"
 last_modified_at: 2026-01-15
 ---
 

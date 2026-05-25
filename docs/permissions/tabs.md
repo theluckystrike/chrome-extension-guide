@@ -5,7 +5,6 @@ description: "Grants persistent access to tab metadata on all tabs in the browse
 permalink: /permissions/tabs/
 category: permissions
 order: 43
-canonical_url: "https://bestchromeextensions.com/permissions/tabs/"
 last_modified_at: 2026-01-15
 ---
 

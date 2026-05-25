@@ -2,7 +2,6 @@
 layout: default
 title: "Working with Tab Groups in Chrome Extensions. Developer Guide"
 description: "Learn how to use the Chrome Tab Groups API to create, organize, and manage tab groups programmatically. Covers group colors, titles, moving tabs, events, and productivity patterns."
-canonical_url: "https://bestchromeextensions.com/tutorials/tab-groups-api-guide/"
 last_modified_at: 2026-01-15
 ---
 

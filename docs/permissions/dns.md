@@ -5,7 +5,6 @@ description: "Permission string: Grants access to API Perform DNS lookups from t
 permalink: /permissions/dns/
 category: permissions
 order: 16
-canonical_url: "https://bestchromeextensions.com/permissions/dns/"
 last_modified_at: 2026-01-15
 ---
 

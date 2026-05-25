@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Iframe Communication. Best Practices"
 description: "Communicate with iframes in content scripts."
-canonical_url: "https://bestchromeextensions.com/patterns/iframe-communication/"
 last_modified_at: 2026-01-15
 ---
 

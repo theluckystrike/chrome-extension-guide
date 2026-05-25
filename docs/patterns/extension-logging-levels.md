@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Extension Logging Levels. Best Practices"
 description: "Implement structured logging with different levels for development and production."
-canonical_url: "https://bestchromeextensions.com/patterns/extension-logging-levels/"
 last_modified_at: 2026-01-15
 ---
 

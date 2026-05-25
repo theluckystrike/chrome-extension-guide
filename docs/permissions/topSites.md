@@ -5,7 +5,6 @@ description: "Permission string: Grants access to API Returns the user's most vi
 permalink: /permissions/topSites/
 category: permissions
 order: 44
-canonical_url: "https://bestchromeextensions.com/permissions/topSites/"
 last_modified_at: 2026-01-15
 ---
 

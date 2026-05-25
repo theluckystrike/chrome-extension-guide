@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome API Reference Overview"
 description: "A comprehensive reference for Chrome Extensions APIs in Manifest V3, covering permissions, methods, events, types, and practical code examples for all extension capabilities."
-canonical_url: "https://bestchromeextensions.com/api-reference/README/"
 last_modified_at: 2026-01-15
 ---
 

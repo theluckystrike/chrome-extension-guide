@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Extension Analytics Privacy. Best Practices"
 description: "Track extension analytics while maintaining user privacy with privacy-conscious telemetry patterns."
-canonical_url: "https://bestchromeextensions.com/patterns/extension-analytics-privacy/"
 last_modified_at: 2026-01-15
 ---
 

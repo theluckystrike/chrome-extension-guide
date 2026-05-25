@@ -2,7 +2,6 @@
 layout: default
 title: "Managing Downloads in Chrome Extensions. Developer Guide"
 description: "Learn how to use the Chrome Downloads API to initiate, monitor, pause, resume, and manage file downloads in your Chrome extension."
-canonical_url: "https://bestchromeextensions.com/tutorials/downloads-api-guide/"
 last_modified_at: 2026-01-15
 ---
 

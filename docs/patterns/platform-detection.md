@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Platform Detection. Best Practices"
 description: "Detect platform and OS for cross-platform extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/platform-detection/"
 last_modified_at: 2026-01-15
 ---
 

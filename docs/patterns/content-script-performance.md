@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Content Script Performance. Best Practices"
 description: "Optimize content script performance."
-canonical_url: "https://bestchromeextensions.com/patterns/content-script-performance/"
 last_modified_at: 2026-01-15
 ---
 

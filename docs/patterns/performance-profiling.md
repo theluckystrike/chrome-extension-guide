@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Performance Profiling. Best Practices"
 description: "Profile and optimize extension performance."
-canonical_url: "https://bestchromeextensions.com/patterns/performance-profiling/"
 last_modified_at: 2026-01-15
 ---
 

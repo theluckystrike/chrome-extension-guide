@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Enterprise Policies. Best Practices"
 description: "Support enterprise deployment with Chrome policies."
-canonical_url: "https://bestchromeextensions.com/patterns/enterprise-policies/"
 last_modified_at: 2026-01-15
 ---
 

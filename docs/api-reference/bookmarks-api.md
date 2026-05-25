@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Bookmarks API Complete Reference"
 description: "The Chrome Bookmarks API enables creating, reading, updating, deleting, searching, and organizing bookmarks in a hierarchical tree structure with folders and nodes."
-canonical_url: "https://bestchromeextensions.com/api-reference/bookmarks-api/"
 last_modified_at: 2026-01-15
 ---
 

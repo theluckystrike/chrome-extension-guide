@@ -1,10 +1,7 @@
 ---
-
 title: How Tab Suspender Pro Reduces Chrome Memory Usage by 80%. Complete Guide
 description: "How Tab Suspender Pro cuts Chrome memory usage by 80%. Benchmarks, competitor comparisons, and a step-by-step setup guide for tab suspension."
 layout: default
-canonical_url: "https://bestchromeextensions.com/docs/guides/tab-suspender-pro-reduce-memory/"
-
 last_modified_at: 2026-01-15
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Versioning. Semantic Versioning and Auto-Update Strategy"
 description: "Master extension versioning with semantic versioning principles, auto-update mechanisms, differential updates, and staged rollouts for production Chrome extensions."
-canonical_url: "https://bestchromeextensions.com/publishing/versioning-strategy/"
 last_modified_at: 2026-01-15
 ---
 

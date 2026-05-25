@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Extension Feature Flags Impl. Best Practices"
 description: "Implement feature flags with storage and remote configuration."
-canonical_url: "https://bestchromeextensions.com/patterns/extension-feature-flags-impl/"
 last_modified_at: 2026-01-15
 ---
 

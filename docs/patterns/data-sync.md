@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Data Sync. Best Practices"
 description: "Sync extension data across devices with sync storage."
-canonical_url: "https://bestchromeextensions.com/patterns/data-sync/"
 last_modified_at: 2026-01-15
 ---
 

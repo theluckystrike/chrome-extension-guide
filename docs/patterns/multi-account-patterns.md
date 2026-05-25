@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Multi Account Patterns. Best Practices"
 description: "Handle multiple user accounts in extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/multi-account-patterns/"
 last_modified_at: 2026-01-15
 ---
 

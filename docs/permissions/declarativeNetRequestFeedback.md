@@ -5,7 +5,6 @@ description: ": : Access to event for debugging rule matches"
 permalink: /permissions/declarativeNetRequestFeedback/
 category: permissions
 order: 14
-canonical_url: "https://bestchromeextensions.com/permissions/declarativeNetRequestFeedback/"
 last_modified_at: 2026-01-15
 ---
 

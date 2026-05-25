@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Development Glossary. Key Terms Explained"
 description: "A comprehensive glossary of Chrome extension development terms. Learn about manifest, content scripts, service workers, and more."
-canonical_url: "https://bestchromeextensions.com/docs/glossary/"
 date: 2026-03-23
 last_modified_at: 2026-03-23
 ---

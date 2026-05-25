@@ -5,7 +5,6 @@ description: "Permission string: Grants access to API Controls display and syste
 permalink: /permissions/power/
 category: permissions
 order: 30
-canonical_url: "https://bestchromeextensions.com/permissions/power/"
 last_modified_at: 2026-01-15
 ---
 

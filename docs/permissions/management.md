@@ -5,7 +5,6 @@ description: "Access to API. manage other installed extensions, apps, and themes
 permalink: /permissions/management/
 category: permissions
 order: 24
-canonical_url: "https://bestchromeextensions.com/permissions/management/"
 last_modified_at: 2026-01-15
 ---
 

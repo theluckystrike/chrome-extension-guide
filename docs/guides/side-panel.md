@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Side Panel API. How to Build a Sidebar UI"
 description: "Learn how to build a sidebar UI in Chrome extensions using the chrome.sidePanel API. This guide covers manifest setup, open/close methods, per-tab panels, and UX patterns."
-canonical_url: "https://bestchromeextensions.com/guides/side-panel/"
 last_modified_at: 2026-01-15
 ---
 

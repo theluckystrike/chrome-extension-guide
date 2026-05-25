@@ -5,7 +5,6 @@ description: ": : Full access to API. read, create, update, delete, move, search
 permalink: /permissions/bookmarks/
 category: permissions
 order: 3
-canonical_url: "https://bestchromeextensions.com/permissions/bookmarks/"
 last_modified_at: 2026-01-15
 ---
 

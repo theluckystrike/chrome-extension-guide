@@ -5,7 +5,6 @@ description: "Removes the quota limits on , IndexedDB, Cache API, and other clie
 permalink: /permissions/unlimitedStorage/
 category: permissions
 order: 47
-canonical_url: "https://bestchromeextensions.com/permissions/unlimitedStorage/"
 last_modified_at: 2026-01-15
 ---
 

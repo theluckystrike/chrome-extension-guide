@@ -5,7 +5,6 @@ description: "Access to the API for showing/hiding your extension's action icon 
 permalink: /permissions/declarativeContent/
 category: permissions
 order: 12
-canonical_url: "https://bestchromeextensions.com/permissions/declarativeContent/"
 last_modified_at: 2026-01-15
 ---
 

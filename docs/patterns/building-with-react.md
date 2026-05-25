@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Building With React. Best Practices"
 description: "Build Chrome extensions with React."
-canonical_url: "https://bestchromeextensions.com/patterns/building-with-react/"
 last_modified_at: 2026-01-15
 ---
 

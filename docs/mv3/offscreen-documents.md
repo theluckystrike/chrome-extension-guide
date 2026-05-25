@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Offscreen Documents. Manifest V3 Guide"
 description: "Use offscreen documents for DOM operations and long-running tasks in Manifest V3."
-canonical_url: "https://bestchromeextensions.com/mv3/offscreen-documents/"
 last_modified_at: 2026-01-15
 ---
 

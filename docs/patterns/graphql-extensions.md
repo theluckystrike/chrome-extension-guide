@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Graphql Extensions. Best Practices"
 description: "Consume GraphQL APIs in Chrome extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/graphql-extensions/"
 last_modified_at: 2026-01-15
 ---
 

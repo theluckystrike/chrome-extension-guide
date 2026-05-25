@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Tab Communication. Best Practices"
 description: "Communicate between extension components and tabs."
-canonical_url: "https://bestchromeextensions.com/patterns/tab-communication/"
 last_modified_at: 2026-01-15
 ---
 

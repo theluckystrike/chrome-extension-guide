@@ -435,7 +435,6 @@ Best Practices for Store Approval
 layout: default
 title: "Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Trust"
 description: "Learn how to implement the principle of least privilege in your Chrome extension, use optional permissions effectively, and understand the difference between activeTab and host permissions."
-canonical_url: "https://bestchromeextensions.com/guides/permissions-best-practices/"
 ---
 
 Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Trust

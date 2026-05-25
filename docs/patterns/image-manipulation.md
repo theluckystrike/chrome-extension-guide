@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Image Manipulation. Best Practices"
 description: "Process and manipulate images in extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/image-manipulation/"
 last_modified_at: 2026-01-15
 ---
 

@@ -5,7 +5,6 @@ description: "Grants access to the API Show rich desktop notifications (basic, i
 permalink: /permissions/notifications/
 category: permissions
 order: 26
-canonical_url: "https://bestchromeextensions.com/permissions/notifications/"
 last_modified_at: 2026-01-15
 ---
 

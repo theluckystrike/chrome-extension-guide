@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Incognito Handling. Best Practices"
 description: "Handle incognito mode in extensions."
-canonical_url: "https://bestchromeextensions.com/patterns/incognito-handling/"
 last_modified_at: 2026-01-15
 ---
 

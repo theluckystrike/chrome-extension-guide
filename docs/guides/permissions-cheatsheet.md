@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Permissions Cheatsheet. All Permissions at a Glance"
 description: "Complete reference for Chrome Extension permissions. Quick lookup table for all available permissions, their use cases, and security considerations."
-canonical_url: "https://bestchromeextensions.com/guides/permissions-cheatsheet/"
 last_modified_at: 2026-01-15
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Cross-Origin Requests. CORS, Host Permissions, and Fetch API"
 description: "Learn how Chrome extensions handle cross-origin requests in Manifest V3, including host permissions, CORS rules, Fetch API usage from background scripts, and content script limitations."
-canonical_url: "https://bestchromeextensions.com/guides/cross-origin-requests/"
 last_modified_at: 2026-01-15
 ---
 

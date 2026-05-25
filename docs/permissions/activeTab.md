@@ -5,7 +5,6 @@ description: "Grants temporary access to the currently active tab when the user 
 permalink: /permissions/activeTab/
 category: permissions
 order: 1
-canonical_url: "https://bestchromeextensions.com/permissions/activeTab/"
 last_modified_at: 2026-01-15
 ---
 

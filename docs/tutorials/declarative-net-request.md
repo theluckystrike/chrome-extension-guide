@@ -2,7 +2,6 @@
 layout: default
 title: "declarativeNetRequest: Content Blocking in MV3. Complete Tutorial"
 description: "Master declarativeNetRequest API in Chrome Extensions Manifest V3. Learn static vs dynamic rules, JSON syntax, migration from webRequest, and common use cases."
-canonical_url: "https://bestchromeextensions.com/tutorials/declarative-net-request/"
 last_modified_at: 2026-01-15
 ---
 

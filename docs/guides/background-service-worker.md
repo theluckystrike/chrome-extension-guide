@@ -1,10 +1,7 @@
 ---
-
 title: Chrome Extension Background Service Worker Guide. Complete MV3 Tutorial
 description: Master Chrome extension background service workers in Manifest V3. Learn TypeScript patterns for event handling, messaging, alarms, and building production-ready extensions like Tab Suspender Pro.
 layout: default
-canonical_url: "https://bestchromeextensions.com/docs/guides/background-service-worker/"
-
 last_modified_at: 2026-01-15
 ---
 

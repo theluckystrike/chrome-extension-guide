@@ -2,7 +2,6 @@
 layout: default
 title: "Service Workers in Chrome Extensions: A detailed look"
 description: "Master Chrome Extension service workers: lifecycle, event-driven architecture, state management, keeping workers alive, alarm patterns, updates, and debugging."
-canonical_url: "https://bestchromeextensions.com/tutorials/service-workers-deep detailed look/"
 last_modified_at: 2026-01-15
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Content Script Vue. Best Practices"
 description: "Integrate Vue.js with content scripts."
-canonical_url: "https://bestchromeextensions.com/patterns/content-script-vue/"
 last_modified_at: 2026-01-15
 ---
 

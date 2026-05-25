@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Tab Group Patterns. Best Practices"
 description: "Organize tabs with the Tab Groups API."
-canonical_url: "https://bestchromeextensions.com/patterns/tab-group-patterns/"
 last_modified_at: 2026-01-15
 ---
 

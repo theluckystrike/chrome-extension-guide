@@ -2,8 +2,6 @@
 title: Chrome Extension Cross-Browser Development. Build for Chrome, Firefox, Edge, and Safari
 description: Learn how to create cross-browser extensions using WebExtension APIs, browser polyfills, manifest differences, and conditional code for Chrome, Firefox, Edge, and Safari.
 layout: default
-canonical_url: "https://bestchromeextensions.com/docs/guides/multi-browser-extension/"
-
 last_modified_at: 2026-01-15
 ---
 

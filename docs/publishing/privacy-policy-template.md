@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Privacy Policy Template. Publishing Guide"
 description: "Privacy policy template and guidelines for Chrome Web Store compliance."
-canonical_url: "https://bestchromeextensions.com/publishing/privacy-policy-template/"
 last_modified_at: 2026-01-15
 ---
 

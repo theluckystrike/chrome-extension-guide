@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension History detailed look. Best Practices"
 description: "Detailed look into the History API for browsing data access."
-canonical_url: "https://bestchromeextensions.com/patterns/history-deep detailed look/"
 last_modified_at: 2026-01-15
 ---
 

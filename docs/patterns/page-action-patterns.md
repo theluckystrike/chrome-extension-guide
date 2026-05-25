@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Page Action Patterns. Best Practices"
 description: "Use page actions for tab-specific extension functionality."
-canonical_url: "https://bestchromeextensions.com/patterns/page-action-patterns/"
 last_modified_at: 2026-01-15
 ---
 

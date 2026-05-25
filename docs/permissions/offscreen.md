@@ -5,7 +5,6 @@ description: "The permission enables the Chrome API, which allows extensions to 
 permalink: /permissions/offscreen/
 category: permissions
 order: 27
-canonical_url: "https://bestchromeextensions.com/permissions/offscreen/"
 last_modified_at: 2026-01-15
 ---
 

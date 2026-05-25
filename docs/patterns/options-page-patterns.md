@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Options Page Patterns. Best Practices"
 description: "Build effective options pages for extension settings."
-canonical_url: "https://bestchromeextensions.com/patterns/options-page-patterns/"
 last_modified_at: 2026-01-15
 ---
 

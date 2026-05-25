@@ -1,10 +1,7 @@
 ---
-
 title: "Chrome Extension Background Service Worker Guide. Complete MV3 Implementation"
 description: "Master Chrome extension background service workers in Manifest V3. Learn TypeScript patterns, alarms API, keep-alive strategies, state management, and build production-ready extensions."
-canonical_url: "https://bestchromeextensions.com/docs/guides/chrome-extension-background-service-worker-guide/"
 last_modified_at: 2026-01-15
-
 ---
 
 Chrome Extension Background Service Worker Guide. Complete MV3 Implementation

@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Performance Optimization. Complete Guide"
 description: "Master Chrome extension performance with this comprehensive guide covering memory management, lazy loading, service worker optimization, content script performance, storage optimization, and network request batching."
-canonical_url: "https://bestchromeextensions.com/guides/chrome-extension-performance-optimization/"
 last_modified_at: 2026-01-15
 ---
 

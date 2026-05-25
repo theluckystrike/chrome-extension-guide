@@ -2,7 +2,6 @@
 layout: default
 title: "Chrome Extension Analytics. Publishing Guide"
 description: "Set up analytics for your Chrome extension to track users, engagement, and performance metrics."
-canonical_url: "https://bestchromeextensions.com/publishing/analytics/"
 last_modified_at: 2026-01-15
 ---
 
