@@ -7,6 +7,17 @@ sitemap:
   changefreq: daily
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Chrome Extension Guide",
+  "url": "https://bestchromeextensions.com/",
+  "description": "Comprehensive guides and tutorials for Chrome extension development. Learn to build, test, publish, and optimize browser extensions.",
+  "sameAs": "https://github.com/theluckystrike/chrome-extension-guide"
+}
+</script>
+
 # Chrome Extension Guide
 
 The Chrome Web Store has 200,000+ extensions and most of them are garbage. These guides help you find the ones worth installing — and warn you about the ones that will steal your data or slow your browser to a crawl.
