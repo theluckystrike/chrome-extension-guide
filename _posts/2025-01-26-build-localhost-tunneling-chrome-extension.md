@@ -18,7 +18,7 @@ we will walk you through building a complete localhost tunneling Chrome extensio
 
 ---
 
-Why Build a Localhost Tunneling Extension? {#why-build-tunneling-extension}
+## Why Build a Localhost Tunneling Extension? {#why-build-tunneling-extension}
 
 The ability to expose localhost to the internet is crucial for modern web development. Whether you are debugging webhooks, testing mobile responsive designs on real devices, sharing work with clients, or integrating third-party services that require publicly accessible URLs, localhost tunneling has become an essential tool in every developer's toolkit.
 
@@ -30,11 +30,11 @@ This extension will demonstrate advanced Chrome extension concepts including ser
 
 ---
 
-Understanding the Architecture {#understanding-architecture}
+## Understanding the Architecture {#understanding-architecture}
 
 Before diving into code, it is essential to understand how our localhost tunneling Chrome extension will work. The extension consists of several interconnected components that each serve specific purposes in the overall architecture.
 
-The Extension Components
+### The Extension Components
 
 The manifest file defines the extension's configuration, permissions, and components. Our extension will use Manifest V3, the current standard for Chrome extensions, which requires using service workers instead of persistent background pages.
 
@@ -44,7 +44,7 @@ The service worker handles background operations, including communicating with t
 
 The native messaging host is a separate application that runs on the user's computer and actually manages the ngrok process or similar tunneling software. Chrome extensions cannot directly execute system processes, so we need this native component to bridge the gap.
 
-How the System Works Together
+### How the System Works Together
 
 When a user clicks the extension icon to create a new tunnel, the popup sends a message to the service worker. The service worker then communicates with the native messaging host, which starts the tunneling process locally. The native host returns the tunnel URL to the service worker, which updates the popup with the new public URL. Throughout the tunnel's lifecycle, the service worker monitors its status and provides real-time updates to the popup interface.
 
@@ -52,7 +52,7 @@ This architecture ensures that tunnels persist even when the popup is closed, as
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new directory for your extension project with the following structure:
 
@@ -77,7 +77,7 @@ This structure separates the extension's components logically, making it easier 
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the heart of every Chrome extension. It tells Chrome everything about your extension, including its name, version, permissions, and which files to load.
 
@@ -120,7 +120,7 @@ This manifest requests several important permissions. The `nativeMessaging` perm
 
 ---
 
-Building the Service Worker {#service-worker}
+## Building the Service Worker {#service-worker}
 
 The service worker is the backbone of our extension. It runs in the background, handles messages from the popup, communicates with the native messaging host, and manages the overall tunnel lifecycle.
 
@@ -276,7 +276,7 @@ This service worker implements the core functionality for creating, managing, an
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup provides the user interface for interacting with the extension. It should be clean, intuitive, and provide all necessary information at a glance.
 
@@ -352,7 +352,7 @@ The popup interface provides a clean, modern design for creating and managing tu
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 The CSS provides a professional appearance that matches Chrome's design language while maintaining usability.
 
@@ -601,7 +601,7 @@ This styling creates a clean, professional interface that feels native to the Ch
 
 ---
 
-Implementing Popup Logic {#popup-logic}
+## Implementing Popup Logic {#popup-logic}
 
 The popup JavaScript handles user interactions and communicates with the service worker.
 
@@ -790,13 +790,13 @@ This popup script handles all user interactions, from creating new tunnels to ma
 
 ---
 
-The Native Messaging Host {#native-messaging}
+## The Native Messaging Host {#native-messaging}
 
 Chrome extensions cannot directly run system processes, so we need a native messaging host application to manage the tunneling software. This is a separate program that runs on the user's computer and communicates with the extension.
 
 For a production extension, you would create a native messaging host application. Here is how the communication works:
 
-Registering the Native Messaging Host
+### Registering the Native Messaging Host
 
 You need to register your native messaging host with Chrome by creating a JSON manifest file. This file tells Chrome how to find and launch your application.
 
@@ -813,7 +813,7 @@ You need to register your native messaging host with Chrome by creating a JSON m
 }
 ```
 
-Native Messaging Host Implementation
+### Native Messaging Host Implementation
 
 The native messaging host would be a simple application that manages the tunneling process. Here is a conceptual implementation in Python:
 
@@ -930,7 +930,7 @@ This native messaging host provides the bridge between your Chrome extension and
 
 ---
 
-Building the Options Page {#options-page}
+## Building the Options Page {#options-page}
 
 The options page allows users to configure the extension's behavior according to their preferences.
 
@@ -1121,24 +1121,24 @@ function showStatus(message, type) {
 
 ---
 
-Loading and Testing the Extension {#loading-and-testing}
+## Loading and Testing the Extension {#loading-and-testing}
 
 Now that we have built all the components, let us load the extension into Chrome and test it.
 
-Loading the Extension
+### Loading the Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top-right corner
 3. Click "Load unpacked" and select your extension's root directory
 4. Your extension will appear in the extensions list and in the toolbar
 
-Testing the Extension
+### Testing the Extension
 
 Once loaded, click the extension icon in the Chrome toolbar. You should see the popup interface with options to create a new tunnel. Enter a port number (for example, 3000 for a typical development server) and click "Create Tunnel."
 
 The extension will communicate with the native messaging host to create the tunnel. The popup should display the public URL that can be shared with others.
 
-Debugging Tips
+### Debugging Tips
 
 If you encounter issues during development, here are some debugging strategies:
 
@@ -1150,29 +1150,29 @@ Third, check for permission errors. The extension needs the `nativeMessaging` pe
 
 ---
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 When building an extension that manages network tunnels, security is paramount. Here are important security considerations:
 
-Native Messaging Security
+### Native Messaging Security
 
 Native messaging provides powerful capabilities but also introduces security risks. Always validate all data exchanged between your extension and the native messaging host. Never blindly trust messages from the native application.
 
-Token Storage
+### Token Storage
 
 If users provide ngrok auth tokens or other sensitive credentials, store them securely using Chrome's storage API with appropriate encryption. Never store tokens in plain text.
 
-URL Validation
+### URL Validation
 
 Always validate tunnel URLs before displaying them or allowing users to open them. Malicious tunnels could redirect users to phishing sites.
 
-Principle of Least Privilege
+### Principle of Least Privilege
 
 Only request the permissions your extension absolutely needs. For this extension, we need `nativeMessaging` for tunnel communication, `storage` for persisting settings, and `tabs` for opening tunnel URLs.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You have now built a complete localhost tunneling Chrome extension that enables developers to create and manage secure tunnels to their local development servers directly from the browser. The extension demonstrates several advanced Chrome extension concepts, including service workers for background processing, native messaging for system integration, real-time communication between extension components, and persistent storage for user preferences.
 
@@ -1182,7 +1182,7 @@ The localhost tunnel extension you have built serves as a solid foundation for a
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 Now that you have a working localhost tunneling extension, here are some suggested improvements and expansions:
 

@@ -7,15 +7,15 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Web Navigation Advanced Patterns
 
-Introduction {#introduction}
+## Introduction {#introduction}
 
 The Chrome Extension Web Navigation API provides powerful tools for monitoring and intercepting browser navigation events. While basic usage is straightforward, advanced patterns enable sophisticated features like navigation analytics, SPA routing detection, frame tracking, and conditional blocking.
 
 This guide explores advanced techniques for working with the `chrome.webNavigation` API in Chrome Extensions.
 
-The webNavigation Lifecycle {#the-webnavigation-lifecycle}
+## The webNavigation Lifecycle {#the-webnavigation-lifecycle}
 
-Understanding Navigation Context {#understanding-navigation-context}
+## Understanding Navigation Context {#understanding-navigation-context}
 
 The webNavigation API provides frame-level context for each navigation event. Key properties of the details object include:
 
@@ -43,9 +43,9 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 }, { url: [{ urlMatches: 'https://*/*' }] });
 ```
 
-Event Lifecycle detailed look {#event-lifecycle-deep detailed look}
+### Event Lifecycle detailed look {#event-lifecycle-deep detailed look}
 
-onBeforeNavigate {#onbeforenavigate}
+## onBeforeNavigate {#onbeforenavigate}
 
 Fired when navigation is about to occur. This is the earliest point in the navigation lifecycle.
 
@@ -67,7 +67,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(
 );
 ```
 
-onCommitted {#oncommitted}
+## onCommitted {#oncommitted}
 
 Fired when the navigation is committed. The server has responded and the browser is committed to loading the new document.
 
@@ -101,7 +101,7 @@ chrome.webNavigation.onCommitted.addListener(
 );
 ```
 
-onCompleted {#oncompleted}
+## onCompleted {#oncompleted}
 
 Fired when the navigation completes successfully.
 
@@ -120,9 +120,9 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-onErrorOccurred {#onerroroccurred}
+## onErrorOccurred {#onerroroccurred}
 
-Fired when navigation fails.
+### Fired when navigation fails.
 
 ```javascript
 chrome.webNavigation.onErrorOccurred.addListener(
@@ -146,11 +146,11 @@ chrome.webNavigation.onErrorOccurred.addListener(
 );
 ```
 
-SPA Navigation Detection {#spa-navigation-detection}
+## SPA Navigation Detection {#spa-navigation-detection}
 
 Single Page Applications (SPAs) use client-side routing, which doesn't trigger traditional page loads. The webNavigation API provides events to detect these navigations.
 
-Detecting History State Changes {#detecting-history-state-changes}
+## Detecting History State Changes {#detecting-history-state-changes}
 
 ```javascript
 // Detect history.pushState / history.replaceState (SPA client-side routing)
@@ -171,7 +171,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(
 );
 ```
 
-Detecting Reference Fragment Updates {#detecting-reference-fragment-updates}
+## Detecting Reference Fragment Updates {#detecting-reference-fragment-updates}
 
 ```javascript
 // Detect reference fragment updates (#section)
@@ -190,7 +190,7 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener(
 );
 ```
 
-Complete SPA Navigation Handler {#complete-spa-navigation-handler}
+## Complete SPA Navigation Handler {#complete-spa-navigation-handler}
 
 ```javascript
 class SPANavigationTracker {
@@ -248,11 +248,11 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 ```
 
-Frame Hierarchy Tracking {#frame-hierarchy-tracking}
+## Frame Hierarchy Tracking {#frame-hierarchy-tracking}
 
 Understanding the frame hierarchy is crucial for extensions that need to interact with iframes.
 
-Understanding frameId and parentFrameId {#understanding-frameid-and-parentframeid}
+## Understanding frameId and parentFrameId {#understanding-frameid-and-parentframeid}
 
 ```javascript
 chrome.webNavigation.onCompleted.addListener((details) => {
@@ -280,7 +280,7 @@ function getFrameDepth(details) {
 }
 ```
 
-Getting All Frames in a Tab {#getting-all-frames-in-a-tab}
+## Getting All Frames in a Tab {#getting-all-frames-in-a-tab}
 
 ```javascript
 // Get all frames in a specific tab
@@ -308,7 +308,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 ```
 
-Frame-Specific Event Listeners {#frame-specific-event-listeners}
+## Frame-Specific Event Listeners {#frame-specific-event-listeners}
 
 The webNavigation filter only supports `url` filters. To filter by frame type, check `frameId` inside the callback:
 
@@ -333,9 +333,9 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-Building a Navigation Analytics Extension {#building-a-navigation-analytics-extension}
+## Building a Navigation Analytics Extension {#building-a-navigation-analytics-extension}
 
-Complete Example {#complete-example}
+## Complete Example {#complete-example}
 
 ```javascript
 // background.js - Navigation Analytics Extension
@@ -456,9 +456,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Transition Types and Qualifiers {#transition-types-and-qualifiers}
+## Transition Types and Qualifiers {#transition-types-and-qualifiers}
 
-Working with Transition Types {#working-with-transition-types}
+## Working with Transition Types {#working-with-transition-types}
 
 ```javascript
 chrome.webNavigation.onCommitted.addListener((details) => {
@@ -504,7 +504,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-Using Transition Data for Filtering {#using-transition-data-for-filtering}
+## Using Transition Data for Filtering {#using-transition-data-for-filtering}
 
 `transitionType` and `transitionQualifiers` are only available on the `onCommitted` event, not on `onCompleted`. The webNavigation filter object only supports `url` filters; there is no `transitionType` filter parameter.
 
@@ -523,9 +523,9 @@ chrome.webNavigation.onCommitted.addListener(
 );
 ```
 
-Conditional Navigation Blocking {#conditional-navigation-blocking}
+## Conditional Navigation Blocking {#conditional-navigation-blocking}
 
-Using declarativeNetRequest (MV3) {#using-declarativenetrequest-mv3}
+## Using declarativeNetRequest (MV3) {#using-declarativenetrequest-mv3}
 
 ```javascript
 // manifest.json
@@ -559,7 +559,7 @@ Using declarativeNetRequest (MV3) {#using-declarativenetrequest-mv3}
 ]
 ```
 
-Programmatic Blocking (with caveats) {#programmatic-blocking-with-caveats}
+## Programmatic Blocking (with caveats) {#programmatic-blocking-with-caveats}
 
 ```javascript
 // Note: You cannot directly block navigations via webNavigation
@@ -589,9 +589,9 @@ function shouldBlock(url) {
 }
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
 ```javascript
 //  Bad: No filters - processes every navigation
@@ -625,7 +625,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-Proper Error Handling {#proper-error-handling}
+## Proper Error Handling {#proper-error-handling}
 
 ```javascript
 chrome.webNavigation.onCompleted.addListener(
@@ -645,7 +645,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-Memory Management {#memory-management}
+## Memory Management {#memory-management}
 
 ```javascript
 // Clean up resources when tabs close
@@ -669,7 +669,7 @@ function cleanupTabData(tabId) {
 }
 ```
 
-Manifest V2 vs V3 Differences {#manifest-v2-vs-v3-differences}
+## Manifest V2 vs V3 Differences {#manifest-v2-vs-v3-differences}
 
 ```javascript
 // MV2: Background pages
@@ -691,9 +691,9 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 // instead of relying solely on webNavigation events
 ```
 
-Common Pitfalls {#common-pitfalls}
+## Common Pitfalls {#common-pitfalls}
 
-Pitfall 1: Not Using URL Filters {#pitfall-1-not-using-url-filters}
+## Pitfall 1: Not Using URL Filters {#pitfall-1-not-using-url-filters}
 
 ```javascript
 //  Bad: Processes all URLs
@@ -706,7 +706,7 @@ chrome.webNavigation.onCompleted.addListener(
 );
 ```
 
-Pitfall 2: Missing Error Handling {#pitfall-2-missing-error-handling}
+## Pitfall 2: Missing Error Handling {#pitfall-2-missing-error-handling}
 
 ```javascript
 //  Bad: No error handling
@@ -724,7 +724,7 @@ try {
 }
 ```
 
-Pitfall 3: Ignoring SPA Navigation {#pitfall-3-ignoring-spa-navigation}
+## Pitfall 3: Ignoring SPA Navigation {#pitfall-3-ignoring-spa-navigation}
 
 ```javascript
 //  Bad: Only handling page loads
@@ -742,7 +742,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 ```
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Extension Web Navigation API provides comprehensive tools for monitoring browser navigation:
 
@@ -754,9 +754,9 @@ The Chrome Extension Web Navigation API provides comprehensive tools for monitor
 
 By mastering these advanced patterns, you can build powerful navigation analytics, deep linking systems, and content filtering extensions.
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Web Navigation Patterns](../patterns/webnavigation-patterns.md)
 - [Web Navigation](../guides/web-navigation.md)

@@ -18,11 +18,11 @@ This comprehensive guide walks you through everything you need to know to implem
 
 ---
 
-Understanding the Chrome Extension Popup Environment
+### Understanding the Chrome Extension Popup Environment
 
 Chrome extension popups present unique challenges and opportunities for data visualization. Unlike traditional web pages, popup windows have strict constraints on size, lifecycle, and resource loading that you must understand before implementing charts.
 
-Popup Window Characteristics
+### Popup Window Characteristics
 
 Chrome extension popups are HTML documents that appear when users click your extension icon. They have several defining characteristics that influence how you implement Chart.js:
 
@@ -32,7 +32,7 @@ Popup windows have a short lifecycle. They open when the user clicks the extensi
 
 Memory management becomes crucial in extension contexts. Chrome extensions share the browser's memory pool, and poorly optimized charts can degrade the entire browser experience. Chart.js is relatively lightweight, but you still need to follow best practices for memory efficiency.
 
-Why Chart.js for Extension Development
+### Why Chart.js for Extension Development
 
 Chart.js offers several advantages that make it particularly well-suited for Chrome extension popups:
 
@@ -42,11 +42,11 @@ The extensive customization options allow you to match your extension's visual d
 
 ---
 
-Setting Up Chart.js in Your Extension Project
+### Setting Up Chart.js in Your Extension Project
 
 Getting Chart.js running in your Chrome extension requires proper project structure and dependency management. This section covers the essential setup steps.
 
-Project Structure
+### Project Structure
 
 Your Chrome extension project should follow a logical structure that separates your popup code from other extension components:
 
@@ -65,7 +65,7 @@ my-extension/
 
 The key files for Chart.js integration are popup.html where you include the library and canvas element, popup.js where you initialize and configure your charts, chart-config.js where you can store reusable chart configurations, and popup.css where you style your popup and charts.
 
-Installing Chart.js
+### Installing Chart.js
 
 You have several options for adding Chart.js to your extension. The best approach depends on your development workflow and build process.
 
@@ -95,7 +95,7 @@ If you use a package manager like npm in your development workflow, install Char
 npm install chart.js
 ```
 
-Then in your popup.js:
+### Then in your popup.js:
 
 ```javascript
 import Chart from 'chart.js/auto';
@@ -143,11 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ---
 
-Creating Your First Chart in a Chrome Popup
+### Creating Your First Chart in a Chrome Popup
 
 With the setup complete, you can now create functional charts in your extension popup. This section walks through building a complete example with practical configuration options.
 
-Basic Bar Chart Implementation
+### Basic Bar Chart Implementation
 
 Start with a straightforward bar chart that displays categorical data. This example demonstrates the core concepts you will use in most popup charts:
 
@@ -163,7 +163,7 @@ Start with a straightforward bar chart that displays categorical data. This exam
 </div>
 ```
 
-The corresponding CSS ensures proper sizing:
+### The corresponding CSS ensures proper sizing:
 
 ```css
 .popup-content {
@@ -190,7 +190,7 @@ The corresponding CSS ensures proper sizing:
 }
 ```
 
-Initialize the chart in your JavaScript:
+### Initialize the chart in your JavaScript:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', initializeChart);
@@ -273,7 +273,7 @@ function initializeChart() {
 }
 ```
 
-Adding Line Charts for Trend Analysis
+### Adding Line Charts for Trend Analysis
 
 Line charts excel at showing trends over time, making them ideal for analytics extensions. Here is how to create a line chart with multiple datasets:
 
@@ -332,11 +332,11 @@ function createLineChart(ctx, data) {
 
 ---
 
-Dynamic Data Loading and Updates
+### Dynamic Data Loading and Updates
 
 Real-world extensions need to load data dynamically and update charts accordingly. This section covers patterns for handling dynamic data in your popup charts.
 
-Loading Data from Background Script
+### Loading Data from Background Script
 
 Chrome extensions use a background script to handle long-running tasks and communicate with external services. Here is how to pass data from the background script to your popup chart:
 
@@ -407,7 +407,7 @@ function processMetricsData(metrics) {
 }
 ```
 
-Real-Time Chart Updates
+### Real-Time Chart Updates
 
 For extensions that monitor live data, you need to update charts periodically. Here is a pattern for real-time updates:
 
@@ -529,11 +529,11 @@ document.addEventListener('visibilitychange', () => {
 
 ---
 
-Advanced Chart Configurations
+### Advanced Chart Configurations
 
 Take your extension charts to the better with advanced configurations that provide better visual appeal and functionality.
 
-Doughnut and Pie Charts for Proportions
+### Doughnut and Pie Charts for Proportions
 
 Doughnut charts work excellently for showing proportions or distributions within a constrained space:
 
@@ -587,7 +587,7 @@ function createDoughnutChart(ctx, data) {
 }
 ```
 
-Chart Theming for Brand Consistency
+### Chart Theming for Brand Consistency
 
 Create a reusable theme configuration to ensure visual consistency across all charts in your extension:
 
@@ -698,11 +698,11 @@ new Chart(ctx, {
 
 ---
 
-Performance Optimization
+### Performance Optimization
 
 Chrome extension popups require careful performance management. These optimization techniques ensure your charts remain responsive and do not impact browser performance.
 
-Minimizing Initial Load Time
+### Minimizing Initial Load Time
 
 Load only what you need and defer non-critical operations:
 
@@ -726,7 +726,7 @@ async function initChartOnDemand() {
 document.getElementById('showChartBtn').addEventListener('click', initChartOnDemand);
 ```
 
-Memory Management
+### Memory Management
 
 Proper cleanup prevents memory leaks that can affect browser performance:
 
@@ -770,25 +770,25 @@ window.addEventListener('unload', () => {
 
 ---
 
-Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
 Even with careful implementation, you may encounter issues when integrating Chart.js in Chrome extension popups. Here are solutions to the most common problems.
 
-Canvas Not Rendering
+### Canvas Not Rendering
 
 If your chart canvas appears blank, check for these common causes. Ensure the canvas element exists in the DOM before initializing the chart by wrapping your initialization in a DOMContentLoaded listener. Verify the canvas has proper dimensions by setting explicit width and height in CSS or the canvas attributes. Confirm Chart.js loaded successfully by checking for JavaScript errors in the console.
 
-Chart Not Responsive
+### Chart Not Responsive
 
 Charts that do not resize correctly typically have CSS issues. Ensure the canvas container has a defined height and the canvas itself has width and height set to 100% within its container. The maintainAspectRatio option should be set to false for popup charts.
 
-Data Not Updating
+### Data Not Updating
 
 When chart updates do not appear, verify you are calling the chart update method after modifying the data. For real-time updates, use chart.update('none') to prevent animation on each update. Ensure data references are updated correctly by checking that you are modifying the chart.data object, not creating a new one.
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing Chart.js in Chrome extension popups opens up powerful possibilities for data visualization within your extensions. By following the patterns and best practices outlined in this guide, you can create responsive, performant charts that enhance your users' experience without compromising extension performance.
 

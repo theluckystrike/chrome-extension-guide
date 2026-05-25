@@ -12,23 +12,23 @@ Chrome Extension Storage Quota. Limits, Best Practices, and Data Management
 
 Managing storage effectively is critical for Chrome extension developers. Understanding the quota limits imposed by Chrome and implementing proper data management strategies ensures your extension remains functional and reliable across different usage scenarios.
 
-Understanding Storage Quota Limits
+### Understanding Storage Quota Limits
 
 Chrome provides two primary storage APIs for extensions: `chrome.storage.local` and `chrome.storage.sync`. Each has distinct quota limitations that developers must consider when designing their data storage strategy.
 
-Local Storage Quota
+### Local Storage Quota
 
 The `chrome.storage.local` API provides the most generous storage capacity with a 10MB (approximately 10,485,760 bytes) quota per extension. This storage persists locally on the user's machine and does not sync across devices. Local storage is ideal for storing large datasets, cached content, user preferences, and application state that doesn't need to travel with the user across different devices.
 
 When you approach the local storage limit, Chrome will throw a `QUOTA_BYTES` error when attempting to write beyond capacity. It's essential to implement proper checks before storing large amounts of data to prevent runtime failures.
 
-Sync Storage Quota
+### Sync Storage Quota
 
 The `chrome.storage.sync` API offers 100KB (approximately 102,400 bytes) of storage that synchronizes across all devices where the user is signed into Chrome with the same account. This makes it perfect for storing user preferences, settings, and small amounts of data that should persist across devices.
 
 Each individual item in sync storage is limited to 8KB via the `QUOTA_BYTES_PER_ITEM` constant. This means you cannot store a single key-value pair larger than 8KB in sync storage, though you can have many smaller items that total up to 100KB.
 
-Summary of Storage Limits
+### Summary of Storage Limits
 
 | Storage Type | Total Quota | Per-Item Limit |
 |--------------|-------------|----------------|
@@ -37,7 +37,7 @@ Summary of Storage Limits
 
 *While there's no explicit per-item limit for local storage, extremely large items may impact performance.
 
-Monitoring Storage Usage with getBytesInUse
+### Monitoring Storage Usage with getBytesInUse
 
 Before storing data, especially large datasets, you should check your current storage usage using the `chrome.storage.local.getBytesInUse()` and `chrome.storage.sync.getBytesInUse()` methods. This API allows you to:
 
@@ -65,11 +65,11 @@ chrome.storage.local.getBytesInUse((bytesInUse) => {
 
 This proactive approach prevents `QUOTA_BYTES` errors and allows you to implement graceful degradation when storage approaches capacity.
 
-Compression Strategies for Efficient Storage
+### Compression Strategies for Efficient Storage
 
 When dealing with large datasets, compression significantly extends your effective storage capacity. Here are practical compression strategies:
 
-JSON Compression
+### JSON Compression
 
 For structured data like arrays and objects, compress before storing:
 
@@ -95,7 +95,7 @@ chrome.storage.local.set({
 });
 ```
 
-Selective Storage
+### Selective Storage
 
 Instead of storing complete datasets, store only essential information:
 
@@ -117,11 +117,11 @@ const minimalUser = {
 };
 ```
 
-Data Pruning Techniques
+### Data Pruning Techniques
 
 Implementing intelligent data pruning ensures your extension continues functioning as storage fills. Consider these approaches:
 
-LRU (Least Recently Used) Eviction
+### LRU (Least Recently Used) Eviction
 
 ```javascript
 const MAX_ITEMS = 100;
@@ -148,7 +148,7 @@ const addItemWithEviction = async (key, value) => {
 };
 ```
 
-Time-Based Cleanup
+### Time-Based Cleanup
 
 ```javascript
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -165,7 +165,7 @@ const cleanupOldData = async () => {
 };
 ```
 
-Best Practices Summary
+### Best Practices Summary
 
 1. Monitor usage regularly: Use `getBytesInUse()` before writing large data
 2. Implement graceful degradation: Have fallback strategies when storage fills

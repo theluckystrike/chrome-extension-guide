@@ -18,43 +18,43 @@ This project will teach you essential Chrome Extension development skills while 
 
 ---
 
-Why Build a Broken Link Checker Extension? {#why-build}
+## Why Build a Broken Link Checker Extension? {#why-build}
 
 Before diving into the code, let's explore why creating a broken link checker extension is an excellent project for developers at any skill level. Understanding the value proposition helps you make better design decisions and motivates you through the more complex implementation details.
 
-The Problem with Broken Links
+### The Problem with Broken Links
 
 Every website owner understands the frustration of discovering dead links on their pages. These broken links, also known as dead link finder results, create negative user experiences that drive visitors away. From an SEO perspective, search engines like Google penalize websites with excessive broken links because they interpret them as signs of poor maintenance and outdated content.
 
 Traditional link checking tools require you to paste URLs into external services, which limits their utility for everyday browsing. A browser-based link validator chrome extension solves this problem by bringing the checking functionality directly to where you need it most, your web browsing experience.
 
-What You Will Learn
+### What You Will Learn
 
 Building this extension teaches you several fundamental Chrome Extension development concepts that apply to virtually any extension project. You will learn how to interact with web pages using content scripts, communicate between different extension components using message passing, make HTTP requests from background scripts, manage user interface with popup windows, and handle asynchronous operations effectively.
 
 ---
 
-Project Architecture Overview {#project-architecture}
+## Project Architecture Overview {#project-architecture}
 
 Every well-structured Chrome Extension follows a specific architectural pattern. Understanding this pattern before writing code prevents common mistakes and makes your extension more maintainable.
 
-Extension Components
+### Extension Components
 
 Our broken link checker extension consists of four main components that work together to provide a smooth user experience. The manifest file serves as the configuration hub, telling Chrome about your extension's capabilities and permissions. Content scripts run within web pages, extracting all links from the DOM. The background script handles the heavy lifting of checking each link's status without blocking the user interface. Finally, the popup provides the interface through which users interact with the extension.
 
 This separation of concerns follows Chrome's best practices and ensures your extension remains responsive even when checking hundreds of links simultaneously. The content script handles DOM manipulation, the background script manages network requests, and the popup displays results, a clean division of labor that makes debugging easier and performance better.
 
-Manifest V3 Requirements
+### Manifest V3 Requirements
 
 Modern Chrome Extensions must use Manifest V3, which introduces several important changes from the older Manifest V2. Most significantly, background scripts now run as service workers that can be terminated when inactive, and network requests from content scripts are restricted. Our architecture accounts for these requirements by moving all HTTP requests to the background script and using message passing to coordinate between components.
 
 ---
 
-Step-by-Step Implementation Guide {#implementation-guide}
+## Step-by-Step Implementation Guide {#implementation-guide}
 
 Now let's build our broken link checker extension. We will create each file systematically, explaining the purpose of every code section.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Every Chrome Extension starts with the manifest.json file. This configuration file tells Chrome about your extension's name, version, permissions, and component files. Create a new folder for your extension and add this manifest.json file.
 
@@ -93,7 +93,7 @@ Every Chrome Extension starts with the manifest.json file. This configuration fi
 
 This manifest requests the minimum permissions necessary for our link validator chrome extension to function. The activeTab permission allows us to access the current tab when the user invokes the extension. The scripting permission lets us inject content scripts to extract links. The host permissions with `<all_urls>` are necessary because link checking requires making requests to arbitrary domains.
 
-Building the Content Script
+### Building the Content Script
 
 The content script runs within the context of web pages and is responsible for extracting all links from the page. Create a file named content.js with the following code:
 
@@ -145,7 +145,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 This content script performs several important functions. First, it finds all anchor elements with href attributes on the page. It extracts both the URL and the link text, which helps users understand which links are broken. It also captures any anchor IDs for more precise identification. Finally, it removes duplicates to avoid checking the same URL multiple times.
 
-Creating the Background Script
+### Creating the Background Script
 
 The background script serves as the bridge between your content script and the network. It receives links from the content script, checks each one, and returns the results. This separation prevents the network operations from blocking the page. Create background.js with this implementation:
 
@@ -325,7 +325,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 This background script implements solid error handling for our dead link finder functionality. It distinguishes between working links, broken links, and redirects, providing detailed error messages that help users understand why specific links failed. The timeout handling prevents the extension from hanging on unresponsive servers.
 
-Designing the Popup Interface
+### Designing the Popup Interface
 
 The popup provides the user interface for your extension. Create popup.html with a clean, functional design:
 
@@ -533,7 +533,7 @@ The popup provides the user interface for your extension. Create popup.html with
 </html>
 ```
 
-Implementing Popup Logic
+### Implementing Popup Logic
 
 The popup JavaScript coordinates between the user interface and the background script. Create popup.js:
 
@@ -709,27 +709,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have created all the necessary files, let's test our broken link checker extension. First, you need to create placeholder icons since Chrome requires them. Create an images folder and add basic icon files, or simply create empty placeholder files for testing purposes.
 
-Loading the Extension
+### Loading the Extension
 
 Open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner. Click the "Load unpacked" button and select the folder containing your extension files. Chrome will load your extension and display it in the extensions toolbar.
 
-Testing the Link Validator
+### Testing the Link Validator
 
 Navigate to any website with multiple links, such as a blog or news site. Click your extension icon in the toolbar to open the popup. Click "Scan Current Page" and watch as the extension extracts and checks each link. The results will display broken links in red, making them easy to identify and fix.
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 While our basic dead link finder extension works well, several enhancements could make it even more powerful. Consider adding support for checking internal links within the same domain, implementing rate limiting to avoid triggering server blocks, adding export functionality to save results as CSV or JSON, supporting scheduled scans that run automatically, and integrating with sitemap.xml files to check entire websites systematically.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a broken link checker extension demonstrates many essential Chrome Extension development concepts while creating a genuinely useful tool. The link validator chrome extension you built follows modern Manifest V3 best practices, implements solid error handling, and provides a clean user interface for identifying dead links.
 

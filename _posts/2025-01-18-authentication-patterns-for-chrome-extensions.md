@@ -18,7 +18,7 @@ The Chrome extension ecosystem has evolved significantly, particularly with the 
 
 ---
 
-Understanding Authentication in the Chrome Extension Context {#understanding-auth}
+## Understanding Authentication in the Chrome Extension Context {#understanding-auth}
 
 Chrome extensions operate in a unique environment that combines the capabilities of web applications with the security model of browser extensions. This hybrid nature creates specific challenges and opportunities for implementing authentication. Unlike traditional web applications that can freely set and manage cookies, Chrome extensions must work within the boundaries of the Chrome Identity API and Manifest V3 specifications.
 
@@ -28,7 +28,7 @@ When we talk about chrome extension auth, we're really addressing three distinct
 
 ---
 
-The Extension Login Flow: Core Concepts {#extension-login-flow}
+## The Extension Login Flow: Core Concepts {#extension-login-flow}
 
 The extension login flow is the sequence of steps a user goes through to authenticate with your extension or with services your extension accesses. Understanding this flow is crucial for building intuitive user experiences while maintaining security. The login flow you implement will depend heavily on your authentication strategy, whether you're using simple token-based auth, full OAuth2 implementations, or integrating with identity providers.
 
@@ -40,7 +40,7 @@ A typical extension login flow might look like this: First, when the user intera
 
 ---
 
-OAuth Chrome Extension Patterns: Implementation Strategies {#oauth-patterns}
+## OAuth Chrome Extension Patterns: Implementation Strategies {#oauth-patterns}
 
 OAuth has become the de facto standard for authorizing access to third-party APIs, and implementing OAuth chrome extension patterns correctly is essential for extensions that integrate with external services. The Chrome Identity API provides two primary methods for implementing OAuth: launchWebAuthFlow for web-based OAuth, and getAuthToken for Google-specific OAuth. Understanding when and how to use each approach is key to building solid integrations.
 
@@ -52,7 +52,7 @@ Managing OAuth tokens in Chrome extensions requires careful attention to securit
 
 ---
 
-Manifest V3 Authentication: New Challenges and Solutions {#manifest-v3-auth}
+## Manifest V3 Authentication: New Challenges and Solutions {#manifest-v3-auth}
 
 Manifest V3 introduced significant changes that affect how Chrome extensions handle authentication. The most notable change is the transition from background pages to service workers, which impacts how authentication state is managed and how long-running authentication processes operate. Understanding these changes is essential for building modern extensions that work within the Manifest V3 framework.
 
@@ -64,7 +64,7 @@ Session management in Manifest V3 requires a proactive approach. Rather than rel
 
 ---
 
-Security Best Practices for Chrome Extension Authentication {#security-best-practices}
+## Security Best Practices for Chrome Extension Authentication {#security-best-practices}
 
 Security should be at the forefront of every authentication implementation. Chrome extensions have historically been targeted by malicious actors attempting to steal credentials or access tokens, making solid security practices essential. The following best practices will help you build authentication systems that protect your users and their data.
 
@@ -78,7 +78,7 @@ Consider implementing additional security measures such as token binding (tying 
 
 ---
 
-Token Management Strategies for Extensions {#token-management}
+## Token Management Strategies for Extensions {#token-management}
 
 Effective token management is the backbone of a reliable Chrome extension authentication system. Tokens are the credentials that grant access to protected resources, and how you manage them directly impacts both security and user experience. A well-designed token management strategy handles token storage, refresh, revocation, and synchronization across extension contexts.
 
@@ -90,7 +90,7 @@ Synchronization across extension contexts requires careful design. When your ser
 
 ---
 
-Implementing Social Login in Chrome Extensions {#social-login}
+## Implementing Social Login in Chrome Extensions {#social-login}
 
 Social login has become the preferred authentication method for many users, and implementing this in Chrome extensions follows patterns similar to web applications but with important differences. The extension login flow for social authentication leverages the same OAuth foundations but optimizes the user experience for the extension context.
 
@@ -102,7 +102,7 @@ Multi-provider support requires thoughtful architecture. If your extension suppo
 
 ---
 
-Debugging Authentication Issues {#debugging-auth}
+## Debugging Authentication Issues {#debugging-auth}
 
 Authentication debugging in Chrome extensions presents unique challenges due to the distributed nature of extension architecture. Authentication logic may execute in the service worker, popup, options page, or content script, making it sometimes difficult to trace the complete authentication flow. Developing effective debugging strategies is essential for maintaining solid authentication.
 
@@ -114,7 +114,7 @@ Common authentication issues in Chrome extensions include token expiration not b
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension OAuth2 Authentication Guide](https://bestchromeextensions.com/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
 - [Chrome Identity API and OAuth](https://bestchromeextensions.com/2025/01/24/chrome-identity-api-oauth/) - Learn how to use Chrome Identity API for authentication
@@ -122,7 +122,7 @@ Related Articles
 
 ---
 
-Conclusion: Building Solid Authentication for Chrome Extensions {#conclusion}
+## Conclusion: Building Solid Authentication for Chrome Extensions {#conclusion}
 
 Authentication patterns for Chrome extensions have evolved significantly with the introduction of Manifest V3, requiring developers to adapt their approaches while maintaining the security and usability that users expect. The chrome extension auth landscape offers multiple strategies, from simple token storage to sophisticated OAuth implementations, each suited to different use cases and security requirements.
 
@@ -134,7 +134,7 @@ As the Chrome extension platform continues to evolve, staying current with authe
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension OAuth2 Authentication Guide](/2025/01/17/chrome-extension-oauth2-authentication-guide/) - Complete guide to implementing OAuth2 in Chrome extensions
 - [Chrome Identity API OAuth Guide](/2025/01/24/chrome-identity-api-oauth/) - Learn how to use the Chrome Identity API for authentication

@@ -17,13 +17,13 @@ This guide explores everything you need to know to build Chrome extensions with 
 
 ---
 
-Angular for Chrome Extensions: Pros and Cons {#angular-pros-cons}
+## Angular for Chrome Extensions: Pros and Cons {#angular-pros-cons}
 
 Before diving into implementation, it is important to understand when Angular makes sense for your extension project and when it might be overkill.
 
-When Angular Excels for Extensions
+### When Angular Excels for Extensions
 
-Angular brings significant advantages to Chrome extension development:
+### Angular brings significant advantages to Chrome extension development:
 
 TypeScript-First Development: Angular is built around TypeScript, providing excellent type safety, autocompletion, and refactoring capabilities. For larger extensions with complex business logic, this catches bugs early and makes code maintenance significantly easier.
 
@@ -35,9 +35,9 @@ Component Architecture: Angular's component-based architecture translates well t
 
 Enterprise Patterns: If you are coming from an Angular background for web applications, using the same framework for extensions reduces context switching and lets you reuse existing knowledge, components, and even shared libraries.
 
-When to Consider Alternatives
+### When to Consider Alternatives
 
-Angular might not be ideal for every extension:
+### Angular might not be ideal for every extension:
 
 - Small, Single-Feature Extensions: If your extension is lightweight with minimal UI, the Angular bootstrapping overhead may not be worth it
 - Strict Bundle Size Constraints: Angular's runtime is larger than vanilla JavaScript or lighter frameworks
@@ -48,11 +48,11 @@ For smaller projects, consider frameworks like [React with our Chrome extension 
 
 ---
 
-Setting Up Angular CLI with Custom Builder for CRX {#angular-cli-custom-builder}
+## Setting Up Angular CLI with Custom Builder for CRX {#angular-cli-custom-builder}
 
 Creating a Chrome extension with Angular requires a build process that produces both your Angular application and the extension manifest and background scripts. Several approaches exist, but using a custom builder with Angular CLI provides the best developer experience.
 
-Project Structure
+### Project Structure
 
 A typical Angular-based Chrome extension project structure looks like this:
 
@@ -72,7 +72,7 @@ my-extension/
  package.json
 ```
 
-Using @angular-builders/custom-esbuild
+### Using @angular-builders/custom-esbuild
 
 For Manifest V3 extensions, the [@angular-builders/custom-esbuild](https://github.com/angular-extensions/custom-esbuild) package provides excellent support:
 
@@ -80,7 +80,7 @@ For Manifest V3 extensions, the [@angular-builders/custom-esbuild](https://githu
 npm install @angular-builders/custom-esbuild --save-dev
 ```
 
-Configure your `angular.json` to build for the extension:
+### Configure your `angular.json` to build for the extension:
 
 ```json
 {
@@ -107,11 +107,11 @@ For more details on setting up TypeScript with extensions, see our [TypeScript e
 
 ---
 
-Building the Popup as an Angular Component {#popup-angular-component}
+## Building the Popup as an Angular Component {#popup-angular-component}
 
 The popup is often the primary interaction point for users. Angular makes building rich, interactive popups straightforward.
 
-Popup Component Structure
+### Popup Component Structure
 
 ```typescript
 // src/app/popup/popup.component.ts
@@ -142,7 +142,7 @@ export class PopupComponent implements OnInit {
 }
 ```
 
-Connecting Popup to Angular
+### Connecting Popup to Angular
 
 Your main entry point needs to bootstrap the Angular application:
 
@@ -163,11 +163,11 @@ For popup design best practices, check our [popup design patterns guide](/docs/g
 
 ---
 
-Content Script Bootstrapping with Angular {#content-script-bootstrapping}
+## Content Script Bootstrapping with Angular {#content-script-bootstrapping}
 
 Content scripts run in the context of web pages and cannot directly use Angular's bootstrap process in the same way as the popup. However, you can create Angular-powered islands within content scripts.
 
-Standalone Content Script Approach
+### Standalone Content Script Approach
 
 For content scripts, create a separate Angular application that mounts to a specific container:
 
@@ -191,17 +191,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Communication Between Content Script and Angular
+### Communication Between Content Script and Angular
 
 Content scripts often need to communicate with your popup or background script. For content script isolation best practices, see our [content script isolation guide](/docs/guides/content-script-isolation/).
 
 ---
 
-RxJS for Chrome Runtime Messaging {#rxjs-messaging}
+## RxJS for Chrome Runtime Messaging {#rxjs-messaging}
 
 RxJS provides elegant patterns for handling Chrome's message passing API, especially when dealing with complex event streams.
 
-Creating a Message Service
+### Creating a Message Service
 
 ```typescript
 // src/app/services/message.service.ts
@@ -251,9 +251,9 @@ export class MessageService {
 }
 ```
 
-Using RxJS Operators for Complex Flows
+### Using RxJS Operators for Complex Flows
 
-RxJS shines when handling complex message patterns:
+### RxJS shines when handling complex message patterns:
 
 ```typescript
 // Example: Debouncing tab updates
@@ -274,11 +274,11 @@ For advanced messaging patterns, see our [advanced messaging patterns guide](/do
 
 ---
 
-Angular Services Wrapping Chrome APIs {#angular-services-chrome-apis}
+## Angular Services Wrapping Chrome APIs {#angular-services-chrome-apis}
 
 Creating Angular services that wrap Chrome APIs provides type safety and makes testing easier.
 
-Chrome API Service Example
+### Chrome API Service Example
 
 ```typescript
 // src/app/services/chrome-api.service.ts
@@ -331,17 +331,17 @@ For more storage patterns, see our [storage API tutorial](/docs/guides/storage-l
 
 ---
 
-Angular Material in Popup and Options Pages {#angular-material}
+## Angular Material in Popup and Options Pages {#angular-material}
 
 Angular Material provides polished, accessible UI components that work well in extension popups and options pages.
 
-Setup Angular Material
+### Setup Angular Material
 
 ```bash
 ng add @angular/material
 ```
 
-Using Material Components
+### Using Material Components
 
 {% raw %}
 ```typescript
@@ -375,7 +375,7 @@ Using Material Components
 ```
 {% endraw %}
 
-Customizing Material Styles for Popup Size
+### Customizing Material Styles for Popup Size
 
 Material components are designed for full applications. For popups, you may need custom theming:
 
@@ -405,11 +405,11 @@ For more UI patterns, see our [extension design system guide](/docs/guides/chrom
 
 ---
 
-Dependency Injection for Testability {#dependency-injection}
+## Dependency Injection for Testability {#dependency-injection}
 
 Angular's DI system makes testing Chrome extensions significantly easier than traditional extension development.
 
-Providing Mock Implementations
+### Providing Mock Implementations
 
 ```typescript
 // Testing with dependency injection
@@ -450,11 +450,11 @@ This approach allows you to test your popup components without needing actual Ch
 
 ---
 
-Zone.js Considerations in Extensions {#zonejs-considerations}
+## Zone.js Considerations in Extensions {#zonejs-considerations}
 
 Zone.js patches asynchronous APIs to automatically track asynchronous operations. In Chrome extensions, this has some important implications.
 
-Zone.js in Service Workers
+### Zone.js in Service Workers
 
 Service workers (background scripts in Manifest V3) have different lifecycle considerations:
 
@@ -466,7 +466,7 @@ import { bootstrapModule } from './app/app.module';
 // unless you're using Angular features that require change detection
 ```
 
-Turning Off Zone.js for Performance
+### Turning Off Zone.js for Performance
 
 For lightweight extensions, you can use Zone.js-free Angular:
 
@@ -482,7 +482,7 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-Manual Zone Management
+### Manual Zone Management
 
 For background scripts that need Angular but should not trigger change detection on every Chrome API call:
 
@@ -509,11 +509,11 @@ export class BackgroundService {
 
 ---
 
-Build Optimization and Tree-Shaking {#build-optimization}
+## Build Optimization and Tree-Shaking {#build-optimization}
 
 Chrome extensions have strict size limits, and Angular applications can become large. Optimization is critical.
 
-Angular Build Configuration
+### Angular Build Configuration
 
 ```json
 // angular.json - Production optimization
@@ -537,9 +537,9 @@ Angular Build Configuration
 }
 ```
 
-Lazy Loading
+### Lazy Loading
 
-For larger extensions with multiple features:
+### For larger extensions with multiple features:
 
 ```typescript
 // Routing with lazy loading
@@ -556,7 +556,7 @@ const routes: Routes = [
 ];
 ```
 
-Tree-Shaking Unused Code
+### Tree-Shaking Unused Code
 
 Ensure you're using standalone components and importing only what you need:
 
@@ -568,7 +568,7 @@ import { MatCardModule } from '@angular/material/card';
 // Import only what you use to enable tree-shaking
 ```
 
-Separating Background Scripts
+### Separating Background Scripts
 
 Keep your background/service worker scripts outside Angular to avoid shipping the Angular runtime to the service worker:
 
@@ -595,11 +595,11 @@ For more optimization techniques, see our [extension performance optimization gu
 
 ---
 
-Conclusion
+### Conclusion
 
 Angular provides a solid foundation for building enterprise-grade Chrome extensions in 2025. With its TypeScript-first approach, dependency injection, RxJS integration, and component architecture, Angular enables you to build maintainable, testable extensions at scale.
 
-Key takeaways from this guide:
+### Key takeaways from this guide:
 
 - Choose Angular wisely: It excels for complex, feature-rich extensions where maintainability matters
 - Use custom builders: Tools like @angular-builders/custom-esbuild streamline the build process
@@ -609,7 +609,7 @@ Key takeaways from this guide:
 
 ---
 
-Ready to Monetize Your Extension?
+### Ready to Monetize Your Extension?
 
 Building a great extension is just the beginning. Learn how to turn your Angular extension into a revenue-generating product with our comprehensive [Extension Monetization Playbook](/docs/monetization/). We cover freemium models, Stripe integration, subscription architecture, and proven growth strategies.
 

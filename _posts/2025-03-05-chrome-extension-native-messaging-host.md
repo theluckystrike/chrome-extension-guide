@@ -18,7 +18,7 @@ This comprehensive guide walks you through every aspect of implementing chrome e
 
 ---
 
-Understanding Native Messaging Architecture {#understanding-native-messaging-architecture}
+## Understanding Native Messaging Architecture {#understanding-native-messaging-architecture}
 
 The chrome native messaging API creates a secure communication channel between your extension and external applications called native messaging hosts. Unlike standard extension content scripts that run exclusively within the browser sandbox, native messaging enables your extension to reach beyond these boundaries and interact with software running directly on the user's operating system. This capability opens up an entirely new dimension of functionality that was previously impossible to achieve with web technologies alone.
 
@@ -30,7 +30,7 @@ Understanding the message flow is essential for building reliable implementation
 
 ---
 
-Setting Up Your Native Messaging Host {#setting-up-your-native-messaging-host}
+## Setting Up Your Native Messaging Host {#setting-up-your-native-messaging-host}
 
 Before your extension can communicate with a native application, you must properly configure the native messaging host on the user's system. This configuration involves creating a manifest file that tells Chrome how to locate and invoke your native application, along with the actual executable that will process messages from your extension.
 
@@ -42,7 +42,7 @@ The executable itself can be written in any programming language capable of read
 
 ---
 
-Extension-Side Implementation {#extension-side-implementation}
+## Extension-Side Implementation {#extension-side-implementation}
 
 With your native messaging host properly configured, you can now implement the extension-side code that initiates and manages communication. Chrome provides two primary APIs for this purpose: chrome.runtime.sendNativeMessage for one-time request-response interactions, and chrome.runtime.connectNative for persistent connections that remain open over time.
 
@@ -97,7 +97,7 @@ Error handling deserves special attention in any native messaging implementation
 
 ---
 
-Security Considerations and Best Practices {#security-considerations-and-best-practices}
+## Security Considerations and Best Practices {#security-considerations-and-best-practices}
 
 Security must be at the forefront of any native messaging implementation. Because native messaging allows your extension to execute code outside the browser sandbox, the potential for misuse is significant if proper safeguards are not implemented. Understanding and applying security best practices protects both your users and your application from potential vulnerabilities.
 
@@ -111,7 +111,7 @@ Chrome imposes a timeout on native messaging connections, typically around 60 se
 
 ---
 
-Practical Use Cases for Native Messaging {#practical-use-cases-for-native-messaging}
+## Practical Use Cases for Native Messaging {#practical-use-cases-for-native-messaging}
 
 Chrome extension native messaging enables numerous practical applications that would be impossible to implement using web technologies alone. Understanding these common use cases helps you identify opportunities where native messaging can add significant value to your extension.
 
@@ -125,7 +125,7 @@ Credential management and security applications benefit significantly from nativ
 
 ---
 
-Advanced Patterns and Performance Optimization {#advanced-patterns-and-performance-optimization}
+## Advanced Patterns and Performance Optimization {#advanced-patterns-and-performance-optimization}
 
 Building production-ready native messaging implementations requires attention to performance and scalability. Several advanced patterns help you create solid solutions that perform well under heavy load and handle the complexities of real-world usage scenarios.
 
@@ -139,7 +139,7 @@ Monitoring and logging provide essential visibility into your native messaging s
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting-common-issues}
+## Troubleshooting Common Issues {#troubleshooting-common-issues}
 
 Even well-designed native messaging implementations encounter issues during development and deployment. Understanding common problems and their solutions helps you quickly diagnose and resolve issues that arise.
 
@@ -153,7 +153,7 @@ Process termination and cleanup require careful attention. Ensure that your nati
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Chrome extension native messaging transforms your extensions from browser-only tools into powerful desktop application companions. By understanding the architecture, implementing proper configuration, following security best practices, and applying advanced patterns, you can create native messaging implementations that are both powerful and reliable. The ability to bridge the browser and desktop environments opens possibilities limited only by your imagination, from system integration to hardware control to legacy system modernization.
 

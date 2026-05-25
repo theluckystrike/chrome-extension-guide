@@ -17,7 +17,7 @@ This checklist covers eight essential areas: startup performance, content script
 
 ---
 
-Section 1: Startup Performance (Points 1-10)
+### Section 1: Startup Performance (Points 1-10)
 
 The startup performance of your extension sets the tone for the entire user experience. Chrome extensions run in a shared browser environment, meaning poor performance in your extension affects not just your users but the browser itself. With Manifest V3's service worker model, understanding and optimizing startup behavior is more important than ever.
 
@@ -90,7 +90,7 @@ Not every feature needs to be available immediately. Implement lazy loading for 
 
 ---
 
-Section 2: Content Script Performance (Points 11-20)
+### Section 2: Content Script Performance (Points 11-20)
 
 Content scripts run in the context of web pages, directly affecting page load times and user experience. Poorly optimized content scripts can slow down browsing significantly, leading to complaints and negative reviews.
 
@@ -170,7 +170,7 @@ elements.forEach((el, i) => el.style.height = heights[i] + 'px'); // All writes
 
 ---
 
-Section 3: Message Passing (Points 21-25)
+### Section 3: Message Passing (Points 21-25)
 
 Message passing between your extension's components involves serialization, inter-process communication (IPC), and deserialization. Each message has overhead that accumulates with frequent communication.
 
@@ -219,7 +219,7 @@ Using a typed messaging system like `@theluckystrike/webext-messaging` enables c
 
 ---
 
-Section 4: Storage Access Patterns (Points 26-35)
+### Section 4: Storage Access Patterns (Points 26-35)
 
 Chrome storage APIs involve IPC between the extension's contexts and Chrome's storage service. Each call has latency that accumulates with frequent access.
 
@@ -310,7 +310,7 @@ Sync storage is slower due to synchronization overhead. Only use it when users n
 
 ---
 
-Section 5: Web Worker and Offloading (Points 36-40)
+### Section 5: Web Worker and Offloading (Points 36-40)
 
 Web Workers provide true multi-threading in browser environments, enabling heavy computations without blocking the main thread or extension service worker.
 
@@ -376,7 +376,7 @@ async function processLargeData(data) {
 
 ---
 
-Section 6: Lazy Loading and Code Splitting (Points 41-45)
+### Section 6: Lazy Loading and Code Splitting (Points 41-45)
 
 Lazy loading defers the loading of non-critical resources until they're needed, dramatically improving initial load times.
 
@@ -386,7 +386,7 @@ JavaScript's dynamic import() syntax enables code splitting at runtime, loading 
 
 - [ ] Point 41: Dynamic `import()` is used for feature branches
 
-Load feature modules on-demand:
+### Load feature modules on-demand:
 
 ```javascript
 // Only load when user clicks the button
@@ -431,7 +431,7 @@ Use font-display: swap or preload critical fonts while lazy-loading less importa
 
 ---
 
-Section 7: Bundle Size Analysis (Points 46-48)
+### Section 7: Bundle Size Analysis (Points 46-48)
 
 Regular bundle analysis helps identify size regressions and optimization opportunities before they become problems.
 
@@ -463,7 +463,7 @@ Modern browsers don't need polyfills for most features. Remove unused polyfills 
 
 ---
 
-Section 8: Lighthouse and Performance Testing (Points 49-50)
+### Section 8: Lighthouse and Performance Testing (Points 49-50)
 
 Automated testing ensures performance doesn't degrade over time and catches issues before release.
 
@@ -496,17 +496,17 @@ Integrate performance testing into your continuous integration to catch regressi
 
 ---
 
-How to Use This Checklist
+### How to Use This Checklist
 
 This checklist is designed to be worked through systematically. Here's how to get the most out of it:
 
-Step 1: Baseline Measurement
+### Step 1: Baseline Measurement
 
 Before making any changes, measure your current performance using Chrome DevTools. Record startup times, memory usage, and identify the most impactful areas for optimization. Use the Chrome DevTools Performance tab to capture detailed traces of your extension's execution. Pay special attention to the Service Worker startup timeline and content script injection times.
 
 Document your baseline measurements so you can compare them after implementing changes. This helps you understand the actual impact of your optimizations and identify which changes provide the most benefit.
 
-Step 2: Prioritize by Impact
+### Step 2: Prioritize by Impact
 
 Not all optimizations are created equal. Focus your efforts on sections that affect the user experience most directly:
 
@@ -519,17 +519,17 @@ Not all optimizations are created equal. Focus your efforts on sections that aff
 - Lower Impact: Bundle size optimization (Section 7)
   While important, bundle size typically only affects initial load times. Address this after you've optimized the higher-impact areas.
 
-Step 3: Implement Incrementally
+### Step 3: Implement Incrementally
 
 Work through the checklist systematically. Each point has corresponding guides in the Chrome Extension Guide that provide detailed implementation instructions. Make one change at a time and measure its impact before moving to the next point. This approach helps you understand what works best for your specific extension.
 
-Step 4: Verify and Monitor
+### Step 4: Verify and Monitor
 
 After implementing changes, re-run your performance tests. Set up ongoing monitoring to catch regressions early. Consider creating a performance dashboard that tracks key metrics over time. Many teams find that setting up automated performance tests in their CI/CD pipeline is essential for maintaining consistent performance.
 
 ---
 
-Performance Budget Targets
+### Performance Budget Targets
 
 Establish clear performance targets for your extension. These budget targets provide concrete goals and help you identify when optimization is needed:
 
@@ -546,7 +546,7 @@ These targets represent achievable goals for most extensions. Your specific use 
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Performance Optimization](../guides/performance.md)
 - [Chrome Extension Performance Best Practices](../guides/chrome-extension-performance-best-practices.md)

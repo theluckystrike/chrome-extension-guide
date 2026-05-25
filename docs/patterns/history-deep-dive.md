@@ -8,7 +8,7 @@ last_modified_at: 2026-01-15
 
 Chrome Extension History detailed look
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome History API (`chrome.history`) provides powerful capabilities for building extension features that analyze, visualize, and manage user browsing history. This guide covers production-ready patterns for working with the History API, from basic searching to advanced analytics and real-time monitoring.
 
@@ -16,11 +16,11 @@ The Chrome History API (`chrome.history`) provides powerful capabilities for bui
 
 ---
 
-Pattern 1: Searching History with Time-Range Filters {#pattern-1-searching-history-with-time-range-filters}
+## Pattern 1: Searching History with Time-Range Filters {#pattern-1-searching-history-with-time-range-filters}
 
 The foundation of history analysis begins with `chrome.history.search()`. This method accepts a query object and returns matching `HistoryItem` objects with pagination support for large result sets.
 
-Basic Time-Range Search {#basic-time-range-search}
+## Basic Time-Range Search {#basic-time-range-search}
 
 ```ts
 // history/search.ts
@@ -95,7 +95,7 @@ export async function searchByDomain(
 }
 ```
 
-Advanced Filtering with Compound Queries {#advanced-filtering-with-compound-queries}
+## Advanced Filtering with Compound Queries {#advanced-filtering-with-compound-queries}
 
 ```ts
 // history/advanced-search.ts
@@ -184,11 +184,11 @@ export function getThisWeekRange(): { startDate: Date; endDate: Date } {
 
 ---
 
-Pattern 2: Getting Detailed Visit Data with chrome.history.getVisits {#pattern-2-getting-detailed-visit-data-with-chromehistorygetvisits}
+## Pattern 2: Getting Detailed Visit Data with chrome.history.getVisits {#pattern-2-getting-detailed-visit-data-with-chromehistorygetvisits}
 
 While `chrome.history.search()` returns summary information, `chrome.history.getVisits()` provides detailed information about each individual visit to a URL, including transition types and referrer URLs.
 
-Retrieving Visit Details {#retrieving-visit-details}
+## Retrieving Visit Details {#retrieving-visit-details}
 
 ```ts
 // history/visits.ts
@@ -273,7 +273,7 @@ export async function analyzeTransitionTypes(
 }
 ```
 
-Transition Types Reference {#transition-types-reference}
+## Transition Types Reference {#transition-types-reference}
 
 ```ts
 // history/transition-types.ts
@@ -314,11 +314,11 @@ export function isValidTransition(type: string): boolean {
 
 ---
 
-Pattern 3: Building a Visual Browsing Timeline {#pattern-3-building-a-visual-browsing-timeline}
+## Pattern 3: Building a Visual Browsing Timeline {#pattern-3-building-a-visual-browsing-timeline}
 
 A visual timeline groups history items by time periods (hours, days, weeks) and organizes them by domain, providing users with an intuitive view of their browsing activity.
 
-Timeline Data Structure {#timeline-data-structure}
+## Timeline Data Structure {#timeline-data-structure}
 
 ```ts
 // history/timeline.ts
@@ -476,11 +476,11 @@ export async function generateTimeline(
 
 ---
 
-Pattern 4: History Analytics {#pattern-4-history-analytics}
+## Pattern 4: History Analytics {#pattern-4-history-analytics}
 
 Analyzing browsing patterns provides insights into user behavior, including most visited sites, time-of-day patterns, and browsing trends.
 
-Analytics Implementation {#analytics-implementation}
+## Analytics Implementation {#analytics-implementation}
 
 ```ts
 // history/analytics.ts
@@ -641,11 +641,11 @@ export async function generateAnalytics(
 
 ---
 
-Pattern 5: Selective History Deletion {#pattern-5-selective-history-deletion}
+## Pattern 5: Selective History Deletion {#pattern-5-selective-history-deletion}
 
 The History API provides methods for removing specific URLs or ranges of history, enabling features like "forget this page" or bulk cleanup.
 
-Deletion Operations {#deletion-operations}
+## Deletion Operations {#deletion-operations}
 
 ```ts
 // history/delete.ts
@@ -777,11 +777,11 @@ export async function deleteOldHistory(daysToKeep: number): Promise<DeleteResult
 
 ---
 
-Pattern 6: History Export with Pagination {#pattern-6-history-export-with-pagination}
+## Pattern 6: History Export with Pagination {#pattern-6-history-export-with-pagination}
 
 Exporting large history datasets requires pagination to handle memory constraints and provide progress feedback.
 
-Export Implementation {#export-implementation}
+## Export Implementation {#export-implementation}
 
 ```ts
 // history/export.ts
@@ -992,11 +992,11 @@ export async function downloadHistory(
 
 ---
 
-Pattern 7: Real-Time History Monitoring {#pattern-7-real-time-history-monitoring}
+## Pattern 7: Real-Time History Monitoring {#pattern-7-real-time-history-monitoring}
 
 Using the History API's event listeners, you can monitor browsing activity in real-time and respond to new visits or deletions.
 
-Event Listeners {#event-listeners}
+## Event Listeners {#event-listeners}
 
 ```ts
 // history/monitoring.ts
@@ -1149,11 +1149,11 @@ export async function updateMonitorConfig(
 
 ---
 
-Pattern 8: Cross-Referencing History with Bookmarks {#pattern-8-cross-referencing-history-with-bookmarks}
+## Pattern 8: Cross-Referencing History with Bookmarks {#pattern-8-cross-referencing-history-with-bookmarks}
 
 Discover URLs that have been visited but not saved as bookmarks, helping users find content worth preserving.
 
-History-Bookmark Cross-Reference {#history-bookmark-cross-reference}
+## History-Bookmark Cross-Reference {#history-bookmark-cross-reference}
 
 ```ts
 // history/bookmark-crossref.ts
@@ -1384,7 +1384,7 @@ export async function bulkBookmark(
 
 ---
 
-Summary Table {#summary-table}
+## Summary Table {#summary-table}
 
 | Pattern | API Methods | Use Case | Complexity |
 |---------|-------------|----------|------------|
@@ -1397,7 +1397,7 @@ Summary Table {#summary-table}
 | 7. Real-Time Monitoring | `onVisited`, `onVisitRemoved` | Track new visits and deletions live | Advanced |
 | 8. Bookmark Cross-Reference | `search()` + `bookmarks.*` | Find visited but unbookmarked content | Advanced |
 
-Key Takeaways {#key-takeaways}
+## Key Takeaways {#key-takeaways}
 
 1. Always use pagination: History can contain thousands of items; process in batches
 2. Cache aggressively: History queries can be expensive; implement TTL-based caching
@@ -1406,7 +1406,7 @@ Key Takeaways {#key-takeaways}
 5. Use storage libraries: `@theluckystrike/webext-storage` simplifies state management
 6. Use messaging: `@theluckystrike/webext-messaging` for real-time updates to UI
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 ```json
 {

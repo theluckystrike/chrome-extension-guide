@@ -18,7 +18,7 @@ Whether you are a web developer struggling with complex grid layouts or someone 
 
 ---
 
-Why Build a CSS Grid Inspector Extension? {#why-build-grid-inspector}
+## Why Build a CSS Grid Inspector Extension? {#why-build-grid-inspector}
 
 The ability to visualize and debug CSS Grid layouts is crucial for modern web development. While Chrome DevTools includes basic grid inspection features, a dedicated extension offers several compelling advantages that make building one worthwhile.
 
@@ -30,29 +30,29 @@ Additionally, the web development community constantly needs better CSS layout t
 
 ---
 
-Understanding the Extension Architecture {#extension-architecture}
+## Understanding the Extension Architecture {#extension-architecture}
 
 Before writing any code, let us understand the core components that make up our CSS Grid Inspector extension. Chrome extensions built with Manifest V3 consist of several parts that work together to deliver functionality.
 
-The Manifest File
+### The Manifest File
 
 The manifest.json file serves as the configuration hub for your extension. It defines the extension name, version, permissions, and declares which scripts and resources the extension will use. For our grid inspector, we will need permissions to access the active tab and execute scripts within page contexts.
 
-Content Scripts
+### Content Scripts
 
 Content scripts are JavaScript files that run in the context of web pages. They can read and modify the DOM, access computed styles using getComputedStyle, and interact with page elements. This is where the core grid detection and overlay rendering logic will live.
 
-Popup Interface
+### Popup Interface
 
 The popup provides our user interface for toggling the inspector, configuring overlay options, and controlling which grid information to display. This creates the interactive experience users expect from a toolbar extension.
 
-Background Service Worker
+### Background Service Worker
 
 The background service worker handles extension lifecycle events and can coordinate between different parts of the extension. While our grid inspector might not heavily rely on this, understanding its role is important for building more complex extensions.
 
 ---
 
-Project Setup and Directory Structure {#project-setup}
+## Project Setup and Directory Structure {#project-setup}
 
 Let us start by setting up our project structure. Create a new folder for your extension project with the following directory structure:
 
@@ -78,9 +78,9 @@ This structure follows Chrome extension best practices, keeping different compon
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
-The manifest.json file defines our extension configuration:
+### The manifest.json file defines our extension configuration:
 
 ```json
 {
@@ -124,7 +124,7 @@ This manifest declares the necessary permissions for our extension. We use the s
 
 ---
 
-Building the Content Script {#content-script}
+## Building the Content Script {#content-script}
 
 The content script is the heart of our extension. It detects grid containers, analyzes their grid properties, and renders visual overlays. Create content/content.js:
 
@@ -321,7 +321,7 @@ This content script provides comprehensive grid detection and visualization. It 
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup provides the user interface for controlling the inspector. Create popup/popup.html:
 
@@ -404,7 +404,7 @@ The popup provides the user interface for controlling the inspector. Create popu
 </html>
 ```
 
-Create popup/popup.css for styling:
+### Create popup/popup.css for styling:
 
 ```css
 * {
@@ -520,7 +520,7 @@ footer {
 }
 ```
 
-Create popup/popup.js to handle user interactions:
+### Create popup/popup.js to handle user interactions:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -609,9 +609,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Creating the Background Service Worker {#background-worker}
+## Creating the Background Service Worker {#background-worker}
 
-Create background/background.js to handle extension lifecycle events:
+### Create background/background.js to handle extension lifecycle events:
 
 ```javascript
 // Background Service Worker for CSS Grid Inspector
@@ -630,7 +630,7 @@ console.log('CSS Grid Inspector background service worker loaded');
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have created all the necessary files, let us test our extension:
 
@@ -645,7 +645,7 @@ You should see visual overlays on all grid containers, displaying grid lines, tr
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 While our basic grid inspector works well, there are many advanced features you can add to make it even more powerful:
 
@@ -661,7 +661,7 @@ Multiple Overlay Styles: Offer different overlay styles such as dotted lines, so
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have tested your extension and added any desired features, you can publish it to the Chrome Web Store:
 
@@ -675,7 +675,7 @@ Remember to follow Chrome's policies and ensure your extension provides genuine 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a CSS Grid Inspector extension is an excellent project that teaches valuable Chrome extension development skills while creating a genuinely useful tool for web developers. Throughout this guide, we have covered the essential components: manifest configuration, content scripts for DOM interaction, popup interfaces for user control, and background service workers for extension lifecycle management.
 

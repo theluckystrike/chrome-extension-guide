@@ -19,7 +19,7 @@ This comprehensive guide walks you through everything you need to know about usi
 
 ---
 
-Table of Contents
+### Table of Contents
 
 1. [Understanding Chrome Profiles and Extensions](#understanding-chrome-profiles-and-extensions)
 2. [How Tab Suspender Pro Behaves Across Different Profiles](#how-tab-suspender-pro-behaves-across-different-profiles)
@@ -32,7 +32,7 @@ Table of Contents
 
 ---
 
-Understanding Chrome Profiles and Extensions {#understanding-chrome-profiles-and-extensions}
+## Understanding Chrome Profiles and Extensions {#understanding-chrome-profiles-and-extensions}
 
 Before diving into Tab Suspender Pro specifically, it's essential to understand how Chrome profiles work with extensions at a fundamental level. Chrome introduced profiles as a way to let multiple users share the same browser installation while keeping their data separate. Each profile maintains its own:
 
@@ -48,7 +48,7 @@ This separation happens at the Chrome Storage API level. When Tab Suspender Pro 
 
 This architecture actually has advantages. It means you can customize Tab Suspender Pro differently for work versus personal browsing without any complex setup. But it also means you need to be intentional about configuration, if you spend time perfecting your suspension rules in one profile, those settings won't automatically appear in your other profiles.
 
-Creating and Managing Chrome Profiles
+### Creating and Managing Chrome Profiles
 
 If you're new to Chrome profiles or need a refresher, here's how to create and manage them:
 
@@ -64,11 +64,11 @@ To install Tab Suspender Pro in a specific profile, simply open Chrome with that
 
 ---
 
-How Tab Suspender Pro Behaves Across Different Profiles {#how-tab-suspender-pro-behaves-across-different-profiles}
+## How Tab Suspender Pro Behaves Across Different Profiles {#how-tab-suspender-pro-behaves-across-different-profiles}
 
 Understanding how Tab Suspender Pro operates within the Chrome profiles framework is crucial for getting the behavior you want. Let's examine the key areas where profile-specific behavior matters.
 
-Extension State Isolation
+### Extension State Isolation
 
 Each profile's Tab Suspender Pro instance maintains its own:
 
@@ -80,7 +80,7 @@ Each profile's Tab Suspender Pro instance maintains its own:
 
 This isolation means you need to configure each profile's Tab Suspender Pro independently. A common scenario illustrates this perfectly:
 
-The Frustrated Remote Worker
+### The Frustrated Remote Worker
 
 Sarah uses Chrome with three profiles: "Work," "Freelance," and "Personal." She installed Tab Suspender Pro and configured it aggressively in her Work profile, suspending tabs after just 30 seconds of inactivity. This works beautifully for her intense development work where she's constantly switching between code repositories, documentation, and communication tools.
 
@@ -88,7 +88,7 @@ But when she opens her Personal profile to browse during lunch, she forgets that
 
 This is exactly the scenario where understanding per-profile configuration becomes essential.
 
-Service Worker Behavior
+### Service Worker Behavior
 
 Tab Suspender Pro uses Chrome's Manifest V3 service worker architecture. Each profile runs its own service worker instance, which means:
 
@@ -100,11 +100,11 @@ This independence is generally beneficial, it means Tab Suspender Pro in your Wo
 
 ---
 
-Configuring Tab Suspender Pro Per-Profile {#configuring-tab-suspender-pro-per-profile}
+## Configuring Tab Suspender Pro Per-Profile {#configuring-tab-suspender-pro-per-profile}
 
 Now let's get into the practical aspects of setting up Tab Suspender Pro differently for each of your Chrome profiles. The key is understanding that you need to configure each instance separately, but the process is straightforward.
 
-Step-by-Step Per-Profile Configuration
+### Step-by-Step Per-Profile Configuration
 
 1. Open the profile you want to configure: Click your profile icon in Chrome's top-right corner and select the desired profile
 
@@ -121,7 +121,7 @@ Step-by-Step Per-Profile Configuration
 
 5. Test your configuration: Open some tabs, let them sit idle, and verify the suspension behavior matches your expectations for this profile
 
-Recommended Profiles Configurations
+### Recommended Profiles Configurations
 
 Here are some starting points for common profile setups:
 
@@ -145,11 +145,11 @@ Research/Academic Profile
 
 ---
 
-Syncing Preferences Across Multiple Profiles {#syncing-preferences-across-multiple-profiles}
+## Syncing Preferences Across Multiple Profiles {#syncing-preferences-across-multiple-profiles}
 
 Sometimes you want consistent Tab Suspender Pro behavior across all your profiles rather than completely separate configurations. Perhaps you want the same whitelist across profiles or need the same suspension rules for compliance reasons. Here's how to approach syncing.
 
-Manual Synchronization Strategies
+### Manual Synchronization Strategies
 
 The most straightforward approach is maintaining a shared configuration document and manually applying settings. This works well when:
 
@@ -157,7 +157,7 @@ The most straightforward approach is maintaining a shared configuration document
 - Settings don't change frequently
 - You want full control over what syncs
 
-To implement manual sync:
+### To implement manual sync:
 
 1. Create a document (notepad, text file, or even a dedicated "Chrome Profiles" note) listing your Tab Suspender Pro settings
 2. When you update settings in one profile, update your documentation
@@ -165,7 +165,7 @@ To implement manual sync:
 
 This method is simple but requires discipline. It's easy to forget to apply updates, leading to inconsistent behavior.
 
-Export/Import Settings
+### Export/Import Settings
 
 Tab Suspender Pro includes export and import functionality that can simplify syncing:
 
@@ -176,7 +176,7 @@ Tab Suspender Pro includes export and import functionality that can simplify syn
 
 This approach is much more reliable than manual copying and ensures your profiles stay consistent.
 
-Chrome Storage Sync Limitations
+### Chrome Storage Sync Limitations
 
 Chrome's `chrome.storage.sync` API, designed to sync data across devices for the same user, doesn't automatically share settings between profiles on the same computer. The sync mechanism is tied to the user's Google account and Chrome profile, so each Chrome profile has its own sync storage container. You cannot use chrome.storage.sync to share Tab Suspender Pro settings between different Chrome profiles on the same machine.
 
@@ -184,11 +184,11 @@ However, if you sign into the same Google account across multiple Chrome profile
 
 ---
 
-Managing Work vs Personal Profiles {#managing-work-vs-personal-profiles}
+## Managing Work vs Personal Profiles {#managing-work-vs-personal-profiles}
 
 The most common use case for multiple Chrome profiles is separating work and personal browsing. Tab Suspender Pro can be particularly valuable in this scenario, but it requires thoughtful configuration to match the different demands of each context.
 
-Work Profile Best Practices
+### Work Profile Best Practices
 
 Your work profile typically has different priorities than personal browsing:
 
@@ -210,9 +210,9 @@ Productivity workflow integration: Consider how your work patterns interact with
 - If you work in focused sessions, longer delays might work better
 - Use keyboard shortcuts to quickly suspend or unsuspend tabs during meetings
 
-Personal Profile Best Practices
+### Personal Profile Best Practices
 
-Personal browsing has entirely different characteristics:
+### Personal browsing has entirely different characteristics:
 
 Relaxed suspension timing: You want content available when you return to it:
 
@@ -232,7 +232,7 @@ Balancing resource savings with convenience: While Tab Suspender Pro saves memor
 - If you're browsing on a laptop with limited memory, aggressive settings extend battery life
 - Find your personal balance point between convenience and performance
 
-Profile Switching Tips
+### Profile Switching Tips
 
 To get the most out of Tab Suspender Pro across profiles:
 
@@ -243,11 +243,11 @@ To get the most out of Tab Suspender Pro across profiles:
 
 ---
 
-Tips for Power Users with Many Profiles {#tips-for-power-users-with-many-profiles}
+## Tips for Power Users with Many Profiles {#tips-for-power-users-with-many-profiles}
 
 If you're someone who maintains five, ten, or even more Chrome profiles, for multiple clients, various projects, or extensive compartmentalization, here are advanced strategies for managing Tab Suspender Pro effectively.
 
-Profile Organization Strategies
+### Profile Organization Strategies
 
 Naming conventions matter: Use consistent, descriptive names for your profiles:
 
@@ -257,7 +257,7 @@ Naming conventions matter: Use consistent, descriptive names for your profiles:
 
 This makes it easier to identify which profile you're configuring and why.
 
-Document your setup: Create a reference document listing:
+### Document your setup: Create a reference document listing:
 
 - Each profile name and purpose
 - Tab Suspender Pro settings for that profile
@@ -266,7 +266,7 @@ Document your setup: Create a reference document listing:
 
 Update this document whenever you change settings. This becomes invaluable when you need to recreate a profile or explain your setup to someone else.
 
-Batch Configuration Approaches
+### Batch Configuration Approaches
 
 When you need to apply consistent settings across many profiles:
 
@@ -280,7 +280,7 @@ When you need to apply consistent settings across many profiles:
 
 This approach gives you consistency with flexibility, you get a solid baseline without manual reconfiguration.
 
-Managing Extension Updates Across Profiles
+### Managing Extension Updates Across Profiles
 
 When Tab Suspender Pro updates, the update applies to all profiles simultaneously at the Chrome level, but settings remain profile-specific. After major updates:
 
@@ -288,18 +288,18 @@ When Tab Suspender Pro updates, the update applies to all profiles simultaneousl
 2. Check if new features align with your current configurations
 3. Update your documentation if settings or UI have changed
 
-Performance Considerations
+### Performance Considerations
 
-With many profiles running simultaneously:
+### With many profiles running simultaneously:
 
 - Each profile's Tab Suspender Pro service worker runs independently
 - If you have 10 profiles with Tab Suspender Pro active and 20 tabs each, that's potentially 200 tabs being monitored
 - The extension itself is lightweight, but cumulative system load increases with more profiles
 - Consider which profiles actually need Tab Suspender Pro, maybe not every profile requires aggressive tab management
 
-Automating Profile-Specific Settings
+### Automating Profile-Specific Settings
 
-For advanced users, consider these automation approaches:
+### For advanced users, consider these automation approaches:
 
 - Use Chrome flags and policies for organization-wide management (enterprise environments)
 - Create scripts that export/import settings between profiles (though this requires manual intervention)
@@ -307,20 +307,20 @@ For advanced users, consider these automation approaches:
 
 ---
 
-Troubleshooting Common Profile-Related Issues {#troubleshooting-common-profile-related-issues}
+## Troubleshooting Common Profile-Related Issues {#troubleshooting-common-profile-related-issues}
 
 Even with proper configuration, you may encounter issues with Tab Suspender Pro across multiple profiles. Here are solutions to common problems:
 
-Settings Not Applying
+### Settings Not Applying
 
-If settings don't seem to be taking effect:
+### If settings don't seem to be taking effect:
 
 1. Verify you're in the correct profile: Check the profile icon in Chrome's top-right corner
 2. Reload the extension: Visit `chrome://extensions`, find Tab Suspender Pro, and click "Reload"
 3. Clear extension storage: In the extension settings, look for an option to clear stored data, then reconfigure
 4. Restart Chrome: Sometimes Chrome needs a fresh start to apply all settings correctly
 
-Whitelist Conflicts Between Profiles
+### Whitelist Conflicts Between Profiles
 
 If you accidentally whitelist a site in one profile that should be managed differently in another:
 
@@ -328,7 +328,7 @@ If you accidentally whitelist a site in one profile that should be managed diffe
 - Export your whitelist configurations to track what's whitelisted where
 - Review whitelists periodically to prevent drift
 
-Memory Usage Higher Than Expected
+### Memory Usage Higher Than Expected
 
 If you're not seeing the memory savings you expect across profiles:
 
@@ -337,7 +337,7 @@ If you're not seeing the memory savings you expect across profiles:
 - Ensure tabs aren't being unsuspended immediately by other extensions
 - Consider that some tabs (pinned tabs, playing audio tabs) are intentionally never suspended
 
-Extension Appearing in Only Some Profiles
+### Extension Appearing in Only Some Profiles
 
 If Tab Suspender Pro seems to be missing from some profiles:
 
@@ -347,11 +347,11 @@ If Tab Suspender Pro seems to be missing from some profiles:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Using Tab Suspender Pro with multiple Chrome profiles gives you incredible flexibility to tailor your tab management to different contexts, workflows, and requirements. Whether you're separating work from personal browsing, managing multiple client projects, or organizing your digital life into distinct compartments, understanding how Tab Suspender Pro operates within the Chrome profiles framework is essential.
 
-Remember the key principles:
+### Remember the key principles:
 
 - Each profile is independent: Tab Suspender Pro settings, whitelists, and statistics don't automatically share between profiles
 - Configure intentionally: Take time to set up each profile according to its specific use case

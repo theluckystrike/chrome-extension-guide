@@ -10,7 +10,7 @@ Building a Product Roadmap for Chrome Extensions
 
 A product roadmap is your strategic plan for evolving your Chrome extension. It transforms scattered feature ideas into a coherent vision that aligns development with user needs and business goals. This guide covers the essential frameworks and practices for building an effective roadmap for your extension.
 
-Why Chrome Extensions Need Roadmaps
+### Why Chrome Extensions Need Roadmaps
 
 Chrome extensions exist in a unique ecosystem, they must balance Chrome's platform constraints, Web Store policies, and user expectations. Unlike standalone web apps, extensions have:
 
@@ -23,11 +23,11 @@ A well-crafted roadmap helps you navigate these constraints while delivering max
 
 ---
 
-Defining Your MVP
+### Defining Your MVP
 
 An MVP (Minimum Viable Product) is the smallest version of your extension that solves the core problem for users. It should be functional enough to demonstrate value and gather feedback.
 
-MVP Definition Template
+### MVP Definition Template
 
 ```markdown
 MVP Definition for [Extension Name]
@@ -58,7 +58,7 @@ Success Metrics
 - [Metric 3]: Target [X] star rating
 ```
 
-Real-World Example: Tab Manager Extension
+### Real-World Example: Tab Manager Extension
 
 MVP Scope:
 - P0: Group tabs, search tabs, restore sessions
@@ -67,9 +67,9 @@ MVP Scope:
 
 ---
 
-Feature Prioritization Frameworks
+### Feature Prioritization Frameworks
 
-ICE Scoring
+### ICE Scoring
 
 ICE (Impact, Confidence, Ease) is a lightweight framework for prioritizing features quickly.
 
@@ -78,9 +78,9 @@ Scoring Criteria:
 - Confidence (1-10): How certain are you about the impact estimate?
 - Ease (1-10): How easy is this to build and maintain?
 
-Formula: Score = Impact × Confidence × Ease
+### Formula: Score = Impact × Confidence × Ease
 
-ICE Scoring Example
+### ICE Scoring Example
 
 | Feature | Impact | Confidence | Ease | Score |
 |---------|--------|------------|------|-------|
@@ -89,9 +89,9 @@ ICE Scoring Example
 | Tab themes | 5 | 7 | 9 | 315 |
 | Keyboard shortcuts | 6 | 9 | 8 | 432 |
 
-Prioritization: Tab search → Keyboard shortcuts → Tab themes → Session sync
+### Prioritization: Tab search → Keyboard shortcuts → Tab themes → Session sync
 
-RICE Scoring
+### RICE Scoring
 
 RICE (Reach, Impact, Confidence, Effort) is more comprehensive and suitable for larger feature sets.
 
@@ -101,9 +101,9 @@ Scoring Criteria:
 - Confidence (0.5-1): How certain are you about reach and impact?
 - Effort (1-?): Person-weeks required to complete
 
-Formula: Score = (Reach × Impact × Confidence) / Effort
+### Formula: Score = (Reach × Impact × Confidence) / Effort
 
-RICE Template
+### RICE Template
 
 ```markdown
 Feature Prioritization Board
@@ -124,18 +124,18 @@ Backlog (Unscheduled)
 | Team features | 500 | 3 | 50% | 12 | 7.5 |
 ```
 
-Choosing Between ICE and RICE
+### Choosing Between ICE and RICE
 
 - Use ICE when: Starting out, small team, quick decisions needed
 - Use RICE when: Larger feature set, need to justify to stakeholders, longer planning horizon
 
 ---
 
-Release Planning
+### Release Planning
 
-Version Numbering for Extensions
+### Version Numbering for Extensions
 
-Follow Semantic Versioning (SemVer) adapted for extensions:
+### Follow Semantic Versioning (SemVer) adapted for extensions:
 
 ```
 MAJOR.MINOR.PATCH
@@ -145,7 +145,7 @@ MAJOR.MINOR.PATCH
 - MINOR (1.0.0 → 1.1.0): New features, backward compatible
 - PATCH (1.0.0 → 1.0.1): Bug fixes, performance improvements
 
-Release Cadence Options
+### Release Cadence Options
 
 | Cadence | Best For | Pros | Cons |
 |---------|----------|------|------|
@@ -154,7 +154,7 @@ Release Cadence Options
 | Monthly | Medium features, thorough testing | Predictable, stable | Slow to respond to issues |
 | Quarterly | Major releases, strategic planning | Big impact, thorough QA | Misses quick wins |
 
-Release Planning Template
+### Release Planning Template
 
 ```markdown
 Release Plan: Version 1.1.0
@@ -181,9 +181,9 @@ Rollout Schedule
 - Monitor: Error rate, crash rate, support tickets
 ```
 
-Phased Rollout Strategy
+### Phased Rollout Strategy
 
-For significant releases, implement a gradual rollout:
+### For significant releases, implement a gradual rollout:
 
 ```typescript
 // Service worker or background script
@@ -210,9 +210,9 @@ chrome.runtime.onUpdateAvailable.addListener((details) => {
 
 ---
 
-Versioning Strategy
+### Versioning Strategy
 
-Manifest Version Considerations
+### Manifest Version Considerations
 
 Chrome Extensions moved from Manifest V2 to V3. Your versioning strategy should account for:
 
@@ -240,7 +240,7 @@ async function checkFeatureSupport(): Promise<Record<string, boolean>> {
 }
 ```
 
-Long-Term Version Planning
+### Long-Term Version Planning
 
 ```markdown
 Version Roadmap: 2024
@@ -271,11 +271,11 @@ Q4: Ecosystem (v2.2+)
 
 ---
 
-User Feedback Loops
+### User Feedback Loops
 
-Collecting Feedback Effectively
+### Collecting Feedback Effectively
 
-In-App Feedback Mechanisms
+### In-App Feedback Mechanisms
 
 ```typescript
 // Feedback button in popup/options page
@@ -329,7 +329,7 @@ function showFeedbackDialog() {
 }
 ```
 
-Review Prompt Strategy
+### Review Prompt Strategy
 
 Timing matters for review prompts. Don't ask immediately after installation:
 
@@ -355,9 +355,9 @@ async function shouldPromptForReview(): Promise<boolean> {
 }
 ```
 
-Analyzing Feedback
+### Analyzing Feedback
 
-Feedback Categorization Template
+### Feedback Categorization Template
 
 ```markdown
 Feedback Analysis: January 2024
@@ -398,13 +398,13 @@ Action Items
 
 ---
 
-Roadmap Communication
+### Roadmap Communication
 
-Public Roadmap Options
+### Public Roadmap Options
 
-GitHub Projects
+### GitHub Projects
 
-Use GitHub Projects for public visibility:
+### Use GitHub Projects for public visibility:
 
 ```yaml
 .github/ISSUE_TEMPLATES/feature_request.md
@@ -428,7 +428,7 @@ Additional Context
 [Add any other context about the feature request]
 ```
 
-Release Notes Best Practices
+### Release Notes Best Practices
 
 ```markdown
 TabMaster v1.2.0 Release Notes
@@ -458,7 +458,7 @@ Thanks to @user1, @user2, and @user3 for reporting issues and helping test!
 [Download from Chrome Web Store →](link)
 ```
 
-Internal vs External Roadmaps
+### Internal vs External Roadmaps
 
 | Aspect | Internal Roadmap | External Roadmap |
 |--------|-------------------|------------------|
@@ -469,9 +469,9 @@ Internal vs External Roadmaps
 
 ---
 
-Templates Summary
+### Templates Summary
 
-Quick-Start Roadmap Template
+### Quick-Start Roadmap Template
 
 ```markdown
 [Extension Name] Roadmap
@@ -506,7 +506,7 @@ Last updated: [Date]
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Extension Monetization Strategies](../guides/extension-monetization.md). Revenue strategies that inform roadmap priorities
 - [How to Monetize Your Chrome Extension](../guides/monetization-overview.md). Complete monetization guide with implementation patterns

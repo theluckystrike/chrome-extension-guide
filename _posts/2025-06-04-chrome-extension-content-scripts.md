@@ -13,18 +13,18 @@ tags: [content-scripts, injection, dom, manifest, javascript, web-page, dom-mani
 
 Content scripts are a powerful feature of Chrome extensions that run in the context of web pages. They allow your extension to read and modify page content, enabling a wide range of functionality from ad blocking to page enhancement. This guide covers everything you need to master content scripts.
 
-How Content Scripts Work
+### How Content Scripts Work
 
 Content scripts are JavaScript files that Chrome injects into web pages that match patterns you specify. Unlike regular JavaScript on a webpage, content scripts can access and manipulate the DOM directly. They run in an isolated world, which provides security benefits but also means they cannot directly access page variables.
 
-Key Concepts
+### Key Concepts
 
 - Injected JavaScript: Content scripts run in the context of the page
 - DOM Access: Full access to read and modify page content
 - Isolated World: Separate JavaScript execution environment from the page
 - Match Patterns: URL patterns that determine when to inject
 
-Declaration in Manifest V3
+### Declaration in Manifest V3
 
 ```json
 {
@@ -41,9 +41,9 @@ Declaration in Manifest V3
 
 The "matches" array defines which pages will have your script injected. You can use specific URLs, wildcards, or the special "<all_urls>" pattern.
 
-Match Patterns
+### Match Patterns
 
-Understanding match patterns is crucial:
+### Understanding match patterns is crucial:
 
 | Pattern | Matches |
 |---------|---------|
@@ -53,9 +53,9 @@ Understanding match patterns is crucial:
 | `<all_urls>` | Every webpage |
 | `file:///C:/path/*` | Local files |
 
-Types of Content Script Injection
+### Types of Content Script Injection
 
-Declarative Injection
+### Declarative Injection
 
 As shown above, you declare content scripts in the manifest. Chrome automatically injects them based on URL patterns. This is the most common approach and works well for extensions that need to run on specific sites.
 
@@ -77,7 +77,7 @@ As shown above, you declare content scripts in the manifest. Chrome automaticall
 }
 ```
 
-Programmatic Injection
+### Programmatic Injection
 
 You can also inject content scripts programmatically from background scripts or other extension contexts:
 
@@ -104,7 +104,7 @@ chrome.scripting.executeScript({
 
 Programmatic injection requires the "scripting" permission and is triggered by user action or extension events.
 
-Accessing Page Content
+### Accessing Page Content
 
 Content scripts have access to the page's DOM but run in an isolated world. This creates a unique environment with specific characteristics:
 
@@ -134,7 +134,7 @@ if (header) {
 document.querySelectorAll('.advertisement').forEach(el => el.remove());
 ```
 
-Isolation Characteristics
+### Isolation Characteristics
 
 Content scripts in their isolated world can:
 - Read and modify the DOM freely
@@ -151,11 +151,11 @@ const myPrivateData = 'secret';
 // window.myPrivateData === undefined
 ```
 
-Communication with Extension
+### Communication with Extension
 
 Content scripts can communicate with other parts of your extension using message passing:
 
-Sending Messages
+### Sending Messages
 
 ```javascript
 // Send message to background script
@@ -177,7 +177,7 @@ chrome.runtime.sendMessage(
 );
 ```
 
-Receiving Messages
+### Receiving Messages
 
 ```javascript
 // Listen for messages from background or popup
@@ -199,7 +199,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Timing of Injection
+### Timing of Injection
 
 Control when your content script runs using the "run_at" option:
 
@@ -223,13 +223,13 @@ Control when your content script runs using the "run_at" option:
 }
 ```
 
-When to Use Each Timing
+### When to Use Each Timing
 
 - document_start: For injecting CSS, modifying meta tags, or pre-loading scripts
 - document_end: For most DOM manipulations, when you need the DOM but not images
 - document_idle: Default, safest choice for most use cases
 
-Isolated Worlds
+### Isolated Worlds
 
 Each content script runs in its own isolated JavaScript world. This provides significant security benefits:
 
@@ -239,7 +239,7 @@ Each content script runs in its own isolated JavaScript world. This provides sig
 
 This isolation protects your code from conflicts with page scripts, but also means you can't directly share data through JavaScript variables.
 
-Communicating Through DOM
+### Communicating Through DOM
 
 You can still interact with page scripts through shared DOM elements:
 
@@ -256,7 +256,7 @@ window.addEventListener('pageReady', (e) => {
 });
 ```
 
-Communicating Through DOM
+### Communicating Through DOM
 
 ```javascript
 // Set a property on the window that page scripts can access
@@ -271,9 +271,9 @@ window.myExtensionAPI = {
 const data = window.myExtensionAPI.getData();
 ```
 
-Common Use Cases
+### Common Use Cases
 
-Content scripts are perfect for:
+### Content scripts are perfect for:
 
 1. Page modification - Adding UI elements, hiding content, changing styles
 2. Data extraction - Scraping information from pages
@@ -283,7 +283,7 @@ Content scripts are perfect for:
 6. Accessibility improvements - Adding keyboard navigation, ARIA labels
 7. Reading tools - Changing fonts, colors, layout for readability
 
-Practical Example: Page Highlighter
+### Practical Example: Page Highlighter
 
 ```javascript
 // content.js - Highlight specific elements on a page
@@ -305,9 +305,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Best Practices
+### Best Practices
 
-Match Specific URLs
+### Match Specific URLs
 
 Avoid using "<all_urls>" unless necessary. Specific URL patterns reduce performance impact and increase user trust:
 
@@ -323,7 +323,7 @@ Avoid using "<all_urls>" unless necessary. Specific URL patterns reduce performa
 }
 ```
 
-Clean Up After Yourself
+### Clean Up After Yourself
 
 If you add elements or modify styles, consider cleaning them up when appropriate:
 
@@ -343,9 +343,9 @@ function cleanupStyles() {
 }
 ```
 
-Handle Dynamic Content
+### Handle Dynamic Content
 
-Use MutationObserver for pages with dynamic content:
+### Use MutationObserver for pages with dynamic content:
 
 ```javascript
 const observer = new MutationObserver((mutations) => {
@@ -378,7 +378,7 @@ observer.observe(document.body, {
 });
 ```
 
-Avoid Conflicts with Page Scripts
+### Avoid Conflicts with Page Scripts
 
 ```javascript
 // Use unique class names to avoid conflicts
@@ -395,7 +395,7 @@ const EXTENSION_PREFIX = 'myext-';
 }
 ```
 
-Conclusion
+### Conclusion
 
 Content scripts are fundamental to building powerful Chrome extensions that enhance web pages. Understanding their isolated nature, communication methods, and best practices will help you create extensions that work reliably across different websites while maintaining security and performance.
 

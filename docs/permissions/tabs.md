@@ -11,12 +11,12 @@ last_modified_at: 2026-01-15
 
 tabs Permission Reference
 
-What It Does {#what-it-does}
+## What It Does {#what-it-does}
 - Grants persistent access to tab metadata on all tabs in the browser
 - Access to `url`, `pendingUrl`, `title`, `favIconUrl` on Tab objects
 - Allows querying and monitoring tabs across all windows
 
-What You Get WITHOUT tabs {#what-you-get-without-tabs}
+## What You Get WITHOUT tabs {#what-you-get-without-tabs}
 
 Without the `tabs` permission, you still get access to these Tab properties:
 
@@ -44,7 +44,7 @@ You also get access to all `chrome.tabs` methods:
 - `chrome.tabs.getZoom()` / `chrome.tabs.setZoom()`. zoom control
 - `chrome.tabs.discard()`. discard tabs to save memory
 
-What You Need tabs FOR {#what-you-need-tabs-for}
+## What You Need tabs FOR {#what-you-need-tabs-for}
 
 The `tabs` permission is required to access these sensitive Tab properties:
 
@@ -57,16 +57,16 @@ The `tabs` permission is required to access these sensitive Tab properties:
 
 Without `tabs` permission, these properties will be `undefined` when you query tabs.
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
-Required permission {#required-permission}
+## Required permission {#required-permission}
 ```json
 {
   "permissions": ["tabs"]
 }
 ```
 
-Optional permission (recommended for more flexible UX) {#optional-permission-recommended-for-more-flexible-ux}
+## Optional permission (recommended for more flexible UX) {#optional-permission-recommended-for-more-flexible-ux}
 ```json
 {
   "optional_permissions": ["tabs"]
@@ -80,9 +80,9 @@ With optional permissions, users can install without granting tab access, and yo
 const granted = await chrome.permissions.request({ permissions: ["tabs"] });
 ```
 
-Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
-Checking if granted {#checking-if-granted}
+## Checking if granted {#checking-if-granted}
 ```ts
 import { checkPermission, requestPermission } from "@theluckystrike/webext-permissions";
 
@@ -96,7 +96,7 @@ if (!result.granted) {
 }
 ```
 
-Description from PERMISSION_DESCRIPTIONS {#description-from-permission-descriptions}
+## Description from PERMISSION_DESCRIPTIONS {#description-from-permission-descriptions}
 ```ts
 import { PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
 
@@ -104,7 +104,7 @@ PERMISSION_DESCRIPTIONS.tabs;
 // "Read information about open tabs"
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Common pattern: background script queries tabs, sends data to popup/panel.
 
@@ -157,9 +157,9 @@ const activeTab = await msg.send("getActiveTab", undefined);
 console.log(`Found ${allTabs.length} tabs. Active: ${activeTab.title}`);
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Store tab-related preferences and recent tab data:
+### Store tab-related preferences and recent tab data:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -200,7 +200,7 @@ async function pinTabToGroup(groupName: string, tabId: number) {
 }
 ```
 
-tabs vs activeTab Comparison {#tabs-vs-activetab-comparison}
+## tabs vs activeTab Comparison {#tabs-vs-activetab-comparison}
 
 | Feature | `tabs` | `activeTab` |
 |---------|--------|-------------|
@@ -211,21 +211,21 @@ tabs vs activeTab Comparison {#tabs-vs-activetab-comparison}
 | Store warning | "Read your browsing history" | No warning |
 | Chrome Web Store review | More scrutiny | Faster approval |
 
-When to Use Which {#when-to-use-which}
+## When to Use Which {#when-to-use-which}
 
-Use `tabs` when: {#use-tabs-when}
+## Use `tabs` when: {#use-tabs-when}
 - You need to read tab URLs/titles in the background
 - You want to list all open tabs in a popup
 - You need persistent access without user interaction
 - You're building a tab manager, history tool, or session manager
 
-Use `activeTab` when: {#use-activetab-when}
+## Use `activeTab` when: {#use-activetab-when}
 - You only need to act on the current page
 - You want to avoid scary permission warnings
 - User trust/privacy is a priority
 - You only act when user explicitly invokes your extension
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 
 1. Undefined without permission: Always check if `tab.url`, `tab.title`, `tab.favIconUrl` exist before using them. They will be `undefined` if `tabs` permission isn't granted.
 
@@ -239,17 +239,17 @@ Gotchas {#gotchas}
 
 6. Extension pages: Tabs hosting extension pages (`chrome-extension://...`) always expose their URL regardless of permissions.
 
-Related Permissions {#related-permissions}
+## Related Permissions {#related-permissions}
 - [activeTab](activeTab.md). temporary access to active tab only
 - [scripting](scripting.md). inject content scripts (needs host permissions without tabs)
 - [storage](storage.md). persist data
 
-API Reference {#api-reference}
+## API Reference {#api-reference}
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Chrome tabs API](https://developer.chrome.com/docs/extensions/reference/tabs)
 - [Manifest permissions](https://developer.chrome.com/docs/extensions/develop/concepts/permissions)
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I get the current tab in Chrome extension?
 Use chrome.tabs.query({active: true, currentWindow: true}) to get the currently active tab, or use the tab parameter in event listeners.

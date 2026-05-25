@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/web-accessible-resourc
 last_modified_at: 2026-01-15
 ---
 
-Web Accessible Resources Advanced Patterns (MV3)
+### Web Accessible Resources Advanced Patterns (MV3)
 
-Overview {#overview}
+## Overview {#overview}
 
 Web Accessible Resources (WAR) in Manifest V3 allow extensions to expose specific resources to web pages. This document covers advanced patterns for secure and effective usage.
 
-MV3 Format {#mv3-format}
+## MV3 Format {#mv3-format}
 
 ```json
 {
@@ -31,9 +31,9 @@ Each entry contains:
 - matches: Match patterns specifying which sites can access resources
 - use_dynamic_url: Generates unique URL per session (prevents fingerprinting)
 
-Security Best Practices {#security-best-practices}
+## Security Best Practices {#security-best-practices}
 
-Restrict Access with Exact Match Patterns {#restrict-access-with-exact-match-patterns}
+## Restrict Access with Exact Match Patterns {#restrict-access-with-exact-match-patterns}
 
 ```json
 {
@@ -43,7 +43,7 @@ Restrict Access with Exact Match Patterns {#restrict-access-with-exact-match-pat
 
 Never use `<all_urls>` unless absolutely necessary. Be as specific as possible with your match patterns to minimize exposure.
 
-Use Dynamic URLs {#use-dynamic-urls}
+## Use Dynamic URLs {#use-dynamic-urls}
 
 Enable `use_dynamic_url: true` to generate unique URLs per session:
 
@@ -58,9 +58,9 @@ This prevents:
 - Extension fingerprinting by websites
 - Caching of extension resources on third-party servers
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 
-1. Script Injection into Page Context {#1-script-injection-into-page-context}
+## 1. Script Injection into Page Context {#1-script-injection-into-page-context}
 
 Inject scripts that run in the page's main world:
 
@@ -71,7 +71,7 @@ script.src = chrome.runtime.getURL('injected.js');
 script.remove();
 ```
 
-2. Asset Loader (Images, Fonts, CSS) {#2-asset-loader-images-fonts-css}
+## 2. Asset Loader (Images, Fonts, CSS) {#2-asset-loader-images-fonts-css}
 
 ```javascript
 function loadExtensionAsset(path) {
@@ -83,7 +83,7 @@ const img = document.createElement('img');
 img.src = loadExtensionAsset('images/icon.png');
 ```
 
-3. Communication Bridge {#3-communication-bridge}
+## 3. Communication Bridge {#3-communication-bridge}
 
 Create a relay between content script and page:
 
@@ -99,9 +99,9 @@ window.addEventListener('message-from-extension', (event) => {
 });
 ```
 
-4. PDF/HTML Viewer {#4-pdfhtml-viewer}
+## 4. PDF/HTML Viewer {#4-pdfhtml-viewer}
 
-Allow extension pages to be loaded in frames:
+### Allow extension pages to be loaded in frames:
 
 ```json
 {
@@ -115,19 +115,19 @@ Allow extension pages to be loaded in frames:
 <iframe src="chrome-extension://EXTENSION_ID/viewer.html?file=..."></iframe>
 ```
 
-Security Implications {#security-implications}
+## Security Implications {#security-implications}
 
 - Any matched site can load your resources: Keep the list of accessible resources minimal
 - Extension detection: Websites can detect your extension by probing for accessible resources
 - Privacy concern: Avoid exposing sensitive data or unique identifiers in WAR
 
-Alternatives to Consider {#alternatives-to-consider}
+## Alternatives to Consider {#alternatives-to-consider}
 
 - Inline scripts: Bundle JavaScript directly in content scripts to avoid exposure
 - Programmatic injection: Use chrome.scripting.executeScript() instead of WAR
 - Message passing: Use chrome.runtime.sendMessage for communication
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [MV3 Web Accessible Resources](../mv3/web-accessible-resources.md)
 - [Basic Web Accessible Resources](../patterns/web-accessible-resources.md)

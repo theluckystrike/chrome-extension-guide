@@ -9,7 +9,7 @@ CSS Injection Techniques for Chrome Extensions
 
 This guide covers various CSS injection methods for Chrome extensions, from static manifest declarations to dynamic runtime injection.
 
-Static Injection via Manifest {#static-injection-via-manifest}
+## Static Injection via Manifest {#static-injection-via-manifest}
 
 Declare CSS files in `manifest.json` under `content_scripts`. These load before the page's own stylesheets, giving your styles higher cascade priority:
 
@@ -22,9 +22,9 @@ Declare CSS files in `manifest.json` under `content_scripts`. These load before 
 }
 ```
 
-Dynamic Injection with chrome.scripting.insertCSS() {#dynamic-injection-with-chromescriptinginsertcss}
+## Dynamic Injection with chrome.scripting.insertCSS() {#dynamic-injection-with-chromescriptinginsertcss}
 
-Inject stylesheets programmatically when needed:
+### Inject stylesheets programmatically when needed:
 
 ```javascript
 chrome.scripting.insertCSS({
@@ -33,7 +33,7 @@ chrome.scripting.insertCSS({
 });
 ```
 
-Or inject inline CSS:
+### Or inject inline CSS:
 
 ```javascript
 chrome.scripting.insertCSS({
@@ -42,9 +42,9 @@ chrome.scripting.insertCSS({
 });
 ```
 
-Removing Injected CSS {#removing-injected-css}
+## Removing Injected CSS {#removing-injected-css}
 
-Use `chrome.scripting.removeCSS()` to undo dynamic injections:
+### Use `chrome.scripting.removeCSS()` to undo dynamic injections:
 
 ```javascript
 chrome.scripting.removeCSS({
@@ -53,9 +53,9 @@ chrome.scripting.removeCSS({
 });
 ```
 
-Content Script Style Injection {#content-script-style-injection}
+## Content Script Style Injection {#content-script-style-injection}
 
-Create style elements directly in the content script:
+### Create style elements directly in the content script:
 
 ```javascript
 const style = document.createElement('style');
@@ -69,11 +69,11 @@ style.textContent = `
 document.head.appendChild(style);
 ```
 
-Overriding Page Styles {#overriding-page-styles}
+## Overriding Page Styles {#overriding-page-styles}
 
-Using !important {#using-important}
+## Using !important {#using-important}
 
-The nuclear option for winning specificity battles:
+### The nuclear option for winning specificity battles:
 
 ```css
 .extension-override {
@@ -81,9 +81,9 @@ The nuclear option for winning specificity battles:
 }
 ```
 
-High-Specificity Selectors {#high-specificity-selectors}
+## High-Specificity Selectors {#high-specificity-selectors}
 
-Increase specificity to override page styles without !important:
+### Increase specificity to override page styles without !important:
 
 ```css
 html body div.main-content .sidebar .extension-element {
@@ -91,7 +91,7 @@ html body div.main-content .sidebar .extension-element {
 }
 ```
 
-Shadow DOM Isolation {#shadow-dom-isolation}
+## Shadow DOM Isolation {#shadow-dom-isolation}
 
 Injected CSS doesn't penetrate shadow DOM boundaries. Use this for component isolation:
 
@@ -101,7 +101,7 @@ const shadow = host.attachShadow({ mode: 'open' });
 shadow.innerHTML = '<style>.isolated { color: green; }</style><span class="isolated">Isolated</span>';
 ```
 
-CSS Custom Properties for Theming {#css-custom-properties-for-theming}
+## CSS Custom Properties for Theming {#css-custom-properties-for-theming}
 
 Define variables in your extension CSS for easy theming:
 
@@ -119,7 +119,7 @@ Define variables in your extension CSS for easy theming:
 }
 ```
 
-Dynamic Theme Injection {#dynamic-theme-injection}
+## Dynamic Theme Injection {#dynamic-theme-injection}
 
 ```javascript
 function applyTheme(theme) {
@@ -134,9 +134,9 @@ function applyTheme(theme) {
 }
 ```
 
-CSS-Only Dark Mode {#css-only-dark-mode}
+## CSS-Only Dark Mode {#css-only-dark-mode}
 
-Quick dark mode using filters:
+### Quick dark mode using filters:
 
 ```css
 .ext-dark-mode {
@@ -146,9 +146,9 @@ Quick dark mode using filters:
 
 This inverts colors and rotates hue to restore correct colors after inversion.
 
-Scoped Styles {#scoped-styles}
+## Scoped Styles {#scoped-styles}
 
-Use unique prefixes to avoid conflicts:
+### Use unique prefixes to avoid conflicts:
 
 ```css
 /* Always prefix your classes */
@@ -157,9 +157,9 @@ Use unique prefixes to avoid conflicts:
 .ext-button--secondary { }
 ```
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
-Prefer a single stylesheet over multiple style elements:
+### Prefer a single stylesheet over multiple style elements:
 
 ```javascript
 // Bad: multiple style elements
@@ -176,7 +176,7 @@ style.textContent = css;
 document.head.appendChild(style);
 ```
 
-CSP Considerations {#csp-considerations}
+## CSP Considerations {#csp-considerations}
 
 Strict Content Security Policy may block inline styles. Use class-based approaches:
 
@@ -188,15 +188,15 @@ element.style.background = 'red';
 element.classList.add('ext-highlight');
 ```
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Content Script Patterns](./content-script-patterns.md)
 - [Theming: Dark Mode](../patterns/theming-dark-mode.md)
 - [Scripting API Reference](../api-reference/scripting-api.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Content Script Injection](../patterns/content-script-injection.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

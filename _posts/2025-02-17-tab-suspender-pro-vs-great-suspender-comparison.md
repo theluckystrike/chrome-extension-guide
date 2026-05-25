@@ -18,7 +18,7 @@ This comprehensive comparison examines both extensions in detail, helping you un
 
 ---
 
-The History of The Great Suspender: From Beloved Extension to Removal {#history-of-the-great-suspender}
+## The History of The Great Suspender: From Beloved Extension to Removal {#history-of-the-great-suspender}
 
 The Great Suspender began its journey in 2011 as a simple solution to a pervasive problem. Created by developers who understood the pain of browser memory exhaustion, this extension quickly gained popularity among power users who kept numerous tabs open for research, work, and entertainment. At its peak, The Great Suspender boasted millions of users and became synonymous with tab management in Chrome.
 
@@ -34,7 +34,7 @@ The Great Suspender's story serves as a cautionary tale about the risks of depen
 
 ---
 
-Why Users Need an Alternative to The Great Suspender {#why-users-need-alternative}
+## Why Users Need an Alternative to The Great Suspender {#why-users-need-alternative}
 
 The removal of The Great Suspender from the Chrome Web Store created a significant gap in the tab management landscape. Millions of users were left searching for a replacement that could deliver similar functionality without the security concerns that had plagued the original extension. Understanding why alternatives matter helps users make better choices about their browser tools.
 
@@ -48,37 +48,37 @@ The privacy concerns surrounding The Great Suspender's later days also underscor
 
 ---
 
-Feature-by-Feature Comparison {#feature-comparison}
+## Feature-by-Feature Comparison {#feature-comparison}
 
 When comparing Tab Suspender Pro vs The Great Suspender, it is essential to examine the features that matter most to users. Both extensions aim to solve the same fundamental problem, reducing browser memory usage through tab suspension, but they approach this goal with different philosophies and capabilities.
 
-Automatic Tab Suspension
+### Automatic Tab Suspension
 
 Tab Suspender Pro offers intelligent automatic suspension that activates after a configurable period of inactivity. Users can set the delay anywhere from 30 seconds to 24 hours, allowing fine-grained control over when tabs should be suspended. The extension monitors tab activity in the background, automatically suspending tabs when they have been idle beyond the configured threshold. This feature works smoothly without requiring user intervention, making it ideal for users who want set-it-and-forget-it memory optimization.
 
 The Great Suspender similarly offered automatic suspension with configurable delays, though the implementation varied across different versions and forks. The original extension allowed users to set suspension timers and provided basic automation that worked well for most use cases. However, the fragmented ecosystem of unofficial versions means that feature consistency is no longer guaranteed.
 
-Whitelist and Exception Management
+### Whitelist and Exception Management
 
 Tab Suspender Pro excels in whitelist management, allowing users to exclude specific websites from automatic suspension. This is crucial for web applications that must remain active in the background, such as email clients, collaboration tools, music streaming services, or productivity dashboards. Users can add domains to a whitelist either individually or through pattern matching, creating flexible rules that accommodate complex browsing workflows.
 
 The whitelist functionality in The Great Suspender was functional but less sophisticated. Users could whitelist domains, but the pattern matching capabilities were limited compared to modern alternatives. This made it more difficult to create nuanced rules for complex web applications that use multiple subdomains or dynamic URLs.
 
-Manual Suspension Controls
+### Manual Suspension Controls
 
 Both extensions provide manual suspension options, but Tab Suspender Pro offers additional keyboard shortcuts and quick actions that enhance user control. Users can suspend individual tabs, suspend all tabs in a window, or restore suspended tabs with single-click actions. The extension also provides context menu integration, allowing users to suspend or unsuspend tabs directly from Chrome's right-click menu.
 
-Tab Preview and Restoration
+### Tab Preview and Restoration
 
 When a tab is suspended, both extensions display a placeholder that shows the page title and favicon. Tab Suspender Pro enhances this experience by offering customizable placeholder themes and the ability to preview tab URLs before restoration. When restoring a suspended tab, the extension retrieves the page fresh from the server, ensuring users see the latest content without having to reload manually.
 
-Statistics and Insights
+### Statistics and Insights
 
 Tab Suspender Pro provides detailed statistics about memory savings and suspension activity. Users can see how many tabs have been suspended, how much memory has been saved, and trends over time. This feedback helps users understand the impact of tab suspension on their system and adjust their settings for optimal results. The Great Suspender offered basic statistics but lacked the comprehensive analytics that power users appreciate.
 
 ---
 
-Privacy and Security Differences {#privacy-security}
+## Privacy and Security Differences {#privacy-security}
 
 Privacy and security considerations take center stage when comparing these extensions, especially in light of The Great Suspender's controversial later history. Users must understand how each extension handles their data and what guarantees they can provide about their privacy practices.
 
@@ -92,7 +92,7 @@ Tab Suspender Pro's privacy-first approach extends to its update model as well. 
 
 ---
 
-Performance Benchmarks {#performance-benchmarks}
+## Performance Benchmarks {#performance-benchmarks}
 
 Performance is the primary reason users install tab suspension extensions, so understanding how each extension affects system resources is crucial. Both extensions aim to reduce memory usage, but their efficiency and overhead can vary significantly.
 
@@ -106,7 +106,7 @@ Restoration speed is another important performance consideration. When returning
 
 ---
 
-Verdict and Recommendation {#verdict}
+## Verdict and Recommendation {#verdict}
 
 After thoroughly examining Tab Suspender Pro vs The Great Suspender, the clear winner for 2025 is Tab Suspender Pro. This recommendation is based on multiple factors that make Tab Suspender Pro the superior choice for users seeking reliable tab management in 2025.
 
@@ -120,7 +120,7 @@ The extension is particularly well-suited for several user profiles. Researchers
 
 ---
 
-Making the Switch to Tab Suspender Pro {#making-switch}
+## Making the Switch to Tab Suspender Pro {#making-switch}
 
 If you are currently using The Great Suspender or one of its forks, switching to Tab Suspender Pro is straightforward. Install the extension from the Chrome Web Store, configure your preferred suspension delay and whitelist entries, and let the extension handle the rest. Your existing browsing habits will continue smoothly, but with better memory management and enhanced privacy protections.
 
@@ -130,7 +130,7 @@ Tab Suspender Pro represents the evolution of tab management, building on the fo
 
 ---
 
-Conclusion
+### Conclusion
 
 The comparison between Tab Suspender Pro vs The Great Suspender reveals clear differences in capability, security, and long-term viability. While The Great Suspender served users well for nearly a decade, its removal and the subsequent privacy concerns have made Tab Suspender Pro the obvious choice for 2025.
 

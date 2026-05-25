@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Readability Enhancer Extension. Full Tutorial
 
-What We're Building {#what-were-building}
+## What We're Building {#what-were-building}
 - Clean article view that extracts main content from any webpage
 - Font family (serif/sans-serif/monospace), size slider, line height, max width controls
 - Reading progress bar based on scroll position
@@ -17,9 +17,9 @@ What We're Building {#what-were-building}
 - Keyboard shortcuts: toggle reader, increase/decrease font size
 - Uses `activeTab`, `storage` permissions
 
-manifest.json. MV3, activeTab + storage permissions, action with icon {#manifestjson-mv3-activetab-storage-permissions-action-with-icon}
+## manifest.json. MV3, activeTab + storage permissions, action with icon {#manifestjson-mv3-activetab-storage-permissions-action-with-icon}
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 - `activeTab` permission for accessing current page content
 - `storage` permission for saving user preferences
 - Action with default icon, can add commands for keyboard shortcuts
@@ -38,7 +38,7 @@ Step 1: Manifest Configuration {#step-1-manifest-configuration}
 }
 ```
 
-Step 2: Content Script. Extract Main Article Content {#step-2-content-script-extract-main-article-content}
+## Step 2: Content Script. Extract Main Article Content {#step-2-content-script-extract-main-article-content}
 - Heuristic algorithm: find largest text block, `<article>` tag, or `<main>` tag
 - Clone the content, remove unwanted elements (ads, navigation, comments)
 - Calculate word count for reading time
@@ -64,7 +64,7 @@ function findLargestTextBlock() {
 }
 ```
 
-Step 3: Reader View Overlay {#step-3-reader-view-overlay}
+## Step 3: Reader View Overlay {#step-3-reader-view-overlay}
 - Create full-screen overlay with clean typography
 - Centered content container with optimal max-width (65-75 characters)
 - Typography: Georgia/Merriweather for serif, system-ui for sans-serif
@@ -83,7 +83,7 @@ function createReaderOverlay(content, wordCount) {
 }
 ```
 
-Step 4: Font Controls {#step-4-font-controls}
+## Step 4: Font Controls {#step-4-font-controls}
 - Font family: serif (Georgia), sans-serif (system-ui), monospace (Consolas)
 - Size slider: 14px to 28px range
 - Line height: 1.4 to 2.0
@@ -101,7 +101,7 @@ Step 4: Font Controls {#step-4-font-controls}
 }
 ```
 
-Step 5: Save Preferences to Storage {#step-5-save-preferences-to-storage}
+## Step 5: Save Preferences to Storage {#step-5-save-preferences-to-storage}
 - Use `chrome.storage.local` for per-device preferences
 - Store: fontFamily, fontSize, lineHeight, maxWidth, theme
 - Load saved preferences when reader mode activates
@@ -120,7 +120,7 @@ async function loadPreferences() {
 }
 ```
 
-Step 6: Reading Progress Bar {#step-6-reading-progress-bar}
+## Step 6: Reading Progress Bar {#step-6-reading-progress-bar}
 - Fixed at top of viewport
 - Calculate: `(scrollPosition / (pageHeight - viewportHeight)) * 100`
 - Update on scroll event (throttled for performance)
@@ -135,7 +135,7 @@ function updateProgressBar() {
 }
 ```
 
-Step 7: Estimated Reading Time {#step-7-estimated-reading-time}
+## Step 7: Estimated Reading Time {#step-7-estimated-reading-time}
 - Formula: `Math.ceil(wordCount / 200)` minutes
 - Display in toolbar: "X min read"
 - Update dynamically if content changes
@@ -147,7 +147,7 @@ function calculateReadingTime(wordCount) {
 }
 ```
 
-Step 8: Keyboard Shortcuts {#step-8-keyboard-shortcuts}
+## Step 8: Keyboard Shortcuts {#step-8-keyboard-shortcuts}
 - `Alt+Shift+R`: Toggle reader mode on/off
 - `Alt+Plus` / `Alt+Minus`: Increase/decrease font size
 - `Alt+T`: Cycle through themes (light/sepia/dark)
@@ -161,7 +161,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-Theme Modes {#theme-modes}
+## Theme Modes {#theme-modes}
 - Light: white background (#ffffff), dark text (#1a1a1a)
 - Sepia: warm background (#f4ecd8), brown text (#5b4636)
 - Dark: dark background (#1a1a1a), light text (#e0e0e0)
@@ -174,7 +174,7 @@ Theme Modes {#theme-modes}
 }
 ```
 
-Print-Friendly Styling {#print-friendly-styling}
+## Print-Friendly Styling {#print-friendly-styling}
 - Hide toolbar and progress bar
 - Force light theme
 - Add page breaks between sections if needed
@@ -187,26 +187,26 @@ Print-Friendly Styling {#print-friendly-styling}
 }
 ```
 
-Edge Cases & Handling {#edge-cases-handling}
+## Edge Cases & Handling {#edge-cases-handling}
 - Paginated articles: Detect pagination links, may need user confirmation
 - Infinite scroll: Extract visible content, note more content below
 - Paywalled content: Can only read what's rendered; cannot bypass paywalls
 - No main content found: Show helpful error message to user
 - Images: Preserve images, add alt text fallback
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - See [guides/content-script-patterns.md](../guides/content-script-patterns.md) for content script architecture
 - See [patterns/theming-dark-mode.md](../patterns/theming-dark-mode.md) for theming patterns
 - See [guides/accessibility.md](../guides/accessibility.md) for accessibility considerations
 
-Testing {#testing}
+## Testing {#testing}
 - Test on various content types: news articles, blog posts, documentation
 - Verify reading time accuracy on different word counts
 - Test all theme modes and font combinations
 - Verify keyboard shortcuts work as expected
 - Test print preview and printing functionality
 
-What You Learned {#what-you-learned}
+## What You Learned {#what-you-learned}
 - Content extraction using DOM heuristics
 - Overlay-based UI patterns
 - Reading time calculation

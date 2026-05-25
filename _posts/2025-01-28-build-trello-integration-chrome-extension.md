@@ -18,7 +18,7 @@ you'll learn how to build a fully functional Trello Integration Chrome Extension
 
 ---
 
-Why Build a Trello Chrome Extension? {#why-build-trello-extension}
+## Why Build a Trello Chrome Extension? {#why-build-trello-extension}
 
 Trello is one of the most popular project management tools globally, with millions of users relying on its Kanban-style boards to organize tasks. A well-designed trello chrome extension can significantly enhance user productivity by enabling:
 
@@ -34,7 +34,7 @@ The demand for trello chrome extension solutions continues to grow as remote wor
 
 ---
 
-Prerequisites and Setup {#prerequisites}
+## Prerequisites and Setup {#prerequisites}
 
 Before we dive into coding, make sure you have the following:
 
@@ -43,7 +43,7 @@ Before we dive into coding, make sure you have the following:
 - A Trello account (free tier works fine)
 - Basic knowledge of HTML, CSS, and JavaScript
 
-Registering Your Trello Application
+### Registering Your Trello Application
 
 The first step is to register your application with Trello to obtain API credentials:
 
@@ -52,7 +52,7 @@ The first step is to register your application with Trello to obtain API credent
 3. Copy your API Key (we'll need this later)
 4. For development, we'll use a token-based approach instead of full OAuth
 
-Setting Up the Project Structure
+### Setting Up the Project Structure
 
 Create a new directory for your extension and set up the following structure:
 
@@ -76,7 +76,7 @@ This structure separates concerns appropriately: popup files handle the extensio
 
 ---
 
-Creating the Manifest V3 Configuration {#manifest-configuration}
+## Creating the Manifest V3 Configuration {#manifest-configuration}
 
 Every Chrome extension starts with the manifest.json file. This tells Chrome about your extension's capabilities, permissions, and structure:
 
@@ -114,7 +114,7 @@ Every Chrome extension starts with the manifest.json file. This tells Chrome abo
 }
 ```
 
-Key points about this manifest:
+### Key points about this manifest:
 
 - host_permissions: We need access to both the Trello API and the Trello website for authentication flows
 - permissions: storage for saving user credentials, activeTab for accessing current page information, and scripting for content script functionality
@@ -122,11 +122,11 @@ Key points about this manifest:
 
 ---
 
-Implementing Trello API Authentication {#authentication}
+## Implementing Trello API Authentication {#authentication}
 
 Authentication is crucial for a trello chrome extension. We'll implement a token-based authentication system that stores credentials securely.
 
-Storing Credentials
+### Storing Credentials
 
 Create a utility module for handling Trello credentials:
 
@@ -171,7 +171,7 @@ class TrelloAuth {
 const trelloAuth = new TrelloAuth();
 ```
 
-Implementing the Authentication Flow
+### Implementing the Authentication Flow
 
 For simplicity, we'll use a manual token approach where users paste their API key and token. This avoids the complexity of implementing full OAuth in an extension:
 
@@ -220,11 +220,11 @@ This authentication approach allows users to obtain their API key and token from
 
 ---
 
-Building the Trello Card Creator {#card-creation}
+## Building the Trello Card Creator {#card-creation}
 
 Now let's implement the core functionality: creating Trello cards from the extension popup. This is where our trello card creator comes to life.
 
-Trello API Client
+### Trello API Client
 
 First, create a client for interacting with the Trello API:
 
@@ -298,7 +298,7 @@ class TrelloClient {
 const trelloClient = new TrelloClient();
 ```
 
-Creating the Card Creation UI
+### Creating the Card Creation UI
 
 Now let's build the popup interface for creating cards:
 
@@ -380,7 +380,7 @@ Now let's build the popup interface for creating cards:
 </html>
 ```
 
-Card Creation Logic
+### Card Creation Logic
 
 Implement the card creation logic in popup.js:
 
@@ -499,7 +499,7 @@ This trello card creator allows users to select a board and list, enter card det
 
 ---
 
-Adding Context Menu Functionality {#context-menu}
+## Adding Context Menu Functionality {#context-menu}
 
 To make your task management extension even more powerful, let's add right-click context menu integration:
 
@@ -535,7 +535,7 @@ This enables users to right-click anywhere in Chrome and quickly create a Trello
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 A polished UI makes your extension stand out. Here's a professional CSS stylesheet:
 
@@ -682,11 +682,11 @@ body {
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 Now that you have the basics working, here are some advanced features to consider adding:
 
-Quick Card Creation with Keyboard Shortcuts
+### Quick Card Creation with Keyboard Shortcuts
 
 Add keyboard shortcuts for power users:
 
@@ -700,7 +700,7 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-Labels and Due Dates
+### Labels and Due Dates
 
 Extend the card creation to support labels and due dates:
 
@@ -718,7 +718,7 @@ async function createCardWithExtras(listId, cardData) {
 }
 ```
 
-Board Filtering and Search
+### Board Filtering and Search
 
 Add the ability to search and filter boards for users with many Trello boards:
 
@@ -733,7 +733,7 @@ function filterBoards(searchTerm) {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your trello chrome extension:
 
@@ -749,7 +749,7 @@ Before publishing, thoroughly test your trello chrome extension:
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 When ready to publish:
 
@@ -760,7 +760,7 @@ When ready to publish:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a Trello Integration Chrome Extension is an excellent project that teaches you real-world skills in API integration, authentication, and Chrome extension development. You've learned how to:
 
@@ -772,4 +772,4 @@ Building a Trello Integration Chrome Extension is an excellent project that teac
 
 This task management extension provides immediate value to users and can be expanded with features like labels, due dates, attachments, and integrations with other productivity tools. The skills you gained here apply directly to building integrations with dozens of other APIs, from Slack to GitHub to Notion.
 
-Start building your trello chrome extension today and watch your productivity soar!
+### Start building your trello chrome extension today and watch your productivity soar!

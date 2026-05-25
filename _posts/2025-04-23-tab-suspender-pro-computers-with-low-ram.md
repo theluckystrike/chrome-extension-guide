@@ -17,7 +17,7 @@ The reality is that modern websites have grown exponentially more complex over t
 
 ---
 
-Chrome's RAM Appetite Explained {#chromes-ram-appetite-explained}
+## Chrome's RAM Appetite Explained {#chromes-ram-appetite-explained}
 
 To effectively optimize Chrome for low-RAM computers, you must first understand why the browser consumes so much memory in the first place. Chrome's architecture is fundamentally different from older browsers, and understanding these differences will help you appreciate why Tab Suspender Pro is so effective at addressing the problem.
 
@@ -33,7 +33,7 @@ Chrome also maintains extensive caches to improve performance. The browser cache
 
 ---
 
-Why 2-4GB Systems Struggle {#why-2-4gb-systems-struggle}
+## Why 2-4GB Systems Struggle {#why-2-4gb-systems-struggle}
 
 Computers with 2GB or 4GB of RAM face unique challenges that make modern web browsing particularly painful. Understanding these challenges helps explain why Tab Suspender Pro is not just helpful but absolutely essential for these systems.
 
@@ -49,7 +49,7 @@ The user experience on low-RAM systems without optimization is characterized by 
 
 ---
 
-Aggressive Suspension Settings for Low RAM {#aggressive-suspension-settings-for-low-ram}
+## Aggressive Suspension Settings for Low RAM {#aggressive-suspension-settings-for-low-ram}
 
 Making Tab Suspender Pro effective on 2-4GB RAM systems requires configuring aggressive suspension settings that prioritize memory conservation over convenience. The default settings are designed for typical users with adequate memory, but low-RAM systems need a much more proactive approach to tab suspension.
 
@@ -65,7 +65,7 @@ Consider enabling the "suspend all tabs on startup" option if you typically star
 
 ---
 
-Recommended Max Active Tabs {#recommended-max-active-tabs}
+## Recommended Max Active Tabs {#recommended-max-active-tabs}
 
 For computers with 2-4GB of RAM, limiting the number of simultaneously active tabs is essential for maintaining acceptable performance. Tab Suspender Pro can help you enforce these limits through its built-in tab counting features and by automatically suspending excess tabs.
 
@@ -81,7 +81,7 @@ Using bookmarking in conjunction with Tab Suspender Pro can transform your brows
 
 ---
 
-Combining with Chrome Flags for Memory Savings {#combining-with-chrome-flags-for-memory-savings}
+## Combining with Chrome Flags for Memory Savings {#combining-with-chrome-flags-for-memory-savings}
 
 Tab Suspender Pro works even better when combined with Chrome's built-in memory optimization flags. These experimental features provide additional memory savings that complement the extension's tab suspension capabilities, creating a comprehensive memory management strategy for low-RAM systems.
 
@@ -99,7 +99,7 @@ Finally, consider disabling hardware acceleration if your system struggles with 
 
 ---
 
-Alternative Lightweight Browsers vs Tab Suspender Pro {#alternative-lightweight-browsers-vs-tab-suspender-pro}
+## Alternative Lightweight Browsers vs Tab Suspender Pro {#alternative-lightweight-browsers-vs-tab-suspender-pro}
 
 While Tab Suspender Pro can dramatically improve Chrome's performance on low-RAM systems, some users wonder whether switching to a lighter browser might be a better solution. Evaluating these alternatives helps you make an informed decision about the best approach for your specific situation.
 
@@ -115,7 +115,7 @@ For most users with low-RAM computers who are invested in the Chrome ecosystem, 
 
 ---
 
-Conclusion
+### Conclusion
 
 Living with a computer that has only 2GB or 4GB of RAM does not mean you must endure sluggish browser performance or give up on modern web browsing. Tab Suspender Pro transforms Chrome from a memory-hungry application into one that respects your system constraints while still providing access to the full modern web. By understanding Chrome's memory architecture, configuring aggressive suspension settings, limiting your active tab count, leveraging Chrome's built-in memory features, and making informed choices about browser alternatives, you can achieve a smooth and productive browsing experience even on modest hardware.
 

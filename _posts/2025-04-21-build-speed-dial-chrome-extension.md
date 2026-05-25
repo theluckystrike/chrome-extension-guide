@@ -18,7 +18,7 @@ Whether you want to create a personal productivity tool or publish an extension 
 
 ---
 
-Why Build a Speed Dial Extension? {#why-build-speed-dial}
+## Why Build a Speed Dial Extension? {#why-build-speed-dial}
 
 Speed dial extensions serve a fundamental purpose: they save time. Instead of typing URLs or searching through bookmarks, users can simply click a tile to visit their favorite websites. The concept originated with Opera browser's speed dial feature and has since become a staple of modern browser customization.
 
@@ -28,7 +28,7 @@ The Chrome Web Store has numerous speed dial extensions with millions of combine
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Before writing any code, let us define what our speed dial extension will do. Our basic implementation will include the following features:
 
@@ -38,7 +38,7 @@ This feature set provides a solid foundation that you can later extend with addi
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension needs a well-organized project structure. Create a new folder for your project and set up the following files:
 
@@ -48,7 +48,7 @@ Let us start by creating the manifest.json file, which is the heart of every Chr
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file tells Chrome about your extension's capabilities and permissions. For our speed dial extension, we need to declare the new tab override and storage permissions.
 
@@ -84,11 +84,11 @@ This manifest file specifies several important things. The "chrome_url_overrides
 
 ---
 
-Building the New Tab Page {#new-tab-page}
+## Building the New Tab Page {#new-tab-page}
 
 The new tab page is the main interface of our speed dial extension. It displays the grid of speed dial tiles and handles user interactions.
 
-Create newtab.html with the following structure:
+### Create newtab.html with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -150,7 +150,7 @@ This HTML structure provides a clean interface with a header containing a search
 
 ---
 
-Styling the Speed Dial Extension {#styling}
+## Styling the Speed Dial Extension {#styling}
 
 Create newtab.css to style your extension. The design should be visually appealing while remaining functional and fast.
 
@@ -394,9 +394,9 @@ This CSS provides a modern dark theme with gradient backgrounds, smooth hover an
 
 ---
 
-Implementing the JavaScript Logic {#javascript-logic}
+## Implementing the JavaScript Logic {#javascript-logic}
 
-Now create newtab.js to handle all the functionality:
+### Now create newtab.js to handle all the functionality:
 
 ```javascript
 // Default speed dial sites
@@ -600,7 +600,7 @@ This JavaScript implementation handles loading sites from storage, rendering the
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 While the new tab page is the main interface, adding a popup provides quick access from anywhere in the browser. Create popup.html:
 
@@ -673,7 +673,7 @@ While the new tab page is the main interface, adding a popup provides quick acce
 </html>
 ```
 
-And popup.js:
+### And popup.js:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', loadPopupSites);
@@ -711,7 +711,7 @@ document.getElementById('add-btn').addEventListener('click', () => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that you have created all the necessary files, it is time to test your extension in Chrome.
 
@@ -723,7 +723,7 @@ If you encounter any issues, check the extension console for errors. You can acc
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have thoroughly tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store.
 
@@ -739,7 +739,7 @@ Google typically reviews new extensions within a few hours to a few days. Once a
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 While the basic speed dial extension is fully functional, there are many ways you can enhance it to make it stand out from the competition.
 
@@ -749,7 +749,7 @@ Add import/export functionality so users can backup and share their speed dial c
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a speed dial Chrome extension is an excellent project that teaches you fundamental extension development concepts while creating a genuinely useful tool. you learned how to create a Manifest V3 extension with new tab override, implement persistent storage using the chrome.storage API, build a modern and responsive user interface, and prepare your extension for publishing to the Chrome Web Store.
 

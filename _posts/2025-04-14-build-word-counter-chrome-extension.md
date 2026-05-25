@@ -18,25 +18,25 @@ Chrome extensions are one of the most practical projects you can build as a begi
 
 ---
 
-Why Build a Word Counter Chrome Extension? {#why-build-word-counter}
+## Why Build a Word Counter Chrome Extension? {#why-build-word-counter}
 
 Before we dive into the code, let us discuss why building a word counter extension is an excellent project for developers of all skill levels.
 
-Practical Everyday Use
+### Practical Everyday Use
 
 A word counter is something you will actually use. Writers constantly need to check their word count to meet submission requirements or stay within blog post length guidelines. Students need to ensure they meet essay word limits. Social media managers must adhere to character limits on platforms like Twitter (X), LinkedIn, and Instagram. Having a reliable word counter accessible from any webpage solves these real problems.
 
-Learning Fundamental Concepts
+### Learning Fundamental Concepts
 
 Building a word counter Chrome extension teaches you several essential concepts that apply to virtually every Chrome extension you will build in the future. You will learn how to work with content scripts that run on webpages, how to create popup interfaces, how to use Chrome storage APIs, and how to structure a Manifest V3 extension project.
 
-Foundation for More Complex Extensions
+### Foundation for More Complex Extensions
 
 The techniques you learn in this project serve as the foundation for more sophisticated text analysis tools. Once you can count words, you can expand into readability scoring, keyword density analysis, grammar checking, and more advanced natural language processing features.
 
 ---
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Before we begin, make sure you have the following:
 
@@ -49,7 +49,7 @@ That is it! If you can write a simple web page, you can build a Chrome extension
 
 ---
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 Every Chrome extension needs a specific file structure. For our word counter extension, we will create the following files:
 
@@ -70,7 +70,7 @@ The manifest.json file tells Chrome about your extension. The popup files create
 
 ---
 
-Step 1: Creating the Manifest File {#step-1-manifest}
+## Step 1: Creating the Manifest File {#step-1-manifest}
 
 The manifest.json file is the configuration file for your Chrome extension. It defines the extension name, version, permissions, and which files to load. For Manifest V3 (the current standard), here is what our manifest looks like:
 
@@ -111,7 +111,7 @@ Notice that we do not need extensive permissions like "storage" or "<all_urls>" 
 
 ---
 
-Step 2: Creating the Popup Interface {#step-2-popup}
+## Step 2: Creating the Popup Interface {#step-2-popup}
 
 The popup is what users see when they click your extension icon in the Chrome toolbar. We will create a clean, simple interface that displays the word count results.
 
@@ -268,7 +268,7 @@ The CSS styles our popup to look modern and professional, matching Chrome's desi
 
 ---
 
-Step 3: Creating the Content Script {#step-3-content-script}
+## Step 3: Creating the Content Script {#step-3-content-script}
 
 The content script is what runs on the actual webpage to analyze the selected text. This is where the core logic of our extension lives.
 
@@ -334,7 +334,7 @@ The content script listens for messages from the popup and performs text analysi
 
 ---
 
-Step 4: Creating the Popup Logic {#step-4-popup-js}
+## Step 4: Creating the Popup Logic {#step-4-popup-js}
 
 Now we need to connect the popup to the content script. The popup JavaScript handles button clicks and communicates with the content script.
 
@@ -398,11 +398,11 @@ The popup script queries the active tab and sends a message to the content scrip
 
 ---
 
-Step 5: Loading and Testing the Extension {#step-5-testing}
+## Step 5: Loading and Testing the Extension {#step-5-testing}
 
 Now that all the files are created, it is time to load your extension into Chrome and test it.
 
-Loading the Extension
+### Loading the Extension
 
 1. Open Google Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right corner
@@ -411,7 +411,7 @@ Loading the Extension
 
 Your extension should now appear in the Chrome toolbar! You should see a new icon next to your address bar.
 
-Using the Extension
+### Using the Extension
 
 1. Navigate to any webpage with text content (a news article, blog post, or document)
 2. Select some text by clicking and dragging
@@ -420,7 +420,7 @@ Using the Extension
 
 You should see the word count, character count, and other metrics displayed in the popup. If you get an error, make sure you have selected some text on the page first, the extension requires a text selection to analyze.
 
-Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
 If your extension is not working, here are some common problems and solutions:
 
@@ -434,51 +434,51 @@ The content script does not run: Some websites have Content Security Policy (CSP
 
 ---
 
-Step 6: Enhancing Your Extension {#step-6-enhancements}
+## Step 6: Enhancing Your Extension {#step-6-enhancements}
 
 Now that you have a working word counter, here are some ideas to make it even better:
 
-Add Page-Wide Analysis
+### Add Page-Wide Analysis
 
 Modify the extension to analyze all text on the page, not just the selected text. This requires adding "document" to the matches array in your manifest and modifying the content script to iterate through all paragraph elements.
 
-Add Reading Time Estimate
+### Add Reading Time Estimate
 
 Calculate estimated reading time based on an average reading speed of 200-250 words per minute. This is a popular feature in many productivity extensions.
 
-Add Local Storage
+### Add Local Storage
 
 Use the Chrome storage API to remember the user's last analysis or track word counts over time. This requires adding "storage" permission to your manifest.
 
-Add Keyboard Shortcut
+### Add Keyboard Shortcut
 
 Register a keyboard shortcut so users can analyze text without using the mouse. This requires adding a "commands" section to your manifest.
 
-Add Copy-Paste Analysis
+### Add Copy-Paste Analysis
 
 Allow users to paste text directly into the popup for analysis. This is useful when they want to analyze text from a source outside their browser.
 
 ---
 
-How Chrome Extension Architecture Works {#architecture-explained}
+## How Chrome Extension Architecture Works {#architecture-explained}
 
 Understanding how the different parts of your extension work together will help you build more advanced extensions in the future.
 
-The Popup Lifecycle
+### The Popup Lifecycle
 
 The popup is a mini web page that loads when you click the extension icon and unloads when you close it. This means any JavaScript variables you set in the popup are lost when the popup closes. If you need to persist data, use the Chrome storage API.
 
-Content Script Isolation
+### Content Script Isolation
 
 Content scripts run in the context of the web page but have limited access to the page's JavaScript variables. They share the DOM with the page's scripts but exist in an isolated world. This is a security feature that prevents extensions from accidentally interfering with page functionality.
 
-Message Passing
+### Message Passing
 
 The popup and content script communicate through Chrome's message passing API. The popup sends a message using `chrome.tabs.sendMessage()`, and the content script listens using `chrome.runtime.onMessage.addListener()`. This architecture keeps the popup lightweight and ensures the content script handles all page interaction.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you are satisfied with your extension, you can publish it to the Chrome Web Store:
 
@@ -492,7 +492,7 @@ Publishing is free for individual developers, though there is a $5 one-time fee 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional word counter Chrome extension from scratch. You learned how to create a Manifest V3 extension, build a popup interface, write a content script for page interaction, and connect everything together with message passing.
 
@@ -502,4 +502,4 @@ Now that you have a working extension, consider expanding it with the enhancemen
 
 Start building today, and you might be surprised at how quickly you can go from idea to working prototype to published extension. The tools and concepts are simpler than you might expect, and the learning curve is gentle if you already know basic web development.
 
-Happy coding!
+### Happy coding!

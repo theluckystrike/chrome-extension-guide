@@ -18,7 +18,7 @@ The concept of API mocking isn't new to web development. Developers have long us
 
 ---
 
-Understanding the Architecture of a Local API Mock Extension {#understanding-architecture}
+## Understanding the Architecture of a Local API Mock Extension {#understanding-architecture}
 
 Before diving into the implementation details, it's essential to understand the core architecture that makes a local API mock extension work. The foundation lies in Chrome's webRequest API, which allows extensions to observe, analyze, and modify network requests as they pass through the browser. Combined with the declarativeNetRequest API introduced in Manifest V3, you can create powerful rules that intercept specific URL patterns and return custom responses without modifying the original request.
 
@@ -26,7 +26,7 @@ The architecture consists of several key components working together smoothly. T
 
 One of the most significant advantages of building this as a Chrome extension is the ability to work completely offline. Traditional mock servers require running a local Node.js server or similar setup, which adds complexity to your development environment. With a Chrome extension, everything runs within the browser itself, making it portable and easy to share with team members through the Chrome Web Store or direct extension loading.
 
-Why Build Your Own Instead of Using Existing Solutions?
+### Why Build Your Own Instead of Using Existing Solutions?
 
 You might wonder why you should build your own API mock extension when several existing solutions like Requestly, Mockable.io, or various browser DevTools already provide similar functionality. The answer lies in customization and learning. Building your own extension gives you complete control over features, allows you to tailor it to your specific workflow, and provides invaluable insights into how Chrome extensions interact with network requests.
 
@@ -34,7 +34,7 @@ Moreover, existing tools often come with limitations, whether in the form of pai
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every well-organized Chrome extension follows a clear project structure that separates concerns and makes maintenance straightforward. For our local API mock extension, we'll use the following directory layout that reflects best practices for Manifest V3 extensions.
 
@@ -97,7 +97,7 @@ The key permissions here are declarativeNetRequest and host_access, which allow 
 
 ---
 
-Implementing the Service Worker {#service-worker}
+## Implementing the Service Worker {#service-worker}
 
 The service worker acts as the brain of our extension, handling mock rule management and coordinating with the declarativeNetRequest API. Let's create a comprehensive service worker that handles all the core functionality.
 
@@ -219,7 +219,7 @@ This service worker handles the core functionality of managing and applying mock
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface provides developers with an intuitive way to manage their mock rules without leaving the browser. Let's create a clean, functional popup that supports adding, viewing, and deleting mock rules.
 
@@ -584,11 +584,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Advanced Features and Use Cases {#advanced-features}
+## Advanced Features and Use Cases {#advanced-features}
 
 Now that we have the basic implementation working, let's explore some advanced features that can make your API mock extension even more powerful and useful for real-world development scenarios.
 
-Dynamic Response Manipulation
+### Dynamic Response Manipulation
 
 One of the most powerful features you can add is the ability to generate dynamic responses based on request parameters. Instead of returning static JSON, you can create response factories that modify the output based on query parameters, headers, or request body content.
 
@@ -619,7 +619,7 @@ function createPaginatedResponse(request, mockConfig) {
 
 This approach allows you to test various pagination scenarios without creating separate mock rules for each page. You can extend this pattern to handle sorting, filtering, and other query parameters that your real API might support.
 
-Request Logging and Debugging
+### Request Logging and Debugging
 
 Another valuable feature is implementing request logging that captures all intercepted requests, allowing developers to debug their applications more effectively. You can store request logs in chrome.storage and display them in a dedicated panel within your extension popup.
 
@@ -643,7 +643,7 @@ async function logRequest(details) {
 }
 ```
 
-Mock Response Delay Simulation
+### Mock Response Delay Simulation
 
 Network latency is often the culprit behind performance issues in web applications. Adding configurable delay simulation to your mock responses helps developers understand how their applications behave under slow network conditions.
 
@@ -660,7 +660,7 @@ async function createDelayedResponse(mock, originalResponse) {
 
 You can extend the popup UI to include a delay input field, allowing developers to test their application's loading states, skeleton screens, and timeout handling.
 
-Mock Suites and Presets
+### Mock Suites and Presets
 
 For larger projects with multiple environments or feature branches, organizing mocks into suites and presets becomes essential. You can implement a system where developers can save groups of mock rules as presets and switch between them instantly.
 
@@ -689,29 +689,29 @@ This feature is particularly useful when working on feature branches that might 
 
 ---
 
-Best Practices and Performance Considerations {#best-practices}
+## Best Practices and Performance Considerations {#best-practices}
 
 Building a production-ready Chrome extension requires attention to performance, security, and user experience. Here are some essential best practices to ensure your API mock extension performs optimally.
 
-Rule Priority Management
+### Rule Priority Management
 
 When you have multiple mock rules that might overlap, understanding and properly implementing rule priority becomes crucial. The declarativeNetRequest API processes rules in order of their priority, with higher priority rules being evaluated first. Ensure your UI allows developers to reorder rules or set explicit priorities to avoid unexpected behavior.
 
-Error Handling and Fallbacks
+### Error Handling and Fallbacks
 
 Robust error handling ensures your extension doesn't break the browser's normal functionality when something goes wrong. Always wrap your rule application logic in try-catch blocks, and provide clear error messages to users when their mock configurations are invalid.
 
-Memory Management
+### Memory Management
 
 Service workers in Chrome extensions are ephemeral and can be terminated after periods of inactivity. Design your extension to persist state properly and reinitialize correctly when the service worker wakes up. Avoid storing large amounts of data in memory, and rely on chrome.storage for persistence.
 
-Security Considerations
+### Security Considerations
 
 When intercepting network requests, you're handling potentially sensitive data. Ensure your extension follows security best practices: validate all user inputs, don't log sensitive headers or authentication tokens by default, and consider adding options for developers to exclude certain domains from mocking.
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 Building a local API mock Chrome extension is an excellent project that teaches you valuable skills in Chrome extension development while providing a practical tool that can significantly improve your development workflow. The foundation we've built in this guide can be extended in countless ways based on your specific needs.
 

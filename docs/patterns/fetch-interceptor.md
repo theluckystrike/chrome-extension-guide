@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/fetch-interceptor/"
 last_modified_at: 2026-01-15
 ---
 
-Fetch/XHR Interception Patterns
+### Fetch/XHR Interception Patterns
 
 This document covers patterns for intercepting and modifying network requests in Chrome extensions using MV3.
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions can intercept, modify, block, or redirect network requests through several mechanisms:
 
@@ -18,11 +18,11 @@ Chrome extensions can intercept, modify, block, or redirect network requests thr
 - chrome.webRequest: Read-only observation (limited in MV3)
 - Content script injection: Programmatic interception via monkey-patching
 
-declarativeNetRequest (MV3) {#declarativenetrequest-mv3}
+## declarativeNetRequest (MV3) {#declarativenetrequest-mv3}
 
 The `declarativeNetRequest` API is the MV3 approach for modifying network requests without requiring host permissions.
 
-Static Rules {#static-rules}
+## Static Rules {#static-rules}
 
 Static rules are defined in the manifest and loaded at extension startup:
 
@@ -38,9 +38,9 @@ Static rules are defined in the manifest and loaded at extension startup:
 }
 ```
 
-Dynamic Rules {#dynamic-rules}
+## Dynamic Rules {#dynamic-rules}
 
-Dynamic rules can be added at runtime:
+### Dynamic rules can be added at runtime:
 
 ```javascript
 chrome.declarativeNetRequest.updateDynamicRules({
@@ -53,9 +53,9 @@ chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-Blocking Patterns {#blocking-patterns}
+## Blocking Patterns {#blocking-patterns}
 
-Block specific requests using URL filters:
+### Block specific requests using URL filters:
 
 ```javascript
 {
@@ -69,9 +69,9 @@ Block specific requests using URL filters:
 }
 ```
 
-Redirect Patterns {#redirect-patterns}
+## Redirect Patterns {#redirect-patterns}
 
-Redirect requests to alternative URLs:
+### Redirect requests to alternative URLs:
 
 ```javascript
 {
@@ -88,9 +88,9 @@ Redirect requests to alternative URLs:
 }
 ```
 
-CDN Switching {#cdn-switching}
+## CDN Switching {#cdn-switching}
 
-Rewrite URLs to use different CDNs:
+### Rewrite URLs to use different CDNs:
 
 ```javascript
 {
@@ -107,7 +107,7 @@ Rewrite URLs to use different CDNs:
 }
 ```
 
-Modifying Headers {#modifying-headers}
+## Modifying Headers {#modifying-headers}
 
 Use `modifyHeaders` to add, remove, or set request/response headers:
 
@@ -128,7 +128,7 @@ Use `modifyHeaders` to add, remove, or set request/response headers:
 }
 ```
 
-Programmatic Interception (Content Scripts) {#programmatic-interception-content-scripts}
+## Programmatic Interception (Content Scripts) {#programmatic-interception-content-scripts}
 
 For intercepting requests within page context, monkey-patch `fetch` and `XMLHttpRequest`:
 
@@ -159,9 +159,9 @@ chrome.scripting.executeScript({
 });
 ```
 
-Observing Requests (webRequest) {#observing-requests-webrequest}
+## Observing Requests (webRequest) {#observing-requests-webrequest}
 
-Use `chrome.webRequest` for read-only observation (non-blocking):
+### Use `chrome.webRequest` for read-only observation (non-blocking):
 
 ```javascript
 chrome.webRequest.onCompleted.addListener(
@@ -181,7 +181,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 In MV3, blocking via `webRequest` (`webRequestBlocking`) is no longer available for most extensions. Only policy-installed extensions retain access. Use `declarativeNetRequest` instead for request blocking and modification.
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 - Don't intercept sensitive requests: Avoid modifying requests to authentication endpoints or payment processors
 - Handle credentials carefully: Ensure user credentials aren't inadvertently exposed
@@ -189,7 +189,7 @@ Security Considerations {#security-considerations}
 - Limit scope: Only intercept requests necessary for your extension's functionality
 - Use HTTPS: When redirecting, prefer HTTPS URLs
 
-Reading Response Data {#reading-response-data}
+## Reading Response Data {#reading-response-data}
 
 The `declarativeNetRequest` API cannot read response bodies. For content inspection:
 
@@ -197,7 +197,7 @@ The `declarativeNetRequest` API cannot read response bodies. For content inspect
 2. Intercept `fetch` or `XMLHttpRequest` to access response data
 3. Consider using `chrome.debugger` for deeper inspection (requires user consent)
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [declarativeNetRequest API Reference](../api-reference/declarative-net-request-api.md)
 - [Network Interception Patterns](./network-interception.md)

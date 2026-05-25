@@ -18,7 +18,7 @@ This comprehensive guide explores everything you need about implementing WebAsse
 
 ---
 
-Understanding WebAssembly in the Chrome Extension Context {#understanding-wasm}
+## Understanding WebAssembly in the Chrome Extension Context {#understanding-wasm}
 
 WebAssembly is a binary instruction format designed as a portable compilation target for programming languages. It provides a way to execute code written in languages like C, C++, Rust, Go, and AssemblyScript directly in the browser with performance characteristics native speed. For Chrome extension developers, WebAssembly offers a powerful tool for optimizing performance-critical components without sacrificing cross-platform compatibility.
 
@@ -26,7 +26,7 @@ Chrome extensions operate within a unique environment that combines web technolo
 
 The performance advantages of WebAssembly stem from its binary format and efficient execution model. Unlike JavaScript, which must be parsed and compiled at runtime, WebAssembly modules are delivered in a compact binary format that loads quickly and executes with minimal overhead. This characteristic makes wasm particularly valuable for extensions that perform repetitive computations, process large amounts of data, or implement algorithms with intensive computational requirements.
 
-When to Use WebAssembly in Your Extension
+### When to Use WebAssembly in Your Extension
 
 Not every Chrome extension requires WebAssembly. Understanding when wasm provides meaningful benefits helps you make informed architectural decisions. Consider implementing WebAssembly when your extension performs mathematical computations that take significant time in JavaScript, such as image processing, cryptography, or data compression. Extensions that parse and process large JSON or XML documents can also benefit from wasm parsers that outperform their JavaScript equivalents.
 
@@ -36,11 +36,11 @@ However, WebAssembly introduces additional complexity including build pipeline r
 
 ---
 
-Setting Up WebAssembly in Your Chrome Extension Project {#setting-up-wasm}
+## Setting Up WebAssembly in Your Chrome Extension Project {#setting-up-wasm}
 
 Implementing WebAssembly in a Chrome extension requires configuring your build toolchain to compile source code into wasm binaries and properly loading these binaries within your extension. This section walks through the complete setup process using popular toolchains.
 
-Using AssemblyScript for TypeScript Projects
+### Using AssemblyScript for TypeScript Projects
 
 AssemblyScript provides an excellent starting point for developers familiar with TypeScript. It compiles a TypeScript-like syntax to WebAssembly, making it accessible to web developers while producing efficient wasm output. To set up AssemblyScript in your extension project, install the compiler and dependencies:
 
@@ -81,13 +81,13 @@ export function calculatePrimes(limit: i32): i32 {
 }
 ```
 
-Compile this to WebAssembly using the AssemblyScript compiler:
+### Compile this to WebAssembly using the AssemblyScript compiler:
 
 ```bash
 npx asc src/wasm/math-utils.ts --outFile src/wasm/math-utils.wasm --optimize
 ```
 
-Using Rust for High-Performance Modules
+### Using Rust for High-Performance Modules
 
 Rust produces highly optimized WebAssembly with minimal runtime overhead, making it ideal for performance-critical components. Set up Rust for wasm development by installing the wasm32 target:
 
@@ -117,7 +117,7 @@ crate-type = ["cdylib"]
 wasm-bindgen = "0.2"
 ```
 
-Write your Rust implementation:
+### Write your Rust implementation:
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -141,7 +141,7 @@ pub fn transform_string(input: &str) -> String {
 }
 ```
 
-Build the wasm module:
+### Build the wasm module:
 
 ```bash
 wasm-pack build --target web wasm-processor
@@ -149,11 +149,11 @@ wasm-pack build --target web wasm-processor
 
 ---
 
-Loading and Using WebAssembly in Extension Contexts {#loading-wasm}
+## Loading and Using WebAssembly in Extension Contexts {#loading-wasm}
 
 Once you've compiled your WebAssembly module, the next step is loading and executing it within your Chrome extension. The loading process varies slightly depending on which extension context you're working in, but the core concepts remain consistent.
 
-Loading WebAssembly in Service Workers
+### Loading WebAssembly in Service Workers
 
 Service workers in Manifest V3 extensions provide the primary background processing context. Loading wasm modules in service workers requires careful attention to the chrome-extension:// URL scheme and proper error handling:
 
@@ -195,7 +195,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Loading WebAssembly in Content Scripts
+### Loading WebAssembly in Content Scripts
 
 Content scripts operate within the context of web pages, which changes how you load wasm modules. The key consideration is ensuring the wasm file is accessible and handling cross-origin restrictions appropriately:
 
@@ -260,7 +260,7 @@ initializeWasm().then(() => {
 });
 ```
 
-Configuring Manifest for WebAssembly
+### Configuring Manifest for WebAssembly
 
 Your extension's manifest.json must properly declare WebAssembly resources to make them accessible from different contexts:
 
@@ -290,11 +290,11 @@ Your extension's manifest.json must properly declare WebAssembly resources to ma
 
 ---
 
-Performance Optimization Strategies for Chrome Extension Wasm {#optimization-strategies}
+## Performance Optimization Strategies for Chrome Extension Wasm {#optimization-strategies}
 
 Maximizing the performance benefits of WebAssembly in your Chrome extension requires understanding wasm-specific optimization techniques. This section covers strategies to achieve optimal performance from your wasm modules.
 
-Minimizing Module Load Time
+### Minimizing Module Load Time
 
 WebAssembly module instantiation can contribute to perceived latency, especially in contexts like service workers that may start and stop frequently. Several strategies help minimize this overhead.
 
@@ -349,7 +349,7 @@ async function loadWithCaching() {
 }
 ```
 
-Memory Management in WebAssembly
+### Memory Management in WebAssembly
 
 WebAssembly provides linear memory that you must manage explicitly. Proper memory handling prevents issues like memory leaks and out-of-bounds access while optimizing performance.
 
@@ -409,7 +409,7 @@ impl Allocator {
 }
 ```
 
-Optimizing Data Transfer Between JavaScript and Wasm
+### Optimizing Data Transfer Between JavaScript and Wasm
 
 The boundary between JavaScript and WebAssembly can become a performance bottleneck if not managed carefully. Minimize data transfer overhead using these techniques.
 
@@ -461,11 +461,11 @@ worker.postMessage({ sharedBuffer });
 
 ---
 
-Real-World Chrome Extension Wasm Implementation Examples {#real-world-examples}
+## Real-World Chrome Extension Wasm Implementation Examples {#real-world-examples}
 
 Understanding how WebAssembly performs in production scenarios provides valuable insights for your own implementations. These examples demonstrate practical wasm usage in Chrome extensions.
 
-Example 1: Image Processing Extension
+### Example 1: Image Processing Extension
 
 Image processing is a classic use case for WebAssembly due to the computational intensity of pixel manipulation operations. This example shows a content script that uses wasm to apply filters to images on web pages:
 
@@ -526,7 +526,7 @@ async function applyGrayscaleFilter(imageElement) {
 }
 ```
 
-Example 2: Data Extraction Extension
+### Example 2: Data Extraction Extension
 
 Extensions that scrape and process web page data benefit significantly from wasm parsers that outperform JavaScript alternatives:
 
@@ -602,7 +602,7 @@ class DataExtractor {
 }
 ```
 
-Example 3: Cryptographic Operations Extension
+### Example 3: Cryptographic Operations Extension
 
 Extensions that handle sensitive data often need cryptographic functions. WebAssembly enables you to implement these efficiently:
 
@@ -686,20 +686,20 @@ class WasmCryptoService {
 
 ---
 
-Debugging WebAssembly in Chrome Extensions {#debugging-wasm}
+## Debugging WebAssembly in Chrome Extensions {#debugging-wasm}
 
 Debugging WebAssembly modules in Chrome extensions requires specific techniques and tools. Understanding these approaches helps you quickly identify and resolve issues in your wasm code.
 
-Using Chrome DevTools for Wasm Debugging
+### Using Chrome DevTools for Wasm Debugging
 
-Chrome DevTools provides solid support for debugging WebAssembly:
+### Chrome DevTools provides solid support for debugging WebAssembly:
 
 1. Open your extension's background service worker DevTools at `chrome://extensions/`
 2. Click "Service Worker" link and then "inspect"
 3. Enable "WebAssembly debugging" in DevTools settings
 4. Set breakpoints in your .wasm source files directly
 
-Common Issues and Solutions
+### Common Issues and Solutions
 
 Module Not Loading: Verify the wasm file is correctly listed in web_accessible_resources and the path matches exactly:
 
@@ -742,7 +742,7 @@ async function loadWithErrorHandling() {
 
 ---
 
-Conclusion and Best Practices {#conclusion}
+## Conclusion and Best Practices {#conclusion}
 
 WebAssembly opens powerful possibilities for optimizing Chrome extension performance, but successful implementation requires careful planning and attention to detail. Key takeaways from this guide include understanding when wasm provides meaningful benefits over JavaScript, properly configuring your build pipeline and manifest, and implementing appropriate loading strategies for different extension contexts.
 
@@ -760,7 +760,7 @@ Continue exploring WebAssembly for your extension projects, and remember that th
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [WebAssembly Official Documentation](https://webassembly.org/)
 - [AssemblyScript Documentation](https://www.assemblyscript.org/)

@@ -9,9 +9,9 @@ Build a Browsing History Search Extension
 
 This tutorial guides you through building an enhanced Chrome extension for searching and analyzing your browsing history.
 
-Step 1: Manifest with History Permission {#step-1-manifest-with-history-permission}
+## Step 1: Manifest with History Permission {#step-1-manifest-with-history-permission}
 
-Create `manifest.json` with the `history` permission:
+### Create `manifest.json` with the `history` permission:
 
 ```json
 {
@@ -23,7 +23,7 @@ Create `manifest.json` with the `history` permission:
 }
 ```
 
-Step 2: Popup UI {#step-2-popup-ui}
+## Step 2: Popup UI {#step-2-popup-ui}
 
 Create `popup.html` with search input, date filter, and results container:
 
@@ -40,9 +40,9 @@ Create `popup.html` with search input, date filter, and results container:
 <div id="results"></div>
 ```
 
-Step 3: Search History with Date Range {#step-3-search-history-with-date-range}
+## Step 3: Search History with Date Range {#step-3-search-history-with-date-range}
 
-Use `chrome.history.search()` with query and date filtering:
+### Use `chrome.history.search()` with query and date filtering:
 
 ```javascript
 function searchHistory(query, daysBack) {
@@ -51,7 +51,7 @@ function searchHistory(query, daysBack) {
 }
 ```
 
-Step 4: Display Results {#step-4-display-results}
+## Step 4: Display Results {#step-4-display-results}
 
 Show title, URL, last visit time, and visit count:
 
@@ -68,9 +68,9 @@ function displayResults(results) {
 }
 ```
 
-Step 5: Domain Grouping {#step-5-domain-grouping}
+## Step 5: Domain Grouping {#step-5-domain-grouping}
 
-Group results by domain with collapsible sections:
+### Group results by domain with collapsible sections:
 
 ```javascript
 function groupByDomain(results) {
@@ -83,7 +83,7 @@ function groupByDomain(results) {
 }
 ```
 
-Step 6: Visit Frequency Chart {#step-6-visit-frequency-chart}
+## Step 6: Visit Frequency Chart {#step-6-visit-frequency-chart}
 
 Display a bar chart of most visited domains using simple HTML/CSS:
 
@@ -96,9 +96,9 @@ function renderChart(results) {
 }
 ```
 
-Step 7: Delete History Items {#step-7-delete-history-items}
+## Step 7: Delete History Items {#step-7-delete-history-items}
 
-Delete individual history entries using `chrome.history.deleteUrl()`:
+### Delete individual history entries using `chrome.history.deleteUrl()`:
 
 ```javascript
 function deleteItem(url) {
@@ -106,21 +106,21 @@ function deleteItem(url) {
 }
 ```
 
-Step 8: Additional Features {#step-8-additional-features}
+## Step 8: Additional Features {#step-8-additional-features}
 
 Pagination: Use `maxResults` parameter for paged results. Keyboard Navigation: Implement arrow key navigation through results. Export CSV: Generate CSV with title, URL, visit count, and last visit time. Open in Tab: Click result to navigate using `chrome.tabs.create({ url })`.
 
-Chrome History Limitations {#chrome-history-limitations}
+## Chrome History Limitations {#chrome-history-limitations}
 
 - Maximum 50,000 entries returned; `maxResults` capped at 100,000
 - Results limited to last 3 months unless `startTime` specified
 - Incognito history not accessible
 
-Performance Tips {#performance-tips}
+## Performance Tips {#performance-tips}
 
 - Use `maxResults` to limit query scope and implement debouncing for search input. Cache results when possible and use `chrome.history.deleteUrl()` carefully as deletions are irreversible.
 
-Related Documentation {#related-documentation}
+## Related Documentation {#related-documentation}
 
 - [History API Reference](../api_reference/history-api.md)
 - [History Permissions](../permissions/history.md)

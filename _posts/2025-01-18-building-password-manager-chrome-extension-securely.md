@@ -18,17 +18,17 @@ Creating a secure password manager chrome extension is both a challenging and re
 
 ---
 
-Understanding the Security Requirements {#security-requirements}
+## Understanding the Security Requirements {#security-requirements}
 
 Before writing any code, you must understand what makes a password manager secure. Users rely on their credential storage extension to protect sensitive information including passwords, usernames, API keys, and other authentication credentials. Any vulnerability in your extension could expose this data to attackers, making security your paramount concern throughout development.
 
-Core Security Principles
+### Core Security Principles
 
 A secure password manager chrome extension must satisfy several fundamental security requirements. First, all sensitive data must be encrypted at rest using strong encryption algorithms. Second, the master password used to unlock the vault should never be stored in plaintext and should be processed using key derivation functions that resist brute-force attacks. Third, the extension must protect against common web vulnerabilities including cross-site scripting, cross-site request forgery, and injection attacks.
 
 The chrome.storage API provides the foundation for storing encrypted credential data, but it does not provide encryption itself. You must implement encryption using the Web Crypto API, which is available in Chrome's extension context. This API provides access to cryptographic primitives including AES-GCM for symmetric encryption and PBKDF2 for key derivation, both essential for secure credential storage.
 
-Threat Model
+### Threat Model
 
 Understanding the threats your extension faces helps inform security decisions. Your password manager may encounter several attack vectors. Remote attackers might try to intercept credentials during transmission if your extension syncs data. Malware on the user's machine could attempt to inject code into your extension's context. Phishing attacks might try to trick users into revealing their master password through fake login prompts. Additionally, malicious websites could attempt to exploit vulnerabilities in your extension to access stored credentials.
 
@@ -36,11 +36,11 @@ Each of these threats requires specific countermeasures. Using HTTPS for all net
 
 ---
 
-Project Structure and Manifest Configuration {#project-structure}
+## Project Structure and Manifest Configuration {#project-structure}
 
 Let's set up the project structure for a secure password manager chrome extension using Manifest V3. This structure separates concerns and makes the codebase maintainable and auditable.
 
-Directory Layout
+### Directory Layout
 
 Create a well-organized directory structure that separates your HTML, JavaScript, and assets. A typical password manager extension includes the following directories and files:
 
@@ -70,7 +70,7 @@ password-manager/
 
 This structure separates the background service worker from the popup interface, keeping each component focused on its specific responsibilities. The lib directory contains reusable modules for encryption and storage operations.
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 Your manifest.json defines the extension's capabilities and permissions. For a secure password manager, you'll need to carefully specify which permissions your extension requires:
 
@@ -111,11 +111,11 @@ Notice that we request minimal permissions. The storage permission is required f
 
 ---
 
-Implementing Cryptographic Functions {#crypto-implementation}
+## Implementing Cryptographic Functions {#crypto-implementation}
 
 The cryptographic module is the heart of your secure password extension. This code handles all encryption and decryption operations, making it critical to get right. We'll use the Web Crypto API, which provides browser-native cryptographic functions that are both performant and secure.
 
-Key Derivation
+### Key Derivation
 
 Never store the master password directly. Instead, derive an encryption key from the master password using a key derivation function designed to resist brute-force attacks. PBKDF2 (Password-Based Key Derivation Function 2) is the standard approach:
 
@@ -160,7 +160,7 @@ function generateSalt() {
 
 This implementation uses 100,000 iterations, which provides a good balance between security and usability. The salt ensures that even if two users have the same master password, their derived keys will be different. Always use cryptographically secure random values for salt generation.
 
-Encryption and Decryption
+### Encryption and Decryption
 
 For encrypting stored credentials, AES-GCM (Advanced Encryption Standard in Galois/Counter Mode) provides both confidentiality and integrity verification. This means you'll immediately detect any tampering with encrypted data:
 
@@ -200,11 +200,11 @@ The initialization vector (IV) must be unique for each encryption operation. By 
 
 ---
 
-Credential Storage Module {#storage-module}
+## Credential Storage Module {#storage-module}
 
 The storage module manages how credentials are saved and retrieved from chrome.storage. This module wraps the chrome.storage API with encryption handling, providing a clean interface for the rest of your extension.
 
-Secure Storage Implementation
+### Secure Storage Implementation
 
 ```javascript
 // lib/storage.js
@@ -281,11 +281,11 @@ This implementation ensures that credentials are never stored in plaintext. All 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface provides the user-facing part of your secure password extension. It should be intuitive and provide clear feedback about the vault's locked or unlocked state.
 
-Popup HTML Structure
+### Popup HTML Structure
 
 ```html
 <!-- popup/popup.html -->
@@ -337,7 +337,7 @@ Popup HTML Structure
 </html>
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
 ```javascript
 // popup/popup.js
@@ -417,11 +417,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Auto-Fill Functionality {#auto-fill}
+## Auto-Fill Functionality {#auto-fill}
 
 One of the most valuable features of a credential storage extension is automatic form filling. The content script detects login forms and offers to fill them with stored credentials.
 
-Content Script Implementation
+### Content Script Implementation
 
 ```javascript
 // content/content-script.js
@@ -486,19 +486,19 @@ The content script communicates with the background service worker to retrieve c
 
 ---
 
-Best Practices and Security Considerations {#best-practices}
+## Best Practices and Security Considerations {#best-practices}
 
 Building a secure password extension requires ongoing attention to security throughout development and maintenance.
 
-Never Store Master Password
+### Never Store Master Password
 
 Your extension should never store the master password in any form. The password is used to derive an encryption key, but the key itself is held in memory only while the vault is unlocked. Even chrome.storage.local should never contain the master password or any direct derivation of it.
 
-Implement Proper Memory Handling
+### Implement Proper Memory Handling
 
 JavaScript doesn't provide direct memory control, but you can minimize the exposure of sensitive data. Clear sensitive data from variables when no longer needed, and avoid logging sensitive information to console. In the background service worker, the key should be cleared when the worker terminates.
 
-Use Content Security Policy
+### Use Content Security Policy
 
 A strong Content Security Policy prevents cross-site scripting attacks that could otherwise inject malicious code into your extension. Define strict CSP headers in your manifest:
 
@@ -510,17 +510,17 @@ A strong Content Security Policy prevents cross-site scripting attacks that coul
 }
 ```
 
-Regular Security Audits
+### Regular Security Audits
 
 Password managers are high-value targets for attackers. Regularly audit your code for vulnerabilities, keep dependencies updated, and consider commissioning third-party security reviews. Subscribe to security advisories for any libraries you use.
 
-User Education
+### User Education
 
 Even the most secure extension can be compromised if users choose weak master passwords. Implement password strength meters when users create their master password, and encourage the use of unique, randomly generated passwords for each site.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a secure password manager chrome extension requires careful attention to security at every level. By implementing proper encryption using the Web Crypto API, storing credentials securely with chrome.storage, and following secure development practices, you can create an extension that genuinely protects users' credentials.
 
@@ -530,7 +530,7 @@ The complete source code for this secure password manager extension provides a s
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Security Best Practices 2025](/2025/01/16/chrome-extension-security-best-practices-2025/) - Comprehensive security guidelines for extensions
 - [Content Security Policy for Chrome Extensions](/2025/01/18/content-security-policy-chrome-extensions/) - Implement solid CSP policies

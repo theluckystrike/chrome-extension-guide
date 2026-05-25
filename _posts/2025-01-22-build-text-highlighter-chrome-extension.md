@@ -18,7 +18,7 @@ This project will teach you essential Chrome extension development concepts incl
 
 ---
 
-Why Build a Text Highlighter Extension? {#why-build}
+## Why Build a Text Highlighter Extension? {#why-build}
 
 The demand for text highlighting tools in browsers continues to grow for several compelling reasons. First, the amount of information available online has exploded, making it essential to have tools that help users organize and remember important content. Second, students, researchers, professionals, and casual browsers all benefit from the ability to mark and save text across different websites.
 
@@ -28,7 +28,7 @@ From a commercial perspective, highlight and annotation tools have proven to be 
 
 ---
 
-Project Architecture Overview {#architecture}
+## Project Architecture Overview {#architecture}
 
 Before writing any code, let us understand the architecture of our Chrome extension. A typical text highlighter extension consists of several components working together.
 
@@ -38,7 +38,7 @@ For this project, we will use Manifest V3, which is the current standard for Chr
 
 ---
 
-Step 1: Setting Up the Project Structure {#setup}
+## Step 1: Setting Up the Project Structure {#setup}
 
 Create a new folder for your extension project. Inside this folder, create the following directory structure:
 
@@ -60,7 +60,7 @@ You will need to create simple icon files for your extension. For development pu
 
 ---
 
-Step 2: Creating the Manifest File {#manifest}
+## Step 2: Creating the Manifest File {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. Here is the complete manifest for our text highlighter extension:
 
@@ -103,7 +103,7 @@ This manifest declares that our extension needs storage permissions to save high
 
 ---
 
-Step 3: Building the Content Script {#content-script}
+## Step 3: Building the Content Script {#content-script}
 
 The content script is where the magic happens. This JavaScript file runs in the context of web pages and handles text selection, highlighting, and DOM manipulation. Here is a comprehensive content script for our web annotation extension:
 
@@ -317,7 +317,7 @@ This content script provides comprehensive functionality for highlighting text o
 
 ---
 
-Step 4: Creating the Popup Interface {#popup}
+## Step 4: Creating the Popup Interface {#popup}
 
 The popup provides the user interface that appears when users click the extension icon. It allows users to manage their highlights and access extension features. Here is the popup HTML:
 
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Step 5: Adding CSS Styles {#styles}
+## Step 5: Adding CSS Styles {#styles}
 
 The styles.css file provides visual styling for the highlights and popup:
 
@@ -607,7 +607,7 @@ The styles.css file provides visual styling for the highlights and popup:
 
 ---
 
-Step 6: Background Service Worker {#background}
+## Step 6: Background Service Worker {#background}
 
 The background service worker handles extension lifecycle events and coordinates between different parts of the extension:
 
@@ -648,7 +648,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Step 7: Loading and Testing Your Extension {#testing}
+## Step 7: Loading and Testing Your Extension {#testing}
 
 Now that you have created all the necessary files, it is time to load your extension into Chrome and test it. Follow these steps to load your unpacked extension:
 
@@ -662,7 +662,7 @@ To test your extension, navigate to any webpage and select some text with your m
 
 ---
 
-Step 8: Extending Your Extension {#extending}
+## Step 8: Extending Your Extension {#extending}
 
 Once you have the basic text highlighter extension working, there are many ways to extend its functionality. Consider adding these features to make your extension more powerful and useful:
 
@@ -680,7 +680,7 @@ PDF Support: Extend your extension to work with PDF files using PDF.js or simila
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have built a fully functional text highlighter Chrome extension from scratch. This project demonstrates core Chrome extension development concepts including Manifest V3 configuration, content scripts, popup interfaces, storage persistence, and inter-component communication.
 

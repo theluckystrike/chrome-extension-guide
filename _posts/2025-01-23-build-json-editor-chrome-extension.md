@@ -18,11 +18,11 @@ we'll walk through the complete process of building a professional-grade JSON ed
 
 ---
 
-Why Build a JSON Editor Chrome Extension? {#why-build}
+## Why Build a JSON Editor Chrome Extension? {#why-build}
 
 The demand for json editor extensions in the Chrome Web Store remains consistently high. Developers, data analysts, and technical professionals constantly need to work with JSON data, yet the built-in developer tools offer limited JSON functionality. This creates an excellent opportunity to build a tool that solves real problems.
 
-Market Demand and User Needs
+### Market Demand and User Needs
 
 A quick search for "json editor extension" in the Chrome Web Store reveals thousands of users actively seeking better JSON manipulation tools. The most popular extensions have millions of users, indicating strong market demand. Users want extensions that can:
 
@@ -35,7 +35,7 @@ A quick search for "json editor extension" in the Chrome Web Store reveals thous
 
 Building an extension that addresses these needs not only provides value to users but also serves as an impressive portfolio project that demonstrates your understanding of Chrome extension development, JavaScript DOM manipulation, and UI/UX design.
 
-Technical Skills You'll Gain
+### Technical Skills You'll Gain
 
 This project will teach you several valuable skills that extend beyond Chrome extension development:
 
@@ -48,11 +48,11 @@ This project will teach you several valuable skills that extend beyond Chrome ex
 
 ---
 
-Project Architecture and Features {#architecture}
+## Project Architecture and Features {#architecture}
 
 Before writing any code, let's outline the architecture of our JSON editor extension. A well-planned structure will make development smoother and the final product more maintainable.
 
-Core Features
+### Core Features
 
 Our JSON editor extension will include the following features:
 
@@ -65,7 +65,7 @@ Our JSON editor extension will include the following features:
 7. Theme Toggle - Light/dark mode support
 8. Local Storage - Remember user's last JSON and preferences
 
-Extension Structure
+### Extension Structure
 
 The extension will follow the Manifest V3 structure with the following files:
 
@@ -84,7 +84,7 @@ json-editor-extension/
 
 ---
 
-Step 1: Creating the Manifest File {#manifest}
+## Step 1: Creating the Manifest File {#manifest}
 
 Every Chrome extension begins with the manifest.json file. This configuration file tells Chrome about your extension's permissions, files, and capabilities.
 
@@ -117,7 +117,7 @@ The manifest declares we need storage permission to persist user data. The actio
 
 ---
 
-Step 2: Building the Popup HTML {#popup-html}
+## Step 2: Building the Popup HTML {#popup-html}
 
 The popup HTML provides the user interface for our JSON editor extension. We'll create a clean, intuitive layout with an input area, action buttons, and a tree viewer panel.
 
@@ -171,7 +171,7 @@ This HTML structure provides a two-panel layout: the input area for pasting JSON
 
 ---
 
-Step 3: Styling with CSS {#styles}
+## Step 3: Styling with CSS {#styles}
 
 The CSS file styles our extension to look professional and user-friendly. We'll implement a clean design with proper syntax highlighting for different JSON value types.
 
@@ -363,7 +363,7 @@ The CSS includes comprehensive theming support with CSS custom properties. The d
 
 ---
 
-Step 4: Implementing the Tree Viewer {#tree-viewer}
+## Step 4: Implementing the Tree Viewer {#tree-viewer}
 
 The tree viewer is the heart of our JSON editor extension. This JavaScript component transforms raw JSON into an interactive, collapsible tree structure that makes navigating complex data structures intuitive.
 
@@ -549,7 +549,7 @@ This tree viewer component handles nested objects and arrays recursively, creati
 
 ---
 
-Step 5: Implementing Popup Logic {#popup-logic}
+## Step 5: Implementing Popup Logic {#popup-logic}
 
 The popup.js file ties everything together, handling user interactions and JSON processing.
 
@@ -676,7 +676,7 @@ This popup script manages all user interactions: formatting, minifying, copying,
 
 ---
 
-Step 6: Creating Extension Icons {#icons}
+## Step 6: Creating Extension Icons {#icons}
 
 Every Chrome extension needs icons at various sizes. For a production extension, you'd create professional icons. For development purposes, you can create simple placeholder icons or use a tool to generate them.
 
@@ -684,9 +684,9 @@ To create basic icons, you can use an online icon generator or create simple col
 
 ---
 
-Step 7: Testing Your Extension {#testing}
+## Step 7: Testing Your Extension {#testing}
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load the extension:
    - Open Chrome and navigate to `chrome://extensions/`
@@ -710,7 +710,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Step 8: Publishing to Chrome Web Store {#publishing}
+## Step 8: Publishing to Chrome Web Store {#publishing}
 
 Once your extension is working correctly, follow these steps to publish:
 
@@ -735,11 +735,11 @@ Once your extension is working correctly, follow these steps to publish:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've now built a complete JSON Editor Chrome Extension with all the features users expect from a professional tool. The extension includes a solid JSON tree viewer, formatting capabilities, validation, theme support, and persistent storage.
 
-This project demonstrates your ability to:
+### This project demonstrates your ability to:
 
 - Build a complete Chrome extension from scratch using Manifest V3
 - Implement complex DOM manipulation for interactive UI components

@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/cookies-sessions/"
 last_modified_at: 2026-01-15
 ---
 
-Cookies and Sessions Patterns
+### Cookies and Sessions Patterns
 
 Working with cookies in Chrome extensions gives you fine-grained control over authentication state, tracking analysis, and cookie hygiene. The `chrome.cookies` API surfaces every cookie the browser manages and lets you read, write, delete, and monitor changes in real time.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Declare the `cookies` permission and specify host patterns for the domains you need access to:
 
@@ -24,7 +24,7 @@ Declare the `cookies` permission and specify host patterns for the domains you n
 
 ---
 
-Pattern 1: chrome.cookies API Basics {#pattern-1-chromecookies-api-basics}
+## Pattern 1: chrome.cookies API Basics {#pattern-1-chromecookies-api-basics}
 
 The five core operations cover every CRUD action plus change observation.
 
@@ -79,7 +79,7 @@ The `cause` field is one of `"evicted"`, `"expired"`, `"explicit"`, `"expired_ov
 
 ---
 
-Pattern 2: Session Detection {#pattern-2-session-detection}
+## Pattern 2: Session Detection {#pattern-2-session-detection}
 
 Check whether a user is logged in to a site by probing for known authentication cookies.
 
@@ -128,7 +128,7 @@ chrome.cookies.onChanged.addListener(() => {
 
 ---
 
-Pattern 3: Cookie Monitoring Dashboard {#pattern-3-cookie-monitoring-dashboard}
+## Pattern 3: Cookie Monitoring Dashboard {#pattern-3-cookie-monitoring-dashboard}
 
 Track all cookie changes in real time and expose them to a popup or side panel.
 
@@ -180,7 +180,7 @@ In the popup, call `chrome.runtime.sendMessage({ type: "GET_COOKIE_LOG" })` to f
 
 ---
 
-Pattern 4: Cookie Cleanup {#pattern-4-cookie-cleanup}
+## Pattern 4: Cookie Cleanup {#pattern-4-cookie-cleanup}
 
 Bulk-delete cookies by domain, age, or type. Useful for privacy-focused extensions.
 
@@ -232,7 +232,7 @@ async function cleanupCookies(filter: CleanupFilter): Promise<number> {
 
 ---
 
-Pattern 5: Third-Party Cookie Analysis {#pattern-5-third-party-cookie-analysis}
+## Pattern 5: Third-Party Cookie Analysis {#pattern-5-third-party-cookie-analysis}
 
 Identify tracker cookies on the current page by comparing cookie domains to the page domain.
 
@@ -287,7 +287,7 @@ async function analyzePageCookies(tabId: number): Promise<TrackerReport> {
 
 ---
 
-Pattern 6: Cookie Backup and Restore {#pattern-6-cookie-backup-and-restore}
+## Pattern 6: Cookie Backup and Restore {#pattern-6-cookie-backup-and-restore}
 
 Export all cookies as JSON and import them back later.
 
@@ -339,7 +339,7 @@ async function restoreCookies(backup: CookieBackup): Promise<number> {
 
 ---
 
-Pattern 7: Cookie Store Management {#pattern-7-cookie-store-management}
+## Pattern 7: Cookie Store Management {#pattern-7-cookie-store-management}
 
 Chrome maintains separate cookie stores for normal and incognito contexts.
 
@@ -400,7 +400,7 @@ Declare `"incognito": "spanning"` in the manifest to access incognito cookie sto
 
 ---
 
-Pattern 8: SameSite, Secure, and HttpOnly Audit Tool {#pattern-8-samesite-secure-and-httponly-audit-tool}
+## Pattern 8: SameSite, Secure, and HttpOnly Audit Tool {#pattern-8-samesite-secure-and-httponly-audit-tool}
 
 Audit all cookies for security best practices and flag issues.
 
@@ -496,7 +496,7 @@ function severityOrder(s: "high" | "medium" | "low"): number {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | # | Pattern | Key API | Use Case |
 |---|---------|---------|----------|

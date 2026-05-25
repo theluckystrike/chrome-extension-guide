@@ -18,7 +18,7 @@ Creating a window resizer extension for Chrome is an excellent project for devel
 
 ---
 
-Understanding Chrome Extension Architecture for Window Management {#understanding-chrome-extension-architecture}
+## Understanding Chrome Extension Architecture for Window Management {#understanding-chrome-extension-architecture}
 
 Before diving into code, it's crucial to understand the architecture that makes window resizing possible in Chrome extensions. Chrome provides a powerful Windows API that allows extensions to create, modify, and manage browser windows programmatically. This API is part of the chrome.windows namespace and offers methods for querying window information, updating window properties, and handling window events.
 
@@ -30,7 +30,7 @@ The permissions required for window resizing are relatively minimal. We'll need 
 
 ---
 
-Setting Up the Project Structure {#setting-up-project-structure}
+## Setting Up the Project Structure {#setting-up-project-structure}
 
 Every Chrome extension begins with a well-organized project structure. Let's create the foundation for our window resizer extension. First, create a new directory for your project, let's call it "window-resizer-extension", and set up the following file structure within it:
 
@@ -81,7 +81,7 @@ This manifest declares the "windows" permission, which is essential for our exte
 
 ---
 
-Creating the Popup User Interface {#creating-popup-user-interface}
+## Creating the Popup User Interface {#creating-popup-user-interface}
 
 The popup is what users see when they click our extension icon in the Chrome toolbar. For a window resizer, we need an intuitive interface that displays common viewport sizes and allows custom input. Let's create the HTML structure first:
 
@@ -171,7 +171,7 @@ This HTML provides a clean, organized interface with two main sections. The pres
 
 ---
 
-Styling the Popup Interface {#styling-popup-interface}
+## Styling the Popup Interface {#styling-popup-interface}
 
 A well-designed popup enhances user experience significantly. Let's create CSS that makes our extension visually appealing and easy to use:
 
@@ -333,7 +333,7 @@ This CSS provides a modern, clean look that aligns with Chrome's Material Design
 
 ---
 
-Implementing the Extension Logic {#implementing-extension-logic}
+## Implementing the Extension Logic {#implementing-extension-logic}
 
 Now comes the core functionality, making the extension actually resize windows. We'll create the JavaScript that handles user interactions and communicates with Chrome's Windows API:
 
@@ -542,7 +542,7 @@ async function resizeWindow(width, height, shouldCenter = false) {
 
 ---
 
-Testing Your Extension Locally {#testing-your-extension-locally}
+## Testing Your Extension Locally {#testing-your-extension-locally}
 
 Before publishing, you'll want to test your extension locally to ensure everything works correctly. Chrome provides a simple way to load unpacked extensions for testing. Here's how:
 
@@ -556,7 +556,7 @@ One common issue you might encounter is the window not resizing to exact dimensi
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Now that you have a working window resizer extension, consider adding these advanced features to make it even more useful:
 
@@ -574,7 +574,7 @@ These enhancements can significantly increase the value of your extension and di
 
 ---
 
-Publishing Your Extension {#publishing-your-extension}
+## Publishing Your Extension {#publishing-your-extension}
 
 Once you're satisfied with your extension and have thoroughly tested it, you can publish it to the Chrome Web Store. The publishing process involves creating a developer account, preparing your extension assets, and submitting through the Chrome Web Store developer dashboard.
 
@@ -584,7 +584,7 @@ Chrome charges a one-time $5 developer registration fee to publish extensions. A
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've successfully built a complete Window Resizer Chrome extension for responsive design testing. This extension demonstrates key concepts in Chrome extension development including Manifest V3 architecture, the chrome.windows API, popup UI design, and background script communication.
 

@@ -18,11 +18,11 @@ you will learn how to build a production-ready notification center extension fro
 
 ---
 
-Why Build a Notification Center Extension? {#why-build-notification-center}
+## Why Build a Notification Center Extension? {#why-build-notification-center}
 
 The average knowledge worker receives over 100 notifications per day across various applications. This constant interruption fragment reduces productivity and increases cognitive load. A well-designed alert manager extension addresses these problems by providing a centralized location for all notifications.
 
-The Problem with Scattered Notifications
+### The Problem with Scattered Notifications
 
 Browser notifications are ephemeral by design. They appear, wait for user attention, and disappear, often while you are focused on another task. System notifications pile up in the notification center but remain siloed by application. Users find themselves:
 
@@ -31,7 +31,7 @@ Browser notifications are ephemeral by design. They appear, wait for user attent
 - Unable to review notification history from more than a few hours ago
 - Lacking the ability to filter or prioritize which notifications matter most
 
-The Solution: Unified Notification Center
+### The Solution: Unified Notification Center
 
 A notification center extension solves these problems by aggregating notifications into a single, accessible interface. Users can:
 
@@ -45,11 +45,11 @@ This is why notification aggregator tools consistently rank among the most popul
 
 ---
 
-Understanding Chrome Notification APIs {#chrome-notification-apis}
+## Understanding Chrome Notification APIs {#chrome-notification-apis}
 
 Before writing code, you need to understand how Chrome handles notifications. Chrome provides several APIs that work together to create a solid notification system.
 
-The Notifications API
+### The Notifications API
 
 The Chrome Notifications API (`chrome.notifications`) allows extensions to create system notifications that appear in the user's operating system notification center. These notifications persist until the user dismisses them or clicks on them.
 
@@ -66,7 +66,7 @@ chrome.notifications.create({
 });
 ```
 
-The Alarms API
+### The Alarms API
 
 The Alarms API (`chrome.alarms`) enables your extension to schedule code to run at specific times or intervals. This is essential for fetching new notifications periodically:
 
@@ -83,7 +83,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-The Storage API
+### The Storage API
 
 The Chrome Storage API (`chrome.storage`) provides a way to persist data across browser sessions. This is critical for storing notification history:
 
@@ -99,7 +99,7 @@ chrome.storage.local.get('notifications', (result) => {
 });
 ```
 
-The Badge API
+### The Badge API
 
 The Badge API allows you to display a number on the extension icon, indicating unread notification count:
 
@@ -111,11 +111,11 @@ chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });
 
 ---
 
-Project Structure and Setup {#project-structure}
+## Project Structure and Setup {#project-structure}
 
 Now let us set up the project structure for our notification center extension. We will use Manifest V3, the latest Chrome extension platform.
 
-Directory Layout
+### Directory Layout
 
 ```
 notification-center/
@@ -134,9 +134,9 @@ notification-center/
      notification.css
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
-Create the `manifest.json` file with the necessary permissions:
+### Create the `manifest.json` file with the necessary permissions:
 
 ```json
 {
@@ -177,13 +177,13 @@ This manifest grants the necessary permissions for notifications, storage, alarm
 
 ---
 
-Building the Background Service Worker {#background-service-worker}
+## Building the Background Service Worker {#background-service-worker}
 
 The background service worker is the brain of your extension. It handles notification creation, storage, and periodic fetching.
 
-Core Background Script
+### Core Background Script
 
-Create `background/background.js`:
+### Create `background/background.js`:
 
 ```javascript
 // Background service worker for Notification Center
@@ -288,13 +288,13 @@ This background script handles notification storage, badge updates, and periodic
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. It displays all stored notifications in a clean, organized interface.
 
-HTML Structure
+### HTML Structure
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -342,9 +342,9 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
-Create `popup/popup.css` with a modern, clean design:
+### Create `popup/popup.css` with a modern, clean design:
 
 ```css
 * {
@@ -527,9 +527,9 @@ body {
 }
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
-Create `popup/popup.js` to handle all the interaction logic:
+### Create `popup/popup.js` to handle all the interaction logic:
 
 ```javascript
 // Popup script for Notification Center
@@ -686,11 +686,11 @@ function escapeHtml(text) {
 
 ---
 
-Advanced Features for Production {#advanced-features}
+## Advanced Features for Production {#advanced-features}
 
 While the basic notification center works, a production-ready extension needs additional features. Let me outline how to implement them.
 
-Priority System
+### Priority System
 
 Implement a priority system to highlight important notifications:
 
@@ -717,9 +717,9 @@ function createPriorityNotification(notification) {
 }
 ```
 
-Notification Grouping
+### Notification Grouping
 
-Group notifications by source or time period:
+### Group notifications by source or time period:
 
 ```javascript
 function groupNotifications(notifications) {
@@ -748,7 +748,7 @@ function groupNotifications(notifications) {
 }
 ```
 
-Integration with Real Services
+### Integration with Real Services
 
 To make your extension truly useful, integrate with actual notification sources:
 
@@ -761,32 +761,32 @@ Each integration requires OAuth authentication and API key setup. The Chrome Ide
 
 ---
 
-Best Practices for Notification Extensions {#best-practices}
+## Best Practices for Notification Extensions {#best-practices}
 
 Building a notification center extension comes with responsibilities. Follow these best practices to create a product users trust.
 
-Respect User Privacy
+### Respect User Privacy
 
 - Only request permissions you absolutely need
 - Store notification data locally when possible
 - Provide clear options for users to delete their data
 - Never send notification content to external servers without consent
 
-Optimize Performance
+### Optimize Performance
 
 - Use service workers efficiently, avoid keeping them alive unnecessarily
 - Limit the number of stored notifications (100-500 is usually sufficient)
 - Use efficient data structures for quick filtering and searching
 - Implement lazy loading for notification lists
 
-Provide Clear Value
+### Provide Clear Value
 
 - Give users control over which sources to include
 - Allow granular notification filtering
 - Support notification customization (sound, duration, display options)
 - Provide easy ways to mark notifications as read or dismiss them
 
-Test Thoroughly
+### Test Thoroughly
 
 - Test across different Chrome versions and operating systems
 - Verify notification behavior when the browser is closed
@@ -795,7 +795,7 @@ Test Thoroughly
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your notification center extension is ready, you can publish it to the Chrome Web Store:
 
@@ -809,7 +809,7 @@ For the store listing, use keywords like "notification center extension," "unifi
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a notification center Chrome extension is a rewarding project that teaches you advanced Chrome extension development concepts while creating a genuinely useful tool. You have learned how to work with the Notifications API, Alarms API, Storage API, and Badge API. You have created a complete extension with a modern popup interface, background service worker, and persistent storage.
 
@@ -819,7 +819,7 @@ Start with this base implementation, test it thoroughly, and gradually add featu
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 To continue developing your notification center extension:
 

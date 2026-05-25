@@ -9,7 +9,7 @@ Code Quality and Linting for Chrome Extensions
 
 Maintaining code quality in Chrome extensions requires tooling that understands the unique constraints of extension development: multiple execution contexts, browser API patterns, service worker limitations, and Chrome Web Store policies. This guide covers a complete linting, formatting, and CI pipeline tailored for Manifest V3 extensions.
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 - [ESLint Flat Config for Chrome Extensions](#eslint-flat-config-for-chrome-extensions)
 - [Recommended Rules for Extension Patterns](#recommended-rules-for-extension-patterns)
@@ -26,7 +26,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-ESLint Flat Config for Chrome Extensions {#eslint-flat-config-for-chrome-extensions}
+## ESLint Flat Config for Chrome Extensions {#eslint-flat-config-for-chrome-extensions}
 
 ESLint 9+ uses the flat config format (`eslint.config.js`). This replaces `.eslintrc.*` files with a single JavaScript module that exports an array of configuration objects.
 
@@ -117,7 +117,7 @@ export default tseslint.config(
 );
 ```
 
-Installation {#installation}
+## Installation {#installation}
 
 ```bash
 npm install -D eslint @eslint/js typescript-eslint globals
@@ -125,7 +125,7 @@ npm install -D eslint @eslint/js typescript-eslint globals
 
 ---
 
-Recommended Rules for Extension Patterns {#recommended-rules-for-extension-patterns}
+## Recommended Rules for Extension Patterns {#recommended-rules-for-extension-patterns}
 
 Beyond the defaults, these rules catch common extension bugs.
 
@@ -173,7 +173,7 @@ Beyond the defaults, these rules catch common extension bugs.
 }
 ```
 
-Why `no-floating-promises` Is Critical {#why-no-floating-promises-is-critical}
+## Why `no-floating-promises` Is Critical {#why-no-floating-promises-is-critical}
 
 In MV3, nearly every Chrome API call returns a promise. A forgotten `await` means errors are silently swallowed:
 
@@ -187,11 +187,11 @@ await chrome.storage.local.set({ key: 'value' });
 
 ---
 
-Custom ESLint Rules {#custom-eslint-rules}
+## Custom ESLint Rules {#custom-eslint-rules}
 
 Write custom rules for patterns specific to extension development. Place these in a local plugin.
 
-No innerHTML in Content Scripts {#no-innerhtml-in-content-scripts}
+## No innerHTML in Content Scripts {#no-innerhtml-in-content-scripts}
 
 Using `innerHTML` in content scripts is a security risk (XSS via page-controlled data) and violates Chrome Web Store policy.
 
@@ -241,7 +241,7 @@ export default {
 ```
 {% endraw %}
 
-Require Error Handling on Chrome APIs {#require-error-handling-on-chrome-apis}
+## Require Error Handling on Chrome APIs {#require-error-handling-on-chrome-apis}
 
 Chrome API calls can reject. Ensure they are wrapped in try/catch or have a `.catch()` handler.
 
@@ -298,7 +298,7 @@ export default {
 };
 ```
 
-Registering Custom Rules {#registering-custom-rules}
+## Registering Custom Rules {#registering-custom-rules}
 
 ```javascript
 // eslint.config.js (add to the config array)
@@ -327,7 +327,7 @@ const extensionPlugin = {
 
 ---
 
-Prettier Configuration {#prettier-configuration}
+## Prettier Configuration {#prettier-configuration}
 
 Prettier handles formatting so ESLint can focus on logic errors.
 
@@ -353,7 +353,7 @@ node_modules/
 *.pem
 ```
 
-ESLint and Prettier Integration {#eslint-and-prettier-integration}
+## ESLint and Prettier Integration {#eslint-and-prettier-integration}
 
 Use `eslint-config-prettier` to disable ESLint rules that conflict with Prettier:
 
@@ -371,7 +371,7 @@ export default tseslint.config(
 );
 ```
 
-Run formatting separately from linting:
+### Run formatting separately from linting:
 
 ```json
 {
@@ -385,18 +385,18 @@ Run formatting separately from linting:
 
 ---
 
-Husky and lint-staged Pre-Commit Hooks {#husky-and-lint-staged-pre-commit-hooks}
+## Husky and lint-staged Pre-Commit Hooks {#husky-and-lint-staged-pre-commit-hooks}
 
 Catch issues before they reach the repository.
 
-Setup {#setup}
+## Setup {#setup}
 
 ```bash
 npm install -D husky lint-staged
 npx husky init
 ```
 
-Configuration {#configuration}
+## Configuration {#configuration}
 
 ```json
 // package.json
@@ -421,7 +421,7 @@ Configuration {#configuration}
 npx lint-staged
 ```
 
-Manifest Validation Script {#manifest-validation-script}
+## Manifest Validation Script {#manifest-validation-script}
 
 Validate `manifest.json` on every commit to catch permission and field errors early:
 
@@ -467,7 +467,7 @@ console.log('Manifest validation passed.');
 
 ---
 
-TypeScript Strict Checks Worth Enabling {#typescript-strict-checks-worth-enabling}
+## TypeScript Strict Checks Worth Enabling {#typescript-strict-checks-worth-enabling}
 
 Beyond `"strict": true`, these additional checks prevent real extension bugs.
 
@@ -493,7 +493,7 @@ Beyond `"strict": true`, these additional checks prevent real extension bugs.
 }
 ```
 
-Real-World Impact {#real-world-impact}
+## Real-World Impact {#real-world-impact}
 
 `noImplicitReturns` catches the most common MV3 messaging bug:
 
@@ -511,11 +511,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-Extension-Specific Code Smells {#extension-specific-code-smells}
+## Extension-Specific Code Smells {#extension-specific-code-smells}
 
 These patterns compile and lint clean but cause real problems in production extensions.
 
-Global State in Service Workers {#global-state-in-service-workers}
+## Global State in Service Workers {#global-state-in-service-workers}
 
 Service workers are terminated after 30 seconds of inactivity. Any in-memory state is lost.
 
@@ -534,7 +534,7 @@ chrome.webRequest.onCompleted.addListener(async () => {
 });
 ```
 
-Synchronous Listeners with Async Operations {#synchronous-listeners-with-async-operations}
+## Synchronous Listeners with Async Operations {#synchronous-listeners-with-async-operations}
 
 Chrome event listeners that return a value synchronously cannot use `await` directly.
 
@@ -557,7 +557,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Unbounded Arrays in Storage {#unbounded-arrays-in-storage}
+## Unbounded Arrays in Storage {#unbounded-arrays-in-storage}
 
 `chrome.storage.sync` has a 100KB total limit and 8KB per-item limit. `chrome.storage.local` defaults to 10MB.
 
@@ -582,7 +582,7 @@ async function logVisit(url: string): Promise<void> {
 }
 ```
 
-Other Smells to Watch For {#other-smells-to-watch-for}
+## Other Smells to Watch For {#other-smells-to-watch-for}
 
 - `setTimeout`/`setInterval` in service workers: Use `chrome.alarms` instead. Timers do not survive worker termination.
 - Content scripts modifying `document.cookie`: Violates CSP and may be blocked. Use `chrome.cookies` from the background.
@@ -591,9 +591,9 @@ Other Smells to Watch For {#other-smells-to-watch-for}
 
 ---
 
-Bundle Analysis and Dead Code Detection {#bundle-analysis-and-dead-code-detection}
+## Bundle Analysis and Dead Code Detection {#bundle-analysis-and-dead-code-detection}
 
-Visualize Bundle Size {#visualize-bundle-size}
+## Visualize Bundle Size {#visualize-bundle-size}
 
 ```bash
 npm install -D rollup-plugin-visualizer
@@ -616,7 +616,7 @@ export default defineConfig({
 
 Run `npm run build` then open `bundle-stats.html` to identify oversized dependencies.
 
-Dead Code Detection with knip {#dead-code-detection-with-knip}
+## Dead Code Detection with knip {#dead-code-detection-with-knip}
 
 ```bash
 npm install -D knip
@@ -640,7 +640,7 @@ npm install -D knip
 npx knip  # Reports unused files, exports, and dependencies
 ```
 
-Extension Size Budget {#extension-size-budget}
+## Extension Size Budget {#extension-size-budget}
 
 Chrome Web Store has size limits and large extensions get additional review. Add a size check:
 
@@ -672,9 +672,9 @@ if (sizeMB > MAX_SIZE_MB) {
 
 ---
 
-Dependency Audit {#dependency-audit}
+## Dependency Audit {#dependency-audit}
 
-npm audit {#npm-audit}
+## npm audit {#npm-audit}
 
 ```bash
 Check for known vulnerabilities
@@ -687,7 +687,7 @@ Production-only audit (skip devDependencies)
 npm audit --omit=dev
 ```
 
-Snyk Integration {#snyk-integration}
+## Snyk Integration {#snyk-integration}
 
 ```bash
 npm install -D snyk
@@ -702,9 +702,9 @@ Add to CI:
   run: npx snyk test --severity-threshold=high
 ```
 
-Lockfile Linting {#lockfile-linting}
+## Lockfile Linting {#lockfile-linting}
 
-Prevent unexpected dependency changes:
+### Prevent unexpected dependency changes:
 
 ```bash
 npm install -D lockfile-lint
@@ -718,7 +718,7 @@ npm install -D lockfile-lint
 }
 ```
 
-Extension-Specific Dependency Concerns {#extension-specific-dependency-concerns}
+## Extension-Specific Dependency Concerns {#extension-specific-dependency-concerns}
 
 - Avoid polyfills for APIs the background context does not have: Including DOM polyfills in the service worker bundle wastes space and masks bugs.
 - Check for Node.js built-in usage: Packages that import `fs`, `path`, or `crypto` (Node module) will fail at runtime. Use `resolve.alias` in your bundler to catch these.
@@ -726,9 +726,9 @@ Extension-Specific Dependency Concerns {#extension-specific-dependency-concerns}
 
 ---
 
-Chrome Extension Lint Tools {#chrome-extension-lint-tools}
+## Chrome Extension Lint Tools {#chrome-extension-lint-tools}
 
-web-ext lint (Firefox Compatibility) {#web-ext-lint-firefox-compatibility}
+## web-ext lint (Firefox Compatibility) {#web-ext-lint-firefox-compatibility}
 
 If you target Firefox as well, Mozilla's `web-ext` tool validates against WebExtension standards:
 
@@ -743,7 +743,7 @@ Common issues it catches:
 - Insecure CSP directives
 - Temporary addon ID requirements
 
-Chrome Extension CLI Checks {#chrome-extension-cli-checks}
+## Chrome Extension CLI Checks {#chrome-extension-cli-checks}
 
 Use the Chrome Extension CLI to validate the built extension before publishing:
 
@@ -764,7 +764,7 @@ node -e "
 
 ---
 
-CI Integration with GitHub Actions {#ci-integration-with-github-actions}
+## CI Integration with GitHub Actions {#ci-integration-with-github-actions}
 
 A complete workflow that runs lint, type checking, build, and security audit on every push and pull request.
 
@@ -857,9 +857,9 @@ jobs:
         run: npx lockfile-lint --type npm --path package-lock.json --validate-https --allowed-hosts npm
 ```
 
-Branch Protection Rules {#branch-protection-rules}
+## Branch Protection Rules {#branch-protection-rules}
 
-Configure GitHub branch protection to require these checks:
+### Configure GitHub branch protection to require these checks:
 
 - `lint-and-typecheck` must pass
 - `build` must pass
@@ -867,7 +867,7 @@ Configure GitHub branch protection to require these checks:
 
 ---
 
-Pre-Publish Checklist Automation {#pre-publish-checklist-automation}
+## Pre-Publish Checklist Automation {#pre-publish-checklist-automation}
 
 Automate the checks you run before uploading to the Chrome Web Store.
 
@@ -983,7 +983,7 @@ Add to `package.json`:
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 A solid code quality pipeline for Chrome extensions includes:
 
@@ -998,9 +998,9 @@ A solid code quality pipeline for Chrome extensions includes:
 9. GitHub Actions CI that runs lint, type check, build, and security checks on every PR.
 10. Pre-publish automation that validates everything before uploading to the Chrome Web Store.
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Code Review Checklist](../guides/chrome-extension-code-review-checklist.md)
 - [Environment Variables](../guides/chrome-extension-env-variables.md)

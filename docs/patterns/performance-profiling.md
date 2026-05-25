@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/performance-profiling/
 last_modified_at: 2026-01-15
 ---
 
-Performance Profiling for Chrome Extensions
+### Performance Profiling for Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 Extensions run in shared browser processes. A slow extension degrades the entire browsing experience. This guide covers how to measure, profile, and optimize extension performance across service workers, content scripts, popups, and storage operations.
 
 ---
 
-Where Performance Matters {#where-performance-matters}
+## Where Performance Matters {#where-performance-matters}
 
 | Context | Impact | Bottleneck |
 |---------|--------|-----------|
@@ -26,7 +26,7 @@ Where Performance Matters {#where-performance-matters}
 
 ---
 
-Pattern 1: Measuring Service Worker Startup {#pattern-1-measuring-service-worker-startup}
+## Pattern 1: Measuring Service Worker Startup {#pattern-1-measuring-service-worker-startup}
 
 Service workers are terminated after ~30 seconds of inactivity and must restart quickly:
 
@@ -48,7 +48,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Tracking Startup Over Time {#tracking-startup-over-time}
+## Tracking Startup Over Time {#tracking-startup-over-time}
 
 ```ts
 // background.ts
@@ -72,7 +72,7 @@ recordStartupMetric();
 
 ---
 
-Pattern 2: Content Script Performance {#pattern-2-content-script-performance}
+## Pattern 2: Content Script Performance {#pattern-2-content-script-performance}
 
 Content scripts run on every matched page. Heavy scripts cause visible jank:
 
@@ -115,7 +115,7 @@ function bestApproach() {
 }
 ```
 
-Debouncing DOM Observers {#debouncing-dom-observers}
+## Debouncing DOM Observers {#debouncing-dom-observers}
 
 ```ts
 // content.ts. Efficient MutationObserver
@@ -139,7 +139,7 @@ function observeDOM(callback: () => void) {
 
 ---
 
-Pattern 3: Popup Load Time Optimization {#pattern-3-popup-load-time-optimization}
+## Pattern 3: Popup Load Time Optimization {#pattern-3-popup-load-time-optimization}
 
 Popups feel slow because users expect instant response after clicking the icon:
 
@@ -173,7 +173,7 @@ function renderSkeleton(root: HTMLElement) {
 }
 ```
 
-Measuring Popup Paint Time {#measuring-popup-paint-time}
+## Measuring Popup Paint Time {#measuring-popup-paint-time}
 
 ```ts
 // popup.ts
@@ -197,7 +197,7 @@ measures.forEach((m) => console.log(`[perf] ${m.name}: ${m.duration.toFixed(1)}m
 
 ---
 
-Pattern 4: Storage Operation Profiling {#pattern-4-storage-operation-profiling}
+## Pattern 4: Storage Operation Profiling {#pattern-4-storage-operation-profiling}
 
 Storage is async I/O. batch operations whenever possible:
 
@@ -248,9 +248,9 @@ const data = await profileStorage("load-settings", () =>
 
 ---
 
-Pattern 5: Message Passing Performance {#pattern-5-message-passing-performance}
+## Pattern 5: Message Passing Performance {#pattern-5-message-passing-performance}
 
-Large payloads and frequent messages create overhead:
+### Large payloads and frequent messages create overhead:
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -278,7 +278,7 @@ async function profileMessage() {
 }
 ```
 
-Payload Size Guidelines {#payload-size-guidelines}
+## Payload Size Guidelines {#payload-size-guidelines}
 
 | Payload Size | Performance | Recommendation |
 |-------------|-------------|----------------|
@@ -289,25 +289,25 @@ Payload Size Guidelines {#payload-size-guidelines}
 
 ---
 
-Pattern 6: DevTools Performance Panel {#pattern-6-devtools-performance-panel}
+## Pattern 6: DevTools Performance Panel {#pattern-6-devtools-performance-panel}
 
-Use Chrome DevTools to profile your extension:
+### Use Chrome DevTools to profile your extension:
 
-Service Worker Profiling {#service-worker-profiling}
+## Service Worker Profiling {#service-worker-profiling}
 1. Open `chrome://extensions`
 2. Click "Inspect views: service worker" on your extension
 3. Go to Performance tab
 4. Click Record, trigger events, stop recording
 5. Analyze the flame chart for long tasks
 
-Content Script Profiling {#content-script-profiling}
+## Content Script Profiling {#content-script-profiling}
 1. Open the page your content script runs on
 2. Open DevTools > Performance tab
 3. Record a page load
 4. Filter by your extension's script in the flame chart
 5. Look for layout thrashing, long script evaluation
 
-Key Metrics to Watch {#key-metrics-to-watch}
+## Key Metrics to Watch {#key-metrics-to-watch}
 
 ```ts
 // Collect Web Vitals from content scripts
@@ -336,7 +336,7 @@ function collectMetrics() {
 
 ---
 
-Pattern 7: Bundle Size Analysis {#pattern-7-bundle-size-analysis}
+## Pattern 7: Bundle Size Analysis {#pattern-7-bundle-size-analysis}
 
 Large bundles slow down service worker startup and content script injection:
 
@@ -363,7 +363,7 @@ export default defineConfig({
 });
 ```
 
-Size Budgets {#size-budgets}
+## Size Budgets {#size-budgets}
 
 | Component | Target | Warning |
 |-----------|--------|---------|
@@ -374,9 +374,9 @@ Size Budgets {#size-budgets}
 
 ---
 
-Pattern 8: Lazy Loading in Extensions {#pattern-8-lazy-loading-in-extensions}
+## Pattern 8: Lazy Loading in Extensions {#pattern-8-lazy-loading-in-extensions}
 
-Not every module needs to load at startup:
+### Not every module needs to load at startup:
 
 ```ts
 // background.ts
@@ -407,7 +407,7 @@ document.addEventListener("mouseup", async () => {
 
 ---
 
-Automated Performance Testing {#automated-performance-testing}
+## Automated Performance Testing {#automated-performance-testing}
 
 ```ts
 // tests/performance.test.ts
@@ -448,7 +448,7 @@ test("content script does not create long tasks", async ({ page }) => {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Area | Key Optimization |
 |------|-----------------|

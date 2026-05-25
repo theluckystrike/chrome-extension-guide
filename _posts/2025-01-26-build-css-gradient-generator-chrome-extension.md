@@ -20,7 +20,7 @@ The extension we will build supports multiple gradient types, color stops, angle
 
 ---
 
-Why Build a CSS Gradient Generator Extension? {#why-build-gradient-extension}
+## Why Build a CSS Gradient Generator Extension? {#why-build-gradient-extension}
 
 The demand for gradient tools in the browser is substantial and growing. Web designers and developers frequently need to create gradient backgrounds, buttons, text effects, and borders. While there are online gradient generators available, having a dedicated Chrome extension provides several distinct advantages that make it worth building.
 
@@ -34,7 +34,7 @@ The Chrome Web Store has numerous gradient-related extensions, with some achievi
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Before writing any code, let us define the features our CSS gradient generator extension will include. A comprehensive feature set will make our extension stand out and provide genuine value to users.
 
@@ -56,7 +56,7 @@ Finally, we will implement color picking from webpages. Using the Eyedropper API
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project. Inside this folder, create the following file structure:
 
@@ -109,7 +109,7 @@ This manifest declares that our extension requires access to the active tab for 
 
 ---
 
-Creating the Popup HTML Structure {#popup-html}
+## Creating the Popup HTML Structure {#popup-html}
 
 The popup.html file defines the user interface for our gradient generator. We need to create a clean, intuitive layout that makes gradient creation straightforward. Open popup.html and add the following structure:
 
@@ -176,7 +176,7 @@ This HTML structure provides all the UI elements we need: a preview area, gradie
 
 ---
 
-Styling the Extension Interface {#popup-css}
+## Styling the Extension Interface {#popup-css}
 
 Now let us create the CSS styles for our extension. The popup.css file will make our interface visually appealing and user-friendly. Good design is crucial for user adoption and satisfaction.
 
@@ -416,7 +416,7 @@ These styles create a clean, modern interface that is easy to use. The gradient 
 
 ---
 
-Implementing the Extension Logic {#popup-javascript}
+## Implementing the Extension Logic {#popup-javascript}
 
 The popup.js file contains all the functionality for our gradient generator. This is where we handle user interactions, generate the gradient CSS, and manage the history feature. Let us build this step by step.
 
@@ -643,7 +643,7 @@ This JavaScript implementation provides all the core functionality. The Gradient
 
 ---
 
-Adding Color Picking from Webpages {#content-script}
+## Adding Color Picking from Webpages {#content-script}
 
 To make our extension truly powerful, we can add the ability to pick colors directly from webpages. This requires a content script that can interact with the active tab. Create content-script.js:
 
@@ -739,7 +739,7 @@ This implementation allows users to pick colors from any webpage, making color m
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have created all the files, let us test our extension. Open Chrome and navigate to chrome://extensions/. Enable Developer mode by toggling the switch in the top right corner. Click the Load unpacked button and select your extension folder.
 
@@ -756,7 +756,7 @@ All features should work as expected. If you encounter any issues, check the con
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. First, prepare your extension assets:
 
@@ -770,7 +770,7 @@ The review process typically takes a few hours to a few days. Once approved, you
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 Congratulations! You have successfully built a complete CSS gradient generator Chrome extension. This extension includes all the essential features users expect: support for linear and radial gradients, angle control, multiple color stops, real-time preview, one-click CSS code export, and gradient history.
 

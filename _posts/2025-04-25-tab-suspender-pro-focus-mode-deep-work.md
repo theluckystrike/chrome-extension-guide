@@ -17,7 +17,7 @@ If you have struggled with tab overload, constant context switching, or the inab
 
 ---
 
-Table of Contents
+### Table of Contents
 
 1. [What Focus Mode Does: The Foundation of Deep Work](#what-focus-mode-does)
 2. [Suspending All Non-Essential Tabs: The Technical Mechanism](#suspending-all-non-essential-tabs)
@@ -30,7 +30,7 @@ Table of Contents
 
 ---
 
-What Focus Mode Does: The Foundation of Deep Work {#what-focus-mode-does}
+## What Focus Mode Does: The Foundation of Deep Work {#what-focus-mode-does}
 
 Tab Suspender Pro Focus Mode is a purpose-built feature designed to help you achieve and maintain deep work states. But what exactly does it do, and why does it matter for your productivity?
 
@@ -48,11 +48,11 @@ The philosophy behind Focus Mode aligns with the principles of deep work as arti
 
 ---
 
-Suspending All Non-Essential Tabs: The Technical Mechanism {#suspending-all-non-essential-tabs}
+## Suspending All Non-Essential Tabs: The Technical Mechanism {#suspending-all-non-essential-tabs}
 
 Understanding how Tab Suspender Pro actually suspends tabs helps you configure the extension more effectively and troubleshoot any issues that arise.
 
-How Tab Suspension Works
+### How Tab Suspension Works
 
 When Tab Suspender Pro suspends a tab, it doesn't simply minimize or hide the tab. it completely unloads the tab's content from memory while preserving its state. Here's the technical sequence:
 
@@ -64,7 +64,7 @@ When Tab Suspender Pro suspends a tab, it doesn't simply minimize or hide the ta
 
 4. Instant Restoration: When you click on a suspended tab, the restoration process is nearly instantaneous because the original URL is preserved. Chrome simply reloads the page from its original source.
 
-What Gets Suspended in Focus Mode
+### What Gets Suspended in Focus Mode
 
 When you activate Focus Mode, Tab Suspender Pro evaluates each open tab against your whitelist configuration. Tabs that don't match your whitelist criteria are candidates for suspension. The extension considers several factors:
 
@@ -78,11 +78,11 @@ The beauty of Focus Mode is that it handles all of this automatically. You don't
 
 ---
 
-Configuring Focus Whitelist: Your Custom Productivity Environment {#configuring-focus-whitelist}
+## Configuring Focus Whitelist: Your Custom Productivity Environment {#configuring-focus-whitelist}
 
 The whitelist is the heart of Tab Suspender Pro Focus Mode. A well-configured whitelist defines exactly which websites constitute your "focus environment." Getting this right is crucial for maintaining both productivity and usability.
 
-Building Your Core Whitelist
+### Building Your Core Whitelist
 
 Your whitelist should include only the tools and resources you genuinely need for your current work. Consider these categories:
 
@@ -92,7 +92,7 @@ Communication Tools: Many people need access to email or messaging during work, 
 
 Reference Resources: Research-oriented work often requires reference materials. Add the specific databases, documentation sites, or reference tools you need. Avoid adding "just in case" sites. these tend to become sources of distraction.
 
-Whitelist Configuration Strategies
+### Whitelist Configuration Strategies
 
 Task-Specific Whitelists: Create different whitelist profiles for different types of work. You might have a "coding" profile that includes development tools, a "writing" profile for content creation, and a "research" profile for investigation work. Tab Suspender Pro allows you to switch between these profiles easily.
 
@@ -100,7 +100,7 @@ Time-Based Whitelists: Consider using scheduling features (discussed below) to a
 
 Regex and Pattern Matching: For power users, Tab Suspender Pro supports regular expression matching for URLs. This allows for sophisticated rules like "suspend all tabs except those containing 'project-name' in the URL" or "suspend all tabs from news sites."
 
-Common Whitelist Mistakes to Avoid
+### Common Whitelist Mistakes to Avoid
 
 Over-Inclusion: The most common mistake is adding too many sites to the whitelist. If your whitelist includes 30 sites, you're essentially recreating the tab overload problem that Focus Mode is designed to solve. Be ruthless about limiting your whitelist to truly essential tools.
 
@@ -110,11 +110,11 @@ Not Accounting for New Needs: Review and adjust your whitelist periodically. As 
 
 ---
 
-Scheduling Focus Sessions: Automate Your Productivity {#scheduling-focus-sessions}
+## Scheduling Focus Sessions: Automate Your Productivity {#scheduling-focus-sessions}
 
 One of Tab Suspender Pro's most powerful features is its ability to schedule focus sessions. Rather than manually activating Focus Mode each time you want to work deeply, you can set up automatic triggers based on time, day, or even website activity.
 
-Time-Based Scheduling
+### Time-Based Scheduling
 
 Set up recurring focus sessions that automatically activate Focus Mode at your most productive times. Common configurations include:
 
@@ -124,11 +124,11 @@ Afternoon Focus Periods: If you have a post-lunch slump but need to maintain pro
 
 Evening Wind-Down: For those who work into the evening, scheduling Focus Mode to activate during specific evening hours can help maintain boundaries and prevent late-night rabbit holes.
 
-Day-Based Scheduling
+### Day-Based Scheduling
 
 Different days often have different work patterns. You might want Focus Mode to activate differently on weekdays versus weekends, or have specific configurations for different workdays. Tab Suspender Pro supports day-of-week scheduling, allowing you to create distinct configurations for each day.
 
-Activity-Triggered Sessions
+### Activity-Triggered Sessions
 
 For advanced users, Tab Suspender Pro can activate Focus Mode based on your browsing activity. For example:
 
@@ -136,17 +136,17 @@ For advanced users, Tab Suspender Pro can activate Focus Mode based on your brow
 - Trigger Focus Mode after a period of inactivity followed by resuming work
 - Start a focus session when you open a specific application or document
 
-Combining Schedules
+### Combining Schedules
 
 The most effective scheduling strategy often combines multiple triggers. You might have a regular morning schedule that activates automatically, with the ability to manually trigger additional sessions as needed. This provides structure while maintaining flexibility.
 
 ---
 
-Combining Focus Mode with Pomodoro Technique {#combining-with-pomodoro}
+## Combining Focus Mode with Pomodoro Technique {#combining-with-pomodoro}
 
 The Pomodoro Technique, developed by Francesco Cirillo in the late 1980s, is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks (5 minutes). Tab Suspender Pro Focus Mode pairs exceptionally well with this methodology.
 
-The Synergy Between Focus Mode and Pomodoro
+### The Synergy Between Focus Mode and Pomodoro
 
 Both systems share a common philosophy: structured concentration followed by intentional rest. When combined, they reinforce each other:
 
@@ -156,7 +156,7 @@ Reduced Decision Fatigue: Both techniques work by reducing the number of decisio
 
 Clear Start and End Points: Pomodoro sessions have explicit beginnings and endings, making it easier to transition into and out of focus mode. You know exactly when a focus session should start (when you start the timer) and when it ends (when the timer rings).
 
-Implementation Strategy
+### Implementation Strategy
 
 Here's how to combine these two systems effectively:
 
@@ -172,7 +172,7 @@ Here's how to combine these two systems effectively:
 
 6. Repeat and Review: After four Pomodoro sessions (100 minutes of work), take a longer break (15-30 minutes). This is a good time to review what's working, adjust your whitelist if needed, and prepare for the next work block.
 
-Advanced Integration
+### Advanced Integration
 
 For power users, there are ways to create even tighter integration:
 
@@ -182,13 +182,13 @@ For power users, there are ways to create even tighter integration:
 
 ---
 
-Measuring Productivity Gains: Quantifying Your Focus {#measuring-productivity-gains}
+## Measuring Productivity Gains: Quantifying Your Focus {#measuring-productivity-gains}
 
 Improvement requires measurement. Tab Suspender Pro includes features to help you understand how Focus Mode affects your productivity, allowing you to refine your approach over time.
 
-Metrics Tab Suspender Pro Tracks
+### Metrics Tab Suspender Pro Tracks
 
-The extension automatically tracks several useful metrics:
+### The extension automatically tracks several useful metrics:
 
 Suspended vs. Active Time: Understand how much of your browsing time is spent with tabs suspended versus active. This shows you the "opportunity cost" of tab suspension. the resources you're saving that could otherwise go to your work.
 
@@ -198,7 +198,7 @@ Tab Count Over Time: See how your open tab count changes with and without Focus 
 
 Suspension Events: Track how often tabs are being suspended and restored. High suspension rates might indicate you need to adjust your whitelist.
 
-Establishing Your Baseline
+### Establishing Your Baseline
 
 Before you can measure improvement, you need to establish a baseline:
 
@@ -208,7 +208,7 @@ Before you can measure improvement, you need to establish a baseline:
 
 3. Measure Memory Usage: Use Chrome's built-in task manager (Shift+Esc) to note your typical memory usage with your normal tab patterns.
 
-After Implementing Focus Mode
+### After Implementing Focus Mode
 
 After using Focus Mode for a week or two, compare your metrics:
 
@@ -217,7 +217,7 @@ After using Focus Mode for a week or two, compare your metrics:
 - Has your browser memory usage decreased?
 - Do you feel less mental fatigue at the end of the workday?
 
-Beyond the Numbers
+### Beyond the Numbers
 
 While quantitative metrics are valuable, don't overlook qualitative improvements:
 
@@ -230,24 +230,24 @@ These subjective improvements often matter more than any metric. The goal of Foc
 
 ---
 
-Advanced Tips and Best Practices {#advanced-tips}
+## Advanced Tips and Best Practices {#advanced-tips}
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Master the keyboard shortcuts for Focus Mode. The ability to toggle focus on and off instantly removes friction and makes the tool feel like a natural extension of your workflow.
 
-Whitelist Management
+### Whitelist Management
 
 - Use Groups: Organize your whitelist into groups for different contexts
 - Export/Import: Save your whitelist configurations so you can share them across devices or back them up
 - Regular Reviews: Set a calendar reminder to review your whitelist monthly
 
-Focus Mode Triggers
+### Focus Mode Triggers
 
 - Contextual Activation: Create rules that automatically enable Focus Mode based on what you're working on
 - Location Awareness: Some users find location-based rules helpful, activating different focus profiles based on where they're working
 
-Recovery Strategies
+### Recovery Strategies
 
 - Quick Peek: Learn how to quickly view a suspended tab without fully restoring it (sometimes just seeing the title is enough to scratch an itch)
 - Batch Processing: When your focus session ends, review all suspended tabs at once rather than one at a time
@@ -255,7 +255,7 @@ Recovery Strategies
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Tab Suspender Pro Focus Mode represents a powerful approach to browser-based productivity. By automatically managing your tabs, enforcing boundaries, and creating distraction-free work environments, it addresses one of the biggest challenges facing modern knowledge workers: maintaining focus in an attention economy designed to fragment our concentration.
 

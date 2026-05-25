@@ -10,7 +10,7 @@ Chrome Extension IndexedDB Guide: Storing Large Data Sets Efficiently
 
 When building Chrome extensions that need to handle large amounts of structured data, the Chrome Storage API often falls short. IndexedDB provides a powerful client-side NoSQL database solution that enables Chrome extensions to store significant volumes of data with full transactional support, complex queries through indexes, and efficient data retrieval. This comprehensive guide walks you through implementing IndexedDB in your Chrome extension, from basic concepts to advanced patterns used by production extensions.
 
-Understanding IndexedDB vs chrome.storage
+### Understanding IndexedDB vs chrome.storage
 
 Before diving into implementation, it's crucial to understand when IndexedDB is the right choice over the simpler Chrome Storage API. Each storage mechanism has distinct characteristics that make it suitable for different scenarios.
 
@@ -32,11 +32,11 @@ Here's a practical comparison that illustrates when to use each technology:
 
 For most extensions, a hybrid approach works best: use chrome.storage for user preferences and settings that benefit from automatic sync, and use IndexedDB for large datasets, cached content, and complex data that doesn't need cross-device synchronization.
 
-Setting Up IndexedDB in Your Extension
+### Setting Up IndexedDB in Your Extension
 
 IndexedDB doesn't require special permissions in Manifest V3, it operates within your extension's origin just like web pages. However, you'll need to structure your code carefully since the API is callback-based and can become unwieldy without abstraction.
 
-Opening a Database
+### Opening a Database
 
 Every IndexedDB operation begins with opening a database connection. The `open` method takes a name and version number:
 
@@ -68,11 +68,11 @@ function openDatabase() {
 
 The `onupgradeneeded` event is critical, it's the only place where you can create object stores and indexes. This event fires when the database is being created for the first time or when the version number increases.
 
-Schema Design for Chrome Extensions
+### Schema Design for Chrome Extensions
 
 Designing an efficient schema requires understanding your access patterns. Unlike traditional relational databases, IndexedDB is a key-value store with secondary indexes, so your schema should optimize for how you'll query the data.
 
-Creating Object Stores
+### Creating Object Stores
 
 Object stores are similar to tables in relational databases. Each store holds records with a unique key:
 
@@ -108,7 +108,7 @@ request.onupgradeneeded = (event) => {
 
 The `keyPath` option specifies the property that uniquely identifies each record. Using `autoIncrement: true` generates numeric keys automatically, but for most extension use cases, you'll want to use meaningful keys like UUIDs or URLs.
 
-Understanding Indexes
+### Understanding Indexes
 
 Indexes are crucial for query performance. Without an index on a property, IndexedDB must scan every record in the object store, a operation that becomes prohibitively slow as your dataset grows. Always create indexes for properties you plan to filter or sort by.
 
@@ -121,11 +121,11 @@ articlesStore.createIndex('categoryDate', ['category', 'publishedDate'], {
 });
 ```
 
-Working with Transactions
+### Working with Transactions
 
 Transactions are fundamental to IndexedDB's reliability. They ensure data consistency by grouping operations that either all succeed or all fail together.
 
-Basic Transaction Patterns
+### Basic Transaction Patterns
 
 ```javascript
 async function addArticle(article) {
@@ -157,7 +157,7 @@ async function getArticleById(id) {
 
 The transaction constructor takes an array of object store names and a mode. Use `'readwrite'` for operations that modify data and `'readonly'` for purely retrieval operations.
 
-Batch Operations
+### Batch Operations
 
 For importing large datasets, use batch operations to improve performance:
 
@@ -179,7 +179,7 @@ async function bulkAddArticles(articles) {
 }
 ```
 
-Querying with Cursors
+### Querying with Cursors
 
 Cursors allow you to iterate through records efficiently, which is particularly useful for bulk operations and range queries:
 
@@ -239,11 +239,11 @@ async function getRecentArticles(limit = 10) {
 
 The `'prev'` direction is essential when you want results in descending order, such as showing the most recent items first.
 
-Versioning and Database Upgrades
+### Versioning and Database Upgrades
 
 As your extension evolves, you'll need to modify your database schema. IndexedDB's version-based upgrade system makes this possible without data loss.
 
-Implementing Schema Migrations
+### Implementing Schema Migrations
 
 ```javascript
 const DB_NAME = 'MyExtensionDB';
@@ -302,11 +302,11 @@ function openDatabase() {
 
 Always increment the version number when making schema changes. The `oldVersion` property tells you which migration scripts to run, allowing for incremental upgrades from any previous version.
 
-Using Dexie.js for Simplified IndexedDB
+### Using Dexie.js for Simplified IndexedDB
 
 The raw IndexedDB API is powerful but verbose. Dexie.js provides a lightweight wrapper that makes IndexedDB development significantly more enjoyable while maintaining full functionality.
 
-Getting Started with Dexie.js
+### Getting Started with Dexie.js
 
 First, add Dexie to your project:
 
@@ -314,7 +314,7 @@ First, add Dexie to your project:
 npm install dexie
 ```
 
-Then create a type-safe database wrapper:
+### Then create a type-safe database wrapper:
 
 ```javascript
 import Dexie from 'dexie';
@@ -341,9 +341,9 @@ const db = new MyExtensionDB();
 
 The schema string syntax is intuitive: primary keys are listed first, followed by indexed properties. Compound indexes use square brackets.
 
-Querying with Dexie.js
+### Querying with Dexie.js
 
-Dexie's query syntax closely resembles MongoDB:
+### Dexie's query syntax closely resembles MongoDB:
 
 ```javascript
 // Get all articles
@@ -371,9 +371,9 @@ const result = await db.articles
   .sortBy('publishedDate');
 ```
 
-Collection Methods
+### Collection Methods
 
-Dexie provides powerful collection methods for common operations:
+### Dexie provides powerful collection methods for common operations:
 
 ```javascript
 // Bulk operations
@@ -396,7 +396,7 @@ await db.articles.where('publishedDate').below(oldDate).delete();
 const techCount = await db.articles.where('category').equals('tech').count();
 ```
 
-Using Dexie with React and Extension Contexts
+### Using Dexie with React and Extension Contexts
 
 For modern extension architectures, combining Dexie with React Query or similar data fetching libraries provides excellent developer experience:
 
@@ -428,11 +428,11 @@ export function useCachedData() {
 
 The `useLiveQuery` hook automatically keeps your UI in sync when the database changes, making it perfect for popup and options page interfaces.
 
-Offline-First Patterns for Extensions
+### Offline-First Patterns for Extensions
 
 Offline-first architecture ensures your extension works smoothly regardless of network connectivity. IndexedDB is the foundation for solid offline functionality.
 
-Caching API Responses
+### Caching API Responses
 
 ```javascript
 class APICache {
@@ -496,7 +496,7 @@ class APICache {
 const cache = new APICache(db);
 ```
 
-Syncing When Online
+### Syncing When Online
 
 Implement a sync manager that queues changes when offline and processes them when connectivity returns:
 
@@ -567,11 +567,11 @@ class SyncManager {
 }
 ```
 
-Quota Management Strategies
+### Quota Management Strategies
 
 While IndexedDB offers generous storage, you should implement monitoring and management to prevent hitting browser limits.
 
-Checking Storage Usage
+### Checking Storage Usage
 
 ```javascript
 async function getStorageEstimate() {
@@ -594,7 +594,7 @@ async function logStorageStatus() {
 }
 ```
 
-Implementing Cleanup Policies
+### Implementing Cleanup Policies
 
 ```javascript
 class StorageManager {
@@ -641,13 +641,13 @@ class StorageManager {
 }
 ```
 
-Migration Strategies for Production Extensions
+### Migration Strategies for Production Extensions
 
 When releasing updates that modify your IndexedDB schema, proper migration ensures user data is preserved and the extension continues functioning correctly.
 
-Backup Before Migration
+### Backup Before Migration
 
-Always backup critical data before running migrations:
+### Always backup critical data before running migrations:
 
 ```javascript
 async function backupDatabase(db) {
@@ -676,7 +676,7 @@ async function backupDatabase(db) {
 }
 ```
 
-Safe Migration Pattern
+### Safe Migration Pattern
 
 ```javascript
 async function safeMigration() {
@@ -706,7 +706,7 @@ async function safeMigration() {
 }
 ```
 
-Conclusion
+### Conclusion
 
 IndexedDB provides Chrome extension developers with enterprise-grade storage capabilities that scale far beyond the limitations of chrome.storage. By understanding the core concepts, object stores, transactions, indexes, and versioning, you can build solid data layers that handle large datasets efficiently.
 

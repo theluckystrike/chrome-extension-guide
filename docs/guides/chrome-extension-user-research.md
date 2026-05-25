@@ -9,7 +9,7 @@ User Research and Feedback for Chrome Extensions
 
 Understanding your users is critical for building successful extensions. This guide covers comprehensive strategies for gathering feedback, conducting research, and analyzing user behavior while maintaining privacy compliance.
 
-Overview {#overview}
+## Overview {#overview}
 
 Effective user research combines multiple data sources:
 - Direct user feedback (in-extension, surveys, reviews)
@@ -17,9 +17,9 @@ Effective user research combines multiple data sources:
 - Community engagement (GitHub issues, forums)
 - Proactive research (beta programs, user interviews)
 
-In-Extension Feedback {#in-extension-feedback}
+## In-Extension Feedback {#in-extension-feedback}
 
-Feedback Form in Options Page {#feedback-form-in-options-page}
+## Feedback Form in Options Page {#feedback-form-in-options-page}
 
 Include a dedicated feedback section in your options page for users to report issues or suggest features:
 
@@ -37,7 +37,7 @@ document.getElementById('submit-feedback').addEventListener('click', async () =>
 </script>
 ```
 
-Rating Prompt After Usage Milestone {#rating-prompt-after-usage-milestone}
+## Rating Prompt After Usage Milestone {#rating-prompt-after-usage-milestone}
 
 Prompt users for a rating after positive engagement milestones:
 
@@ -53,11 +53,11 @@ async function checkRatingPrompt() {
 }
 ```
 
-Chrome Web Store Reviews {#chrome-web-store-reviews}
+## Chrome Web Store Reviews {#chrome-web-store-reviews}
 
-Monitoring Reviews {#monitoring-reviews}
+## Monitoring Reviews {#monitoring-reviews}
 
-Regularly track and respond to reviews:
+### Regularly track and respond to reviews:
 
 ```javascript
 // Use Chrome Web Store API or manual monitoring
@@ -69,18 +69,18 @@ async function getReviews() {
 }
 ```
 
-Responding to Reviews {#responding-to-reviews}
+## Responding to Reviews {#responding-to-reviews}
 
 - Respond within 24-48 hours
 - Be professional and helpful
 - Direct users to support channels for complex issues
 - Thank users for positive reviews
 
-Analytics Integration {#analytics-integration}
+## Analytics Integration {#analytics-integration}
 
 See [Extension Analytics Guide](../guides/extension-analytics.md) for detailed implementation of privacy-respecting analytics.
 
-Key Metrics to Track {#key-metrics-to-track}
+## Key Metrics to Track {#key-metrics-to-track}
 
 | Metric | Description |
 |--------|-------------|
@@ -90,9 +90,9 @@ Key Metrics to Track {#key-metrics-to-track}
 | Retention | User return rates |
 | Error rate | Failed operations |
 
-Feature Request Tracking {#feature-request-tracking}
+## Feature Request Tracking {#feature-request-tracking}
 
-In-Extension Suggestion Box {#in-extension-suggestion-box}
+## In-Extension Suggestion Box {#in-extension-suggestion-box}
 
 ```javascript
 // suggestion-box.js
@@ -107,16 +107,16 @@ function showSuggestionBox() {
 }
 ```
 
-GitHub Issues Integration {#github-issues-integration}
+## GitHub Issues Integration {#github-issues-integration}
 
 Link your extension to a public GitHub repository for issue tracking:
 - Use issue templates for bug reports and feature requests
 - Label issues for categorization
 - Engage with reporters publicly
 
-A/B Testing in Extensions {#ab-testing-in-extensions}
+## A/B Testing in Extensions {#ab-testing-in-extensions}
 
-Feature Flags with Random Assignment {#feature-flags-with-random-assignment}
+## Feature Flags with Random Assignment {#feature-flags-with-random-assignment}
 
 ```javascript
 async function getFeatureFlag(flagName) {
@@ -131,7 +131,7 @@ async function trackExperiment(experimentId, variant, event) {
 }
 ```
 
-Measuring Engagement {#measuring-engagement}
+## Measuring Engagement {#measuring-engagement}
 
 Compare metrics between variants:
 - Conversion rates
@@ -139,11 +139,11 @@ Compare metrics between variants:
 - Session duration
 - Error rates
 
-User Surveys {#user-surveys}
+## User Surveys {#user-surveys}
 
-In-Extension Survey Popup {#in-extension-survey-popup}
+## In-Extension Survey Popup {#in-extension-survey-popup}
 
-Make surveys non-intrusive and dismissable:
+### Make surveys non-intrusive and dismissable:
 
 ```javascript
 function showSurvey() {
@@ -162,23 +162,23 @@ function showSurvey() {
 }
 ```
 
-Beta Testing {#beta-testing}
+## Beta Testing {#beta-testing}
 
 See [Beta Testing Guide](../publishing/beta-testing.md) for detailed beta program setup.
 
-Chrome Web Store Trusted Testers {#chrome-web-store-trusted-testers}
+## Chrome Web Store Trusted Testers {#chrome-web-store-trusted-testers}
 
 - Use unlisted distribution for beta versions
 - Limit tester count for controlled feedback
 - Gradually roll out to larger groups
 
-Unlisted Distribution {#unlisted-distribution}
+## Unlisted Distribution {#unlisted-distribution}
 
 Publish as unlisted to share only with specific users via direct links.
 
-Crash and Error Reporting {#crash-and-error-reporting}
+## Crash and Error Reporting {#crash-and-error-reporting}
 
-Automated Error Collection {#automated-error-collection}
+## Automated Error Collection {#automated-error-collection}
 
 ```javascript
 window.onerror = async (message, source, lineno, colno, error) => {
@@ -194,9 +194,9 @@ window.onerror = async (message, source, lineno, colno, error) => {
 };
 ```
 
-NPS Surveys {#nps-surveys}
+## NPS Surveys {#nps-surveys}
 
-Net Promoter Score measures user loyalty:
+### Net Promoter Score measures user loyalty:
 
 ```javascript
 async function showNPS() {
@@ -213,9 +213,9 @@ async function showNPS() {
 }
 ```
 
-Uninstall Feedback {#uninstall-feedback}
+## Uninstall Feedback {#uninstall-feedback}
 
-Exit Survey with setUninstallURL {#exit-survey-with-setuninstallurl}
+## Exit Survey with setUninstallURL {#exit-survey-with-setuninstallurl}
 
 ```javascript
 // In your background script
@@ -229,31 +229,31 @@ The exit survey page should ask:
 - Suggestions for improvement
 - Whether user might return
 
-Privacy Considerations {#privacy-considerations}
+## Privacy Considerations {#privacy-considerations}
 
-Data Anonymization {#data-anonymization}
+## Data Anonymization {#data-anonymization}
 
 - Never collect PII without explicit consent
 - Use anonymous installation IDs
 - Aggregate data before analysis
 - Implement data retention policies
 
-Disclosure Requirements {#disclosure-requirements}
+## Disclosure Requirements {#disclosure-requirements}
 
 - Clearly state data collection in privacy policy
 - Explain what is collected and why
 - Provide opt-out mechanisms
 - Follow [CWS policies](https://developer.chrome.com/docs/webstore/program-policies/privacy/)
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Publishing Analytics](../publishing/analytics.md)
 - [Beta Testing](../publishing/beta-testing.md)
 - [Extension Analytics](../guides/extension-analytics.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [User Onboarding](../guides/extension-onboarding.md)
 - [User Onboarding Guide](../guides/user-onboarding.md)

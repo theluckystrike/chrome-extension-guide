@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/indexeddb-extensions/"
 last_modified_at: 2026-01-15
 ---
 
-IndexedDB in Extensions
+### IndexedDB in Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 `chrome.storage.local` works well for simple key-value data, but it falls apart when your extension needs to store thousands of structured records, run range queries, or manage data larger than 10 MB. IndexedDB gives you a full transactional database inside your extension. but it comes with its own quirks, especially in Manifest V3 service workers where the database connection can vanish when the worker terminates. This guide covers eight patterns for using IndexedDB effectively in Chrome extensions.
 
 ---
 
-When to Use IndexedDB vs. chrome.storage {#when-to-use-indexeddb-vs-chromestorage}
+## When to Use IndexedDB vs. chrome.storage {#when-to-use-indexeddb-vs-chromestorage}
 
 | Criteria | `chrome.storage.local` | IndexedDB |
 |----------|----------------------|-----------|
@@ -31,7 +31,7 @@ Use `chrome.storage` for settings and small state. Use IndexedDB when you need t
 
 ---
 
-Pattern 1: Why IndexedDB (When chrome.storage Is Not Enough) {#pattern-1-why-indexeddb-when-chromestorage-is-not-enough}
+## Pattern 1: Why IndexedDB (When chrome.storage Is Not Enough) {#pattern-1-why-indexeddb-when-chromestorage-is-not-enough}
 
 Consider a browser history analyzer extension that stores page visit metadata:
 
@@ -63,7 +63,7 @@ IndexedDB wins when: (1) your dataset exceeds a few hundred records, (2) you nee
 
 ---
 
-Pattern 2: Database Setup with Versioned Schema {#pattern-2-database-setup-with-versioned-schema}
+## Pattern 2: Database Setup with Versioned Schema {#pattern-2-database-setup-with-versioned-schema}
 
 Structure your database with explicit version numbers and upgrade handlers:
 
@@ -118,7 +118,7 @@ export function openDatabase(): Promise<IDBDatabase> {
 }
 ```
 
-Gotcha: Blocked Upgrades {#gotcha-blocked-upgrades}
+## Gotcha: Blocked Upgrades {#gotcha-blocked-upgrades}
 
 If another tab has an open connection to the database at an older version, the upgrade will be blocked. Handle `onblocked` and listen for `onversionchange` on existing connections:
 
@@ -135,7 +135,7 @@ db.onversionchange = () => {
 
 ---
 
-Pattern 3: Typed CRUD Wrapper Class {#pattern-3-typed-crud-wrapper-class}
+## Pattern 3: Typed CRUD Wrapper Class {#pattern-3-typed-crud-wrapper-class}
 
 The raw IndexedDB API is verbose. Wrap it in a type-safe class:
 
@@ -252,7 +252,7 @@ const visit = await visitStore.get(1); // Visit | undefined
 
 ---
 
-Pattern 4: Indexes and Querying {#pattern-4-indexes-and-querying}
+## Pattern 4: Indexes and Querying {#pattern-4-indexes-and-querying}
 
 Indexes are what make IndexedDB useful beyond a key-value store. Use them for range queries, sorting, and compound lookups:
 
@@ -342,13 +342,13 @@ const githubVisits = await queryIndex<Visit>(
 );
 ```
 
-Compound Index Key Ordering {#compound-index-key-ordering}
+## Compound Index Key Ordering {#compound-index-key-ordering}
 
 Compound index keys are compared left-to-right. The index `["domain", "timestamp"]` groups records by domain first, then sorts by timestamp within each domain. You cannot query by timestamp alone using this index. you need a separate `by-timestamp` index for that.
 
 ---
 
-Pattern 5: IndexedDB in Service Workers {#pattern-5-indexeddb-in-service-workers}
+## Pattern 5: IndexedDB in Service Workers {#pattern-5-indexeddb-in-service-workers}
 
 Service workers are the trickiest context for IndexedDB. The worker can terminate mid-transaction, and the database connection becomes stale on wake:
 
@@ -414,7 +414,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-Gotcha: Long-Running Transactions {#gotcha-long-running-transactions}
+## Gotcha: Long-Running Transactions {#gotcha-long-running-transactions}
 
 Do not start a transaction and then `await` something unrelated before completing it. IndexedDB transactions auto-commit when the event loop is idle. If the service worker sleeps between operations, the transaction will commit prematurely or fail:
 
@@ -433,7 +433,7 @@ tx.objectStore("cache").put(json);
 
 ---
 
-Pattern 6: Background Data Import/Export with Progress {#pattern-6-background-data-importexport-with-progress}
+## Pattern 6: Background Data Import/Export with Progress {#pattern-6-background-data-importexport-with-progress}
 
 For extensions that import or export large datasets (bookmarks, history, saved articles), use chunked processing with progress reporting:
 
@@ -549,7 +549,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Pattern 7: Storage Quota Management and Cleanup {#pattern-7-storage-quota-management-and-cleanup}
+## Pattern 7: Storage Quota Management and Cleanup {#pattern-7-storage-quota-management-and-cleanup}
 
 IndexedDB storage is quota-managed. Monitor usage and implement cleanup strategies to avoid hitting the limit:
 
@@ -636,7 +636,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-Requesting Persistent Storage {#requesting-persistent-storage}
+## Requesting Persistent Storage {#requesting-persistent-storage}
 
 By default, the browser can evict IndexedDB data under storage pressure. Request persistent storage to prevent this:
 
@@ -652,7 +652,7 @@ Extensions with the `unlimitedStorage` permission automatically get persistent s
 
 ---
 
-Pattern 8: Migration from chrome.storage.local to IndexedDB {#pattern-8-migration-from-chromestoragelocal-to-indexeddb}
+## Pattern 8: Migration from chrome.storage.local to IndexedDB {#pattern-8-migration-from-chromestoragelocal-to-indexeddb}
 
 When an extension outgrows `chrome.storage.local`, migrate existing data without losing user state:
 
@@ -755,7 +755,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 ```
 
-Migration Safety Rules {#migration-safety-rules}
+## Migration Safety Rules {#migration-safety-rules}
 
 1. Always remove data from `chrome.storage` only after the IndexedDB write commits successfully.
 2. Track migration version separately from the IndexedDB schema version. they serve different purposes.
@@ -764,7 +764,7 @@ Migration Safety Rules {#migration-safety-rules}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

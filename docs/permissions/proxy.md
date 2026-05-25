@@ -11,23 +11,23 @@ last_modified_at: 2026-01-15
 
 proxy Permission. Chrome Extension Reference
 
-Overview {#overview}
+## Overview {#overview}
 - Permission string: `"proxy"`
 - What it grants: Access to `chrome.proxy` API. configure Chrome's proxy settings
 - Risk level: High. routes ALL browser traffic through specified proxy
 - User prompt: "Read and change all your data on all websites"
 - `@theluckystrike/webext-permissions`: `describePermission('proxy')`
 
-manifest.json {#manifestjson}
+## manifest.json {#manifestjson}
 ```json
 { "permissions": ["proxy"] }
 ```
 
-Key APIs {#key-apis}
+## Key APIs {#key-apis}
 
-chrome.proxy.settings (ChromeSetting pattern: get/set/clear) {#chromeproxysettings-chromesetting-pattern-getsetclear}
+## chrome.proxy.settings (ChromeSetting pattern: get/set/clear) {#chromeproxysettings-chromesetting-pattern-getsetclear}
 
-Setting a Proxy {#setting-a-proxy}
+## Setting a Proxy {#setting-a-proxy}
 ```javascript
 chrome.proxy.settings.set({
   value: {
@@ -41,47 +41,47 @@ chrome.proxy.settings.set({
 });
 ```
 
-Proxy Modes {#proxy-modes}
+## Proxy Modes {#proxy-modes}
 - `"direct"`. no proxy
 - `"auto_detect"`. WPAD protocol
 - `"pac_script"`. PAC auto-config script
 - `"fixed_servers"`. specified server(s)
 - `"system"`. system settings
 
-PAC Script Mode {#pac-script-mode}
+## PAC Script Mode {#pac-script-mode}
 - Inline `data` or remote `url` for PAC file
 - `FindProxyForURL(url, host)` function returns proxy or "DIRECT"
 
-Getting/Clearing Settings {#gettingclearing-settings}
+## Getting/Clearing Settings {#gettingclearing-settings}
 - `get()` returns current config + `levelOfControl`
 - `clear()` resets to default
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 - `chrome.proxy.onProxyError` listener for proxy failures
 
-Proxy Rules Structure {#proxy-rules-structure}
+## Proxy Rules Structure {#proxy-rules-structure}
 - `singleProxy`, `proxyForHttp`, `proxyForHttps`, `proxyForFtp`, `fallbackProxy`
 - `bypassList`: array of patterns to skip proxy
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 
-VPN-Like Extension {#vpn-like-extension}
+## VPN-Like Extension {#vpn-like-extension}
 - Set fixed proxy to VPN server, user chooses location
 - Store server with `@theluckystrike/webext-storage`
 
-Per-Site Proxy {#per-site-proxy}
+## Per-Site Proxy {#per-site-proxy}
 - Dynamic PAC script routing specific domains through proxy
 
-Proxy Toggle {#proxy-toggle}
+## Proxy Toggle {#proxy-toggle}
 - Toolbar icon: `set()` to enable, `clear()` to disable
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 - Proxy intercepts ALL traffic. extremely sensitive permission
 - HTTPS: proxy sees destination but not content (CONNECT tunnel)
 - Never hardcode credentials
 - Consider `optional_permissions`
 
-Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, requestPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -102,7 +102,7 @@ if (!result.granted) {
 }
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: popup provides proxy controls, background applies settings:
 
@@ -156,9 +156,9 @@ msg.onMessage({
 });
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Store proxy profiles and preferences:
+### Store proxy profiles and preferences:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -201,7 +201,7 @@ storage.watch("proxyEnabled", async (enabled) => {
 });
 ```
 
-Practical Example: PAC Script for Per-Site Routing {#practical-example-pac-script-for-per-site-routing}
+## Practical Example: PAC Script for Per-Site Routing {#practical-example-pac-script-for-per-site-routing}
 
 ```ts
 // Route specific domains through a proxy, everything else direct
@@ -229,7 +229,7 @@ async function applyPerSiteProxy(host: string, port: number, domains: string[]) 
 }
 ```
 
-Practical Example: Proxy Error Monitoring {#practical-example-proxy-error-monitoring}
+## Practical Example: Proxy Error Monitoring {#practical-example-proxy-error-monitoring}
 
 ```ts
 chrome.proxy.onProxyError.addListener((details) => {
@@ -248,25 +248,25 @@ chrome.proxy.onProxyError.addListener((details) => {
 });
 ```
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 - `controlled_by_other_extensions` blocks your changes. if another extension has set the proxy, your `set()` call silently fails. Always check `levelOfControl` from `get()` before setting.
 - Proxy credentials cannot be set programmatically. Chrome will prompt the user with its own auth dialog when the proxy requires authentication. You cannot bypass or pre-fill this.
 - PAC script errors are silent. if your `FindProxyForURL` function has a syntax error, Chrome falls back to direct connections without any visible error. Always test PAC scripts thoroughly.
 - Incognito mode inherits from regular by default. incognito windows inherit proxy settings from regular windows. You can override with `scope: "incognito_persistent"` to set separate proxy for incognito.
 - Proxy settings are global. this permission affects ALL browser traffic, not just your extension. Be very transparent with users about what you are routing and where.
 
-Common Errors {#common-errors}
+## Common Errors {#common-errors}
 - `controlled_by_other_extensions`. another extension owns proxy
 - Invalid PAC syntax
 - Can't set proxy credentials programmatically. Chrome prompts user
 
-Related {#related}
+## Related {#related}
 - [Chrome proxy API docs](https://developer.chrome.com/docs/extensions/reference/api/proxy)
 - [webRequest](webRequest.md). observe requests going through the proxy
 - [storage](storage.md). persist proxy profiles and preferences
 - [notifications](notifications.md). alert users to proxy errors
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I configure proxy in Chrome extension?
 Use chrome.proxy.settings.set() to configure proxy settings. You can set pac scripts, fixed servers, or use system settings.

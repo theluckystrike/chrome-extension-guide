@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/advanced-i18n/"
 last_modified_at: 2026-01-15
 ---
 
-Advanced Internationalization Patterns
+### Advanced Internationalization Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The [basic i18n guide](../guides/internationalization.md) covers `chrome.i18n` fundamentals. This article tackles real-world patterns: dynamic locale switching, pluralization, RTL support, formatted dates/numbers, and type-safe message keys.
 
 ---
 
-Pattern 1: Type-Safe Message Keys {#pattern-1-type-safe-message-keys}
+## Pattern 1: Type-Safe Message Keys {#pattern-1-type-safe-message-keys}
 
 Prevent typos by generating TypeScript types from your `messages.json`:
 
@@ -46,7 +46,7 @@ fs.writeFileSync("src/i18n.generated.ts", output);
 console.log(`Generated ${keys.length} message keys`);
 ```
 
-Usage:
+### Usage:
 
 ```ts
 import { getMessage } from "./i18n.generated";
@@ -69,7 +69,7 @@ Add to your build:
 
 ---
 
-Pattern 2: Pluralization {#pattern-2-pluralization}
+## Pattern 2: Pluralization {#pattern-2-pluralization}
 
 Chrome's i18n has no built-in pluralization. Implement it with ICU-style patterns:
 
@@ -103,7 +103,7 @@ export function plural(count: number, messages: PluralMessages): string {
 }
 ```
 
-Usage:
+### Usage:
 
 ```ts
 import { plural } from "./i18n/plural";
@@ -123,7 +123,7 @@ const msg = plural(tabCount, {
 
 ---
 
-Pattern 3: Dynamic Locale Switching {#pattern-3-dynamic-locale-switching}
+## Pattern 3: Dynamic Locale Switching {#pattern-3-dynamic-locale-switching}
 
 Chrome extensions use the browser's locale by default. To let users choose their own locale:
 
@@ -183,7 +183,7 @@ export function getLocale(): string {
 
 ---
 
-Pattern 4: RTL (Right-to-Left) Support {#pattern-4-rtl-right-to-left-support}
+## Pattern 4: RTL (Right-to-Left) Support {#pattern-4-rtl-right-to-left-support}
 
 Extensions must handle RTL languages like Arabic, Hebrew, and Persian:
 
@@ -204,7 +204,7 @@ export function getDirection(locale?: string): "ltr" | "rtl" {
 }
 ```
 
-Apply direction in your popup or options page:
+### Apply direction in your popup or options page:
 
 ```ts
 // popup.ts
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-CSS patterns for RTL:
+### CSS patterns for RTL:
 
 ```css
 /* Use logical properties instead of physical ones */
@@ -244,7 +244,7 @@ CSS patterns for RTL:
 
 ---
 
-Pattern 5: Formatted Dates and Numbers {#pattern-5-formatted-dates-and-numbers}
+## Pattern 5: Formatted Dates and Numbers {#pattern-5-formatted-dates-and-numbers}
 
 Use `Intl` APIs with the extension's locale for consistent formatting:
 
@@ -282,7 +282,7 @@ export function formatRelativeTime(date: Date): string {
 }
 ```
 
-Usage:
+### Usage:
 
 ```ts
 import { formatNumber, formatDate, formatRelativeTime } from "./i18n/format";
@@ -299,9 +299,9 @@ formatRelativeTime(twoHoursAgo);
 
 ---
 
-Pattern 6: DOM Localization with Data Attributes {#pattern-6-dom-localization-with-data-attributes}
+## Pattern 6: DOM Localization with Data Attributes {#pattern-6-dom-localization-with-data-attributes}
 
-Automatically translate static UI elements without manual JavaScript:
+### Automatically translate static UI elements without manual JavaScript:
 
 ```html
 <!-- popup.html -->
@@ -343,9 +343,9 @@ document.addEventListener("DOMContentLoaded", () => localizeDOM());
 
 ---
 
-Pattern 7: Locale-Aware Manifest Fields {#pattern-7-locale-aware-manifest-fields}
+## Pattern 7: Locale-Aware Manifest Fields {#pattern-7-locale-aware-manifest-fields}
 
-Chrome automatically localizes manifest fields prefixed with `__MSG_`:
+### Chrome automatically localizes manifest fields prefixed with `__MSG_`:
 
 ```json
 {
@@ -365,7 +365,7 @@ This works for:
 
 ---
 
-Pattern 8: Missing Translation Fallback Chain {#pattern-8-missing-translation-fallback-chain}
+## Pattern 8: Missing Translation Fallback Chain {#pattern-8-missing-translation-fallback-chain}
 
 When a message isn't available in the user's locale, implement a fallback chain:
 
@@ -392,9 +392,9 @@ export function getMessageWithFallback(
 
 ---
 
-Validation Script {#validation-script}
+## Validation Script {#validation-script}
 
-Catch missing translations before they ship:
+### Catch missing translations before they ship:
 
 ```ts
 // scripts/validate-i18n.ts
@@ -437,7 +437,7 @@ process.exit(hasErrors ? 1 : 0);
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

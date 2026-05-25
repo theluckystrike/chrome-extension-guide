@@ -18,11 +18,11 @@ The demand for lead generation chrome extension tools continues to grow as busin
 
 ---
 
-Understanding the Ethical Framework for Email Extraction
+### Understanding the Ethical Framework for Email Extraction
 
 Before writing a single line of code, you must understand why ethical considerations matter in email extraction. The distinction between helpful tool and harmful scraper often comes down to intent and implementation. An ethical email finder Chrome extension helps users collect contact information they have a legitimate right to access, while unethical scrapers violate trust, overload servers, and often violate laws.
 
-What Makes Email Extraction Ethical
+### What Makes Email Extraction Ethical
 
 Ethical email extraction begins with understanding what you are actually collecting and why. When someone visits a company's "Contact Us" page or an employee's LinkedIn profile, they are making their email address publicly available, either explicitly or through patterns that reasonable people would expect to be discoverable. Ethical extractors respect this implicit permission while avoiding practices that cross lines into exploitation.
 
@@ -30,7 +30,7 @@ The core principle of ethical email extraction involves three factors: transpare
 
 Consider the difference between a user manually copying an email address from a website and an extension that automates this process. The action is fundamentally the same, extracting publicly displayed information, but automation introduces scale. This scale is where ethical problems often begin. An ethical lead generation chrome extension includes safeguards that prevent users from extracting email addresses at rates that would strain server resources or violate terms of service.
 
-Legal Considerations and Compliance
+### Legal Considerations and Compliance
 
 The legal landscape surrounding web scraping and email extraction continues to evolve, making compliance a moving target. Several key legal frameworks affect how you should build and market your extension.
 
@@ -40,11 +40,11 @@ The most important consideration is understanding that terms of service agreemen
 
 ---
 
-Setting Up Your Chrome Extension Project
+### Setting Up Your Chrome Extension Project
 
 With the ethical framework established, it's time to build your extension. We'll create a Manifest V3 extension, the current standard for Chrome extensions, that safely extracts email addresses from web pages.
 
-Project Structure and Manifest Configuration
+### Project Structure and Manifest Configuration
 
 Create a new directory for your extension and set up the basic file structure. You'll need a manifest.json file, an HTML popup interface, and JavaScript files for content scripts and background processing.
 
@@ -82,7 +82,7 @@ Create a new directory for your extension and set up the basic file structure. Y
 
 This manifest configuration reflects several ethical design decisions. We're requesting only the permissions necessary for the extension to function, the "activeTab" permission ensures we only access the current page when the user explicitly requests it, and "scripting" allows us to inject the content script that performs the extraction. The host permissions cover all URLs because email addresses can appear anywhere, but the user must actively invoke the extraction each time.
 
-Content Script for Email Detection
+### Content Script for Email Detection
 
 The content script is where the actual email extraction happens. This script runs in the context of the web page and uses JavaScript to find email addresses in the page content.
 
@@ -125,7 +125,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 This implementation includes several ethical safeguards. The regex pattern matches standard email formats without being overly aggressive. The filtering removes common test domains that would never be useful for lead generation. Most importantly, the script only extracts emails that are already visible in the page text, nothing is hidden, nothing is collected from sources the user can't see in their browser.
 
-Popup Interface for User Interaction
+### Popup Interface for User Interaction
 
 The popup provides the interface through which users interact with your extension. It should be simple, clear, and transparent about what it's doing.
 
@@ -218,11 +218,11 @@ The popup includes an ethical notice that reminds users of their responsibilitie
 
 ---
 
-Implementing Rate Limiting and Respectful Extraction
+### Implementing Rate Limiting and Respectful Extraction
 
 One of the most important ethical considerations in any scraping or extraction tool is respecting the resources of the websites you interact with. Even though this extension works on demand rather than automatically, implementing rate limiting demonstrates respect for website owners.
 
-Background Service Worker
+### Background Service Worker
 
 The background service worker manages state and implements ethical safeguards:
 
@@ -317,11 +317,11 @@ This implementation includes automatic rate limiting that prevents rapid-fire ex
 
 ---
 
-Export Functionality and Data Handling
+### Export Functionality and Data Handling
 
 The extracted emails need to be usable. Your extension should provide easy export options while maintaining ethical data handling practices.
 
-Popup JavaScript for User Interaction
+### Popup JavaScript for User Interaction
 
 ```javascript
 // popup.js
@@ -379,11 +379,11 @@ The export functionality is intentionally simple, users can copy emails to their
 
 ---
 
-Best Practices for Ethical Lead Generation Extensions
+### Best Practices for Ethical Lead Generation Extensions
 
 Building a functional email finder is only the beginning. To truly call your extension ethical, you need to consider the entire lifecycle of how users will employ it.
 
-User Education and Transparency
+### User Education and Transparency
 
 Include clear documentation that explains both what the extension does and what it doesn't do. Users should understand that this tool only finds emails that are already publicly visible on web pages. It cannot bypass authentication, access private information, or retrieve email addresses from sources that require login credentials.
 
@@ -395,7 +395,7 @@ While your extension operates on user-initiated requests rather than automated c
 
 You can implement this check by fetching the robots.txt file for the current domain before allowing extraction. If the file disallows scraping of the current path, you should warn the user or prevent extraction entirely. This approach won't catch all cases, robots.txt doesn't explicitly address email extraction in most cases, but it shows a commitment to respecting website owner preferences.
 
-Data Storage and Privacy
+### Data Storage and Privacy
 
 Decide whether your extension will store extracted data and how. The most ethical approach is to avoid storing any data permanently. Emails should exist only in the extension's temporary memory until the user copies them elsewhere. This eliminates privacy concerns and reduces your liability.
 
@@ -403,7 +403,7 @@ If you do implement any storage feature, perhaps to build a contact list over ti
 
 ---
 
-Compliance with Chrome Web Store Policies
+### Compliance with Chrome Web Store Policies
 
 Your extension must comply with Chrome Web Store developer program policies to be published. Several policies are particularly relevant to email extraction tools.
 
@@ -413,7 +413,7 @@ Pay particular attention to the permissions you request. Asking for unnecessary 
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
 Before publishing, thoroughly test your extension across different scenarios. Test with various types of websites, corporate pages, personal blogs, social media profiles (where emails might be visible in bios), and verify that extraction works correctly in each case.
 
@@ -423,7 +423,7 @@ Test the user interface: clicking the extension icon, the popup appearing, extra
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an ethical scraping extension requires balancing functionality with responsibility. This guide has shown you how to create a fully functional email extractor extension that respects users, website owners, and legal requirements.
 

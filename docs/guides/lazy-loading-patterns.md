@@ -7,15 +7,15 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Lazy Loading Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 Lazy loading is essential for Chrome extensions to minimize initial bundle size, reduce memory footprint, and improve perceived performance. This guide covers patterns for loading code on-demand across different extension contexts.
 
-Dynamic Import in Extension Contexts {#dynamic-import-in-extension-contexts}
+## Dynamic Import in Extension Contexts {#dynamic-import-in-extension-contexts}
 
 Dynamic `import()` works in extension contexts just like in regular web apps, but with some considerations for the extension's permission model and file organization.
 
-Basic Dynamic Import {#basic-dynamic-import}
+## Basic Dynamic Import {#basic-dynamic-import}
 
 ```ts
 // background.ts - Lazy load a heavy module only when needed
@@ -25,7 +25,7 @@ async function handleAdvancedFeature() {
 }
 ```
 
-Type-Safe Dynamic Imports {#type-safe-dynamic-imports}
+## Type-Safe Dynamic Imports {#type-safe-dynamic-imports}
 
 ```ts
 // types.ts
@@ -41,11 +41,11 @@ async function loadAnalytics(): Promise<AnalyticsModule> {
 }
 ```
 
-Lazy Loading Popup and Options Page Components {#lazy-loading-popup-and-options-page-components}
+## Lazy Loading Popup and Options Page Components {#lazy-loading-popup-and-options-page-components}
 
 Popup and options pages have limited execution time. Load only what's immediately needed.
 
-Popup Lazy Loading {#popup-lazy-loading}
+## Popup Lazy Loading {#popup-lazy-loading}
 
 ```ts
 // popup/main.ts
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Options Page with Route-Based Loading {#options-page-with-route-based-loading}
+## Options Page with Route-Based Loading {#options-page-with-route-based-loading}
 
 ```ts
 // options/main.ts
@@ -103,11 +103,11 @@ function App() {
 }
 ```
 
-On-Demand Content Script Injection {#on-demand-content-script-injection}
+## On-Demand Content Script Injection {#on-demand-content-script-injection}
 
 Content scripts run in web page contexts. Load them dynamically based on user interaction or page conditions.
 
-Programmatic Injection {#programmatic-injection}
+## Programmatic Injection {#programmatic-injection}
 
 ```ts
 // background.ts
@@ -120,7 +120,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Conditional Injection Based on URL {#conditional-injection-based-on-url}
+## Conditional Injection Based on URL {#conditional-injection-based-on-url}
 
 ```ts
 // manifest.json
@@ -146,7 +146,7 @@ if (window.location.hostname.includes('youtube.com')) {
 }
 ```
 
-User-Initiated Feature Loading {#user-initiated-feature-loading}
+## User-Initiated Feature Loading {#user-initiated-feature-loading}
 
 ```ts
 // content-script.ts
@@ -171,11 +171,11 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-Deferred Module Loading in Service Workers {#deferred-module-loading-in-service-workers}
+## Deferred Module Loading in Service Workers {#deferred-module-loading-in-service-workers}
 
 Service workers in extensions (MV3) are ephemeral. Defer loading non-essential modules until they're actually needed.
 
-Lazy Module Registration {#lazy-module-registration}
+## Lazy Module Registration {#lazy-module-registration}
 
 ```ts
 // background.ts
@@ -208,7 +208,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Module Cache for Service Worker Restarts {#module-cache-for-service-worker-restarts}
+## Module Cache for Service Worker Restarts {#module-cache-for-service-worker-restarts}
 
 ```ts
 // background.ts
@@ -225,9 +225,9 @@ async function importCached<T>(modulePath: string): Promise<T> {
 }
 ```
 
-Route-Based Code Splitting with Frameworks {#route-based-code-splitting-with-frameworks}
+## Route-Based Code Splitting with Frameworks {#route-based-code-splitting-with-frameworks}
 
-React Router in Extension Popup {#react-router-in-extension-popup}
+## React Router in Extension Popup {#react-router-in-extension-popup}
 
 ```ts
 // popup/App.tsx
@@ -253,7 +253,7 @@ export function App() {
 }
 ```
 
-Preact with petite-router {#preact-with-petite-router}
+## Preact with petite-router {#preact-with-petite-router}
 
 ```ts
 // popup/main.ts
@@ -273,7 +273,7 @@ render(
 );
 ```
 
-Framework-Agnostic Code Splitting {#framework-agnostic-code-splitting}
+## Framework-Agnostic Code Splitting {#framework-agnostic-code-splitting}
 
 ```ts
 // lib/router.ts
@@ -298,9 +298,9 @@ export async function navigate(path: string) {
 }
 ```
 
-Prefetching and Caching Strategies {#prefetching-and-caching-strategies}
+## Prefetching and Caching Strategies {#prefetching-and-caching-strategies}
 
-Stale-While-Revalidate for Extension Resources {#stale-while-revalidate-for-extension-resources}
+## Stale-While-Revalidate for Extension Resources {#stale-while-revalidate-for-extension-resources}
 
 ```ts
 // lib/cache.ts
@@ -333,7 +333,7 @@ export async function fetchWithCache<T>(url: string): Promise<T> {
 }
 ```
 
-Service Worker Caching Strategies {#service-worker-caching-strategies}
+## Service Worker Caching Strategies {#service-worker-caching-strategies}
 
 ```ts
 // background.ts - Install-time caching
@@ -358,7 +358,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 ```
 
-Preloading Critical Routes {#preloading-critical-routes}
+## Preloading Critical Routes {#preloading-critical-routes}
 
 ```ts
 // popup/hooks/usePreload.ts
@@ -384,9 +384,9 @@ export function usePreload(routes: string[]) {
 }
 ```
 
-Measuring Load Time Improvements {#measuring-load-time-improvements}
+## Measuring Load Time Improvements {#measuring-load-time-improvements}
 
-Performance Markers in Background Script {#performance-markers-in-background-script}
+## Performance Markers in Background Script {#performance-markers-in-background-script}
 
 ```ts
 // background.ts
@@ -418,7 +418,7 @@ async function loadModuleWithTracking<T>(name: string, loader: () => Promise<T>)
 }
 ```
 
-Popup Performance Metrics {#popup-performance-metrics}
+## Popup Performance Metrics {#popup-performance-metrics}
 
 ```ts
 // popup/main.ts
@@ -441,7 +441,7 @@ function Dashboard() {
 }
 ```
 
-Chrome Tracing for Extension Analysis {#chrome-tracing-for-extension-analysis}
+## Chrome Tracing for Extension Analysis {#chrome-tracing-for-extension-analysis}
 
 ```ts
 // background.ts - Debugging performance
@@ -461,7 +461,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Real User Monitoring {#real-user-monitoring}
+## Real User Monitoring {#real-user-monitoring}
 
 ```ts
 // lib/rum.ts
@@ -493,7 +493,7 @@ reportPerformance({
 });
 ```
 
-Best Practices Summary {#best-practices-summary}
+## Best Practices Summary {#best-practices-summary}
 
 1. Always lazy load non-critical modules - Any code not needed for initial render should use dynamic imports.
 
@@ -509,15 +509,15 @@ Best Practices Summary {#best-practices-summary}
 
 7. Test on low-end devices - Real-world performance matters more than synthetic benchmarks.
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Background Service Worker Patterns](./background-patterns.md)
 - [Content Script Isolation](./content-script-isolation.md)
 - [Message Passing](./messaging.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Lazy Loading Content Scripts](../patterns/lazy-loading-content-scripts.md)
 - [Caching Strategies](../guides/caching-strategies.md)

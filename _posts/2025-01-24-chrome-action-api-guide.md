@@ -18,7 +18,7 @@ In Manifest V3, `chrome.action` replaces both `chrome.browserAction` and `chrome
 
 ---
 
-Understanding the Action API {#understanding-action-api}
+## Understanding the Action API {#understanding-action-api}
 
 Every Chrome extension can have a toolbar icon, which Chrome calls an "action." The Action API gives you programmatic control over this icon and its associated behaviors. When a user installs your extension, the toolbar icon is the most visible part of your extension's presence in the browser.
 
@@ -31,7 +31,7 @@ The Action API lets you control four main aspects of the toolbar icon:
 
 Additionally, the API fires events when users interact with the icon, allowing your extension to respond to clicks when no popup is configured.
 
-Manifest Declaration
+### Manifest Declaration
 
 To use the Action API, declare the `"action"` key in your `manifest.json`:
 
@@ -58,11 +58,11 @@ No special permissions are needed for the Action API. the `"action"` manifest ke
 
 ---
 
-Popup Management {#popup-management}
+## Popup Management {#popup-management}
 
 The popup is an HTML page that opens in a small window anchored to the toolbar icon when the user clicks it. It is the most common way extensions present a user interface.
 
-Static Popup
+### Static Popup
 
 The simplest approach is declaring a popup in the manifest:
 
@@ -141,7 +141,7 @@ document.getElementById('actionBtn').addEventListener('click', async () => {
 });
 ```
 
-Dynamic Popup Switching
+### Dynamic Popup Switching
 
 You can change the popup at runtime based on context:
 
@@ -169,7 +169,7 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
 });
 ```
 
-Disabling the Popup for Click Handling
+### Disabling the Popup for Click Handling
 
 To use `chrome.action.onClicked` instead of a popup, either omit `default_popup` from the manifest or clear it at runtime:
 
@@ -182,7 +182,7 @@ const popup = await chrome.action.getPopup({});
 console.log('Current popup:', popup); // '' if none
 ```
 
-Programmatically Opening the Popup
+### Programmatically Opening the Popup
 
 Starting in Chrome 127, you can open the popup programmatically in response to certain user actions:
 
@@ -199,11 +199,11 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 ---
 
-Badge Text and Color {#badges}
+## Badge Text and Color {#badges}
 
 Badges are small text overlays displayed on top of your toolbar icon. They are perfect for showing counts, statuses, or brief notifications.
 
-Setting Badge Text
+### Setting Badge Text
 
 ```javascript
 // Set a global badge
@@ -221,7 +221,7 @@ await chrome.action.setBadgeText({ text: '' });
 
 Badge text is limited to about 4 characters. Longer text is truncated. Use numbers, short abbreviations, or symbols.
 
-Badge Background Color
+### Badge Background Color
 
 ```javascript
 // Set badge background color (RGBA array or hex string)
@@ -241,7 +241,7 @@ await chrome.action.setBadgeBackgroundColor({
 });
 ```
 
-Badge Text Color
+### Badge Text Color
 
 Starting in Chrome 110, you can also control the text color:
 
@@ -251,7 +251,7 @@ await chrome.action.setBadgeTextColor({
 });
 ```
 
-Practical Badge Patterns
+### Practical Badge Patterns
 
 Here is a pattern for showing an unread count badge that updates in real time:
 
@@ -284,7 +284,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-A status indicator pattern for showing extension state:
+### A status indicator pattern for showing extension state:
 
 ```javascript
 async function setExtensionStatus(status) {
@@ -303,11 +303,11 @@ async function setExtensionStatus(status) {
 
 ---
 
-Icon Management {#icon-management}
+## Icon Management {#icon-management}
 
 You can change the toolbar icon dynamically to reflect different states or contexts.
 
-Setting Icons from Files
+### Setting Icons from Files
 
 ```javascript
 await chrome.action.setIcon({
@@ -325,7 +325,7 @@ await chrome.action.setIcon({
 });
 ```
 
-Generating Icons with Canvas
+### Generating Icons with Canvas
 
 For truly dynamic icons, use the `OffscreenCanvas` API in your service worker or an offscreen document:
 
@@ -357,11 +357,11 @@ await setDynamicIcon('A', '#4285F4');
 
 ---
 
-Click Handling with onClicked {#click-handling}
+## Click Handling with onClicked {#click-handling}
 
 When no popup is set, clicking the toolbar icon fires the `chrome.action.onClicked` event. This is useful for extensions that perform a single action or toggle a feature.
 
-Basic Click Handler
+### Basic Click Handler
 
 ```javascript
 // background.js
@@ -377,7 +377,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Toggle Pattern
+### Toggle Pattern
 
 A common pattern is using the icon click to toggle a feature on or off:
 
@@ -437,7 +437,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 ---
 
-Title (Tooltip) Management {#title-management}
+## Title (Tooltip) Management {#title-management}
 
 The title is the tooltip text shown when the user hovers over your toolbar icon.
 
@@ -462,7 +462,7 @@ Dynamic titles are excellent for providing context-specific information without 
 
 ---
 
-Enabling and Disabling the Action {#enable-disable}
+## Enabling and Disabling the Action {#enable-disable}
 
 You can disable the toolbar icon for specific tabs or globally. A disabled icon appears grayed out and does not respond to clicks.
 
@@ -477,7 +477,7 @@ await chrome.action.enable(tabId);
 const isEnabled = await chrome.action.isEnabled({ tabId });
 ```
 
-Declarative Enabling with Conditions
+### Declarative Enabling with Conditions
 
 For more efficient enable/disable logic, use `chrome.declarativeContent` in combination with the Action API:
 
@@ -519,7 +519,7 @@ This pattern is the MV3 equivalent of MV2's `chrome.pageAction`, where the icon 
 
 ---
 
-Migration from browserAction and pageAction {#migration}
+## Migration from browserAction and pageAction {#migration}
 
 In Manifest V2, there were two separate APIs:
 - `chrome.browserAction`. always visible in the toolbar
@@ -527,7 +527,7 @@ In Manifest V2, there were two separate APIs:
 
 Manifest V3 merges both into `chrome.action`. Here is how to migrate:
 
-Manifest Changes
+### Manifest Changes
 
 ```json
 // MV2
@@ -551,7 +551,7 @@ Manifest Changes
 }
 ```
 
-Code Changes
+### Code Changes
 
 | MV2 | MV3 |
 |-----|-----|
@@ -576,7 +576,7 @@ console.log('Badge set');
 
 ---
 
-Tab-Specific vs Global State {#tab-vs-global}
+## Tab-Specific vs Global State {#tab-vs-global}
 
 Every Action API setter method accepts an optional `tabId` parameter. Understanding the difference between global and tab-specific state is important:
 
@@ -601,11 +601,11 @@ await chrome.action.setBadgeText({ tabId: 123, text: '' });
 
 ---
 
-Keyboard Shortcuts and the Action {#keyboard-shortcuts}
+## Keyboard Shortcuts and the Action {#keyboard-shortcuts}
 
 You can bind keyboard shortcuts to your extension's action using the `commands` manifest key. When a shortcut is configured with `"_execute_action"`, it triggers the same behavior as clicking the toolbar icon.
 
-Configuring Shortcuts
+### Configuring Shortcuts
 
 ```json
 {
@@ -630,7 +630,7 @@ Configuring Shortcuts
 
 The `_execute_action` command is special. it opens the popup if one is set, or fires the `onClicked` event if no popup is configured. Custom commands (like `toggle-feature`) fire the `chrome.commands.onCommand` event instead.
 
-Handling Custom Commands Alongside Actions
+### Handling Custom Commands Alongside Actions
 
 ```javascript
 // background.js
@@ -655,7 +655,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 Users can customize keyboard shortcuts at `chrome://extensions/shortcuts`. Always choose suggested keys that do not conflict with common browser or operating system shortcuts. Consider platform differences. for example, `Ctrl` on Windows and Linux maps to `Command` on macOS for most user expectations.
 
-Indicating Shortcut Availability
+### Indicating Shortcut Availability
 
 You can display the configured shortcut in your popup or tooltip to help users discover it:
 
@@ -674,7 +674,7 @@ document.getElementById('shortcutHint').textContent =
 
 ---
 
-Popup Sizing and Layout Considerations {#popup-sizing}
+## Popup Sizing and Layout Considerations {#popup-sizing}
 
 The popup window has specific constraints that affect your UI design:
 
@@ -727,7 +727,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Keep popups lightweight. The popup window has limited space (max 800x600 pixels). Keep your UI focused and responsive. Load data asynchronously to avoid blank screens.
 
@@ -752,7 +752,7 @@ await Promise.all([
 
 ---
 
-Related Resources {#related}
+## Related Resources {#related}
 
 - [Chrome Scripting API Complete Reference](/2025/01/24/chrome-scripting-api-complete-reference/). Inject scripts when the user clicks your action
 - [Chrome Runtime API: Messaging and Lifecycle](/2025/01/24/chrome-runtime-api-messaging/). Communicate between popup and service worker
@@ -761,11 +761,11 @@ Related Resources {#related}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 The `chrome.action` API is the front door of your Chrome extension. It controls the toolbar icon that users see and interact with every day. By mastering popups, badges, dynamic icons, click handlers, and the enable/disable pattern, you can build extensions that feel polished and professional.
 
-Key takeaways:
+### Key takeaways:
 
 1. Use popups for UI-rich interactions, `onClicked` for single-action extensions.
 2. Badges are your best tool for at-a-glance status updates. keep them short and meaningful.

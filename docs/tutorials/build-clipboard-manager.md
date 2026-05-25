@@ -7,10 +7,10 @@ last_modified_at: 2026-01-15
 ---
 Build a Clipboard Manager Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 Popup clipboard history with search, pinned favorites, one-click paste. Uses offscreen document for clipboard access in MV3.
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 ```
 clipboard-manager/
   manifest.json
@@ -23,7 +23,7 @@ clipboard-manager/
   content.js
 ```
 
-Step 1: Manifest {#step-1-manifest}
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -42,7 +42,7 @@ Step 1: Manifest {#step-1-manifest}
 }
 ```
 
-Step 2: Content Script {#step-2-content-script}
+## Step 2: Content Script {#step-2-content-script}
 ```javascript
 // Detect copy events on any page
 document.addEventListener('copy', () => {
@@ -50,7 +50,7 @@ document.addEventListener('copy', () => {
 });
 ```
 
-Step 3: Offscreen Document {#step-3-offscreen-document}
+## Step 3: Offscreen Document {#step-3-offscreen-document}
 ```html
 <!-- offscreen.html -->
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Step 4: Background Service Worker {#step-4-background-service-worker}
+## Step 4: Background Service Worker {#step-4-background-service-worker}
 ```javascript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -152,7 +152,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Step 5: Popup {#step-5-popup}
+## Step 5: Popup {#step-5-popup}
 ```html
 <!DOCTYPE html>
 <html>
@@ -208,7 +208,7 @@ body { width: 350px; max-height: 500px; margin: 0; font-family: system-ui; backg
 </html>
 ```
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 - Image clipboard support
 - Rich text preview
 - Sync pinned items across devices

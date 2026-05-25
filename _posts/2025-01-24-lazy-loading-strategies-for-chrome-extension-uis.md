@@ -16,7 +16,7 @@ Performance is not an afterthought in Chrome extension development, it is a fund
 
 we will explore lazy loading strategies specifically tailored for Chrome extensions. You will learn how to implement dynamic imports, code splitting, and component-level lazy loading to dramatically reduce your extension's initial load time, memory footprint, and CPU usage. These techniques are essential for building professional-grade extensions that perform well across a wide range of devices and use cases.
 
-Understanding Lazy Loading in the Context of Chrome Extensions
+### Understanding Lazy Loading in the Context of Chrome Extensions
 
 Lazy loading is a design pattern that delays the initialization or loading of resources, such as JavaScript modules, CSS files, images, or entire UI components, until the moment they are needed. In traditional web development, lazy loading is commonly applied to images below the fold or route-based code splitting in single-page applications. In Chrome extension development, the principles are similar, but the implementation context differs significantly.
 
@@ -26,11 +26,11 @@ The service worker in Manifest V3 extensions is event-driven and can terminate a
 
 The popup UI presents another opportunity for lazy loading. When users click your extension icon, they expect an instant response. However, if your popup loads a large amount of JavaScript and renders complex UI immediately, users will experience a noticeable delay. Lazy loading the popup's content and deferring heavy computations can make your extension feel snappy and responsive.
 
-Implementing Dynamic Imports in Chrome Extensions
+### Implementing Dynamic Imports in Chrome Extensions
 
 Dynamic imports represent one of the most powerful tools in the lazy loading arsenal. Unlike static imports, which are resolved at build time, dynamic imports use the `import()` syntax to load modules on demand. This approach is supported in all modern browsers and works smoothly within Chrome extension contexts.
 
-Basic Dynamic Import Pattern
+### Basic Dynamic Import Pattern
 
 The simplest form of dynamic import involves loading a module only when a specific function is called. Consider a scenario where your extension needs to handle complex data formatting in the popup, but this functionality is rarely used. Instead of importing the formatting module at the top of your popup script, you can load it dynamically when the user interacts with the relevant feature.
 
@@ -50,7 +50,7 @@ document.getElementById('format-btn').addEventListener('click', handleFormatButt
 
 This pattern ensures that the formatter module is only downloaded and parsed when the user actually clicks the format button. For extensions where this functionality is rarely used, this can save significant initial load time and memory.
 
-Lazy Loading Feature Modules
+### Lazy Loading Feature Modules
 
 For larger extensions with multiple features, consider organizing your code into feature modules that can be loaded independently. This approach, often called lazy loading feature modules, allows users to download only the code required for the features they use.
 
@@ -85,11 +85,11 @@ async function initializeExtension() {
 
 This pattern is particularly useful for feature-rich extensions where different users benefit from different functionality. Power users who need all features pay the upfront cost once, while users who need only basic functionality enjoy a much faster initial load.
 
-Code Splitting Strategies for Extension Components
+### Code Splitting Strategies for Extension Components
 
 Code splitting takes lazy loading to the better by dividing your codebase into separate chunks that can be loaded independently. Webpack and other modern bundlers support code splitting out of the box, but understanding how to apply it specifically to Chrome extensions requires attention to the unique architecture of extensions.
 
-Service Worker Code Splitting
+### Service Worker Code Splitting
 
 The service worker is the backbone of your extension, handling background tasks, message passing, and coordination between components. In Manifest V3, service workers have a strict lifecycle, they can be terminated after remaining idle for a short period and must be reinitialized when events arrive. This makes optimizing the service worker initialization critical for performance.
 
@@ -136,7 +136,7 @@ initialize();
 
 This approach ensures that the service worker starts up quickly with a minimal footprint. The various handlers, analytics, sync, export, are only loaded when actually needed. For extensions where certain features are rarely used, this can dramatically reduce the average service worker memory usage and startup time.
 
-Popup UI Code Splitting
+### Popup UI Code Splitting
 
 The popup is often the most visible part of your extension, and users expect it to open instantly. However, complex popups with many features can become sluggish if all the code loads at once. Code splitting the popup allows you to show a fast-loading skeleton or minimal UI while the full functionality loads.
 
@@ -177,7 +177,7 @@ requestIdleCallback(() => {
 
 Using `requestIdleCallback` ensures the popup appears immediately while the full application loads in the background without blocking the initial render. This technique, borrowed from modern web performance best practices, creates a perception of speed even when loading substantial functionality.
 
-Content Script Optimization
+### Content Script Optimization
 
 Content scripts run in the context of web pages and are injected when pages matching your host permissions load. Every millisecond your content script takes to execute affects the page's perceived load time. Lazy loading in content scripts is therefore particularly important.
 
@@ -229,11 +229,11 @@ Content scripts run in the context of web pages and are injected when pages matc
 
 This pattern is especially powerful for extensions that enhance specific types of content on web pages. By observing which elements are present and only loading the relevant code when needed, you minimize the impact on page performance while still delivering full functionality when appropriate.
 
-Advanced Lazy Loading Patterns
+### Advanced Lazy Loading Patterns
 
 Beyond basic dynamic imports and code splitting, several advanced patterns can further optimize your extension's loading behavior.
 
-Route-Based Lazy Loading for Extension Pages
+### Route-Based Lazy Loading for Extension Pages
 
 If your extension includes dedicated pages (accessed via `chrome-extension://...` URLs), route-based lazy loading can significantly improve their performance. This pattern is particularly relevant for settings pages, dashboard views, or any complex UI within your extension.
 
@@ -267,7 +267,7 @@ const path = window.location.pathname;
 handleRoute(path);
 ```
 
-Lazy Loading Images and Media
+### Lazy Loading Images and Media
 
 Images often constitute the largest portion of page weight, and this applies to extension UIs as well. Lazy loading images ensures they are only fetched when they enter the viewport.
 
@@ -298,7 +298,7 @@ if (document.readyState === 'loading') {
 }
 ```
 
-Preloading Strategies
+### Preloading Strategies
 
 While lazy loading defers loading until needed, strategic preloading can improve the user experience when you can predict future needs. The key is to preload aggressively enough to feel instantaneous but not so aggressively that you negate the benefits of lazy loading.
 
@@ -349,11 +349,11 @@ document.getElementById('export-btn').addEventListener('click', () => {
 });
 ```
 
-Measuring the Impact of Lazy Loading
+### Measuring the Impact of Lazy Loading
 
 Implementing lazy loading is only the first step, measuring its impact ensures your efforts are actually improving performance. Several tools and techniques can help you quantify the benefits.
 
-Chrome DevTools Performance Analysis
+### Chrome DevTools Performance Analysis
 
 The Performance panel in Chrome DevTools provides detailed timing information for service workers and extension pages. Record a trace while interacting with your extension to identify:
 
@@ -363,7 +363,7 @@ The Performance panel in Chrome DevTools provides detailed timing information fo
 
 Focus on reducing the time before your extension becomes responsive (Time to Interactive) rather than just total load time.
 
-Memory Profiling
+### Memory Profiling
 
 Lazy loading's primary benefit is often reduced memory usage rather than faster load times. Use the Memory panel in DevTools to:
 
@@ -371,7 +371,7 @@ Lazy loading's primary benefit is often reduced memory usage rather than faster 
 - Compare memory usage with and without lazy loading
 - Identify memory leaks that might occur when features are loaded and unloaded
 
-Real User Monitoring
+### Real User Monitoring
 
 For extension users in the wild, consider adding anonymous performance telemetry to your extension:
 
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Best Practices and Common Pitfalls
+### Best Practices and Common Pitfalls
 
 As you implement lazy loading in your Chrome extension, keep these best practices and pitfalls in mind.
 
@@ -414,7 +414,7 @@ Consider caching strategies. Dynamic imports are cached by the browser just like
 
 Maintain backward compatibility. Not all users run the latest Chrome version. Ensure your lazy loading implementations degrade gracefully on older browsers, or accept that some users will not benefit from these optimizations.
 
-Conclusion
+### Conclusion
 
 Lazy loading is an essential technique for building high-performance Chrome extensions. By strategically deferring the loading of modules, components, and resources until they are actually needed, you can dramatically reduce initial load times, memory consumption, and CPU usage. This translates to a better user experience, higher retention rates, and more positive reviews in the Chrome Web Store.
 

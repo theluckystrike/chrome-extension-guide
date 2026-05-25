@@ -18,11 +18,11 @@ This comprehensive guide walks you through everything you need to know about bui
 
 ---
 
-Understanding the Options Page in Manifest V3 {#understanding-options-page}
+## Understanding the Options Page in Manifest V3 {#understanding-options-page}
 
 In Chrome Extension Manifest V3, the options page is defined directly in your `manifest.json` file. This is a departure from earlier approaches where developers sometimes used options pages embedded within the extension popup or as separate HTML pages opened through background script redirects. The modern approach provides a dedicated, full-featured settings interface that users can access from the Chrome extensions management page.
 
-Declaring Your Options Page
+### Declaring Your Options Page
 
 The configuration is straightforward. In your `manifest.json`, add or modify the `options_page` field:
 
@@ -55,17 +55,17 @@ The `options_ui` approach offers additional configuration possibilities, such as
 
 ---
 
-Designing Your Options Page Interface {#designing-interface}
+## Designing Your Options Page Interface {#designing-interface}
 
 A professional options page balances functionality with usability. Users should be able to find and change settings quickly without feeling overwhelmed by complexity. Here are the essential design principles and patterns to follow.
 
-Layout Structure
+### Layout Structure
 
 Most successful extension options pages use a clean, hierarchical layout. The page typically consists of a header with the extension name and a brief description, followed by grouped settings sections. Each group addresses a specific aspect of the extension functionality, such as general behavior, appearance customization, or advanced features.
 
 Consider using a two-column layout for complex settings pages. The left column displays navigation tabs or a table of contents, while the right column shows the relevant settings. This pattern scales well as your extension gains more configuration options and helps users navigate to specific sections without scrolling.
 
-Form Elements and Input Types
+### Form Elements and Input Types
 
 Your options page will likely include various form elements. Here are the most common and how to implement them effectively:
 
@@ -108,11 +108,11 @@ Number inputs with appropriate min/max attributes prevent invalid entries:
 
 ---
 
-Implementing Storage Synchronization {#storage-synchronization}
+## Implementing Storage Synchronization {#storage-synchronization}
 
 Chrome provides solid storage APIs that are essential for any options page implementation. The `chrome.storage` API offers two distinct storage areas: `local` and `sync`. Understanding when to use each is crucial for building professional extensions.
 
-Local Storage
+### Local Storage
 
 Use local storage for data that should remain on the current device and never synchronize across computers:
 
@@ -129,7 +129,7 @@ chrome.storage.local.set({
 
 Local storage has no size limits and is appropriate for large datasets, cached content, or device-specific preferences.
 
-Sync Storage
+### Sync Storage
 
 When users sign in to Chrome, `sync` storage automatically synchronizes their settings across all devices where they use the same Google account. This is ideal for user preferences that should follow them:
 
@@ -146,7 +146,7 @@ chrome.storage.sync.set({
 
 Sync storage has a quota of approximately 100KB, which is sufficient for most extension settings. If you need more space, reserve sync for critical preferences and use local storage for everything else.
 
-Loading Settings on Page Load
+### Loading Settings on Page Load
 
 Your options page must load saved settings when it opens. Use the storage API's callback or Promise-based approach:
 
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Listening for Storage Changes
+### Listening for Storage Changes
 
 Implement the `onChanged` listener to update your options page in real-time if settings change elsewhere, such as from the popup or background script:
 
@@ -186,11 +186,11 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
 ---
 
-Saving Settings with Validation {#saving-settings}
+## Saving Settings with Validation {#saving-settings}
 
 Proper form handling ensures users provide valid input and receive feedback when settings are saved. Never trust user input and always validate before saving.
 
-Implementing Save Handlers
+### Implementing Save Handlers
 
 Attach event listeners to your form and validate all inputs before persisting:
 
@@ -227,7 +227,7 @@ document.getElementById('settingsForm').addEventListener('submit', (e) => {
 });
 ```
 
-Providing User Feedback
+### Providing User Feedback
 
 Always inform users of save success or failure. Visual feedback prevents confusion and repeated submissions:
 
@@ -253,11 +253,11 @@ function showError(message) {
 
 ---
 
-Advanced Features and Best Practices {#advanced-features}
+## Advanced Features and Best Practices {#advanced-features}
 
 Beyond the fundamentals, several advanced features distinguish professional extension options pages from basic implementations.
 
-Import and Export Functionality
+### Import and Export Functionality
 
 Allow users to backup and restore their settings. This is particularly valuable for power users who configure many options:
 
@@ -295,7 +295,7 @@ document.getElementById('importSettings').addEventListener('change', (e) => {
 });
 ```
 
-Reset to Defaults
+### Reset to Defaults
 
 Provide a clear way for users to reset all settings to their original values:
 
@@ -322,7 +322,7 @@ document.getElementById('resetDefaults').addEventListener('click', () => {
 });
 ```
 
-URL Parameters for Deep Linking
+### URL Parameters for Deep Linking
 
 Advanced users appreciate the ability to link directly to specific settings sections. Implement URL hash navigation:
 
@@ -342,7 +342,7 @@ if (hash) {
 <a href="#notifications">Jump to notification settings</a>
 ```
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Power users navigate options pages using keyboards. Ensure all form elements are keyboard-accessible and provide shortcuts for common actions:
 
@@ -358,11 +358,11 @@ document.addEventListener('keydown', (e) => {
 
 ---
 
-Styling Your Options Page {#styling-options-page}
+## Styling Your Options Page {#styling-options-page}
 
 The visual design of your options page should align with Chrome's Material Design guidelines while reflecting your extension's brand. Use consistent spacing, readable typography, and appropriate color contrasts.
 
-CSS Variables for Theming
+### CSS Variables for Theming
 
 Implement CSS variables to support light and dark modes and make future theme changes straightforward:
 
@@ -392,7 +392,7 @@ body {
 }
 ```
 
-Responsive Design
+### Responsive Design
 
 Your options page should work well on various screen sizes. Use flexible layouts and test on different viewport widths:
 
@@ -424,11 +424,11 @@ Your options page should work well on various screen sizes. Use flexible layouts
 
 ---
 
-Accessibility Considerations {#accessibility}
+## Accessibility Considerations {#accessibility}
 
 A professional options page is accessible to all users, including those using assistive technologies. Chrome extensions often serve users with various abilities, making accessibility essential.
 
-Semantic HTML
+### Semantic HTML
 
 Use proper HTML elements for their intended purposes. Screen readers rely on semantic structure:
 
@@ -445,7 +445,7 @@ Use proper HTML elements for their intended purposes. Screen readers rely on sem
 </form>
 ```
 
-Focus Management and ARIA
+### Focus Management and ARIA
 
 Ensure keyboard users can navigate all controls and understand their current focus:
 
@@ -462,7 +462,7 @@ Ensure keyboard users can navigate all controls and understand their current foc
 </p>
 ```
 
-Color Contrast
+### Color Contrast
 
 Maintain WCAG AA compliance with sufficient color contrast ratios:
 
@@ -479,13 +479,13 @@ Maintain WCAG AA compliance with sufficient color contrast ratios:
 
 ---
 
-Testing Your Options Page {#testing-options-page}
+## Testing Your Options Page {#testing-options-page}
 
 Thorough testing ensures your options page works correctly across different scenarios and user configurations.
 
-Manual Testing Checklist
+### Manual Testing Checklist
 
-Test these scenarios before releasing your extension:
+### Test these scenarios before releasing your extension:
 
 - All form inputs accept valid values and reject invalid ones
 - Settings persist after closing and reopening the options page
@@ -495,7 +495,7 @@ Test these scenarios before releasing your extension:
 - Dark mode and theme switching work correctly
 - All keyboard shortcuts function as expected
 
-Automated Testing with Playwright
+### Automated Testing with Playwright
 
 Consider adding automated tests for critical functionality:
 
@@ -520,7 +520,7 @@ test('options page saves settings', async ({ page }) => {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 A well-designed options page is essential for any professional Chrome extension. It serves as the primary interface for users to customize their experience, and its quality reflects directly on your extension's overall professionalism. By following the patterns and best practices outlined in this guide, you can create an options page that is intuitive, accessible, and robust.
 

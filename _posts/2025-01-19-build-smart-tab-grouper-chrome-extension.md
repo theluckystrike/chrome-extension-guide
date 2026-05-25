@@ -18,7 +18,7 @@ In this comprehensive tutorial, we'll walk through building a smart tab grouper 
 
 ---
 
-Why Build a Tab Grouper Extension? {#why-build-tab-grouper}
+## Why Build a Tab Grouper Extension? {#why-build-tab-grouper}
 
 Before diving into the code, let's understand why tab grouper extensions are so popular and valuable. Chrome's built-in tab groups feature is powerful, but it requires manual organization. A smart tab grouper extension can automatically:
 
@@ -33,7 +33,7 @@ The demand for tools that help organize tabs Chrome has never been higher. With 
 
 ---
 
-Project Setup and Prerequisites {#project-setup}
+## Project Setup and Prerequisites {#project-setup}
 
 Before we start coding, let's set up our development environment. You'll need:
 
@@ -42,7 +42,7 @@ Before we start coding, let's set up our development environment. You'll need:
 3. Basic knowledge of HTML, CSS, and JavaScript
 4. Node.js (optional, but helpful for development)
 
-Creating the Project Structure
+### Creating the Project Structure
 
 Create a new folder for your extension and set up the following structure:
 
@@ -65,7 +65,7 @@ tab-grouper/
 
 ---
 
-The Manifest File: Your Extension's Foundation {#manifest-file}
+## The Manifest File: Your Extension's Foundation {#manifest-file}
 
 Every Chrome extension starts with a `manifest.json` file. This configuration file tells Chrome about your extension's permissions, files, and capabilities. For our tab grouper extension, we'll use Manifest V3, the latest version of Chrome's extension platform.
 
@@ -108,7 +108,7 @@ This manifest requests the necessary permissions to read tab information, store 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension's icon in the toolbar. Let's create a clean, intuitive interface for our tab grouper extension.
 
@@ -315,7 +315,7 @@ button {
 
 ---
 
-The Logic: Implementing Auto Group Tabs {#implementing-auto-group}
+## The Logic: Implementing Auto Group Tabs {#implementing-auto-group}
 
 Now comes the core functionality. We'll create a background script that handles the actual tab grouping logic. This is where our tab grouper extension really shines.
 
@@ -483,7 +483,7 @@ This background script is the brain of our tab grouper extension. It handles:
 
 ---
 
-Connecting the Popup {#popup-logic}
+## Connecting the Popup {#popup-logic}
 
 Now let's connect our popup HTML to the background script with JavaScript:
 
@@ -568,7 +568,7 @@ async function updateStats() {
 
 ---
 
-Adding Content Script for Advanced Features {#content-script}
+## Adding Content Script for Advanced Features {#content-script}
 
 To make our tab grouper extension even smarter, let's add a content script that can analyze page content and suggest appropriate groups. This is particularly useful for organizing tabs Chrome based on content type.
 
@@ -641,7 +641,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Creating an Options Page {#options-page}
+## Creating an Options Page {#options-page}
 
 For a complete tab grouper extension, users should be able to customize their grouping behavior. Let's create an options page:
 
@@ -754,7 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we've built all the components, let's test our tab grouper extension:
 
@@ -769,7 +769,7 @@ You should see your tabs automatically organized by domain with color-coded grou
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic auto group tabs functionality working, consider adding these advanced features:
 
@@ -790,7 +790,7 @@ Save and restore tab groups across browser sessions.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a tab grouper extension is an excellent project that combines practical utility with meaningful Chrome extension development skills. You've learned how to:
 
@@ -804,4 +804,4 @@ This project provides a solid foundation for building more complex Chrome extens
 
 Remember, the best extensions solve real problems. As you continue development, gather feedback from users and iterate on features. A tab grouper extension that truly helps people organize tabs Chrome can become a valuable tool for thousands of users.
 
-Now it's your turn to take this foundation and build something amazing!
+### Now it's your turn to take this foundation and build something amazing!

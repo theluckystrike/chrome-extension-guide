@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-communi
 last_modified_at: 2026-01-15
 ---
 
-Content Script Communication Bridge
+### Content Script Communication Bridge
 
-Overview {#overview}
+## Overview {#overview}
 
 Content scripts run in Chrome's [isolated world](../guides/content-script-isolation.md), separate from the page's JavaScript context. Both can access the DOM, but cannot directly share variables or call each other's functions. This guide covers practical patterns for bridging these worlds.
 
@@ -16,15 +16,15 @@ See also: [Content Script Isolation](./content-script-isolation.md), [Iframe Com
 
 ---
 
-The Communication Problem {#the-communication-problem}
+## The Communication Problem {#the-communication-problem}
 
 Both worlds see the same DOM, but have separate JavaScript contexts. Communication must go through the DOM. the only shared resource.
 
 ---
 
-Pattern 1: window.postMessage Bridge {#pattern-1-windowpostmessage-bridge}
+## Pattern 1: window.postMessage Bridge {#pattern-1-windowpostmessage-bridge}
 
-Extension → Page {#extension-page}
+## Extension → Page {#extension-page}
 
 ```ts
 // content.ts. Send FROM extension TO page
@@ -45,7 +45,7 @@ document.getElementById('extension-bridge')?.addEventListener('extension-message
 });
 ```
 
-Page → Extension {#page-extension}
+## Page → Extension {#page-extension}
 
 ```js
 // Page script. Send TO extension
@@ -66,7 +66,7 @@ window.addEventListener('message', (event) => {
 
 ---
 
-Pattern 2: CustomEvent Dispatching {#pattern-2-customevent-dispatching}
+## Pattern 2: CustomEvent Dispatching {#pattern-2-customevent-dispatching}
 
 ```ts
 // content.ts. Notify page of extension state
@@ -84,7 +84,7 @@ document.addEventListener('extension-state-changed', (e) => {
 
 ---
 
-Pattern 3: DOM Attribute Signaling {#pattern-3-dom-attribute-signaling}
+## Pattern 3: DOM Attribute Signaling {#pattern-3-dom-attribute-signaling}
 
 ```ts
 // content.ts. Write state to DOM
@@ -105,9 +105,9 @@ observer.observe(document.body, { attributes: true, subtree: true });
 
 ---
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
-Always validate origin and message shape:
+### Always validate origin and message shape:
 
 ```ts
 window.addEventListener('message', (event) => {
@@ -124,7 +124,7 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Whitelist sources. Don't accept from any origin
 2. Validate structure. Check expected properties and types
@@ -133,9 +133,9 @@ Best Practices {#best-practices}
 
 ---
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
-Intercepting Page API Calls {#intercepting-page-api-calls}
+## Intercepting Page API Calls {#intercepting-page-api-calls}
 
 ```ts
 // content.ts. Inject fetch interceptor
@@ -154,7 +154,7 @@ script.textContent = `
 document.documentElement.appendChild(script);
 ```
 
-Injecting Data into Page Context {#injecting-data-into-page-context}
+## Injecting Data into Page Context {#injecting-data-into-page-context}
 
 ```ts
 // content.ts. Expose data to page
@@ -166,7 +166,7 @@ function exposeToPage(key: string, value: unknown) {
 exposeToPage('settings', { theme: 'dark' });
 ```
 
-Reading Page Variables {#reading-page-variables}
+## Reading Page Variables {#reading-page-variables}
 
 ```ts
 // content.ts. Read page state (if exposed)
@@ -178,7 +178,7 @@ const pageState = getPageVar<{ user: string }>('__pageState');
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Method | Direction | Best For |
 |--------|-----------|----------|

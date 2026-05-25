@@ -18,7 +18,7 @@ Whether you are a beginner looking to understand Chrome extension development or
 
 ---
 
-Why Build a QR Code Generator Chrome Extension {#why-build-qr-extension}
+## Why Build a QR Code Generator Chrome Extension {#why-build-qr-extension}
 
 Before diving into the technical details, let's explore why creating a qr code generator extension is worth your time and effort. The demand for quick QR code generation tools continues to grow as businesses and individuals seek convenient ways to share information digitally.
 
@@ -28,7 +28,7 @@ The skills you develop building this extension transfer directly to other Chrome
 
 ---
 
-Prerequisites and Development Setup {#prerequisites}
+## Prerequisites and Development Setup {#prerequisites}
 
 Before beginning your qr code generator extension project, ensure you have the necessary tools installed on your development machine. You will need a modern code editor such as Visual Studio Code, which provides excellent support for JavaScript development and file management.
 
@@ -40,13 +40,13 @@ For generating the actual QR codes, you have several JavaScript library options.
 
 ---
 
-Project Structure and File Organization {#project-structure}
+## Project Structure and File Organization {#project-structure}
 
 Every Chrome extension requires a specific file structure to function correctly. Let's organize our qr code generator extension with a clean, maintainable architecture. Create a new folder for your project and add the following files and directories.
 
 The essential files include the manifest.json file, which defines extension metadata and permissions, an HTML file for the popup interface, CSS for styling, JavaScript for the core functionality, and an icon file for the extension's visual representation in the Chrome UI.
 
-Your project structure should look like this:
+### Your project structure should look like this:
 
 ```
 qr-code-generator/
@@ -69,11 +69,11 @@ This organization separates concerns effectively, making your extension easy to 
 
 ---
 
-Creating the Manifest V3 Configuration {#manifest-v3}
+## Creating the Manifest V3 Configuration {#manifest-v3}
 
 The manifest.json file serves as the blueprint for your Chrome extension. It declares the extension's name, version, permissions, and the various components that make up its functionality. Chrome introduced Manifest V3 to improve security, privacy, and performance, so we will use this latest specification.
 
-Create your manifest.json with the following configuration:
+### Create your manifest.json with the following configuration:
 
 ```json
 {
@@ -116,11 +116,11 @@ Notice that we use a service worker for the background script rather than the ol
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface provides the primary user interaction point for your qr code generator extension. When users click the extension icon, they should see a clean, intuitive interface where they can enter text or URLs and instantly generate QR codes.
 
-Create popup.html with a straightforward structure:
+### Create popup.html with a straightforward structure:
 
 ```html
 <!DOCTYPE html>
@@ -168,7 +168,7 @@ This HTML provides a clean form with a textarea for input, a checkbox to quickly
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 The visual design of your extension significantly impacts user experience and perceived quality. Create popup.css with a modern, clean aesthetic that matches Chrome's Material Design guidelines:
 
@@ -302,7 +302,7 @@ This CSS creates a polished, professional appearance with proper spacing, readab
 
 ---
 
-Implementing Core Functionality {#javascript-implementation}
+## Implementing Core Functionality {#javascript-implementation}
 
 The JavaScript logic brings your qr code generator extension to life. Create popup.js with the following implementation:
 
@@ -410,7 +410,7 @@ This JavaScript handles all the core functionality including generating QR codes
 
 ---
 
-Adding Background Service Worker {#background-worker}
+## Adding Background Service Worker {#background-worker}
 
 The background service worker handles events that occur even when the popup is not open. For a qr code generator extension, this can include keyboard shortcuts, context menu integration, or automatic URL capture. Let's create a basic background.js:
 
@@ -447,11 +447,11 @@ This background worker initializes default settings when the extension first ins
 
 ---
 
-Content Script for Enhanced Features {#content-script}
+## Content Script for Enhanced Features {#content-script}
 
 Content scripts allow your extension to interact with web pages. While not strictly necessary for a basic qr code generator extension, adding a content script enables powerful features like generating QR codes for selected text or the current page URL directly from the page context.
 
-Create content.js:
+### Create content.js:
 
 ```javascript
 // Content script for QR Code Generator Extension
@@ -483,7 +483,7 @@ This content script enables additional functionality like capturing selected tex
 
 ---
 
-Creating Extension Icons {#icons}
+## Creating Extension Icons {#icons}
 
 Every Chrome extension requires icons at various sizes. You need to create or obtain icon files in the following sizes: 16x16, 48x48, and 128x128 pixels. For development purposes, you can create simple placeholder icons, but for production, invest in professional icon design.
 
@@ -493,7 +493,7 @@ Save your icons in the icons folder with the filenames icon16.png, icon48.png, a
 
 ---
 
-Loading and Testing Your Extension {#testing}
+## Loading and Testing Your Extension {#testing}
 
 Chrome provides excellent support for testing extensions during development. To load your qr code generator extension, follow these steps:
 
@@ -507,7 +507,7 @@ If you encounter errors, right-click anywhere in the popup and select "Inspect" 
 
 ---
 
-Debugging Common Issues {#debugging}
+## Debugging Common Issues {#debugging}
 
 Even well-built extensions encounter issues during development. Here are common problems you might encounter and their solutions.
 
@@ -521,7 +521,7 @@ Permission errors typically stem from incorrect permission names in the manifest
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your qr code generator extension is complete and thoroughly tested, you can publish it to the Chrome Web Store for millions of Chrome users to discover and install.
 
@@ -533,7 +533,7 @@ Once approved, your qr code generator extension becomes available to all Chrome 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a qr code generator extension for Chrome represents an excellent project that teaches valuable skills while producing a genuinely useful tool. Throughout this tutorial, you have learned how to create a Manifest V3 extension, build an intuitive popup interface, implement QR code generation functionality, and prepare your extension for testing and publication.
 

@@ -7,18 +7,18 @@ last_modified_at: 2026-01-15
 ---
 Testing Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 Testing extensions is tricky because they run across multiple contexts (background, popup, content scripts) and depend on Chrome APIs. This guide covers strategies from unit tests to manual testing.
 
-Testing Pyramid for Extensions {#testing-pyramid-for-extensions}
+## Testing Pyramid for Extensions {#testing-pyramid-for-extensions}
 1. Unit tests. test pure logic, schema definitions, message types
 2. Integration tests. test with mocked Chrome APIs
 3. E2E tests. test the loaded extension in a real browser (Puppeteer/Playwright)
 4. Manual testing. load unpacked and verify
 
-Unit Testing Setup {#unit-testing-setup}
+## Unit Testing Setup {#unit-testing-setup}
 
-Install dependencies {#install-dependencies}
+## Install dependencies {#install-dependencies}
 ```bash
 npm install -D vitest @anthropic-ai/claude-code
 Testing Chrome Extensions Comprehensively
@@ -57,9 +57,9 @@ describe('parseUrl', () => {
 });
 ```
 
-Testing @theluckystrike/webext-storage {#testing-theluckystrikewebext-storage}
+## Testing @theluckystrike/webext-storage {#testing-theluckystrikewebext-storage}
 
-Test schema definitions {#test-schema-definitions}
+## Test schema definitions {#test-schema-definitions}
 ```ts
 import { defineSchema } from "@theluckystrike/webext-storage";
 
@@ -78,7 +78,7 @@ describe("schema", () => {
 });
 ```
 
-Mock chrome.storage for integration tests {#mock-chromestorage-for-integration-tests}
+## Mock chrome.storage for integration tests {#mock-chromestorage-for-integration-tests}
 ```ts
 // __mocks__/chrome.ts
 const store: Record<string, unknown> = {};
@@ -111,7 +111,7 @@ const mockStorage = {
 (globalThis as any).chrome = { storage: mockStorage, runtime: { lastError: null } };
 ```
 
-Test storage operations {#test-storage-operations}
+## Test storage operations {#test-storage-operations}
 ```ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
@@ -139,9 +139,9 @@ describe("TypedStorage", () => {
 });
 ```
 
-Testing @theluckystrike/webext-messaging {#testing-theluckystrikewebext-messaging}
+## Testing @theluckystrike/webext-messaging {#testing-theluckystrikewebext-messaging}
 
-Test message type definitions {#test-message-type-definitions}
+## Test message type definitions {#test-message-type-definitions}
 ```ts
 // Compile-time type testing
 type Messages = {
@@ -155,7 +155,7 @@ import { createMessenger } from "@theluckystrike/webext-messaging";
 const msg = createMessenger<Messages>();
 ```
 
-Mock chrome.runtime for messaging tests {#mock-chromeruntime-for-messaging-tests}
+## Mock chrome.runtime for messaging tests {#mock-chromeruntime-for-messaging-tests}
 ```ts
 const listeners: Function[] = [];
 
@@ -257,7 +257,7 @@ describe('scraper', () => {
 });
 ```
 
-E2E Testing with Puppeteer {#e2e-testing-with-puppeteer}
+## E2E Testing with Puppeteer {#e2e-testing-with-puppeteer}
 4. Testing Service Worker Handlers
 
 ```typescript
@@ -272,7 +272,7 @@ describe('handlers', () => {
 });
 ```
 
-Manual Testing Checklist {#manual-testing-checklist}
+## Manual Testing Checklist {#manual-testing-checklist}
 - [ ] Load unpacked extension in chrome://extensions
 - [ ] Test popup opens and displays correctly
 - [ ] Test all popup actions
@@ -286,14 +286,14 @@ Manual Testing Checklist {#manual-testing-checklist}
 - [ ] Check DevTools console for errors in each context
 - [ ] Test on Chrome stable (not just dev)
 
-Debugging Tips {#debugging-tips}
+## Debugging Tips {#debugging-tips}
 - Background: `chrome://extensions` > service worker "Inspect"
 - Popup: right-click popup > "Inspect"
 - Content script: page DevTools > Console (select extension context in dropdown)
 - Storage: DevTools > Application > Extension Storage
 - Network: DevTools > Network tab (for fetch calls from background)
 
-CI Setup (GitHub Actions) {#ci-setup-github-actions}
+## CI Setup (GitHub Actions) {#ci-setup-github-actions}
 5. Testing Popup UI Components
 
 ```typescript
@@ -433,7 +433,7 @@ jobs:
       - run: npm run test:e2e
 ```
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 - [Background Patterns](background-patterns.md)
 - [Content Script Patterns](content-script-patterns.md)
 - [Popup Patterns](popup-patterns.md)

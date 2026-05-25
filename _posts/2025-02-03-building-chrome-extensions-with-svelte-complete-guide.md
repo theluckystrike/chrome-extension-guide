@@ -17,23 +17,23 @@ This comprehensive guide walks you through building production-ready Chrome exte
 
 ---
 
-Why Svelte is Perfect for Chrome Extensions {#why-svelte}
+## Why Svelte is Perfect for Chrome Extensions {#why-svelte}
 
 The case for Svelte in Chrome extension development rests on three fundamental pillars: bundle size, runtime performance, and developer experience.
 
-Zero Runtime Overhead
+### Zero Runtime Overhead
 
 Unlike React, which ships a runtime library to interpret component instructions at runtime, Svelte compiles your components into vanilla JavaScript that manipulates the DOM directly. This means no reconciliation algorithm, no virtual DOM diffing, and no runtime bundle overhead. For Chrome extensions, where popup scripts must execute immediately when users click the extension icon, this difference is measurable and significant.
 
 Consider the bundle size comparison: a minimal React-based popup with state management typically weighs 40-80KB gzipped, while an equivalent Svelte popup often comes in under 10KB. That is a 5-8x reduction in payload that translates directly to faster popup open times, especially on slower devices or when users have dozens of extensions installed.
 
-Performance That Scales
+### Performance That Scales
 
 Chrome extensions face unique performance constraints. The popup UI exists in a separate context from the host page, but share the same memory space. Memory leaks in your extension directly impact browser performance, and users notice. Svelte's reactive system is designed from the ground up to be efficient, updates are surgical, touching only the DOM nodes that actually changed.
 
 The absence of a runtime also means there is no overhead from framework hooks, effects, or reconciliation passes. Your extension does the minimum work necessary to update the UI, conserving both CPU and memory resources.
 
-Developer Experience That Sticks
+### Developer Experience That Sticks
 
 Svelte's component syntax feels like writing enhanced HTML. Styles are scoped by default, reactivity is intuitive (no useState or useEffect hooks to master), and animations are built into the framework. For developers coming from vanilla JavaScript or templating backgrounds, Svelte offers a gentle learning curve while still delivering professional-grade results.
 
@@ -41,11 +41,11 @@ For a deeper comparison of frameworks, see our [Chrome extension framework compa
 
 ---
 
-SvelteKit vs Vanilla Svelte for Extensions {#sveltekit-vs-vanilla}
+## SvelteKit vs Vanilla Svelte for Extensions {#sveltekit-vs-vanilla}
 
 One of the first decisions you will face is whether to use SvelteKit or vanilla Svelte with Vite. The answer depends on your extension's complexity and whether you need server-side features.
 
-When to Choose Vanilla Svelte
+### When to Choose Vanilla Svelte
 
 For most Chrome extensions, vanilla Svelte with Vite is the right choice. You do not need server-side rendering, API routes, or the full application framework that SvelteKit provides. A straightforward Vite + Svelte setup gives you:
 
@@ -56,7 +56,7 @@ For most Chrome extensions, vanilla Svelte with Vite is the right choice. You do
 
 The vanilla approach keeps your build configuration simple and your output predictable. You map exactly which files become which extension components, with no framework-imposed conventions.
 
-When to Choose SvelteKit
+### When to Choose SvelteKit
 
 SvelteKit makes sense when your extension is part of a larger web application, or when you want to share code between your website and extension. If you are building an extension that accompanies a SaaS product and need to share authentication logic, API clients, or UI components between contexts, SvelteKit's module system simplifies this significantly.
 
@@ -64,13 +64,13 @@ However, for standalone extensions, the added complexity of SvelteKit rarely pro
 
 ---
 
-Project Setup: Vite + Svelte + CRXJS {#vite-svelte-crxjs}
+## Project Setup: Vite + Svelte + CRXJS {#vite-svelte-crxjs}
 
 Modern Chrome extension development requires a solid build pipeline. We will use Vite for fast builds, Svelte for the UI, and CRXJS for packaging the extension.
 
-Creating the Project
+### Creating the Project
 
-Initialize a new Svelte project with Vite:
+### Initialize a new Svelte project with Vite:
 
 ```bash
 npm create vite@latest my-extension -- --template svelte-ts
@@ -78,7 +78,7 @@ cd my-extension
 npm install
 ```
 
-Installing CRXJS
+### Installing CRXJS
 
 CRXJS is the modern choice for packaging Chrome extensions with Vite. Unlike the older chrome-extension-cli tools, CRXJS supports Vite's development workflow smoothly:
 
@@ -86,7 +86,7 @@ CRXJS is the modern choice for packaging Chrome extensions with Vite. Unlike the
 npm install -D @crxjs/vite-plugin
 ```
 
-Configuring Vite
+### Configuring Vite
 
 Create a `vite.config.ts` that sets up both Svelte and CRXJS:
 
@@ -118,11 +118,11 @@ This configuration builds your popup from `index.html`, registers a service work
 
 ---
 
-Building Popup Components {#popup-components}
+## Building Popup Components {#popup-components}
 
 The popup is often the primary user interface for your extension. Svelte makes building reactive, responsive popups remarkably straightforward.
 
-Basic Popup Structure
+### Basic Popup Structure
 
 ```svelte
 <script lang="ts">
@@ -189,11 +189,11 @@ Notice how Svelte's `{#if}` blocks handle conditional rendering without needing 
 
 ---
 
-Content Script Svelte Mounting {#content-script-svelte}
+## Content Script Svelte Mounting {#content-script-svelte}
 
 Content scripts run in the context of web pages, not your extension's popup. This creates an interesting challenge: how do you use Svelte components in an environment designed for vanilla JavaScript?
 
-Mounting Approach
+### Mounting Approach
 
 The solution is to mount Svelte components dynamically onto page elements:
 
@@ -227,7 +227,7 @@ if (document.readyState === 'loading') {
 
 This pattern lets you inject rich, reactive interfaces into any webpage while keeping your extension code organized and maintainable.
 
-Handling Lifecycle
+### Handling Lifecycle
 
 Content scripts persist across page navigation, but your Svelte components need to clean up properly:
 
@@ -252,11 +252,11 @@ Content scripts persist across page navigation, but your Svelte components need 
 
 ---
 
-Reactive Stores for Chrome Storage {#reactive-stores}
+## Reactive Stores for Chrome Storage {#reactive-stores}
 
 One of Svelte's most powerful features is its stores, reactive state containers that automatically update any component that subscribes to them. This pairs beautifully with chrome.storage.
 
-Creating a Chrome Storage Store
+### Creating a Chrome Storage Store
 
 ```typescript
 // stores/storage.ts
@@ -327,7 +327,7 @@ export const settings = derived(storage, $storage => $storage.settings);
 export const userData = derived(storage, $storage => $storage.userData);
 ```
 
-Using the Store in Components
+### Using the Store in Components
 
 ```svelte
 <script lang="ts">
@@ -361,11 +361,11 @@ The `$` prefix subscribes to the store reactively, Svelte automatically handles 
 
 ---
 
-Transition Animations in Popups {#transition-animations}
+## Transition Animations in Popups {#transition-animations}
 
 Svelte's built-in transition engine makes adding polish to your popup effortless. Unlike React, which requires external libraries like Framer Motion, Svelte ships with sophisticated transitions out of the box.
 
-Basic Transitions
+### Basic Transitions
 
 {% raw %}
 ```svelte
@@ -399,7 +399,7 @@ Basic Transitions
 ```
 {% endraw %}
 
-Crossfade for List Items
+### Crossfade for List Items
 
 When reordering or removing items, Svelte's crossfade provides magical animations:
 
@@ -441,11 +441,11 @@ These animations work in popup contexts just as they do in web applications, giv
 
 ---
 
-Svelte Actions for DOM Manipulation {#svelte-actions}
+## Svelte Actions for DOM Manipulation {#svelte-actions}
 
 Svelte actions are functions that run when an element is mounted, perfect for integrating third-party libraries or performing DOM operations that lie outside Svelte's reactive system.
 
-Basic Action Pattern
+### Basic Action Pattern
 
 ```typescript
 // actions/tooltip.ts
@@ -489,7 +489,7 @@ export function tooltip(node: HTMLElement, text: string) {
 }
 ```
 
-Using Actions in Components
+### Using Actions in Components
 
 ```svelte
 <script>
@@ -505,7 +505,7 @@ Actions are ideal for integrating libraries like Chart.js, D3, or Monaco Editor 
 
 ---
 
-Production Build Size Comparison {#build-comparison}
+## Production Build Size Comparison {#build-comparison}
 
 Real-world bundle size directly impacts extension performance and user experience. Here is how Svelte compares to React and Vue for typical extension popups:
 
@@ -521,11 +521,11 @@ For extensions where every millisecond matters (and where users notice popup del
 
 ---
 
-When to Choose Svelte Over React or Vue {#when-to-choose-svelte}
+## When to Choose Svelte Over React or Vue {#when-to-choose-svelte}
 
 Svelte is not always the right choice, but for Chrome extensions, it frequently is. Here is when to pick Svelte:
 
-Choose Svelte When:
+### Choose Svelte When:
 
 - Performance is critical: You need the fastest possible popup open times
 - Bundle size matters: You want to minimize the extension's memory footprint
@@ -544,7 +544,7 @@ For most Chrome extensions, the simplicity and performance of Svelte make it the
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Svelte offers Chrome extension developers a compelling combination: blazing-fast runtime performance, minimal bundle sizes, and an elegant component model that makes building complex UIs straightforward. From reactive stores that automatically sync with chrome.storage, to built-in transition animations, to the simplicity of Svelte actions for DOM integration, Svelte provides modern tooling that feels purpose-built for extension development.
 

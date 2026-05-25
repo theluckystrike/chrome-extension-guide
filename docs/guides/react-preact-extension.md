@@ -12,7 +12,7 @@ Building Chrome extensions with modern UI frameworks like React and Preact has b
 
 This guide walks you through building Chrome extension UIs with React and Preact, covering popup development, options pages, content script injection, state management patterns, and bundle size optimization strategies that keep your extension fast and efficient.
 
-Why Use React or Preact for Extensions {#why-react-preact}
+## Why Use React or Preact for Extensions {#why-react-preact}
 
 React and Preact each offer distinct advantages for extension development. React provides the largest ecosystem, extensive documentation, and smooth integration with popular tooling. Its component model maps naturally to extension UIs, where you often have distinct interfaces for popup, options, and side panel contexts. The virtual DOM ensures efficient updates, which is particularly valuable in extension contexts where resources are more constrained than in regular web applications.
 
@@ -20,7 +20,7 @@ Preact presents a compelling alternative when bundle size is critical. At just 3
 
 Both frameworks benefit from strong TypeScript support, enabling type-safe extension development that catches errors before runtime. The choice between them often comes down to your specific requirements: choose React for maximum ecosystem access and team familiarity, choose Preact when minimizing bundle size is paramount.
 
-Setting Up Your Project {#setting-up-project}
+## Setting Up Your Project {#setting-up-project}
 
 Begin with a project structure that separates different extension contexts while enabling code sharing:
 
@@ -69,7 +69,7 @@ export default defineConfig({
 });
 ```
 
-Building the Popup with React {#building-popup}
+## Building the Popup with React {#building-popup}
 
 The extension popup is often the primary interaction point for users, making its design and performance critical. React's component model excels here, allowing you to build complex, interactive interfaces that remain maintainable.
 
@@ -90,7 +90,7 @@ Create your popup entry point with explicit dimensions in the HTML:
 </html>
 ```
 
-Set appropriate dimensions in your manifest:
+### Set appropriate dimensions in your manifest:
 
 ```json
 {
@@ -142,7 +142,7 @@ export function PopupApp() {
 }
 ```
 
-Creating the Options Page {#options-page}
+## Creating the Options Page {#options-page}
 
 The options page serves as your extension's settings hub, typically requiring more screen real estate and more complex configuration interfaces than the popup. React's form handling capabilities shine here, especially when combined with state management libraries.
 
@@ -204,7 +204,7 @@ export function GeneralSettings() {
 }
 ```
 
-Content Script UI Injection {#content-script-injection}
+## Content Script UI Injection {#content-script-injection}
 
 Injecting React components into web pages requires careful consideration of style isolation and DOM interaction. The Shadow DOM provides essential encapsulation, preventing your extension's styles from bleeding into the host page and vice versa.
 
@@ -258,7 +258,7 @@ if (document.readyState === 'loading') {
 }
 ```
 
-Configure the content script in your manifest:
+### Configure the content script in your manifest:
 
 ```json
 {
@@ -287,7 +287,7 @@ const observer = new MutationObserver(() => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-State Management Patterns {#state-management}
+## State Management Patterns {#state-management}
 
 Managing state across extension contexts requires understanding Chrome's storage APIs and message passing system. Several patterns work well depending on your complexity needs.
 
@@ -372,11 +372,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Bundle Size Optimization {#bundle-optimization}
+## Bundle Size Optimization {#bundle-optimization}
 
 Extension bundle size directly impacts load times and user perception of performance. Chrome extensions have a 128KB limit for each JavaScript file in MV3, making optimization essential for larger applications.
 
-Start with tree-shaking and code splitting:
+### Start with tree-shaking and code splitting:
 
 ```typescript
 // vite.config.ts
@@ -424,7 +424,7 @@ Implement lazy loading for extension pages:
 import('./popup');
 ```
 
-Use platform-specific imports to exclude unnecessary code:
+### Use platform-specific imports to exclude unnecessary code:
 
 ```typescript
 // Only import what's needed
@@ -441,7 +441,7 @@ npx source-map-explorer dist/*.js
 
 Remove unused dependencies and consider lighter alternatives. For example, replace moment.js with date-fns or dayjs, or use native browser APIs where possible.
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Chrome Extension React Setup](./chrome-extension-react-setup.md). Detailed React setup for extensions
 - [Building with React](../patterns/building-with-react.md). React patterns specific to extensions
@@ -449,7 +449,7 @@ Related Guides {#related-guides}
 - [Vite Extension Setup](./vite-extension-setup.md). Build tool configuration
 - [Bundle Optimization](../patterns/bundle-optimization.md). Advanced optimization techniques
 
-Related Articles
+### Related Articles
 
 
 ---

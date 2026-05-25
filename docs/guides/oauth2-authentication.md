@@ -8,7 +8,7 @@ last_modified_at: 2026-01-15
 
 Chrome Extension OAuth2 Authentication. How to Sign In Users with Google, GitHub, and More
 
-Overview {#overview}
+## Overview {#overview}
 
 OAuth2 authentication is essential for Chrome extensions that need to access user data from third-party services. Whether you're building an extension that integrates with Google Drive, GitHub repositories, or any other OAuth-enabled API, understanding the `chrome.identity` API is crucial for implementing secure and smooth authentication.
 
@@ -16,7 +16,7 @@ Chrome extensions support two primary OAuth flows: the Google OAuth2 flow using 
 
 This guide covers everything you need to implement solid OAuth2 authentication in your Chrome extension, from basic token acquisition to advanced token refresh patterns and multi-provider setups.
 
-The chrome.identity API {#the-chrome-identity-api}
+## The chrome.identity API {#the-chrome-identity-api}
 
 The `chrome.identity` API provides the foundation for authentication in Chrome extensions. Before using it, you must declare the `"identity"` permission in your `manifest.json`:
 
@@ -26,7 +26,7 @@ The `chrome.identity` API provides the foundation for authentication in Chrome e
 }
 ```
 
-The API offers four key methods:
+### The API offers four key methods:
 
 - `chrome.identity.getAuthToken()`. Retrieves OAuth2 tokens for Google APIs
 - `chrome.identity.launchWebAuthFlow()`. Initiates OAuth/OAuth2 flow for third-party providers
@@ -35,11 +35,11 @@ The API offers four key methods:
 
 Understanding when to use each method is key to building a proper authentication system.
 
-Google OAuth with getAuthToken {#google-oauth-with-getauthtoken}
+## Google OAuth with getAuthToken {#google-oauth-with-getauthtoken}
 
 For extensions that need to access Google APIs (Gmail, Drive, Calendar, YouTube, etc.), Chrome provides a simplified OAuth flow through `getAuthToken`. This method automatically handles token caching and works smoothly with Google's OAuth2 infrastructure.
 
-Manifest Configuration
+### Manifest Configuration
 
 First, configure your `manifest.json` with OAuth2 client details:
 
@@ -57,7 +57,7 @@ First, configure your `manifest.json` with OAuth2 client details:
 }
 ```
 
-Getting the Token
+### Getting the Token
 
 ```javascript
 function getGoogleAuthToken() {
@@ -90,7 +90,7 @@ async function fetchUserProfile() {
 }
 ```
 
-Interactive vs Silent Mode
+### Interactive vs Silent Mode
 
 The `interactive` parameter controls whether Chrome shows a popup to the user:
 
@@ -109,11 +109,11 @@ chrome.identity.getAuthToken({ interactive: false }, (token) => {
 });
 ```
 
-Third-Party OAuth with launchWebAuthFlow {#third-party-oauth-with-launchwebauthflow}
+## Third-Party OAuth with launchWebAuthFlow {#third-party-oauth-with-launchwebauthflow}
 
 For non-Google OAuth providers, use `launchWebAuthFlow`. This method opens an interactive web auth flow in a popup window, then redirects back to your extension with the authorization code or access token.
 
-How It Works
+### How It Works
 
 1. Build the authorization URL with your client ID and desired scopes
 2. Call `launchWebAuthFlow` with the URL
@@ -122,7 +122,7 @@ How It Works
 5. Extract the code or token from the redirect URL
 6. Exchange the code for tokens (if needed)
 
-GitHub OAuth Example
+### GitHub OAuth Example
 
 ```javascript
 async function signInWithGitHub() {
@@ -172,9 +172,9 @@ function verifyState(state) {
 }
 ```
 
-Custom OAuth Provider
+### Custom OAuth Provider
 
-The same pattern works for any OAuth provider:
+### The same pattern works for any OAuth provider:
 
 ```javascript
 async function signInWithProvider(providerConfig) {
@@ -219,13 +219,13 @@ async function signInWithProvider(providerConfig) {
 }
 ```
 
-Token Storage Strategies {#token-storage-strategies}
+## Token Storage Strategies {#token-storage-strategies}
 
 Properly storing OAuth tokens is critical for security and user experience. Chrome provides several storage options:
 
-chrome.storage
+### chrome.storage
 
-The recommended approach uses `chrome.storage`:
+### The recommended approach uses `chrome.storage`:
 
 ```javascript
 // Using chrome.storage.local (persistent)
@@ -263,18 +263,18 @@ async function clearTokens() {
 }
 ```
 
-Security Considerations
+### Security Considerations
 
 - Never store tokens in localStorage. Content scripts can access localStorage, making tokens vulnerable to XSS attacks
 - Use chrome.storage.local or chrome.storage.sync. These are isolated from web pages
 - Encrypt sensitive tokens. For extra security, consider encrypting tokens before storage
 - Implement token expiration tracking. Always check if tokens are expired before using them
 
-Token Refresh Flow {#token-refresh-flow}
+## Token Refresh Flow {#token-refresh-flow}
 
 Access tokens expire (typically within 1 hour). Your extension must implement a refresh mechanism to maintain continuous access without requiring the user to re-authenticate.
 
-Implementing Token Refresh
+### Implementing Token Refresh
 
 ```javascript
 class TokenManager {
@@ -347,7 +347,7 @@ async function makeAuthenticatedRequest(url) {
 }
 ```
 
-Automatic Token Refresh
+### Automatic Token Refresh
 
 For smooth experience, check and refresh tokens before making API calls:
 
@@ -377,7 +377,7 @@ async function apiRequest(endpoint, options = {}) {
 }
 ```
 
-PKCE Flow for Enhanced Security {#pkce-flow-for-enhanced-security}
+## PKCE Flow for Enhanced Security {#pkce-flow-for-enhanced-security}
 
 For public clients (including browser extensions), implementing PKCE (Proof Key for Code Exchange) adds an extra layer of security by preventing authorization code interception attacks.
 
@@ -439,7 +439,7 @@ async function authWithPKCE() {
 }
 ```
 
-Multi-Provider Authentication Setup {#multi-provider-authentication-setup}
+## Multi-Provider Authentication Setup {#multi-provider-authentication-setup}
 
 If your extension supports multiple OAuth providers, implement a unified authentication system:
 
@@ -561,7 +561,7 @@ const googleAuth = await auth.signIn('google');
 await auth.signOut('github');
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Use HTTPS always. Never transmit tokens over unencrypted connections
 2. Implement proper error handling. Handle network errors, token expiration, and revocation
@@ -571,7 +571,7 @@ Best Practices {#best-practices}
 6. Monitor for token revocation. Handle cases where users revoke access from provider settings
 7. Store provider information. Track which provider was used for each stored token
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing OAuth2 authentication in Chrome extensions requires understanding the `chrome.identity` API's capabilities and limitations. For Google services, `getAuthToken` provides a streamlined experience, while `launchWebAuthFlow` offers flexibility for any OAuth2-compatible provider.
 

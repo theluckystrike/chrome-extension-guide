@@ -15,7 +15,7 @@ If you have ever found yourself reaching for your mouse dozens of times per hour
 
 The keyboard-first approach to tab management is not just about speed, though that is certainly a major benefit. It is about maintaining your flow state, keeping your hands on the keyboard where they belong when you are doing serious work, and reducing the context-switching overhead that comes with reaching for the mouse. Whether you are a developer, writer, researcher, or anyone who keeps more than a handful of tabs open, mastering these keyboard techniques will transform how you interact with your browser.
 
-Why Keyboard-Only Tab Management Matters
+### Why Keyboard-Only Tab Management Matters
 
 Before we dive into the specific shortcuts and techniques, it is worth understanding why a keyboard-only workflow with Tab Suspender Pro is so powerful. The average knowledge worker switches context between applications dozens of times per day, and each switch involves a cognitive load that takes time to recover from. When you move your hand from your keyboard to your mouse, you are breaking your flow. You are interrupting your thought process to perform a mechanical action that could be accomplished with a simple keystroke.
 
@@ -23,11 +23,11 @@ Tab Suspender Pro was designed with this philosophy in mind. The extension provi
 
 Additionally, a keyboard-only workflow is significantly faster once you have built the requisite muscle memory. Studies consistently show that expert keyboard users can perform tasks two to three times faster than their mouse-dependent counterparts. When you combine Tab Suspender Pro is memory-saving capabilities with keyboard-driven efficiency, you create a browsing experience that is both more productive and less fatiguing.
 
-Complete Tab Suspender Pro Keyboard Shortcuts Reference
+### Complete Tab Suspender Pro Keyboard Shortcuts Reference
 
 Tab Suspender Pro ships with an extensive collection of default keyboard shortcuts designed to handle virtually any tab management scenario. Understanding these shortcuts is the foundation of building a keyboard-only workflow. Below is a comprehensive reference of all available shortcuts for both Windows and Mac users.
 
-Primary Suspension Commands
+### Primary Suspension Commands
 
 The core functionality of Tab Suspender Pro revolves around suspending and resuming tabs, and there are dedicated shortcuts for each of these actions. Ctrl+Shift+S (Windows) or Cmd+Shift+S (Mac) is the primary suspension command, immediately suspending the currently active tab. This is your go-to shortcut when you need to free up memory right now without any confirmation dialogs or extra steps.
 
@@ -37,7 +37,7 @@ For users who need to suspend multiple tabs at once, Tab Suspender Pro provides 
 
 To bring all your suspended tabs back at once, use Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac). This wakes every suspended tab in the current window simultaneously. This is perfect for those moments when you need to access your entire collection of reference materials at once.
 
-Whitelist and Exception Management
+### Whitelist and Exception Management
 
 Certain tabs should never be suspended, and Tab Suspender Pro provides keyboard shortcuts to manage these exceptions efficiently. Ctrl+Shift+D (Windows) or Cmd+Shift+D (Mac) adds the current tab is domain to your whitelist with a single keystroke. After whitelisting a domain, Tab Suspender Pro will never automatically suspend tabs from that domain, ensuring your email, Slack, project management tools, and other essential applications remain active.
 
@@ -45,13 +45,13 @@ To remove a domain from your whitelist, use Ctrl+Shift+X (Windows) or Cmd+Shift+
 
 For power users who need more granular control, Ctrl+Shift+E (Windows) or Cmd+Shift+E (Mac) opens the Tab Suspender Pro options page directly, allowing you to access advanced whitelist management, custom suspension rules, and other configuration options without leaving your keyboard.
 
-Tab Navigation Shortcuts
+### Tab Navigation Shortcuts
 
 While Tab Suspender Pro provides its own shortcuts for suspension and resumption, efficient keyboard-only workflows also require proficiency with Chrome is built-in tab navigation shortcuts. Ctrl+Tab cycles forward through your open tabs, while Ctrl+Shift+Tab cycles backward. Ctrl+1 through Ctrl+8 jump directly to specific tab positions, and Ctrl+9 jumps to the last tab regardless of its position.
 
 These Chrome shortcuts work smoothly with Tab Suspender Pro, and you can navigate to suspended tabs using these keys. When you land on a suspended tab, it will automatically wake as soon as it becomes active. This means you can use Ctrl+Tab to cycle through your tabs, and suspended tabs will wake instantly when they become the active tab.
 
-Setting Up Custom Keyboard Shortcuts
+### Setting Up Custom Keyboard Shortcuts
 
 While Tab Suspender Pro is default shortcuts are well-designed and intuitive, every power user has unique needs and existing muscle memory. Chrome provides a comprehensive interface for customizing keyboard shortcuts for any extension, giving you complete control over your hotkey configuration. Here is how to access and customize these settings.
 
@@ -65,11 +65,11 @@ One powerful strategy is to group related Tab Suspender Pro functions under cons
 
 Chrome also allows you to set different shortcuts for "In Chrome" (when you are in the browser window) versus "Global" (when Chrome is not the active application). The global shortcuts are particularly useful for users who want to manage their tabs even when working in other applications. To set a global shortcut, find the "Global" section at the bottom of the Tab Suspender Pro shortcuts page and assign your desired keys there.
 
-Suspend and Resume Workflows Without the Mouse
+### Suspend and Resume Workflows Without the Mouse
 
 Now that you understand the available shortcuts, let us explore practical workflows that use these keyboard commands for efficient tab management without ever touching your mouse. These workflows represent how power users actually work with Tab Suspender Pro on a daily basis.
 
-The Research Sprint Workflow
+### The Research Sprint Workflow
 
 The research sprint is perhaps the most common use case for Tab Suspender Pro, and a keyboard-only approach makes it dramatically more efficient. Imagine you are researching a complex topic, opening dozens of tabs from search results, Wikipedia articles, academic papers, and blog posts. Rather than letting these accumulate and slow your browser, you develop a rhythm using only your keyboard.
 
@@ -79,7 +79,7 @@ When you need to reference something from an earlier suspended tab, you have sev
 
 At the end of your research session, you might have 20 or 30 suspended tabs representing your collected sources. A quick Ctrl+Shift+R wakes them all at once for a final review. Any tabs you do not need can be closed with Ctrl+W, while the valuable ones remain accessible in your tab bar for future sessions.
 
-The Context Switching Workflow
+### The Context Switching Workflow
 
 If you work on multiple projects simultaneously, you likely have different sets of tabs for each. Tab Suspender Pro shortcuts make it easy to switch contexts quickly without ever touching your mouse. This context switching workflow is essential for developers, consultants, and anyone who juggles multiple responsibilities.
 
@@ -89,7 +89,7 @@ When you return to Project A later, Ctrl+Shift+R wakes everything you were worki
 
 For users with very complex workflows, combining Tab Suspender Pro with Chrome is tab groups feature creates even more powerful organization. You might have a "Research" group, a "Development" group, and a "Communication" group. Suspending entire groups becomes automatic with practice, and waking them up brings your entire workflow back in seconds.
 
-The Focus Mode Workflow
+### The Focus Mode Workflow
 
 Many power users create their own "focus mode" using keyboard shortcuts, eliminating visual clutter and maintaining concentration on the task at hand. This workflow is particularly effective for writers, developers, and anyone who needs to concentrate on a single task without visual distractions.
 
@@ -97,7 +97,7 @@ Start by pressing Ctrl+Shift+D on any tab you need to keep open, such as your em
 
 The result is a clean, focused browser window with only your essential tools visible, while your research and reference materials wait quietly in suspended state. You can quickly wake any suspended tab when you need it, then suspend it again when you are done. This creates a dynamic, focused environment that adapts to your immediate needs.
 
-Navigating Suspended Tabs Without the Mouse
+### Navigating Suspended Tabs Without the Mouse
 
 One of the most common concerns about suspended tabs is how to navigate them without using the mouse. The good news is that Tab Suspender Pro is designed to work smoothly with Chrome is keyboard navigation system, and suspended tabs wake instantly when they become active.
 
@@ -109,7 +109,7 @@ Chrome also supports searching for tabs using Ctrl+Shift+A (Windows) or Cmd+Shif
 
 The Tab Suspender Pro popup itself can be navigated entirely with the keyboard. When you click the extension icon to open the popup, you can use Tab to move between options, Space or Enter to activate buttons, and Escape to close the popup. This allows you to access Tab Suspender Pro is advanced features without ever reaching for your mouse.
 
-Combining Tab Suspender Pro with Vimium for Complete Mouse-Free Browsing
+### Combining Tab Suspender Pro with Vimium for Complete Mouse-Free Browsing
 
 For users committed to a fully keyboard-driven browsing experience, combining Tab Suspender Pro with Vimium creates an incredibly powerful synergy. Vimium is a Chrome extension that provides Vim-style keyboard shortcuts for navigation and browser control, and when used together with Tab Suspender Pro, you can perform virtually any browser action without touching your mouse.
 
@@ -123,7 +123,7 @@ To set up this combination, first install Vimium from the Chrome Web Store, then
 
 The learning curve for this combination is steeper than using either extension alone, but the productivity gains are substantial. Within a few days of practice, you will find yourself performing browser tasks that once required the mouse with just a few keystrokes. Your hands never leave the keyboard, your flow state remains unbroken, and your tab management becomes effortless.
 
-Advanced Tips for Keyboard Power Users
+### Advanced Tips for Keyboard Power Users
 
 As you become more comfortable with your keyboard-only Tab Suspender Pro workflow, consider these advanced techniques to further enhance your productivity. These tips represent the accumulated wisdom of power users who have fully embraced keyboard-driven browsing.
 
@@ -135,7 +135,7 @@ Third, consider using the Pomodoro Technique in conjunction with your keyboard w
 
 Finally, remember that building a keyboard-only workflow is a gradual process. Start by learning just two or three shortcuts that you use most frequently, and add more as they become muscle memory. Within a few weeks, you will wonder how you ever managed your tabs with a mouse.
 
-Conclusion
+### Conclusion
 
 Tab Suspender Pro is already an indispensable tool for anyone who wants to manage their browser tabs efficiently and conserve memory. But by mastering its keyboard shortcuts and integrating them into a complete keyboard-driven workflow, you unlock a level of productivity that mouse-dependent users can only dream about.
 

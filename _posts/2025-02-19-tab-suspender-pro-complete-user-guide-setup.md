@@ -15,7 +15,7 @@ If you have ever found yourself with 50+ browser tabs open, watching your laptop
 
 Tab Suspender Pro is a Chrome extension designed to automatically suspend inactive tabs, dramatically reducing memory usage and CPU consumption. we will walk you through everything from installation to advanced configuration, helping you get the most out of this powerful productivity tool.
 
-What is Tab Suspender Pro?
+### What is Tab Suspender Pro?
 
 Tab Suspender Pro is a browser extension that automatically pauses (suspends) tabs you have not used for a configurable period of time. When a tab is suspended, Chrome unloads its content from memory and replaces it with a lightweight placeholder. The tab's URL is preserved, so you can instantly resume it by clicking, Chrome will reload the page just as you left it.
 
@@ -23,7 +23,7 @@ This approach differs significantly from simply closing tabs. Suspended tabs rem
 
 The extension offers a range of configuration options, from simple one-click suspension to sophisticated rules-based automation. Whether you want a hands-off experience with automatic suspension or prefer granular control over which sites get suspended, Tab Suspender Pro has you covered.
 
-Installation from Chrome Web Store
+### Installation from Chrome Web Store
 
 Getting started with Tab Suspender Pro is straightforward. Here is the step-by-step installation process:
 
@@ -39,15 +39,15 @@ Getting started with Tab Suspender Pro is straightforward. Here is the step-by-s
 
 That is it, you are ready to start using Tab Suspender Pro. The extension begins working immediately with default settings, so tabs will begin suspending after a period of inactivity.
 
-First-Time Setup Walkthrough
+### First-Time Setup Walkthrough
 
 When you first install Tab Suspender Pro, the extension loads with sensible defaults designed to work well for most users. However, taking a few minutes to customize the settings will help you get the best experience.
 
-Opening the Settings Dashboard
+### Opening the Settings Dashboard
 
 Click the Tab Suspender Pro icon in your Chrome toolbar. The popup displays your current memory savings, the number of suspended tabs, and quick access to settings. Look for a gear icon or "Settings" link to access the full configuration options.
 
-Initial Configuration Decisions
+### Initial Configuration Decisions
 
 Before diving into settings, consider your typical browsing habits:
 
@@ -57,43 +57,43 @@ Before diving into settings, consider your typical browsing habits:
 
 For most users, starting with the default settings and then making adjustments based on your experience is the best approach. The extension is designed to work well out of the box.
 
-Configuration Options Explained
+### Configuration Options Explained
 
 Tab Suspender Pro provides a comprehensive set of configuration options that allow you to customize its behavior to match your workflow.
 
-Suspension Timer
+### Suspension Timer
 
 The suspension timer determines how long a tab must be inactive before it gets suspended. You can set this to values ranging from 30 seconds to several hours. The default is typically 5 minutes, which provides a good balance between resource savings and convenience.
 
 For maximum memory and battery savings, consider setting a shorter timer (1-2 minutes). For users who frequently switch between many tabs and find suspension disruptive, a longer timer (10-15 minutes) may be more comfortable. You can also set different timers for different situations using the advanced rules system.
 
-Pinned Tabs
+### Pinned Tabs
 
 By default, Tab Suspender Pro respects your pinned tabs. Pinned tabs in Chrome remain at the left side of your tab strip and are typically used for sites you want to keep accessible at all times. The extension will not automatically suspend pinned tabs, preserving your ability to quickly access your most important sites.
 
 If you want pinned tabs to suspend after a period of inactivity, you can change this in the settings. However, the default behavior of protecting pinned tabs is recommended for most users.
 
-Audio Tabs
+### Audio Tabs
 
 Tabs that are currently playing audio are automatically protected from suspension. This ensures that your music, podcasts, or video audio continues playing uninterrupted. The extension detects audio playback through Chrome's tab API and adds a visual indicator to audio tabs.
 
 Some users run audio in the background without realizing it, tabs playing auto-playing videos or sites with background audio features. Tab Suspender Pro correctly identifies these and prevents suspension, so audio playback is never interrupted.
 
-Whitelist Management
+### Whitelist Management
 
 The whitelist is one of the most important features for customizing Tab Suspender Pro. Sites on your whitelist will never be automatically suspended, ensuring that critical applications always remain active.
 
-Domain Whitelist
+### Domain Whitelist
 
 Adding a domain to your whitelist is straightforward. In the extension settings, look for the whitelist section and enter the domain you want to protect. For example, adding "gmail.com" will protect all Google Mail tabs. You can add as many domains as needed.
 
-URL Patterns
+### URL Patterns
 
 For more granular control, you can add specific URL patterns rather than entire domains. This is useful when you want to protect one page on a site but allow others to suspend. URL patterns support wildcards and regular expressions for advanced users.
 
 For example, you might whitelist "docs.google.com" for Google Docs but allow other Google services to suspend. Or you might protect only specific URLs containing "/spreadsheets/" while allowing other spreadsheet tabs to suspend after inactivity.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Tab Suspender Pro includes keyboard shortcuts for quick actions. While exact shortcuts may vary based on your Chrome version, common shortcuts include:
 
@@ -104,7 +104,7 @@ Tab Suspender Pro includes keyboard shortcuts for quick actions. While exact sho
 
 You can view and customize keyboard shortcuts in Chrome's extension settings. Navigate to chrome://extensions/shortcuts, find Tab Suspender Pro, and assign your preferred key combinations.
 
-Dark Mode and Theme Support
+### Dark Mode and Theme Support
 
 Tab Suspender Pro supports Chrome's theme system, automatically adapting to your browser's appearance settings. If you use Chrome's dark mode, the extension's popup and settings pages will display with dark backgrounds and light text.
 
@@ -112,7 +112,7 @@ The suspended tab placeholder page also respects your theme settings. On dark mo
 
 For users who want additional customization, the extension settings include options to force a specific theme regardless of your browser settings.
 
-Memory Savings Dashboard
+### Memory Savings Dashboard
 
 One of Tab Suspender Pro's most motivating features is the memory savings dashboard. When you click the extension icon, you will see real-time statistics showing:
 
@@ -124,11 +124,11 @@ These numbers can be surprising. Users who typically keep 50+ tabs open often di
 
 For a deeper analysis of memory savings across different tab counts, see our [Tab Suspender Pro memory benchmark comparing 50, 100, and 200 tabs](/2025/01/15/tab-suspender-pro-memory-benchmark-50-100-200-tabs/).
 
-Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
 While Tab Suspender Pro works reliably in most scenarios, you may occasionally encounter issues. Here are solutions to common problems:
 
-Tabs Not Suspending
+### Tabs Not Suspending
 
 If tabs are not suspending as expected, check the following:
 
@@ -138,7 +138,7 @@ If tabs are not suspending as expected, check the following:
 - Check audio playback: Tabs with audio are protected
 - Confirm the timer has elapsed: The tab must be inactive for the full timer duration
 
-Suspended Tabs Not Resuming
+### Suspended Tabs Not Resuming
 
 When clicking a suspended tab does not reload the page:
 
@@ -146,7 +146,7 @@ When clicking a suspended tab does not reload the page:
 - Verify the URL is still valid: If the original page no longer exists (404 error), the tab will not load
 - Try right-click menu: Some versions offer "Unsuspend" from the right-click context menu
 
-Memory Savings Not Showing
+### Memory Savings Not Showing
 
 If the dashboard shows zero memory savings despite having suspended tabs:
 
@@ -154,33 +154,33 @@ If the dashboard shows zero memory savings despite having suspended tabs:
 - Check Chrome's memory reporting: The extension relies on Chrome's memory APIs
 - Verify permissions: Ensure the extension has permission to access all websites
 
-Extension Conflicts
+### Extension Conflicts
 
-Some other extensions may interfere with tab suspension:
+### Some other extensions may interfere with tab suspension:
 
 - Other tab managers: Disable competing extensions to test
 - Session managers: Some session restore features may conflict
 - Developer tools: Extensions that modify tab behavior can cause issues
 
-Comparison with Alternatives
+### Comparison with Alternatives
 
 Several other tab management extensions exist. Here is how Tab Suspender Pro compares:
 
-The Great Suspender
+### The Great Suspender
 
 The Great Suspender was one of the original tab suspender extensions and inspired many alternatives. It offers similar core functionality to Tab Suspender Pro, with automatic suspension of inactive tabs. However, Tab Suspender Pro provides a more modern interface, better memory savings tracking, and more configuration options. The Great Suspender has also had some stability issues in recent Chrome versions.
 
-Auto Tab Discard
+### Auto Tab Discard
 
 Auto Tab Discard is Chrome's built-in alternative, available through the chrome://discards URL. It provides basic tab suspension without requiring an extension. However, Auto Tab Discard is less configurable than Tab Suspender Pro, with limited whitelist options and no visual dashboard showing your savings. Tab Suspender Pro offers a more polished user experience.
 
-OneTab
+### OneTab
 
 OneTab takes a different approach, converting all your open tabs into a list rather than keeping them in the tab strip. This saves memory but changes your workflow significantly. Tab Suspender Pro preserves your tab organization while still saving resources, which many users find more intuitive.
 
 For a deeper comparison of these alternatives, see our guide on [Chrome tab management solutions](/2025/01/16/chrome-tab-groups-vs-tab-suspender-which-is-better/).
 
-FAQ
+### FAQ
 
 Does Tab Suspender Pro work with Chrome profiles?
 Yes, Tab Suspender Pro works with multiple Chrome profiles. Each profile has its own extension settings and whitelist.
@@ -200,7 +200,7 @@ Active downloads will continue even if their containing tab is suspended. Howeve
 Can I exclude specific time periods from suspension?
 Advanced users can set up more complex rules, but the simplest approach is to temporarily disable the extension or adjust your whitelist when you need tabs to remain active.
 
-Privacy Policy Summary
+### Privacy Policy Summary
 
 Tab Suspender Pro is designed with privacy in mind. The extension:
 
@@ -213,7 +213,7 @@ For complete privacy details, review the extension's full privacy policy on the 
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Tab Suspender Pro Memory Benchmark: 50, 100, and 200 Tabs](/2025/01/15/tab-suspender-pro-memory-benchmark-50-100-200-tabs/)
 - [Chrome Tab Groups vs Tab Suspender - Which is Better](/2025/01/16/chrome-tab-groups-vs-tab-suspender-which-is-better/)

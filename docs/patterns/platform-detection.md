@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/platform-detection/"
 last_modified_at: 2026-01-15
 ---
 
-Platform Detection
+### Platform Detection
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions run across Windows, macOS, Linux, and ChromeOS. each with different keyboard shortcuts, file paths, and user expectations. Detecting the platform and system context lets you adapt behavior, UI, and shortcuts for each environment.
 
 ---
 
-Platform Info via chrome.runtime.getPlatformInfo() {#platform-info-via-chromeruntimegetplatforminfo}
+## Platform Info via chrome.runtime.getPlatformInfo() {#platform-info-via-chromeruntimegetplatforminfo}
 
 The `chrome.runtime.getPlatformInfo()` API returns the OS, architecture, and platform type:
 
@@ -39,7 +39,7 @@ This runs in any extension context. popup, background, options page.
 
 ---
 
-Chrome Version Detection {#chrome-version-detection}
+## Chrome Version Detection {#chrome-version-detection}
 
 Detect the Chrome version to gate features or warn users:
 
@@ -62,9 +62,9 @@ if (isChromeVersionAtLeast(110)) {
 
 ---
 
-Environment Detection: Dev vs Production {#environment-detection-dev-vs-production}
+## Environment Detection: Dev vs Production {#environment-detection-dev-vs-production}
 
-Distinguish between development and production contexts:
+### Distinguish between development and production contexts:
 
 ```ts
 // utils/environment.ts
@@ -85,7 +85,7 @@ Development extensions have temporary IDs; production extensions have 32-charact
 
 ---
 
-Display and Window Info {#display-and-window-info}
+## Display and Window Info {#display-and-window-info}
 
 Get display dimensions for positioning popups or side panels:
 
@@ -107,9 +107,9 @@ export async function getWorkArea(): Promise<{ width: number; height: number }> 
 
 ---
 
-Color Scheme and Reduced Motion {#color-scheme-and-reduced-motion}
+## Color Scheme and Reduced Motion {#color-scheme-and-reduced-motion}
 
-Respect user accessibility preferences:
+### Respect user accessibility preferences:
 
 ```ts
 // utils/preferences.ts
@@ -130,9 +130,9 @@ document.documentElement.setAttribute("data-theme", getColorScheme());
 
 ---
 
-Language and Locale {#language-and-locale}
+## Language and Locale {#language-and-locale}
 
-Detect user language for i18n:
+### Detect user language for i18n:
 
 ```ts
 // utils/locale.ts
@@ -150,7 +150,7 @@ const lang = getLanguage().split("-")[0]; // "en-US" → "en"
 
 ---
 
-Network Type Detection {#network-type-detection}
+## Network Type Detection {#network-type-detection}
 
 ```ts
 // utils/network.ts
@@ -166,9 +166,9 @@ export function getNetworkType(): "online" | "offline" | "slow-2g" | "2g" | "3g"
 
 ---
 
-Platform Utility: Unified Helper {#platform-utility-unified-helper}
+## Platform Utility: Unified Helper {#platform-utility-unified-helper}
 
-Combine all detection into one utility:
+### Combine all detection into one utility:
 
 ```ts
 // utils/system.ts
@@ -197,9 +197,9 @@ export async function getSystemContext(): Promise<SystemContext> {
 
 ---
 
-Pattern: Adaptive Shortcuts {#pattern-adaptive-shortcuts}
+## Pattern: Adaptive Shortcuts {#pattern-adaptive-shortcuts}
 
-Different platforms use different modifier keys:
+### Different platforms use different modifier keys:
 
 ```ts
 // utils/shortcuts.ts
@@ -218,9 +218,9 @@ In the extension popup, show "Press Ctrl+S on Windows, Command+S on macOS".
 
 ---
 
-Pattern: Platform-Aware UI {#pattern-platform-aware-ui}
+## Pattern: Platform-Aware UI {#pattern-platform-aware-ui}
 
-Adjust UI based on platform conventions:
+### Adjust UI based on platform conventions:
 
 ```ts
 // ui/platform-aware.ts
@@ -242,7 +242,7 @@ export function applyPlatformStyles(): void {
 
 ---
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [System API Reference][api-reference_system-api]. Full chrome.system.* APIs
 - [Cross-Browser Compatibility][patterns_cross-browser]. Feature detection and polyfills

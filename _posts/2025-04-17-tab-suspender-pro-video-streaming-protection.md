@@ -18,7 +18,7 @@ Tab Suspender Pro is designed with a sophisticated detection system that can ide
 
 ---
 
-How Tab Suspender Pro Detects Video Playback {#how-tab-suspender-pro-detects-video-playback}
+## How Tab Suspender Pro Detects Video Playback {#how-tab-suspender-pro-detects-video-playback}
 
 Understanding how Tab Suspender Pro detects video playback requires diving into the technical mechanisms that power this intelligent feature. The extension utilizes a multi-layered detection approach that examines several indicators to determine whether a tab is actively streaming media. This sophisticated system ensures that video playback is rarely, if ever, interrupted accidentally.
 
@@ -30,7 +30,7 @@ The extension also considers audio playback that might not be accompanied by vis
 
 ---
 
-YouTube Compatibility {#youtube-compatibility}
+## YouTube Compatibility {#youtube-compatibility}
 
 YouTube is arguably the most popular video streaming platform in the world, and ensuring compatibility with YouTube is a top priority for Tab Suspender Pro. The platform's unique architecture presented specific challenges that the development team had to address to provide smooth video protection.
 
@@ -44,7 +44,7 @@ It is worth noting that YouTube's advertising system also plays a role in detect
 
 ---
 
-Netflix and Streaming Service Support {#netflix-and-streaming-service-support}
+## Netflix and Streaming Service Support {#netflix-and-streaming-service-support}
 
 Netflix, Hulu, Amazon Prime Video, Disney+, HBO Max, and other premium streaming services represent a different category of video consumption that Tab Suspender Pro handles with equal sophistication. These platforms use advanced video player technologies that differ from standard HTML5 implementations, requiring specialized detection logic.
 
@@ -58,7 +58,7 @@ For users who want even more control, Tab Suspender Pro allows you to create cus
 
 ---
 
-Auto-Detecting Media Elements {#auto-detecting-media-elements}
+## Auto-Detecting Media Elements {#auto-detecting-media-elements}
 
 The automatic media element detection system in Tab Suspender Pro represents one of the most technically impressive aspects of the extension's design. This system is designed to work across the vast diversity of websites on the internet, from major platforms to smaller websites that might use unconventional video implementations.
 
@@ -72,7 +72,7 @@ One of the most impressive aspects of the auto-detection system is its ability t
 
 ---
 
-Configuring Video Tab Protection {#configuring-video-tab-protection}
+## Configuring Video Tab Protection {#configuring-video-tab-protection}
 
 While Tab Suspender Pro's auto-detection works remarkably well out of the box, the extension provides extensive configuration options that allow you to fine-tune how video tabs are protected. Understanding these options helps you customize the extension to match your specific workflow and preferences.
 
@@ -88,7 +88,7 @@ The extension also supports different profiles or modes that you can switch betw
 
 ---
 
-Audio-Only vs Video Detection {#audio-only-vs-video-detection}
+## Audio-Only vs Video Detection {#audio-only-vs-video-detection}
 
 Distinguishing between audio-only and video playback is an important aspect of Tab Suspender Pro's detection system, and understanding how this works helps you configure the extension more effectively. Both types of media consumption are protected, but the detection methods differ slightly.
 
@@ -104,7 +104,7 @@ It is important to note that some websites use hybrid approaches that can compli
 
 ---
 
-Conclusion: Enjoy Smooth Video Streaming with Memory Savings
+### Conclusion: Enjoy Smooth Video Streaming with Memory Savings
 
 Tab Suspender Pro represents a thoughtful solution to the common problem of Chrome tab management, particularly when it comes to protecting video streaming experiences. Through sophisticated auto-detection of media elements, specialized support for major streaming platforms like YouTube and Netflix, and extensive configuration options, the extension provides a comprehensive approach to tab suspension that respects your viewing habits while still delivering significant memory savings.
 

@@ -18,7 +18,7 @@ This comprehensive guide will walk you through the process of integrating D3.js 
 
 ---
 
-Why Use D3.js in Chrome Extensions {#why-d3-chrome-extensions}
+## Why Use D3.js in Chrome Extensions {#why-d3-chrome-extensions}
 
 Chrome extensions benefit tremendously from D3.js visualization capabilities for several compelling reasons. First, extensions have direct access to browser data through various Chrome APIs, including tabs, history, bookmarks, storage, and management APIs. This access provides rich data sources that D3.js can transform into meaningful visualizations.
 
@@ -30,11 +30,11 @@ Finally, D3.js has a massive community and extensive documentation. Developers c
 
 ---
 
-Setting Up D3.js in Your Chrome Extension Project {#setting-up-d3}
+## Setting Up D3.js in Your Chrome Extension Project {#setting-up-d3}
 
 Getting D3.js working in your Chrome extension requires proper project configuration. Let's walk through the essential setup steps.
 
-Installing D3.js
+### Installing D3.js
 
 The simplest way to add D3.js to your Chrome extension project is through npm. If you are using a build tool like Webpack or Rollup, install D3 as a dependency:
 
@@ -44,7 +44,7 @@ npm install d3
 
 For simpler projects without a build system, you can include D3.js directly from a CDN in your HTML files. However, for production extensions, bundling D3.js with your code is recommended to avoid external dependencies and potential loading issues.
 
-Configuring manifest.json
+### Configuring manifest.json
 
 Your extension's manifest.json must properly declare content scripts and any required permissions. Here is a sample configuration for an extension using D3.js:
 
@@ -72,7 +72,7 @@ Your extension's manifest.json must properly declare content scripts and any req
 
 The critical consideration here is the order of JavaScript files in your content_scripts array. D3.js must load before any script that uses D3 functions. This ensures the D3 library is available when your visualization code executes.
 
-Project Structure Recommendation
+### Project Structure Recommendation
 
 Organize your Chrome extension project with clear separation between D3 visualization code and extension logic:
 
@@ -96,11 +96,11 @@ This structure keeps your D3 visualization components modular and maintainable. 
 
 ---
 
-Creating Your First D3 Visualization in a Chrome Extension {#first-visualization}
+## Creating Your First D3 Visualization in a Chrome Extension {#first-visualization}
 
 Now let's build a practical example. We will create a Chrome extension that visualizes browser tab usage data using D3.js. This example demonstrates the core patterns you will use in any D3-powered Chrome extension.
 
-The Content Script
+### The Content Script
 
 Content scripts run in the context of web pages and can access the page's DOM. This makes them ideal for injecting D3 visualizations that overlay or replace page content:
 
@@ -226,11 +226,11 @@ This content script creates a floating visualization panel in the corner of any 
 
 ---
 
-Accessing Chrome APIs with D3 Visualizations {#chrome-apis-d3}
+## Accessing Chrome APIs with D3 Visualizations {#chrome-apis-d3}
 
 The real power of combining D3.js with Chrome extensions comes from accessing Chrome's rich API ecosystem.  how to create visualizations that use actual browser data.
 
-Querying Tab Information
+### Querying Tab Information
 
 Chrome provides the `chrome.tabs` API for accessing tab data. However, content scripts cannot directly call this API. You need to use message passing between your content script and background script:
 
@@ -293,7 +293,7 @@ function processTabData(tabs) {
 
 This pattern, querying Chrome APIs in the background script and sending data to content scripts, allows D3 visualizations to display real browser state.
 
-Storing Visualization Preferences
+### Storing Visualization Preferences
 
 Chrome's Storage API lets you persist user preferences for your visualizations:
 
@@ -319,11 +319,11 @@ Storing preferences enables users to customize how data appears in your extensio
 
 ---
 
-Advanced D3 Visualizations for Chrome Extensions {#advanced-visualizations}
+## Advanced D3 Visualizations for Chrome Extensions {#advanced-visualizations}
 
 Beyond basic bar charts, D3.js enables sophisticated visualizations that can make your Chrome extension stand out.  some advanced techniques.
 
-Force-Directed Network Graphs
+### Force-Directed Network Graphs
 
 Network graphs are excellent for visualizing relationships between items. Chrome extensions can use these to show connections between bookmarks, browsing history, or tab groups:
 
@@ -399,7 +399,7 @@ function createNetworkGraph(container, nodes, links) {
 
 This network graph could visualize relationships between tabs (pages from the same domain connect), bookmarks (folders and their contents), or browsing history (pages visited in sequence).
 
-Interactive Time Series Charts
+### Interactive Time Series Charts
 
 For extensions that track data over time, such as productivity extensions measuring focused work sessions, time series charts are invaluable:
 
@@ -492,11 +492,11 @@ Time series charts are perfect for productivity extensions that track focus time
 
 ---
 
-Performance Optimization for D3 in Chrome Extensions {#performance-optimization}
+## Performance Optimization for D3 in Chrome Extensions {#performance-optimization}
 
 D3 visualizations can be computationally intensive, especially with large datasets. Optimizing performance ensures your extension remains responsive.
 
-Use requestAnimationFrame for Animations
+### Use requestAnimationFrame for Animations
 
 When updating visualizations based on changing data, use requestAnimationFrame to ensure smooth rendering:
 
@@ -521,7 +521,7 @@ function updateVisualization(newData) {
 
 This batching technique prevents redundant updates when data changes rapidly.
 
-Limit DOM Elements
+### Limit DOM Elements
 
 D3 creates SVG elements for each data point. With large datasets, consider using canvas rendering or data aggregation:
 
@@ -538,7 +538,7 @@ const aggregatedData = d3.rollup(
 const pieData = Array.from(aggregatedData, ([key, value]) => ({ key, value }));
 ```
 
-Debounce Resize Handlers
+### Debounce Resize Handlers
 
 When visualizing in responsive containers, debounce resize handlers to prevent excessive redraws:
 
@@ -565,11 +565,11 @@ window.addEventListener('resize', handleResize);
 
 ---
 
-Best Practices for D3 Chrome Extension Development {#best-practices}
+## Best Practices for D3 Chrome Extension Development {#best-practices}
 
 Following these best practices will help you create robust, maintainable D3-powered Chrome extensions.
 
-Separate Visualization Logic from Extension Code
+### Separate Visualization Logic from Extension Code
 
 Keep your D3 code in dedicated modules. This separation makes visualization logic testable and reusable:
 
@@ -585,7 +585,7 @@ export function createLineChart(config) {
 }
 ```
 
-Handle Extension Context Invalidations
+### Handle Extension Context Invalidations
 
 Content scripts can be unloaded when users navigate away. Wrap D3 initialization in proper lifecycle handling:
 
@@ -611,7 +611,7 @@ document.addEventListener('visibilitychange', () => {
 initVisualization();
 ```
 
-Test Across Different Page Environments
+### Test Across Different Page Environments
 
 Chrome extensions run on countless websites with varying CSS and JavaScript. Use shadow DOM or scoped styles to prevent conflicts:
 
@@ -640,7 +640,7 @@ function createShadowContainer() {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 D3.js transforms Chrome extensions from simple utilities into powerful data visualization tools. By combining D3's flexible rendering capabilities with Chrome's rich API ecosystem, you can create extensions that provide genuine insights into users' browsing behavior, productivity patterns, and data interactions.
 

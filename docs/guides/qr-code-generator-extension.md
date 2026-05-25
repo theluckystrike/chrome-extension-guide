@@ -111,9 +111,9 @@ Build Configuration (tsconfig.json)
 
 ---
 
-Core Implementation with TypeScript
+### Core Implementation with TypeScript
 
-Shared Types (shared/types.ts)
+### Shared Types (shared/types.ts)
 
 ```typescript
 export interface QRCodeOptions {
@@ -147,7 +147,7 @@ export interface ExtensionMessage {
 export type MessageHandler = (message: ExtensionMessage, sender: chrome.runtime.MessageSender) => void;
 ```
 
-QR Code Generator Service (shared/qrcode.ts)
+### QR Code Generator Service (shared/qrcode.ts)
 
 ```typescript
 import { QRCodeOptions, QRCodeResult } from './types';
@@ -231,7 +231,7 @@ export class QRCodeGenerator {
 }
 ```
 
-Background Service Worker (background/service-worker.ts)
+### Background Service Worker (background/service-worker.ts)
 
 ```typescript
 import { ExtensionMessage, StoredSettings, QRCodeResult } from '../shared/types';
@@ -338,9 +338,9 @@ async function saveToHistory(result: QRCodeResult): Promise<void> {
 
 ---
 
-UI Design
+### UI Design
 
-Popup Interface (popup/popup.html)
+### Popup Interface (popup/popup.html)
 
 ```html
 <!DOCTYPE html>
@@ -402,7 +402,7 @@ Popup Interface (popup/popup.html)
 </html>
 ```
 
-Popup Controller (popup/popup.ts)
+### Popup Controller (popup/popup.ts)
 
 ```typescript
 document.addEventListener('DOMContentLoaded', () => {
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Content Script Overlay (content/overlay.ts)
+### Content Script Overlay (content/overlay.ts)
 
 ```typescript
 // Create a floating QR code overlay on the current page
@@ -577,9 +577,9 @@ function createOverlay(): void {
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions Explained
+### Required Permissions Explained
 
 | Permission | Purpose |
 |------------|---------|
@@ -587,7 +587,7 @@ Required Permissions Explained
 | `activeTab` | Access current tab for overlay injection |
 | `scripting` | Inject content scripts dynamically |
 
-Optional Permissions (for advanced features)
+### Optional Permissions (for advanced features)
 
 ```json
 {
@@ -602,7 +602,7 @@ Optional Permissions (for advanced features)
 }
 ```
 
-Using chrome.storage
+### Using chrome.storage
 
 ```typescript
 // Synchronous access (MV3)
@@ -626,9 +626,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-State Management and Storage
+### State Management and Storage
 
-Using chrome.storage for Settings
+### Using chrome.storage for Settings
 
 ```typescript
 interface AppState {
@@ -671,7 +671,7 @@ class StateManager {
 export const stateManager = new StateManager();
 ```
 
-Background State Sync
+### Background State Sync
 
 ```typescript
 // Use message passing to sync state between contexts
@@ -688,9 +688,9 @@ async function syncState(): Promise<void> {
 
 ---
 
-Error Handling and Edge Cases
+### Error Handling and Edge Cases
 
-Comprehensive Error Handling
+### Comprehensive Error Handling
 
 ```typescript
 class QRErrorHandler {
@@ -722,7 +722,7 @@ try {
 }
 ```
 
-Edge Cases to Handle
+### Edge Cases to Handle
 
 1. Empty input: Show validation message
 2. Very long text: Warn about QR code capacity
@@ -733,9 +733,9 @@ Edge Cases to Handle
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Vitest
+### Unit Testing with Vitest
 
 ```typescript
 // tests/qrcode.test.ts
@@ -766,7 +766,7 @@ describe('QRCodeGenerator', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
 ```typescript
 // tests/integration.test.ts
@@ -790,9 +790,9 @@ describe('Extension Integration', () => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Lazy Loading
+### Lazy Loading
 
 ```typescript
 // Only load QR code library when needed
@@ -806,7 +806,7 @@ async function loadQRLibrary() {
 }
 ```
 
-Caching Strategies
+### Caching Strategies
 
 ```typescript
 // Cache generated QR codes for repeated text
@@ -826,7 +826,7 @@ export function cacheQR(text: string, result: QRCodeResult): void {
 }
 ```
 
-Memory Management
+### Memory Management
 
 ```typescript
 // Clean up large data in content scripts
@@ -844,9 +844,9 @@ window.addEventListener('unload', cleanup);
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Pre-submission Requirements
+### Pre-submission Requirements
 
 - [ ] Test in Chrome, Edge, and Firefox (if supporting)
 - [ ] Verify manifest.json is valid
@@ -855,7 +855,7 @@ Pre-submission Requirements
 - [ ] Privacy policy URL (if collecting data)
 - [ ] Screenshots and description ready
 
-Store Listing
+### Store Listing
 
 ```markdown
 Description Template
@@ -872,7 +872,7 @@ Screenshots Required
 - Options/settings (if any)
 ```
 
-Extension Store Submission
+### Extension Store Submission
 
 1. Package: `zip -r extension.zip . -x "node_modules/*" -x ".git/*"`
 2. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -880,7 +880,7 @@ Extension Store Submission
 4. Fill in listing details
 5. Submit for review
 
-Post-publication
+### Post-publication
 
 - Monitor for user feedback
 - Track crash reports in Developer Dashboard
@@ -889,7 +889,7 @@ Post-publication
 
 ---
 
-Summary
+### Summary
 
 Building a QR code generator Chrome extension demonstrates many essential patterns:
 

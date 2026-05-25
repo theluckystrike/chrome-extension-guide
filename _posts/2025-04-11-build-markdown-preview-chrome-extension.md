@@ -18,7 +18,7 @@ we will walk through the complete process of creating a Chrome extension render 
 
 ---
 
-Why Build a Markdown Preview Chrome Extension? {#why-build}
+## Why Build a Markdown Preview Chrome Extension? {#why-build}
 
 The demand for markdown viewer chrome tools has grown exponentially as more developers and content creators adopt Markdown for their daily work. While many online editors and IDE extensions offer preview functionality, having a dedicated Chrome extension provides several distinct advantages that make it worth building.
 
@@ -30,7 +30,7 @@ Finally, creating a markdown preview extension is an excellent entry point into 
 
 ---
 
-Understanding the Chrome Extension Architecture {#architecture}
+## Understanding the Chrome Extension Architecture {#architecture}
 
 Before diving into code, it is essential to understand the fundamental architecture of a Chrome extension. Chrome extensions are essentially web applications that run in a constrained environment within the browser. They consist of several components that work together to provide enhanced functionality.
 
@@ -42,7 +42,7 @@ The popup is the small window that appears when users click your extension icon 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every well-organized Chrome extension follows a consistent project structure. Creating a logical folder hierarchy from the start makes development smoother and maintenance easier. For our build markdown extension project, we will organize our files as follows.
 
@@ -67,7 +67,7 @@ This structure keeps related files together and makes it easy to locate any comp
 
 ---
 
-Creating the Manifest V3 Configuration {#manifest}
+## Creating the Manifest V3 Configuration {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. This configuration file tells Chrome everything it needs to know about your extension, including its name, version, permissions, and the files that comprise its functionality. Let us create a proper Manifest V3 configuration for our markdown preview chrome extension.
 
@@ -100,7 +100,7 @@ The action configuration defines our popup. When users click the extension icon,
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is where users will interact with our chrome extension render markdown functionality. We need to create an interface with two primary areas: an input pane for typing or pasting Markdown, and a preview pane for displaying the rendered HTML. We will also add some utility buttons for common actions.
 
@@ -139,7 +139,7 @@ The structure uses a container div with two panes side by side. The left pane co
 
 ---
 
-Styling the Popup for a Professional Look {#styling}
+## Styling the Popup for a Professional Look {#styling}
 
 The CSS styles define how our popup looks and feels. A well-designed popup enhances the user experience and makes the extension more pleasant to use. Our styling creates a clean, split-pane interface that mirrors popular markdown editors.
 
@@ -227,7 +227,7 @@ The styling creates a professional appearance with a 50/50 split between input a
 
 ---
 
-Implementing Live Markdown Rendering {#implementation}
+## Implementing Live Markdown Rendering {#implementation}
 
 The JavaScript logic brings our markdown preview chrome extension to life. We need to initialize the marked library, set up event listeners for real-time rendering, and implement utility functions for copying HTML and extracting page content.
 
@@ -268,7 +268,7 @@ markdownInput.addEventListener('input', updatePreview);
 
 This simple but powerful function grabs the text from the textarea, passes it through marked.parse() to convert Markdown to HTML, and injects the result into the preview div. By attaching an input event listener, the preview updates in real-time as the user types.
 
-We also add utility functions:
+### We also add utility functions:
 
 ```javascript
 // Copy HTML button
@@ -306,7 +306,7 @@ The copy HTML button copies the rendered HTML to the clipboard, providing feedba
 
 ---
 
-Loading External Libraries {#libraries}
+## Loading External Libraries {#libraries}
 
 For our chrome extension render markdown functionality to work, we need the marked library for Markdown parsing and highlight.js for code syntax highlighting. Including these libraries in our extension ensures it works entirely offline without requiring external network requests.
 
@@ -318,7 +318,7 @@ Both libraries are included directly in our extension folder, ensuring consisten
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Once you have created all the necessary files, it is time to load your extension into Chrome and test its functionality. The testing process involves enabling developer mode in Chrome, loading your extension, and verifying that all features work as expected.
 
@@ -330,7 +330,7 @@ If you encounter issues, use the Chrome Developer Tools. Right-click anywhere in
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 When your build markdown extension project is complete and thoroughly tested, you can publish it to the Chrome Web Store to share with users worldwide. The publishing process involves preparing your extension for distribution and using the Chrome Web Store developer dashboard.
 
@@ -340,7 +340,7 @@ The Chrome Web Store provides a powerful distribution platform for markdown prev
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 Congratulations! You have successfully built a fully functional chrome extension markdown preview tool. This extension provides live rendering of Markdown text, syntax highlighting for code blocks, and useful utility features like copying HTML and extracting page content.
 

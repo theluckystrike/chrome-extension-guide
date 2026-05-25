@@ -18,7 +18,7 @@ This comprehensive guide walks you through the entire process of integrating Ope
 
 ---
 
-Why Integrate AI APIs into Chrome Extensions {#why-integrate-ai}
+## Why Integrate AI APIs into Chrome Extensions {#why-integrate-ai}
 
 The decision to integrate AI capabilities into Chrome extensions stems from the unique position browsers occupy in users' digital lives. Chrome extensions have direct access to web content, user interactions, and browser state, making them ideal vehicles for AI-powered features. When you combine this accessibility with the powerful natural language processing and generation capabilities of modern AI APIs, you create extensions that can understand context, generate content, and assist users in ways that were previously impossible.
 
@@ -28,7 +28,7 @@ The three major players in this space, OpenAI, Claude, and Gemini, each offer di
 
 ---
 
-Setting Up Your Chrome Extension for AI Integration {#setting-up-extension}
+## Setting Up Your Chrome Extension for AI Integration {#setting-up-extension}
 
 Before diving into API integration, you need to set up a Chrome extension project with the necessary permissions and structure. The foundation of any AI-powered extension begins with the manifest file, where you declare the permissions required for making external API calls.
 
@@ -58,7 +58,7 @@ The architecture of your extension will typically involve a popup interface wher
 
 ---
 
-Integrating OpenAI API in Chrome Extensions {#integrating-openai}
+## Integrating OpenAI API in Chrome Extensions {#integrating-openai}
 
 OpenAI's API provides access to powerful language models including GPT-4o and GPT-4o-mini. To integrate OpenAI into your chrome extension, you first need to obtain an API key from the OpenAI platform. This key must be stored securely and never exposed in client-side code that could be accessed by malicious actors.
 
@@ -92,7 +92,7 @@ One important consideration when building openai chrome extension features is ra
 
 ---
 
-Integrating Claude API in Chrome Extensions {#integrating-claude}
+## Integrating Claude API in Chrome Extensions {#integrating-claude}
 
 Anthropic's Claude API offers a different approach to AI integration, with a focus on helpful, harmless, and honest responses. The Claude API uses a distinct authentication method requiring an API-Key header and an Anthropic-Version header. Integrating Claude into your Chrome extension follows similar patterns to OpenAI but with some important differences in request structure.
 
@@ -125,7 +125,7 @@ Security considerations for Claude integration mirror those for OpenAI, never ex
 
 ---
 
-Integrating Gemini API in Chrome Extensions {#integrating-gemini}
+## Integrating Gemini API in Chrome Extensions {#integrating-gemini}
 
 Google's Gemini API represents a multimodal approach to AI, capable of processing and generating text, images, and other media types. This makes Gemini particularly powerful for Chrome extensions that need to work with visual content or provide diverse AI capabilities.
 
@@ -161,7 +161,7 @@ Gemini's integration with Google's ecosystem also offers advantages for extensio
 
 ---
 
-Best Practices for AI API Integration in Chrome Extensions {#best-practices}
+## Best Practices for AI API Integration in Chrome Extensions {#best-practices}
 
 Successfully integrating AI APIs into Chrome extensions requires attention to several best practices that ensure reliability, security, and positive user experience. These guidelines apply regardless of which AI provider you choose to work with.
 
@@ -177,7 +177,7 @@ Cost Management: AI API usage can quickly become expensive if not managed proper
 
 ---
 
-Building a Complete AI Chrome Extension Example {#complete-example}
+## Building a Complete AI Chrome Extension Example {#complete-example}
 
 To tie together all the concepts covered in this guide, let's examine how to build a chrome extension AI assistant that demonstrates the key integration patterns. This example combines elements from all three AI providers and shows how to create a cohesive user experience.
 
@@ -191,7 +191,7 @@ For a chatgpt chrome extension build, you would follow this same pattern but con
 
 ---
 
-Conclusion and Future Directions {#conclusion}
+## Conclusion and Future Directions {#conclusion}
 
 Integrating AI APIs into Chrome extensions opens up remarkable possibilities for creating intelligent browser experiences. Whether you choose OpenAI for conversational AI, Claude for thoughtful analysis, or Gemini for multimodal capabilities, or combine all three in a single extension, you now have the foundation to build sophisticated AI-powered tools.
 

@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 Declarative Content API Guide
 
-Overview {#overview}
+## Overview {#overview}
 - Show/hide extension action icon based on page content
 - No need to read page data. rules evaluated by browser
 - Requires `"declarativeContent"` permission
 - More performant than using `chrome.tabs.onUpdated`
 
-Basic Setup: Show Icon on Matching Pages {#basic-setup-show-icon-on-matching-pages}
+## Basic Setup: Show Icon on Matching Pages {#basic-setup-show-icon-on-matching-pages}
 ```javascript
 // Disable icon by default
 chrome.action.disable();

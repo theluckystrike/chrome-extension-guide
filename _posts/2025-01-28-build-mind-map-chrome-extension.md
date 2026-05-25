@@ -18,33 +18,33 @@ Whether you are a beginner looking to learn Chrome extension development or an e
 
 ---
 
-Why Build a Mind Map Chrome Extension? {#why-mind-map-extension}
+## Why Build a Mind Map Chrome Extension? {#why-mind-map-extension}
 
 The demand for visual thinking tools has never been higher. Professionals across industries use mind mapping for project planning, note-taking, problem-solving, and creative brainstorming. A Chrome extension that brings this functionality directly into the browser offers several compelling advantages over standalone applications.
 
-The Browser as Your Workspace
+### The Browser as Your Workspace
 
 Chrome is where many people spend most of their digital time. Having a mind mapping tool embedded in the browser means users can capture ideas the moment they arise without switching between applications. Whether researching a topic, reading emails, or browsing social media, thoughts can be immediately organized into visual mind maps without context switching.
 
-Smooth Integration with Web Content
+### Smooth Integration with Web Content
 
 A Chrome extension mind map tool can interact with web content in ways standalone apps cannot. Users can select text from any webpage and instantly add it as a node in their mind map. This creates a powerful research workflow where information gathering and idea organization happen simultaneously.
 
-Offline-First Architecture
+### Offline-First Architecture
 
 Chrome extensions work offline using service workers and local storage. Your mind map extension can function without an internet connection, syncing data when connectivity returns. This makes it reliable for users who work in various environments or travel frequently.
 
-Monetization Potential
+### Monetization Potential
 
 Productivity tools like mind mapping extensions have proven monetization models. You can offer a free version with basic features and a premium tier with advanced capabilities like cloud sync, unlimited mind maps, export formats, and collaboration features.
 
 ---
 
-Project Planning and Architecture {#project-planning}
+## Project Planning and Architecture {#project-planning}
 
 Before writing any code, let us establish a clear architecture for our mind map Chrome extension. This will ensure the development process stays organized and the final product meets user expectations.
 
-Core Features
+### Core Features
 
 Our mind map extension will include the following essential features:
 
@@ -56,7 +56,7 @@ Our mind map extension will include the following essential features:
 6. Save and Load: Persistent storage using Chrome's storage API
 7. Export Functionality: Export mind maps as images or JSON
 
-Extension Architecture
+### Extension Architecture
 
 We will use the modern Manifest V3 architecture, which provides better security and performance. The extension will consist of:
 
@@ -67,11 +67,11 @@ We will use the modern Manifest V3 architecture, which provides better security 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us create the foundation for our extension. First, create a new directory for your project and set up the essential files.
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest.json file defines our extension and its capabilities:
 
@@ -111,9 +111,9 @@ The manifest.json file defines our extension and its capabilities:
 }
 ```
 
-Directory Structure
+### Directory Structure
 
-Create the following folder structure:
+### Create the following folder structure:
 
 ```
 mind-map-extension/
@@ -134,7 +134,7 @@ mind-map-extension/
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides quick access to create new mind maps or access existing ones. Let us build a clean, functional popup interface.
 
@@ -397,7 +397,7 @@ function updateRecentMaps(newMap) {
 
 ---
 
-Building the Mind Map Canvas {#mind-map-canvas}
+## Building the Mind Map Canvas {#mind-map-canvas}
 
 The core of our extension is the mind map canvas where users create and organize their ideas. We will use HTML5 Canvas for rendering.
 
@@ -1036,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Content Script for Text Capture {#content-script}
+## Content Script for Text Capture {#content-script}
 
 The content script enables users to capture text from any webpage and add it directly to their mind map.
 
@@ -1077,7 +1077,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background script handles extension lifecycle events and manages state.
 
@@ -1112,9 +1112,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
-To test your mind map extension:
+### To test your mind map extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
@@ -1134,33 +1134,33 @@ Test the following features:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic mind map extension working, consider adding these advanced features:
 
-Cloud Synchronization
+### Cloud Synchronization
 
 Implement cloud sync using Firebase or a similar backend service to allow users to access their mind maps across multiple devices.
 
-Collaboration Features
+### Collaboration Features
 
 Add real-time collaboration using WebSockets, allowing multiple users to work on the same mind map simultaneously.
 
-Templates
+### Templates
 
 Create pre-built mind map templates for common use cases like project planning, meeting notes, and study outlines.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Implement keyboard shortcuts for common actions like adding nodes, deleting nodes, and saving.
 
-Import and Export Formats
+### Import and Export Formats
 
 Support additional export formats like JSON, Markdown, and PDF, as well as import functionality from other mind mapping tools.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a mind map Chrome extension is an excellent project that combines creative UI design with practical browser extension development skills. The extension we have built in this guide provides a solid foundation that you can extend and customize based on your users' needs.
 

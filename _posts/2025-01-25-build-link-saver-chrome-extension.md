@@ -18,7 +18,7 @@ This tutorial is designed for developers who want to understand the complete wor
 
 ---
 
-Why Build a Link Saver Extension {#why-build-link-saver}
+## Why Build a Link Saver Extension {#why-build-link-saver}
 
 Before diving into the code, it is worth understanding why creating a link saver extension represents an excellent project for both learning and practical use. Traditional browser bookmarks have served us well for decades, but they come with significant limitations that a custom extension can address.
 
@@ -28,7 +28,7 @@ From a development perspective, building a link saver extension teaches you esse
 
 ---
 
-Understanding the Architecture {#understanding-architecture}
+## Understanding the Architecture {#understanding-architecture}
 
 A Chrome extension consists of several components that work together to create a cohesive experience. Before writing any code, let us examine the architecture of our link saver extension to understand how the pieces fit together.
 
@@ -40,7 +40,7 @@ Communication between the popup and the background components happens through me
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project and set up the basic file structure. Your project will need several key files working together to create a functional extension. The manifest.json file serves as the configuration hub, defining the extension's permissions and components. The popup.html file provides the user interface for viewing and managing saved links. The popup.js file contains the JavaScript logic for the popup interface, handling user interactions and storage operations. The background.js file manages background tasks and event listeners.
 
@@ -48,7 +48,7 @@ Organizing these files properly from the start makes development much smoother. 
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file forms the backbone of every Chrome extension. For our link saver extension, we need to configure several key properties that define the extension's capabilities and components. Let us create a comprehensive manifest file that follows Manifest V3 specifications, which represent the current standard for Chrome extension development.
 
@@ -84,7 +84,7 @@ One important aspect of Manifest V3 worth noting is the distinction between back
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface represents what users see when they interact with our extension. This HTML file needs to provide an intuitive way for users to save the current page and view their previously saved links. Let us create a clean, functional interface that demonstrates good UX practices for Chrome extensions.
 
@@ -216,7 +216,7 @@ This HTML provides a clean interface with a prominent save button at the top and
 
 ---
 
-Implementing the Popup Logic {#popup-logic}
+## Implementing the Popup Logic {#popup-logic}
 
 The popup JavaScript file handles all the interactivity for our extension. This script runs when the popup opens and manages saving new links, displaying the list of saved links, and deleting unwanted links. Let us implement a comprehensive solution that handles all these requirements robustly.
 
@@ -342,7 +342,7 @@ The code also uses modern async/await syntax for cleaner asynchronous operations
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Before deploying your extension, you need to test it thoroughly to ensure everything works correctly. Chrome provides built-in support for loading unpacked extensions directly from your development folder, allowing you to iterate quickly without going through the formal publication process.
 
@@ -352,7 +352,7 @@ When testing your link saver extension, verify several key behaviors. First, con
 
 ---
 
-Improving and Extending Your Extension {#future-improvements}
+## Improving and Extending Your Extension {#future-improvements}
 
 While our basic link saver extension provides core functionality, numerous enhancements could make it even more useful. Consider exploring these improvements as you continue developing your extension skills.
 
@@ -364,7 +364,7 @@ For users who want even more power, consider adding features like link metadata 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a link saver Chrome extension provides an excellent learning project that teaches fundamental skills applicable to any extension development work. You have learned how to create a Manifest V3 configuration, build a functional popup interface with HTML and CSS, implement solid JavaScript logic for saving and managing data, use chrome.storage for persistent data storage, and test and debug your extension before deployment.
 

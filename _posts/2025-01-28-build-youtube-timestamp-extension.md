@@ -18,11 +18,11 @@ we will walk through building a fully functional video bookmark chrome extension
 
 ---
 
-Why Build a YouTube Timestamp Extension? {#why-build}
+## Why Build a YouTube Timestamp Extension? {#why-build}
 
 The demand for timestamp bookmarking tools on YouTube is substantial. Content creators, students, researchers, and casual viewers all have reasons to mark and return to specific moments in videos. A well-designed YouTube timestamp extension can serve multiple use cases:
 
-Use Cases for Timestamp Bookmarking
+### Use Cases for Timestamp Bookmarking
 
 Educational Purposes: Students watching lecture videos often need to mark important explanations or concepts. Instead of scrubbing through lengthy videos to find that one explanation, they can simply click a bookmark and return immediately.
 
@@ -36,29 +36,29 @@ Building this extension teaches you valuable skills including YouTube player API
 
 ---
 
-Project Architecture and Components {#architecture}
+## Project Architecture and Components {#architecture}
 
 Before writing any code, we need to understand the architecture of our YouTube timestamp extension. A typical Chrome extension with timestamp bookmarking functionality consists of several key components:
 
-The Manifest File
+### The Manifest File
 
 The `manifest.json` file defines the extension's configuration, permissions, and entry points. Our extension needs permissions to interact with YouTube pages, store data, and display a popup interface.
 
-Content Script
+### Content Script
 
 The content script runs in the context of YouTube pages. It communicates with the YouTube player API to extract current timestamps, inject UI elements into the page, and listen for user interactions.
 
-Popup Interface
+### Popup Interface
 
 The popup provides the main user interface for viewing, managing, and organizing saved timestamps. Users can see their bookmarks, add notes, and navigate to saved timestamps.
 
-Background Service Worker
+### Background Service Worker
 
 While our extension can function without a complex background script, having one allows for advanced features like syncing bookmarks across devices or handling cross-tab state management.
 
 ---
 
-Setting Up the Manifest {#manifest}
+## Setting Up the Manifest {#manifest}
 
 Let us start by creating the manifest file. We will use Manifest V3, which is the current standard for Chrome extensions:
 
@@ -103,7 +103,7 @@ The manifest declares several important permissions. The `storage` permission al
 
 ---
 
-Building the Content Script {#content-script}
+## Building the Content Script {#content-script}
 
 The content script is the heart of our extension. It runs on YouTube pages and handles all interactions with the video player. Let us build a comprehensive content script that captures timestamps and provides in-page functionality:
 
@@ -272,7 +272,7 @@ We also inject a notification element into the page to give users feedback when 
 
 ---
 
-Creating the Popup Interface {#popup}
+## Creating the Popup Interface {#popup}
 
 The popup provides the main user interface for managing bookmarks. Let us create an intuitive and functional popup:
 
@@ -710,11 +710,11 @@ The popup provides comprehensive bookmark management functionality. Users can vi
 
 ---
 
-Enhancing with Additional Features {#advanced-features}
+## Enhancing with Additional Features {#advanced-features}
 
 While our basic youtube timestamp extension is fully functional, there are several enhancements that would make it even more useful for users seeking youtube notes functionality:
 
-Adding Notes Support in Content Script
+### Adding Notes Support in Content Script
 
 Update the content script to allow adding notes directly from the video page:
 
@@ -751,7 +751,7 @@ async function handleBookmarkClick(event) {
 }
 ```
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Adding keyboard shortcuts makes timestamp bookmarking even faster. Add this to your manifest:
 
@@ -767,7 +767,7 @@ Adding keyboard shortcuts makes timestamp bookmarking even faster. Add this to y
 }
 ```
 
-Then handle the command in your background script:
+### Then handle the command in your background script:
 
 ```javascript
 // background.js
@@ -781,7 +781,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-Export and Import Functionality
+### Export and Import Functionality
 
 Users often want to back up their bookmarks or share them with others. Add export functionality:
 
@@ -833,23 +833,23 @@ async function importBookmarks(file) {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing your youtube timestamp extension, thorough testing is essential. Here is our recommended testing process:
 
-Manual Testing Checklist
+### Manual Testing Checklist
 
 Load your extension in developer mode by navigating to `chrome://extensions`, enabling Developer mode, and clicking "Load unpacked". Select your extension folder. Test each of the following scenarios:
 
 Navigate to various YouTube videos and verify the bookmark button appears in the correct location. Click the bookmark button and verify the timestamp is captured accurately. Open the popup and verify all saved bookmarks appear correctly. Click on a bookmark to jump to that timestamp. Edit a bookmark note and verify it saves correctly. Delete individual bookmarks and verify they are removed. Test the clear all function. Navigate to a different video and verify the current video information updates. Test keyboard shortcuts if implemented.
 
-Edge Cases to Consider
+### Edge Cases to Consider
 
 Your extension should handle several edge cases gracefully. When a video is paused, the timestamp should still be captured accurately. For videos with unusual URL formats, the video ID extraction should work correctly. If storage is full or unavailable, the user should see an appropriate error message. When there are zero bookmarks, the empty state should display properly. Long video titles and notes should be truncated with ellipsis.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once testing is complete, you can publish your video bookmark chrome extension to the Chrome Web Store. The publishing process involves several steps:
 
@@ -859,7 +859,7 @@ When writing your store listing, emphasize the key benefits: easy one-click time
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a YouTube timestamp extension is an excellent project that teaches valuable Chrome extension development skills while creating a genuinely useful tool. The extension we built in this guide captures timestamps directly from YouTube videos, stores them persistently using Chrome storage, provides an intuitive popup interface for management, supports notes for each timestamp, and allows quick navigation to saved moments.
 

@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-messaging-pr
 last_modified_at: 2026-01-15
 ---
 
-Extension Messaging Protocols
+### Extension Messaging Protocols
 
 Designing structured messaging protocols for Chrome extensions ensures type-safe, maintainable communication between content scripts, background scripts, and popup pages.
 
-Typed Message Protocol with Discriminated Unions {#typed-message-protocol-with-discriminated-unions}
+## Typed Message Protocol with Discriminated Unions {#typed-message-protocol-with-discriminated-unions}
 
-Use discriminated unions for type-safe message routing:
+### Use discriminated unions for type-safe message routing:
 
 ```typescript
 // Shared types (in a common package or content script)
@@ -26,9 +26,9 @@ type Response<T extends MessageType> =
   | { success: false; error: ErrorCode };
 ```
 
-Request-Response Pattern {#request-response-pattern}
+## Request-Response Pattern {#request-response-pattern}
 
-Standardize all responses with success/error shape:
+### Standardize all responses with success/error shape:
 
 ```typescript
 interface Response<T> {
@@ -43,9 +43,9 @@ interface Response<T> {
 }
 ```
 
-Versioning for Forward Compatibility {#versioning-for-forward-compatibility}
+## Versioning for Forward Compatibility {#versioning-for-forward-compatibility}
 
-Include protocol version in every message:
+### Include protocol version in every message:
 
 ```typescript
 interface ProtocolMessage<T> {
@@ -56,9 +56,9 @@ interface ProtocolMessage<T> {
 }
 ```
 
-Standardized Error Codes {#standardized-error-codes}
+## Standardized Error Codes {#standardized-error-codes}
 
-Define a consistent error code enum:
+### Define a consistent error code enum:
 
 ```typescript
 enum ErrorCode {
@@ -70,7 +70,7 @@ enum ErrorCode {
 }
 ```
 
-Message Router {#message-router}
+## Message Router {#message-router}
 
 Create a type-safe router for handling messages:
 
@@ -88,7 +88,7 @@ const router: Record<string, MessageHandler<any>> = {
 };
 ```
 
-Timeout Handling with AbortController {#timeout-handling-with-abortcontroller}
+## Timeout Handling with AbortController {#timeout-handling-with-abortcontroller}
 
 Implement reliable request-response with timeouts:
 
@@ -108,7 +108,7 @@ async function sendWithTimeout<T>(
 }
 ```
 
-Message Logging Interceptor {#message-logging-interceptor}
+## Message Logging Interceptor {#message-logging-interceptor}
 
 Add debugging and audit capabilities:
 
@@ -122,7 +122,7 @@ const loggingInterceptor = (handler: Function) => async (msg: Message) => {
 };
 ```
 
-Cross-Reference {#cross-reference}
+## Cross-Reference {#cross-reference}
 
 - [Message Passing Patterns](../reference/message-passing-patterns.md)
 - [Event-Driven Messaging](./event-driven-messaging.md)

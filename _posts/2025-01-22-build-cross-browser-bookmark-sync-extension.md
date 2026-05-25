@@ -18,29 +18,29 @@ we'll walk you through building a production-ready cross-browser bookmark sync e
 
 ---
 
-Understanding Cross-Browser Bookmark Synchronization {#understanding-cross-browser-sync}
+## Understanding Cross-Browser Bookmark Synchronization {#understanding-cross-browser-sync}
 
 Before diving into code, it's essential to understand the architecture required for successful cross-browser bookmark synchronization. Unlike browser-specific extensions that can rely on proprietary APIs, cross-browser extensions must use the standardized WebExtension API, which Chrome and Firefox both support with minimal differences.
 
-The Challenge of Cross-Browser Sync
+### The Challenge of Cross-Browser Sync
 
 Synchronizing bookmarks across browsers presents unique challenges that you must address in your extension design. First, each browser maintains its own bookmark tree structure, and while they're conceptually similar, there are subtle differences in how bookmarks are organized and identified. Second, users may make changes in multiple browsers between sync operations, requiring solid conflict resolution strategies. Third, network latency and offline usage patterns can create synchronization anomalies that your code must handle gracefully.
 
 The WebExtension API provides the `bookmarks` API for Chrome and `bookmarks` API for Firefox, which share similar interfaces but have some implementation differences. Your extension must account for these differences while providing a consistent experience. Additionally, you'll need to decide on a storage mechanism, options include cloud storage services, WebDAV servers, or even peer-to-peer synchronization using technologies like WebRTC.
 
-Architecture Overview
+### Architecture Overview
 
 Our cross-browser bookmark sync extension will follow a client-server architecture where the extension acts as the client. The extension will periodically check for changes, push local changes to the server, and pull remote changes to keep the local bookmark tree in sync. This architecture allows users to sync bookmarks between multiple browsers installed on different devices, all while maintaining a central source of truth for their bookmark data.
 
 ---
 
-Project Setup and Manifest Configuration {#project-setup}
+## Project Setup and Manifest Configuration {#project-setup}
 
 Let's start by setting up the project structure and configuring the manifest file. We'll use Manifest V3, which is the current standard for Chrome extensions and is also supported by Firefox.
 
-Directory Structure
+### Directory Structure
 
-Create the following directory structure for your extension:
+### Create the following directory structure for your extension:
 
 ```
 cross-browser-bookmark-sync/
@@ -67,7 +67,7 @@ cross-browser-bookmark-sync/
          messages.json
 ```
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 The manifest.json file defines the extension's permissions, background scripts, and browser-specific configurations. Here's our complete manifest:
 
@@ -113,7 +113,7 @@ Notice the permissions array includes `bookmarks` for accessing the bookmark API
 
 ---
 
-The Background Service Worker {#background-service-worker}
+## The Background Service Worker {#background-service-worker}
 
 The background service worker serves as the extension's central coordination hub, managing sync operations, handling alarms, and responding to bookmark changes. This is where the core synchronization logic lives.
 
@@ -240,7 +240,7 @@ The background service worker sets up listeners for all bookmark modification ev
 
 ---
 
-The Synchronization Engine {#sync-engine}
+## The Synchronization Engine {#sync-engine}
 
 The sync engine is the core component that handles all synchronization logic, including local change tracking, remote synchronization, and conflict resolution. This is where the magic happens.
 
@@ -548,7 +548,7 @@ The sync engine handles the complete synchronization lifecycle, including fetchi
 
 ---
 
-Conflict Resolution Strategy {#conflict-resolution}
+## Conflict Resolution Strategy {#conflict-resolution}
 
 When users make changes in multiple browsers between sync operations, conflicts arise. The conflict resolver implements strategies to handle these situations intelligently.
 
@@ -630,7 +630,7 @@ The conflict resolver supports multiple resolution strategies: newest-wins (base
 
 ---
 
-Storage Utility {#storage-utility}
+## Storage Utility {#storage-utility}
 
 The storage utility provides a clean interface for local data persistence using the Chrome Storage API:
 
@@ -678,7 +678,7 @@ export class BookmarkStorage {
 
 ---
 
-Options Page for User Configuration {#options-page}
+## Options Page for User Configuration {#options-page}
 
 The options page allows users to configure their sync settings, including the sync server URL, synchronization interval, and conflict resolution preference:
 
@@ -817,7 +817,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before deploying your extension, thorough testing is essential. Here's how to test the bookmark sync extension:
 
@@ -833,7 +833,7 @@ Before deploying your extension, thorough testing is essential. Here's how to te
 
 ---
 
-Deployment Considerations {#deployment}
+## Deployment Considerations {#deployment}
 
 When deploying your cross-browser bookmark sync extension, consider the following:
 
@@ -849,7 +849,7 @@ When deploying your cross-browser bookmark sync extension, consider the followin
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a cross-browser bookmark sync extension is a complex but rewarding project that addresses a genuine user need. By leveraging the WebExtension API, you can create an extension that works smoothly across Chrome and Firefox, giving users the freedom to synchronize their bookmarks without being locked into a single browser ecosystem.
 

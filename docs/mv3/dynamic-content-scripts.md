@@ -6,12 +6,12 @@ canonical_url: "https://bestchromeextensions.com/mv3/dynamic-content-scripts/"
 last_modified_at: 2026-01-15
 ---
 
-Dynamic Content Scripts in MV3
+### Dynamic Content Scripts in MV3
 
-Overview {#overview}
+## Overview {#overview}
 MV3 introduces `chrome.scripting.registerContentScripts` for runtime content script registration. Scripts persist across service worker restarts.
 
-Static vs Dynamic {#static-vs-dynamic}
+## Static vs Dynamic {#static-vs-dynamic}
 | Feature | Static (manifest) | Dynamic (scripting API) |
 |---------|-------------------|------------------------|
 | Declaration | `content_scripts` in manifest | `chrome.scripting.registerContentScripts()` |
@@ -19,7 +19,7 @@ Static vs Dynamic {#static-vs-dynamic}
 | User configurable | No | Yes |
 | Persist across SW restart | Yes | Yes (default) |
 
-Register {#register}
+## Register {#register}
 ```javascript
 await chrome.scripting.registerContentScripts([{
   id: 'my-script',
@@ -34,7 +34,7 @@ await chrome.scripting.registerContentScripts([{
 }]);
 ```
 
-Update {#update}
+## Update {#update}
 ```javascript
 await chrome.scripting.updateContentScripts([{
   id: 'my-script',
@@ -42,19 +42,19 @@ await chrome.scripting.updateContentScripts([{
 }]);
 ```
 
-Unregister {#unregister}
+## Unregister {#unregister}
 ```javascript
 await chrome.scripting.unregisterContentScripts({ ids: ['my-script'] });
 await chrome.scripting.unregisterContentScripts(); // Remove ALL
 ```
 
-List Registered {#list-registered}
+## List Registered {#list-registered}
 ```javascript
 const scripts = await chrome.scripting.getRegisteredContentScripts();
 scripts.forEach(s => console.log(`${s.id}: ${s.matches.join(', ')}`));
 ```
 
-User-Configurable Sites {#user-configurable-sites}
+## User-Configurable Sites {#user-configurable-sites}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -75,7 +75,7 @@ async function updateSites(sites) {
 }
 ```
 
-World Configuration {#world-configuration}
+## World Configuration {#world-configuration}
 ```javascript
 // ISOLATED (default): separate JS, shared DOM
 await chrome.scripting.registerContentScripts([{
@@ -88,7 +88,7 @@ await chrome.scripting.registerContentScripts([{
 }]);
 ```
 
-One-Time Execution {#one-time-execution}
+## One-Time Execution {#one-time-execution}
 ```javascript
 await chrome.scripting.executeScript({
   target: { tabId: tab.id },
@@ -103,19 +103,19 @@ await chrome.scripting.executeScript({
 });
 ```
 
-CSS Injection {#css-injection}
+## CSS Injection {#css-injection}
 ```javascript
 await chrome.scripting.insertCSS({ target: { tabId }, files: ['styles.css'] });
 await chrome.scripting.removeCSS({ target: { tabId }, files: ['styles.css'] });
 ```
 
-MV2 Migration {#mv2-migration}
+## MV2 Migration {#mv2-migration}
 ```javascript
 // MV2: chrome.tabs.executeScript(tabId, { file: 'inject.js' })
 // MV3: chrome.scripting.executeScript({ target: { tabId }, files: ['inject.js'] })
 ```
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 - Re-registering without checking if exists (throws error)
 - Forgetting `persistAcrossSessions` defaults to `true`
 - Using MAIN world without understanding security implications

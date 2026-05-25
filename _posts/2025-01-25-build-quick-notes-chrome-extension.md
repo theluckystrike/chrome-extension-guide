@@ -18,7 +18,7 @@ This project is perfect for developers who want to learn Chrome extension develo
 
 ---
 
-Why Build a Quick Notes Chrome Extension? {#why-build}
+## Why Build a Quick Notes Chrome Extension? {#why-build}
 
 The demand for quick note-taking solutions in browsers continues to grow. Users want a fast notepad Chrome experience that doesn't require opening separate applications or switching contexts. Building your own quick notes extension gives you complete control over features, storage, and user experience.
 
@@ -28,7 +28,7 @@ This project will teach you fundamental Chrome extension concepts including popu
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Before writing any code, let's define what our quick notes extension will accomplish. Our inline notes extension will include the following core features:
 
@@ -50,7 +50,7 @@ This stack ensures the extension remains lightweight, fast, and compatible with 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file structure. Let's create the foundation for our quick notes extension. First, create a new folder for your project called `quick-notes-extension`. Inside this folder, we'll create the following essential files:
 
@@ -70,7 +70,7 @@ Let's start by creating the manifest.json file, which is the heart of any Chrome
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file defines your extension's configuration and capabilities. For our quick notes extension, we'll use Manifest V3, which is the current standard for Chrome extensions. Create a new file called `manifest.json` and add the following content:
 
@@ -103,7 +103,7 @@ This manifest file declares that our extension uses Manifest V3, requires storag
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon in the Chrome toolbar. Let's create a clean, functional interface for our quick notes extension. Open `popup.html` and add the following code:
 
@@ -147,7 +147,7 @@ Now let's style this interface with CSS to make it visually appealing and functi
 
 ---
 
-Styling the Extension {#styling}
+## Styling the Extension {#styling}
 
 Create the `popup.css` file and add styles that make your extension look professional and easy to use:
 
@@ -285,7 +285,7 @@ The CSS provides a clean, modern look with a subtle shadow effect on note cards.
 
 ---
 
-Implementing the Functionality {#implementation}
+## Implementing the Functionality {#implementation}
 
 Now comes the core functionality. Create `popup.js` and implement the logic for creating, displaying, editing, and deleting notes:
 
@@ -450,13 +450,13 @@ This JavaScript code handles all the core functionality of our quick notes exten
 
 ---
 
-Creating an Extension Icon {#icon}
+## Creating an Extension Icon {#icon}
 
 Every Chrome extension needs an icon. For development purposes, you can create a simple placeholder icon. Create a 128x128 pixel PNG image and name it `icon.png`. You can use any image editor or create a simple colored square. This icon will appear in the Chrome toolbar and in the Chrome Web Store when you publish.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we've created all the necessary files, let's test our quick notes extension in Chrome:
 
@@ -471,7 +471,7 @@ Testing is an essential part of development. Take time to verify each feature wo
 
 ---
 
-Enhancing the Quick Notes Extension {#enhancements}
+## Enhancing the Quick Notes Extension {#enhancements}
 
 While our basic quick notes extension is fully functional, there are several improvements you can make to enhance the user experience. Consider adding these features as you continue developing your extension skills:
 
@@ -491,7 +491,7 @@ These enhancements will help you practice more advanced Chrome extension develop
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you've tested your extension thoroughly and added any desired enhancements, you can publish it to the Chrome Web Store. Here's what you need to do:
 
@@ -501,7 +501,7 @@ Package your extension by going to `chrome://extensions/`, enabling developer mo
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've successfully built a fully functional quick notes Chrome extension from scratch. This project demonstrates the fundamental concepts of Chrome extension development including Manifest V3 configuration, popup interface creation, Chrome Storage API usage, and user interaction handling.
 
@@ -515,7 +515,7 @@ Start building today, and transform your browsing experience with your own custo
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 To continue learning about Chrome extension development, explore the official Chrome Extensions documentation at Google's developer website. The documentation covers advanced topics like service workers, content scripts, background tasks, and communication between extension components. You can also study existing open-source extensions on GitHub to see how other developers structure their projects and implement various features.
 

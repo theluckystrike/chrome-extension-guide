@@ -17,7 +17,7 @@ This tutorial uses the latest Manifest V3 standards and covers everything from p
 
 ---
 
-Why Build a Base64 Extension? {#why-build}
+## Why Build a Base64 Extension? {#why-build}
 
 Base64 encoding converts binary data into ASCII text format, making it safe for transmission over protocols that only support text. You'll encounter Base64 in many scenarios:
 
@@ -30,7 +30,7 @@ Having a quick-access encode decode chrome tool in your browser toolbar saves co
 
 ---
 
-Project Structure and Setup {#project-structure}
+## Project Structure and Setup {#project-structure}
 
 Every Chrome extension starts with a well-organized project structure. Create a new folder for your extension and set up the following files:
 
@@ -51,7 +51,7 @@ This structure separates concerns between the popup interface, background script
 
 ---
 
-Manifest Configuration (manifest.json) {#manifest}
+## Manifest Configuration (manifest.json) {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. It defines permissions, UI components, and extension behavior. Here's the complete configuration for our Base64 encoder decoder:
 
@@ -101,7 +101,7 @@ The manifest.json file is the heart of every Chrome extension. It defines permis
 }
 ```
 
-Key features in this manifest:
+### Key features in this manifest:
 
 - Popup action: Opens our encoding/decoding interface when clicking the extension icon
 - Clipboard permissions: Allow users to quickly copy/paste encoded content
@@ -110,7 +110,7 @@ Key features in this manifest:
 
 ---
 
-Building the Popup Interface (popup.html) {#popup-html}
+## Building the Popup Interface (popup.html) {#popup-html}
 
 The popup is the main user interface for your extension. It needs to be clean, intuitive, and responsive. Here's the complete HTML structure:
 
@@ -178,7 +178,7 @@ The popup is the main user interface for your extension. It needs to be clean, i
 </html>
 ```
 
-This HTML provides:
+### This HTML provides:
 
 - Mode toggle: Switch between encode and decode modes
 - Input textarea: Large text area for entering content
@@ -189,7 +189,7 @@ This HTML provides:
 
 ---
 
-Styling the Popup (popup.css) {#popup-css}
+## Styling the Popup (popup.css) {#popup-css}
 
 A well-designed extension looks professional and is pleasant to use. Here's a comprehensive CSS file with modern styling:
 
@@ -439,7 +439,7 @@ footer {
 }
 ```
 
-This CSS provides:
+### This CSS provides:
 
 - Modern, clean design following Material Design principles
 - Smooth transitions and hover effects
@@ -449,7 +449,7 @@ This CSS provides:
 
 ---
 
-Core Functionality (popup.js) {#popup-js}
+## Core Functionality (popup.js) {#popup-js}
 
 The JavaScript file handles all the encoding/decoding logic, user interactions, and state management. Here's the complete implementation:
 
@@ -690,7 +690,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-Key features of this implementation:
+### Key features of this implementation:
 
 - Proper Unicode handling: Uses TextEncoder/TextDecoder for UTF-8 support
 - URL-safe Base64: Option to use URL-safe characters (- and _ instead of + and /)
@@ -701,7 +701,7 @@ Key features of this implementation:
 
 ---
 
-Background Service Worker (background.js) {#background}
+## Background Service Worker (background.js) {#background}
 
 The background script handles keyboard shortcuts and context menu interactions:
 
@@ -831,7 +831,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-This background script provides:
+### This background script provides:
 
 - Global keyboard shortcuts: Encode/decode selected text from anywhere
 - Context menu integration: Right-click options for quick encoding/decoding
@@ -839,7 +839,7 @@ This background script provides:
 
 ---
 
-Creating Extension Icons {#icons}
+## Creating Extension Icons {#icons}
 
 Every extension needs icons. Create simple icons using any image editor or generate them programmatically. The icons should be:
 
@@ -851,9 +851,9 @@ For development, you can create placeholder PNG files. Later, replace them with 
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load unpacked extension: Go to chrome://extensions, enable Developer mode, click "Load unpacked," and select your extension folder
 2. Test encoding: Enter text and click Encode - verify correct Base64 output
@@ -865,7 +865,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once testing is complete, follow these steps to publish:
 
@@ -880,7 +880,7 @@ Once testing is complete, follow these steps to publish:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 To make your base64 extension stand out from competitors, consider adding:
 
@@ -894,7 +894,7 @@ To make your base64 extension stand out from competitors, consider adding:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a base64 converter Chrome extension is an excellent project that teaches fundamental Chrome extension development concepts while creating a genuinely useful tool. You've learned how to:
 
@@ -911,7 +911,7 @@ Ready to start building? Clone the complete source code, customize it with your 
 
 ---
 
-Frequently Asked Questions {#faq}
+## Frequently Asked Questions {#faq}
 
 Q: Can this extension handle large files?
 A: The popup interface is designed for text strings. For files, you'd need to implement file input handling and potentially use the File System Access API for larger files.

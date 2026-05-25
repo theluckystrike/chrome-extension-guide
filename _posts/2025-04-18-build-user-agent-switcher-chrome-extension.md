@@ -18,7 +18,7 @@ we will walk through the complete process of building a user agent switcher Chro
 
 ---
 
-What Is a User Agent and Why Does It Matter? {#what-is-user-agent}
+## What Is a User Agent and Why Does It Matter? {#what-is-user-agent}
 
 Before we dive into building the extension, let us understand what a user agent actually is and why it plays such a crucial role in web development. A user agent is a string of text that web browsers send to web servers with every request. This string identifies the browser, its version, the operating system, and other important details that help websites deliver appropriate content.
 
@@ -30,7 +30,7 @@ Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
 
 This string tells the server that you are using Chrome version 123 on a 64-bit Windows 10 computer. Based on this information, websites may serve different content, apply different styling, or redirect you to mobile versions of their site.
 
-Why Web Developers Need User Agent Switching
+### Why Web Developers Need User Agent Switching
 
 The ability to switch user agent strings is essential for several important tasks:
 
@@ -46,20 +46,20 @@ The ability to switch user agent strings is essential for several important task
 
 ---
 
-Project Setup and Prerequisites {#project-setup}
+## Project Setup and Prerequisites {#project-setup}
 
 Before we start coding, let us set up our project structure and ensure we have everything we need to build this user agent switcher Chrome extension.
 
-Required Tools
+### Required Tools
 
-To follow this tutorial, you will need:
+### To follow this tutorial, you will need:
 
 - A code editor (VS Code, Sublime Text, or any editor you prefer)
 - Google Chrome browser installed
 - Basic knowledge of HTML, CSS, and JavaScript
 - A Google account (for publishing to the Chrome Web Store)
 
-Project Directory Structure
+### Project Directory Structure
 
 Create a new folder for your project and set up the following directory structure:
 
@@ -80,7 +80,7 @@ This structure separates our extension into logical components: the manifest fil
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the heart of every Chrome extension. It tells Chrome everything about your extension, including its name, version, permissions, and which files to load. For our user agent switcher, we need to specify the appropriate permissions to access web requests and modify headers.
 
@@ -119,7 +119,7 @@ Create a file named `manifest.json` in your project folder and add the following
 }
 ```
 
-The key permissions we need are:
+### The key permissions we need are:
 
 - storage: To save the selected user agent and remember it between sessions
 - declarativeNetRequest: To modify network requests and change the user agent header
@@ -127,11 +127,11 @@ The key permissions we need are:
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click on your extension icon in the Chrome toolbar. For our user agent switcher, we need a clean interface that displays a list of predefined user agents and allows users to select their desired option.
 
-Create `popup.html` with the following content:
+### Create `popup.html` with the following content:
 
 ```html
 <!DOCTYPE html>
@@ -221,7 +221,7 @@ This HTML provides a comprehensive interface with dropdowns for mobile devices, 
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 Now let us add some CSS to make our popup look professional and user-friendly. Create `popup.css`:
 
@@ -372,7 +372,7 @@ footer {
 
 ---
 
-Implementing the Extension Logic {#extension-logic}
+## Implementing the Extension Logic {#extension-logic}
 
 Now comes the most important part: implementing the JavaScript logic that handles user agent switching. This is where the magic happens. Create `popup.js`:
 
@@ -592,7 +592,7 @@ function showNotification(message) {
 
 ---
 
-Creating the Content Script {#content-script}
+## Creating the Content Script {#content-script}
 
 While the declarativeNetRequest API handles most user agent switching at the network level, adding a content script provides additional functionality for detecting and displaying the current user agent within web pages. Create `content.js`:
 
@@ -645,7 +645,7 @@ if (window.location.href.includes('debug=')) {
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Now that we have created all the necessary files, it is time to test your user agent switcher Chrome extension. Follow these steps to load your extension in Chrome:
 
@@ -655,7 +655,7 @@ Now that we have created all the necessary files, it is time to test your user a
 4. Select the folder containing your extension files
 5. Your extension should now appear in the extensions list
 
-How to Test the Extension
+### How to Test the Extension
 
 Once loaded, test your user agent switcher by following these steps:
 
@@ -666,7 +666,7 @@ Once loaded, test your user agent switcher by following these steps:
 5. Use the custom input to enter your own user agent string
 6. Click "Reset to Default" to restore the original user agent
 
-Common Issues and Troubleshooting
+### Common Issues and Troubleshooting
 
 If your extension is not working as expected, check the following:
 
@@ -678,18 +678,18 @@ If your extension is not working as expected, check the following:
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have thoroughly tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. Here is what you need to do:
 
-Prepare for Publishing
+### Prepare for Publishing
 
 1. Create a developer account at the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Prepare your extension icons (16x16, 48x48, and 128x128 pixels)
 3. Create screenshots and a promotional image for your listing
 4. Write a compelling description using your target keywords naturally
 
-Submission Process
+### Submission Process
 
 When submitting your extension, ensure you:
 
@@ -697,7 +697,7 @@ When submitting your extension, ensure you:
 - Provide detailed release notes explaining what is new in each version
 - Respond promptly to any review feedback from Google
 
-Manifest V3 Considerations
+### Manifest V3 Considerations
 
 Chrome has moved to Manifest V3, which has some restrictions on certain APIs. The declarativeNetRequest API we used requires a special review process for full functionality. For initial publication, you might consider:
 
@@ -707,29 +707,29 @@ Chrome has moved to Manifest V3, which has some restrictions on certain APIs. Th
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Once you have the basic user agent switcher working, consider adding these advanced features:
 
-Preset Device Profiles
+### Preset Device Profiles
 
 Add predefined profiles that not only change the user agent but also simulate viewport sizes, touch events, and device pixel ratios for more accurate mobile emulation.
 
-Quick Toggle
+### Quick Toggle
 
 Add keyboard shortcuts (Ctrl+Shift+U or Cmd+Shift+U) to quickly toggle between your most-used user agents without opening the popup.
 
-URL-Specific Rules
+### URL-Specific Rules
 
 Allow users to set different user agents for specific websites, so you can automatically switch to mobile when visiting your development server and stay on desktop for other sites.
 
-Sync Across Devices
+### Sync Across Devices
 
 Use the `chrome.storage.sync` API to sync user agent preferences across all your Chrome installations where you are signed in.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a user agent switcher Chrome extension is an excellent project that teaches you many fundamental concepts of Chrome extension development. You have learned how to create a Manifest V3 extension, build a popup interface, use the declarativeNetRequest API to modify network requests, and store user preferences with the Chrome storage API.
 

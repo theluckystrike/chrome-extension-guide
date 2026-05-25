@@ -11,7 +11,7 @@ last_modified_at: 2026-01-15
 
 sidePanel Permission
 
-Overview {#overview}
+## Overview {#overview}
 
 - Permission string: `"sidePanel"`
 - Grants access to: `chrome.sidePanel` API
@@ -20,9 +20,9 @@ Overview {#overview}
 
 The sidePanel API provides a persistent UI alongside web content, allowing users to view additional information or tools without leaving the current page.
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-`chrome.sidePanel.setOptions(options)` {#chromesidepanelsetoptionsoptions}
+## `chrome.sidePanel.setOptions(options)` {#chromesidepanelsetoptionsoptions}
 
 Configures the side panel for a specific tab or globally.
 
@@ -49,7 +49,7 @@ await chrome.sidePanel.setOptions({
 });
 ```
 
-`chrome.sidePanel.getOptions(options)` {#chromesidepanelgetoptionsoptions}
+## `chrome.sidePanel.getOptions(options)` {#chromesidepanelgetoptionsoptions}
 
 Retrieves the current panel configuration.
 
@@ -62,7 +62,7 @@ interface GetOptionsParams {
 const options = await chrome.sidePanel.getOptions({ tabId: 123 });
 ```
 
-`chrome.sidePanel.open(options)` {#chromesidepanelopenoptions}
+## `chrome.sidePanel.open(options)` {#chromesidepanelopenoptions}
 
 Programmatically opens the side panel. Requires user gesture context.
 
@@ -85,7 +85,7 @@ await chrome.sidePanel.open({ windowId: chrome.windows.WINDOW_ID_CURRENT });
 
 Available in Chrome 116+. Must be called from user gesture context (e.g., action click, keyboard shortcut).
 
-`chrome.sidePanel.setPanelBehavior(behavior)` {#chromesidepanelsetpanelbehaviorbehavior}
+## `chrome.sidePanel.setPanelBehavior(behavior)` {#chromesidepanelsetpanelbehaviorbehavior}
 
 Configures whether clicking the extension action opens the side panel.
 
@@ -102,7 +102,7 @@ await chrome.sidePanel.setPanelBehavior({
 });
 ```
 
-`chrome.sidePanel.getPanelBehavior()` {#chromesidepanelgetpanelbehavior}
+## `chrome.sidePanel.getPanelBehavior()` {#chromesidepanelgetpanelbehavior}
 
 Retrieves the current panel behavior configuration.
 
@@ -111,7 +111,7 @@ const behavior = await chrome.sidePanel.getPanelBehavior();
 // Returns: { openPanelOnActionClick: boolean }
 ```
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -124,9 +124,9 @@ Manifest Declaration {#manifest-declaration}
 
 The `side_panel` key in the manifest specifies the default HTML file to display when the side panel is opened.
 
-Per-Tab vs Global Panel {#per-tab-vs-global-panel}
+## Per-Tab vs Global Panel {#per-tab-vs-global-panel}
 
-Global Panel {#global-panel}
+## Global Panel {#global-panel}
 Set the panel path without a `tabId` to apply the same panel across all tabs:
 
 ```typescript
@@ -136,7 +136,7 @@ await chrome.sidePanel.setOptions({
 });
 ```
 
-Per-Tab Panel {#per-tab-panel}
+## Per-Tab Panel {#per-tab-panel}
 Set a specific panel for a particular tab using `tabId`:
 
 ```typescript
@@ -147,7 +147,7 @@ await chrome.sidePanel.setOptions({
 });
 ```
 
-Precedence {#precedence}
+## Precedence {#precedence}
 Per-tab configuration takes precedence over global configuration when set. A per-tab panel can be disabled by setting `enabled: false` while keeping the global panel active.
 
 ```typescript
@@ -158,7 +158,7 @@ await chrome.sidePanel.setOptions({
 });
 ```
 
-Communication {#communication}
+## Communication {#communication}
 
 The side panel does not have dedicated events. Use Chrome's runtime messaging for communication between the side panel and service worker:
 
@@ -176,7 +176,7 @@ chrome.runtime.onMessage.addListener((message) => {
 
 The side panel has full access to `chrome.*` APIs, similar to a popup. For structured communication, consider using `@theluckystrike/webext-messaging`.
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
 - Research assistant: Display notes, annotations, or research findings alongside browsing
 - Translation panel: Translate page content or show definitions in a sidebar
@@ -185,9 +185,9 @@ Use Cases {#use-cases}
 - Developer tools: Show API documentation, debug information, or code snippets
 - Bookmarks manager: Quick access to saved bookmarks without leaving the current page
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Basic Side Panel Setup {#basic-side-panel-setup}
+## Basic Side Panel Setup {#basic-side-panel-setup}
 
 manifest.json:
 ```json
@@ -229,7 +229,7 @@ await chrome.sidePanel.setPanelBehavior({
 });
 ```
 
-Per-Tab Panel Switching {#per-tab-panel-switching}
+## Per-Tab Panel Switching {#per-tab-panel-switching}
 
 ```typescript
 // Switch panel based on page content
@@ -258,7 +258,7 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
 });
 ```
 
-Opening Panel on Action Click {#opening-panel-on-action-click}
+## Opening Panel on Action Click {#opening-panel-on-action-click}
 
 ```typescript
 chrome.action.onClicked.addListener(async (tab) => {
@@ -273,7 +273,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Messaging Between Side Panel and Service Worker {#messaging-between-side-panel-and-service-worker}
+## Messaging Between Side Panel and Service Worker {#messaging-between-side-panel-and-service-worker}
 
 Service Worker (background.js):
 ```typescript
@@ -305,14 +305,14 @@ async function getPageInfo() {
 document.getElementById('refresh').addEventListener('click', getPageInfo);
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - Manifest Guide: `docs/mv3/side-panel.md`
 - Patterns: `docs/patterns/side-panel.md`
 - Related Permission: `docs/permissions/tabs.md`
 - Related Permission: `docs/permissions/scripting.md`
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I add a side panel to Chrome?
 Declare "side_panel" in your manifest and use chrome.sidePanel.setOptions() to configure its behavior. Users access it via the toolbar icon.

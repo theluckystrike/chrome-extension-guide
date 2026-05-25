@@ -16,7 +16,7 @@ Dependency injection has become one of the most important software design patter
 
 ---
 
-Understanding Dependency Injection {#understanding-dependency-injection}
+## Understanding Dependency Injection {#understanding-dependency-injection}
 
 Dependency injection is a technique where an object receives other objects it depends on, rather than creating them internally. This inversion of control fundamentally changes how you structure your code and offers significant benefits for Chrome extension development.
 
@@ -61,7 +61,7 @@ const tabManager = new TabManager(storage, notifier);
 
 Now `TabManager` is decoupled from its dependencies. You can easily pass mock implementations during testing or swap the `NotificationService` for a different implementation without touching the `TabManager` class itself.
 
-Why Dependency Injection Matters for Chrome Extensions
+### Why Dependency Injection Matters for Chrome Extensions
 
 Chrome extensions present unique challenges that make dependency injection particularly valuable:
 
@@ -75,11 +75,11 @@ Version Migration: As Chrome extension APIs evolve, you may need to swap impleme
 
 ---
 
-Setting Up Inversify in Your Extension {#setting-up-inversify}
+## Setting Up Inversify in Your Extension {#setting-up-inversify}
 
 Inversify is a powerful dependency injection library for TypeScript and JavaScript. It provides a complete solution with features like constructor injection, property injection, decorators, and container management. Here's how to set it up in your Chrome extension.
 
-Installation
+### Installation
 
 First, install the required packages:
 
@@ -99,7 +99,7 @@ Add the following to your `tsconfig.json`:
 }
 ```
 
-Creating Your Service Container
+### Creating Your Service Container
 
 The Inversify container is the core of your dependency injection setup. It manages the registration and resolution of dependencies:
 
@@ -117,9 +117,9 @@ container.bind<TabManager>('TabManager').to(TabManager);
 export { container };
 ```
 
-Defining Services with Decorators
+### Defining Services with Decorators
 
-Inversify uses decorators to mark classes as injectable:
+### Inversify uses decorators to mark classes as injectable:
 
 ```typescript
 import { injectable } from 'inversify';
@@ -158,11 +158,11 @@ class NotificationServiceImpl implements NotificationService {
 
 ---
 
-Implementing DI Patterns in Chrome Extension Components {#implementing-di-patterns}
+## Implementing DI Patterns in Chrome Extension Components {#implementing-di-patterns}
 
 Now let's explore how to apply dependency injection across the different components of a Chrome extension.
 
-Service Worker Implementation
+### Service Worker Implementation
 
 The service worker is the background brain of your extension. Here's how to use DI there:
 
@@ -197,7 +197,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Content Script Integration
+### Content Script Integration
 
 Content scripts run in the context of web pages. While they cannot directly use the Inversify container from your service worker, you can share code by organizing your services properly:
 
@@ -233,7 +233,7 @@ export class TabManagerImpl implements TabManager {
 }
 ```
 
-Popup and Options Pages
+### Popup and Options Pages
 
 For popup and options pages, create separate containers or use a singleton pattern:
 
@@ -249,9 +249,9 @@ controller.initialize();
 
 ---
 
-Advanced DI Patterns for Extensions {#advanced-di-patterns}
+## Advanced DI Patterns for Extensions {#advanced-di-patterns}
 
-Using Symbols for Type Safety
+### Using Symbols for Type Safety
 
 Instead of string-based identifiers, use TypeScript symbols for type-safe dependency keys:
 
@@ -267,7 +267,7 @@ const TYPES = {
 export { TYPES };
 ```
 
-Lazy Injection
+### Lazy Injection
 
 For services that are expensive to initialize or may not be needed, use lazy injection:
 
@@ -285,9 +285,9 @@ class ContentScriptController {
 }
 ```
 
-Scoped Bindings
+### Scoped Bindings
 
-Inversify supports different scoping strategies:
+### Inversify supports different scoping strategies:
 
 ```typescript
 // Singleton (default) - one instance per container
@@ -302,7 +302,7 @@ container.bind<RequestContext>('RequestContext').to(RequestContext).inRequestSco
 
 ---
 
-Testing with Dependency Injection {#testing-with-di}
+## Testing with Dependency Injection {#testing-with-di}
 
 One of the greatest benefits of dependency injection is improved testability. Map<string, any> = new Map();
 

@@ -18,7 +18,7 @@ Understanding and implementing chrome extension hot reload is essential for any 
 
 ---
 
-Understanding Chrome Extension Reload Mechanics {#understanding-reload-mechanics}
+## Understanding Chrome Extension Reload Mechanics {#understanding-reload-mechanics}
 
 Before diving into hot reload implementations, it's crucial to understand how Chrome handles extension reloading. Chrome extensions consist of several components: the manifest file, background scripts, content scripts, popup pages, options pages, and various static assets. Each of these components has different reload behaviors and constraints that affect how hot reloading works.
 
@@ -30,7 +30,7 @@ Understanding these mechanics helps you choose the right hot reload strategy. So
 
 ---
 
-Using Chrome's Built-in Watch Mode {#built-in-watch-mode}
+## Using Chrome's Built-in Watch Mode {#built-in-watch-mode}
 
 Chrome provides a built-in mechanism for auto-reloading extensions during development, though it's not immediately obvious. When you enable "Developer mode" in chrome://extensions, Chrome watches for changes to unpackaged extensions and can automatically reload them under certain conditions.
 
@@ -42,7 +42,7 @@ Despite these limitations, this approach has one significant advantage: it's bui
 
 ---
 
-Implementing Hot Reload with Chrome Extensions Reloader {#chrome-extensions-reloader}
+## Implementing Hot Reload with Chrome Extensions Reloader {#chrome-extensions-reloader}
 
 One of the most popular solutions for chrome extension hot reload is the Chrome Extensions Reloader extension itself. This is a browser extension that you install in your development browser to quickly reload other extensions with a single click or keyboard shortcut. While it doesn't provide automatic reloading, it significantly speeds up the manual reload process.
 
@@ -56,7 +56,7 @@ This hybrid approach gives you the best of both worlds: a reliable reload mechan
 
 ---
 
-Building a Custom Hot Reload Solution {#custom-hot-reload-solution}
+## Building a Custom Hot Reload Solution {#custom-hot-reload-solution}
 
 For complete control over your chrome extension hot reload workflow, you can build a custom solution using Chrome's debugging protocol. This approach requires more setup but provides maximum flexibility and performance.  how to implement a solid auto reload chrome extension system.
 
@@ -72,7 +72,7 @@ This custom solution can be integrated with various build tools and bundlers. Fo
 
 ---
 
-Using Webpack DevServer for Hot Reload {#webpack-devserver}
+## Using Webpack DevServer for Hot Reload {#webpack-devserver}
 
 If you're using Webpack to bundle your Chrome extension, you can use its built-in development server capabilities for hot reloading. Webpack DevServer provides excellent support for hot module replacement (HMR) in web applications, and similar concepts can be applied to Chrome extension development.
 
@@ -86,7 +86,7 @@ Webpack also supports various plugins specifically designed for Chrome extension
 
 ---
 
-Implementing Live Reload with Browser Sync {#browser-sync}
+## Implementing Live Reload with Browser Sync {#browser-sync}
 
 Browser Sync is another excellent tool for implementing chrome extension live reload. Originally designed for synchronizing testing across multiple devices, Browser Sync can be adapted to work with Chrome extensions during development. Its file watching capabilities combined with browser reloading make it a powerful option for extension developers.
 
@@ -100,7 +100,7 @@ The main limitation of Browser Sync for extension development is that it focuses
 
 ---
 
-Using CRXJS for Development {#crxjs-development}
+## Using CRXJS for Development {#crxjs-development}
 
 CRXJS is a modern tool specifically designed for Chrome extension development with excellent support for hot reloading. It provides a development server that watches your extension files and automatically reloads them in Chrome when changes occur. This makes it one of the easiest ways to set up chrome extension hot reload in your project.
 
@@ -114,7 +114,7 @@ One of CRXJS's strengths is its compatibility with various bundlers and framewor
 
 ---
 
-Vite-Based Hot Reload Solutions {#vite-hot-reload}
+## Vite-Based Hot Reload Solutions {#vite-hot-reload}
 
 Vite has become increasingly popular for web development, and its fast hot module replacement makes it an excellent choice for Chrome extension development as well. Several Vite plugins specifically target Chrome extensions, providing smooth hot reloading out of the box.
 
@@ -128,7 +128,7 @@ The main advantage of using Vite is its speed. Vite uses native ES modules and p
 
 ---
 
-Best Practices for Hot Reload Workflows {#best-practices}
+## Best Practices for Hot Reload Workflows {#best-practices}
 
 Implementing chrome extension hot reload is only part of the equation. To get the most out of your development workflow, follow these best practices that experienced extension developers use.
 
@@ -144,7 +144,7 @@ Finally, consider using TypeScript for your extension development. TypeScript pr
 
 ---
 
-Troubleshooting Common Hot Reload Issues {#troubleshooting}
+## Troubleshooting Common Hot Reload Issues {#troubleshooting}
 
 Even with well-configured hot reload systems, issues can arise. Understanding common problems and their solutions will help you maintain a smooth development workflow.
 
@@ -158,7 +158,7 @@ Memory leaks can occur during development if extension state accumulates across 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Chrome extension hot reload is a significant improvement for extension developers. By automating the reload process, you can maintain your flow state, iterate faster, and focus on writing code rather than managing browser tabs. Whether you choose a simple solution like Chrome Extensions Reloader combined with file watching, or a more sophisticated setup with Webpack, Vite, or CRXJS, the productivity gains are substantial.
 

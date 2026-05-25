@@ -11,27 +11,27 @@ last_modified_at: 2026-01-15
 
 declarativeContent Permission
 
-What It Grants {#what-it-grants}
+## What It Grants {#what-it-grants}
 Access to the `chrome.declarativeContent` API for showing/hiding your extension's action icon based on page content. without needing to read page data.
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["declarativeContent"]
 }
 ```
 
-User Warning {#user-warning}
+## User Warning {#user-warning}
 None. this permission does not trigger a warning. This is a key advantage: it doesn't require host permissions.
 
-API Access {#api-access}
+## API Access {#api-access}
 - `chrome.declarativeContent.onPageChanged`. rule-based event
 - Rules consist of conditions (`PageStateMatcher`) and actions (`ShowAction`, `SetIcon`, `RequestContentScript`)
 
-Core Concept {#core-concept}
+## Core Concept {#core-concept}
 Instead of reading every page and deciding whether to show your icon, you declare rules that Chrome evaluates internally. no extension wake-up needed.
 
-Basic Usage: Show Action on Matching Pages {#basic-usage-show-action-on-matching-pages}
+## Basic Usage: Show Action on Matching Pages {#basic-usage-show-action-on-matching-pages}
 
 How to Use declarativeContent API: Show Action on Matching Pages
 ```typescript
@@ -55,9 +55,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-PageStateMatcher Conditions {#pagestatematcher-conditions}
+## PageStateMatcher Conditions {#pagestatematcher-conditions}
 
-URL Matching {#url-matching}
+## URL Matching {#url-matching}
 ```typescript
 // Match by host
 new chrome.declarativeContent.PageStateMatcher({
@@ -85,7 +85,7 @@ new chrome.declarativeContent.PageStateMatcher({
 });
 ```
 
-CSS Matching {#css-matching}
+## CSS Matching {#css-matching}
 ```typescript
 // Show action only when page has a video element
 new chrome.declarativeContent.PageStateMatcher({
@@ -104,7 +104,7 @@ new chrome.declarativeContent.PageStateMatcher({
 });
 ```
 
-Multiple Rules {#multiple-rules}
+## Multiple Rules {#multiple-rules}
 ```typescript
 chrome.declarativeContent.onPageChanged.addRules([
   {
@@ -124,15 +124,15 @@ chrome.declarativeContent.onPageChanged.addRules([
 ]);
 ```
 
-Actions Available {#actions-available}
+## Actions Available {#actions-available}
 
-ShowAction {#showaction}
+## ShowAction {#showaction}
 Shows the extension's action icon (enables it).
 ```typescript
 new chrome.declarativeContent.ShowAction()
 ```
 
-SetIcon {#seticon}
+## SetIcon {#seticon}
 Changes the icon dynamically.
 ```typescript
 new chrome.declarativeContent.SetIcon({
@@ -140,7 +140,7 @@ new chrome.declarativeContent.SetIcon({
 })
 ```
 
-RequestContentScript {#requestcontentscript}
+## RequestContentScript {#requestcontentscript}
 Injects a content script on matching pages.
 ```typescript
 new chrome.declarativeContent.RequestContentScript({
@@ -149,7 +149,7 @@ new chrome.declarativeContent.RequestContentScript({
 })
 ```
 
-Storage Integration {#storage-integration}
+## Storage Integration {#storage-integration}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -173,7 +173,7 @@ async function updateRules() {
 }
 ```
 
-Comparison with tabs.onUpdated {#comparison-with-tabsonupdated}
+## Comparison with tabs.onUpdated {#comparison-with-tabsonupdated}
 | Feature | declarativeContent | tabs.onUpdated |
 |---|---|---|
 | Permission warning | None | "Read your browsing history" (with tabs) |
@@ -181,28 +181,28 @@ Comparison with tabs.onUpdated {#comparison-with-tabsonupdated}
 | CPU usage | Minimal | Per-navigation |
 | Flexibility | URL/CSS patterns only | Full programmatic control |
 
-When to Use {#when-to-use}
+## When to Use {#when-to-use}
 - Show/hide action icon based on current page
 - Enable extension only on specific sites
 - No-permission alternative to checking URLs via `tabs`
 - Performance-sensitive extensions
 
-When NOT to Use {#when-not-to-use}
+## When NOT to Use {#when-not-to-use}
 - If you need to read page content. use content scripts
 - If you need complex logic. use `tabs.onUpdated` with `activeTab`
 - For dynamic UI beyond show/hide. limited actions available
 
-Permission Check {#permission-check}
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('declarativeContent');
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Guide: `docs/guides/declarative-content.md`
 - Related: `docs/permissions/activeTab.md`, `docs/permissions/tabs.md`
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How does declarativeContent work in Manifest V3?
 DeclarativeContent allows your extension to take actions based on page content without needing to run content scripts constantly. Use chrome.declarativeContent.onPageChanged to define rules.

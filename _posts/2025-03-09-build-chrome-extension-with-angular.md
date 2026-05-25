@@ -18,29 +18,29 @@ Chrome extensions built with Angular benefit from the framework's solid state ma
 
 ---
 
-Why Use Angular for Chrome Extensions? {#why-angular}
+## Why Use Angular for Chrome Extensions? {#why-angular}
 
 Before diving into the technical details, it is worth understanding why Angular is an excellent choice for Chrome extension development. Angular offers several compelling advantages that make it stand out from traditional vanilla JavaScript or other frameworks.
 
-Component-Based Architecture
+### Component-Based Architecture
 
 Angular's component-based architecture aligns perfectly with Chrome extension UI development. Each part of your extension's interface, popup, options page, side panel, can be built as independent Angular components. This modularity makes your code reusable, testable, and easy to maintain. You can create a component library that works across different parts of your extension, reducing duplication and ensuring consistency in your user interface.
 
 The Angular component model also provides excellent encapsulation through view encapsulation modes. You can choose between emulated, native, or none encapsulation depending on your needs, giving you fine-grained control over how styles are applied. This is particularly useful when building extensions that need to coexist with different websites without style conflicts.
 
-TypeScript and Strong Typing
+### TypeScript and Strong Typing
 
 TypeScript is a first-class citizen in Angular development, and it brings significant benefits to Chrome extension projects. Strong typing helps catch errors at compile time rather than runtime, which is crucial when working with Chrome's extension APIs that have complex type definitions. You will get autocomplete support for Chrome APIs, making development faster and less error-prone.
 
 The type definitions for Chrome extension APIs are comprehensive and well-maintained. When you install the appropriate type packages, you will have full IntelliSense support for permissions, methods, and event handlers. This dramatically reduces the learning curve when working with unfamiliar Chrome APIs and helps prevent common mistakes that lead to runtime errors.
 
-Dependency Injection
+### Dependency Injection
 
 Angular's dependency injection system is another powerful feature that translates well to extension development. You can inject services that manage communication between different parts of your extension, popup, background script, content scripts, through well-defined interfaces. This separation of concerns makes your extension architecture clean and testable.
 
 For example, you might create a `StorageService` that abstracts the chrome.storage API, a `MessageService` that handles communication between extension components, and an `ApiService` that manages external HTTP requests. Each service can be injected wherever needed, making your code modular and easy to refactor.
 
-Angular CLI and Build Tools
+### Angular CLI and Build Tools
 
 The Angular CLI provides a mature development workflow with hot module replacement, optimized builds, and easy configuration. When building Chrome extensions, you can use these tools to create a smooth development experience. The CLI handles the complex build configuration needed to bundle your Angular application into extension-compatible files.
 
@@ -48,11 +48,11 @@ Modern Angular versions also support standalone components, which simplify the c
 
 ---
 
-Setting Up Your Angular Chrome Extension Project {#project-setup}
+## Setting Up Your Angular Chrome Extension Project {#project-setup}
 
 Now let us start building our Angular Chrome extension. The first step is setting up a new Angular project configured for extension development. We will use the Angular CLI to create our project and then configure it for Chrome extension compatibility.
 
-Installing Angular CLI
+### Installing Angular CLI
 
 If you have not already installed the Angular CLI, you can do so using npm. The CLI provides commands to generate components, services, and other Angular artifacts, making development significantly faster. Open your terminal and run the following command to install the CLI globally:
 
@@ -62,7 +62,7 @@ npm install -g @angular/cli
 
 After installation, verify that the CLI is properly installed by checking its version. You should see output indicating the installed version number. The CLI is actively maintained, so make sure you are using a recent version to access the latest features and improvements. Angular 17 and later versions include significant improvements to build performance and developer experience.
 
-Creating the Angular Project
+### Creating the Angular Project
 
 With the CLI installed, create a new Angular project for your extension. We will create a project with standalone components and routing disabled, since Chrome extensions typically do not need the full Angular router. Run the following command in your terminal:
 
@@ -74,7 +74,7 @@ This command creates a new Angular project with the name "angular-chrome-extensi
 
 The project structure will include the standard Angular folders: src/app for your application code, src/assets for static files, and various configuration files. You will need to modify this structure slightly to make it work as a Chrome extension, but the Angular CLI has created a solid foundation to build upon.
 
-Installing Chrome Extension Types
+### Installing Chrome Extension Types
 
 To get proper TypeScript support for Chrome extension APIs, you should install the appropriate type definitions. These types provide autocomplete and type checking for all Chrome APIs, significantly improving your development experience. Run the following command to install the type definitions:
 
@@ -86,11 +86,11 @@ With these types installed, you will have full type support for the chrome names
 
 ---
 
-Configuring Angular for Chrome Extension Development {#configuration}
+## Configuring Angular for Chrome Extension Development {#configuration}
 
 The standard Angular build configuration produces a web application optimized for browser deployment, but Chrome extensions require specific adjustments. You need to modify the Angular configuration to output files in the format Chrome expects and to handle the unique requirements of extension development.
 
-Updating angular.json
+### Updating angular.json
 
 The angular.json file controls how Angular builds and serves your application. You need to modify the build configuration to output files compatible with Chrome extensions. Open angular.json in your project root and locate the build configurations.
 
@@ -98,7 +98,7 @@ For a Chrome extension, you typically want to build as a single bundle rather th
 
 The key changes involve modifying the production build configuration to produce a single HTML file with embedded styles, setting the base href appropriately for extension contexts, and ensuring all necessary files are copied to the output directory. You may also want to add a separate build target specifically for extension development.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 The manifest.json file is the heart of every Chrome extension, and you need to create one for your Angular project. This JSON file tells Chrome about your extension's name, version, permissions, and the files that compose the extension. Create a new file called manifest.json in your src folder.
 
@@ -135,11 +135,11 @@ This manifest defines a basic extension with a popup, background service worker,
 
 ---
 
-Building the Angular Popup Component {#popup-development}
+## Building the Angular Popup Component {#popup-development}
 
 The popup is the interface users see when they click your extension icon in the Chrome toolbar. In an Angular extension, this popup is essentially a mini Angular application. Let us build a functional popup component that demonstrates Angular's capabilities in an extension context.
 
-Creating the Popup Component
+### Creating the Popup Component
 
 Angular CLI can generate components for you, but for a Chrome extension popup, you often want more control over the structure. The popup component will serve as the main interface for user interaction, so design it with clarity and usability in mind.
 
@@ -215,7 +215,7 @@ export class PopupComponent implements OnInit {
 
 This component demonstrates several important patterns for Angular Chrome extensions. It uses standalone component syntax, imports necessary Angular modules, and interacts with the Chrome tabs API to get information about the current tab. The template uses Angular's built-in directives like *ngIf for conditional rendering.
 
-Styling the Popup
+### Styling the Popup
 
 Angular provides several options for styling your popup component. You can use component-scoped styles, global styles in styles.css, or a combination of both. For extension popups, component-scoped styles are often the best choice because they prevent style leakage and keep your styles organized.
 
@@ -223,11 +223,11 @@ The styles in the component above demonstrate basic styling principles for popup
 
 ---
 
-Implementing Background Service Workers {#background-service}
+## Implementing Background Service Workers {#background-service}
 
 Chrome extensions use service workers for background processing, and Angular can handle this requirement as well. Service workers run in the background and handle events like browser alarms, messages from content scripts, and extension installation. While service workers cannot use the full Angular framework, you can create lightweight TypeScript files that interact with your Angular components.
 
-Creating the Service Worker
+### Creating the Service Worker
 
 Service workers in Manifest V3 are fundamentally different from the background pages used in Manifest V2. They are event-driven and do not persist in memory between events. This means your service worker needs to be written differently than typical Angular services. Create a new file called background.ts in your src folder.
 
@@ -268,7 +268,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 This service worker demonstrates three common patterns: responding to installation, handling messages, and managing alarms. The message handler shows how to communicate between different parts of your extension, the popup can send a message to the service worker and receive a response asynchronously.
 
-Integrating with Angular Components
+### Integrating with Angular Components
 
 While the service worker itself cannot run Angular code directly, you can create a bridge between your Angular application and the service worker. One approach is to have your Angular components send messages to the service worker and listen for responses. This allows your Angular UI to trigger background tasks and receive updates.
 
@@ -306,11 +306,11 @@ This service provides a clean interface for your Angular components to communica
 
 ---
 
-Working with Content Scripts {#content-scripts}
+## Working with Content Scripts {#content-scripts}
 
 Content scripts run in the context of web pages and can modify page content, access page DOM, and communicate with the extension. Angular can be used to create content script functionality, though the approach differs from building the popup interface.
 
-Creating Content Scripts
+### Creating Content Scripts
 
 Content scripts are typically lighter weight than popup interfaces because they need to inject into potentially any webpage. You should keep content scripts minimal and focused on their specific task. Create a content.ts file that will be compiled to content.js.
 
@@ -345,11 +345,11 @@ This content script demonstrates element highlighting based on messages from the
 
 ---
 
-Building and Testing Your Extension {#building-testing}
+## Building and Testing Your Extension {#building-testing}
 
 With all components in place, you need to build your Angular application and test it in Chrome. The build process compiles your Angular code into files that Chrome can load as an extension.
 
-Building the Extension
+### Building the Extension
 
 Run the Angular build command to compile your application. The output will be placed in the dist folder configured in your angular.json. After building, you will need to copy the manifest.json and any other required files to the output directory.
 
@@ -357,7 +357,7 @@ The build process produces JavaScript bundles that Chrome can load. For the best
 
 After building, verify that all necessary files are present in your output directory. You should have the compiled JavaScript files, the HTML entry point, your manifest.json, and any assets like icons. The file structure should match what your manifest.json references.
 
-Loading the Extension in Chrome
+### Loading the Extension in Chrome
 
 To test your extension, open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner. Click the "Load unpacked" button and select your extension's output directory.
 
@@ -367,23 +367,23 @@ Use Chrome's developer tools to debug your extension. Right-click anywhere in yo
 
 ---
 
-Best Practices for Angular Chrome Extensions {#best-practices}
+## Best Practices for Angular Chrome Extensions {#best-practices}
 
 Building successful Chrome extensions with Angular requires following certain best practices that ensure performance, maintainability, and user satisfaction. These guidelines reflect lessons learned from real-world extension development.
 
-Performance Optimization
+### Performance Optimization
 
 Chrome extensions must be lightweight and fast. Users expect instant popup open times and minimal memory footprint. Optimize your Angular build by enabling production mode, removing unused code through tree shaking, and lazy-loading any heavy components that are not immediately needed.
 
 Avoid loading the full Angular runtime in your content scripts. Instead, use lightweight TypeScript that directly manipulates the DOM. Keep your content scripts as small as possible, since they run on every page the user visits. The smaller your content script, the less impact it has on page load times.
 
-Security Considerations
+### Security Considerations
 
 Always validate any data received from web pages or external sources. Content scripts run in the context of web pages, making them potentially vulnerable to cross-site scripting attacks. Never trust data from the page without validation, and use Angular's built-in sanitization for any HTML content you display.
 
 Be careful with the permissions you request. Users are increasingly cautious about extensions that request broad permissions, and Chrome may warn users about sensitive permissions. Only request the permissions your extension actually needs, and explain to users why each permission is necessary.
 
-State Management
+### State Management
 
 Manage extension state carefully, especially when communicating between different components. Use chrome.storage to persist state across browser sessions, but be aware that storage operations are asynchronous. Consider using Angular's RxJS observables to create reactive state management that works well with Chrome's async APIs.
 
@@ -391,17 +391,17 @@ For more complex extensions, consider implementing a state management library li
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 When your extension is ready, you can publish it to the Chrome Web Store to reach millions of users. The publishing process involves preparing your extension, creating a developer account, and submitting your extension for review.
 
-Preparing for Publication
+### Preparing for Publication
 
 Before publishing, review your manifest.json carefully. Ensure the version number is correct, each version you publish must have a unique version number. Remove any debug code or console.log statements that you used during development. Verify that all icons are present and properly sized.
 
 Create screenshots and a promotional video that demonstrate your extension's value. These assets appear in your Chrome Web Store listing and significantly impact installation rates. Write a clear, concise description that explains what your extension does and why users should install it.
 
-Submitting to the Chrome Web Store
+### Submitting to the Chrome Web Store
 
 You will need a Google Developer account to publish extensions. The registration process includes a one-time fee. Once registered, you can upload your extension using the Chrome Web Store Developer Dashboard. Fill in all required information, upload your extension package, and submit for review.
 
@@ -409,7 +409,7 @@ Google reviews extensions for policy compliance and security issues. The review 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building Chrome extensions with Angular combines the power of a modern web framework with the unique capabilities of browser extensions. Throughout this guide, you have learned how to set up an Angular project for extension development, configure the manifest file, build popup interfaces, implement background service workers, and create content scripts.
 

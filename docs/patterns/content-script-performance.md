@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-perform
 last_modified_at: 2026-01-15
 ---
 
-Content Script Performance Optimization
+### Content Script Performance Optimization
 
-Overview {#overview}
+## Overview {#overview}
 
 Content scripts directly impact page load performance and user experience. Optimizing their initialization and runtime behavior is critical for maintaining fast page loads and responsive extension functionality.
 
-Minimizing Initial Load Impact {#minimizing-initial-load-impact}
+## Minimizing Initial Load Impact {#minimizing-initial-load-impact}
 
 Content scripts block page rendering if loaded at `document_start`. Use `document_idle` for non-critical functionality:
 
@@ -28,9 +28,9 @@ Content scripts block page rendering if loaded at `document_start`. Use `documen
 
 For critical features needing early injection, defer non-essential initialization using `requestIdleCallback`.
 
-Deferred Initialization Pattern {#deferred-initialization-pattern}
+## Deferred Initialization Pattern {#deferred-initialization-pattern}
 
-Defer expensive operations until the page has settled:
+### Defer expensive operations until the page has settled:
 
 ```js
 // Lazy content script initializer
@@ -52,9 +52,9 @@ function initializeFeatures() {
 initContentScript();
 ```
 
-Efficient DOM Querying {#efficient-dom-querying}
+## Efficient DOM Querying {#efficient-dom-querying}
 
-Cache DOM queries and avoid repeated searches:
+### Cache DOM queries and avoid repeated searches:
 
 ```js
 // BAD: Query multiple times
@@ -72,9 +72,9 @@ const container = document.getElementById('extension-root');
 const button = container.querySelector('.action-btn');
 ```
 
-Intersection Observer for Lazy DOM Operations {#intersection-observer-for-lazy-dom-operations}
+## Intersection Observer for Lazy DOM Operations {#intersection-observer-for-lazy-dom-operations}
 
-Defer DOM manipulation until elements are visible:
+### Defer DOM manipulation until elements are visible:
 
 ```js
 const observer = new IntersectionObserver((entries) => {
@@ -89,9 +89,9 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.lazy-load').forEach(el => observer.observe(el));
 ```
 
-MutationObserver Performance {#mutationobserver-performance}
+## MutationObserver Performance {#mutationobserver-performance}
 
-Use targeted observation instead of monitoring entire subtrees:
+### Use targeted observation instead of monitoring entire subtrees:
 
 ```js
 // BAD: Watches entire document
@@ -113,9 +113,9 @@ Disconnect observers when no longer needed to prevent memory leaks:
 observer.disconnect();
 ```
 
-Avoiding Layout Thrashing {#avoiding-layout-thrashing}
+## Avoiding Layout Thrashing {#avoiding-layout-thrashing}
 
-Read layout properties together, then write together:
+### Read layout properties together, then write together:
 
 ```js
 // BAD: Interleaved reads and writes cause reflows
@@ -129,7 +129,7 @@ const heights = elements.map(el => el.offsetHeight); // All READS
 elements.forEach((el, i) => el.style.height = heights[i] + 'px'); // All WRITES
 ```
 
-CSS Containment for Injected UI {#css-containment-for-injected-ui}
+## CSS Containment for Injected UI {#css-containment-for-injected-ui}
 
 Use CSS containment to isolate extension UI from page reflows:
 
@@ -140,9 +140,9 @@ Use CSS containment to isolate extension UI from page reflows:
 }
 ```
 
-Message Batching {#message-batching}
+## Message Batching {#message-batching}
 
-Reduce IPC overhead by batching messages:
+### Reduce IPC overhead by batching messages:
 
 ```js
 // Batched message sender
@@ -169,9 +169,9 @@ function flushMessages() {
 }
 ```
 
-Memory Leak Prevention {#memory-leak-prevention}
+## Memory Leak Prevention {#memory-leak-prevention}
 
-Always clean up observers, listeners, and timers:
+### Always clean up observers, listeners, and timers:
 
 ```js
 class ContentFeature {
@@ -205,7 +205,7 @@ class ContentFeature {
 }
 ```
 
-Script Injection Timing Tradeoffs {#script-injection-timing-tradeoffs}
+## Script Injection Timing Tradeoffs {#script-injection-timing-tradeoffs}
 
 | Timing | Use Case | Tradeoff |
 |--------|----------|----------|
@@ -213,7 +213,7 @@ Script Injection Timing Tradeoffs {#script-injection-timing-tradeoffs}
 | `document_end` | DOM ready, no layout yet | Fast but limited access |
 | `document_idle` | Most features | Best balance, but delayed |
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [DOM Observer Patterns](./dom-observer-patterns.md) - Advanced observer configurations
 - [Content Script Lifecycle](./content-script-lifecycle.md) - Initialization and cleanup

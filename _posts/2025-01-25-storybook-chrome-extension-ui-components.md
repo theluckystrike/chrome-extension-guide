@@ -18,7 +18,7 @@ Storybook has become the industry standard for component-driven development, and
 
 ---
 
-Understanding the Chrome Extension UI Challenge {#understanding-challenge}
+## Understanding the Chrome Extension UI Challenge {#understanding-challenge}
 
 Chrome extensions operate in a complex ecosystem that differs substantially from traditional web applications. When building a browser extension, you must design interfaces that work smoothly across different viewing contexts, from small popup windows to full-featured options pages. Each context has its own constraints, popup windows are typically limited to 600x600 pixels, while options pages can be as expansive as needed. Content scripts must inject into web pages and coexist with existing page styles, requiring careful style isolation strategies.
 
@@ -28,7 +28,7 @@ Storybook addresses these challenges by providing an isolated environment where 
 
 ---
 
-Setting Up Storybook for Your Chrome Extension {#setting-up-storybook}
+## Setting Up Storybook for Your Chrome Extension {#setting-up-storybook}
 
 The first step in implementing Storybook for a Chrome extension involves initializing the tool within your project. Most modern Chrome extension projects use a bundler like Webpack or Vite, and Storybook provides official support for both. If you created your extension using a template like create-react-app or set up a custom build system, the Storybook initialization process adapts accordingly.
 
@@ -47,7 +47,7 @@ The `preview.js` file within the `.storybook` directory allows you to configure 
 
 ---
 
-Configuring the Extension Runtime Environment {#configuring-runtime}
+## Configuring the Extension Runtime Environment {#configuring-runtime}
 
 One of the most critical aspects of setting up Storybook for Chrome extensions involves simulating the extension context within the Storybook environment. When your components reference `chrome.runtime`, `chrome.storage`, or other Chrome API objects, they expect these to be available in the global scope. Storybook's `preview.js` file provides the perfect location to inject these mocks.
 
@@ -96,7 +96,7 @@ Additionally, you may need to configure CSS imports to match your extension's st
 
 ---
 
-Organizing Component Stories for Extensions {#organizing-stories}
+## Organizing Component Stories for Extensions {#organizing-stories}
 
 Effective component organization in Storybook goes beyond simple directory structures, it reflects your extension's architecture and makes it easy for team members to find and understand existing components. For Chrome extensions, a logical organization scheme groups components by their context and purpose within the extension.
 
@@ -175,7 +175,7 @@ export const AllVariants = {
 
 ---
 
-Building a Component Library for Your Extension {#component-library}
+## Building a Component Library for Your Extension {#component-library}
 
 Creating a dedicated component library for your Chrome extension establishes consistency across all extension contexts and significantly reduces development time for new features. A well-designed component library encapsulates best practices, enforces design standards, and provides a single source of truth for UI elements used throughout your extension.
 
@@ -233,7 +233,7 @@ export const Documentation = {
 
 ---
 
-Visual Testing and Accessibility Validation {#visual-testing}
+## Visual Testing and Accessibility Validation {#visual-testing}
 
 Storybook's ecosystem includes powerful tools for visual testing and accessibility validation that are particularly valuable for Chrome extensions. Given that extensions must function correctly across different contexts and potentially interact with diverse web pages, ensuring visual consistency and accessibility compliance is essential.
 
@@ -260,7 +260,7 @@ Run accessibility tests as part of your regular development workflow to catch is
 
 ---
 
-Documenting Components for Team Collaboration {#documentation}
+## Documenting Components for Team Collaboration {#documentation}
 
 Comprehensive component documentation transforms Storybook from a development tool into a knowledge base that accelerates team collaboration. When components are well-documented, designers can reference them to understand available UI patterns, developers can quickly integrate them into new features, and new team members can become productive faster.
 
@@ -278,7 +278,7 @@ This documentation ensures that everyone working on the extension maintains visu
 
 ---
 
-Integrating Storybook with Your Development Workflow {#integration}
+## Integrating Storybook with Your Development Workflow {#integration}
 
 To maximize the benefits of Storybook in your Chrome extension development, integrate it smoothly into your daily workflow and CI/CD pipeline. Configure Storybook to run alongside your development server, providing instant feedback as you modify components. Many teams find it helpful to have Storybook running in a dedicated terminal window during development.
 
@@ -288,7 +288,7 @@ Consider establishing code review practices that include Storybook snapshots. Wh
 
 ---
 
-Best Practices for Extension Component Development {#best-practices}
+## Best Practices for Extension Component Development {#best-practices}
 
 As you implement Storybook for your Chrome extension, keep several best practices in mind that will help you build a sustainable component library:
 
@@ -304,7 +304,7 @@ Version your components: As your component library evolves, maintain backward co
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing Storybook for Chrome extension UI components represents a significant improvement in how you develop, test, and document your extension's interface. By creating an isolated development environment, you accelerate iteration cycles, help collaboration, and establish a living documentation system that keeps your team aligned.
 

@@ -10,7 +10,7 @@ Chrome Extension CI/CD Pipeline: Automated Testing and Publishing
 
 Building a solid CI/CD pipeline is essential for maintaining high-quality Chrome extensions. Manual build and deployment processes are error-prone, time-consuming, and don't scale well with team growth or project complexity. This guide walks you through building a complete automated pipeline that handles everything from code quality checks to production releases on the Chrome Web Store.
 
-Introduction: Why CI/CD Matters for Extension Development
+### Introduction: Why CI/CD Matters for Extension Development
 
 Chrome extensions present unique challenges that make automation critical. Unlike web applications, extensions must work across multiple Chrome versions, handle various permission scenarios, and integrate with browser-specific APIs. Manual testing across these combinations becomes impractical as your extension grows.
 
@@ -24,11 +24,11 @@ Quality Gates: By enforcing linting, testing, and build checks before code merge
 
 Security and Compliance: Automated pipelines can scan for security vulnerabilities, verify extension manifests, and ensure sensitive credentials never enter the codebase.
 
-Pipeline Architecture
+### Pipeline Architecture
 
 The complete CI/CD pipeline for Chrome extensions consists of six distinct stages, each serving a specific purpose in the development lifecycle. Understanding these stages helps you design a pipeline that matches your team's workflow and quality requirements.
 
-Pipeline Stages Overview
+### Pipeline Stages Overview
 
 ```
 
@@ -53,7 +53,7 @@ Pipeline Stages Overview
 
 ```
 
-Trigger Events
+### Trigger Events
 
 The pipeline responds to three primary trigger events that correspond to different development workflows.
 
@@ -63,7 +63,7 @@ Pull Request Creation and Updates: Opening or updating a pull request triggers a
 
 Tag Push: Creating a version tag (e.g., `v1.2.3`) triggers the full pipeline including packaging and publishing. This semantic versioning approach aligns with Chrome Web Store update requirements and provides a clear audit trail.
 
-Stage Details
+### Stage Details
 
 Lint Stage: This stage catches code quality issues before they reach testing. ESLint analyzes your JavaScript and TypeScript code for syntax errors, style violations, and potential bugs. TypeScript's type checker verifies type correctness, catching impossible states and API misuse at compile time.
 
@@ -75,13 +75,13 @@ Package Stage: This stage creates the distributable `.zip` file required for Chr
 
 Publish Stage: The final stage uploads your packaged extension to the Chrome Web Store. This stage should have additional safety controls since it's the only stage that modifies your live extension listing.
 
-GitHub Actions Setup
+### GitHub Actions Setup
 
 GitHub Actions provides an excellent foundation for extension CI/CD due to its tight integration with GitHub repositories, generous free tier for open-source projects, and extensive marketplace of pre-built actions.
 
-Complete Workflow YAML
+### Complete Workflow YAML
 
-Create the file `.github/workflows/ci-cd.yml` in your extension repository:
+### Create the file `.github/workflows/ci-cd.yml` in your extension repository:
 
 {% raw %}
 ```yaml
@@ -258,19 +258,19 @@ jobs:
 
 This workflow implements several best practices worth highlighting. The `needs` declarations create proper dependencies between jobs, ensuring that builds only proceed when earlier stages pass. Matrix testing across multiple Node versions catches version-specific issues early. The conditional `if` statements ensure that packaging and publishing only occur for tagged releases, not for every push to main.
 
-Linting Configuration
+### Linting Configuration
 
 Proper linting configuration is crucial for maintaining code quality in Chrome extension projects. Extensions have unique requirements that standard JavaScript linting rules don't address, including Chrome API types and extension-specific patterns.
 
-ESLint Configuration for Chrome Extensions
+### ESLint Configuration for Chrome Extensions
 
-Install the required ESLint packages:
+### Install the required ESLint packages:
 
 ```bash
 pnpm add -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-chrome
 ```
 
-Create the ESLint configuration file:
+### Create the ESLint configuration file:
 
 ```javascript
 // .eslintrc.js
@@ -325,23 +325,23 @@ module.exports = {
 };
 ```
 
-Pre-commit Hooks with Husky
+### Pre-commit Hooks with Husky
 
 Setting up Husky ensures that code quality checks run before every commit, preventing bad code from entering the repository.
 
-Install Husky and lint-staged:
+### Install Husky and lint-staged:
 
 ```bash
 pnpm add -D husky lint-staged
 ```
 
-Initialize Husky:
+### Initialize Husky:
 
 ```bash
 npx husky init
 ```
 
-Configure lint-staged in `package.json`:
+### Configure lint-staged in `package.json`:
 
 ```json
 {
@@ -357,7 +357,7 @@ Configure lint-staged in `package.json`:
 }
 ```
 
-Update the Husky pre-commit hook:
+### Update the Husky pre-commit hook:
 
 ```bash
 echo 'npx lint-staged' > .husky/pre-commit
@@ -365,11 +365,11 @@ echo 'npx lint-staged' > .husky/pre-commit
 
 This setup ensures that every commit passes your linting and type checks, maintaining consistent code quality across all contributors.
 
-Testing in CI
+### Testing in CI
 
 Testing Chrome extensions presents unique challenges because the Chrome APIs (chrome.storage, chrome.runtime, chrome.tabs, etc.) aren't available in the Node.js test environment. You need to mock these APIs to run meaningful tests.
 
-Unit Testing Background Scripts with Vitest
+### Unit Testing Background Scripts with Vitest
 
 Create a test setup file that mocks Chrome APIs:
 
@@ -500,7 +500,7 @@ describe('StorageHandler', () => {
 });
 ```
 
-Configure Vitest in your project:
+### Configure Vitest in your project:
 
 ```typescript
 // vitest.config.ts
@@ -539,11 +539,11 @@ Add test scripts to `package.json`:
 }
 ```
 
-Building for Production
+### Building for Production
 
 The build stage transforms your source code into a production-ready extension. This involves several optimization steps that reduce bundle size and improve performance.
 
-Build Configuration
+### Build Configuration
 
 For a typical Chrome extension built with TypeScript and a bundler like Vite, your build configuration should include:
 
@@ -581,9 +581,9 @@ export default defineConfig({
 });
 ```
 
-Environment Variables
+### Environment Variables
 
-Create environment-specific build configurations:
+### Create environment-specific build configurations:
 
 ```typescript
 // src/config/index.ts
@@ -621,7 +621,7 @@ export const getConfig = (): AppConfig => {
 };
 ```
 
-Build with specific environment:
+### Build with specific environment:
 
 ```bash
 Development build
@@ -631,11 +631,11 @@ Production build
 NODE_ENV=production pnpm build
 ```
 
-Packaging the Extension
+### Packaging the Extension
 
 Packaging creates the `.zip` file required for Chrome Web Store uploads. The package must exclude development files, source maps, and any other files that shouldn't ship with the production extension.
 
-Package Script
+### Package Script
 
 Create a packaging script that handles version information and file exclusion:
 
@@ -669,7 +669,7 @@ echo "Package created: extension-v${VERSION}.zip"
 ls -lh "../extension-v${VERSION}.zip"
 ```
 
-Exclude Patterns
+### Exclude Patterns
 
 Configure your bundler or use a `.zipignore` file to exclude unnecessary files:
 
@@ -714,20 +714,20 @@ Thumbs.db
 *.tmp
 ```
 
-Auto-Publishing to Chrome Web Store
+### Auto-Publishing to Chrome Web Store
 
 Automating the Chrome Web Store publish process saves significant time and ensures consistent releases. However, this requires careful security handling since publishing directly affects your users.
 
-Prerequisites
+### Prerequisites
 
-Before setting up auto-publishing, you'll need to:
+### Before setting up auto-publishing, you'll need to:
 
 1. Create a Google Cloud project with the Chrome Web Store API enabled
 2. Set up OAuth credentials for the Chrome Web Store API
 3. Obtain your extension's unique ID from the Chrome Web Store developer dashboard
 4. Configure GitHub Secrets for your credentials
 
-GitHub Secrets Configuration
+### GitHub Secrets Configuration
 
 Add the following secrets to your GitHub repository:
 
@@ -736,7 +736,7 @@ Add the following secrets to your GitHub repository:
 - `CWS_REFRESH_TOKEN`: OAuth refresh token for API access
 - `EXTENSION_ID`: Your extension's unique identifier in the Chrome Web Store
 
-Publish Script
+### Publish Script
 
 Create a publish script that handles the upload:
 
@@ -796,7 +796,7 @@ async function publish() {
 publish();
 ```
 
-Safety Controls
+### Safety Controls
 
 Implement multiple safety controls for publishing:
 
@@ -820,11 +820,11 @@ publish:
 ```
 {% endraw %}
 
-Version Management
+### Version Management
 
 Proper version management ensures consistent releases and helps users understand what changed in each update.
 
-Version Bump Script
+### Version Bump Script
 
 Create a script to automate version bumps:
 
@@ -894,9 +894,9 @@ Add version scripts to `package.json`:
 }
 ```
 
-Version Sync Workflow
+### Version Sync Workflow
 
-The complete version sync workflow:
+### The complete version sync workflow:
 
 1. Developer runs `npm run version:patch` (or major/minor)
 2. Script updates both `package.json` and `manifest.json`
@@ -906,13 +906,13 @@ The complete version sync workflow:
 6. Package is created and uploaded to Chrome Web Store
 7. Users receive the update based on your rollout settings
 
-Branch Protection
+### Branch Protection
 
 Branch protection rules ensure that code changes go through proper review and testing before merging to the main branch.
 
-Required Status Checks
+### Required Status Checks
 
-Configure branch protection to require passing CI/CD checks:
+### Configure branch protection to require passing CI/CD checks:
 
 1. Go to your repository settings
 2. Navigate to "Branches" > "Branch protection rules"
@@ -920,16 +920,16 @@ Configure branch protection to require passing CI/CD checks:
 4. Enable "Require status checks to pass before merging"
 5. Select the required checks: `lint`, `test`, and `build`
 
-Required Reviews
+### Required Reviews
 
-Require pull request reviews:
+### Require pull request reviews:
 
 1. Enable "Require pull request reviews before merging"
 2. Set "Required approving reviews" to 1 or 2 based on your team's needs
 3. Enable "Dismiss stale reviews" when new commits are pushed
 4. Enable "Require review from code owners" for critical changes
 
-Protection Rules Summary
+### Protection Rules Summary
 
 ```markdown
 Branch Protection Rules for main
@@ -948,11 +948,11 @@ Branch Protection Rules for main
   -  Prevent branch deletion
 ```
 
-Monitoring and Rollback
+### Monitoring and Rollback
 
 Even with comprehensive testing, issues can make it to production. Having proper monitoring and rollback procedures ensures you can quickly respond to problems.
 
-Chrome Web Store Dashboard Monitoring
+### Chrome Web Store Dashboard Monitoring
 
 The Chrome Web Store developer dashboard provides several metrics:
 
@@ -961,7 +961,7 @@ The Chrome Web Store developer dashboard provides several metrics:
 3. Stack traces: View JavaScript errors reported by users
 4. Publishing status: Monitor the review status of published updates
 
-Staged Rollout
+### Staged Rollout
 
 When publishing updates, use staged rollout to gradually distribute the update:
 
@@ -971,18 +971,18 @@ When publishing updates, use staged rollout to gradually distribute the update:
 4. Gradually increase the percentage if no issues arise
 5. After confirming stability, expand to 100%
 
-Rollback Procedure
+### Rollback Procedure
 
-If critical issues are discovered:
+### If critical issues are discovered:
 
 1. Immediate action: Navigate to the Chrome Web Store dashboard
 2. Revert to previous version: Use the "Package" section to upload a previous stable package
 3. Alternative: Push a new tag for the previous version (e.g., `v1.2.0` if you're at `v1.2.1`)
 4. Documentation: Document the issue and steps taken in your release notes
 
-Error Monitoring with Sentry
+### Error Monitoring with Sentry
 
-Integrate Sentry for real-time error monitoring:
+### Integrate Sentry for real-time error monitoring:
 
 ```typescript
 // src/background/index.ts
@@ -1022,7 +1022,7 @@ export default function Popup() {
 }
 ```
 
-Related Resources
+### Related Resources
 
 For more information on extending your CI/CD pipeline and Chrome extension development, explore these related guides:
 
@@ -1031,7 +1031,7 @@ For more information on extending your CI/CD pipeline and Chrome extension devel
 - [GitHub Actions for Extensions](/guides/github-actions-extension-ci-cd/): Additional GitHub Actions patterns specific to Chrome extension development.
 - [Extension Security Checklist](/guides/chrome-extension-security-checklist/): Ensure your CI/CD pipeline includes security verification steps.
 
-Conclusion
+### Conclusion
 
 Implementing a comprehensive CI/CD pipeline for your Chrome extension is one of the most impactful investments you can make in your project's infrastructure. The initial setup time pays dividends through consistent code quality, faster iteration cycles, and reliable releases.
 

@@ -8,15 +8,15 @@ last_modified_at: 2026-01-15
 
 Tab Suspender Pro Memory Benchmark: How Much RAM Do You Save with 50, 100, and 200 Tabs?
 
-Overview
+### Overview
 
 Tab Suspender Pro has become an essential tool for power users who keep dozens or even hundreds of browser tabs open. But how much actual memory does it save? This comprehensive benchmark tests the extension across three different tab counts, 50, 100, and 200 tabs, across various website types to provide real-world performance data. Whether you're on a modest 8GB laptop or a powerhouse workstation, this guide will help you understand exactly what Tab Suspender Pro delivers and how it compares to Chrome's built-in tab discarding.
 
 This benchmark was conducted using Chrome 120 with Tab Suspender Pro version 2.4.1, measuring memory usage through Chrome's internal task manager and Windows Task Manager for system-level impact. Each test scenario was run multiple times with a cold start between tests to ensure accurate baseline measurements.
 
-Test Methodology
+### Test Methodology
 
-Test Environment
+### Test Environment
 
 The benchmark was conducted on two distinct hardware configurations to provide relevant recommendations across different machine specifications:
 
@@ -34,9 +34,9 @@ Test System B (Low-End):
 - OS: Windows 11 Home 22H2
 - Chrome Version: 120.0.6099.130
 
-Test Scenarios
+### Test Scenarios
 
-Each benchmark test opened tabs in three categories:
+### Each benchmark test opened tabs in three categories:
 
 Static Content Sites (40% of tabs):
 - Wikipedia articles
@@ -59,7 +59,7 @@ Media-Heavy Sites (30% of tabs):
 - Twitter/X timeline
 - LinkedIn feed
 
-Measurement Protocol
+### Measurement Protocol
 
 Memory measurements were taken using Chrome's built-in task manager (Shift+Esc) combined with Windows Task Manager for total process memory. Each test followed this protocol:
 
@@ -72,7 +72,7 @@ Memory measurements were taken using Chrome's built-in task manager (Shift+Esc) 
 7. Measure CPU usage during idle period with both active and suspended tabs
 8. Test system responsiveness using a standardized workflow
 
-Baseline Chrome Memory Without Tab Suspender Pro
+### Baseline Chrome Memory Without Tab Suspender Pro
 
 Before examining Tab Suspender Pro's impact, it's essential to understand how Chrome consumes memory with various tab counts.
 
@@ -106,7 +106,7 @@ At 200 tabs, the results were striking. System A consumed 14.2GB while System B 
 
 Both systems became nearly unusable. Chrome frequently froze, tab switching took 5+ seconds, and the entire system slowed dramatically. System B's swap file grew to 6GB, indicating severe memory pressure.
 
-Memory After Tab Suspension
+### Memory After Tab Suspension
 
 Now let's examine how Tab Suspender Pro changes these numbers by suspending inactive tabs.
 
@@ -143,35 +143,35 @@ The 200-tab scenario demonstrated Tab Suspender Pro's most impressive results:
 
 Even on the memory-constrained System B, Chrome now used only 2.8GB, well within available RAM. The system became fully responsive again, with tab switching times returning to under 500ms.
 
-Per-Tab Savings by Site Type
+### Per-Tab Savings by Site Type
 
 Tab Suspender Pro's effectiveness varies significantly based on the type of website being suspended. Understanding these differences helps set realistic expectations.
 
-Static Content Sites
+### Static Content Sites
 
 Static sites like Wikipedia, documentation pages, and news articles showed the most dramatic memory reduction when suspended, from ~40MB to just 2-3MB per tab. This 93%+ reduction occurs because suspended tabs unload all page resources including JavaScript execution contexts, stylesheets, and DOM trees. When resumed, the page reloads completely, but for inactive tabs, this is an acceptable trade-off.
 
-Average savings per static tab: 37MB (93% reduction)
+### Average savings per static tab: 37MB (93% reduction)
 
-Single-Page Applications
+### Single-Page Applications
 
 SPAs presented a more complex scenario. Gmail, Google Docs, and similar applications maintain substantial in-memory state for responsiveness. When suspended, these tabs dropped from ~95MB to approximately 8-12MB, still higher than static sites because SPA frameworks often require some baseline state to function correctly upon resume.
 
 The key insight here is that Tab Suspender Pro correctly identifies SPAs and handles them appropriately, though users who rely on background sync (like leaving Gmail open for notifications) should mark these tabs as "never suspend."
 
-Average savings per SPA tab: 83MB (87% reduction)
+### Average savings per SPA tab: 83MB (87% reduction)
 
-Media-Heavy Sites
+### Media-Heavy Sites
 
 Video sites and social media with infinite scroll showed the highest baseline memory usage. YouTube, even on the homepage, maintains video preloading buffers and complex JavaScript for the player interface. When suspended, these dropped from ~140MB to approximately 15-20MB, still more than other categories due to browser favicon caching and thumbnail previews.
 
-Average savings per media tab: 122MB (87% reduction)
+### Average savings per media tab: 122MB (87% reduction)
 
-CPU Reduction Metrics
+### CPU Reduction Metrics
 
 Memory isn't the only resource benefiting from tab suspension. CPU usage drops dramatically when inactive tabs are suspended, which directly impacts battery life and system responsiveness.
 
-Idle CPU Usage Comparison
+### Idle CPU Usage Comparison
 
 With 100 tabs open but all inactive (user reading one tab), CPU measurements showed:
 
@@ -187,7 +187,7 @@ System B (Low-End):
 
 The percentage reduction was similar across systems, but the practical impact differed significantly. System B's low-end processor struggled with background tab processing, and the 74% reduction meant the difference between a usable and unusable system.
 
-Wake Cycle Impact
+### Wake Cycle Impact
 
 Tab Suspender Pro also reduces Chrome's "wake" cycles, the times when background tabs execute JavaScript. With all 100 tabs active, Chrome wakes approximately 15-20 tabs per second for various housekeeping tasks. With suspension enabled, this drops to 2-4 tabs per second, dramatically reducing CPU interruptions.
 
@@ -197,7 +197,7 @@ For laptop users, this translates to measurably improved battery life. Our test 
 - 100 tabs, with suspension: 6.8 hours battery life
 - Battery improvement: 62%
 
-System Responsiveness Scores
+### System Responsiveness Scores
 
 Beyond raw memory and CPU metrics, we measured overall system responsiveness using a standardized workflow: opening a new tab, switching between 10 tabs rapidly, and performing a Google search.
 
@@ -214,19 +214,19 @@ Beyond raw memory and CPU metrics, we measured overall system responsiveness usi
 
 The scores clearly demonstrate that Tab Suspender Pro transforms the browsing experience on memory-constrained systems. System B's jump from 2.1 to 7.8/10 with 100 tabs represents the difference between frustration and productivity.
 
-Comparison with Chrome Built-in Tab Discarding
+### Comparison with Chrome Built-in Tab Discarding
 
 Chrome includes built-in tab discarding (sometimes called "automatic tab discarding") that unloads tabs when system memory is low. How does Tab Suspender Pro compare?
 
-Aggressiveness
+### Aggressiveness
 
 Chrome's built-in discarding is reactive, it only kicks in when Chrome or the system is under memory pressure. Tab Suspender Pro is proactive, suspending tabs based on your configured idle time regardless of system memory. This means you get the benefits immediately rather than waiting for problems to occur.
 
-Memory Efficiency
+### Memory Efficiency
 
 When Chrome discards a tab, it keeps the tab in the tab strip but unloads the page content. Tab Suspender Pro takes a similar approach but provides more granular control. Users can choose which tabs to suspend, set different idle times for different tab groups, and whitelist tabs that should never suspend.
 
-User Control
+### User Control
 
 Chrome's built-in discarding provides no user control, you can't tell Chrome to keep a specific tab active or to discard tabs more aggressively. Tab Suspender Pro offers extensive customization including:
 
@@ -236,7 +236,7 @@ Chrome's built-in discarding provides no user control, you can't tell Chrome to 
 - Manual suspend shortcuts
 - Whitelist and blacklist support
 
-Benchmark Comparison
+### Benchmark Comparison
 
 Testing Chrome's automatic discarding at 100 tabs on System B:
 
@@ -245,11 +245,11 @@ Testing Chrome's automatic discarding at 100 tabs on System B:
 
 Tab Suspender Pro delivers significantly better results because it works proactively rather than waiting for memory pressure.
 
-Suspend-on-Idle Timing Optimization
+### Suspend-on-Idle Timing Optimization
 
 Tab Suspender Pro's effectiveness depends heavily on its idle timeout configuration. We tested different timeout settings to find optimal values.
 
-Idle Timeout Benchmarks (100 tabs, System B)
+### Idle Timeout Benchmarks (100 tabs, System B)
 
 | Idle Timeout | Memory Used | Battery Life | User Experience |
 |--------------|-------------|--------------|-----------------|
@@ -259,14 +259,14 @@ Idle Timeout Benchmarks (100 tabs, System B)
 | 5 minutes | 4.2 GB | 5.2 hrs | Minimal benefit over no suspension |
 | Always (manual) | 5.6 GB | 4.8 hrs | User controls everything |
 
-Recommended settings:
+### Recommended settings:
 
 - Power users with many tabs: 30 seconds (aggressive but fair)
 - Researchers reading long articles: 60-120 seconds
 - Developers with IDE-like tabs (CodePen, JSFiddle): 5 minutes or manual whitelist
 - Media sites you listen to in background: Never suspend (whitelist)
 
-Recommendations by Machine Specifications
+### Recommendations by Machine Specifications
 
 8GB RAM Systems
 
@@ -288,7 +288,7 @@ With 16GB, you can comfortably work with 50-75 tabs without suspension, but Tab 
 - Keep documentation and static tabs active if you reference them frequently
 - Consider leaving email and music tabs unsuspended
 
-Expected improvement: 40-60% memory reduction when exceeding 75 tabs
+### Expected improvement: 40-60% memory reduction when exceeding 75 tabs
 
 32GB+ Systems
 
@@ -301,9 +301,9 @@ Enthusiast and workstation systems with 32GB or more will see less dramatic but 
 
 Expected improvement: 30-50% memory reduction, significant CPU/battery improvement
 
-Advanced Configuration Tips
+### Advanced Configuration Tips
 
-Whitelist Essential Sites
+### Whitelist Essential Sites
 
 Create a solid whitelist to prevent suspension of critical tabs:
 
@@ -317,7 +317,7 @@ trello.com
 spotify.com
 ```
 
-Group-Based Rules
+### Group-Based Rules
 
 If you use tab groups, configure different suspension rules per group:
 
@@ -325,13 +325,13 @@ If you use tab groups, configure different suspension rules per group:
 - "Work" group: 5-minute timeout, never auto-suspend
 - "Reference" group: 30-second timeout, always suspend
 
-Battery Optimization
+### Battery Optimization
 
 For laptop users concerned about battery life, combine Tab Suspender Pro with Chrome's built-in battery saver mode. The two features complement each other, battery saver throttles Chrome's foreground performance while Tab Suspender Pro eliminates background waste.
 
 For more detailed power management strategies, see our [Power Management for Chrome Extensions](/guides/power-management/) guide.
 
-Memory Optimization Integration
+### Memory Optimization Integration
 
 Tab Suspender Pro works best as part of a comprehensive memory management strategy. For developers building extensions or users optimizing their browser setup, understanding Chrome's memory model is essential. Our [Memory Management](/guides/memory-management/) guide covers:
 
@@ -340,7 +340,7 @@ Tab Suspender Pro works best as part of a comprehensive memory management strate
 - Storage vs. memory trade-offs
 - Common memory leak sources and fixes
 
-Conclusion
+### Conclusion
 
 Tab Suspender Pro delivers substantial, measurable benefits across all machine configurations. The benchmark results speak for themselves:
 

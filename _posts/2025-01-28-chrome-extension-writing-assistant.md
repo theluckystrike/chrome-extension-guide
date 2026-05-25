@@ -18,17 +18,17 @@ We'll cover everything from project setup to advanced features like grammar chec
 
 ---
 
-Why Build a Writing Assistant Extension? {#why-build}
+## Why Build a Writing Assistant Extension? {#why-build}
 
 The demand for writing assistance tools has exploded in recent years. Professionals, students, and content creators are constantly looking for ways to improve their writing efficiency and quality. Here's why building a writing assistant extension is an excellent project:
 
-Market Opportunity
+### Market Opportunity
 
 The global grammar checking software market continues to grow rapidly. Writers at all levels seek tools that can help them produce error-free content quickly. A Chrome extension that works directly in the browser can capture this market effectively since most writing happens online, in email clients, document editors, social media platforms, and content management systems.
 
 Building a writing assistant extension also gives you valuable experience with several key Chrome extension concepts, including content scripts, message passing, browser storage, and user interface design within the browser chrome itself.
 
-Technical Benefits
+### Technical Benefits
 
 From a development perspective, a writing assistant extension teaches you how to:
 
@@ -42,11 +42,11 @@ These skills are transferable to many other extension projects and general web d
 
 ---
 
-Project Overview and Architecture {#project-overview}
+## Project Overview and Architecture {#project-overview}
 
 Before writing any code, let's outline what our writing assistant extension will do:
 
-Core Features
+### Core Features
 
 1. Grammar Checking: Detect and suggest corrections for grammatical errors
 2. Spelling Verification: Identify misspelled words and provide suggestions
@@ -54,7 +54,7 @@ Core Features
 4. Word Counter: Track word and character counts in real-time
 5. Quick Actions: Provide easy access to common writing tools via popup
 
-Extension Architecture
+### Extension Architecture
 
 Our extension will use the following components:
 
@@ -67,7 +67,7 @@ Let's build each component step by step.
 
 ---
 
-Step 1: Setting Up the Project Structure {#setup}
+## Step 1: Setting Up the Project Structure {#setup}
 
 Create a new folder for your extension project and set up the basic file structure:
 
@@ -78,7 +78,7 @@ mkdir -p icons
 touch manifest.json popup.html popup.js popup.css content.js background.js
 ```
 
-Project Structure Overview
+### Project Structure Overview
 
 ```
 writing-assistant-extension/
@@ -93,7 +93,7 @@ writing-assistant-extension/
 
 ---
 
-Step 2: Creating the Manifest {#manifest}
+## Step 2: Creating the Manifest {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. For Manifest V3 (the current standard), we need to define permissions, content scripts, and the extension's capabilities:
 
@@ -141,7 +141,7 @@ This manifest grants the extension the ability to run on all websites, access br
 
 ---
 
-Step 3: Building the Content Script {#content-script}
+## Step 3: Building the Content Script {#content-script}
 
 The content script is what runs on web pages to analyze and interact with text. This is where the core writing assistance logic lives:
 
@@ -306,7 +306,7 @@ This content script provides comprehensive text analysis capabilities. It can de
 
 ---
 
-Step 4: Creating the Popup Interface {#popup-interface}
+## Step 4: Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. Let's build an intuitive and functional interface:
 
@@ -380,7 +380,7 @@ The popup is what users see when they click the extension icon. Let's build an i
 
 ---
 
-Step 5: Styling the Popup {#popup-styling}
+## Step 5: Styling the Popup {#popup-styling}
 
 A clean, modern design helps your extension feel professional and trustworthy:
 
@@ -576,7 +576,7 @@ footer {
 
 ---
 
-Step 6: Implementing Popup Logic {#popup-logic}
+## Step 6: Implementing Popup Logic {#popup-logic}
 
 Now let's add the JavaScript to make the popup functional:
 
@@ -697,7 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Step 7: Setting Up the Service Worker {#service-worker}
+## Step 7: Setting Up the Service Worker {#service-worker}
 
 The background service worker handles extension lifecycle events and can manage long-running tasks:
 
@@ -734,7 +734,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-Step 8: Testing Your Extension {#testing}
+## Step 8: Testing Your Extension {#testing}
 
 Now let's test the extension in Chrome:
 
@@ -747,29 +747,29 @@ Click the extension icon to open the popup. Navigate to any webpage with text an
 
 ---
 
-Step 9: Advanced Features to Consider {#advanced-features}
+## Step 9: Advanced Features to Consider {#advanced-features}
 
 Once you have the basic extension working, consider adding these advanced features:
 
-Integration with Language APIs
+### Integration with Language APIs
 
 For more sophisticated grammar checking, integrate with APIs like LanguageTool, Grammarly API, or Microsoft Editor. These services offer more comprehensive analysis beyond basic pattern matching.
 
-Custom Dictionaries
+### Custom Dictionaries
 
 Allow users to add words to a custom dictionary so they won't be flagged as errors in future checks.
 
-Writing Goals
+### Writing Goals
 
 Implement word count goals, reading time estimates, and progress tracking for long-form writing projects.
 
-Multiple Language Support
+### Multiple Language Support
 
 Expand beyond English to support multiple languages with appropriate grammar rules.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 When you're ready to share your extension with the world:
 
@@ -782,7 +782,7 @@ Your writing assistant extension is now complete! This project demonstrates fund
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a writing assistant Chrome extension is an excellent project that combines practical utility with meaningful technical challenges. You've learned how to create content scripts that analyze text on any webpage, build responsive popup interfaces, and implement core writing assistance features like grammar checking and readability analysis.
 

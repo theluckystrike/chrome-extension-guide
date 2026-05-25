@@ -11,27 +11,27 @@ last_modified_at: 2026-01-15
 
 contentSettings Permission
 
-What It Grants {#what-it-grants}
+## What It Grants {#what-it-grants}
 Access to the `chrome.contentSettings` API for controlling per-site content settings (cookies, JavaScript, images, popups, notifications, location, camera, microphone, etc.).
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["contentSettings"]
 }
 ```
 
-User Warning {#user-warning}
+## User Warning {#user-warning}
 None. this permission does not trigger a warning at install time.
 
-API Access {#api-access}
+## API Access {#api-access}
 Each content type is a `ContentSetting` object with methods:
 - `.get({ primaryUrl, secondaryUrl? })`. get current setting for a URL
 - `.set({ primaryPattern, secondaryPattern?, setting, scope? })`. set for a URL pattern
 - `.clear({})`. clear all custom settings (reset to defaults)
 - `.getResourceIdentifiers()`. (for plugins only) list resource identifiers
 
-Content Types {#content-types}
+## Content Types {#content-types}
 | Property | Values | Description |
 |---|---|---|
 | `chrome.contentSettings.cookies` | allow, block, session_only | Cookie behavior |
@@ -46,7 +46,7 @@ Content Types {#content-types}
 | `chrome.contentSettings.camera` | allow, block, ask | Camera access |
 | `chrome.contentSettings.automaticDownloads` | allow, block, ask | Multiple file downloads |
 
-Basic Usage {#basic-usage}
+## Basic Usage {#basic-usage}
 
 How to Use contentSettings API
 ```typescript
@@ -75,7 +75,7 @@ await chrome.contentSettings.images.set({
 });
 ```
 
-URL Pattern Format {#url-pattern-format}
+## URL Pattern Format {#url-pattern-format}
 ```
 scheme://host/path
 ```
@@ -84,7 +84,7 @@ scheme://host/path
 - `https://example.com/*`. specific origin
 - `<all_urls>`. all URLs
 
-Privacy Control Pattern {#privacy-control-pattern}
+## Privacy Control Pattern {#privacy-control-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -108,7 +108,7 @@ m.onMessage('BLOCK_SITE', async ({ url, types }) => {
 });
 ```
 
-Scope {#scope}
+## Scope {#scope}
 ```typescript
 // Regular scope. applies to regular browsing
 await chrome.contentSettings.cookies.set({
@@ -125,28 +125,28 @@ await chrome.contentSettings.cookies.set({
 });
 ```
 
-When to Use {#when-to-use}
+## When to Use {#when-to-use}
 - Privacy/security extensions (block trackers, control permissions)
 - Parental control extensions
 - Site-specific preference management
 - Cookie management tools
 - JavaScript blocker extensions
 
-When NOT to Use {#when-not-to-use}
+## When NOT to Use {#when-not-to-use}
 - If you need to block network requests. use `declarativeNetRequest`
 - If you need to modify page content. use content scripts
 - For temporary changes. these persist until cleared
 
-Permission Check {#permission-check}
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('contentSettings');
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Related: `docs/permissions/cookies.md`, `docs/permissions/privacy.md`
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What is contentSettings API used for?
 The contentSettings API allows your extension to override settings for cookies, JavaScript, plugins, and other content behaviors on a per-site or global basis.

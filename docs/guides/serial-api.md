@@ -12,7 +12,7 @@ The Chrome Serial API (`chrome.serial`) enables Chrome extensions to communicate
 
 The Serial API provides a complete set of functions for discovering ports, establishing connections, sending and receiving data, and handling errors. It's available in both Manifest V2 and V3, though V3 requires the API to be accessed from a service worker or background context.
 
-Required Permissions
+### Required Permissions
 
 To use the Serial API, you must declare the `serial` permission in your extension's manifest:
 
@@ -28,7 +28,7 @@ To use the Serial API, you must declare the `serial` permission in your extensio
 
 The `host_permissions` field is optional but can be used to restrict access to specific serial devices or device patterns. Without host permissions, the extension will prompt the user to select a device each time a connection is attempted.
 
-Listing Serial Ports with getDevices
+### Listing Serial Ports with getDevices
 
 Before connecting to a serial device, you need to discover available ports. The `chrome.serial.getDevices()` method returns a list of all available serial ports on the user's system.
 
@@ -78,7 +78,7 @@ function populatePortDropdown(ports) {
 }
 ```
 
-Connecting to Ports with connect
+### Connecting to Ports with connect
 
 Once you've identified the target port, you can establish a connection using `chrome.serial.connect()`. This method accepts the port path and connection options, returning a connection ID that you'll use for subsequent operations.
 
@@ -115,7 +115,7 @@ The `connect()` method returns a `ConnectionInfo` object containing:
 - `connectionId`: A unique identifier for the connection (used for send, disconnect, etc.)
 - `bufferSize`: The size of the receive buffer
 
-Connection Options: bitrate, dataBits, parityBit, stopBits
+### Connection Options: bitrate, dataBits, parityBit, stopBits
 
 The Serial API supports various connection parameters to accommodate different device requirements. Understanding these options is crucial for establishing successful communication with your serial device.
 
@@ -163,7 +163,7 @@ const connectionOptions = {
 };
 ```
 
-Complete Connection Options Example
+### Complete Connection Options Example
 
 ```javascript
 // Configure connection for a typical Arduino device
@@ -185,7 +185,7 @@ const customOptions = {
 };
 ```
 
-Sending Data with send
+### Sending Data with send
 
 Once connected, you can transmit data to the serial device using `chrome.serial.send()`. The data must be sent as an ArrayBuffer.
 
@@ -232,7 +232,7 @@ The `send()` method takes two parameters:
 1. `connectionId`: The ID returned by `connect()`
 2. `data`: An ArrayBuffer containing the bytes to send
 
-Sending Binary Data
+### Sending Binary Data
 
 For binary protocols, you may need to construct specific byte sequences:
 
@@ -254,7 +254,7 @@ function sendTemperatureCommand(connectionId, tempCelsius) {
 }
 ```
 
-Receiving Data with onReceive
+### Receiving Data with onReceive
 
 To receive data from the serial device, you must set up a listener using `chrome.serial.onReceive.addListener()`. This event fires whenever data is received from the connected device.
 
@@ -289,7 +289,7 @@ The `onReceive` event provides an `info` object with:
 - `connectionId`: The connection that received the data
 - `data`: An ArrayBuffer containing the received bytes
 
-Receiving Binary Data
+### Receiving Binary Data
 
 For binary data, you'll need to parse the ArrayBuffer:
 
@@ -312,7 +312,7 @@ chrome.serial.onReceive.addListener((info) => {
 });
 ```
 
-Building a Simple Data Parser
+### Building a Simple Data Parser
 
 ```javascript
 // Buffer for incomplete messages
@@ -348,7 +348,7 @@ function processMessage(message) {
 }
 ```
 
-Error Handling with onReceiveError
+### Error Handling with onReceiveError
 
 The Serial API provides the `chrome.serial.onReceiveError` event for handling connection errors and unexpected disconnections.
 
@@ -390,7 +390,7 @@ function handleDisconnection(connectionId) {
 }
 ```
 
-Error Types
+### Error Types
 
 The `onReceiveError` event provides different error types:
 - `disconnected`: The connection was closed normally
@@ -400,7 +400,7 @@ The `onReceiveError` event provides different error types:
 - `parity_error`: A parity error occurred (check parity settings)
 - `system_error`: A system-level error occurred
 
-Implementing Automatic Reconnection
+### Implementing Automatic Reconnection
 
 ```javascript
 let reconnectAttempts = 0;
@@ -431,7 +431,7 @@ chrome.serial.onReceiveError.addListener(async (info) => {
 });
 ```
 
-Building a Serial Terminal Extension
+### Building a Serial Terminal Extension
 
 Now let's put together everything we've learned to build a functional serial terminal extension. This example demonstrates a complete implementation with UI.
 
@@ -670,7 +670,7 @@ function updateUI(connected) {
 }
 ```
 
-Best Practices
+### Best Practices
 
 When working with the Chrome Serial API, follow these best practices:
 
@@ -686,7 +686,7 @@ When working with the Chrome Serial API, follow these best practices:
 
 6. Consider security: Be cautious about sending commands to serial devices, as they can control physical hardware.
 
-Summary
+### Summary
 
 The Chrome Serial API provides powerful capabilities for extensions to communicate with serial devices. Key methods include:
 

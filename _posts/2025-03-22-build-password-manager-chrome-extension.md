@@ -18,7 +18,7 @@ In this tutorial, we will cover everything from setting up the project structure
 
 ---
 
-Understanding the Security Requirements
+### Understanding the Security Requirements
 
 Before writing any code, you must understand the security requirements that govern password manager extensions. Unlike regular Chrome extensions, password managers handle extremely sensitive data that requires the highest levels of protection. Users trust these extensions with the keys to their digital lives, and any security lapse can result in devastating consequences including identity theft, financial loss, and privacy breaches.
 
@@ -26,7 +26,7 @@ The security requirements for a secure password Chrome extension start with encr
 
 Chrome's extension platform provides several storage APIs, but not all are suitable for sensitive data. The `chrome.storage.local` API stores data locally on the user's device, while `chrome.storage.sync` synchronizes data across the user's devices through their Google account. However, neither of these APIs provides automatic encryption. Your extension must implement its own encryption layer before storing any sensitive information. The Chrome platform also provides the `chrome.storage.managed` API for enterprise-managed configurations, but this is not designed for user credential storage.
 
-Cryptographic Foundation
+### Cryptographic Foundation
 
 The foundation of any secure password manager lies in its cryptographic implementation. For a Chrome extension, you have several options for implementing encryption, each with trade-offs between security, performance, and ease of use. The most recommended approach for modern extensions is to use the Web Crypto API, which provides native browser support for cryptographic operations without requiring external dependencies.
 
@@ -36,7 +36,7 @@ For key derivation, you should never use passwords directly as encryption keys. 
 
 ---
 
-Project Setup and Manifest Configuration
+### Project Setup and Manifest Configuration
 
 Every Chrome extension begins with a `manifest.json` file that defines the extension's capabilities, permissions, and structure. For a password manager, the manifest requires careful configuration to balance functionality with security. You must request only the permissions necessary for the extension to function, as overly broad permissions trigger additional scrutiny during Chrome Web Store review and increase the potential impact of any security vulnerability.
 
@@ -83,7 +83,7 @@ Note that in Manifest V3, background pages have been replaced with service worke
 
 ---
 
-Core Encryption Module
+### Core Encryption Module
 
 With the manifest configured, you can now implement the cryptographic foundation of your password manager. Create a JavaScript module that handles all encryption and decryption operations using the Web Crypto API. This module will be the backbone of your extension's security architecture.
 
@@ -197,7 +197,7 @@ This implementation provides military-grade encryption using AES-256-GCM, which 
 
 ---
 
-Secure Storage Architecture
+### Secure Storage Architecture
 
 With encryption in place, you need to implement the storage architecture that will hold your users' credentials. The storage layer must handle not only saving and retrieving encrypted data but also managing the metadata necessary for organizing passwords, implementing search functionality, and maintaining data integrity.
 
@@ -294,7 +294,7 @@ This storage architecture ensures that credentials are never stored in plaintext
 
 ---
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup interface serves as the primary interaction point between users and your password manager. It must balance usability with security, providing quick access to stored credentials while implementing measures to prevent unauthorized access. Design the popup with a login-first approach that requires authentication before displaying any sensitive information.
 
@@ -362,7 +362,7 @@ The popup implements a security-first design pattern. When opened, it shows only
 
 ---
 
-Implementing Autofill Functionality
+### Implementing Autofill Functionality
 
 One of the most valuable features of a password manager is the ability to automatically fill login forms on websites. This requires a content script that detects login forms, communicates with the background script, and injects the correct credentials. Implementing this feature securely requires careful attention to avoid exposing credentials to web pages.
 
@@ -440,7 +440,7 @@ The content script follows the principle of minimal exposure. It never stores or
 
 ---
 
-Background Service Worker
+### Background Service Worker
 
 The background service worker coordinates communication between the popup, content scripts, and storage. It handles authentication state, manages the crypto manager, and processes credential requests. In Manifest V3, service workers have a limited lifetime and must be designed to handle this constraint.
 
@@ -515,7 +515,7 @@ async function searchCredentials(query) {
 
 ---
 
-Security Best Practices and Considerations
+### Security Best Practices and Considerations
 
 Building a secure password chrome extension requires adherence to additional security best practices beyond the implementation details covered above. These practices address the unique threats facing browser extensions and ensure that your password manager provides solid protection for user credentials.
 
@@ -531,7 +531,7 @@ Fifth, implement secure sync if you plan to offer cross-device synchronization. 
 
 ---
 
-Testing Your Password Manager
+### Testing Your Password Manager
 
 Comprehensive testing is essential for a password manager, where bugs can have severe security implications. Test both the functional behavior and the security properties of your implementation. Functional tests should verify that credentials can be saved, retrieved, searched, and autofilled correctly across various scenarios.
 
@@ -539,7 +539,7 @@ Security testing should verify that encrypted data cannot be decrypted without t
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a password manager Chrome extension is a rewarding project that teaches valuable skills in Chrome extension development, security architecture, and cryptographic implementation. The security-first approach outlined in this guide ensures that your extension handles user credentials with the protection they deserve.
 

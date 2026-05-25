@@ -9,7 +9,7 @@ State Machines for Chrome Extension Logic
 
 State machines provide a structured way to manage complex extension behavior, turning tangled conditional logic into clear, predictable flows. By defining explicit states and allowed transitions, you eliminate impossible states and make your extension's behavior understandable at a glance.
 
-Why State Machines {#why-state-machines}
+## Why State Machines {#why-state-machines}
 
 Traditional extension logic often relies on scattered boolean flags and nested conditionals:
 
@@ -21,13 +21,13 @@ let hasError = false;
 if (isAuthenticated && !isLoading && !hasError) { /* ... */ }
 ```
 
-State machines solve this by enforcing explicit transitions:
+### State machines solve this by enforcing explicit transitions:
 
 - Prevent impossible states: Only valid transitions are allowed
 - Clear transitions: Every state change has a documented trigger
 - Easier debugging: Current state and possible events are explicit
 
-XState Integration {#xstate-integration}
+## XState Integration {#xstate-integration}
 
 [XState](https://xstate.js.org/) is a lightweight state machine library ideal for extensions:
 
@@ -35,7 +35,7 @@ XState Integration {#xstate-integration}
 npm install xstate
 ```
 
-Define a machine:
+### Define a machine:
 
 ```javascript
 import { createMachine, assign } from 'xstate';
@@ -64,11 +64,11 @@ const authMachine = createMachine({
 });
 ```
 
-Extension Use Cases {#extension-use-cases}
+## Extension Use Cases {#extension-use-cases}
 
-Authentication Flow {#authentication-flow}
+## Authentication Flow {#authentication-flow}
 
-Manage user authentication with clear states:
+### Manage user authentication with clear states:
 
 ```javascript
 const authMachine = createMachine({
@@ -90,9 +90,9 @@ const authMachine = createMachine({
 });
 ```
 
-Download Manager {#download-manager}
+## Download Manager {#download-manager}
 
-Track download lifecycle:
+### Track download lifecycle:
 
 ```javascript
 const downloadMachine = createMachine({
@@ -111,9 +111,9 @@ const downloadMachine = createMachine({
 });
 ```
 
-Onboarding Wizard {#onboarding-wizard}
+## Onboarding Wizard {#onboarding-wizard}
 
-Multi-step wizard with validation:
+### Multi-step wizard with validation:
 
 ```javascript
 const onboardingMachine = createMachine({
@@ -128,7 +128,7 @@ const onboardingMachine = createMachine({
 });
 ```
 
-State Persistence {#state-persistence}
+## State Persistence {#state-persistence}
 
 Serialize machine state to `chrome.storage` and restore on service worker wake:
 
@@ -161,9 +161,9 @@ authService.onTransition(state => {
 });
 ```
 
-Transition Handlers {#transition-handlers}
+## Transition Handlers {#transition-handlers}
 
-Trigger Chrome API calls on state transitions:
+### Trigger Chrome API calls on state transitions:
 
 ```javascript
 const machine = createMachine({
@@ -189,9 +189,9 @@ const machine = createMachine({
 });
 ```
 
-Guards and Actions {#guards-and-actions}
+## Guards and Actions {#guards-and-actions}
 
-Use guards for conditional transitions:
+### Use guards for conditional transitions:
 
 ```javascript
 const machine = createMachine({
@@ -215,11 +215,11 @@ const machine = createMachine({
 });
 ```
 
-Parallel and Hierarchical States {#parallel-and-hierarchical-states}
+## Parallel and Hierarchical States {#parallel-and-hierarchical-states}
 
-Parallel States {#parallel-states}
+## Parallel States {#parallel-states}
 
-Multiple independent state machines for different features:
+### Multiple independent state machines for different features:
 
 ```javascript
 const extensionMachine = createMachine({
@@ -249,9 +249,9 @@ const extensionMachine = createMachine({
 });
 ```
 
-Hierarchical States {#hierarchical-states}
+## Hierarchical States {#hierarchical-states}
 
-Nested states for complex flows:
+### Nested states for complex flows:
 
 ```javascript
 const checkoutMachine = createMachine({
@@ -284,9 +284,9 @@ const checkoutMachine = createMachine({
 });
 ```
 
-Testing State Machines {#testing-state-machines}
+## Testing State Machines {#testing-state-machines}
 
-State machines are pure and easily unit tested:
+### State machines are pure and easily unit tested:
 
 ```javascript
 import { createActor } from 'xstate';
@@ -308,21 +308,21 @@ describe('Auth Machine', () => {
 });
 ```
 
-Visualizing State {#visualizing-state}
+## Visualizing State {#visualizing-state}
 
 Use the [XState Visualizer](https://stately.ai/viz) during development to diagram your state machines and visualize transitions. Export machine configurations to share with team members.
 
 ---
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [State Management Patterns](../patterns/state-management.md)
 - [Extension Architecture Patterns](./architecture-patterns.md)
 - [Event-Driven Architecture](../mv3/event-driven-architecture.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [State Management](../patterns/state-management.md)
 - [Extension Architecture](../guides/extension-architecture.md)

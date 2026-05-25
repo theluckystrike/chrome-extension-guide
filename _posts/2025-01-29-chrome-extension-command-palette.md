@@ -18,13 +18,13 @@ Whether you want to create a command bar Chrome extension for personal use or de
 
 ---
 
-What is a Command Palette Extension? {#what-is-command-palette}
+## What is a Command Palette Extension? {#what-is-command-palette}
 
 A command palette is a modal overlay that appears when triggered, typically via a keyboard shortcut like Ctrl+K or Cmd+K. It provides a text input field where users can type commands, search through actions, or find content within the application. The interface then filters and displays matching results in real-time, allowing for instant execution of selected actions.
 
 The popularity of command palettes exploded after VS Code adopted them, and Chrome extensions have followed suit. A well-implemented command palette extension can dramatically improve user productivity by reducing the need for mouse navigation and providing quick access to hidden features.
 
-Why Build a Command Palette Chrome Extension?
+### Why Build a Command Palette Chrome Extension?
 
 There are several compelling reasons to build a command bar Chrome extension:
 
@@ -40,13 +40,13 @@ There are several compelling reasons to build a command bar Chrome extension:
 
 ---
 
-Project Setup and Architecture {#project-setup}
+## Project Setup and Architecture {#project-setup}
 
 Let's start building our command palette extension. We'll use Manifest V3, the latest Chrome extension manifest version.
 
-Directory Structure
+### Directory Structure
 
-Create the following directory structure for your project:
+### Create the following directory structure for your project:
 
 ```
 command-palette-extension/
@@ -62,7 +62,7 @@ command-palette-extension/
      icon128.png
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest.json file defines the extension's configuration and permissions:
 
@@ -104,11 +104,11 @@ This configuration sets up the extension with keyboard shortcuts, a popup interf
 
 ---
 
-Building the Command Palette Interface {#building-interface}
+## Building the Command Palette Interface {#building-interface}
 
 The core of any command palette extension is its user interface. Let's create a responsive, feature-rich interface that feels native to Chrome.
 
-HTML Structure
+### HTML Structure
 
 The popup.html file contains the command palette UI:
 
@@ -146,7 +146,7 @@ The popup.html file contains the command palette UI:
 </html>
 ```
 
-Styling the Command Palette
+### Styling the Command Palette
 
 The styles.css file provides a modern, clean appearance:
 
@@ -286,11 +286,11 @@ body {
 
 ---
 
-Implementing Command Logic {#implementing-logic}
+## Implementing Command Logic {#implementing-logic}
 
 Now let's implement the JavaScript functionality that makes the command palette work.
 
-Core Command System
+### Core Command System
 
 The popup.js file handles all the command logic:
 
@@ -511,11 +511,11 @@ document.addEventListener('DOMContentLoaded', init);
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 Now let's explore some advanced features that will make your command palette extension truly powerful.
 
-Adding Page-Specific Commands
+### Adding Page-Specific Commands
 
 A command palette extension can offer different commands depending on the current page. Let's implement this feature:
 
@@ -580,7 +580,7 @@ function getPageSpecificCommands() {
 }
 ```
 
-Search Enhancement with Fuzzy Matching
+### Search Enhancement with Fuzzy Matching
 
 Implement fuzzy search for better command matching:
 
@@ -638,11 +638,11 @@ function filterCommandsFuzzy(query) {
 
 ---
 
-Performance Optimization {#performance}
+## Performance Optimization {#performance}
 
 A command palette needs to be lightning fast. Here are optimization techniques:
 
-Debounced Search
+### Debounced Search
 
 ```javascript
 function debounce(func, wait) {
@@ -667,7 +667,7 @@ const debouncedFilter = debounce((query) => {
 searchInput.addEventListener('input', (e) => debouncedFilter(e.target.value));
 ```
 
-Lazy Loading Icons
+### Lazy Loading Icons
 
 ```javascript
 // Lazy load command icons
@@ -690,11 +690,11 @@ function lazyLoadIcons() {
 
 ---
 
-Testing and Debugging {#testing}
+## Testing and Debugging {#testing}
 
-Proper testing ensures your extension works correctly:
+### Proper testing ensures your extension works correctly:
 
-Unit Testing Commands
+### Unit Testing Commands
 
 ```javascript
 // Test the filter function
@@ -723,7 +723,7 @@ if (process.env.NODE_ENV === 'development') {
 
 ---
 
-Best Practices and Tips {#best-practices}
+## Best Practices and Tips {#best-practices}
 
 Follow these best practices to create a polished command palette extension:
 
@@ -743,7 +743,7 @@ Follow these best practices to create a polished command palette extension:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a command palette Chrome extension is an excellent way to enhance user productivity and create a more efficient browsing experience. This guide covered the essential components: project setup, interface design, command implementation, advanced features like fuzzy search and page-specific commands, performance optimization, and testing.
 

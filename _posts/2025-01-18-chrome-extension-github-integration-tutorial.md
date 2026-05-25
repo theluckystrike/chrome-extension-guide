@@ -18,11 +18,11 @@ This tutorial assumes you have basic knowledge of JavaScript and Chrome extensio
 
 ---
 
-Why Integrate Chrome Extensions with GitHub? {#why-integrate}
+## Why Integrate Chrome Extensions with GitHub? {#why-integrate}
 
 The combination of Chrome extensions and GitHub creates powerful workflows that can significantly enhance developer productivity. By bringing GitHub functionality directly into the browser, you eliminate the need to switch between contexts and reduce friction in your daily development tasks.
 
-Common Use Cases
+### Common Use Cases
 
 There are numerous practical applications for Chrome extension GitHub integration. Repository management extensions allow you to view star counts, check repository health, and manage settings without leaving your browser. Issue tracking extensions enable you to create, view, and update GitHub issues directly from the Chrome interface, making it easier to capture bugs and feature requests as you browse the web.
 
@@ -32,11 +32,11 @@ The convenience factor cannot be overstated. Instead of maintaining a separate t
 
 ---
 
-Prerequisites and Setup {#prerequisites}
+## Prerequisites and Setup {#prerequisites}
 
 Before we dive into the implementation, let's ensure you have everything needed to follow this tutorial. You'll need Node.js installed on your system, along with a modern code editor like Visual Studio Code. You'll also need a GitHub account to register your OAuth application and test the integration.
 
-Creating Your Project Structure
+### Creating Your Project Structure
 
 Let's start by setting up the extension project. Create a new directory for your extension and initialize the necessary files. The project structure will follow Manifest V3 conventions, with clear separation between the popup, background service worker, and content scripts.
 
@@ -50,7 +50,7 @@ The popup directory will contain the HTML, CSS, and JavaScript for the extension
 
 ---
 
-Manifest V3 Configuration {#manifest}
+## Manifest V3 Configuration {#manifest}
 
 The manifest.json file is the heart of any Chrome extension. For GitHub integration, we need to declare specific permissions and configure the extension properly.
 
@@ -90,11 +90,11 @@ Notice the OAuth2 configuration. This tells Chrome to handle the OAuth flow usin
 
 ---
 
-Implementing OAuth Authentication {#oauth-authentication}
+## Implementing OAuth Authentication {#oauth-authentication}
 
 Authentication is the foundation of any GitHub integration. The chrome.identity API provides the launchWebAuthFlow method, which handles the OAuth redirect flow in a popup window.
 
-Setting Up GitHub OAuth App
+### Setting Up GitHub OAuth App
 
 Before writing code, you need to register an OAuth application in GitHub. Navigate to your GitHub account settings, go to Developer settings, and select OAuth Apps. Click "New OAuth App" and fill in the required information.
 
@@ -102,9 +102,9 @@ For the Authorization callback URL, use: `https://<extension-id>.chromiumapp.org
 
 The extension ID is assigned when you first load your extension in Chrome. You can find it in chrome://extensions after enabling developer mode. Note that this ID changes if you repack your extension, so you may need to update the callback URL during development.
 
-Authentication Code Implementation
+### Authentication Code Implementation
 
-Create the background service worker to handle authentication:
+### Create the background service worker to handle authentication:
 
 ```javascript
 // background/background.js
@@ -168,11 +168,11 @@ For security reasons, you should exchange the code for a token on your own serve
 
 ---
 
-Making GitHub API Calls {#api-calls}
+## Making GitHub API Calls {#api-calls}
 
 With authentication in place, we can now make API calls to GitHub. The REST API provides endpoints for repositories, issues, pull requests, and more. For more complex queries, especially around relationships between objects, consider using GraphQL.
 
-Basic API Client
+### Basic API Client
 
 Create a utility module for making API requests:
 
@@ -248,11 +248,11 @@ This API client provides methods for common GitHub operations. The getAccessToke
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users interact with most frequently. Let's create a clean, functional interface that displays repository information and provides quick actions.
 
-Popup HTML
+### Popup HTML
 
 ```html
 <!-- popup/popup.html -->
@@ -297,7 +297,7 @@ Popup HTML
 </html>
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
 ```javascript
 // popup/popup.js
@@ -366,7 +366,7 @@ async function loadUserData() {
 
 ---
 
-Handling the OAuth Token Exchange {#token-exchange}
+## Handling the OAuth Token Exchange {#token-exchange}
 
 As mentioned earlier, you should exchange the OAuth code for a token on your server rather than in the extension. Here's a simple example using Express:
 
@@ -405,47 +405,47 @@ The extension would then retrieve the token from the redirect URL and store it u
 
 ---
 
-Best Practices and Security Considerations {#best-practices}
+## Best Practices and Security Considerations {#best-practices}
 
 When building GitHub-integrated Chrome extensions, security should be your top priority. Here are essential best practices to follow.
 
-Token Security
+### Token Security
 
 Never store tokens in localStorage or chrome.storage.sync without encryption. Use chrome.storage.local for sensitive data, and consider implementing token refresh logic to handle expired tokens gracefully. Implement proper logout functionality that clears tokens completely.
 
-Scope Minimization
+### Scope Minimization
 
 Only request the OAuth scopes your extension actually needs. If you're building a simple repository viewer, you might only need read:user and repo:status. Be honest with users about what data your extension accesses and why.
 
-Rate Limiting Handling
+### Rate Limiting Handling
 
 GitHub's API has rate limits, 60 requests per hour for unauthenticated requests and 5,000 for authenticated requests. Implement proper error handling for rate limit responses and consider caching frequently accessed data to reduce API calls.
 
-Content Security Policy
+### Content Security Policy
 
 Manifest V3 enforces strict Content Security Policy. Ensure all your API calls go to allowed domains and that you're not executing dynamic code. Use JSON.parse for parsing API responses rather than eval.
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 Once you have the basic integration working, consider adding these advanced features to make your extension truly stand out.
 
-Real-time Notifications
+### Real-time Notifications
 
 Use the GitHub Notifications API to fetch and display real-time alerts for issues, PRs, and mentions. Combine this with Chrome's notification API to show desktop notifications when important events occur.
 
-Repository Search
+### Repository Search
 
 Implement a search interface that leverages GitHub's search API to find repositories, code, issues, and pull requests. Add keyboard shortcuts for quick access to search functionality.
 
-GitHub Actions Integration
+### GitHub Actions Integration
 
 Display workflow runs, build status, and deployment information. Allow users to trigger workflows or rerun failed builds directly from the extension.
 
 ---
 
-Testing and Debugging {#testing-debugging}
+## Testing and Debugging {#testing-debugging}
 
 Chrome provides excellent developer tools for testing extensions. Use chrome://extensions to load your unpacked extension and access the service worker console. The popup has its own DevTools, you can right-click the popup and select "Inspect" to debug it.
 
@@ -453,7 +453,7 @@ For testing GitHub integration, create a test organization with dummy repositori
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a Chrome extension with GitHub integration opens up powerful possibilities for developer productivity. In this tutorial, we covered the essential components: OAuth authentication using chrome.identity, API client implementation, popup UI creation, and security best practices.
 

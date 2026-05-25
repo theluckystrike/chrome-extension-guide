@@ -18,13 +18,13 @@ This tutorial leverages the Chrome Desktop Capture API combined with HTML5 Canva
 
 ---
 
-Prerequisites and Development Setup {#prerequisites}
+## Prerequisites and Development Setup {#prerequisites}
 
 Before we begin building our full page screenshot Chrome extension, ensure you have the following tools installed on your development machine. You will need a modern code editor like Visual Studio Code, Google Chrome browser, and basic knowledge of HTML, CSS, and JavaScript.
 
 Chrome extension development does not require a complex setup. You can start by creating a new folder for your project and organizing your files according to the standard extension structure. The essential files you will need include `manifest.json`, `popup.html`, `popup.js`, and a content script for handling the page capture.
 
-Your project folder should follow this structure:
+### Your project folder should follow this structure:
 
 ```
 full-page-screenshot/
@@ -44,7 +44,7 @@ The manifest file serves as the configuration center for your Chrome extension, 
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the foundation of every Chrome extension. For our full page screenshot Chrome extension, we need to declare the appropriate permissions and define the extension's components. We will use Manifest V3, which is the current standard for Chrome extensions.
 
@@ -82,7 +82,7 @@ The desktopCapture permission is essential for our functionality. It allows the 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It should be simple and intuitive, providing clear options for capturing screenshots. Let's create a clean, functional popup interface using HTML and CSS.
 
@@ -227,7 +227,7 @@ h1 {
 
 ---
 
-Implementing the Background Service Worker {#background-service-worker}
+## Implementing the Background Service Worker {#background-service-worker}
 
 The background service worker handles communication between the popup and the content script. It initiates the desktop capture process and coordinates the screenshot workflow. This is where the chrome.desktopCapture API comes into play.
 
@@ -273,7 +273,7 @@ The background script uses the getDesktopSources method to access available capt
 
 ---
 
-The Core Screenshot Logic {#screenshot-logic}
+## The Core Screenshot Logic {#screenshot-logic}
 
 The content script runs in the context of the webpage and handles the actual screenshot capture process. This is where we use the MediaStream from the desktop capture and process it to create a full page screenshot.
 
@@ -386,7 +386,7 @@ This content script handles the complex task of capturing the full page. It calc
 
 ---
 
-The Popup Controller {#popup-controller}
+## The Popup Controller {#popup-controller}
 
 The popup JavaScript connects the user interface with the extension's functionality. It handles button clicks, collects user options, and coordinates the screenshot capture process.
 
@@ -471,11 +471,11 @@ The popup controller provides a smooth user experience by disabling the capture 
 
 ---
 
-Advanced Features and Optimizations {#advanced-features}
+## Advanced Features and Optimizations {#advanced-features}
 
 A production-ready screenshot extension should include additional features that enhance usability and handle edge cases.  some advanced implementations that will make your extension stand out in the Chrome Web Store.
 
-Handling Large Pages
+### Handling Large Pages
 
 Large webpages with extensive content can cause memory issues during capture. Implement a chunked capture approach that processes the page in sections and stitches them together:
 
@@ -526,7 +526,7 @@ async function captureLargePage(chunkHeight = 4000) {
 }
 ```
 
-Adding Watermarks and Annotations
+### Adding Watermarks and Annotations
 
 Many users want to add watermarks or annotations to their screenshots. Implement a post-processing function that adds these elements:
 
@@ -563,7 +563,7 @@ function addWatermark(dataUrl, watermarkText) {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing your extension, thorough testing is essential. Chrome provides built-in tools for testing extensions that make the development process straightforward. Load your extension in developer mode by navigating to chrome://extensions, enabling developer mode, and clicking "Load unpacked." Select your extension folder to install it temporarily.
 
@@ -573,7 +573,7 @@ Use Chrome DevTools to debug any issues. The Console panel will show any JavaScr
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is thoroughly tested and working correctly, you can publish it to the Chrome Web Store. Create a developer account if you do not already have one, and prepare your store listing with compelling screenshots, a detailed description, and appropriate category tags.
 
@@ -581,7 +581,7 @@ The review process typically takes a few days. Google checks for policy complian
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a full page screenshot Chrome extension is a rewarding project that teaches you important concepts about Chrome extension architecture, the desktop capture API, and canvas-based image processing. The extension we built in this guide provides a solid foundation that you can extend with additional features like annotation tools, cloud storage integration, or automatic sharing to social media.
 

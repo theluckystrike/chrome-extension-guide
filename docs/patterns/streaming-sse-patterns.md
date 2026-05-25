@@ -6,7 +6,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/streaming-sse-patterns
 last_modified_at: 2026-01-15
 ---
 
-Streaming and Server-Sent Events in Chrome Extensions
+### Streaming and Server-Sent Events in Chrome Extensions
 
 Modern Chrome extensions increasingly need to handle streaming data -- from AI API responses
 to real-time feeds. The extension architecture (service workers, popups, content scripts) adds
@@ -19,7 +19,7 @@ streaming and SSE in Manifest V3 extensions.
 
 ---
 
-Pattern 1: Fetch Streaming Responses in a Service Worker {#pattern-1-fetch-streaming-responses-in-a-service-worker}
+## Pattern 1: Fetch Streaming Responses in a Service Worker {#pattern-1-fetch-streaming-responses-in-a-service-worker}
 
 Service workers can use the Fetch API with `ReadableStream` to consume chunked responses.
 The key constraint is that service workers terminate after ~30 seconds of inactivity, so you
@@ -56,7 +56,7 @@ async function fetchStream(url: string, signal?: AbortSignal): Promise<void> {
 }
 ```
 
-Gotchas:
+### Gotchas:
 
 - The service worker idle timer resets on every `reader.read()` call, but only while the
   promise is pending. If the server pauses sending for >30 s, Chrome may kill the worker.
@@ -66,7 +66,7 @@ Gotchas:
 
 ---
 
-Pattern 2: SSE Connections via Offscreen Document {#pattern-2-sse-connections-via-offscreen-document}
+## Pattern 2: SSE Connections via Offscreen Document {#pattern-2-sse-connections-via-offscreen-document}
 
 `EventSource` is not available in service workers. To maintain a persistent SSE connection,
 use an offscreen document -- it runs in a full DOM context and survives as long as the
@@ -122,7 +122,7 @@ function connectSSE(url: string): EventSource {
 connectSSE("https://api.example.com/events");
 ```
 
-Gotchas:
+### Gotchas:
 
 - Only one offscreen document can exist at a time. If you need SSE alongside other offscreen
   uses (audio, DOM parsing), multiplex inside a single document.
@@ -135,7 +135,7 @@ Gotchas:
 
 ---
 
-Pattern 3: Streaming AI API Responses (Chunked Transfer) {#pattern-3-streaming-ai-api-responses-chunked-transfer}
+## Pattern 3: Streaming AI API Responses (Chunked Transfer) {#pattern-3-streaming-ai-api-responses-chunked-transfer}
 
 AI APIs (OpenAI, Anthropic, Google) return streaming completions as SSE over `fetch`. Each
 chunk is a JSON payload prefixed with `data: `. Parsing requires accumulating a line buffer.
@@ -212,7 +212,7 @@ async function handleAIRequest(prompt: string): Promise<void> {
 }
 ```
 
-Gotchas:
+### Gotchas:
 
 - Never assume one `reader.read()` call yields exactly one SSE event. A single chunk may
   contain multiple events, or an event may be split across chunks -- hence the line buffer.
@@ -222,7 +222,7 @@ Gotchas:
 
 ---
 
-Pattern 4: Forwarding Stream Chunks to Popup / Side Panel {#pattern-4-forwarding-stream-chunks-to-popup-side-panel}
+## Pattern 4: Forwarding Stream Chunks to Popup / Side Panel {#pattern-4-forwarding-stream-chunks-to-popup-side-panel}
 
 The popup and side panel have independent lifetimes. Use `chrome.runtime.Port` for
 long-lived connections so you can detect when the UI closes and stop streaming.
@@ -303,7 +303,7 @@ port.onMessage.addListener((msg) => {
 });
 ```
 
-Gotchas:
+### Gotchas:
 
 - `chrome.runtime.sendMessage` is fire-and-forget and unsuitable for high-frequency chunk
   delivery. Always use `Port` for streaming.
@@ -314,7 +314,7 @@ Gotchas:
 
 ---
 
-Pattern 5: Stream Buffering and Backpressure Handling {#pattern-5-stream-buffering-and-backpressure-handling}
+## Pattern 5: Stream Buffering and Backpressure Handling {#pattern-5-stream-buffering-and-backpressure-handling}
 
 When the producer (network) is faster than the consumer (UI rendering), chunks pile up in
 memory. Implement a simple ring buffer with flush intervals to smooth delivery.
@@ -378,7 +378,7 @@ function createBufferedForwarder(port: chrome.runtime.Port, requestId: string): 
 }
 ```
 
-Gotchas:
+### Gotchas:
 
 - `setInterval` in a service worker does not prevent termination. Pair it with an active
   `fetch` stream read loop to keep the worker alive.
@@ -389,7 +389,7 @@ Gotchas:
 
 ---
 
-Pattern 6: Reconnection Strategies for SSE {#pattern-6-reconnection-strategies-for-sse}
+## Pattern 6: Reconnection Strategies for SSE {#pattern-6-reconnection-strategies-for-sse}
 
 Built-in `EventSource` reconnection is unreliable in extension contexts. Implement your own
 with exponential backoff and `Last-Event-ID` tracking.
@@ -517,7 +517,7 @@ class ResilientSSE {
 }
 ```
 
-Gotchas:
+### Gotchas:
 
 - Always include jitter in backoff to prevent thundering herd when many clients reconnect
   simultaneously after a server restart.
@@ -529,7 +529,7 @@ Gotchas:
 
 ---
 
-Pattern 7: Stream Progress Indicators in Extension UI {#pattern-7-stream-progress-indicators-in-extension-ui}
+## Pattern 7: Stream Progress Indicators in Extension UI {#pattern-7-stream-progress-indicators-in-extension-ui}
 
 Show meaningful progress for streams that have a known total length or expected token count.
 For indeterminate streams, use a token counter and elapsed time.
@@ -612,7 +612,7 @@ function StreamIndicator({ progress }: { progress: StreamProgress }) {
 ```
 {% endraw %}
 
-Gotchas:
+### Gotchas:
 
 - `Content-Length` is almost never present on SSE or chunked-transfer responses. Design the
   UI to work without a known total.
@@ -623,7 +623,7 @@ Gotchas:
 
 ---
 
-Pattern 8: ReadableStream Processing in Content Scripts {#pattern-8-readablestream-processing-in-content-scripts}
+## Pattern 8: ReadableStream Processing in Content Scripts {#pattern-8-readablestream-processing-in-content-scripts}
 
 Content scripts can create their own `ReadableStream` pipelines via `TransformStream`. This
 is useful for intercepting and transforming page-initiated streams (e.g., adding translation
@@ -746,7 +746,7 @@ async function consumeForAnalysis(
 }
 ```
 
-Gotchas:
+### Gotchas:
 
 - Content scripts with `world: "MAIN"` share the page's JS context. Your intercepted
   `fetch` runs with the page's CSP, not the extension's.
@@ -761,7 +761,7 @@ Gotchas:
 
 ---
 
-Quick Reference {#quick-reference}
+## Quick Reference {#quick-reference}
 
 | Pattern | Best Context | Key API |
 |---------|-------------|---------|

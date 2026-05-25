@@ -18,7 +18,7 @@ This comprehensive guide will walk you through creating a fully functional Priva
 
 ---
 
-Understanding the Privacy Policy Checker Requirements
+### Understanding the Privacy Policy Checker Requirements
 
 Before diving into code, let's define what our privacy checker extension needs to accomplish. A well-designed privacy policy checker should be able to:
 
@@ -32,7 +32,7 @@ The core functionality revolves around scraping and analyzing HTML content, whic
 
 ---
 
-Setting Up the Project Structure
+### Setting Up the Project Structure
 
 Every Chrome extension begins with a manifest file. For our privacy policy checker extension, we'll use Manifest V3, which is the current standard and offers improved security and performance characteristics.
 
@@ -72,11 +72,11 @@ This manifest grants our extension the necessary permissions to analyze web page
 
 ---
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup is what users interact with when they click our extension icon. Let's create a clean, informative user interface that displays the results of our privacy policy analysis.
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -146,11 +146,11 @@ Create `popup.html`:
 
 ---
 
-Implementing the Privacy Analysis Logic
+### Implementing the Privacy Analysis Logic
 
 Now comes the core functionality, the JavaScript that analyzes web pages for privacy compliance. We'll create a content script that runs on the current page and extracts relevant information.
 
-Create `analyze.js`:
+### Create `analyze.js`:
 
 ```javascript
 // Content script for privacy policy analysis
@@ -297,11 +297,11 @@ window.postMessage({ type: 'PRIVACY_ANALYSISResults', results: results }, '*');
 
 ---
 
-Creating the Popup Logic
+### Creating the Popup Logic
 
 Now let's create the JavaScript that connects the popup to our analysis functionality:
 
-Create `popup.js`:
+### Create `popup.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -443,11 +443,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Adding Styles and Assets
+### Adding Styles and Assets
 
 Create a basic stylesheet for the extension:
 
-Create `popup.css`:
+### Create `popup.css`:
 
 ```css
 * {
@@ -476,11 +476,11 @@ body {
 
 ---
 
-Understanding Key Privacy Regulations
+### Understanding Key Privacy Regulations
 
 Before deploying your gdpr checker extension, it's important to understand what these regulations require. This knowledge will help you create a more accurate and useful tool.
 
-GDPR (General Data Protection Regulation)
+### GDPR (General Data Protection Regulation)
 
 The GDPR is perhaps the most comprehensive privacy regulation globally. It applies to any organization processing personal data of EU residents. Key requirements include:
 
@@ -493,7 +493,7 @@ The GDPR is perhaps the most comprehensive privacy regulation globally. It appli
 
 Our cookie consent chrome extension checks for many of these elements, including consent mechanisms, data deletion options, and contact information for data protection inquiries.
 
-CCPA (California Consumer Privacy Act)
+### CCPA (California Consumer Privacy Act)
 
 The CCPA provides California residents with specific privacy rights, including:
 
@@ -516,7 +516,7 @@ Our cookie detection functionality specifically targets these requirements.
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
 Before publishing your privacy checker extension to the Chrome Web Store, thorough testing is essential. Here's how to test your extension:
 
@@ -534,29 +534,29 @@ Before publishing your privacy checker extension to the Chrome Web Store, thorou
 
 ---
 
-Enhancing Your Privacy Checker
+### Enhancing Your Privacy Checker
 
 Once you have the basic functionality working, consider adding these advanced features:
 
-Privacy Score Calculation
+### Privacy Score Calculation
 
 Implement a weighted scoring system that calculates an overall privacy score based on the presence and quality of privacy policy, cookie consent mechanisms, and GDPR compliance elements.
 
-Historical Tracking
+### Historical Tracking
 
 Use Chrome's storage API to track privacy compliance scores over time for websites you visit frequently, helping you make informed decisions about which services to trust.
 
-Multi-Language Support
+### Multi-Language Support
 
 Expand your cookie consent detection to support multiple languages, as cookie banners appear in various languages depending on the user's location.
 
-Privacy Policy Content Analysis
+### Privacy Policy Content Analysis
 
 Integrate a basic NLP model to analyze the content of privacy policies themselves, checking for concerning phrases like "we sell your data" or identifying key sections like data retention policies.
 
 ---
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
 When you're ready to share your extension, follow these steps:
 
@@ -570,7 +570,7 @@ When you're ready to share your extension, follow these steps:
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a privacy policy checker Chrome extension is both a practical project and a valuable tool for internet users concerned about their online privacy. By following this guide, you've learned how to create an extension that can detect privacy policies, analyze cookie consent implementations, and perform basic GDPR compliance checks.
 
@@ -580,7 +580,7 @@ Remember, while automated tools can help identify potential privacy issues, they
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [GDPR Official Text](https://gdpr.eu/)

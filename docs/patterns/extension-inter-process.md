@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-inter-proces
 last_modified_at: 2026-01-15
 ---
 
-Extension Inter-Process Communication Patterns
+### Extension Inter-Process Communication Patterns
 
 This document covers communication between Chrome Extensions and external applications, including native messaging and cross-extension communication.
 
-Native Messaging: Connecting to Local Applications {#native-messaging-connecting-to-local-applications}
+## Native Messaging: Connecting to Local Applications {#native-messaging-connecting-to-local-applications}
 
 Chrome Extensions can communicate with native applications installed on the user's computer using the Native Messaging API. This enables extensions to access system-level capabilities that aren't available through web APIs.
 
-Setting Up Native Messaging {#setting-up-native-messaging}
+## Setting Up Native Messaging {#setting-up-native-messaging}
 
 1. Host Manifest File
 
@@ -36,7 +36,7 @@ Create a JSON manifest file (e.g., `myhost.json`) in a designated directory:
 - macOS: Add to `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/`
 - Linux: Add to `~/.config/google-chrome/NativeMessagingHosts/`
 
-Using connectNative() {#using-connectnative}
+## Using connectNative() {#using-connectnative}
 
 ```javascript
 // In your extension's background script
@@ -53,9 +53,9 @@ port.onDisconnect.addListener(() => {
 });
 ```
 
-JSON STDIO Protocol {#json-stdio-protocol}
+## JSON STDIO Protocol {#json-stdio-protocol}
 
-Native apps communicate via stdin/stdout using JSON messages:
+### Native apps communicate via stdin/stdout using JSON messages:
 
 ```python
 Example Python native host
@@ -74,18 +74,18 @@ while True:
     sys.stdout.flush()
 ```
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
 - Filesystem Access: Read/write files beyond web accessible resources
 - Hardware Access: Interact with serial ports, USB devices, printers
 - System APIs: Access system notifications, clipboard, system info
 - Legacy Integration: Connect to existing desktop applications
 
-Cross-Extension Messaging {#cross-extension-messaging}
+## Cross-Extension Messaging {#cross-extension-messaging}
 
 Extensions can communicate with other extensions using `extensionId`.
 
-Sending Messages to Another Extension {#sending-messages-to-another-extension}
+## Sending Messages to Another Extension {#sending-messages-to-another-extension}
 
 ```javascript
 // In your extension
@@ -99,7 +99,7 @@ chrome.runtime.sendMessage(extensionId, {
 });
 ```
 
-Receiving Messages from Other Extensions {#receiving-messages-from-other-extensions}
+## Receiving Messages from Other Extensions {#receiving-messages-from-other-extensions}
 
 ```javascript
 // In the receiving extension's background script
@@ -114,13 +114,13 @@ chrome.runtime.onMessageExternal.addListener(
 );
 ```
 
-Extension ID Discovery {#extension-id-discovery}
+## Extension ID Discovery {#extension-id-discovery}
 
 Extensions must know each other's IDs. Share IDs through:
 - Documentation or configuration files
 - Manifest's `externally_connectable` field
 
-Communicating with Web Pages {#communicating-with-web-pages}
+## Communicating with Web Pages {#communicating-with-web-pages}
 
 Use `externally_connectable` in manifest.json to allow web pages to connect:
 
@@ -134,7 +134,7 @@ Use `externally_connectable` in manifest.json to allow web pages to connect:
 }
 ```
 
-Web Page to Extension {#web-page-to-extension}
+## Web Page to Extension {#web-page-to-extension}
 
 ```javascript
 // From a web page
@@ -148,41 +148,41 @@ chrome.runtime.sendMessage(extensionId, {
 });
 ```
 
-Debugging Native Messaging {#debugging-native-messaging}
+## Debugging Native Messaging {#debugging-native-messaging}
 
-Chrome Logs {#chrome-logs}
+## Chrome Logs {#chrome-logs}
 
 - Windows: `chrome://net-internals/#native-io`
 - Enable logging via `--enable-logging --v=1` flag
 
-Common Issues {#common-issues}
+## Common Issues {#common-issues}
 
 1. Manifest Not Found: Verify correct installation location
 2. Permission Denied: Ensure native app has execute permissions
 3. JSON Parse Error: Validate message format (newlines matter)
 4. Timeout: Native app may be unresponsive or crashed
 
-Testing Native App {#testing-native-app}
+## Testing Native App {#testing-native-app}
 
 ```bash
 Test manually (pipe JSON through stdin)
 echo '{"action": "test"}' | ./native_app
 ```
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 - Validate all messages from native apps and external extensions
 - Limit `allowed_origins` to specific extension IDs
 - Use HTTPS for web page connections
 - Sanitize data before passing to web pages or other extensions
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Native Messaging](./native-messaging.md) - Detailed native messaging guide
 - [Permissions: nativeMessaging](../permissions/nativeMessaging.md) - Permission configuration
 - [Extension-to-Extension](./extension-to-extension.md) - Advanced cross-extension patterns
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Chrome Native Messaging Documentation](https://developer.chrome.com/docs/apps/nativeMessaging)
 - [externally_connectable](https://developer.chrome.com/docs/extensions/mv3/manifest/externally_connectable/)

@@ -10,7 +10,7 @@ Building Chrome Extensions with TypeScript
 
 TypeScript has become the standard for building solid Chrome extensions. It provides compile-time type safety for Chrome APIs, enables intelligent autocomplete, and catches errors before runtime. This comprehensive guide covers everything you need to build type-safe Chrome extensions.
 
-Table of Contents
+### Table of Contents
 
 - [Project Setup](#project-setup)
 - [Configuring tsconfig.json](#configuring-tsconfigjson)
@@ -23,9 +23,9 @@ Table of Contents
 
 ---
 
-Project Setup {#project-setup}
+## Project Setup {#project-setup}
 
-Initializing Your Project
+### Initializing Your Project
 
 Create a new extension project with TypeScript:
 
@@ -36,7 +36,7 @@ npm install --save-dev typescript @types/chrome esbuild
 mkdir -p src/background src/content src/popup src/shared
 ```
 
-Directory Structure
+### Directory Structure
 
 A well-organized TypeScript extension project:
 
@@ -64,9 +64,9 @@ my-extension/
 
 ---
 
-Configuring tsconfig.json {#configuring-tsconfigjson}
+## Configuring tsconfig.json {#configuring-tsconfigjson}
 
-Base Configuration
+### Base Configuration
 
 Chrome extensions run in multiple contexts, some with DOM (popup, options, content scripts) and some without (service worker). Your `tsconfig.json` must account for these differences:
 
@@ -96,7 +96,7 @@ Chrome extensions run in multiple contexts, some with DOM (popup, options, conte
 }
 ```
 
-Context-Specific Configurations
+### Context-Specific Configurations
 
 For complex extensions, use separate tsconfig files for different contexts:
 
@@ -126,11 +126,11 @@ For complex extensions, use separate tsconfig files for different contexts:
 
 ---
 
-Typing Chrome APIs {#typing-chrome-apis}
+## Typing Chrome APIs {#typing-chrome-apis}
 
-Installing Type Definitions
+### Installing Type Definitions
 
-Install the official Chrome type definitions:
+### Install the official Chrome type definitions:
 
 ```bash
 npm install --save-dev @types/chrome
@@ -138,7 +138,7 @@ npm install --save-dev @types/chrome
 
 This provides full type support for all Chrome extension APIs.
 
-Using Typed Chrome APIs
+### Using Typed Chrome APIs
 
 With `@types/chrome` installed, you get full autocomplete and type checking:
 
@@ -172,7 +172,7 @@ async function loadSettings(): Promise<Settings | null> {
 }
 ```
 
-Extending Chrome Types
+### Extending Chrome Types
 
 When Chrome APIs don't cover your use case, extend the types:
 
@@ -197,9 +197,9 @@ interface CustomTab extends chrome.tabs.Tab {
 
 ---
 
-Typed Messaging {#typed-messaging}
+## Typed Messaging {#typed-messaging}
 
-Defining Message Types
+### Defining Message Types
 
 Create a centralized message type definition:
 
@@ -236,9 +236,9 @@ export type Request<T extends MessageType> = MessageMap[T]['request'];
 export type Response<T extends MessageType> = MessageMap[T]['response'];
 ```
 
-Typed Message Handler
+### Typed Message Handler
 
-Create type-safe message handlers:
+### Create type-safe message handlers:
 
 ```typescript
 // src/background/message-handler.ts
@@ -286,7 +286,7 @@ registerHandler('saveBookmark', async (request) => {
 });
 ```
 
-Sending Typed Messages
+### Sending Typed Messages
 
 ```typescript
 // src/content/content-script.ts
@@ -319,9 +319,9 @@ const result = await sendMessage('saveBookmark', {
 
 ---
 
-Typed Storage Wrappers {#typed-storage-wrappers}
+## Typed Storage Wrappers {#typed-storage-wrappers}
 
-Basic Typed Storage
+### Basic Typed Storage
 
 Create a type-safe storage wrapper:
 
@@ -377,7 +377,7 @@ export const localStorage = new TypedStorage('local');
 export const syncStorage = new TypedStorage('sync');
 ```
 
-Storage with Validation
+### Storage with Validation
 
 Add runtime validation with Zod:
 
@@ -418,7 +418,7 @@ class ValidatedStorage {
 
 ---
 
-Build Tooling {#build-tooling}
+## Build Tooling {#build-tooling}
 
 esbuild Configuration
 
@@ -474,9 +474,9 @@ async function build() {
 build();
 ```
 
-Vite Configuration
+### Vite Configuration
 
-Vite provides an excellent developer experience:
+### Vite provides an excellent developer experience:
 
 ```typescript
 // vite.config.ts
@@ -517,7 +517,7 @@ export default defineConfig({
 
 webpack Configuration
 
-For complex builds with code splitting:
+### For complex builds with code splitting:
 
 ```javascript
 // webpack.config.js
@@ -555,9 +555,9 @@ module.exports = {
 
 ---
 
-Common Type Patterns {#common-type-patterns}
+## Common Type Patterns {#common-type-patterns}
 
-Nullable Tab Handling
+### Nullable Tab Handling
 
 ```typescript
 // Safe tab access with proper null handling
@@ -577,7 +577,7 @@ function getTabTitle(tab: chrome.tabs.Tab): string {
 }
 ```
 
-Manifest Type Safety
+### Manifest Type Safety
 
 ```typescript
 // Typed manifest configuration
@@ -596,7 +596,7 @@ const manifest: Manifest.V3 = {
 };
 ```
 
-Promise-Based Chrome API Wrapper
+### Promise-Based Chrome API Wrapper
 
 ```typescript
 // Convert callback-based APIs to promises
@@ -615,7 +615,7 @@ function setStoredValue<T>(key: string, value: T): Promise<void> {
 }
 ```
 
-Event Type Safety
+### Event Type Safety
 
 ```typescript
 // Typed event listeners
@@ -636,11 +636,11 @@ interface ExtensionEvent<T> {
 
 ---
 
-Debugging TypeScript Extensions {#debugging-typescript-extensions}
+## Debugging TypeScript Extensions {#debugging-typescript-extensions}
 
-Source Maps in Production
+### Source Maps in Production
 
-Enable source maps for debugging deployed extensions:
+### Enable source maps for debugging deployed extensions:
 
 ```json
 // tsconfig.json
@@ -653,7 +653,7 @@ Enable source maps for debugging deployed extensions:
 }
 ```
 
-In your build configuration:
+### In your build configuration:
 
 ```typescript
 // esbuild build options
@@ -663,13 +663,13 @@ In your build configuration:
 }
 ```
 
-Chrome DevTools Tips
+### Chrome DevTools Tips
 
 1. Service Worker Debugging: Open `chrome://extensions` and click "service worker" link to access background context
 2. Content Script Debugging: Use the page's DevTools (not extension DevTools) for content scripts
 3. Console Filtering: Filter by context using dropdown in Console tab
 
-Type-Safe Console Logging
+### Type-Safe Console Logging
 
 ```typescript
 // Debug utilities with type information
@@ -683,7 +683,7 @@ function debugJson<T>(label: string, value: T): void {
 }
 ```
 
-Common TypeScript Errors
+### Common TypeScript Errors
 
 Error: `Property 'X' does not exist on type 'Y'`
 - Solution: Ensure `@types/chrome` is installed and `lib` includes correct context
@@ -696,7 +696,7 @@ Error: `Expression of type 'X' can't be used to index type 'Y'`
 
 ---
 
-Related Articles
+### Related Articles
 
 - [TypeScript Setup Guide](https://bestchromeextensions.com/guides/typescript-setup/). Detailed TypeScript configuration for Chrome extensions
 - [TypeScript Extensions](https://bestchromeextensions.com/guides/typescript-extensions/). Additional TypeScript patterns and practices

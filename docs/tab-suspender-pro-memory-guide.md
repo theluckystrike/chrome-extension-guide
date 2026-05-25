@@ -16,17 +16,17 @@ This is exactly the problem that Tab Suspender Pro solves. we will explore how t
 
 ---
 
-Understanding the Chrome Memory Problem {#understanding-chrome-memory-problem}
+## Understanding the Chrome Memory Problem {#understanding-chrome-memory-problem}
 
 Before diving into the solution, it is essential to understand why Chrome consumes so much memory in the first place.
 
-Why Chrome Uses So Much RAM
+### Why Chrome Uses So Much RAM
 
 Chrome uses a multi-process architecture where each tab runs in its own process. This design provides isolation and security benefits, but it comes with a significant memory overhead. Each process requires its own memory allocation for the JavaScript heap, DOM storage, rendering engine, and other browser components.
 
 When you have 50 tabs open, you are essentially running 50 mini-browsers simultaneously. Even if most of those tabs are idle. meaning you are not actively viewing them. they continue consuming memory resources in the background.
 
-Common scenarios that trigger high memory usage:
+### Common scenarios that trigger high memory usage:
 
 - Research sessions with 30+ tabs open
 - Development workflows with multiple documentation tabs
@@ -38,7 +38,7 @@ Common scenarios that trigger high memory usage:
 
 According to various studies, an average Chrome tab consumes between 100MB and 500MB of RAM, depending on the website complexity. A user with 50 open tabs could easily be using 5GB to 10GB of memory just for their browser.
 
-The Impact on System Performance
+### The Impact on System Performance
 
 High Chrome memory usage does not just affect the browser. it impacts your entire system:
 
@@ -51,13 +51,13 @@ This is where Tab Suspender Pro comes in as a significant improvement.
 
 ---
 
-What Is Tab Suspender Pro? {#what-is-tab-suspender-pro}
+## What Is Tab Suspender Pro? {#what-is-tab-suspender-pro}
 
 [Tab Suspender Pro](https://chrome.google.com/webstore/detail/tab-suspender-pro/fmajcpipccbgjhchdlhgmnbmcmmafpbf) is a Chrome extension designed to automatically suspend (freeze) inactive tabs to free up memory. When you open a new tab or return to a suspended tab, it is automatically restored. often so smoothly that you would not even know it was suspended.
 
 Unlike basic tab managers that simply close tabs or organize them into groups, Tab Suspender Pro intelligently freezes tabs while preserving their state. You can return to a suspended tab exactly where you left off, without reloading the page or losing your place in a document, video, or form.
 
-Key Features of Tab Suspender Pro
+### Key Features of Tab Suspender Pro
 
 1. Automatic Tab Suspension: Tabs that have been inactive for a configurable period are automatically suspended. You decide how long to wait before suspension kicks in. whether it is 30 seconds, 5 minutes, or never (for pinned tabs).
 
@@ -73,11 +73,11 @@ Key Features of Tab Suspender Pro
 
 ---
 
-How Tab Suspender Pro Reduces Chrome Memory Usage by 80% {#how-it-works}
+## How Tab Suspender Pro Reduces Chrome Memory Usage by 80% {#how-it-works}
 
 The 80% memory reduction claim is not marketing hype. it is backed by how Chrome's rendering process works. Let us break down the mechanics.
 
-The Science Behind Tab Suspension
+### The Science Behind Tab Suspension
 
 When Chrome suspends a tab, it essentially pauses the page's rendering process. This means:
 
@@ -88,7 +88,7 @@ When Chrome suspends a tab, it essentially pauses the page's rendering process. 
 
 The tab remains in your browser's tab strip as a placeholder, but the memory footprint drops dramatically. often from hundreds of megabytes to just a few megabytes.
 
-Real-World Memory Savings
+### Real-World Memory Savings
 
 Here is a typical example of memory savings with Tab Suspender Pro:
 
@@ -101,9 +101,9 @@ Here is a typical example of memory savings with Tab Suspender Pro:
 
 *Figures are approximate and vary based on tab content. YouTube, complex web apps, and sites with heavy JavaScript consume more memory.*
 
-Why 80%?
+### Why 80%?
 
-The 80% figure represents the realistic ceiling because:
+### The 80% figure represents the realistic ceiling because:
 
 1. Tab infrastructure overhead: Chrome still needs to maintain some data structures for each tab, even when suspended.
 2. Pinned tabs: Most users pin their most important tabs (email, Slack, calendar), and these are typically excluded from suspension.
@@ -113,7 +113,7 @@ When you account for these factors, the actual suspendable memory is typically a
 
 ---
 
-Feature Comparison: Tab Suspender Pro vs. Other Solutions {#feature-comparison}
+## Feature Comparison: Tab Suspender Pro vs. Other Solutions {#feature-comparison}
 
 There are several tab management and memory optimization tools available. Here is how Tab Suspender Pro stacks up:
 
@@ -129,7 +129,7 @@ There are several tab management and memory optimization tools available. Here i
 | Actively maintained |  | No (abandoned) | Yes | Yes |
 | Manifest V3 |  | No (MV2) | Yes | Yes |
 
-Why Tab Suspender Pro stands out:
+### Why Tab Suspender Pro stands out:
 
 - Active development: Unlike The Great Suspender (which was abandoned and removed from the Chrome Web Store), Tab Suspender Pro is actively maintained with regular updates.
 - Manifest V3 compliant: Uses the latest Chrome extension standards for better performance and security.
@@ -138,17 +138,17 @@ Why Tab Suspender Pro stands out:
 
 ---
 
-Setting Up Tab Suspender Pro: Step-by-Step Guide {#setup-guide}
+## Setting Up Tab Suspender Pro: Step-by-Step Guide {#setup-guide}
 
 Getting started with Tab Suspender Pro takes just a few minutes. Follow these steps:
 
-Step 1: Install the Extension
+### Step 1: Install the Extension
 
 Visit the [Tab Suspender Pro Chrome Web Store listing](https://chrome.google.com/webstore/detail/tab-suspender-pro/fmajcpipccbgjhchdlhgmnbmcmmafpbf) and click "Add to Chrome."
 
 Screenshot description: The Chrome Web Store listing page showing Tab Suspender Pro with the "Add to Chrome" button prominently displayed, star ratings, and the extension icon.
 
-Step 2: Configure Initial Settings
+### Step 2: Configure Initial Settings
 
 After installation, click the extension icon in your toolbar and access Settings. Configure the following:
 
@@ -158,7 +158,7 @@ After installation, click the extension icon in your toolbar and access Settings
 
 Screenshot description: The Tab Suspender Pro settings page showing suspension delay options, whitelist configuration, and memory display toggle.
 
-Step 3: Set Up Your Whitelist
+### Step 3: Set Up Your Whitelist
 
 Click "Manage Whitelist" to add sites that should never be suspended:
 
@@ -170,11 +170,11 @@ Click "Manage Whitelist" to add sites that should never be suspended:
 
 Screenshot description: The whitelist management interface with example entries like gmail.com, slack.com, and outlook.com.
 
-Step 4: Pin Essential Tabs
+### Step 4: Pin Essential Tabs
 
 Pin your most-used tabs (right-click > Pin) to ensure they remain active. Pinned tabs are automatically excluded from suspension.
 
-Step 5: Monitor Your Savings
+### Step 5: Monitor Your Savings
 
 Click the extension icon anytime to see your memory savings. The dashboard shows:
 
@@ -186,11 +186,11 @@ Screenshot description: The Tab Suspender Pro popup showing "Memory Saved: 2.4 G
 
 ---
 
-Performance Benchmarks: Real-World Testing {#performance-benchmarks}
+## Performance Benchmarks: Real-World Testing {#performance-benchmarks}
 
 We conducted thorough testing to measure Tab Suspender Pro's impact across different use cases. Here are the results:
 
-Benchmark Methodology
+### Benchmark Methodology
 
 We tested on a system with 16GB RAM running Chrome with the following tab configurations:
 
@@ -201,7 +201,7 @@ We tested on a system with 16GB RAM running Chrome with the following tab config
 
 Each test measured Chrome's memory usage with Tab Suspender Pro disabled, then enabled after a 5-minute idle period.
 
-Results
+### Results
 
 | Workload | Baseline RAM | With Tab Suspender Pro | Reduction |
 |---|---|---|---|
@@ -210,7 +210,7 @@ Results
 | Heavy (50 tabs) | 9.8 GB | 2.1 GB | 79% |
 | Extreme (100 tabs) | 18.5 GB | 3.8 GB | 79% |
 
-Key Observations
+### Key Observations
 
 1. Tab content matters: Tabs with YouTube, complex web apps, and interactive dashboards use more memory and benefit more from suspension.
 2. Restoration is instant: Returning to suspended tabs shows them within 100-500ms, depending on network speed and page complexity.
@@ -219,9 +219,9 @@ Key Observations
 
 ---
 
-Common Questions and Troubleshooting {#faq}
+## Common Questions and Troubleshooting {#faq}
 
-Does Tab Suspender Pro work with all websites?
+### Does Tab Suspender Pro work with all websites?
 
 Tab Suspender Pro works with virtually all websites. However, some sites may have specific requirements:
 
@@ -229,21 +229,21 @@ Tab Suspender Pro works with virtually all websites. However, some sites may hav
 - Sites with session timeouts: Some banking sites may log you out if inactive. Whitelist these.
 - Live streaming: Videos will pause when suspended. Add streaming sites to the whitelist if needed.
 
-Will I lose my data if Chrome crashes?
+### Will I lose my data if Chrome crashes?
 
 No. Suspended tabs are not closed. they are merely frozen in their current state. Even if Chrome crashes or you close the browser entirely, your tabs will be exactly as you left them when you reopen Chrome (due to Chrome's session restore feature working alongside Tab Suspender Pro).
 
-Does Tab Suspender Pro slow down my computer when waking tabs?
+### Does Tab Suspender Pro slow down my computer when waking tabs?
 
 Restoring a suspended tab is nearly instantaneous. The slight delay (typically under 500ms) is barely noticeable and is far preferable to the alternative of keeping all tabs active.
 
-Is Tab Suspender Pro free?
+### Is Tab Suspender Pro free?
 
 Tab Suspender Pro offers both free and premium tiers. The free version covers basic suspension needs for most users, while the premium version includes advanced features like cloud sync, priority support, and enhanced customization options.
 
 ---
 
-Best Practices for Maximum Memory Savings {#best-practices}
+## Best Practices for Maximum Memory Savings {#best-practices}
 
 To get the most out of Tab Suspender Pro:
 
@@ -262,7 +262,7 @@ To get the most out of Tab Suspender Pro:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Chrome memory management is a real challenge for modern web users. With the average user keeping dozens of tabs open, browser memory consumption has become a significant bottleneck affecting system performance, productivity, and even battery life.
 
@@ -274,7 +274,7 @@ Ready to reclaim your memory? [Install Tab Suspender Pro](https://chrome.google.
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [Tab Suspender Pro Official Website](https://zovo.one)
 - [Chrome Web Store Developer Documentation](https://developer.chrome.com/docs/webstore)

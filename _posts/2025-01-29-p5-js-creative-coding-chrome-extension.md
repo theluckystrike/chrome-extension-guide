@@ -18,7 +18,7 @@ This comprehensive guide will walk you through everything you need to know about
 
 ---
 
-Understanding p5.js and Its Role in Creative Coding {#understanding-p5js}
+## Understanding p5.js and Its Role in Creative Coding {#understanding-p5js}
 
 p5.js is an open-source JavaScript library that brings the creative coding philosophy of Processing to the web. Created by Lauren McCarthy and maintained by a vibrant community, p5.js makes it accessible for anyone to create digital art, animations, and interactive experiences using code. The library provides a set of functions that simplify working with graphics, animation, and user interaction, making it perfect for both beginners and experienced developers.
 
@@ -28,29 +28,29 @@ What makes p5.js particularly powerful is its immediate mode graphics approach. 
 
 ---
 
-Why Combine p5.js with Chrome Extensions? {#why-combine}
+## Why Combine p5.js with Chrome Extensions? {#why-combine}
 
 Chrome extensions provide a unique platform for creative coding projects. While web applications are constrained by the same-origin policy and the limitations of a single webpage, Chrome extensions can interact with multiple pages, access browser APIs, and persist data across sessions. This opens up possibilities that simply are not available to regular web applications.
 
-Enhanced Capabilities
+### Enhanced Capabilities
 
 When you combine p5.js with Chrome extensions, you gain several advantages. First, extensions can inject content scripts into any webpage, allowing you to overlay creative visualizations on existing sites. Imagine a extension that transforms YouTube videos into generative art, or one that adds interactive data visualizations to news articles. Second, extensions have access to browser APIs that regular web pages do not, including storage, tabs, bookmarks, and more. This means your p5.js creations can interact with the user's browsing history, preferences, and activities.
 
-Persistent Creative Tools
+### Persistent Creative Tools
 
 Chrome extensions run in the background and remain available whenever the user opens Chrome. This persistence makes them ideal for creative tools that users want to access regularly. A generative art extension, for example, could create new artwork every time the user opens a new tab, or provide quick access to creative coding tools from the extension popup.
 
-Distribution Channel
+### Distribution Channel
 
 The Chrome Web Store provides a massive distribution platform for your creative coding projects. With billions of Chrome users worldwide, your p5.js extension has the potential to reach a vast audience. Whether you are building a tool for personal use or creating a product to share with the world, Chrome extensions provide an accessible path to distribution.
 
 ---
 
-Setting Up p5.js in Your Chrome Extension {#setup}
+## Setting Up p5.js in Your Chrome Extension {#setup}
 
 Now that you understand the potential, let us dive into the practical implementation. Setting up p5.js in a Chrome extension requires a few specific considerations, particularly around how the library is loaded and how the canvas is managed.
 
-Creating the Extension Structure
+### Creating the Extension Structure
 
 First, create a new Chrome extension project with the standard structure: a manifest file, HTML files for the popup or options page, and JavaScript files for your logic. For p5.js integration, you will need to include the p5.js library in your extension.
 
@@ -70,7 +70,7 @@ my-p5-extension/
      icon.png
 ```
 
-Configuring the Manifest
+### Configuring the Manifest
 
 Your manifest.json file needs to declare the necessary permissions and specify the files that make up your extension. Here is an example manifest for a p5.js extension:
 
@@ -98,11 +98,11 @@ The key point here is including p5.min.js in the content_scripts array. This loa
 
 ---
 
-Building Your First p5.js Extension {#first-extension}
+## Building Your First p5.js Extension {#first-extension}
 
 Let us build a practical example: a Chrome extension that creates generative art on any webpage. This extension will overlay a p5.js canvas on the current page and generate beautiful, evolving patterns.
 
-The Content Script Approach
+### The Content Script Approach
 
 Content scripts in Chrome extensions run in the context of web pages, which makes them perfect for p5.js integration. However, content scripts have some limitations, they cannot access certain extension APIs directly and must communicate with the background script for advanced functionality.
 
@@ -149,7 +149,7 @@ window.addEventListener('resize', () => {
 
 This content script creates a full-screen canvas that overlays the current webpage. The p5.js draw loop continuously generates colorful particles that create mesmerizing patterns over time. By setting `pointer-events: none`, we ensure that the canvas does not interfere with the underlying page functionality.
 
-Creating a Popup-Based Extension
+### Creating a Popup-Based Extension
 
 Alternatively, you can create a p5.js extension that runs primarily in the extension popup. This approach gives you more control over the user interface and allows for more complex interactions.
 
@@ -207,11 +207,11 @@ This popup sketch creates an interactive particle system that users can watch an
 
 ---
 
-Advanced p5.js Extension Patterns {#advanced-patterns}
+## Advanced p5.js Extension Patterns {#advanced-patterns}
 
 Once you have the basics working, you can explore more advanced patterns that use the unique capabilities of Chrome extensions.
 
-Communicating Between Content Scripts and Background
+### Communicating Between Content Scripts and Background
 
 For more complex extensions, you will need to communicate between your content scripts (where p5.js runs) and the background service worker. This allows your p5.js creation to access extension APIs and respond to browser events.
 
@@ -238,7 +238,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Saving and Loading Creative Work
+### Saving and Loading Creative Work
 
 Chrome storage APIs provide a perfect solution for saving users' creative work. You can save canvas images, sketch configurations, and creative outputs directly to the user's Chrome storage.
 
@@ -265,7 +265,7 @@ function loadArtwork() {
 }
 ```
 
-Interactive Extensions with User Input
+### Interactive Extensions with User Input
 
 You can create extensions that respond to user interactions not just within the p5.js canvas, but also through the extension popup and browser context menus.
 
@@ -281,11 +281,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Best Practices for p5.js Chrome Extensions {#best-practices}
+## Best Practices for p5.js Chrome Extensions {#best-practices}
 
 Building successful p5.js Chrome extensions requires attention to performance, user experience, and technical considerations specific to the extension environment.
 
-Performance Optimization
+### Performance Optimization
 
 Chrome extensions must be efficient to provide a good user experience. Here are some tips for optimizing your p5.js extension:
 
@@ -295,41 +295,41 @@ Second, clean up resources when they are no longer needed. If your extension cre
 
 Third, be mindful of memory usage. Chrome extensions share the browser's memory footprint, and users may have multiple extensions installed. Avoid creating excessive objects or arrays that accumulate over time.
 
-User Experience Considerations
+### User Experience Considerations
 
 The best extensions feel invisible until needed. Your p5.js creations should enhance the browsing experience without being intrusive. Use transparency and blending modes to create effects that coexist peacefully with webpage content. Provide easy controls to enable, disable, or adjust your extension's behavior.
 
 Consider adding a simple UI that allows users to control key parameters of your creative work. A small popup or context menu option can give users power without overwhelming them with options.
 
-Cross-Browser Compatibility
+### Cross-Browser Compatibility
 
 While Chrome extensions are the primary target, consider that many extension APIs are now standardized across browsers. The Chrome Web Store supports extensions that work in Chrome, Edge, and other Chromium-based browsers. Avoid using Chrome-specific APIs unless absolutely necessary, and test your extension in multiple browsers if cross-compatibility is important.
 
 ---
 
-Creative Ideas for p5.js Extensions {#creative-ideas}
+## Creative Ideas for p5.js Extensions {#creative-ideas}
 
 Now that you understand the technical implementation, here are some creative project ideas to inspire your own p5.js Chrome extension development:
 
-Generative New Tab Pages
+### Generative New Tab Pages
 
 Create an extension that replaces the default new tab page with a generative art canvas. Every time the user opens a new tab, they see a unique piece of algorithmically generated artwork. You could incorporate weather data, time of day, or user preferences into the generative process.
 
-Interactive Data Visualization
+### Interactive Data Visualization
 
 Build an extension that transforms webpage data into interactive visualizations. When users visit sites with tabular data, your extension could offer to visualize that data using p5.js, creating charts, graphs, or artistic representations of information.
 
-Educational Creative Coding Tools
+### Educational Creative Coding Tools
 
 Develop an extension that helps users learn creative coding. Include interactive tutorials, code examples, and a sandbox environment where users can experiment with p5.js directly in the browser.
 
-Artistic Page Overlays
+### Artistic Page Overlays
 
 Create extensions that add artistic effects to webpages. From subtle particle effects that respond to mouse movement to full canvas overlays that completely transform the visual appearance of a page, the creative possibilities are endless.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Integrating p5.js with Chrome extensions opens up exciting possibilities for creative coding in the browser. Whether you want to build generative art tools, interactive visualizations, or unique creative experiences, the combination of p5.js and Chrome extensions provides a powerful platform for your projects.
 
@@ -341,7 +341,7 @@ Remember to test thoroughly, gather user feedback, and continue refining your cr
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 To continue your journey with p5.js and Chrome extensions, explore these valuable resources:
 
@@ -350,7 +350,7 @@ To continue your journey with p5.js and Chrome extensions, explore these valuabl
 - [p5.js Instance Mode](https://github.com/processing/p5.js/wiki/Global-and-instance-mode) - Learn about creating isolated p5.js sketches
 - [Chrome Web Store Publishing Guide](https://developer.chrome.com/docs/webstore/publish) - How to publish your extension
 
-Happy creative coding!---
+### Happy creative coding!---
 
 Turn Your Extension Into a Business
 Ready to monetize? The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers freemium models, Stripe integration, subscription architecture, and growth strategies for Chrome extension developers.

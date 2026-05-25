@@ -21,7 +21,7 @@ What You'll Learn
 
 ---
 
-Extension Contexts Overview
+### Extension Contexts Overview
 
 Before diving into patterns, let's understand the contexts available in a Chrome extension:
 
@@ -60,7 +60,7 @@ Each context has its own lifecycle, memory space, and access to Chrome APIs.
 
 The popup is often the primary user interface for an extension.  the two main patterns.
 
-Single-Page Popup Pattern
+### Single-Page Popup Pattern
 
 Best for: Simple extensions with few features, quick actions
 
@@ -83,7 +83,7 @@ Best for: Simple extensions with few features, quick actions
 
 ```
 
-Example Implementation:
+### Example Implementation:
 
 ```javascript
 // manifest.json
@@ -198,9 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Multi-Page Popup Pattern
+### Multi-Page Popup Pattern
 
-Best for: Complex extensions with multiple distinct features
+### Best for: Complex extensions with multiple distinct features
 
 ```
 
@@ -219,7 +219,7 @@ Best for: Complex extensions with multiple distinct features
 
 ```
 
-Example Implementation:
+### Example Implementation:
 
 ```html
 <!-- popup.html -->
@@ -321,7 +321,7 @@ class MultiPagePopup {
 }
 ```
 
-When to Use Each Pattern
+### When to Use Each Pattern
 
 | Feature | Single-Page | Multi-Page |
 |---------|-------------|------------|
@@ -337,7 +337,7 @@ When to Use Each Pattern
 
 The service worker is the backbone of your extension. Here are key patterns:
 
-Event-Driven Architecture
+### Event-Driven Architecture
 
 ```javascript
 // background.js
@@ -407,7 +407,7 @@ class ExtensionServiceWorker {
 new ExtensionServiceWorker();
 ```
 
-Keep-Alive Pattern
+### Keep-Alive Pattern
 
 Service workers terminate after 30 seconds of inactivity. Use alarms to keep them alive:
 
@@ -440,7 +440,7 @@ class KeepAliveServiceWorker {
 }
 ```
 
-Message Router Pattern
+### Message Router Pattern
 
 ```javascript
 // background.js
@@ -492,7 +492,7 @@ router.register('OPEN_NEW_TAB', async (msg, sender) => {
 
 Content scripts run in the context of web pages. Here are injection strategies:
 
-Declarative Injection
+### Declarative Injection
 
 ```json
 // manifest.json
@@ -508,9 +508,9 @@ Declarative Injection
 }
 ```
 
-Programmatic Injection
+### Programmatic Injection
 
-For more control over when scripts load:
+### For more control over when scripts load:
 
 ```javascript
 // background.js - Programmatic injection
@@ -551,9 +551,9 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 });
 ```
 
-Dynamic Content Script Pattern
+### Dynamic Content Script Pattern
 
-Load scripts based on page conditions:
+### Load scripts based on page conditions:
 
 ```javascript
 // content.js - Dynamic injection
@@ -594,7 +594,7 @@ class DynamicContentLoader {
 }
 ```
 
-Isolated World Communication
+### Isolated World Communication
 
 Content scripts run in an isolated world. Here's how to communicate with the page:
 
@@ -663,7 +663,7 @@ The side panel provides a persistent UI alongside the web page:
         Web Page Content
 ```
 
-Side Panel Implementation
+### Side Panel Implementation
 
 ```json
 // manifest.json
@@ -750,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 5. DevTools Panel Integration
 
-Extensions can add custom panels to Chrome DevTools:
+### Extensions can add custom panels to Chrome DevTools:
 
 ```
 
@@ -770,7 +770,7 @@ Extensions can add custom panels to Chrome DevTools:
 
 ```
 
-DevTools Panel Implementation
+### DevTools Panel Implementation
 
 ```json
 // manifest.json
@@ -914,7 +914,7 @@ Organize your extension into reusable modules:
 
 ```
 
-Module Structure
+### Module Structure
 
 ```javascript
 // src/modules/base.js - Base module class
@@ -1035,7 +1035,7 @@ export class MessagingModule extends BaseModule {
 
 7. Sharing Code Between Contexts
 
-Using ES Modules with Web Accessible Resources
+### Using ES Modules with Web Accessible Resources
 
 ```json
 // manifest.json
@@ -1093,7 +1093,7 @@ export const EVENTS = {
 })();
 ```
 
-Copy-Based Sharing
+### Copy-Based Sharing
 
 For simpler sharing, copy shared modules to each context:
 
@@ -1118,7 +1118,7 @@ src/
 
 ---
 
-Architecture Decision Matrix
+### Architecture Decision Matrix
 
 Use this matrix to choose the right architecture:
 
@@ -1134,7 +1134,7 @@ Use this matrix to choose the right architecture:
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Extension Architecture Guide](/docs/guides/extension-architecture/). Comprehensive guide to extension architecture fundamentals
 - [Background Service Workers](/docs/guides/service-workers/). Detailed look into service worker implementation
@@ -1142,7 +1142,7 @@ Related Articles
 
 ---
 
-Summary
+### Summary
 
 Choosing the right architecture pattern is essential for building maintainable Chrome extensions:
 

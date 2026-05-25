@@ -13,7 +13,7 @@ A definitive, step-by-step guide for migrating Chrome extensions from Manifest V
 
 ---
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 1. [Migration Overview](#1-migration-overview)
 2. [Background Page to Service Worker](#2-background-page-to-service-worker)
@@ -31,7 +31,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-1. Migration Overview {#1-migration-overview}
+## 1. Migration Overview {#1-migration-overview}
 
 MV2 is fully deprecated. Extensions on the Chrome Web Store must use MV3.
 
@@ -48,11 +48,11 @@ MV2 is fully deprecated. Extensions on the Chrome Web Store must use MV3.
 
 ---
 
-2. Background Page to Service Worker {#2-background-page-to-service-worker}
+## 2. Background Page to Service Worker {#2-background-page-to-service-worker}
 
 This is the largest and most error-prone migration task.
 
-Manifest Change {#manifest-change}
+## Manifest Change {#manifest-change}
 
 MV2:
 ```json
@@ -66,7 +66,7 @@ MV3:
 
 Only one entry point is allowed. Use `"type": "module"` with `import` statements, or use a bundler to combine files.
 
-Gotcha: No DOM Access {#gotcha-no-dom-access}
+## Gotcha: No DOM Access {#gotcha-no-dom-access}
 
 Service workers have no `document`, `window`, `XMLHttpRequest`, or `localStorage`.
 
@@ -85,7 +85,7 @@ const title = await chrome.runtime.sendMessage({ action: 'parseHTML', html });
 await chrome.storage.local.set({ title });
 ```
 
-Gotcha: Service Worker Termination {#gotcha-service-worker-termination}
+## Gotcha: Service Worker Termination {#gotcha-service-worker-termination}
 
 Workers terminate after ~30 seconds of inactivity. All in-memory state is lost.
 
@@ -101,7 +101,7 @@ chrome.runtime.onMessage.addListener(async () => {
 });
 ```
 
-Gotcha: Top-Level Event Registration {#gotcha-top-level-event-registration}
+## Gotcha: Top-Level Event Registration {#gotcha-top-level-event-registration}
 
 All listeners must be registered synchronously at the top level. Listeners registered inside async callbacks are lost on restart.
 
@@ -119,7 +119,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
 });
 ```
 
-Gotcha: Timers {#gotcha-timers}
+## Gotcha: Timers {#gotcha-timers}
 
 `setInterval`/`setTimeout` are unreliable because the worker can terminate before they fire.
 
@@ -134,7 +134,7 @@ chrome.alarms.onAlarm.addListener((a) => {
 });
 ```
 
-Gotcha: Multiple Scripts {#gotcha-multiple-scripts}
+## Gotcha: Multiple Scripts {#gotcha-multiple-scripts}
 
 ```javascript
 // MV2 allowed: "scripts": ["utils.js", "api.js", "bg.js"]
@@ -143,13 +143,13 @@ import { utils } from './utils.js';
 import { api } from './api.js';
 ```
 
-Gotcha: XMLHttpRequest {#gotcha-xmlhttprequest}
+## Gotcha: XMLHttpRequest {#gotcha-xmlhttprequest}
 
 Replace with `fetch()` -- XHR is unavailable in service workers.
 
 ---
 
-3. browserAction/pageAction to action {#3-browseractionpageaction-to-action}
+## 3. browserAction/pageAction to action {#3-browseractionpageaction-to-action}
 
 MV3 unifies both into `action`.
 
@@ -173,7 +173,7 @@ chrome.action.enable(tabId);   // replaces pageAction.show
 chrome.action.disable(tabId);  // replaces pageAction.hide
 ```
 
-For page_action-style show/hide behavior, use `chrome.declarativeContent`:
+### For page_action-style show/hide behavior, use `chrome.declarativeContent`:
 
 ```javascript
 chrome.action.disable();
@@ -191,11 +191,11 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-4. tabs.executeScript to scripting.executeScript {#4-tabsexecutescript-to-scriptingexecutescript}
+## 4. tabs.executeScript to scripting.executeScript {#4-tabsexecutescript-to-scriptingexecutescript}
 
 Add `"scripting"` to permissions. The API is a complete redesign.
 
-File Injection {#file-injection}
+## File Injection {#file-injection}
 
 ```javascript
 // MV2
@@ -208,7 +208,7 @@ const results = await chrome.scripting.executeScript({
 });
 ```
 
-Inline Code {#inline-code}
+## Inline Code {#inline-code}
 
 ```javascript
 // MV2 - arbitrary code strings allowed
@@ -222,7 +222,7 @@ const results = await chrome.scripting.executeScript({
 console.log(results[0].result);
 ```
 
-Passing Arguments {#passing-arguments}
+## Passing Arguments {#passing-arguments}
 
 ```javascript
 const results = await chrome.scripting.executeScript({
@@ -232,7 +232,7 @@ const results = await chrome.scripting.executeScript({
 });
 ```
 
-CSS and Frames {#css-and-frames}
+## CSS and Frames {#css-and-frames}
 
 ```javascript
 // CSS injection (replaces chrome.tabs.insertCSS)
@@ -252,11 +252,11 @@ await chrome.scripting.executeScript({
 
 ---
 
-5. Blocking webRequest to declarativeNetRequest {#5-blocking-webrequest-to-declarativenetrequest}
+## 5. Blocking webRequest to declarativeNetRequest {#5-blocking-webrequest-to-declarativenetrequest}
 
 Often the most complex migration, especially for ad blockers and privacy tools.
 
-Manifest {#manifest}
+## Manifest {#manifest}
 
 ```json
 {
@@ -268,7 +268,7 @@ Manifest {#manifest}
 }
 ```
 
-Blocking {#blocking}
+## Blocking {#blocking}
 
 ```javascript
 // MV2
@@ -290,7 +290,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 }]
 ```
 
-Header Modification {#header-modification}
+## Header Modification {#header-modification}
 
 ```json
 [{
@@ -303,7 +303,7 @@ Header Modification {#header-modification}
 }]
 ```
 
-Redirects {#redirects}
+## Redirects {#redirects}
 
 ```json
 [{
@@ -313,7 +313,7 @@ Redirects {#redirects}
 }]
 ```
 
-Dynamic Rules {#dynamic-rules}
+## Dynamic Rules {#dynamic-rules}
 
 ```javascript
 await chrome.declarativeNetRequest.updateDynamicRules({
@@ -323,7 +323,7 @@ await chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-Limits and Caveats {#limits-and-caveats}
+## Limits and Caveats {#limits-and-caveats}
 
 - Each extension is guaranteed 30,000 static rules; a shared global pool provides up to 300,000 additional rules across all extensions
 - Up to 100 static rulesets, 50 enabled at a time
@@ -334,7 +334,7 @@ Limits and Caveats {#limits-and-caveats}
 
 ---
 
-6. Content Security Policy Changes {#6-content-security-policy-changes}
+## 6. Content Security Policy Changes {#6-content-security-policy-changes}
 
 MV2 (string):
 ```json
@@ -361,7 +361,7 @@ To migrate `eval()`/`new Function()` usage, move it to a sandboxed iframe and co
 
 ---
 
-7. web_accessible_resources Format {#7-web-accessible-resources-format}
+## 7. web_accessible_resources Format {#7-web-accessible-resources-format}
 
 MV2 (flat array):
 ```json
@@ -386,7 +386,7 @@ Each entry requires `matches` and/or `extension_ids`. Setting `use_dynamic_url: 
 
 ---
 
-8. Promise-Based APIs {#8-promise-based-apis}
+## 8. Promise-Based APIs {#8-promise-based-apis}
 
 Nearly all `chrome.*` APIs return promises in MV3 when no callback is provided.
 
@@ -415,7 +415,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-9. Removed APIs and Replacements {#9-removed-apis-and-replacements}
+## 9. Removed APIs and Replacements {#9-removed-apis-and-replacements}
 
 | Removed | Replacement |
 |---------|-------------|
@@ -443,9 +443,9 @@ const result = await chrome.runtime.sendMessage({ action: 'doSomething' });
 
 ---
 
-10. Storage Migration {#10-storage-migration}
+## 10. Storage Migration {#10-storage-migration}
 
-localStorage to chrome.storage {#localstorage-to-chromestorage}
+## localStorage to chrome.storage {#localstorage-to-chromestorage}
 
 ```javascript
 // MV2 background
@@ -455,7 +455,7 @@ const token = localStorage.getItem('authToken');
 const { authToken } = await chrome.storage.local.get('authToken');
 ```
 
-chrome.storage.session (MV3 only) {#chromestoragesession-mv3-only}
+## chrome.storage.session (MV3 only) {#chromestoragesession-mv3-only}
 
 In-memory storage cleared when browser closes. Ideal for transient state:
 
@@ -467,7 +467,7 @@ await chrome.storage.session.setAccessLevel({
 });
 ```
 
-Data Preservation {#data-preservation}
+## Data Preservation {#data-preservation}
 
 `chrome.storage.local` and `chrome.storage.sync` data survives the MV2-to-MV3 update. `localStorage` data from the background page is lost. Migrate it in your final MV2 release:
 
@@ -485,7 +485,7 @@ Host permissions moved from `permissions` to `host_permissions`. In MV3, users c
 
 ---
 
-11. Step-by-Step Migration Workflow {#11-step-by-step-migration-workflow}
+## 11. Step-by-Step Migration Workflow {#11-step-by-step-migration-workflow}
 
 1. Update `manifest_version` to `3`
 2. Move host permissions from `permissions` to `host_permissions`
@@ -502,7 +502,7 @@ Host permissions moved from `permissions` to `host_permissions`. In MV3, users c
 
 ---
 
-12. Testing Your Migrated Extension {#12-testing-your-migrated-extension}
+## 12. Testing Your Migrated Extension {#12-testing-your-migrated-extension}
 
 1. Load unpacked at `chrome://extensions` with Developer mode on
 2. Check the Errors section for manifest issues
@@ -515,38 +515,38 @@ Host permissions moved from `permissions` to `host_permissions`. In MV3, users c
 
 ---
 
-13. Common Migration Failures and Fixes {#13-common-migration-failures-and-fixes}
+## 13. Common Migration Failures and Fixes {#13-common-migration-failures-and-fixes}
 
-Service worker registration failed {#service-worker-registration-failed}
+## Service worker registration failed {#service-worker-registration-failed}
 Syntax error or top-level `document`/`window` reference. Remove all DOM globals from the service worker.
 
-Cannot read properties of undefined (reading 'executeScript') {#cannot-read-properties-of-undefined-reading-executescript}
+## Cannot read properties of undefined (reading 'executeScript') {#cannot-read-properties-of-undefined-reading-executescript}
 Missing `"scripting"` permission in manifest.json.
 
-Refused to execute inline script {#refused-to-execute-inline-script}
+## Refused to execute inline script {#refused-to-execute-inline-script}
 MV3 CSP blocks inline scripts. Move all `<script>` and `onclick` handlers to external `.js` files.
 
-CORS errors on fetch {#cors-errors-on-fetch}
+## CORS errors on fetch {#cors-errors-on-fetch}
 Missing domain in `host_permissions`.
 
-Event listeners not firing after restart {#event-listeners-not-firing-after-restart}
+## Event listeners not firing after restart {#event-listeners-not-firing-after-restart}
 Listeners registered inside async callbacks. Move all `.addListener` calls to the top level.
 
-Alarm delay less than minimum {#alarm-delay-less-than-minimum}
+## Alarm delay less than minimum {#alarm-delay-less-than-minimum}
 `chrome.alarms` minimum interval is 30 seconds (`periodInMinutes: 0.5`). Values below 0.5 will trigger a warning and not be honored. For shorter delays, use `setTimeout` (acceptable for one-shot tasks while the worker is active).
 
-Maximum dynamic rules exceeded {#maximum-dynamic-rules-exceeded}
+## Maximum dynamic rules exceeded {#maximum-dynamic-rules-exceeded}
 Use static rulesets for large rule lists. Consolidate with regex rules where possible.
 
-Badge text disappears {#badge-text-disappears}
+## Badge text disappears {#badge-text-disappears}
 Badge state resets on worker restart. Save it to `chrome.storage.session` and restore in `chrome.runtime.onStartup`.
 
-Popup loses connection to background {#popup-loses-connection-to-background}
+## Popup loses connection to background {#popup-loses-connection-to-background}
 Handle `port.onDisconnect` and reconnect when using long-lived ports via `chrome.runtime.connect()`.
 
 ---
 
-Further Reading {#further-reading}
+## Further Reading {#further-reading}
 
 - [Service Worker Lifecycle](service-worker-lifecycle.md)
 - [Scripting API Guide](scripting-api.md)
@@ -554,9 +554,9 @@ Further Reading {#further-reading}
 - [Permissions Model](permissions-model.md)
 - [MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [MV3 Migration Cheatsheet](../guides/mv3-migration-cheatsheet.md)
 - [Migration Checklist](../guides/extension-migration-mv2-to-mv3-checklist.md)

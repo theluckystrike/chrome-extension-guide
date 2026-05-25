@@ -10,7 +10,7 @@ Chrome Storage Sync Strategies
 
 Data persistence is the backbone of any Chrome extension that needs to remember user preferences, sync across devices, or maintain state between sessions. The Chrome Storage API provides powerful mechanisms for storing and retrieving data, but choosing the right storage strategy and implementing it correctly requires understanding the nuanced differences between sync and local storage, quota constraints, and migration patterns. This guide covers everything you need to build solid storage systems for your Chrome extensions.
 
-Table of Contents
+### Table of Contents
 
 - [Understanding Chrome Storage Types](#understanding-chrome-storage-types)
 - [When to Use sync.storage](#when-to-use-syncstorage)
@@ -23,11 +23,11 @@ Table of Contents
 
 ---
 
-Understanding Chrome Storage Types
+### Understanding Chrome Storage Types
 
 Chrome provides three primary storage APIs for extensions, each designed for different use cases. Understanding these differences is crucial for building extensions that work reliably across all user scenarios.
 
-chrome.storage.sync
+### chrome.storage.sync
 
 The `chrome.storage.sync` API automatically syncs stored data across all devices where the user is signed into Chrome with the same account. This is ideal for user preferences, settings, and any data that should follow the user across machines. When data is stored using this API, Chrome handles synchronization in the background, ensuring consistency without requiring you to implement any sync logic yourself.
 
@@ -64,7 +64,7 @@ async function loadUserPreferences() {
 }
 ```
 
-chrome.storage.local
+### chrome.storage.local
 
 The `chrome.storage.local` API stores data that remains on the current device only. This is appropriate for cached data, device-specific settings, or any information that shouldn't follow the user across different machines. Local storage has significantly higher quota limits than sync storage, making it suitable for larger datasets.
 
@@ -104,7 +104,7 @@ async function getCachedResponse(url, maxAgeMs = 3600000) {
 }
 ```
 
-chrome.storage.managed
+### chrome.storage.managed
 
 The `chrome.storage.managed` API allows enterprise administrators to configure extension settings through group policy. Data stored here is read-only for the extension and cannot be modified by users. This is useful for organizations that need to enforce specific configurations across their fleet of devices.
 
@@ -127,7 +127,7 @@ When to Use sync.storage
 
 Choosing between sync and local storage affects user experience significantly. Here are the scenarios where `chrome.storage.sync` is the appropriate choice.
 
-User Preferences and Settings
+### User Preferences and Settings
 
 Any setting that users would expect to be consistent across their devices should use sync storage. This includes theme preferences, notification settings, language choices, and UI customizations. When users switch between their work laptop and personal computer, they expect their preferences to travel with them.
 
@@ -163,7 +163,7 @@ class UserSettingsManager {
 }
 ```
 
-Cross-Device Data
+### Cross-Device Data
 
 If your extension helps users organize information like bookmarks, notes, or reading lists, sync storage ensures this data is available everywhere. The automatic synchronization eliminates the need for manual export/import or cloud backend integration.
 
@@ -199,7 +199,7 @@ When to Use local.storage
 
 While sync storage offers convenience, local storage has distinct advantages in specific scenarios.
 
-Large Data Storage
+### Large Data Storage
 
 Sync storage has stricter quota limits (see Quota Limits section). For extensions that need to store large amounts of data, such as cached API responses, historical data, or offline content, local storage is the appropriate choice.
 
@@ -251,7 +251,7 @@ class LargeDataCache {
 }
 ```
 
-Device-Specific Data
+### Device-Specific Data
 
 Some data simply doesn't make sense to sync. Device-specific settings, temporary state, or data tied to a particular machine should use local storage.
 
@@ -283,11 +283,11 @@ class DeviceStateManager {
 
 ---
 
-Understanding Quota Limits
+### Understanding Quota Limits
 
 Chrome enforces storage quotas to prevent extensions from consuming excessive browser resources. Understanding these limits helps you design storage systems that remain reliable under all conditions.
 
-Quota Limits Overview
+### Quota Limits Overview
 
 | Storage Type | Quota Limit | Item Size Limit |
 |-------------|-------------|------------------|
@@ -297,7 +297,7 @@ Quota Limits Overview
 
 The sync storage limit of 100 KB might seem restrictive, but it's designed for user preferences and small data items. For larger data, you must use local storage or implement a hybrid approach.
 
-Checking Available Quota
+### Checking Available Quota
 
 ```javascript
 class StorageQuotaChecker {
@@ -340,11 +340,11 @@ class StorageQuotaChecker {
 
 ---
 
-Quota Management Strategies
+### Quota Management Strategies
 
 When approaching quota limits, you need strategies to manage storage efficiently. Here are proven patterns for staying within limits while maintaining functionality.
 
-Hybrid Storage Architecture
+### Hybrid Storage Architecture
 
 The most effective approach combines sync and local storage based on data characteristics. Sync small, critical user preferences while storing larger, less critical data locally.
 
@@ -373,7 +373,7 @@ class HybridStorageManager {
 }
 ```
 
-Automatic Cleanup and Eviction
+### Automatic Cleanup and Eviction
 
 Implement intelligent cleanup to prevent quota exhaustion.
 
@@ -424,7 +424,7 @@ class StorageCleanupManager {
 }
 ```
 
-Compression for Large Data
+### Compression for Large Data
 
 When approaching storage limits, compress data before storing.
 
@@ -465,11 +465,11 @@ class CompressedStorage {
 
 ---
 
-Storage Migration Patterns
+### Storage Migration Patterns
 
 When updating extensions, you often need to migrate data from old storage formats to new ones. Proper migration ensures user data is preserved across versions.
 
-Version-Based Migration
+### Version-Based Migration
 
 ```javascript
 const CURRENT_SCHEMA_VERSION = 3;
@@ -527,7 +527,7 @@ class StorageMigrationManager {
 }
 ```
 
-Progressive Migration for Large Datasets
+### Progressive Migration for Large Datasets
 
 For large datasets that can't be migrated in a single operation:
 
@@ -595,7 +595,7 @@ class ProgressiveMigrationManager {
 
 ---
 
-Error Handling and Recovery
+### Error Handling and Recovery
 
 Storage operations can fail for various reasons. Solid error handling ensures your extension remains functional even when storage encounters problems.
 
@@ -660,7 +660,7 @@ class ResilientStorage {
 
 ---
 
-Best Practices Summary
+### Best Practices Summary
 
 Building reliable Chrome extension storage requires following proven patterns. Here are the key takeaways from this guide.
 

@@ -10,7 +10,7 @@ Chrome Extension Development Tutorial with TypeScript: Complete Guide for 2026
 
 Chrome extension development has evolved significantly with the adoption of Manifest V3 and modern JavaScript tooling. TypeScript has become the standard for building robust, maintainable extensions that can scale with complex features. This comprehensive tutorial walks you through building production-ready Chrome extensions using TypeScript, covering everything from project setup to advanced patterns used in real-world extensions like Tab Suspender Pro.
 
-Table of Contents
+### Table of Contents
 
 - [Why TypeScript for Chrome Extensions](#why-typescript-for-chrome-extensions)
 - [Project Setup and Build Configuration](#project-setup-and-build-configuration)
@@ -23,7 +23,7 @@ Table of Contents
 - [Testing and Debugging](#testing-and-debugging)
 - [Building for Production](#building-for-production)
 
-Why TypeScript for Chrome Extensions {#why-typescript-for-chrome-extensions}
+## Why TypeScript for Chrome Extensions {#why-typescript-for-chrome-extensions}
 
 TypeScript brings several compelling advantages to Chrome extension development that become increasingly important as your extension grows in complexity. The static type checking catches errors at compile time rather than runtime, which is especially valuable when working with Chrome's extension APIs that have complex type signatures. When you're dealing with message passing between content scripts, background workers, and popup pages, having explicit types for your payloads eliminates an entire category of bugs that would otherwise require extensive testing to discover.
 
@@ -31,11 +31,11 @@ Beyond error prevention, TypeScript significantly improves the developer experie
 
 The Chrome ecosystem has matured considerably, with excellent type definitions available through the `@types/chrome` package. These types cover virtually all Chrome extension APIs, from the fundamental `chrome.runtime` and `chrome.storage` to specialized APIs like `chrome.debugger` and `chrome.sidePanel`. Combined with modern build tools like Vite and Webpack, TypeScript has become the recommended approach for serious extension development in 2026.
 
-Project Setup and Build Configuration {#project-setup-and-build-configuration}
+## Project Setup and Build Configuration {#project-setup-and-build-configuration}
 
 Setting up a TypeScript project for Chrome extension development requires careful configuration to ensure your build output works correctly with Chrome's extension system. Let's create a production-ready project structure that you can adapt for any extension project.
 
-Initializing the Project
+### Initializing the Project
 
 Create a new directory and initialize your project with the necessary dependencies:
 
@@ -47,7 +47,7 @@ npm install --save-dev typescript vite @types/chrome
 
 This installs TypeScript for compilation, Vite for fast development builds, and the Chrome type definitions. The `@types/chrome` package provides comprehensive type coverage for all Chrome extension APIs, significantly improving your development experience.
 
-TypeScript Configuration
+### TypeScript Configuration
 
 Create a `tsconfig.json` that targets the appropriate JavaScript version and configures module resolution for extension development:
 
@@ -74,7 +74,7 @@ Create a `tsconfig.json` that targets the appropriate JavaScript version and con
 
 The `strict` flag enables all type-checking options, which catches more potential errors during development. While this might require more initial effort to satisfy the type checker, the resulting code is significantly more reliable.
 
-Vite Configuration for Extensions
+### Vite Configuration for Extensions
 
 Create a `vite.config.ts` to handle the unique requirements of building extension files:
 
@@ -109,11 +109,11 @@ export default defineConfig({
 
 This configuration builds each entry point separately while maintaining proper chunking for shared code. The alias configuration makes imports cleaner and more maintainable as your codebase grows.
 
-Manifest V3 Configuration detailed look {#manifest-v3-configuration-deep detailed look}
+### Manifest V3 Configuration detailed look {#manifest-v3-configuration-deep detailed look}
 
 The manifest.json file serves as the blueprint for your extension, and understanding its configuration options is essential for building compliant extensions. Let's examine each critical section with TypeScript-friendly examples.
 
-Complete Manifest Configuration
+### Complete Manifest Configuration
 
 ```json
 {
@@ -173,11 +173,11 @@ The `permissions` array declares the APIs your extension needs, while `host_perm
 
 Pay careful attention to the difference between `permissions` and `host_permissions`. The `permissions` array is for Chrome APIs like `storage` and `tabs`, while `host_permissions` controls network access to websites. Requesting excessive host permissions can trigger additional review requirements in the Chrome Web Store, so only request what's absolutely necessary for your extension's functionality.
 
-Type-Safe Content Scripts {#type-safe-content-scripts}
+## Type-Safe Content Scripts {#type-safe-content-scripts}
 
 Content scripts run in the context of web pages, injecting functionality directly into the user's browsing experience. TypeScript helps ensure your content script code is solid and correctly typed.
 
-Creating a Content Script with Types
+### Creating a Content Script with Types
 
 ```typescript
 // src/content/types.ts
@@ -299,11 +299,11 @@ if (document.readyState === 'loading') {
 
 The key to maintaining type safety in content scripts is defining clear interfaces for your data structures and message payloads. This approach prevents runtime errors caused by mismatched data structures and makes your code self-documenting.
 
-Background Service Worker Implementation {#background-service-worker-implementation}
+## Background Service Worker Implementation {#background-service-worker-implementation}
 
 The background service worker is the central hub of your extension, managing state, coordinating between components, and handling system-level events. In Manifest V3, service workers are ephemeral, they start when needed and terminate after inactivity. This makes proper state management critical.
 
-Service Worker with State Management
+### Service Worker with State Management
 
 ```typescript
 // src/background/types.ts
@@ -498,11 +498,11 @@ worker.initialize();
 
 This implementation demonstrates critical patterns for production extensions: state persistence across service worker restarts, proper message handling with type-safe payloads, and scheduled task management using the alarms API. Each component is separated for maintainability and testability.
 
-Popup Page Design Patterns {#popup-page-design-patterns}
+## Popup Page Design Patterns {#popup-page-design-patterns}
 
 The popup is often the primary user interface for extensions, appearing when users click the extension icon. Building a solid popup requires careful attention to state management and communication with the background service worker.
 
-Type-Safe Popup Implementation
+### Type-Safe Popup Implementation
 
 ```typescript
 // src/popup/types.ts
@@ -619,11 +619,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 The popup follows a pattern of loading state from the background service worker, setting up event listeners, and updating the UI accordingly. This separation ensures the popup remains responsive and properly synchronized with the extension's central state.
 
-Message Passing Between Components {#message-passing-between-components}
+## Message Passing Between Components {#message-passing-between-components}
 
 Chrome extensions use message passing for communication between isolated worlds, content scripts, background service workers, and popup pages. TypeScript makes this communication type-safe and reliable.
 
-Type-Safe Message System
+### Type-Safe Message System
 
 ```typescript
 // src/shared/messages.ts
@@ -680,11 +680,11 @@ export function validateMessage<T>(
 
 This message validation system adds a layer of runtime safety to your extension's communication, catching malformed messages before they cause issues. Combined with TypeScript's compile-time checking, you get defense in depth against message-related bugs.
 
-Type-Safe Storage Operations {#type-safe-storage-operations}
+## Type-Safe Storage Operations {#type-safe-storage-operations}
 
 The Chrome storage API uses a simple key-value interface, but you can add type safety through wrapper classes that enforce schemas at runtime.
 
-Typed Storage Wrapper
+### Typed Storage Wrapper
 
 ```typescript
 // src/shared/storage.ts
@@ -754,11 +754,11 @@ export const storage = new TypedStorage();
 
 This typed storage wrapper validates data when storing and retrieving, ensuring type safety at runtime while maintaining the simple interface of chrome.storage.local.
 
-Testing and Debugging {#testing-and-debugging}
+## Testing and Debugging {#testing-and-debugging}
 
 Testing Chrome extensions requires special consideration because many APIs are Chrome-specific. Here's a practical approach to testing your TypeScript extension code.
 
-Unit Testing with Mocked Chrome APIs
+### Unit Testing with Mocked Chrome APIs
 
 ```typescript
 // tests/__mocks__/chrome.ts
@@ -793,11 +793,11 @@ export const chrome = createChromeMock();
 
 By creating mocks for Chrome APIs, you can write unit tests that verify your logic without depending on the actual Chrome environment. This makes your code more testable and your tests more reliable.
 
-Building for Production {#building-for-production}
+## Building for Production {#building-for-production}
 
 When your extension is ready for release, follow these steps to create a production build that passes Chrome Web Store review.
 
-Production Build Process
+### Production Build Process
 
 ```bash
 Run TypeScript compilation with strict checking
@@ -815,13 +815,13 @@ ls -la dist/
 
 The production build should output clean, minified JavaScript files that work with Chrome's extension system. Verify your manifest.json is correctly generated and all paths reference the correct build artifacts.
 
-Chrome Web Store Submission Checklist
+### Chrome Web Store Submission Checklist
 
 Before submitting to the Chrome Web Store, ensure your extension meets all requirements. Test the unpacked extension in Developer Mode to catch any issues that might not appear during development. Verify that all permissions are necessary and properly justified in your store listing. Ensure your extension handles edge cases gracefully and doesn't crash on unusual websites.
 
 ---
 
-Conclusion
+### Conclusion
 
 Building Chrome extensions with TypeScript in 2026 represents the convergence of modern web development practices with the unique requirements of browser extension development. The patterns and examples in this tutorial provide a foundation for creating robust, maintainable extensions that can scale to complex feature sets.
 

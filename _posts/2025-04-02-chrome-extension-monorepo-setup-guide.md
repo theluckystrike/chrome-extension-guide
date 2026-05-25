@@ -18,17 +18,17 @@ we will walk you through setting up a chrome extension monorepo using Turborepo,
 
 ---
 
-Why Use a Monorepo for Chrome Extensions {#why-monorepo}
+## Why Use a Monorepo for Chrome Extensions {#why-monorepo}
 
 Before diving into the technical implementation, it is essential to understand why you should consider a monorepo approach for your Chrome extensions. The benefits extend far beyond simple organizational convenience and can significantly impact your development velocity and code quality.
 
-The Problem with Polyrepo setups
+### The Problem with Polyrepo setups
 
 When each Chrome extension lives in its own repository, you inevitably encounter code duplication. Common utilities, shared libraries, authentication helpers, UI components, and testing utilities get copied across repositories. This duplication creates several problems: bug fixes require changes in multiple places, keeping dependencies synchronized becomes tedious, and maintaining consistent code quality across extensions proves challenging.
 
 Additionally, polyrepo setups lead to fragmented tooling. Each repository might use slightly different versions of build tools, testing frameworks, or linting configurations. This inconsistency makes it harder to onboard new team members and creates cognitive overhead when switching between projects.
 
-Benefits of Chrome Extension Monorepo
+### Benefits of Chrome Extension Monorepo
 
 A monorepo chrome extension setup addresses these challenges comprehensively. First and foremost, code sharing becomes trivial. You can create a shared packages directory containing common utilities, UI components, and business logic that all your extensions can import directly. This eliminates duplication and ensures that improvements to shared code benefit all extensions immediately.
 
@@ -40,31 +40,31 @@ Finally, tooling consolidation simplifies your development environment. ESLint, 
 
 ---
 
-Understanding Turborepo for Chrome Extension Development {#understanding-turborepo}
+## Understanding Turborepo for Chrome Extension Development {#understanding-turborepo}
 
 Turborepo has become the de facto standard for JavaScript monorepos, and it is exceptionally well-suited for Chrome extension development. Its intelligent caching, pipeline system, and zero-config setup make it an ideal choice for managing multiple extensions.
 
-What Makes Turborepo Special
+### What Makes Turborepo Special
 
 Turborepo introduces the concept of "tasks" and "pipelines" to monorepo management. A pipeline defines how different scripts relate to each other and which ones can run in parallel. For Chrome extensions, typical pipelines might include building, testing, linting, and packaging. Turborepo automatically determines which tasks need to run based on what files have changed.
 
 The remote caching feature takes this further by caching build outputs in the cloud. If you run a build on your local machine, that cache can be shared with your CI/CD pipeline and even with other developers on your team. This means that once someone builds a particular configuration, everyone else gets instant cached results.
 
-Alternative Monorepo Tools
+### Alternative Monorepo Tools
 
 While Turborepo is our primary focus, it is worth noting alternatives. Nx is another powerful option with more extensive features, including built-in code generation and advanced analysis tools. However, Nx has a steeper learning curve and more overhead. Yarn Workspaces and npm Workspaces provide basic monorepo functionality without the sophisticated caching and pipeline features of Turborepo. For most Chrome extension projects, Turborepo strikes the best balance between power and simplicity.
 
 ---
 
-Setting Up Your Chrome Extension Monorepo {#setting-up}
+## Setting Up Your Chrome Extension Monorepo {#setting-up}
 
 Now let us dive into the practical implementation. We will create a monorepo structure that can host multiple Chrome extensions while sharing common code.
 
-Prerequisites
+### Prerequisites
 
 Before starting, ensure you have Node.js 18 or later installed. You will also need npm, yarn, or pnpm as your package manager. For this guide, we will use pnpm due to its excellent monorepo support and efficient disk space usage, but the concepts apply equally to other package managers.
 
-Step 1: Initialize the Monorepo
+### Step 1: Initialize the Monorepo
 
 Create a new directory for your monorepo and initialize it with a package.json file. This root package.json will serve as the configuration hub for your entire monorepo.
 
@@ -80,7 +80,7 @@ Next, install Turborepo as a dev dependency:
 npm install -D turbo
 ```
 
-Step 2: Configure the Monorepo Structure
+### Step 2: Configure the Monorepo Structure
 
 Create a turbo.json file at the root of your monorepo. This file defines your build pipelines and caching behavior:
 
@@ -109,7 +109,7 @@ Create a turbo.json file at the root of your monorepo. This file defines your bu
 
 This configuration tells Turborepo that the "build" task depends on the "^build" task, meaning it must wait for all dependencies to finish building first. The "outputs" array specifies which directories contain build artifacts that should be cached.
 
-Step 3: Create the Workspace Configuration
+### Step 3: Create the Workspace Configuration
 
 Add workspace configuration to your root package.json. This tells your package manager that the monorepo contains multiple packages:
 
@@ -137,11 +137,11 @@ This configuration creates two workspace categories: "apps" for your Chrome exte
 
 ---
 
-Creating Chrome Extension Apps {#creating-extensions}
+## Creating Chrome Extension Apps {#creating-extensions}
 
 With the monorepo structure in place, we can now create Chrome extension applications. Each extension will be a self-contained app within the monorepo.
 
-Setting Up Your First Extension
+### Setting Up Your First Extension
 
 Create a new directory under apps for your first extension:
 
@@ -151,7 +151,7 @@ cd apps/my-first-extension
 npm init -y
 ```
 
-Install the necessary dependencies for Chrome extension development:
+### Install the necessary dependencies for Chrome extension development:
 
 ```bash
 npm install -D typescript @types/chrome webpack webpack-cli webpack-merge html-webpack-plugin css-loader style-loader ts-loader copy-webpack-plugin
@@ -175,7 +175,7 @@ Create a tsconfig.json for TypeScript configuration:
 }
 ```
 
-Creating the Manifest
+### Creating the Manifest
 
 Every Chrome extension requires a manifest.json file. Create this file in your extension directory:
 
@@ -194,7 +194,7 @@ Every Chrome extension requires a manifest.json file. Create this file in your e
 }
 ```
 
-Building the Extension
+### Building the Extension
 
 Create a webpack.config.js to bundle your extension:
 
@@ -259,11 +259,11 @@ Add build scripts to your extension's package.json:
 
 ---
 
-Creating Shared Packages {#shared-packages}
+## Creating Shared Packages {#shared-packages}
 
 The real power of a chrome extension monorepo emerges when you create shared packages that multiple extensions can use. This is where you eliminate code duplication and build a library of reusable components.
 
-Creating a Shared UI Package
+### Creating a Shared UI Package
 
 Create a package for shared UI components:
 
@@ -273,14 +273,14 @@ cd packages/ui-components
 npm init -y
 ```
 
-Install React for building UI components:
+### Install React for building UI components:
 
 ```bash
 npm install react react-dom
 npm install -D @types/react @types/react-dom typescript
 ```
 
-Create TypeScript configuration and your first component:
+### Create TypeScript configuration and your first component:
 
 ```typescript
 // packages/ui-components/src/Button.tsx
@@ -314,14 +314,14 @@ export const Button: React.FC<ButtonProps> = ({
 };
 ```
 
-Export your components from an index file:
+### Export your components from an index file:
 
 ```typescript
 // packages/ui-components/src/index.ts
 export { Button } from './Button';
 ```
 
-Update the package.json to include TypeScript build configuration:
+### Update the package.json to include TypeScript build configuration:
 
 ```json
 {
@@ -339,7 +339,7 @@ Update the package.json to include TypeScript build configuration:
 }
 ```
 
-Using Shared Packages in Extensions
+### Using Shared Packages in Extensions
 
 Now your extensions can easily import shared components. In your extension's package.json, add a dependency on the shared package:
 
@@ -370,11 +370,11 @@ export const Popup: React.FC = () => {
 
 ---
 
-Advanced Monorepo Patterns {#advanced-patterns}
+## Advanced Monorepo Patterns {#advanced-patterns}
 
 As your monorepo grows, you will want to implement additional patterns to maintain organization and efficiency.
 
-Shared Configuration Packages
+### Shared Configuration Packages
 
 Create packages that centralize configuration across all extensions. For example, a types package can define shared TypeScript types:
 
@@ -384,7 +384,7 @@ cd packages/types
 npm init -y
 ```
 
-Define shared types that all extensions use:
+### Define shared types that all extensions use:
 
 ```typescript
 // packages/types/src/index.ts
@@ -401,9 +401,9 @@ export interface UserPreferences {
 }
 ```
 
-Shared Utility Libraries
+### Shared Utility Libraries
 
-Create utility packages for common functionality:
+### Create utility packages for common functionality:
 
 ```bash
 mkdir packages/utils
@@ -431,7 +431,7 @@ export const storage = {
 };
 ```
 
-Managing Multiple Extensions
+### Managing Multiple Extensions
 
 A well-structured chrome extension workspace allows you to manage multiple extensions efficiently. Each extension in your apps directory is independent but can use shared packages. This architecture scales beautifully, from two extensions to twenty or more.
 
@@ -439,47 +439,47 @@ To add a new extension, simply create a new directory under apps with the same s
 
 ---
 
-Best Practices for Chrome Extension Monorepos {#best-practices}
+## Best Practices for Chrome Extension Monorepos {#best-practices}
 
 Following established best practices ensures your monorepo remains maintainable as it grows.
 
-Dependency Management
+### Dependency Management
 
 Keep your root package.json lean. Only add truly global dependencies there. Extension-specific dependencies belong in each app's package.json. Use consistent dependency versions across your monorepo by establishing a central "versions" file or using npm's resolution overrides.
 
-Build Optimization
+### Build Optimization
 
 Configure Turborepo's caching appropriately. Ensure that your build outputs are correctly specified in the turbo.json so that only changed packages rebuild. Use the "outputs" field strategically, exclude development artifacts and include only production-ready files.
 
-Code Sharing Guidelines
+### Code Sharing Guidelines
 
 Establish clear boundaries between shared packages. A good rule is that shared packages should have no knowledge of specific extensions. They should be general-purpose enough that any extension could use them. This prevents tight coupling and makes packages easier to maintain.
 
-Testing Strategy
+### Testing Strategy
 
 Implement tests at both the package level and the extension level. Shared packages should have comprehensive unit tests. Extensions should have integration tests that verify the extension loads correctly and interacts with Chrome APIs as expected.
 
 ---
 
-Common Pitfalls and How to Avoid Them {#pitfalls}
+## Common Pitfalls and How to Avoid Them {#pitfalls}
 
 Even well-planned monorepos can run into issues. Here are common problems and solutions.
 
-Circular Dependencies
+### Circular Dependencies
 
 Never create circular dependencies between packages. If Package A imports Package B, Package B cannot import Package A. Use dependency analysis tools to detect cycles early. If you find packages that seem to need circular imports, reconsider your package boundaries.
 
-Version Mismatches
+### Version Mismatches
 
 Different extensions might need different versions of the same dependency. While this is one of the trickiest monorepo challenges, solutions include using pnpm's strict peer dependencies, creating version-specific packages, or using package overrides carefully.
 
-Build Conflicts
+### Build Conflicts
 
 If multiple extensions define the same build scripts, there can be conflicts. Use Turborepo's pipeline to orchestrate builds so they run in the correct order. Ensure each extension's webpack configuration outputs to unique directories.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Setting up a chrome extension monorepo is one of the most impactful architectural decisions you can make for your extension development workflow. By consolidating multiple extensions into a single repository with shared code packages, you eliminate duplication, simplify dependency management, and dramatically improve build times through intelligent caching.
 

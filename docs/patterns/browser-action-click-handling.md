@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/browser-action-click-h
 last_modified_at: 2026-01-15
 ---
 
-Browser Action Click Handling
+### Browser Action Click Handling
 
 The browser action (toolbar icon) is a primary interaction point for extensions. Understanding click handling patterns is essential for building intuitive user experiences.
 
-Default Behavior {#default-behavior}
+## Default Behavior {#default-behavior}
 
 When a user clicks the extension icon:
 - With popup defined: Opens the popup HTML (default behavior)
@@ -25,7 +25,7 @@ When a user clicks the extension icon:
 }
 ```
 
-No Popup Mode: onClicked Event {#no-popup-mode-onclicked-event}
+## No Popup Mode: onClicked Event {#no-popup-mode-onclicked-event}
 
 To handle clicks programmatically, omit the popup and listen for the click event:
 
@@ -36,7 +36,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-Toggle Pattern: Enable/Disable with Icon Change {#toggle-pattern-enabledisable-with-icon-change}
+## Toggle Pattern: Enable/Disable with Icon Change {#toggle-pattern-enabledisable-with-icon-change}
 
 A common pattern is to toggle extension state on each click:
 
@@ -66,9 +66,9 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Dynamic Popup Switching {#dynamic-popup-switching}
+## Dynamic Popup Switching {#dynamic-popup-switching}
 
-Switch between popup and click-handler modes programmatically:
+### Switch between popup and click-handler modes programmatically:
 
 ```javascript
 // background.js
@@ -87,7 +87,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Per-Tab Conditional Behavior {#per-tab-conditional-behavior}
+## Per-Tab Conditional Behavior {#per-tab-conditional-behavior}
 
 Handle clicks differently based on the current URL:
 
@@ -109,9 +109,9 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Using activeTab for One-Click Permission {#using-activetab-for-one-click-permission}
+## Using activeTab for One-Click Permission {#using-activetab-for-one-click-permission}
 
-The `activeTab` permission allows injection without host permissions:
+### The `activeTab` permission allows injection without host permissions:
 
 ```javascript
 // manifest.json
@@ -132,13 +132,13 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Important Notes {#important-notes}
+## Important Notes {#important-notes}
 
 - Programmatic popup opening is not supported, user gesture required
 - Icon changes persist until explicitly changed again
 - Use tab-specific settings for per-tab state management
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Action API Reference](../api-reference/action-api.md)
 - [MV3 Action API](../mv3/action-api.md)

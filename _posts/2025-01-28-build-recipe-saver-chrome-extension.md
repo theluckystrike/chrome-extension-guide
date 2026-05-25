@@ -18,7 +18,7 @@ This comprehensive guide walks you through building a production-ready recipe sa
 
 ---
 
-Why Build a Recipe Saver Chrome Extension {#why-build-recipe-saver}
+## Why Build a Recipe Saver Chrome Extension {#why-build-recipe-saver}
 
 The demand for recipe management tools continues to grow as more people turn to online resources for cooking inspiration. A recipe saver extension offers unique advantages over standalone applications and bookmarking systems because it can intelligently extract recipe data from web pages, eliminating the need for manual copying and pasting.
 
@@ -28,7 +28,7 @@ The cooking extension market presents a significant opportunity for developers. 
 
 ---
 
-Project Planning and Feature Definition {#project-planning}
+## Project Planning and Feature Definition {#project-planning}
 
 Before writing any code, you need to define the core features your recipe saver extension will provide. A basic recipe saver should allow users to save recipes with one click, view their saved collection, and access recipes offline. More advanced features might include recipe categorization, search functionality, meal planning, shopping list generation, and cross-device synchronization.
 
@@ -45,7 +45,7 @@ For this guide, we will build a comprehensive extension with the following featu
 
 This feature set provides enough complexity to demonstrate advanced Chrome extension concepts while remaining achievable within a single tutorial. You can expand these features later based on user feedback and market demands.
 
-Technology Stack
+### Technology Stack
 
 Our recipe saver extension will use the following technologies:
 
@@ -57,7 +57,7 @@ Our recipe saver extension will use the following technologies:
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Every Chrome extension begins with a well-organized project structure. Create a new folder for your extension and set up the following files and directories:
 
@@ -88,7 +88,7 @@ This structure separates different parts of your extension clearly, making it ea
 
 ---
 
-Creating the Manifest V3 Configuration {#manifest-creation}
+## Creating the Manifest V3 Configuration {#manifest-creation}
 
 The manifest.json file is the heart of every Chrome extension. It defines the extension's capabilities, permissions, and configuration. For our recipe saver extension, we need to specify the appropriate permissions for storage, active tab access, and script injection.
 
@@ -138,11 +138,11 @@ This manifest configuration grants the extension the permissions it needs to fun
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is the primary user interface for most Chrome extensions. For our recipe saver, the popup will display the saved recipes list, provide quick save functionality, and offer access to the full recipe collection.
 
-Create the popup HTML file:
+### Create the popup HTML file:
 
 ```html
 <!DOCTYPE html>
@@ -357,7 +357,7 @@ The CSS provides a clean, modern design with a green color scheme appropriate fo
 
 ---
 
-Implementing Popup Functionality {#popup-javascript}
+## Implementing Popup Functionality {#popup-javascript}
 
 The popup JavaScript handles user interactions and communicates with other parts of the extension. Create the popup.js file:
 
@@ -543,7 +543,7 @@ This JavaScript code handles all the popup functionality including loading and s
 
 ---
 
-Creating the Content Script for Recipe Extraction {#content-script}
+## Creating the Content Script for Recipe Extraction {#content-script}
 
 The content script runs on web pages and is responsible for extracting recipe data. This is the most complex part of the extension as it must handle various website structures and formats.
 
@@ -831,7 +831,7 @@ This content script implements multiple extraction strategies, prioritizing stru
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and can manage longer-running tasks:
 
@@ -865,7 +865,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-Creating the Options Page {#options-page}
+## Creating the Options Page {#options-page}
 
 The options page provides a full-featured interface for managing all saved recipes. Create the options.html file:
 
@@ -1203,7 +1203,7 @@ The options page CSS provides a clean, modern interface with card-based recipe d
 
 ---
 
-Options Page JavaScript {#options-javascript}
+## Options Page JavaScript {#options-javascript}
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -1435,7 +1435,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Testing Your Recipe Saver Extension {#testing}
+## Testing Your Recipe Saver Extension {#testing}
 
 Before publishing your extension, thorough testing is essential. Load your extension in Chrome by following these steps:
 
@@ -1456,7 +1456,7 @@ The JSON-LD extraction should work well on major sites, while the fallback strat
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working, you can publish it to the Chrome Web Store:
 
@@ -1473,7 +1473,7 @@ Your store listing should include:
 
 ---
 
-Future Enhancements {#future-enhancements}
+## Future Enhancements {#future-enhancements}
 
 After launching your basic recipe saver extension, consider adding these advanced features:
 
@@ -1488,7 +1488,7 @@ After launching your basic recipe saver extension, consider adding these advance
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a recipe saver Chrome extension is an excellent project that combines practical utility with interesting technical challenges. The extension you create can genuinely help users organize their cooking resources and discover new recipes.
 

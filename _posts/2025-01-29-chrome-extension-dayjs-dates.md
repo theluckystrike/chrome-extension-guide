@@ -18,7 +18,7 @@ Understanding how to properly implement time formatting extension capabilities u
 
 ---
 
-Why Day.js for Chrome Extensions?
+### Why Day.js for Chrome Extensions?
 
 The JavaScript Date object, while built-in, offers limited functionality for complex date operations. Developers often find themselves writing custom utility functions for common tasks like formatting relative time ("2 hours ago"), parsing various date formats, or handling time zones. Day.js emerges as an excellent solution for dayjs extension development for several compelling reasons.
 
@@ -30,11 +30,11 @@ Third, the API design of Day.js feels familiar to developers who have used Momen
 
 ---
 
-Installing Day.js in Your Chrome Extension Project
+### Installing Day.js in Your Chrome Extension Project
 
 Setting up Day.js in a Chrome extension project follows standard JavaScript package management practices, though you'll need to consider how your extension's JavaScript is bundled and loaded.
 
-Using npm for Package Management
+### Using npm for Package Management
 
 For modern Chrome extension development using build tools like Webpack, Rollup, or Vite, installing Day.js is straightforward. Run the following command in your project directory:
 
@@ -58,7 +58,7 @@ dayjs.extend(timezone);
 dayjs.extend(utc);
 ```
 
-Using Day.js Directly in Manifest V3
+### Using Day.js Directly in Manifest V3
 
 For simpler extensions or those not using a build system, you can include Day.js directly in your extension. Download the minified Day.js library from the official website or npm, then add it to your extension's directory. Reference it in your HTML files before your main script:
 
@@ -72,11 +72,11 @@ When using this approach, ensure you load the plugins after Day.js but before sc
 
 ---
 
-Configuring Day.js for Chrome Extension Contexts
+### Configuring Day.js for Chrome Extension Contexts
 
 Chrome extensions operate across multiple execution contexts, each with distinct characteristics and requirements. Understanding these contexts is essential for effective date handling in your extension.
 
-Content Scripts and Date Handling
+### Content Scripts and Date Handling
 
 Content scripts run in the context of web pages, isolated from the extension's other components. When implementing date manipulation chrome in content scripts, consider the following best practices.
 
@@ -110,7 +110,7 @@ const date2 = dayjs('29/01/2025', 'DD/MM/YYYY');
 const date3 = dayjs('Jan 29, 2025', 'MMM D, YYYY');
 ```
 
-Background Service Workers and Timestamp Management
+### Background Service Workers and Timestamp Management
 
 Manifest V3 introduced service workers as the replacement for background pages. Service workers handle extension events and can perform operations even when no extension page is open. Date handling in service workers often involves logging, scheduling, and coordinating across extension components.
 
@@ -146,7 +146,7 @@ function checkScheduledTasks() {
 }
 ```
 
-Popup and Options Pages
+### Popup and Options Pages
 
 Popup pages and options pages run in their own context and can load Day.js like any regular web page. These contexts typically display dates to users, making formatting crucial for user experience.
 
@@ -173,9 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Advanced Day.js Features for Chrome Extensions
+### Advanced Day.js Features for Chrome Extensions
 
-Relative Time and Human-Readable Dates
+### Relative Time and Human-Readable Dates
 
 One of the most common requirements for extensions is displaying time in relative formats like "5 minutes ago" or "in 2 hours." Day.js's relativeTime plugin makes this straightforward:
 
@@ -193,7 +193,7 @@ dayjs('2025-01-25').from('2025-01-29'); // "4 days ago"
 
 This functionality proves invaluable for extensions that display timestamps of recent activities, notifications, or browsing history. Users instantly understand "5 minutes ago" far better than "2025-01-29T10:25:00Z."
 
-Timezone Handling
+### Timezone Handling
 
 Extensions serving a global user base must handle timezone differences appropriately. Day.js provides timezone support through its timezone plugin:
 
@@ -216,7 +216,7 @@ console.log(newYorkTime.format()); // 2025-01-29T05:00:00-05:00
 
 This capability is essential for extensions that coordinate across timezones or display meeting times, flight information, or any time-sensitive data.
 
-Duration Calculations
+### Duration Calculations
 
 Extensions often need to calculate durations between dates, whether for tracking time spent on tasks, measuring page load performance, or managing timers:
 
@@ -240,9 +240,9 @@ console.log(dur.asHours()); // 4.5
 
 ---
 
-Best Practices for Day.js in Chrome Extensions
+### Best Practices for Day.js in Chrome Extensions
 
-Optimizing Bundle Size
+### Optimizing Bundle Size
 
 To maintain optimal performance, follow these dayjs extension optimization strategies:
 
@@ -270,7 +270,7 @@ async function formatWithAdvancedOptions(date) {
 }
 ```
 
-Handling Cross-Context Date Sharing
+### Handling Cross-Context Date Sharing
 
 When sharing dates between extension contexts (content scripts, background, popup), always use standardized formats. ISO 8601 strings provide the safest format for cross-context communication:
 
@@ -290,7 +290,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-Error Handling and Validation
+### Error Handling and Validation
 
 Always validate dates before performing operations, especially when handling user input or data from web pages:
 
@@ -310,9 +310,9 @@ if (userDate) {
 
 ---
 
-Real-World Examples: Building Date-Aware Chrome Extensions
+### Real-World Examples: Building Date-Aware Chrome Extensions
 
-Reading Time Tracker Extension
+### Reading Time Tracker Extension
 
 Consider building an extension that tracks how long users spend on web pages. Day.js handles the time calculations elegantly:
 
@@ -335,7 +335,7 @@ window.addEventListener('beforeunload', () => {
 });
 ```
 
-Scheduled Reminder Extension
+### Scheduled Reminder Extension
 
 Extensions that remind users at specific times benefit from Day.js's scheduling capabilities:
 
@@ -362,7 +362,7 @@ function scheduleReminder(reminderTime, message) {
 
 ---
 
-Conclusion
+### Conclusion
 
 Day.js provides Chrome extension developers with a powerful, lightweight solution for date and time handling. Its small footprint, modular plugin architecture, and intuitive API make it ideal for extensions where performance and bundle size matter. Whether you're implementing simple timestamp formatting or complex timezone-aware scheduling, Day.js delivers the tools you need.
 
@@ -372,9 +372,9 @@ The key to success lies in understanding your extension's specific requirements 
 
 ---
 
-Additional Resources and Tips
+### Additional Resources and Tips
 
-Day.js Plugin Ecosystem
+### Day.js Plugin Ecosystem
 
 Day.js offers numerous plugins beyond those covered in this guide. Here are some additional plugins that can enhance your Chrome extension's date handling capabilities.
 
@@ -416,7 +416,7 @@ dayjs('2025-02-15').quarter(); // 1
 dayjs('2025-05-20').quarter(); // 2
 ```
 
-Debugging Date Issues in Extensions
+### Debugging Date Issues in Extensions
 
 When developing Chrome extensions with date handling, debugging can be challenging due to the multiple execution contexts. Here are strategies to identify and resolve common issues.
 
@@ -443,7 +443,7 @@ dayjs.utc('2025-01-29T10:00:00').format();
 
 Third, use the debugging tools in Chrome to inspect dates across contexts. The background service worker console output appears in the Extensions management page, while content script logs appear in the page's console.
 
-Performance Considerations for Large-Scale Extensions
+### Performance Considerations for Large-Scale Extensions
 
 For extensions that process many dates, such as analytics dashboards or history viewers, consider these performance optimizations.
 
@@ -470,7 +470,7 @@ Implement pagination when displaying large lists of dated items to avoid perform
 
 ---
 
-Summary and Next Steps
+### Summary and Next Steps
 
 Day.js transforms date handling in Chrome extensions from a painful development experience into a streamlined process. This guide covered the essential aspects of integrating Day.js into your extensions, from basic installation to advanced timezone handling and performance optimization. The practical examples demonstrated real-world applications that you can adapt for your own projects.
 

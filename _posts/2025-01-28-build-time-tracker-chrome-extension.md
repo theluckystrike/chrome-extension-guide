@@ -18,7 +18,7 @@ Whether you are a seasoned developer looking to expand your extension portfolio 
 
 ---
 
-Why Build a Time Tracker Chrome Extension {#why-build-time-tracker}
+## Why Build a Time Tracker Chrome Extension {#why-build-time-tracker}
 
 The demand for productivity tools has never been higher, and time tracking applications stand among the most sought-after solutions in the Chrome Web Store. A time tracker extension offers unique advantages over standalone applications because it lives directly in the browser where users spend most of their workday.
 
@@ -28,7 +28,7 @@ The productivity timer market continues to grow as more companies adopt time-bas
 
 ---
 
-Project Planning and Architecture {#project-planning}
+## Project Planning and Architecture {#project-planning}
 
 Before writing any code, you need to define the core features your time tracker extension will provide. A basic time tracker should allow users to start and stop timers, view elapsed time, and save tracked sessions. More advanced features might include project categorization, daily and weekly reports, export capabilities, and cross-device synchronization.
 
@@ -43,7 +43,7 @@ For this guide, we will build a comprehensive extension with the following featu
 
 This feature set provides enough complexity to demonstrate advanced concepts while remaining achievable within a single tutorial. You can always expand these features later based on user feedback and market demands.
 
-Technology Stack
+### Technology Stack
 
 Our time tracker extension will use the following technologies:
 
@@ -57,7 +57,7 @@ Modern Chrome extension development favors vanilla JavaScript over heavy framewo
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file structure to function correctly. Create a new folder for your project and add the following files:
 
@@ -81,7 +81,7 @@ Let us examine each file in detail, starting with the manifest.
 
 ---
 
-Creating the Manifest V3 Configuration {#manifest-configuration}
+## Creating the Manifest V3 Configuration {#manifest-configuration}
 
 The manifest.json file defines how Chrome should load and interact with your extension. Here is a complete manifest configuration for our time tracker:
 
@@ -121,11 +121,11 @@ Understanding permission scope is crucial for both security and user trust. Alwa
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface is what users see when they click your extension icon. It needs to be clean, intuitive, and responsive. Let us create a professional-looking popup with all the functionality users expect from a time tracker.
 
-HTML Structure
+### HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -186,7 +186,7 @@ HTML Structure
 
 This HTML structure provides a complete user interface with timer display, control buttons, project selection, task input, daily statistics, and action buttons. The design follows standard accessibility practices with proper labels and semantic markup.
 
-Styling the Popup
+### Styling the Popup
 
 The CSS should be clean, modern, and consistent with Chrome's design language. Users spend their entire workday in browsers, so familiarity and comfort matter.
 
@@ -341,11 +341,11 @@ This CSS provides a polished, professional appearance that feels native to the C
 
 ---
 
-Implementing Core Timer Logic {#timer-logic}
+## Implementing Core Timer Logic {#timer-logic}
 
 The JavaScript files handle the actual functionality of the extension. We need to split our code between the popup script (which handles user interactions) and the background script (which maintains the timer when the popup is closed).
 
-Background Service Worker
+### Background Service Worker
 
 The background script runs continuously in the background, managing timer state even when the popup is closed. This is crucial for accurate time tracking.
 
@@ -474,7 +474,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 This background script manages the core timer functionality, ensuring accurate tracking even when the popup is closed. It uses Chrome's storage API to persist state and the alarms API for reliable timing.
 
-Popup Script
+### Popup Script
 
 The popup script handles user interactions and updates the interface based on timer state.
 
@@ -645,7 +645,7 @@ This popup script provides a complete user experience with real-time timer updat
 
 ---
 
-Creating Extension Icons {#extension-icons}
+## Creating Extension Icons {#extension-icons}
 
 Every Chrome extension needs icon images in various sizes. These icons appear in the Chrome toolbar, the Extensions page, and the Chrome Web Store. Create simple icons using any image editing tool, or generate them programmatically using a canvas-based approach.
 
@@ -658,22 +658,22 @@ The required icon sizes are:
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension to ensure it functions correctly. Chrome provides developer tools specifically for extension development.
 
-Loading Your Extension
+### Loading Your Extension
 
-To test your extension in Chrome:
+### To test your extension in Chrome:
 
 1. Navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension folder
 4. The extension icon should appear in your Chrome toolbar
 
-Common Testing Scenarios
+### Common Testing Scenarios
 
-Test the following scenarios to ensure solid functionality:
+### Test the following scenarios to ensure solid functionality:
 
 - Starting and stopping the timer multiple times
 - Closing and reopening the popup while the timer runs
@@ -687,15 +687,15 @@ Use Chrome's developer tools to debug any issues. You can access extension logs 
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your extension is tested and working, you can publish it to the Chrome Web Store. The publishing process involves creating a developer account, preparing your store listing, and submitting for review.
 
-Developer Account Setup
+### Developer Account Setup
 
 Create a developer account through the Google Chrome Web Store developer dashboard. There is a one-time registration fee that helps maintain the ecosystem quality.
 
-Store Listing Preparation
+### Store Listing Preparation
 
 Your store listing should include:
 - A compelling title and description
@@ -704,13 +704,13 @@ Your store listing should include:
 - Clear privacy policy disclosure
 - Appropriate category and region selections
 
-Review Process
+### Review Process
 
 Chrome reviews extensions for policy compliance, functionality, and user experience. The review typically takes a few days, though it may take longer for new or complex extensions.
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once your basic time tracker is working, consider adding these advanced features to make your extension stand out:
 
@@ -723,7 +723,7 @@ Once your basic time tracker is working, consider adding these advanced features
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a time tracker Chrome extension is an excellent project that teaches you valuable skills in extension development while creating a genuinely useful tool. The Manifest V3 architecture provides a modern, secure foundation for building productivity applications that integrate smoothly with users' daily workflows.
 

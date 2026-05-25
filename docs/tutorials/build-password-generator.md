@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Password Generator Extension. Full Tutorial
 
-What We're Building {#what-were-building}
+## What We're Building {#what-were-building}
 - Popup with configurable password options (length, uppercase, lowercase, numbers, symbols)
 - Cryptographically secure generation using `crypto.getRandomValues`
 - Visual password strength indicator with color-coded bar
@@ -16,14 +16,14 @@ What We're Building {#what-were-building}
 - Content script to auto-fill password fields on web pages
 - Keyboard shortcut (`Alt+Shift+P`) to generate a password from anywhere
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 - Node.js + npm installed
 - `npm install @theluckystrike/webext-storage`
 
 ---
 
-Step 1: Project Setup and manifest.json {#step-1-project-setup-and-manifestjson}
+## Step 1: Project Setup and manifest.json {#step-1-project-setup-and-manifestjson}
 
 ```bash
 mkdir securepass-ext && cd securepass-ext
@@ -66,9 +66,9 @@ npm install -D typescript
 
 ---
 
-Step 2: Popup UI with Password Options {#step-2-popup-ui-with-password-options}
+## Step 2: Popup UI with Password Options {#step-2-popup-ui-with-password-options}
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -138,7 +138,7 @@ The popup is 320px wide with a monospace password display, a color-coded strengt
 
 ---
 
-Step 3: Crypto-Secure Password Generation {#step-3-crypto-secure-password-generation}
+## Step 3: Crypto-Secure Password Generation {#step-3-crypto-secure-password-generation}
 
 `crypto.getRandomValues` provides a CSPRNG, unlike `Math.random` which is predictable. This module is shared between the popup and background script.
 
@@ -215,7 +215,7 @@ The guarantee loop replaces the first N characters with one from each required s
 
 ---
 
-Step 4: Password Strength Indicator {#step-4-password-strength-indicator}
+## Step 4: Password Strength Indicator {#step-4-password-strength-indicator}
 
 The strength calculation uses entropy estimation: `bits = length * log2(poolSize)`. The pool size is detected from the actual password content, not the configured options.
 
@@ -265,7 +265,7 @@ A 16-character password with all types: `16 * log2(94) = 104.8 bits`.
 
 ---
 
-Step 5: Clipboard Copy with Visual Feedback {#step-5-clipboard-copy-with-visual-feedback}
+## Step 5: Clipboard Copy with Visual Feedback {#step-5-clipboard-copy-with-visual-feedback}
 
 Uses `navigator.clipboard.writeText` with a fallback to `document.execCommand('copy')` for older contexts. See cross-ref: `docs/patterns/clipboard-patterns.md`.
 
@@ -304,7 +304,7 @@ export async function copyToClipboard(
 
 ---
 
-Step 6: Password History with @theluckystrike/webext-storage {#step-6-password-history-with-theluckystrikewebext-storage}
+## Step 6: Password History with @theluckystrike/webext-storage {#step-6-password-history-with-theluckystrikewebext-storage}
 
 ```typescript
 // popup.ts
@@ -469,7 +469,7 @@ Options persist across popup opens. History stores up to 20 entries with timesta
 
 ---
 
-Step 7: Auto-Fill Password Fields (Content Script) {#step-7-auto-fill-password-fields-content-script}
+## Step 7: Auto-Fill Password Fields (Content Script) {#step-7-auto-fill-password-fields-content-script}
 
 The content script detects password fields on web pages and injects a small "Gen" button inside each one. A `MutationObserver` handles dynamically-added fields in SPAs.
 
@@ -585,7 +585,7 @@ The `input` and `change` events are dispatched so frameworks like React and Vue 
 
 ---
 
-Step 8: Keyboard Shortcut (Background Service Worker) {#step-8-keyboard-shortcut-background-service-worker}
+## Step 8: Keyboard Shortcut (Background Service Worker) {#step-8-keyboard-shortcut-background-service-worker}
 
 The background script handles the `Alt+Shift+P` shortcut registered in the manifest. It sends a message to the content script to fill any password fields, and copies the generated password to clipboard.
 
@@ -637,7 +637,7 @@ Users can customize the shortcut at `chrome://extensions/shortcuts`.
 
 ---
 
-Testing {#testing}
+## Testing {#testing}
 
 1. Load unpacked from `chrome://extensions` with Developer Mode on
 2. Click the extension icon -- verify popup shows with options
@@ -649,7 +649,7 @@ Testing {#testing}
 8. Click "Gen" in a password field -- verify value fills and button shows "Done" briefly
 9. Press `Alt+Shift+P` on a page with a password field -- verify it fills and shows a toast
 
-What You Learned {#what-you-learned}
+## What You Learned {#what-you-learned}
 - Crypto-secure random generation with `crypto.getRandomValues` and Fisher-Yates shuffle
 - Entropy-based password strength estimation
 - Clipboard access with `navigator.clipboard` and fallback (cross-ref: `docs/patterns/clipboard-patterns.md`)

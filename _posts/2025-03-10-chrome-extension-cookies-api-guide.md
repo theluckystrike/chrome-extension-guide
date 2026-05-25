@@ -18,7 +18,7 @@ This comprehensive guide walks you through every aspect of the Chrome Cookies AP
 
 ---
 
-Understanding the Chrome Cookies API {#understanding-chrome-cookies-api}
+## Understanding the Chrome Cookies API {#understanding-chrome-cookies-api}
 
 The Chrome Cookies API, accessible through the `chrome.cookies` namespace, provides extension developers with comprehensive functionality to read, write, and delete browser cookies. This API is one of the most powerful features available to Chrome extension developers, enabling the creation of sophisticated tools for session management, authentication automation, and privacy control.
 
@@ -26,7 +26,7 @@ Before diving into implementation, it is important to understand the architectur
 
 The API follows a consistent pattern common to Chrome extension APIs, using promises for asynchronous operations and providing detailed error handling. Each cookie operation returns specific information about the cookie being manipulated, including its name, value, domain, path, expiration date, and various security attributes like the Secure and HttpOnly flags.
 
-Required Permissions for Cookie Access
+### Required Permissions for Cookie Access
 
 To use the Chrome Cookies API, you must declare the appropriate permissions in your extension's manifest file. The most common permission is simply "cookies", which grants access to cookies for all URLs. However, for more granular control and to avoid triggering unnecessary permission warnings, you can specify specific host permissions.
 
@@ -49,11 +49,11 @@ The host permissions are particularly important because Chrome's cookie model ha
 
 ---
 
-Reading Cookies with the Chrome Cookies API {#reading-cookies}
+## Reading Cookies with the Chrome Cookies API {#reading-cookies}
 
 Reading cookies is the most common operation when working with the Chrome Cookies API. The `chrome.cookies.get()` method allows you to retrieve a specific cookie by name for a given URL, while `chrome.cookies.getAll()` enables retrieving multiple cookies based on filtering criteria.
 
-Getting a Single Cookie
+### Getting a Single Cookie
 
 The `chrome.cookies.get()` method requires a URL and a cookie name, returning a Promise that resolves to a Cookie object or null if the cookie does not exist:
 
@@ -76,7 +76,7 @@ chrome.cookies.get({ url: "https://example.com", name: "session_id" })
 
 The URL parameter is crucial because cookies are scoped to specific domains and paths. The method uses the URL to determine which cookies to consider, taking into account domain matching rules and path matching. This approach ensures that you can correctly retrieve cookies even when dealing with complex domain structures like subdomains.
 
-Getting Multiple Cookies
+### Getting Multiple Cookies
 
 For scenarios where you need to retrieve all cookies matching certain criteria, the `chrome.cookies.getAll()` method provides powerful filtering capabilities:
 
@@ -106,7 +106,7 @@ chrome.cookies.getAll({ url: window.location.href })
 
 The filtering options are extensive, allowing you to filter by domain, name, path, secure flag, session flag, and URL. This flexibility makes it easy to implement features like cookie export, cookie analysis, and session management.
 
-Understanding the Cookie Object Structure
+### Understanding the Cookie Object Structure
 
 Each cookie returned by the Chrome Cookies API contains a wealth of information organized into a structured object:
 
@@ -125,11 +125,11 @@ Understanding these attributes is essential for properly managing cookies and im
 
 ---
 
-Writing and Setting Cookies {#writing-cookies}
+## Writing and Setting Cookies {#writing-cookies}
 
 Creating new cookies or updating existing ones is accomplished through the `chrome.cookies.set()` method. This powerful method accepts a details object containing all the parameters needed to create a cookie with precise control over its behavior.
 
-Basic Cookie Creation
+### Basic Cookie Creation
 
 Here is how to create a basic cookie:
 
@@ -161,7 +161,7 @@ chrome.cookies.set({
 
 The method returns the newly created cookie object if successful, or null if the cookie could not be set. Common reasons for failure include invalid URL formats, permission issues, or conflicts with existing cookie settings.
 
-Setting Session Cookies
+### Setting Session Cookies
 
 Session cookies are temporary cookies that are deleted when the browser closes. These are the most common type of cookie for maintaining login sessions and user preferences during a browsing session:
 
@@ -182,7 +182,7 @@ chrome.cookies.set({
 
 The `httpOnly` flag is particularly important for security, as it prevents JavaScript from accessing the cookie, protecting it from cross-site scripting attacks. Similarly, the `secure` flag ensures the cookie is only transmitted over HTTPS connections.
 
-Setting Persistent Cookies
+### Setting Persistent Cookies
 
 Persistent cookies remain stored after the browser closes and are automatically deleted after their expiration date:
 
@@ -211,11 +211,11 @@ The `expirationDate` parameter expects a Unix timestamp in seconds, not millisec
 
 ---
 
-Deleting and Managing Cookies {#deleting-cookies}
+## Deleting and Managing Cookies {#deleting-cookies}
 
 Cookie deletion is as important as creation, especially when building privacy-focused extensions or implementing logout functionality. The Chrome Cookies API provides methods for both removing individual cookies and clearing all cookies for specific domains.
 
-Deleting a Specific Cookie
+### Deleting a Specific Cookie
 
 To delete a specific cookie, use the `chrome.cookies.remove()` method:
 
@@ -235,7 +235,7 @@ chrome.cookies.remove({
 
 The method returns the details of the removed cookie if successful, or null if no matching cookie was found. The URL parameter is required and must match the URL used when the cookie was set.
 
-Bulk Cookie Deletion
+### Bulk Cookie Deletion
 
 For scenarios requiring bulk cookie management, such as clearing all cookies for a domain or removing all session cookies, you can combine the getAll and remove methods:
 
@@ -269,11 +269,11 @@ chrome.cookies.getAll({ session: true })
 
 ---
 
-Advanced Cookie API Features {#advanced-features}
+## Advanced Cookie API Features {#advanced-features}
 
 Beyond the basic CRUD operations, the Chrome Cookies API provides additional features for monitoring cookie changes and handling cookie conflicts.
 
-Listening for Cookie Changes
+### Listening for Cookie Changes
 
 The `chrome.cookies.onChanged` event allows your extension to react to any modifications to the cookie store:
 
@@ -293,7 +293,7 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 
 This event is invaluable for building real-time cookie monitors, tracking user session changes, or implementing features that need to respond to cookie modifications by other extensions or scripts.
 
-Understanding Cookie Change Causes
+### Understanding Cookie Change Causes
 
 The `cause` property in the changeInfo object provides context about why a cookie change occurred:
 
@@ -308,11 +308,11 @@ Understanding these causes helps you build more intelligent cookie management fe
 
 ---
 
-Building a Cookie Manager Extension {#building-cookie-manager}
+## Building a Cookie Manager Extension {#building-cookie-manager}
 
 Now that you understand the fundamentals, let us build a practical cookie manager extension that demonstrates these concepts in action.
 
-Manifest Configuration
+### Manifest Configuration
 
 First, set up your manifest.json with the necessary permissions:
 
@@ -340,7 +340,7 @@ First, set up your manifest.json with the necessary permissions:
 }
 ```
 
-Popup Interface Implementation
+### Popup Interface Implementation
 
 Create a popup.html that displays cookies for the current domain:
 
@@ -374,7 +374,7 @@ Create a popup.html that displays cookies for the current domain:
 </html>
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
 Implement the popup.js to handle cookie operations:
 
@@ -439,11 +439,11 @@ This basic implementation provides a foundation for building more sophisticated 
 
 ---
 
-Best Practices and Security Considerations {#best-practices}
+## Best Practices and Security Considerations {#best-practices}
 
 When working with the Chrome Cookies API, following best practices ensures your extension is secure, performant, and respects user privacy.
 
-Permission Minimization
+### Permission Minimization
 
 Only request the cookie permissions your extension actually needs. Using specific host permissions rather than broad permissions reduces permission warnings and improves user trust. For example, if your extension only works with a specific website, limit your host permissions to that domain:
 
@@ -454,7 +454,7 @@ Only request the cookie permissions your extension actually needs. Using specifi
 }
 ```
 
-Secure Cookie Handling
+### Secure Cookie Handling
 
 Always respect cookie security attributes. When setting cookies, use appropriate flags:
 
@@ -462,7 +462,7 @@ Always respect cookie security attributes. When setting cookies, use appropriate
 - HttpOnly: Set to true to prevent JavaScript access, protecting against XSS
 - SameSite: Use "strict" or "lax" to prevent CSRF attacks (avoid "none" unless necessary)
 
-User Privacy
+### User Privacy
 
 Cookie extensions have access to sensitive user data. Always:
 
@@ -471,7 +471,7 @@ Cookie extensions have access to sensitive user data. Always:
 - Never exfiltrate cookie data without explicit user consent
 - Implement proper data retention policies
 
-Error Handling
+### Error Handling
 
 Cookie operations can fail for various reasons. Always implement proper error handling:
 
@@ -492,11 +492,11 @@ async function safeCookieSet(details) {
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Even with proper implementation, you may encounter issues when working with the Chrome Cookies API. Here are solutions to common problems.
 
-Cookie Not Found
+### Cookie Not Found
 
 If `chrome.cookies.get()` returns null when you expect a cookie to exist:
 
@@ -505,17 +505,17 @@ If `chrome.cookies.get()` returns null when you expect a cookie to exist:
 - Ensure the cookie has not expired
 - Confirm the path matches the cookie's scope
 
-Permission Denied Errors
+### Permission Denied Errors
 
-If you receive permission errors:
+### If you receive permission errors:
 
 - Check that the appropriate host permissions are declared
 - Verify the URL uses the correct protocol (http or https)
 - For cross-site cookies, ensure you have permission for both the source and destination domains
 
-Cookies Not Persisting
+### Cookies Not Persisting
 
-If cookies are not being saved:
+### If cookies are not being saved:
 
 - Verify you are not using Incognito mode without proper permissions
 - Check if the cookie's expiration date is set correctly
@@ -524,7 +524,7 @@ If cookies are not being saved:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Extension Cookies API provides powerful capabilities for managing browser cookies, enabling developers to create sophisticated tools for session management, authentication, and privacy control. By mastering the concepts covered in this guide, reading, writing, and deleting cookies, listening for changes, and implementing proper security practices, you can build solid cookie management extensions that enhance user productivity and privacy.
 

@@ -18,7 +18,7 @@ we will walk through the complete process of creating a chrome extension price t
 
 ---
 
-Why Build a Price Tracker Chrome Extension {#why-build-price-tracker}
+## Why Build a Price Tracker Chrome Extension {#why-build-price-tracker}
 
 The demand for price drop notification chrome tools has never been higher. With the rise of e-commerce giants like Amazon, Walmart, eBay, and countless niche online stores, consumers have more options than ever before. However, this abundance also brings price volatility. Products can fluctuate in price multiple times per week, sometimes dramatically.
 
@@ -28,11 +28,11 @@ The e-commerce price tracking market is projected to grow significantly in the c
 
 ---
 
-Understanding the Architecture of a Price Tracker Extension {#architecture-overview}
+## Understanding the Architecture of a Price Tracker Extension {#architecture-overview}
 
 Before we dive into coding, let us understand how a typical chrome extension price tracker works. The architecture consists of several key components that work together to deliver a smooth user experience.
 
-Core Components
+### Core Components
 
 The first component is the content script that runs on product pages. This script extracts the current price, product title, product identifier (like ASIN or SKU), and other relevant information from the page. Content scripts have access to the DOM and can parse the HTML to find price elements.
 
@@ -44,7 +44,7 @@ The fourth component is the storage system using Chrome's storage API. This stor
 
 Finally, the notification system uses Chrome's native notifications to alert users when prices drop below their target threshold. This is the key feature that makes a price drop notification chrome extension valuable to users.
 
-Technology Stack
+### Technology Stack
 
 For this project, we will use:
 - HTML/CSS for the popup interface
@@ -56,11 +56,11 @@ No external frameworks are required, keeping the extension lightweight and fast.
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Let us start by creating the project structure for our chrome extension price tracker. Create a new folder for your project and set up the following files and directories.
 
-Manifest File (manifest.json)
+### Manifest File (manifest.json)
 
 Every Chrome extension starts with a manifest file. This JSON file tells Chrome about your extension's permissions, files, and capabilities. For our price tracker chrome extension, we need to declare the permissions for storage, notifications, and the ability to run on e-commerce websites.
 
@@ -118,7 +118,7 @@ This manifest declares that our extension needs storage and notification permiss
 
 ---
 
-Building the Content Script {#content-script}
+## Building the Content Script {#content-script}
 
 The content script is the heart of our chrome extension price monitor. It runs on product pages and extracts price information automatically. Let us create a solid content script that can handle multiple e-commerce platforms.
 
@@ -282,7 +282,7 @@ This content script is sophisticated enough to handle multiple retailers. It inc
 
 ---
 
-Creating the Background Service Worker {#background-worker}
+## Creating the Background Service Worker {#background-worker}
 
 The background service worker is essential for periodic price checks. Even when the user is not viewing a product page, the service worker can fetch updated prices and trigger notifications. Let us create a solid background worker for our chrome extension price monitor.
 
@@ -460,7 +460,7 @@ The background worker handles several critical functions. First, it schedules pe
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is the user-facing component of our price tracker chrome extension. It displays tracked products, allows users to set target prices, and provides access to settings. Let us create a clean, functional popup.
 
@@ -793,7 +793,7 @@ function setupEventListeners() {
 
 ---
 
-Testing Your Price Tracker Extension {#testing-extension}
+## Testing Your Price Tracker Extension {#testing-extension}
 
 Now that we have built all the components, it is time to test your chrome extension price tracker. Open Chrome and navigate to `chrome://extensions/`. Enable "Developer mode" in the top right corner, then click "Load unpacked" and select your project folder.
 
@@ -803,7 +803,7 @@ Test the target price feature by entering a target price below the current price
 
 ---
 
-Advanced Features and Improvements {#advanced-features}
+## Advanced Features and Improvements {#advanced-features}
 
 While our basic chrome extension price monitor is functional, there are many ways to enhance it. Consider adding support for more retailers beyond Amazon, Walmart, and eBay. Each new retailer requires a new extractor function in the content script.
 
@@ -817,7 +817,7 @@ Finally, consider adding deal-finding features. Users could set preferences for 
 
 ---
 
-Best Practices for Price Tracker Extensions {#best-practices}
+## Best Practices for Price Tracker Extensions {#best-practices}
 
 When building a chrome extension price tracker, there are several best practices you should follow. First, respect user privacy. Only collect the data necessary for the extension to function, and be transparent about what data you collect.
 
@@ -831,7 +831,7 @@ Finally, maintain your extension actively. E-commerce websites frequently change
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have now built a complete chrome extension price tracker with support for Amazon, Walmart, and eBay. Your extension can extract product information from these retailers, store tracked products, periodically check for price updates, and send notifications when prices drop.
 

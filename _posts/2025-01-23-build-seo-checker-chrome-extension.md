@@ -19,7 +19,7 @@ This tutorial covers everything from setting up your development environment to 
 
 ---
 
-Prerequisites and Development Setup
+### Prerequisites and Development Setup
 
 Before diving into the implementation, ensure you have the necessary tools and knowledge. This project requires basic familiarity with HTML, CSS, and JavaScript, along with a Chrome browser for testing. You'll also need Node.js installed for managing dependencies and building your extension.
 
@@ -56,11 +56,11 @@ This configuration grants your extension the necessary permissions while followi
 
 ---
 
-Core SEO Analysis Features
+### Core SEO Analysis Features
 
 A comprehensive SEO checker extension must analyze multiple aspects of on-page optimization. This section details the essential checks your extension should implement, along with implementation strategies for each feature.
 
-Meta Tag Analysis
+### Meta Tag Analysis
 
 Meta tags provide search engines with crucial information about your webpage content. Your extension should analyze title tags, meta descriptions, canonical URLs, and Open Graph tags. The title tag remains one of the most important on-page SEO factors, directly influencing search engine rankings and click-through rates in search results.
 
@@ -129,7 +129,7 @@ function analyzeMetaTags() {
 
 This function returns a structured analysis of all critical meta elements, including validation results for recommended lengths. The passed boolean indicates whether each element meets SEO best practices, making it easy to display clear pass/fail indicators in your extension's UI.
 
-Heading Structure and Content Hierarchy
+### Heading Structure and Content Hierarchy
 
 Proper heading structure helps search engines understand your content's organization. An effective on-page SEO chrome tool must analyze the heading hierarchy, checking for H1 tag usage, H2-H6 subheadings, and overall content structure. Every page should have exactly one H1 tag that accurately describes the page content.
 
@@ -188,7 +188,7 @@ function analyzeHeadings() {
 
 This analysis reveals common heading structure problems like missing H1 tags, multiple H1 tags, or empty headings. The passed flag helps users quickly identify whether their heading structure meets SEO best practices.
 
-Content Readability and Keyword Analysis
+### Content Readability and Keyword Analysis
 
 Content readability significantly impacts both user engagement and SEO performance. Search engines favor content that's easy to read and understand. Your extension should implement readability metrics like Flesch-Kincaid reading ease scores and analyze keyword usage patterns throughout the content.
 
@@ -253,7 +253,7 @@ function getReadabilityLevel(score) {
 
 This readability analysis provides valuable insights into content quality. Users can quickly identify whether their content meets appropriate readability levels for their target audience.
 
-Image Optimization Analysis
+### Image Optimization Analysis
 
 Images play a crucial role in both user experience and SEO. Your extension should analyze image alt attributes, file sizes, and lazy loading implementation. Images without proper alt text miss out on SEO opportunities and accessibility compliance.
 
@@ -314,11 +314,11 @@ This analysis provides a comprehensive view of image optimization, highlighting 
 
 ---
 
-Link Analysis and Technical SEO
+### Link Analysis and Technical SEO
 
 Beyond content analysis, comprehensive SEO checking requires examining link structures and technical SEO factors. This section covers internal and external link analysis, mobile responsiveness checks, and Core Web Vitals assessment.
 
-Internal and External Link Analysis
+### Internal and External Link Analysis
 
 Links remain one of the most important ranking factors. Your extension should categorize links as internal (pointing to the same domain) or external (pointing to other domains), identify broken links, and analyze anchor text distribution:
 
@@ -393,7 +393,7 @@ function analyzeLinks() {
 
 This link analysis provides insights into a page's link profile, helping users understand their internal linking structure and external link relationships.
 
-Core Web Vitals Assessment
+### Core Web Vitals Assessment
 
 Core Web Vitals have become essential ranking factors. Your extension can measure Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative Layout Shift (CLS) using the Chrome UI Diagnostics API when available, or through manual performance timing:
 
@@ -459,7 +459,7 @@ These Core Web Vitals metrics provide users with performance insights directly i
 
 ---
 
-Building the User Interface
+### Building the User Interface
 
 The popup interface serves as the primary interaction point for your SEO checker extension. It should display analysis results clearly, providing users with actionable insights. Design a clean, intuitive interface that presents complex data in an easily digestible format.
 
@@ -608,7 +608,7 @@ This interface provides a clean, organized display of SEO analysis results. The 
 
 ---
 
-Connecting the Popup with Content Scripts
+### Connecting the Popup with Content Scripts
 
 The popup communicates with content scripts to retrieve SEO analysis data from the active webpage. Implement the messaging system in your popup.js:
 
@@ -710,7 +710,7 @@ This JavaScript handles the communication between the popup and the content scri
 
 ---
 
-Testing and Publishing Your Extension
+### Testing and Publishing Your Extension
 
 Before publishing to the Chrome Web Store, thoroughly test your extension across different websites and page types. Create test cases covering various scenarios: well-optimized pages, poorly optimized pages, single-page applications, and pages with dynamic content.
 
@@ -722,7 +722,7 @@ Your SEO checker extension is now complete and ready for distribution. Users can
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an SEO checker Chrome extension is an excellent project that combines practical utility with powerful browser API usage. You've learned how to analyze meta tags, headings, content readability, images, links, and Core Web Vitals, all essential components of comprehensive on-page SEO analysis.
 

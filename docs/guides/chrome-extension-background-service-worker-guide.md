@@ -13,11 +13,11 @@ The background service worker is the backbone of any sophisticated Chrome extens
 
 Whether you're building a simple productivity tool or a complex enterprise extension like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn), understanding the service worker lifecycle is essential for creating reliable, performant Chrome extensions that pass review and delight users.
 
-Understanding the Service Worker Lifecycle
+### Understanding the Service Worker Lifecycle
 
 The background service worker in Chrome extensions represents a paradigm shift from the always-on background pages of Manifest V2. In MV3, service workers follow an event-driven lifecycle that dramatically affects how you architect your extension's background logic.
 
-How Service Workers Work in MV3
+### How Service Workers Work in MV3
 
 When Chrome needs to handle an event for your extension,  whether from a timer, a network request, or a message from a content script, it wakes up your service worker, executes the relevant event handler, and then terminates the worker after approximately 30 seconds of inactivity. This design improves security, reduces resource consumption, and prevents runaway scripts from consuming excessive memory.
 
@@ -143,15 +143,15 @@ const background = new BackgroundServiceWorker();
 background.initialize();
 ```
 
-The Implications of Ephemeral Execution
+### The Implications of Ephemeral Execution
 
 Understanding that your service worker starts fresh on each invocation has profound implications for how you design your extension. Any data you need across invocations must be persisted to `chrome.storage` or `chrome.storage.session`. This includes user preferences, cached data, authentication tokens, and application state.
 
-Working with the chrome.alarms API
+### Working with the chrome.alarms API
 
 The `chrome.alarms` API is your primary tool for scheduling recurring or delayed tasks in a service worker. Unlike JavaScript's `setTimeout` and `setInterval`, alarms persist across service worker restarts and are specifically designed for the extension environment.
 
-Creating and Managing Alarms
+### Creating and Managing Alarms
 
 ```typescript
 // src/background/alarm-scheduler.ts
@@ -245,7 +245,7 @@ class AlarmScheduler {
 }
 ```
 
-Advanced Alarm Patterns with TypeScript
+### Advanced Alarm Patterns with TypeScript
 
 For extensions requiring sophisticated scheduling logic, implement dynamic alarm management:
 
@@ -328,11 +328,11 @@ class DynamicAlarmManager {
 }
 ```
 
-Keep-Alive Strategies for Long-Running Operations
+### Keep-Alive Strategies for Long-Running Operations
 
 Keeping your service worker alive when you need it is a common challenge in MV3. The 30-second idle timeout means you must actively maintain the worker's lifecycle or use alternative approaches for long-running operations.
 
-The Alarm-Based Keep-Alive Pattern
+### The Alarm-Based Keep-Alive Pattern
 
 The most common keep-alive strategy involves using chrome.alarms to periodically "ping" the service worker, resetting the idle timer:
 
@@ -414,7 +414,7 @@ class KeepAliveManager {
 const keepAliveManager = new KeepAliveManager();
 ```
 
-Using Offscreen Documents for Extended Operations
+### Using Offscreen Documents for Extended Operations
 
 For operations that genuinely need a DOM or longer execution time, offscreen documents provide a better solution than forcing the service worker to stay awake:
 
@@ -511,11 +511,11 @@ class OffscreenDocumentManager {
 }
 ```
 
-State Persistence Patterns
+### State Persistence Patterns
 
 Since service workers don't maintain state between invocations, you must persist any critical data to storage. This section covers the patterns and best practices for maintaining state across service worker lifecycles.
 
-Comprehensive Storage Management
+### Comprehensive Storage Management
 
 ```typescript
 // src/background/storage-manager.ts
@@ -669,7 +669,7 @@ class ChromeStorageManager {
 }
 ```
 
-State Manager with Automatic Restoration
+### State Manager with Automatic Restoration
 
 ```typescript
 // src/background/state-manager.ts
@@ -837,7 +837,7 @@ class StateManager {
 }
 ```
 
-Complete Integration Example
+### Complete Integration Example
 
 Here's how all these patterns work together in a real-world extension similar to Tab Suspender Pro:
 
@@ -1028,7 +1028,7 @@ const background = new ChromeExtensionBackground();
 background.initialize();
 ```
 
-Best Practices Summary
+### Best Practices Summary
 
 When implementing background service workers for Chrome extensions, follow these essential guidelines:
 
@@ -1057,7 +1057,7 @@ Common Pitfalls to Avoid
 4. Don't forget error handling. Storage operations can fail for various reasons
 5. Don't keep the worker alive unnecessarily. It wastes resources and may cause issues with Chrome's extension review process
 
-Related Guides
+### Related Guides
 
 - [Service Worker Lifecycle detailed look](service-worker-lifecycle.md)
 - [Chrome Extension Message Passing Patterns](message-passing-best-practices.md)

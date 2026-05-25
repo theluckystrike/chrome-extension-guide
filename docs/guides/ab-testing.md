@@ -9,7 +9,7 @@ Chrome Extension A/B Testing. How to Test Features and Optimize Conversions
 
 A/B testing is an essential methodology for making data-driven decisions in Chrome extension development. By comparing different versions of features, UI elements, or user flows, you can understand what resonates with your users and optimize for better engagement, conversion rates, and overall satisfaction. This guide covers the complete implementation of A/B testing in Chrome extensions, from basic concepts to advanced statistical analysis.
 
-Why A/B Test in Extensions
+### Why A/B Test in Extensions
 
 Chrome extensions present unique opportunities and challenges for experimentation. Unlike traditional web applications, extensions have direct access to user browser behavior, can run in the background, and interact with web pages in powerful ways. This creates richer data sources for understanding user behavior while also requiring careful consideration of privacy and performance.
 
@@ -17,7 +17,7 @@ Extensions benefit from A/B testing in several key areas. First, you can test di
 
 The direct relationship with users through extensions provides higher intent signals than typical web properties. Users actively choose to install your extension, indicating genuine interest in your offering. This makes your user base particularly valuable for experimentation, as small improvements in conversion or engagement can translate to significant long-term retention gains.
 
-Setting Up Experiments with chrome.storage
+### Setting Up Experiments with chrome.storage
 
 The foundation of any extension experimentation system is reliable storage for experiment configuration and user assignment. Chrome's storage API provides the persistence layer needed to maintain consistent user experience across sessions while allowing centralized configuration updates.
 
@@ -339,7 +339,7 @@ class ExperimentTracker {
       await this.flush();
 Server-Side Configuration
 
-Remote Config Pattern
+### Remote Config Pattern
 
 Store experiment definitions server-side to enable dynamic adjustments without requiring extension updates.
 
@@ -371,7 +371,7 @@ Store experiment definitions server-side to enable dynamic adjustments without r
 }
 ```
 
-Emergency Kill Switch
+### Emergency Kill Switch
 
 Always include the ability to disable experiments instantly from the server.
 
@@ -389,9 +389,9 @@ applyConfig(config) {
 }
 ```
 
-Feature Flags
+### Feature Flags
 
-Simple Flag Evaluation
+### Simple Flag Evaluation
 
 Feature flags provide a simpler alternative to full experiments for gradual rollouts.
 
@@ -432,7 +432,7 @@ if (await flags.isEnabled('new_dashboard')) {
 }
 ```
 
-Percentage Rollouts
+### Percentage Rollouts
 
 Gradually enable features for a percentage of users.
 
@@ -450,9 +450,9 @@ if (await isEnabledForUser('experimental_feature', 10)) {
 }
 ```
 
-Measuring Metrics
+### Measuring Metrics
 
-Custom Metrics Tracking
+### Custom Metrics Tracking
 
 Track metrics that matter for extension success beyond simple click-through rates.
 
@@ -516,11 +516,11 @@ class MetricsCollector {
 
 Track metrics that align with your business objectives, including primary conversion events, engagement indicators like feature usage frequency, retention measurements through repeat installation anniversary, and experiment-specific goals such as onboarding completion or settings configuration.
 
-Statistical Significance Basics
+### Statistical Significance Basics
 
 Understanding statistical significance prevents false conclusions from random variation. When comparing variants, you need enough data to distinguish genuine performance differences from noise.
 
-Calculate statistical significance for your experiment results:
+### Calculate statistical significance for your experiment results:
 
 ```javascript
 // src/experiments/statistics.js
@@ -574,7 +574,7 @@ function normalCDF(x) {
 
 A common mistake is declaring winners too early. Always run experiments for a predetermined duration or sample size, and avoid peeking at results before reaching your planned endpoint. The more variants you test simultaneously, the larger your required sample size becomes to maintain statistical power.
 
-Common Pitfalls and Best Practices
+### Common Pitfalls and Best Practices
 
 Successful experimentation requires avoiding common mistakes that can invalidate your results or harm user experience.
 
@@ -586,14 +586,14 @@ Avoid testing cosmetic changes that don't align with meaningful business outcome
 
 Always implement proper cleanup when experiments end. Remove experimental code paths, migrate users to the winning variant, and document your findings for future reference. This keeps your codebase clean and builds institutional knowledge about what works for your user base.
 
-Conclusion
+### Conclusion
 
 A/B testing in Chrome extensions requires thoughtful implementation of storage, configuration, analytics, and statistical analysis. Start with simple local experiments to validate your framework, then scale to remote configuration for production flexibility. Track meaningful metrics that align with your business objectives, and always apply proper statistical rigor to avoid false conclusions.
 
 The investment in solid experimentation pays dividends through continuous improvement of your extension's user experience and conversion performance. Each well-designed experiment builds knowledge about your users and guides product decisions with evidence rather than intuition.
 Key Metrics for Extensions
 
-Focus on metrics that indicate genuine value delivery:
+### Focus on metrics that indicate genuine value delivery:
 
 | Metric | Description | Target |
 |--------|-------------|--------|
@@ -603,9 +603,9 @@ Focus on metrics that indicate genuine value delivery:
 | Retention D7/D30 | Day 7/30 retention | > 40%/20% |
 | Uninstall Rate | Chrome Web Store metric | < 10% |
 
-Conversion Tracking
+### Conversion Tracking
 
-Define Clear Conversions
+### Define Clear Conversions
 
 Map your business goals to measurable conversion events.
 
@@ -642,7 +642,7 @@ async function trackConversion(eventType, value = 1) {
 }
 ```
 
-Attribution Window
+### Attribution Window
 
 Set appropriate attribution windows for your conversion cycle.
 
@@ -654,9 +654,9 @@ const ATTRIBUTION_WINDOW = {
 };
 ```
 
-Popup Variant Testing
+### Popup Variant Testing
 
-Dynamic Popup Rendering
+### Dynamic Popup Rendering
 
 Test different popup designs by conditionally rendering components.
 
@@ -684,7 +684,7 @@ async function initPopup() {
 }
 ```
 
-Testing Popup Elements
+### Testing Popup Elements
 
 ```javascript
 // Test different CTA button colors
@@ -707,9 +707,9 @@ async function renderCta() {
 }
 ```
 
-Onboarding Experiments
+### Onboarding Experiments
 
-Testing Onboarding Flows
+### Testing Onboarding Flows
 
 Experiment with different onboarding approaches to improve activation rates.
 
@@ -741,7 +741,7 @@ async function initOnboarding() {
 }
 ```
 
-Measuring Activation
+### Measuring Activation
 
 Define and track activation events that indicate successful onboarding.
 
@@ -770,9 +770,9 @@ async function checkActivation() {
 }
 ```
 
-Analytics Integration
+### Analytics Integration
 
-Privacy-Preserving Analytics
+### Privacy-Preserving Analytics
 
 Design your analytics to respect user privacy while gathering actionable insights.
 
@@ -831,7 +831,7 @@ class PrivacyRespectingAnalytics {
 }
 ```
 
-Integration with Analytics Platforms
+### Integration with Analytics Platforms
 
 ```javascript
 // Send to multiple platforms
@@ -851,9 +851,9 @@ async function sendToAnalytics(analytics, event, properties) {
 }
 ```
 
-Privacy-Respecting Experiments
+### Privacy-Respecting Experiments
 
-GDPR/CCPA Compliance
+### GDPR/CCPA Compliance
 
 Ensure your experiments comply with privacy regulations.
 
@@ -903,7 +903,7 @@ class ExperimentPrivacy {
 }
 ```
 
-Data Minimization
+### Data Minimization
 
 Collect only what you need for experiment analysis.
 
@@ -925,9 +925,9 @@ Collect only what you need for experiment analysis.
 }
 ```
 
-Code Examples
+### Code Examples
 
-Complete Experiment Hook
+### Complete Experiment Hook
 
 ```javascript
 // src/experiments/useExperiment.js
@@ -958,7 +958,7 @@ function useExperiment(experimentId) {
 }
 ```
 
-React Component Example
+### React Component Example
 
 {% raw %}
 ```javascript
@@ -986,9 +986,9 @@ function ExperimentWrapper({ experimentId, children, variants }) {
 ```
 {% endraw %}
 
-Testing Experiments
+### Testing Experiments
 
-Local Testing
+### Local Testing
 
 ```javascript
 // Debug mode - force variants
@@ -1004,7 +1004,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const forcedVariant = urlParams.get('experiment_variant');
 ```
 
-QA Checklist
+### QA Checklist
 
 - [ ] Verify all variants render correctly
 - [ ] Test with fresh install (no cached assignment)
@@ -1013,7 +1013,7 @@ QA Checklist
 - [ ] Check experiment end date behavior
 - [ ] Test emergency kill switch
 
-Reference Resources
+### Reference Resources
 
 For more information on Chrome extension development and best practices:
 
@@ -1023,7 +1023,7 @@ For more information on Chrome extension development and best practices:
 - [Extension Privacy Guidelines](https://developer.chrome.com/docs/extensions/privacy)
 - [Best Practices for Extension UX](https://developer.chrome.com/docs/extensions/ui)
 
-Best Practices Summary
+### Best Practices Summary
 
 1. Start simple - Begin with feature flags before complex A/B tests
 2. Clear hypotheses - Define what you're testing and why

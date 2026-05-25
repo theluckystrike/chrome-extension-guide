@@ -18,11 +18,11 @@ This is where a chrome extension accessibility checker becomes invaluable. we wi
 
 ---
 
-Why Build an Accessibility Checker Chrome Extension? {#why-build-a11y-extension}
+## Why Build an Accessibility Checker Chrome Extension? {#why-build-a11y-extension}
 
 Before diving into the code, let us explore why creating a dedicated accessibility auditing tool as a Chrome extension makes perfect sense in today's web development landscape.
 
-The Accessibility Gap
+### The Accessibility Gap
 
 Despite increased awareness about web accessibility, the majority of websites still fail to meet basic WCAG standards. A recent study found that over 98% of the top one million websites have at least one accessibility issue. This widespread problem exists because:
 
@@ -33,7 +33,7 @@ Despite increased awareness about web accessibility, the majority of websites st
 
 A chrome extension accessibility checker solves these problems by placing powerful scanning capabilities directly in the browser where developers already work. It provides instant feedback, integrates smoothly into development workflows, and makes accessibility checking as easy as running a linter or automated test.
 
-The Power of Browser-Based Scanning
+### The Power of Browser-Based Scanning
 
 Chrome extensions have unique advantages for accessibility auditing. They can:
 
@@ -46,13 +46,13 @@ These capabilities make a chrome extension a perfect platform for building an ef
 
 ---
 
-Project Architecture {#project-architecture}
+## Project Architecture {#project-architecture}
 
 Our accessibility checker extension will consist of several key components working together to provide comprehensive scanning capabilities.
 
-Extension Components Overview
+### Extension Components Overview
 
-The extension architecture includes:
+### The extension architecture includes:
 
 1. Manifest V3 Configuration: Defines permissions, content scripts, and extension behavior
 2. Content Script (scanner.js): Performs DOM analysis and accessibility audits
@@ -64,7 +64,7 @@ This modular design allows us to extend the scanner with new rules easily while 
 
 ---
 
-Setting Up the Manifest {#manifest-configuration}
+## Setting Up the Manifest {#manifest-configuration}
 
 Every Chrome extension starts with the manifest file. For our WCAG checker chrome extension, we need to declare the appropriate permissions and define our content scripts.
 
@@ -109,7 +109,7 @@ Every Chrome extension starts with the manifest file. For our WCAG checker chrom
 }
 ```
 
-Key manifest configuration decisions:
+### Key manifest configuration decisions:
 
 - `host_permissions`: We request access to all URLs so the extension can scan any website
 - `content_scripts`: The scanner runs automatically on every page load
@@ -118,11 +118,11 @@ Key manifest configuration decisions:
 
 ---
 
-Building the WCAG Scanner Engine {#wcag-scanner-engine}
+## Building the WCAG Scanner Engine {#wcag-scanner-engine}
 
 The heart of our a11y scanner extension is the scanning engine that analyzes web pages against WCAG criteria. Let us build a comprehensive scanner that checks for common accessibility violations.
 
-Core Scanner Implementation
+### Core Scanner Implementation
 
 Create a file named `scanner.js` that will contain all our scanning logic:
 
@@ -181,7 +181,7 @@ class WCAGScanner {
 
 This foundational code sets up our scanner class with a structured approach to WCAG compliance checking. Each method will analyze specific aspects of the page for accessibility issues.
 
-Image Accessibility Checker
+### Image Accessibility Checker
 
 Images are one of the most common sources of accessibility issues. Our scanner checks for missing alt text and improper alt text usage:
 
@@ -223,7 +223,7 @@ async checkImages() {
 }
 ```
 
-Color Contrast Analyzer
+### Color Contrast Analyzer
 
 WCAG requires sufficient color contrast for text readability. Our contrast checker calculates the contrast ratio between text and background colors:
 
@@ -307,7 +307,7 @@ getLuminance(color) {
 }
 ```
 
-Keyboard Accessibility Checker
+### Keyboard Accessibility Checker
 
 Keyboard accessibility is fundamental for users who cannot use a mouse. Our scanner verifies that all interactive elements are keyboard-accessible:
 
@@ -358,7 +358,7 @@ async checkKeyboardAccessibility() {
 }
 ```
 
-ARIA Validation Scanner
+### ARIA Validation Scanner
 
 Proper ARIA (Accessible Rich Internet Applications) usage is critical for screen reader users. Our scanner validates ARIA attributes:
 
@@ -439,7 +439,7 @@ getValidRoles() {
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides the user interface for viewing scan results. Create `popup.html` and `popup.js`:
 
@@ -512,7 +512,7 @@ The popup provides the user interface for viewing scan results. Create `popup.ht
 </html>
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
 The popup script handles communication with the content scanner and displays results:
 
@@ -597,7 +597,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Connecting Components with Background Script {#background-script}
+## Connecting Components with Background Script {#background-script}
 
 The background script serves as the bridge between the content scanner and the popup:
 
@@ -627,7 +627,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test our accessibility checker extension:
 
@@ -650,11 +650,11 @@ Now that we have built all the components, let us test our accessibility checker
 
 ---
 
-Extending the Scanner {#extending-scanner}
+## Extending the Scanner {#extending-scanner}
 
 The architecture we have built makes it easy to add new scanning capabilities. Here are some ideas for extending your a11y scanner extension:
 
-Additional Checks to Implement
+### Additional Checks to Implement
 
 1. Heading Structure: Ensure proper heading hierarchy (h1 → h2 → h3)
 2. Form Validation: Check for proper error messages and validation
@@ -663,7 +663,7 @@ Additional Checks to Implement
 5. Touch Targets: Verify minimum 44x44 pixel touch target sizes
 6. Language Changes: Check for proper `lang` attributes on multilingual content
 
-Advanced Features
+### Advanced Features
 
 Consider adding these advanced capabilities:
 
@@ -675,11 +675,11 @@ Consider adding these advanced capabilities:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an accessibility checker Chrome extension is a rewarding project that addresses a real need in the web development community. Our WCAG compliance scanner demonstrates the core principles of automated accessibility testing while providing a solid foundation for expansion.
 
-Key takeaways from this guide:
+### Key takeaways from this guide:
 
 1. Chrome extensions are ideal for accessibility testing because they can access the fully rendered DOM and analyze pages as users experience them
 2. A comprehensive accessibility checker must address multiple WCAG criteria including images, contrast, keyboard navigation, ARIA, and forms
@@ -692,7 +692,7 @@ Start using your accessibility checker on your projects today, and continue lear
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Web Content Accessibility Guidelines (W3C)](https://www.w3.org/WAI/standards-guidelines/wcag/)

@@ -18,7 +18,7 @@ Whether you are building a productivity extension that saves user preferences, a
 
 ---
 
-Understanding IndexedDB Fundamentals {#understanding-indexeddb-fundamentals}
+## Understanding IndexedDB Fundamentals {#understanding-indexeddb-fundamentals}
 
 IndexedDB is a low-level API for client-side storage of significant amounts of structured data, including files and binary data. It provides a transactional database system with built-in indexing, enabling high-performance searches through large datasets. For Chrome extension developers, IndexedDB represents the most powerful storage option when you need to store complex objects, perform range queries, or manage data that exceeds the limitations of chrome.storage.
 
@@ -30,7 +30,7 @@ IndexedDB also provides excellent support for offline functionality. Because the
 
 ---
 
-IndexedDB vs chrome.storage: Choosing the Right Storage Solution {#indexeddb-vs-chrome-storage}
+## IndexedDB vs chrome.storage: Choosing the Right Storage Solution {#indexeddb-vs-chrome-storage}
 
 Chrome provides multiple storage options for extensions, and understanding when to use each is crucial for building effective applications. While chrome.storage.sync and chrome.storage.local are convenient for simple key-value storage, IndexedDB shines when you need more advanced features. Let us examine the key differences and help you choose the right solution for your extension.
 
@@ -42,7 +42,7 @@ The choice between these storage solutions depends on your specific requirements
 
 ---
 
-Working with IndexedDB in Chrome Extensions {#working-with-indexeddb}
+## Working with IndexedDB in Chrome Extensions {#working-with-indexeddb}
 
 Implementing IndexedDB in your Chrome extension requires understanding its asynchronous API and the patterns for opening databases, performing transactions, and managing data. While the IndexedDB API can seem complex at first, breaking it down into its core components makes it manageable and powerful.
 
@@ -75,7 +75,7 @@ Transactions are the backbone of IndexedDB operations. Every read or write opera
 
 ---
 
-Creating and Managing Object Stores {#creating-and-managing-object-stores}
+## Creating and Managing Object Stores {#creating-and-managing-object-stores}
 
 Object stores are the fundamental containers for storing data in IndexedDB. Each object store holds a collection of records, similar to a table in a traditional database. When designing your IndexedDB schema for a Chrome extension, careful consideration of your data model and access patterns will significantly impact performance and usability.
 
@@ -109,7 +109,7 @@ When designing your object stores, consider your query patterns carefully. Creat
 
 ---
 
-Performing CRUD Operations {#performing-crud-operations}
+## Performing CRUD Operations {#performing-crud-operations}
 
 Once your database and object stores are set up, you need to perform create, read, update, and delete operations. The IndexedDB API provides methods for each of these operations, all within the context of transactions for safety and reliability.
 
@@ -198,7 +198,7 @@ Updating records uses the same put() method as creating records, but with an exi
 
 ---
 
-Advanced IndexedDB Patterns for Chrome Extensions {#advanced-indexeddb-patterns}
+## Advanced IndexedDB Patterns for Chrome Extensions {#advanced-indexeddb-patterns}
 
 Beyond basic CRUD operations, IndexedDB provides advanced features that enable sophisticated data management in Chrome extensions. Understanding these patterns will help you build more solid and performant extensions.
 
@@ -259,7 +259,7 @@ Error handling in IndexedDB requires careful attention. Database operations can 
 
 ---
 
-Storage Quotas and Best Practices {#storage-quotas-and-best-practices}
+## Storage Quotas and Best Practices {#storage-quotas-and-best-practices}
 
 Chrome extensions have storage quotas that vary depending on the storage type and the user's browser. Understanding these limits and planning accordingly is essential for building production-ready extensions that won't fail unexpectedly when users store large amounts of data.
 
@@ -318,7 +318,7 @@ Best practices for IndexedDB in Chrome extensions include regularly cleaning up 
 
 ---
 
-Building Offline-Capable Extensions with IndexedDB {#building-offline-capable-extensions}
+## Building Offline-Capable Extensions with IndexedDB {#building-offline-capable-extensions}
 
 One of the most powerful use cases for IndexedDB in Chrome extensions is enabling offline functionality. By storing application data locally, your extension can work smoothly regardless of network connectivity, synchronizing when the connection is restored.
 
@@ -399,7 +399,7 @@ This pattern enables your extension to queue user actions while offline and auto
 
 ---
 
-Performance Optimization Tips {#performance-optimization-tips}
+## Performance Optimization Tips {#performance-optimization-tips}
 
 Optimizing IndexedDB performance requires understanding its internal mechanisms and applying best practices. For Chrome extensions that handle large datasets or require fast response times, these optimization techniques can make a significant difference.
 
@@ -476,7 +476,7 @@ Consider using compression for stored text data, especially if your extension st
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 IndexedDB provides Chrome extension developers with a powerful, feature-rich client-side database solution that enables sophisticated data management directly in users' browsers. From simple key-value storage to complex offline-capable applications, IndexedDB handles the requirements of modern Chrome extensions with ease.
 

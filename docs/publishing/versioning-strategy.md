@@ -10,7 +10,7 @@ Chrome Extension Versioning. Semantic Versioning and Auto-Update Strategy
 
 Effective version management is critical for maintaining Chrome extensions that serve thousands or millions of users. This guide covers the version format, semantic versioning principles tailored for extensions, the auto-update infrastructure, differential updates, staged rollouts, and maintaining a comprehensive version history.
 
-Version Format in manifest.json {#version-format}
+## Version Format in manifest.json {#version-format}
 
 Chrome extensions use a specific version format defined in the manifest. The `version` field in `manifest.json` is mandatory and must follow a structured pattern:
 
@@ -26,7 +26,7 @@ The version string accepts 1 to 4 dot-separated integers, each ranging from 0 to
 
 Chrome requires that each uploaded version must have a higher version number than the previous one. You cannot reuse or decrease version numbers, this is enforced by the Chrome Web Store during submission.
 
-Semantic Versioning for Extensions {#semver-for-extensions}
+## Semantic Versioning for Extensions {#semver-for-extensions}
 
 Semantic versioning (SemVer) provides a systematic approach to communicating the nature of changes between releases. While Chrome extensions don't strictly require SemVer, adopting it improves user understanding and developer coordination.
 
@@ -38,7 +38,7 @@ Patch versions (0.0.X) cover bug fixes, performance optimizations, documentation
 
 For Chrome extensions, a fourth component is sometimes used: `major.minor.patch.build`. The build number can represent CI/CD pipeline build identifiers or timestamp-based versioning, though this is optional and primarily useful for internal tracking.
 
-Understanding update_url and Auto-Update Infrastructure {#update-url}
+## Understanding update_url and Auto-Update Infrastructure {#update-url}
 
 Chrome's auto-update system relies on the `update_url` field in the manifest, which points to an update manifest (XML) that tells the browser where to find newer versions. For extensions hosted on the Chrome Web Store, this URL is managed automatically:
 
@@ -61,7 +61,7 @@ The browser periodically checks this URL, typically every few hours, to determin
 
 For extensions distributed through the Chrome Web Store, Google handles the update infrastructure entirely. The system automatically notifies users with the extension's update mechanism, and you don't need to manage update manifests manually.
 
-Differential Updates {#differential-updates}
+## Differential Updates {#differential-updates}
 
 Chrome implements differential updates (also called delta updates) to minimize bandwidth usage and speed up the update process. Instead of downloading the entire extension package for each update, Chrome downloads only the binary differences between the old and new versions.
 
@@ -71,7 +71,7 @@ The differential update system works by comparing the previous version's CRX fil
 
 For Chrome Web Store submissions, Google generates and serves differential updates automatically. If you're self-hosting, you may need to use tools like `crxmake` or Google's `omaha` server to generate delta updates.
 
-Staged Rollouts for Risk Mitigation {#staged-rollouts}
+## Staged Rollouts for Risk Mitigation {#staged-rollouts}
 
 Staged rollouts allow you to gradually release new versions to a subset of users, monitoring for issues before a full deployment. This is essential for catching bugs, crashes, or user complaints that might not appear in testing.
 
@@ -86,7 +86,7 @@ To use staged rollouts, upload your new version through the developer dashboard 
 
 For extensions not on the Chrome Web Store, staged rollouts require custom infrastructure, hosting different versions at different URLs and directing user updates accordingly.
 
-Maintaining Version History {#version-history}
+## Maintaining Version History {#version-history}
 
 A clear version history serves multiple purposes: it helps users understand what's changed, assists your support team in diagnosing issues, and provides an audit trail for compliance.
 
@@ -116,7 +116,7 @@ Changed
 
 Document not just what changed, but why, especially for breaking changes or permission additions. This helps users understand the impact of updating.
 
-Best Practices Summary {#best-practices}
+## Best Practices Summary {#best-practices}
 
 - Always increment version numbers; never reuse or decrease them
 - Adopt semantic versioning to communicate change significance clearly

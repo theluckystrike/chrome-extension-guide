@@ -14,7 +14,7 @@ Vite Setup for Chrome Extension Development: Complete Guide
 
 Modern Chrome extension development has evolved significantly, and using a build tool like Vite can dramatically improve your development workflow. If you are still manually managing your extension's build process, you are missing out on game-changing features like hot module replacement, lightning-fast builds, and a unified development experience. This comprehensive guide will walk you through setting up Vite for Chrome extension development with Manifest V3, helping you create a fast extension dev environment that will transform how you build browser extensions.
 
-Why Use Vite for Chrome Extension Development?
+### Why Use Vite for Chrome Extension Development?
 
 The Chrome extension ecosystem has undergone a massive transformation with the introduction of Manifest V3. While this new manifest version brings improved security and performance, it also introduces new challenges for developers. Traditional development workflows often involve cumbersome rebuild cycles, manual file management, and complex configuration setups. Vite addresses these problems by bringing modern frontend development best practices to Chrome extension creation.
 
@@ -22,7 +22,7 @@ Vite, created by Evan You (the creator of Vue.js), is a next-generation frontend
 
 The benefits extend far beyond just speed. Vite provides a unified configuration experience whether you are building a React, Vue, Svelte, or vanilla JavaScript extension. This consistency means you can switch between projects or adopt new frontend frameworks without relearning build configurations. Additionally, Vite's plugin ecosystem offers powerful extensions specifically designed for Chrome extension development, making it easier to handle the unique requirements of browser extensions.
 
-Fast Extension Dev: Transforming Your Workflow
+### Fast Extension Dev: Transforming Your Workflow
 
 One of the most compelling reasons to adopt Vite for your Chrome extension projects is the dramatic improvement in development speed. Traditional extension development often involves a cycle of making changes, running a build command, loading the extension in Chrome, and testing. This iterative process can become time-consuming, especially as your extension grows in complexity.
 
@@ -32,11 +32,11 @@ The vite chrome extension setup also provides an optimized production build proc
 
 ---
 
-Setting Up Your Vite Chrome Extension Project
+### Setting Up Your Vite Chrome Extension Project
 
 Getting started with Vite for Chrome extension development is straightforward, especially when you use one of the available templates designed specifically for this purpose. Several community-maintained templates provide pre-configured setups optimized for Manifest V3 development.
 
-Using the Vite MV3 Template
+### Using the Vite MV3 Template
 
 The most popular approach is to use a template specifically designed for Manifest V3 Chrome extensions. These templates come pre-configured with everything you need to start building immediately, including proper manifest configuration, TypeScript support, and development scripts.
 
@@ -44,7 +44,7 @@ To create a new project using a vite mv3 template, you can use the create comman
 
 The template will typically create a project structure that includes separate directories for your popup, background service worker, content scripts, and options page. Each of these components is configured to build correctly for Chrome's extension environment, handling the unique ways Chrome extensions load different types of scripts.
 
-Manual Vite Setup for Chrome Extensions
+### Manual Vite Setup for Chrome Extensions
 
 If you prefer more control over your setup or want to understand the underlying configuration, you can set up Vite manually. This approach gives you complete flexibility over your project structure and build process.
 
@@ -54,11 +54,11 @@ The core of your Vite configuration will define multiple entry points, one for e
 
 ---
 
-Understanding the Vite Configuration
+### Understanding the Vite Configuration
 
 Your vite.config.ts file is the heart of your chrome extension vite setup. This configuration file controls how Vite builds your extension, and understanding its structure is essential for creating a solid development environment.
 
-Configuring Multiple Entry Points
+### Configuring Multiple Entry Points
 
 Chrome extensions are fundamentally different from traditional web applications because they consist of multiple independent scripts that run in different contexts. Your popup runs in a context similar to a standard web page, your background service worker runs in its own isolated environment, and content scripts run in the context of web pages the user visits.
 
@@ -66,7 +66,7 @@ Vite handles this through its build.rollupOptions.input configuration, which all
 
 For each entry point, you might need different build configurations. Content scripts, for example, cannot use certain features available in regular web pages due to Chrome's content script isolation. Your background service worker needs to be built differently to work correctly as a service worker. Vite's configuration system allows you to specify different build options for each entry point.
 
-Manifest Generation
+### Manifest Generation
 
 One of the critical aspects of chrome extension vite setup is properly generating your manifest.json file. While you can manually write your manifest, using a plugin to generate it from your configuration provides significant benefits. These plugins can automatically include your entry points in the manifest, handle version numbers from your package.json, and ensure your manifest is always in sync with your built files.
 
@@ -74,11 +74,11 @@ The manifest configuration typically specifies your extension's name, version, d
 
 ---
 
-Development Workflow with Hot Reload
+### Development Workflow with Hot Reload
 
 Once your Vite chrome extension setup is complete, you can take advantage of a development workflow that is significantly faster than traditional approaches. The key to this workflow is Vite's development server combined with Chrome's extension reloading capabilities.
 
-Setting Up Development Mode
+### Setting Up Development Mode
 
 In development mode, Vite starts a local development server that serves your extension files with proper hashing and caching headers. This server watches for file changes and automatically rebuilds modified modules. When combined with an extension reload tool, this creates a smooth development experience where changes appear almost instantly.
 
@@ -86,7 +86,7 @@ To enable this workflow, you typically use a tool that watches your build output
 
 The hot reload experience varies depending on what you are modifying. Changes to your popup or options page UI can often be reflected without a full extension reload, preserving state and allowing for faster iteration. Changes to background scripts or manifest configurations typically require a full reload, but this is still much faster than manually packaging and loading your extension.
 
-Debugging in Development
+### Debugging in Development
 
 Vite provides excellent debugging capabilities that make troubleshooting your extension easier. The development server includes full source map support, meaning you can debug your original TypeScript or ES6+ code directly in Chrome's developer tools rather than trying to understand minified output.
 
@@ -96,11 +96,11 @@ Content scripts present some unique debugging challenges, but Vite's configurati
 
 ---
 
-Production Builds and Optimization
+### Production Builds and Optimization
 
 When it comes time to publish your extension, Vite's production build process ensures your extension is optimized for performance and compliance with Chrome Web Store requirements. Understanding how to configure and run production builds is essential for any chrome extension vite setup.
 
-Optimizing Your Build Output
+### Optimizing Your Build Output
 
 Vite's production build uses Rollup under the hood to generate highly optimized bundles. Rollup performs tree shaking to remove unused code, ensuring your extension package contains only the code you actually use. This is particularly valuable for extensions that import large libraries, as unused portions of those libraries will be stripped out.
 
@@ -108,7 +108,7 @@ Code splitting is another powerful feature that Vite brings to chrome extension 
 
 Your build configuration should also handle static assets correctly. Images, icons, and other non-code files need to be copied to your output directory and referenced correctly in your manifest. Vite's plugin ecosystem includes tools that handle this automatically, ensuring your assets are in the right place and properly hashed for caching.
 
-Building for Different Environments
+### Building for Different Environments
 
 A solid chrome extension vite setup supports multiple build configurations for different environments. You likely want separate configurations for development, staging, and production. Each environment might require different API endpoints, logging levels, or feature flags.
 
@@ -116,11 +116,11 @@ Environment variables in Vite make it easy to configure your extension for diffe
 
 ---
 
-Advanced Vite Chrome Extension Configurations
+### Advanced Vite Chrome Extension Configurations
 
 As you become more comfortable with your vite chrome extension setup, you can explore advanced configurations that further improve your development experience and extension performance.
 
-TypeScript Integration
+### TypeScript Integration
 
 TypeScript has become the standard for modern Chrome extension development, and Vite provides first-class TypeScript support. Setting up TypeScript in your project is as simple as adding a tsconfig.json file and installing TypeScript as a development dependency.
 
@@ -128,7 +128,7 @@ With TypeScript configured, you get type checking across your entire extension c
 
 Vite handles TypeScript compilation automatically, using esbuild for fast transpilation while preserving TypeScript's type checking separately. This provides the best of both worlds: rapid development builds with full type checking available when you need it.
 
-Framework-Specific Setups
+### Framework-Specific Setups
 
 While you can use Vite with vanilla JavaScript, many developers prefer using frameworks like React, Vue, or Svelte for their extension UIs. Vite provides excellent support for all these frameworks, and setting them up for Chrome extension development follows similar patterns to regular web app development.
 
@@ -138,11 +138,11 @@ Vue and Svelte are also excellent choices, offering different trade-offs in term
 
 ---
 
-Common Issues and Troubleshooting
+### Common Issues and Troubleshooting
 
 Even with a well-configured vite chrome extension setup, you may encounter some challenges. Understanding common issues and their solutions will help you maintain a productive development workflow.
 
-Service Worker Considerations
+### Service Worker Considerations
 
 Manifest V3 introduced background service workers as the replacement for background pages. Service workers have different characteristics than traditional web pages, and this can cause issues if your chrome extension vite setup is not configured correctly.
 
@@ -150,7 +150,7 @@ One common issue involves code that is not service worker compatible. Service wo
 
 Another consideration is the service worker's lifecycle. Service workers can be terminated by Chrome when idle and restarted when needed. This means your background code needs to handle being started and stopped gracefully, using the async nature of extension APIs to manage state across these cycles.
 
-Content Script Isolation
+### Content Script Isolation
 
 Content scripts run in the context of web pages users visit, isolated from the page's JavaScript but sharing the DOM. This creates some unique challenges when building content scripts with Vite.
 
@@ -160,7 +160,7 @@ Source maps for content scripts require special attention. Without proper source
 
 ---
 
-Conclusion
+### Conclusion
 
 Setting up Vite for Chrome extension development is one of the best investments you can make in your extension development workflow. The combination of fast builds, hot module replacement, and excellent debugging support transforms the extension development experience from cumbersome to delightful.
 
@@ -170,6 +170,6 @@ As Chrome extension development continues to evolve, tools like Vite will become
 
 ---
 
-Additional Resources
+### Additional Resources
 
 To further enhance your Chrome extension development with Vite, explore the official Vite documentation, Chrome's extension development guides, and the various Chrome extension-specific plugins available in the Vite ecosystem. The community has created excellent tools and templates that can accelerate your setup process while following best practices.

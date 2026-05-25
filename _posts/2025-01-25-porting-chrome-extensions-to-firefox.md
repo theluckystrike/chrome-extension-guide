@@ -18,11 +18,11 @@ This comprehensive guide walks you through the entire process of porting Chrome 
 
 ---
 
-Understanding the WebExtensions Architecture {#understanding-webextensions}
+## Understanding the WebExtensions Architecture {#understanding-webextensions}
 
 Both Chrome and Firefox support the WebExtensions API, a standardized framework for building browser extensions. This shared foundation means that the core of your extension, HTML, CSS, and JavaScript, can often work across both browsers with minimal modifications. However, understanding the nuances between the two implementations is crucial for a smooth porting process.
 
-The Common Ground
+### The Common Ground
 
 The WebExtensions API was designed with cross-browser compatibility in mind. Mozilla worked closely with Google and other browser vendors to create a unified API surface that works consistently across Chromium-based browsers (Chrome, Edge, Brave) and Firefox. This standardization covers essential APIs including:
 
@@ -35,7 +35,7 @@ The WebExtensions API was designed with cross-browser compatibility in mind. Moz
 
 The good news is that if you built your extension following Chrome's Manifest V3 specification, approximately 80-90% of your code will work directly in Firefox without modification. The remaining 10-20% typically involves API-specific quirks, deprecated functions, or browser-specific features that require targeted adjustments.
 
-Key Differences to Anticipate
+### Key Differences to Anticipate
 
 Despite the common WebExtensions foundation, several areas require attention during porting:
 
@@ -49,11 +49,11 @@ Update Mechanisms: The update checking and auto-update processes differ between 
 
 ---
 
-Preparing Your Chrome Extension for Porting {#preparation}
+## Preparing Your Chrome Extension for Porting {#preparation}
 
 Before beginning the porting process, ensure your Chrome extension is structured in a way that facilitates cross-browser development. This preparation work will save significant time and reduce potential issues during the migration.
 
-Organizing for Cross-Browser Compatibility
+### Organizing for Cross-Browser Compatibility
 
 The most effective approach to multi-browser support involves structuring your extension with shared and browser-specific code paths. Create a clear separation between core logic that works universally and browser-specific implementations:
 
@@ -69,7 +69,7 @@ The most effective approach to multi-browser support involves structuring your e
 
 This architecture allows you to import the appropriate browser adapter based on detection, keeping your core business logic clean and reusable. Many successful cross-browser extensions use this pattern to maintain single source codebases while supporting Chrome, Firefox, Edge, and even Safari.
 
-Manifest File Migration {#manifest-migration}
+## Manifest File Migration {#manifest-migration}
 
 The manifest.json file requires careful attention when porting to Firefox. While Chrome and Firefox both support Manifest V3, there are specific differences in how each browser interprets and validates the manifest.
 
@@ -124,7 +124,7 @@ For Firefox, you'll need to add the `browser_specific_settings` field:
 
 The `strict_min_version` parameter is critical, it specifies the minimum Firefox version your extension supports. Mozilla recommends setting this to a version that supports all the APIs you use, typically no older than two major releases. As of 2025, Firefox 109+ supports the majority of Manifest V3 features.
 
-Handling API Differences {#api-differences}
+## Handling API Differences {#api-differences}
 
 Several common Chrome APIs require adjustments for Firefox compatibility:
 
@@ -160,11 +160,11 @@ Declarative Net Request: Firefox supports this API but with some differences in 
 
 ---
 
-Step-by-Step Porting Process {#porting-process}
+## Step-by-Step Porting Process {#porting-process}
 
 With preparation complete, follow this systematic approach to port your extension:
 
-Step 1: Audit Your Extension's API Usage
+### Step 1: Audit Your Extension's API Usage
 
 Create a comprehensive list of all Chrome APIs your extension uses. Check each against Mozilla's WebExtensions compatibility documentation to identify potential issues. Pay special attention to:
 
@@ -172,11 +172,11 @@ Create a comprehensive list of all Chrome APIs your extension uses. Check each a
 - Experimental APIs: Features not yet standardized may work differently
 - Platform-specific features: APIs like `chrome.sidePanel` or `chrome.debugger` may have Firefox equivalents or require alternative implementations
 
-Step 2: Create a Firefox-Specific Manifest
+### Step 2: Create a Firefox-Specific Manifest
 
 Copy your manifest.json to manifest.firefox.json and add the required Firefox-specific fields. Test this manifest using Firefox's web-ext tool or the about:debugging page.
 
-Step 3: Implement Browser Detection
+### Step 3: Implement Browser Detection
 
 Add runtime detection to load the appropriate code paths:
 
@@ -189,7 +189,7 @@ const browserAPI = isFirefox ? browser : chrome;
 
 This simple pattern allows your code to work smoothly in both environments while taking advantage of Firefox's Promise-based APIs when available.
 
-Step 4: Handle Content Script Isolation
+### Step 4: Handle Content Script Isolation
 
 Firefox handles content script isolation differently than Chrome. Ensure your content scripts are fully self-contained and don't rely on shared state from the background script. Use message passing for any necessary communication:
 
@@ -209,11 +209,11 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Step 5: Update Icons and Assets
+### Step 5: Update Icons and Assets
 
 Firefox requires PNG icons and has specific size requirements. Ensure you provide icons at 16, 32, 48, and 128 pixels. Firefox also supports SVG icons for scalable rendering.
 
-Step 6: Test Extensively
+### Step 6: Test Extensively
 
 Use Firefox Developer Edition and the web-ext tool for development testing:
 
@@ -229,9 +229,9 @@ This command starts Firefox with your extension loaded, automatically reloading 
 
 ---
 
-Common Porting Challenges and Solutions {#challenges}
+## Common Porting Challenges and Solutions {#challenges}
 
-Challenge 1: Service Worker Persistence
+### Challenge 1: Service Worker Persistence
 
 Chrome service workers have different lifecycle management than Firefox background scripts. Firefox background scripts are more persistent and may continue running longer than Chrome's service workers.
 
@@ -252,7 +252,7 @@ setInterval(() => {
 }, 30000);
 ```
 
-Challenge 2: Content Script Injection
+### Challenge 2: Content Script Injection
 
 Firefox's content script injection can behave differently, particularly with dynamically loaded pages and single-page applications.
 
@@ -281,13 +281,13 @@ function observeDOM() {
 }
 ```
 
-Challenge 3: Native Messaging
+### Challenge 3: Native Messaging
 
 If your extension uses native messaging to communicate with external applications, the implementation differs significantly between Chrome and Firefox.
 
 Solution: Create separate native messaging hosts for each browser, or use cross-platform frameworks like Native Messaging Wrapper that handle browser differences transparently.
 
-Challenge 4: WebRequest API Limitations
+### Challenge 4: WebRequest API Limitations
 
 Firefox's declarativeNetRequest API has different limits and capabilities compared to Chrome.
 
@@ -295,15 +295,15 @@ Solution: Check Mozilla's documentation for current limits and design your exten
 
 ---
 
-Testing Your Ported Extension {#testing}
+## Testing Your Ported Extension {#testing}
 
 Comprehensive testing is essential for ensuring a quality cross-browser experience. Implement a multi-layered testing strategy:
 
-Local Development Testing
+### Local Development Testing
 
 Use Firefox Developer Edition for development, it provides excellent extension debugging tools and early access to new WebExtensions features. The Browser Toolbox (accessible via about:debugging) provides Chrome-like developer tools specifically for extensions.
 
-Automated Testing
+### Automated Testing
 
 Implement automated tests that verify cross-browser compatibility:
 
@@ -321,23 +321,23 @@ function getBrowserFeatures() {
 }
 ```
 
-User Acceptance Testing
+### User Acceptance Testing
 
 Before publishing to AMO, recruit beta testers who use Firefox specifically. Their feedback will reveal real-world issues that development testing might miss.
 
 ---
 
-Publishing to Mozilla Add-on Marketplace {#publishing}
+## Publishing to Mozilla Add-on Marketplace {#publishing}
 
 Once your extension is thoroughly tested, publishing to AMO requires several specific steps:
 
-Creating Your AMO Account
+### Creating Your AMO Account
 
 1. Visit [addons.mozilla.org](https://addons.mozilla.org)
 2. Sign in with a Mozilla account or create one
 3. Complete developer verification (may require a small fee in some regions)
 
-Submitting Your Extension
+### Submitting Your Extension
 
 1. Navigate to the Developer Hub
 2. Select "Submit an Add-on"
@@ -348,11 +348,11 @@ Submitting Your Extension
    - Privacy policy (required for certain permissions)
    - Review screenshots and icon
 
-The Review Process
+### The Review Process
 
 Mozilla reviews all submissions for security, privacy, and functionality. The review process typically takes 1-7 days for new submissions. Firefox's review is generally less automated than Chrome's, with human reviewers assessing your extension's code quality and compliance with policies.
 
-Handling Updates
+### Handling Updates
 
 When you release updates:
 
@@ -365,15 +365,15 @@ This creates a signed package you can upload through the AMO developer dashboard
 
 ---
 
-Maintaining Cross-Browser Extensions {#maintenance}
+## Maintaining Cross-Browser Extensions {#maintenance}
 
-Successful cross-browser extensions require ongoing maintenance:
+### Successful cross-browser extensions require ongoing maintenance:
 
-Monitor API Changes
+### Monitor API Changes
 
 Subscribe to Mozilla's Add-on Blog and Chrome's Extensions Blog to stay informed about API changes. Implement feature detection to gracefully handle deprecated or removed APIs.
 
-Use Build Tools
+### Use Build Tools
 
 Implement a build system that generates browser-specific bundles:
 
@@ -388,7 +388,7 @@ const browserSpecific = {
 module.exports = environment => browserSpecific[environment];
 ```
 
-Automate Testing
+### Automate Testing
 
 Set up CI/CD pipelines that test your extension in both Chrome and Firefox:
 
@@ -405,7 +405,7 @@ GitHub Actions workflow
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Porting your Chrome extension to Firefox is a rewarding process that can significantly expand your user base with relatively modest effort. The WebExtensions API provides excellent cross-browser compatibility, and with careful attention to the differences outlined in this guide, you can maintain a single codebase that serves both Chrome and Firefox users effectively.
 
@@ -415,7 +415,7 @@ Remember to use Firefox's unique features where appropriate, Mozilla's add-on ec
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [Mozilla WebExtensions Documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
 - [Chrome to Firefox Porting Guide](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities)

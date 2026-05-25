@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Accessibility Guide. Build Extensions Everyone Can Use
 
-Introduction {#introduction}
+## Introduction {#introduction}
 
 Accessibility isn't just a best practice, it's an essential part of building Chrome extensions that serve everyone. Approximately 15% of the global population lives with some form of disability, and your extension's users likely include people who rely on assistive technologies. Building accessible extensions ensures that everyone can benefit from your work, expands your potential user base, and often improves usability for all users.
 
 Chrome extensions present unique accessibility challenges because they introduce additional user interface elements beyond traditional web pages. Popups, side panels, options pages, and injected content scripts all need careful attention to ensure they're usable by people with visual, motor, or cognitive impairments. This guide covers the core principles and techniques for creating accessible Chrome extensions following WCAG 2.1 AA guidelines.
 
-Semantic HTML: The Foundation {#semantic-html}
+## Semantic HTML: The Foundation {#semantic-html}
 
 Before diving into advanced accessibility techniques, it's crucial to start with proper semantic HTML. Semantic elements communicate the purpose and structure of your content to assistive technologies automatically, without requiring additional ARIA attributes.
 
@@ -29,7 +29,7 @@ For example, instead of creating a clickable div, use a proper button element:
 <button class="close-btn" aria-label="Close popup">×</button>
 ```
 
-ARIA Attributes {#aria-attributes}
+## ARIA Attributes {#aria-attributes}
 
 Accessible Rich Internet Applications (ARIA) attributes provide additional semantic information when HTML alone isn't sufficient. However, you should only use ARIA when necessary, native HTML elements are always preferred when available.
 
@@ -72,7 +72,7 @@ aria-live: Announces dynamic content changes to screen readers. Use "polite" to 
 document.getElementById('status-message').textContent = 'Settings saved!';
 ```
 
-Keyboard Navigation {#keyboard-navigation}
+## Keyboard Navigation {#keyboard-navigation}
 
 Many users cannot use a mouse and rely entirely on keyboard navigation. Every interactive element in your extension must be reachable and operable using only the keyboard. The Tab key should move focus forward through interactive elements, and Shift+Tab should move backward. All interactive elements need a visible focus indicator, never remove outline without providing an alternative.
 
@@ -96,7 +96,7 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-Screen Reader Support {#screen-reader-support}
+## Screen Reader Support {#screen-reader-support}
 
 Screen readers convert visual interfaces into spoken output for users with visual impairments. Chrome extensions must work with popular screen readers like NVDA, JAWS, and VoiceOver.
 
@@ -127,7 +127,7 @@ Form accessibility requires proper labeling. Every form control needs a visible 
   aria-live="polite" hidden>Username is required</span>
 ```
 
-Color Contrast {#color-contrast}
+## Color Contrast {#color-contrast}
 
 Color accessibility ensures that text and interactive elements remain distinguishable for users with color blindness or low vision. WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18px or 14px bold).
 
@@ -150,7 +150,7 @@ When designing success, warning, and error states, ensure each state is distingu
 }
 ```
 
-Focus Management {#focus-management}
+## Focus Management {#focus-management}
 
 Proper focus management creates a logical navigation experience, especially in single-page interfaces like extension popups. When your popup opens, focus should automatically move to the first interactive element. This eliminates the need for users to tab through the entire extension just to reach the main content.
 
@@ -185,13 +185,13 @@ function trapFocus(container) {
 
 When closing a popup or panel, return focus to the element that opened it. This prevents users from losing their place in the underlying page.
 
-Testing Your Accessibility {#testing-your-accessibility}
+## Testing Your Accessibility {#testing-your-accessibility}
 
 Automated testing catches many accessibility issues but cannot verify everything. Use tools like axe, WAVE, or Lighthouse to identify common problems, but always supplement with manual testing.
 
 Test using only the keyboard, navigate your entire extension without touching your mouse. Use a screen reader to experience your extension as your blind users would. Zoom your browser to 200% to ensure your interface remains functional at larger text sizes.
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building accessible Chrome extensions requires attention to semantic HTML, ARIA attributes, keyboard navigation, screen reader support, color contrast, and focus management. These techniques not only serve users with disabilities but often improve the experience for all users. Start implementing accessibility from the beginning of your project, and test regularly throughout development to catch issues early.
 
@@ -200,7 +200,7 @@ Accessibility (a11y) is essential for Chrome extensions. Over 1 billion people w
 
 This guide covers how to build accessible Chrome extensions following WCAG 2.1 AA guidelines, the industry standard for web accessibility.
 
-WCAG Compliance for Extension UIs
+### WCAG Compliance for Extension UIs
 
 The Web Content Accessibility Guidelines (WCAG) 2.1 AA is the baseline for extension accessibility. Key principles include:
 
@@ -211,7 +211,7 @@ The Web Content Accessibility Guidelines (WCAG) 2.1 AA is the baseline for exten
 
 Extensions must apply WCAG to all UI surfaces: popups, options pages, side panels, content script injections, and onboarding flows. Reference: https://developer.chrome.com/docs/extensions/develop/ui/accessibility
 
-Keyboard Navigation in Popups
+### Keyboard Navigation in Popups
 
 All interactive elements in extension popups must be keyboard-accessible. This is the most fundamental accessibility requirement.
 
@@ -262,7 +262,7 @@ function navigateMenu(moveForward = true) {
 }
 ```
 
-Focus Management in Extension Pages
+### Focus Management in Extension Pages
 
 Proper focus management ensures users can navigate efficiently. When a popup opens, focus should automatically move to the first interactive element. When closed, focus should return to the triggering element.
 
@@ -301,7 +301,7 @@ function createFocusTrap(container) {
 }
 ```
 
-ARIA Labels and Roles
+### ARIA Labels and Roles
 
 Semantic HTML should be your first choice, but ARIA (Accessible Rich Internet Applications) provides additional accessibility information when semantic elements aren't sufficient.
 
@@ -334,7 +334,7 @@ Semantic HTML should be your first choice, but ARIA (Accessible Rich Internet Ap
 </div>
 ```
 
-Screen Reader Support
+### Screen Reader Support
 
 Screen readers convert visual interfaces into spoken output. Test with ChromeVox (built into ChromeOS), NVDA (Windows), or VoiceOver (macOS).
 
@@ -358,7 +358,7 @@ document.querySelectorAll('.decorative-icon').forEach(el => {
 });
 ```
 
-Color Contrast Requirements
+### Color Contrast Requirements
 
 WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18px+ or 14px+ bold). Use Chrome DevTools to check contrast.
 
@@ -399,7 +399,7 @@ WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for 
 }
 ```
 
-High Contrast Mode Support
+### High Contrast Mode Support
 
 Users with visual impairments often use high contrast mode. Use CSS media queries to detect and adapt.
 
@@ -435,7 +435,7 @@ Users with visual impairments often use high contrast mode. Use CSS media querie
 }
 ```
 
-Reduced Motion Preferences
+### Reduced Motion Preferences
 
 Respect users who experience motion sensitivity by respecting the `prefers-reduced-motion` media query.
 
@@ -452,7 +452,7 @@ Respect users who experience motion sensitivity by respecting the `prefers-reduc
 }
 ```
 
-Font Size and Zoom Handling
+### Font Size and Zoom Handling
 
 Allow text resize up to 200% without breaking layout. Use relative units (`rem`, `em`, `%`) rather than fixed pixels.
 
@@ -480,7 +480,7 @@ button, input, select, textarea {
 }
 ```
 
-Accessible Forms in Options Pages
+### Accessible Forms in Options Pages
 
 Every form input needs a properly associated label. Use fieldsets for grouped controls.
 
@@ -548,7 +548,7 @@ document.getElementById('settings-form').addEventListener('submit', async (e) =>
 </script>
 ```
 
-Accessible Context Menus
+### Accessible Context Menus
 
 Context menus triggered by browser.contextMenus should also be accessible. While Chrome handles the native context menu accessibility, ensure your extension's internal menus are accessible.
 
@@ -575,7 +575,7 @@ chrome.contextMenus.create({
 });
 ```
 
-Accessible Notifications
+### Accessible Notifications
 
 When using chrome.notifications, provide accessible information for screen readers.
 
@@ -592,7 +592,7 @@ chrome.notifications.create({
 });
 ```
 
-Accessible Extension Icons
+### Accessible Extension Icons
 
 Icons should have alternative text when used in ways users can see them. For extension icons shown in the toolbar, use the default tooltip, but for icons within your UI:
 
@@ -607,7 +607,7 @@ Icons should have alternative text when used in ways users can see them. For ext
 <img src="extension-logo.png" alt="Extension logo">
 ```
 
-Accessible Onboarding Flows
+### Accessible Onboarding Flows
 
 Onboarding flows must be accessible, including any welcome pages or tutorial steps.
 
@@ -631,7 +631,7 @@ Onboarding flows must be accessible, including any welcome pages or tutorial ste
 </dialog>
 ```
 
-Testing Accessibility with axe-core
+### Testing Accessibility with axe-core
 
 Use axe-core for automated accessibility testing in your extension.
 
@@ -664,9 +664,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Chrome Accessibility DevTools
+### Chrome Accessibility DevTools
 
-Chrome DevTools provides excellent accessibility auditing:
+### Chrome DevTools provides excellent accessibility auditing:
 
 1. Accessibility Panel (Elements tab): Inspect accessibility tree, ARIA attributes, and computed properties
 2. Lighthouse Audit: Run accessibility audits with detailed reports
@@ -687,9 +687,9 @@ chrome.devtools.panels.create(
 );
 ```
 
-Accessibility Checklist
+### Accessibility Checklist
 
-Before publishing your extension, verify:
+### Before publishing your extension, verify:
 
 - [ ] All interactive elements keyboard-accessible (Tab, Enter, Space, Escape)
 - [ ] Focus managed correctly on popup open/close
@@ -706,7 +706,7 @@ Before publishing your extension, verify:
 - [ ] Touch targets minimum 44x44px
 - [ ] No auto-playing animations without user control
 
-Common Mistakes to Avoid
+### Common Mistakes to Avoid
 
 - Using `<div onclick>` instead of `<button>`. not keyboard accessible
 - Missing form labels. screen readers cannot identify inputs
@@ -717,7 +717,7 @@ Common Mistakes to Avoid
 - Missing alt text on informative images
 - Not announcing dynamic content changes
 
-Additional Resources
+### Additional Resources
 
 - [Chrome Extension Accessibility Documentation](https://developer.chrome.com/docs/extensions/develop/ui/accessibility)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)

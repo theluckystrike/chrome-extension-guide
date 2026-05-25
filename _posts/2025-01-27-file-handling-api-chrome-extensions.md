@@ -18,17 +18,17 @@ As web applications continue to evolve toward becoming full-fledged desktop repl
 
 ---
 
-Understanding the File Handling API {#understanding-file-handling-api}
+## Understanding the File Handling API {#understanding-file-handling-api}
 
 The File Handling API is a powerful web platform API that allows web applications and extensions to register themselves as handlers for specific file types. This capability bridges the gap between web-based tools and traditional desktop applications, enabling users to open files directly in your extension with a simple double-click or right-click context menu action.
 
-What Is File Handling in Chrome Extensions?
+### What Is File Handling in Chrome Extensions?
 
 File handling extension functionality allows your Chrome extension to become the default opener for certain file types. When a user right-clicks a file in their operating system's file manager or double-clicks it within Chrome, your extension can intercept that action and receive the file contents directly. This creates a smooth workflow where files open in your extension automatically, without requiring users to manually import or upload them.
 
 The File Handling API extends the capabilities that were previously limited to native desktop applications. Before this API, Chrome extensions could only access files through drag-and-drop or file input elements. Now, your extension can integrate deeply with the operating system's file handling infrastructure, providing a truly native-like experience.
 
-Why File Handling Matters for Extension Developers
+### Why File Handling Matters for Extension Developers
 
 The importance of file handling extension capabilities cannot be overstated in today's web development landscape. Users have grown accustomed to desktop applications that automatically open relevant files, and they expect similar functionality from web-based tools. By implementing proper file handling, you create a more intuitive user experience that eliminates friction between storing files and working with them.
 
@@ -36,11 +36,11 @@ Consider the workflow difference: without file handling, a user must navigate to
 
 ---
 
-Implementing File Association in Chrome Extensions {#file-association-chrome}
+## Implementing File Association in Chrome Extensions {#file-association-chrome}
 
 Establishing file association in Chrome requires careful configuration in your extension's manifest file. The manifest declares which file types your extension can handle, and Chrome uses this information to present your extension as an option when users attempt to open files of those types.
 
-Manifest V3 File Handling Configuration
+### Manifest V3 File Handling Configuration
 
 In Manifest V3, file handling is configured through the `file_handlers` property in the extension manifest. This configuration specifies the file types your extension can open, along with the contexts in which these associations should appear.
 
@@ -64,7 +64,7 @@ In Manifest V3, file handling is configured through the `file_handlers` property
 
 This configuration registers your extension as a handler for multiple file types. When users install your extension, Chrome registers these associations with the operating system, making your extension available in the "Open with" context menu for specified file types.
 
-Advanced File Association Patterns
+### Advanced File Association Patterns
 
 For more complex file handling extension scenarios, you can configure multiple file handlers with different capabilities. This allows your extension to handle various file types in context-specific ways, providing tailored experiences for different file categories.
 
@@ -88,11 +88,11 @@ The `types` property allows you to specify MIME types in addition to file extens
 
 ---
 
-Handling Files in Your Extension {#handling-files-in-extension}
+## Handling Files in Your Extension {#handling-files-in-extension}
 
 Once you have configured file associations, your extension needs to actually receive and process the files. This involves setting up event listeners that Chrome triggers when a user opens a file with your extension.
 
-The onLaunched Event
+### The onLaunched Event
 
 When a user opens a file with your extension, Chrome launches your extension's background service worker or event page and triggers the `onLaunched` event. This event contains information about the launched file, including its path and entry point.
 
@@ -111,7 +111,7 @@ chrome.fileHandler.onLaunched.addListener((launchData) => {
 
 The `launchData` object provides everything you need to access the opened file. The `entries` property contains File System FileEntry objects that your extension can read directly, without requiring the user to manually select them through a file picker.
 
-Reading File Contents
+### Reading File Contents
 
 Once you have access to file entries, reading their contents is straightforward using the File System Access API:
 
@@ -135,17 +135,17 @@ This direct access to file contents enables powerful workflows where your extens
 
 ---
 
-The Open With Extension Feature {#open-with-extension}
+## The Open With Extension Feature {#open-with-extension}
 
 The "open with" extension functionality is what makes file handling truly powerful. This feature integrates your extension with the operating system's file handling infrastructure, appearing in context menus and as an option when users want to open files with specific applications.
 
-How Open With Works
+### How Open With Works
 
 When users right-click a file in their operating system's file manager (Windows Explorer, macOS Finder, etc.) or within Chrome's download manager, they see a list of applications that can handle that file type. Your extension appears in this list when properly configured, allowing users to select it as their preferred handler.
 
 This integration is particularly valuable because it meets users where they already are. Rather than requiring users to navigate to your web application first, you can meet them in their existing workflow. They simply right-click a file and choose your extension, and Chrome handles the rest.
 
-Registering as Default Handler
+### Registering as Default Handler
 
 For the best user experience, you might want your extension to become the default handler for certain file types. While Chrome provides the infrastructure for this, the actual default handler selection happens at the operating system level after user confirmation.
 
@@ -167,11 +167,11 @@ Note that the actual API for setting default handlers may vary, and users typica
 
 ---
 
-Best Practices for File Handling Extensions {#best-practices}
+## Best Practices for File Handling Extensions {#best-practices}
 
 Implementing file handling extension functionality requires attention to several important best practices that ensure a smooth, secure, and performant experience for your users.
 
-Security Considerations
+### Security Considerations
 
 File handling introduces significant security considerations that you must address. Never blindly trust file contents without validation, as users might intentionally or inadvertently open malicious files. Implement solid input validation and sanitization before processing any file data.
 
@@ -201,7 +201,7 @@ chrome.fileHandler.onLaunched.addListener(async (launchData) => {
 });
 ```
 
-Performance Optimization
+### Performance Optimization
 
 Large files can significantly impact your extension's performance. Implement lazy loading and streaming approaches to handle files efficiently without blocking the user interface:
 
@@ -223,7 +223,7 @@ async function processFileStream(fileEntry) {
 
 This streaming approach allows you to process files of any size without running out of memory, making your extension suitable for handling large datasets, long documents, or media files.
 
-User Experience Patterns
+### User Experience Patterns
 
 Successful file handling extensions provide clear feedback to users about what's happening. Show loading indicators when processing files, display the filename prominently in your interface, and save modifications back to the original file location when possible:
 
@@ -246,47 +246,47 @@ chrome.fileHandler.onLaunched.addListener(async (launchData) => {
 
 ---
 
-Common Use Cases for File Handling API {#common-use-cases}
+## Common Use Cases for File Handling API {#common-use-cases}
 
 The File Handling API enables numerous powerful extension types that rival native desktop applications in functionality.
 
-Code Editors and IDEs
+### Code Editors and IDEs
 
 Code editors benefit immensely from file handling extension capabilities. Users can right-click any source file and open it directly in your web-based IDE, with full support for reading, editing, and saving changes back to the original file. Syntax highlighting, code completion, and version control integration all work smoothly once the file is loaded.
 
-Image and Media Editors
+### Image and Media Editors
 
 Image editing extensions can register as handlers for common image formats, allowing users to open images directly in your editor with a single click. The ability to read and write files without additional dialogs creates a workflow indistinguishable from native applications.
 
-Data Analysis Tools
+### Data Analysis Tools
 
 Spreadsheets, CSV viewers, and data analysis tools can register for data file formats, immediately loading and visualizing data without requiring manual upload. This is particularly valuable for tools that work with large datasets where the overhead of file upload dialogs would be significant.
 
-Document Processors
+### Document Processors
 
 Markdown editors, word processors, and note-taking applications can register for text-based formats, providing a smooth writing experience where documents open automatically and saves write directly to the original file.
 
 ---
 
-Troubleshooting File Handling Issues {#troubleshooting}
+## Troubleshooting File Handling Issues {#troubleshooting}
 
 Even with careful implementation, issues can arise with file handling extensions. Understanding common problems helps you resolve them quickly.
 
-Extension Not Appearing in Context Menu
+### Extension Not Appearing in Context Menu
 
 If your extension doesn't appear in the "Open with" context menu, verify that your manifest configuration is correct. Ensure file extensions are properly formatted without leading periods, and check that your extension has the necessary permissions. Also confirm that the user has installed your extension and that it's enabled.
 
-Files Not Opening in Extension
+### Files Not Opening in Extension
 
 When files fail to open in your extension, check the background service worker or event page for errors. Ensure your `onLaunched` listener is properly registered and that you're handling the launch data correctly. Browser console logs often reveal the root cause.
 
-Permission Errors
+### Permission Errors
 
 File handling requires appropriate permissions. Ensure your extension requests necessary permissions in the manifest and that users have granted them. Remember that some file operations may require additional permissions depending on what you're trying to do with the files.
 
 ---
 
-Conclusion
+### Conclusion
 
 The File Handling API transforms Chrome extensions from isolated web applications into integrated tools that work smoothly with users' existing file workflows. By properly implementing file association in Chrome, enabling open with extension functionality, and following security and performance best practices, you can create extensions that feel like native desktop applications.
 

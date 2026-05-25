@@ -18,7 +18,7 @@ The demand for reading time estimator tools has grown significantly as online co
 
 ---
 
-Understanding Reading Speed and WPM Calculations {#understanding-reading-speed}
+## Understanding Reading Speed and WPM Calculations {#understanding-reading-speed}
 
 Before diving into code, it is essential to understand the fundamentals of reading speed measurement. Words per minute (WPM) serves as the standard metric for measuring reading speed across the globe. The average adult reads at approximately 200 to 250 WPM, though this varies significantly based on reading purpose, content complexity, and individual capability.
 
@@ -30,7 +30,7 @@ Your reading speed calculator extension will need to count words accurately, app
 
 ---
 
-Setting Up the Chrome Extension Project {#project-setup}
+## Setting Up the Chrome Extension Project {#project-setup}
 
 Every Chrome extension begins with a manifest file that defines the extension's metadata, permissions, and capabilities. For our reading speed calculator extension, we will use Manifest V3, which is the current standard and offers improved security and performance compared to older versions.
 
@@ -65,7 +65,7 @@ The popup.html file defines the user interface that appears when users click you
 
 ---
 
-Building the Extension User Interface {#building-ui}
+## Building the Extension User Interface {#building-ui}
 
 The popup interface is the primary way users interact with your reading speed extension. It should be clean, informative, and easy to use. Create the popup.html file with the following structure:
 
@@ -235,7 +235,7 @@ This interface provides a clean, modern design with a gradient background and wh
 
 ---
 
-Implementing the Core Logic with JavaScript {#core-logic}
+## Implementing the Core Logic with JavaScript {#core-logic}
 
 The JavaScript file handles all the functionality: extracting text from the current page, counting words, calculating reading time, and updating the UI. Create popup.js with the following implementation:
 
@@ -353,7 +353,7 @@ The calculateReadingTime function uses the standard formula of dividing word cou
 
 ---
 
-Enhancing the Extension with Additional Features {#enhancing-features}
+## Enhancing the Extension with Additional Features {#enhancing-features}
 
 Now that the core functionality works, let us add some enhancements that make the extension more useful and professional. First, we will add support for different reading modes: casual reading, careful reading, and speed reading. Each mode has different WPM assumptions and provides better estimates for different use cases.
 
@@ -455,7 +455,7 @@ This content script tracks both scroll progress and actual time spent reading, a
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Chrome provides excellent developer tools for testing and debugging extensions. To test your reading speed calculator extension, open Chrome and navigate to chrome://extensions/. Enable "Developer mode" using the toggle in the top right corner, then click "Load unpacked" and select your extension directory.
 
@@ -467,7 +467,7 @@ Common issues to watch for include incorrectly counting numbers as words, includ
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have thoroughly tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. This process requires creating a developer account, preparing promotional assets, and following Google's guidelines.
 
@@ -477,7 +477,7 @@ When submitting your extension, provide clear descriptions using your target key
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have built a complete reading speed calculator Chrome extension that provides valuable functionality to users. This extension demonstrates several important concepts in Chrome extension development, including using the Scripting API to access page content, creating responsive popup interfaces, storing user preferences, and implementing content scripts for page-level features.
 

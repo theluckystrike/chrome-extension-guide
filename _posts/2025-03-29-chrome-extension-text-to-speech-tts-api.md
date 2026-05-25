@@ -18,23 +18,23 @@ The chrome.tts API provides developers with a solid interface to synthesize spok
 
 ---
 
-Understanding the Chrome TTS API {#understanding-chrome-tts-api}
+## Understanding the Chrome TTS API {#understanding-chrome-tts-api}
 
 The chrome.tts API is one of Chrome's most powerful accessibility features, allowing extensions to speak text using the operating system's speech synthesis capabilities. Before diving into code, it's essential to understand the architecture and capabilities of this API.
 
-What is chrome.tts?
+### What is chrome.tts?
 
 The chrome.tts API is a programmatic interface that enables Chrome extensions to convert text into spoken words. This API leverages the device's built-in speech synthesis engine, which means it works out of the box without requiring any external services or additional installations. The API supports various languages and voice options, making it versatile for international applications.
 
 When you call chrome.tts.speak(), the API sends your text to the system's speech synthesis engine, which generates audio output. This process happens entirely on the client side, ensuring low latency and offline functionality. The API also provides events to track speech progress, handle errors, and control playback.
 
-Key Features of the TTS API
+### Key Features of the TTS API
 
 The chrome.tts API offers several powerful features that make it ideal for building screen readers. First, it supports voice selection, allowing you to choose from multiple installed voices with different accents and genders. Second, you can control speech rate and pitch, enabling customization for different user preferences. Third, the API provides event callbacks for monitoring speech status, which is crucial for building responsive user interfaces.
 
 Another significant feature is the ability to enqueue multiple utterances. This means you can queue several text segments, and the API will speak them in sequence without overlapping. For a screen reader that needs to read multiple elements or paragraphs, this feature is essential. Additionally, the API supports SSML (Speech Synthesis Markup Language), which enables fine-grained control over pronunciation, emphasis, and pacing.
 
-Browser Compatibility and Requirements
+### Browser Compatibility and Requirements
 
 The chrome.tts API is available in all modern Chromium-based browsers, including Google Chrome, Edge, and Brave. However, it's important to note that this API requires the "tts" permission in your manifest file. Without proper permission declarations, the API calls will fail silently or throw errors.
 
@@ -42,11 +42,11 @@ For the best user experience, ensure your extension handles cases where speech s
 
 ---
 
-Setting Up Your Chrome Extension Project {#setting-up-chrome-extension-project}
+## Setting Up Your Chrome Extension Project {#setting-up-chrome-extension-project}
 
 Now that you understand the chrome.tts API fundamentals, let's set up the project structure for our screen reader extension. We'll create a complete Chrome extension with all the necessary components.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Every Chrome extension begins with a manifest.json file that defines the extension's properties, permissions, and components. For our text-to-speech screen reader, we'll need to declare the "tts" permission and specify the extension's background script and popup interface.
 
@@ -77,7 +77,7 @@ Every Chrome extension begins with a manifest.json file that defines the extensi
 
 The manifest_version 3 is the current standard for Chrome extensions, offering improved security and performance. The "tts" permission is crucial, without it, our extension cannot access the speech synthesis API. The "activeTab" and "scripting" permissions allow us to read content from the current page and inject scripts when needed.
 
-Project Directory Structure
+### Project Directory Structure
 
 Create a well-organized directory structure for your extension. This organization makes maintenance easier and helps other developers understand your code. Here's the recommended structure:
 
@@ -99,11 +99,11 @@ The background.js file handles the service worker, which runs in the background 
 
 ---
 
-Building the Core TTS Functionality {#building-core-tts-functionality}
+## Building the Core TTS Functionality {#building-core-tts-functionality}
 
 With the project structure in place, let's implement the core text-to-speech functionality. We'll create reusable functions that handle speaking text, managing voices, and controlling speech parameters.
 
-Initializing the TTS Engine
+### Initializing the TTS Engine
 
 Before speaking any text, we need to ensure the TTS engine is properly initialized. This involves checking available voices and setting default parameters. Here's a comprehensive initialization function:
 
@@ -146,7 +146,7 @@ initializeTTS();
 
 This initialization code runs when the extension loads, automatically detecting available voices and selecting an appropriate default. The voice selection logic prefers English voices but falls back to any available voice if English isn't found.
 
-Speaking Text with the Chrome TTS API
+### Speaking Text with the Chrome TTS API
 
 The core function for speaking text uses chrome.tts.speak(). This function accepts the text to speak and an options object that controls how the text is spoken:
 
@@ -198,7 +198,7 @@ function resumeSpeaking() {
 
 The options object provides extensive control over speech output. The onStart, onEnd, onError, and onWord callbacks allow you to build responsive interfaces that reflect the current speech state. This is particularly important for screen readers, where users need visual feedback about what's being spoken.
 
-Handling Voice Selection
+### Handling Voice Selection
 
 For a complete screen reader experience, users should be able to choose their preferred voice. Here's how to implement voice selection:
 
@@ -245,11 +245,11 @@ These functions allow complete customization of the speech output. A good screen
 
 ---
 
-Extracting Text from Web Pages {#extracting-text-from-web-pages}
+## Extracting Text from Web Pages {#extracting-text-from-web-pages}
 
 A screen reader needs to extract text content from web pages. This is where content scripts come in. We'll create a content script that can extract selected text, entire page content, or specific elements.
 
-Reading Selected Text
+### Reading Selected Text
 
 The most common use case is reading text that the user has selected. Here's how to implement this:
 
@@ -273,7 +273,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This simple function gets the user's current text selection and returns it to the extension. The message passing system allows communication between content scripts and the background service worker.
 
-Extracting Full Page Content
+### Extracting Full Page Content
 
 For a comprehensive screen reader, you might want to read the entire page. Here's a more sophisticated extraction function:
 
@@ -323,7 +323,7 @@ function getHeadings() {
 
 This code extracts the main content while filtering out navigation, scripts, and other non-essential elements. The getHeadings() function is particularly useful for building a table of contents, allowing users to navigate by headings.
 
-Reading Specific Elements
+### Reading Specific Elements
 
 For advanced functionality, users might want to read specific elements like paragraphs, links, or form labels:
 
@@ -373,11 +373,11 @@ These extraction functions enable a truly comprehensive screen reader that can r
 
 ---
 
-Building the User Interface {#building-user-interface}
+## Building the User Interface {#building-user-interface}
 
 Now let's create the popup interface that users will interact with. This interface provides controls for playback, voice selection, and speed adjustment.
 
-The Popup HTML
+### The Popup HTML
 
 ```html
 <!-- popup.html -->
@@ -430,7 +430,7 @@ The Popup HTML
 
 This HTML provides a clean, functional interface with playback controls and settings. The range sliders allow users to adjust speech parameters in real-time.
 
-The Popup JavaScript
+### The Popup JavaScript
 
 ```javascript
 // popup.js - Handle UI interactions
@@ -518,11 +518,11 @@ The popup JavaScript handles user interactions and communicates with the backgro
 
 ---
 
-Advanced Features and Best Practices {#advanced-features-best-practices}
+## Advanced Features and Best Practices {#advanced-features-best-practices}
 
 Now let's explore advanced features that will make your screen reader truly professional and user-friendly.
 
-SSML Support for Better Speech
+### SSML Support for Better Speech
 
 SSML (Speech Synthesis Markup Language) enables fine-grained control over speech output. Chrome supports a subset of SSML tags that can improve the naturalness of synthesized speech:
 
@@ -559,7 +559,7 @@ function speakWithPunctuation(text) {
 
 SSML allows you to add pauses, emphasize words, control pitch and rate dynamically, and produce much more natural-sounding speech. This is particularly valuable for accessibility applications where clarity is essential.
 
-Keyboard Shortcuts for Power Users
+### Keyboard Shortcuts for Power Users
 
 Power users appreciate keyboard shortcuts for quick access to functionality. Here's how to implement them:
 
@@ -612,7 +612,7 @@ Add keyboard shortcut definitions to your manifest:
 }
 ```
 
-Error Handling and User Feedback
+### Error Handling and User Feedback
 
 Robust error handling is essential for a production-quality extension:
 
@@ -653,15 +653,15 @@ function speakWithErrorHandling(text, options = {}) {
 
 ---
 
-Testing and Deployment {#testing-deployment}
+## Testing and Deployment {#testing-deployment}
 
 Before releasing your extension, thorough testing ensures a smooth user experience.
 
-Testing Your Extension
+### Testing Your Extension
 
 Load your extension in Chrome by navigating to chrome://extensions/, enabling Developer mode, and clicking "Load unpacked". Test all features including voice selection, speed adjustment, text extraction, and error handling.
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
 Once testing is complete, you can publish your extension:
 
@@ -675,7 +675,7 @@ Ensure your extension complies with Chrome Web Store policies, particularly rega
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a Chrome extension text-to-speech screen reader is a rewarding project that can make the web more accessible. The chrome.tts API provides powerful capabilities for synthesizing speech, while content scripts enable extracting text from any web page. By following this guide, you've learned how to create a complete extension with voice selection, playback controls, keyboard shortcuts, and solid error handling.
 

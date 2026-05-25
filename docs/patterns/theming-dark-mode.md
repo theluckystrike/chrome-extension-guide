@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/theming-dark-mode/"
 last_modified_at: 2026-01-15
 ---
 
-Theming and Dark Mode Patterns
+### Theming and Dark Mode Patterns
 
 Chrome extensions live across multiple surfaces -- popup, options page, side panel, and content scripts injected into arbitrary sites. Keeping a consistent theme across all of them while respecting user preferences requires a deliberate architecture. These eight patterns build from simple system-theme detection to a full multi-surface theme engine.
 
 ---
 
-Pattern 1: System Theme Detection {#pattern-1-system-theme-detection}
+## Pattern 1: System Theme Detection {#pattern-1-system-theme-detection}
 
 Use `prefers-color-scheme` to follow the OS setting in your extension UI.
 
@@ -57,7 +57,7 @@ body {
 
 ---
 
-Pattern 2: User-Selectable Theme with chrome.storage {#pattern-2-user-selectable-theme-with-chromestorage}
+## Pattern 2: User-Selectable Theme with chrome.storage {#pattern-2-user-selectable-theme-with-chromestorage}
 
 Let users choose between system, light, and dark. Persist the choice and broadcast changes.
 
@@ -109,7 +109,7 @@ Calling `chrome.storage.sync.set` fires `onChanged` in every open extension page
 
 ---
 
-Pattern 3: CSS Custom Properties Theme System {#pattern-3-css-custom-properties-theme-system}
+## Pattern 3: CSS Custom Properties Theme System {#pattern-3-css-custom-properties-theme-system}
 
 Define a complete design token set using CSS custom properties, then swap them by toggling a single attribute.
 
@@ -163,7 +163,7 @@ Components only reference `var(--bg)`, `var(--text)`, etc. Swapping the theme re
 
 ---
 
-Pattern 4: Content Script Page Theme Injection {#pattern-4-content-script-page-theme-injection}
+## Pattern 4: Content Script Page Theme Injection {#pattern-4-content-script-page-theme-injection}
 
 Inject dark mode into any website by inserting a stylesheet into the page.
 
@@ -211,7 +211,7 @@ The `invert + hue-rotate` trick is a quick approximation. Images and video get a
 
 ---
 
-Pattern 5: Theme Sync Across All Surfaces {#pattern-5-theme-sync-across-all-surfaces}
+## Pattern 5: Theme Sync Across All Surfaces {#pattern-5-theme-sync-across-all-surfaces}
 
 Coordinate theme state between popup, options page, side panel, and content scripts using a shared message bus.
 
@@ -268,7 +268,7 @@ Content scripts listen for `THEME_CHANGED` and toggle their injected stylesheet.
 
 ---
 
-Pattern 6: Per-Site Theme Overrides {#pattern-6-per-site-theme-overrides}
+## Pattern 6: Per-Site Theme Overrides {#pattern-6-per-site-theme-overrides}
 
 Let users save a theme preference per domain so certain sites always keep their original appearance.
 
@@ -314,7 +314,7 @@ Expose `setSiteOverride` through the popup so users can right-click and exclude 
 
 ---
 
-Pattern 7: Dynamic Icon Switching Based on Theme {#pattern-7-dynamic-icon-switching-based-on-theme}
+## Pattern 7: Dynamic Icon Switching Based on Theme {#pattern-7-dynamic-icon-switching-based-on-theme}
 
 Swap the toolbar icon between light and dark variants so it stays visible regardless of the browser's toolbar color.
 
@@ -357,7 +357,7 @@ Place icon variants in your extension's `icons/` directory: `icon-light-16.png` 
 
 ---
 
-Pattern 8: High Contrast and Forced Colors Support {#pattern-8-high-contrast-and-forced-colors-support}
+## Pattern 8: High Contrast and Forced Colors Support {#pattern-8-high-contrast-and-forced-colors-support}
 
 Respect the `forced-colors` media query for users who enable Windows High Contrast or similar OS features.
 
@@ -424,7 +424,7 @@ Combine with `prefers-contrast: more` for users who want higher contrast without
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | # | Pattern | Key Mechanism | Use Case |
 |---|---------|---------------|----------|

@@ -18,11 +18,11 @@ we'll walk through the complete process of building a GitHub enhancer extension 
 
 ---
 
-Why Build a GitHub Enhancer Extension? {#why-build-github-enhancer}
+## Why Build a GitHub Enhancer Extension? {#why-build-github-enhancer}
 
 Before diving into the technical details, let's explore why building a GitHub enhancer extension is worth your time and effort. Understanding the motivation behind this project will help you design a more impactful tool.
 
-The Need for GitHub Enhancement
+### The Need for GitHub Enhancement
 
 GitHub's web interface, while powerful, wasn't designed with every individual developer's workflow in mind. Some common problems include:
 
@@ -34,7 +34,7 @@ GitHub's web interface, while powerful, wasn't designed with every individual de
 
 A well-designed GitHub enhancer extension can address these issues and more, saving you hours every week.
 
-The Developer Community Opportunity
+### The Developer Community Opportunity
 
 GitHub has over 100 million developers using its platform daily. This creates a massive opportunity for extension developers to create tools that solve real problems. Popular GitHub extensions like Octotree (which adds a file tree sidebar), Refined GitHub, and various productivity boosters have millions of combined users.
 
@@ -42,11 +42,11 @@ Building a GitHub enhancer extension isn't just about solving your own problems,
 
 ---
 
-Project Planning and Feature Design {#project-planning}
+## Project Planning and Feature Design {#project-planning}
 
 Every successful extension starts with clear planning. Let's define what our GitHub enhancer extension will do.
 
-Core Features
+### Core Features
 
 For this tutorial, we'll build an extension with the following features:
 
@@ -56,7 +56,7 @@ For this tutorial, we'll build an extension with the following features:
 4. Keyboard Shortcuts: Custom keyboard shortcuts for common GitHub actions
 5. Repository Quick Stats: Instant visibility into repository health, stars, forks, and last commit
 
-Extension Architecture Overview
+### Extension Architecture Overview
 
 Our extension will use the following components:
 
@@ -67,11 +67,11 @@ Our extension will use the following components:
 
 ---
 
-Setting Up the Development Environment {#development-environment}
+## Setting Up the Development Environment {#development-environment}
 
 Let's start building our extension. First, create the project structure and manifest file.
 
-Creating the Project Structure
+### Creating the Project Structure
 
 Create a new folder for your extension and set up the following file structure:
 
@@ -95,7 +95,7 @@ github-enhancer/
          messages.json
 ```
 
-Writing the Manifest File
+### Writing the Manifest File
 
 The manifest.json file defines your extension's configuration. Here's our Manifest V3 manifest:
 
@@ -152,7 +152,7 @@ The manifest.json file defines your extension's configuration. Here's our Manife
 }
 ```
 
-Key manifest fields explained:
+### Key manifest fields explained:
 
 - host_permissions: Essential for accessing both GitHub.com and the GitHub API
 - content_scripts: These run on GitHub pages to modify the UI
@@ -161,11 +161,11 @@ Key manifest fields explained:
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. Let's build a functional and attractive popup.
 
-HTML Structure
+### HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -233,7 +233,7 @@ HTML Structure
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
 ```css
 * {
@@ -386,7 +386,7 @@ h2 {
 }
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
 ```javascript
 // popup.js
@@ -509,11 +509,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Content Scripts for GitHub Page Enhancement {#content-scripts}
+## Content Scripts for GitHub Page Enhancement {#content-scripts}
 
 Content scripts allow your extension to interact with GitHub's web pages directly. This is where the real magic happens.
 
-Content Script Setup
+### Content Script Setup
 
 ```javascript
 // content.js
@@ -706,7 +706,7 @@ function showKeyboardShortcutsHelp() {
 }
 ```
 
-Content Script CSS
+### Content Script CSS
 
 ```css
 /* content.css */
@@ -799,7 +799,7 @@ Content Script CSS
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background service worker handles tasks that need to run independently of any specific page, such as API calls, storage management, and message handling.
 
@@ -885,24 +885,24 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we've built the extension, let's test it locally before publishing.
 
-Loading the Extension in Chrome
+### Loading the Extension in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top-right corner
 3. Click "Load unpacked"
 4. Select your extension folder
 
-Debugging Tips
+### Debugging Tips
 
 - Use `console.log` statements in your content scripts, they'll appear in the console of the GitHub page
 - Check the "Service Worker" section in Chrome's extension management for background script logs
 - Use Chrome DevTools to inspect the popup by right-clicking it and selecting "Inspect popup"
 
-Common Issues and Solutions
+### Common Issues and Solutions
 
 | Issue | Solution |
 |-------|----------|
@@ -913,32 +913,32 @@ Common Issues and Solutions
 
 ---
 
-Best Practices for GitHub Extensions {#best-practices}
+## Best Practices for GitHub Extensions {#best-practices}
 
 When building production-ready GitHub extensions, follow these best practices:
 
-Security
+### Security
 
 - Never hardcode tokens in your code, always use chrome.storage
 - Request only the minimum permissions needed
 - Validate all data received from GitHub API
 - Use HTTPS for all API calls
 
-Performance
+### Performance
 
 - Lazy-load features that aren't needed on every page
 - Cache API responses when appropriate
 - Use requestIdleCallback for non-critical operations
 - Minimize DOM manipulation in content scripts
 
-User Experience
+### User Experience
 
 - Provide clear onboarding for new users
 - Include keyboard shortcuts documentation
 - Respect GitHub's UI and add enhancements subtly
 - Handle API rate limits gracefully
 
-Documentation
+### Documentation
 
 - Include a clear README with installation instructions
 - Document all keyboard shortcuts
@@ -947,7 +947,7 @@ Documentation
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and ready, follow these steps to publish:
 
@@ -960,7 +960,7 @@ Once your extension is tested and ready, follow these steps to publish:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a GitHub enhancer Chrome extension is an excellent way to improve your own workflow while learning valuable skills in extension development. We've covered the essential components: Manifest V3 configuration, popup interfaces, content scripts for page enhancement, and background service workers for API interactions.
 
@@ -978,7 +978,7 @@ Remember to respect GitHub's terms of service and API rate limits, and always pr
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [GitHub REST API Documentation](https://docs.github.com/en/rest)
 - [Chrome Extension Development Docs](https://developer.chrome.com/docs/extensions/mv3/)

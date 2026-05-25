@@ -18,7 +18,7 @@ Understanding how to properly implement chrome extension communication is fundam
 
 ---
 
-Why Message Passing Matters in Chrome Extensions {#why-message-passing-matters}
+## Why Message Passing Matters in Chrome Extensions {#why-message-passing-matters}
 
 Chrome's extension architecture deliberately isolates components for security and stability. Content scripts run in the context of web pages, meaning they can access and manipulate page DOM but have limited access to Chrome APIs. Background service workers handle events, manage state, and coordinate between components but cannot access page content directly. Popups and side panels are ephemeral UI components that exist only when users interact with them.
 
@@ -28,11 +28,11 @@ Without proper message passing, your extension cannot function as a cohesive uni
 
 ---
 
-Understanding the Message Passing Architecture {#message-passing-architecture}
+## Understanding the Message Passing Architecture {#message-passing-architecture}
 
 Chrome provides two primary mechanisms for message passing content script background communication: one-time requests and persistent connections. Each serves different use cases, and understanding when to use which approach is crucial for building efficient extensions.
 
-One-Time Messages with chrome.runtime.sendMessage
+### One-Time Messages with chrome.runtime.sendMessage
 
 The simplest form of communication uses one-time messages sent through chrome.runtime.sendMessage. This method is ideal for single request-response interactions where you do not need an ongoing connection. The message is sent, and the receiver can optionally respond, but the channel closes after the exchange completes.
 
@@ -72,7 +72,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 The critical detail here is returning `true` from the listener when the response is asynchronous. This tells Chrome to keep the message channel open until `sendResponse` is called, allowing for async operations like network requests.
 
-Sending Messages from Background to Content Scripts
+### Sending Messages from Background to Content Scripts
 
 The reverse direction, sending messages from the background to content scripts, uses a similar API but requires specifying the target tab:
 
@@ -93,11 +93,11 @@ Content scripts listen for these messages using the same `chrome.runtime.onMessa
 
 ---
 
-Long-Lived Connections with chrome.extension.connect {#long-lived-connections}
+## Long-Lived Connections with chrome.extension.connect {#long-lived-connections}
 
 For scenarios requiring continuous communication between components, chrome extension ports provide persistent connections that remain open until explicitly closed. This approach is ideal for real-time data streaming, ongoing synchronization, or any use case where messages flow frequently in both directions.
 
-Creating a Port Connection
+### Creating a Port Connection
 
 To establish a persistent connection, the initiating component creates a port:
 
@@ -123,7 +123,7 @@ port.onDisconnect.addListener(() => {
 });
 ```
 
-The background worker handles the connection:
+### The background worker handles the connection:
 
 ```javascript
 // In background service worker
@@ -147,7 +147,7 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-When to Use Ports Over sendMessage
+### When to Use Ports Over sendMessage
 
 Choose chrome extension ports when you need bidirectional communication that happens repeatedly over time. The overhead of establishing a connection is amortized over many messages, making ports more efficient for high-frequency communication. Additionally, ports allow both sides to initiate messages freely, whereas `sendMessage` follows a more request-response pattern.
 
@@ -155,11 +155,11 @@ Use `chrome.runtime.sendMessage` for simple, one-off interactions where establis
 
 ---
 
-Practical Patterns for Content Script to Background Communication {#practical-patterns}
+## Practical Patterns for Content Script to Background Communication {#practical-patterns}
 
 Real-world extensions often combine these communication methods into established patterns. Understanding these patterns helps you build more maintainable and solid extensions.
 
-The Controller Pattern
+### The Controller Pattern
 
 In this pattern, the background worker acts as a central controller that manages state and coordinates between multiple content scripts running in different tabs:
 
@@ -196,7 +196,7 @@ function broadcastToOtherTabs(excludeTabId, message) {
 }
 ```
 
-Event-Driven Updates
+### Event-Driven Updates
 
 Content scripts can register for event-based updates from the background, enabling reactive UIs that update automatically when underlying data changes:
 
@@ -252,11 +252,11 @@ function notifySubscribers(newData) {
 
 ---
 
-Handling Errors and Edge Cases {#error-handling}
+## Handling Errors and Edge Cases {#error-handling}
 
 Robust extensions must handle various error conditions that can occur during message passing.
 
-Checking for Listener Availability
+### Checking for Listener Availability
 
 When sending messages, always check for runtime errors, as the target may not have a listener loaded:
 
@@ -270,7 +270,7 @@ chrome.tabs.sendMessage(tabId, message, (response) => {
 });
 ```
 
-Managing Connection Timeouts
+### Managing Connection Timeouts
 
 Ports can become disconnected unexpectedly. Implement reconnection logic:
 
@@ -297,11 +297,11 @@ function connectWithRetry(maxRetries = 3) {
 
 ---
 
-Message Passing in Manifest V3: Important Changes {#manifest-v3-changes}
+## Message Passing in Manifest V3: Important Changes {#manifest-v3-changes}
 
 Chrome's transition to Manifest V3 introduced several changes affecting message passing patterns. Understanding these differences ensures your extension works correctly with the current extension platform.
 
-Service Worker Limitations
+### Service Worker Limitations
 
 Background pages in Manifest V3 use service workers instead of persistent background pages. Service workers can terminate when idle and restart when needed. This lifecycle affects message handling:
 
@@ -325,7 +325,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Native Messaging
+### Native Messaging
 
 Extensions can communicate with native applications using `chrome.runtime.sendNativeMessage`. This is useful for integrating with desktop applications or system utilities:
 
@@ -348,13 +348,13 @@ Native messaging requires additional configuration in the manifest and must be e
 
 ---
 
-Best Practices for Chrome Extension Communication {#best-practices}
+## Best Practices for Chrome Extension Communication {#best-practices}
 
 Follow these guidelines to build reliable, maintainable extension communication:
 
-Use Type-Safe Message Structures
+### Use Type-Safe Message Structures
 
-Define consistent message schemas and validate incoming messages:
+### Define consistent message schemas and validate incoming messages:
 
 ```javascript
 // Message schema
@@ -375,7 +375,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Implement Message Versioning
+### Implement Message Versioning
 
 As your extension evolves, message formats may change. Include version information:
 
@@ -392,7 +392,7 @@ function createMessage(action, payload) {
 }
 ```
 
-Log for Debugging
+### Log for Debugging
 
 Add logging to track message flow during development:
 
@@ -407,7 +407,7 @@ function logMessage(direction, message, sender) {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Mastering chrome extension message passing is essential for building sophisticated extensions that coordinate multiple components effectively. The key takeaways are:
 
@@ -425,7 +425,7 @@ These communication patterns form the backbone of any non-trivial Chrome extensi
 
 ---
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Chrome Extension Messaging Documentation](https://developer.chrome.com/docs/extensions/mv3/messaging/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)
@@ -434,11 +434,11 @@ Related Resources {#related-resources}
 
 ---
 
-Advanced Communication Patterns {#advanced-patterns}
+## Advanced Communication Patterns {#advanced-patterns}
 
 For more complex extension architectures, consider these advanced patterns that build upon the foundational message passing techniques.
 
-Popup to Background Communication
+### Popup to Background Communication
 
 Popup scripts have a unique lifecycle, they only exist when the user clicks the extension icon. This ephemeral nature requires special handling for communication:
 
@@ -464,7 +464,7 @@ document.getElementById('syncButton').addEventListener('click', async () => {
 
 The key insight is that popups can communicate with both content scripts (via the tab) and the background worker directly. Choose the approach based on where the data resides.
 
-Side Panel Communication
+### Side Panel Communication
 
 Side panels in Manifest V3 offer persistent UI that remains open while browsing. They communicate similarly to popups but maintain a longer-lived connection:
 
@@ -482,9 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Multi-Tab Synchronization
+### Multi-Tab Synchronization
 
-Extensions managing multiple tabs need solid synchronization strategies:
+### Extensions managing multiple tabs need solid synchronization strategies:
 
 ```javascript
 // Background worker managing cross-tab state
@@ -518,7 +518,7 @@ class TabManager {
 }
 ```
 
-Security Considerations
+### Security Considerations
 
 When implementing message passing, always validate inputs to prevent security vulnerabilities:
 
@@ -555,7 +555,7 @@ function sanitizeMessage(message) {
 }
 ```
 
-Performance Optimization
+### Performance Optimization
 
 For extensions handling high message volumes, optimize your communication:
 
@@ -598,7 +598,7 @@ function trackUserAction(action) {
 }
 ```
 
-Testing Message Passing
+### Testing Message Passing
 
 Implement comprehensive testing for your communication layer:
 

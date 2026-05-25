@@ -18,7 +18,7 @@ This tutorial assumes you have basic knowledge of HTML, CSS, and JavaScript. By 
 
 ---
 
-Why Build a Color Picker Extension? {#why-build-color-picker}
+## Why Build a Color Picker Extension? {#why-build-color-picker}
 
 The demand for color picker tools in the browser is substantial. Web designers constantly need to sample colors from websites, developers need to extract colors for their projects, and content creators frequently need to match colors across different platforms. A well-designed color picker extension solves these problems directly from the browser.
 
@@ -28,7 +28,7 @@ The Chrome browser already includes a built-in color picker in DevTools, but hav
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Before writing any code, let us define what our color picker extension will do. We will build an extension with the following features:
 
@@ -44,7 +44,7 @@ Finally, we will add a mini color palette generator. When a color is picked, we 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project. Inside this folder, create the following file structure:
 
@@ -63,7 +63,7 @@ color-picker-extension/
 
 The manifest.json file defines your extension configuration. For the Eyedropper API to work, we need to declare specific permissions and use Manifest V3, the current standard for Chrome extensions.
 
-Create the manifest.json file with the following content:
+### Create the manifest.json file with the following content:
 
 ```json
 {
@@ -95,7 +95,7 @@ The permissions we include are minimal and focused. The "scripting" permission a
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. It should be clean, functional, and provide quick access to all features. Let us create popup.html:
 
@@ -159,7 +159,7 @@ The HTML structure is straightforward. We have a picker button, a result section
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 The CSS should make the extension look professional and easy to use. Create popup.css with these styles:
 
@@ -309,7 +309,7 @@ The styling uses a clean, modern design with good contrast and clear visual hier
 
 ---
 
-Implementing the Extension Logic {#extension-logic}
+## Implementing the Extension Logic {#extension-logic}
 
 Now comes the core functionality. Create popup.js with all the color manipulation and interaction logic:
 
@@ -508,7 +508,7 @@ The key functionality is in the activatePicker method, which uses the EyeDropper
 
 ---
 
-Adding Background Script {#background-script}
+## Adding Background Script {#background-script}
 
 For a more complete extension, we need a background script. This is required for certain features and future expansion. Create background.js:
 
@@ -551,7 +551,7 @@ The background script handles extension installation and message passing between
 
 ---
 
-Creating Extension Icons {#extension-icons}
+## Creating Extension Icons {#extension-icons}
 
 Every extension needs icons. You can create simple icons using any image editing tool. The icons should be PNG files at 16x16, 48x48, and 128x128 pixels. For development purposes, you can create placeholder icons or use the following approach to generate them programmatically.
 
@@ -565,7 +565,7 @@ You can use an online tool like favicon.cc or create icons in a graphics editor.
 
 ---
 
-Testing the Extension {#testing}
+## Testing the Extension {#testing}
 
 Now let us test the extension in Chrome. Follow these steps:
 
@@ -579,7 +579,7 @@ The picked color will appear in the popup with HEX, RGB, and HSL values. Click t
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 If the Eyedropper API does not work, it may be because the API is still experimental. Make sure you are using a recent version of Chrome. The Eyedropper API is available in Chrome 95 and later.
 
@@ -589,7 +589,7 @@ If the popup does not open, check the console for errors. You can do this by rig
 
 ---
 
-Enhancing the Extension {#enhancing-features}
+## Enhancing the Extension {#enhancing-features}
 
 Once the basic extension is working, consider adding these advanced features to make it more useful:
 
@@ -605,7 +605,7 @@ Add support for color blindness simulation to help designers ensure their color 
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 When your extension is ready, you can publish it to the Chrome Web Store. First, zip your extension folder. Then, navigate to the Chrome Web Store Developer Dashboard and create a new listing.
 
@@ -615,7 +615,7 @@ After submitting, Google will review your extension. The review process typicall
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a color picker Chrome extension is an excellent project that teaches you fundamental extension development concepts while creating a genuinely useful tool. You have learned how to use the Eyedropper API, work with color conversions, manage persistent storage, and create a polished user interface.
 

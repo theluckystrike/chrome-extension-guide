@@ -18,7 +18,7 @@ This guide walks you through every aspect of the Chrome History API, from basic 
 
 ---
 
-Understanding the Chrome History API {#understanding-chrome-history-api}
+## Understanding the Chrome History API {#understanding-chrome-history-api}
 
 The chrome.history API is part of Chrome's extension APIs that provides programmatic access to the user's browsing history. This powerful interface allows extensions to read, search, add, and delete history entries, enabling a wide range of functionality from simple history viewers to complex analytics tools.
 
@@ -28,7 +28,7 @@ However, the History API operates with certain limitations and privacy considera
 
 ---
 
-Setting Up Permissions in Manifest V3 {#setting-up-permissions}
+## Setting Up Permissions in Manifest V3 {#setting-up-permissions}
 
 Before using the chrome.history API, you must declare the appropriate permission in your extension's manifest file. This is a critical step that enables your extension to access the user's browsing history.
 
@@ -54,11 +54,11 @@ requesting the history permission triggers a specific warning during the Chrome 
 
 ---
 
-Querying History Entries {#querying-history-entries}
+## Querying History Entries {#querying-history-entries}
 
 The cornerstone of the chrome.history API is the search functionality, which allows you to retrieve history entries based on various criteria. The chrome.history.search() method is asynchronous and returns a promise that resolves to an array of HistoryItem objects.
 
-Basic History Search
+### Basic History Search
 
 Here's how to perform a basic history search:
 
@@ -79,7 +79,7 @@ chrome.history.search({
 
 This example retrieves the most recent 100 history entries. The text parameter supports search queries, you can search for specific URLs, page titles, or keywords. Setting text to an empty string returns all entries within the specified time range. The maxResults parameter limits the number of returned items, while startTime filters results to visits after a specific timestamp.
 
-Advanced Search with Time Ranges
+### Advanced Search with Time Ranges
 
 For more targeted queries, you can combine text search with time-based filtering:
 
@@ -103,13 +103,13 @@ This pattern is particularly useful for building analytics features that show us
 
 ---
 
-Understanding HistoryItem Objects {#understanding-history-items}
+## Understanding HistoryItem Objects {#understanding-history-items}
 
 When you query history, each result is returned as a HistoryItem object containing detailed information about a visited URL. Understanding the structure of these objects helps you effectively use the data in your extension.
 
-Properties of HistoryItem
+### Properties of HistoryItem
 
-The HistoryItem object includes the following key properties:
+### The HistoryItem object includes the following key properties:
 
 - id: A unique identifier for this history entry
 - url: The URL that was visited
@@ -137,11 +137,11 @@ The title property may be empty for URLs that Chrome hasn't yet crawled or for c
 
 ---
 
-Adding Custom History Entries {#adding-custom-history-entries}
+## Adding Custom History Entries {#adding-custom-history-entries}
 
 The chrome.history API allows you to programmatically add new entries to the browsing history. This functionality is valuable for extensions that want to track user interactions with external links, bookmark syncing tools, or any feature that involves navigating to URLs outside the normal browsing flow.
 
-Using addUrl() Method
+### Using addUrl() Method
 
 The chrome.history.addUrl() method adds a new entry to history:
 
@@ -167,11 +167,11 @@ This method is particularly useful when your extension opens pages in ways that 
 
 ---
 
-Deleting History Entries {#deleting-history-entries}
+## Deleting History Entries {#deleting-history-entries}
 
 Managing history also involves the ability to delete entries. The chrome.history API provides multiple deletion methods to handle different use cases, from removing specific URLs to clearing all history.
 
-Deleting Specific URLs
+### Deleting Specific URLs
 
 To remove a specific URL from history, use the deleteUrl() method:
 
@@ -183,7 +183,7 @@ chrome.history.deleteUrl({url: 'https://example.com'}, function() {
 
 This removes all visits to the specified URL from the browsing history. The operation is permanent, so you should consider adding confirmation dialogs in your extension before performing deletions.
 
-Deleting by Time Range
+### Deleting by Time Range
 
 For bulk deletions based on time periods, use the deleteRange() method:
 
@@ -200,7 +200,7 @@ chrome.history.deleteRange({
 
 This pattern is useful for implementing privacy features that automatically clean up old history entries.
 
-Clearing All History
+### Clearing All History
 
 To delete all browsing history, use the deleteAll() method:
 
@@ -214,11 +214,11 @@ This powerful method removes all entries from the user's browsing history. As wi
 
 ---
 
-Retrieving Detailed Visit Information {#retrieving-detailed-visit-info}
+## Retrieving Detailed Visit Information {#retrieving-detailed-visit-info}
 
 Beyond basic history items, you can retrieve detailed information about individual visits using the chrome.history.getVisits() method. This returns an array of VisitItem objects, each representing a single visit to a URL.
 
-Getting All Visits for a URL
+### Getting All Visits for a URL
 
 ```javascript
 chrome.history.getVisits({url: 'https://example.com'}, function(visits) {
@@ -233,7 +233,7 @@ chrome.history.getVisits({url: 'https://example.com'}, function(visits) {
 
 The VisitItem object includes properties such as visitId (unique identifier for this visit), visitTime (timestamp of the visit), referringVisitId (ID of the visit that led to this one), and transition (the type of transition, such as link, typed, or bookmark).
 
-Understanding Transition Types
+### Understanding Transition Types
 
 The transition property describes how the user arrived at the page. Common transition types include:
 
@@ -247,11 +247,11 @@ This information is valuable for analytics extensions that want to understand us
 
 ---
 
-Building a Complete History Manager Extension {#building-history-manager}
+## Building a Complete History Manager Extension {#building-history-manager}
 
 Now that you understand the individual components, let's put together a complete example that demonstrates a functional history manager extension. This example showcases how to combine the various chrome.history methods into a cohesive user experience.
 
-Background Script Implementation
+### Background Script Implementation
 
 ```javascript
 // background.js - Handles history operations
@@ -330,7 +330,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-Popup Implementation
+### Popup Implementation
 
 ```javascript
 // popup.js - User interface for history manager
@@ -418,19 +418,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ---
 
-Best Practices and Privacy Considerations {#best-practices}
+## Best Practices and Privacy Considerations {#best-practices}
 
 When working with the chrome.history API, following best practices ensures your extension provides value while respecting user privacy. These guidelines help you create extensions that users trust and find genuinely useful.
 
-Request Minimal Permissions
+### Request Minimal Permissions
 
 Only request the history permission if your extension genuinely needs it. Users are increasingly cautious about granting broad permissions, and Chrome reviews applications for unnecessary access. If you only need to track specific pages your extension creates, consider using alternative approaches like storing data in extension storage.
 
-Provide Clear Value
+### Provide Clear Value
 
 Your extension should clearly communicate how it uses history data. If you're building a history search tool, make that functionality obvious in your extension's description. Avoid hidden or unexpected uses of history data that might surprise users.
 
-Implement Proper Error Handling
+### Implement Proper Error Handling
 
 The chrome.history API operations are asynchronous and can fail for various reasons. Always implement proper error handling:
 
@@ -445,35 +445,35 @@ chrome.history.search({text: 'test', maxResults: 10}, function(results) {
 });
 ```
 
-Respect User Privacy
+### Respect User Privacy
 
 Consider implementing features that give users control over their data. Options to exclude specific sites from tracking, export history data, or set automatic deletion periods demonstrate respect for user privacy and often increase user trust.
 
 ---
 
-Advanced Use Cases {#advanced-use-cases}
+## Advanced Use Cases {#advanced-use-cases}
 
 The chrome.history API enables various advanced implementations beyond simple history viewing. These use cases demonstrate the API's versatility and potential for creating sophisticated extensions.
 
-Browsing Analytics Dashboard
+### Browsing Analytics Dashboard
 
 Create an extension that analyzes browsing patterns and presents insights about time spent on different types of websites, most visited domains, and peak browsing hours. This requires aggregating data from multiple history queries and presenting it in meaningful visualizations.
 
-Smart Bookmark Manager
+### Smart Bookmark Manager
 
 Build an intelligent bookmarking system that automatically organizes history into collections based on visit frequency, time patterns, and content categories. Machine learning algorithms can identify important pages that users return to frequently.
 
-History Synchronization
+### History Synchronization
 
 Implement cross-device history synchronization that allows users to access their browsing history across multiple computers. This requires careful handling of data privacy and secure transmission.
 
-Privacy-Focused History Viewer
+### Privacy-Focused History Viewer
 
 Create a read-only history viewer with enhanced search capabilities, visualization tools, and export options. Focus on helping users find previously visited pages quickly without modifying any data.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Extension History API opens up tremendous possibilities for building powerful browsing history management tools. From basic search functionality to sophisticated analytics dashboards, understanding how to effectively use chrome.history enables you to create extensions that significantly enhance user productivity.
 

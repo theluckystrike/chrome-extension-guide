@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-advanced/"
 last_modified_at: 2026-01-15
 ---
 
-Shadow DOM Advanced Patterns for Chrome Extensions
+### Shadow DOM Advanced Patterns for Chrome Extensions
 
 Shadow DOM gives content scripts a private DOM subtree that host page styles cannot penetrate. This guide covers eight advanced patterns for building robust, accessible extension UI with Shadow DOM in Manifest V3.
 
-Pattern Summary {#pattern-summary}
+## Pattern Summary {#pattern-summary}
 
 | # | Pattern | Use Case |
 |---|---------|----------|
@@ -25,7 +25,7 @@ Pattern Summary {#pattern-summary}
 
 ---
 
-Pattern 1: Closed vs Open Shadow DOM for Extension UI {#pattern-1-closed-vs-open-shadow-dom-for-extension-ui}
+## Pattern 1: Closed vs Open Shadow DOM for Extension UI {#pattern-1-closed-vs-open-shadow-dom-for-extension-ui}
 
 Open shadow roots are accessible via `element.shadowRoot`. Closed roots return `null`, preventing host-page scripts from inspecting or modifying extension UI.
 
@@ -60,7 +60,7 @@ When to use each:
 
 ---
 
-Pattern 2: Constructable Stylesheets (adoptedStyleSheets) {#pattern-2-constructable-stylesheets-adoptedstylesheets}
+## Pattern 2: Constructable Stylesheets (adoptedStyleSheets) {#pattern-2-constructable-stylesheets-adoptedstylesheets}
 
 Constructable stylesheets let you create `CSSStyleSheet` objects in JavaScript and share them across multiple shadow roots without duplicating `<style>` elements.
 
@@ -110,7 +110,7 @@ Calling `sheet.replaceSync(newCSS)` at runtime instantly updates every shadow ro
 
 ---
 
-Pattern 3: Slotted Content for Customizable Widgets {#pattern-3-slotted-content-for-customizable-widgets}
+## Pattern 3: Slotted Content for Customizable Widgets {#pattern-3-slotted-content-for-customizable-widgets}
 
 Slots let an extension widget accept content from the host page's light DOM, useful when building overlay-style UIs that wrap existing page content.
 
@@ -156,7 +156,7 @@ function highlightText(range: Range, note: string): void {
 }
 ```
 
-Named slots allow multiple insertion points:
+### Named slots allow multiple insertion points:
 
 ```typescript
 shadow.innerHTML = `
@@ -170,7 +170,7 @@ shadow.innerHTML = `
 
 ---
 
-Pattern 4: Shadow DOM Event Handling (Event Retargeting, Composed Events) {#pattern-4-shadow-dom-event-handling-event-retargeting-composed-events}
+## Pattern 4: Shadow DOM Event Handling (Event Retargeting, Composed Events) {#pattern-4-shadow-dom-event-handling-event-retargeting-composed-events}
 
 Events originating inside a shadow root are retargeted: listeners on the host element see `event.target` as the host, not the internal element. Only events with `composed: true` cross shadow boundaries.
 
@@ -214,7 +214,7 @@ function emitFromShadow(shadow: ShadowRoot): void {
 
 ---
 
-Pattern 5: Forms Inside Shadow DOM (formAssociated, ElementInternals) {#pattern-5-forms-inside-shadow-dom-formassociated-elementinternals}
+## Pattern 5: Forms Inside Shadow DOM (formAssociated, ElementInternals) {#pattern-5-forms-inside-shadow-dom-formassociated-elementinternals}
 
 Form-associated custom elements participate in native form submission and validation through `ElementInternals`.
 
@@ -268,7 +268,7 @@ customElements.define("ext-rating", ExtRating);
 
 ---
 
-Pattern 6: Shadow DOM with CSS Custom Properties for Theming {#pattern-6-shadow-dom-with-css-custom-properties-for-theming}
+## Pattern 6: Shadow DOM with CSS Custom Properties for Theming {#pattern-6-shadow-dom-with-css-custom-properties-for-theming}
 
 CSS custom properties pierce shadow boundaries, making them the standard mechanism for theming shadow DOM components.
 
@@ -319,7 +319,7 @@ function watchSystemTheme(host: HTMLElement): void {
 
 ---
 
-Pattern 7: Nested Shadow DOM (Component Composition) {#pattern-7-nested-shadow-dom-component-composition}
+## Pattern 7: Nested Shadow DOM (Component Composition) {#pattern-7-nested-shadow-dom-component-composition}
 
 Complex extension UIs benefit from nesting shadow roots -- an outer shell with inner sub-components, each with isolated styles.
 
@@ -380,7 +380,7 @@ function buildDashboard(shadow: ShadowRoot): void {
 
 ---
 
-Pattern 8: Accessibility in Shadow DOM (ARIA, Focus Delegation) {#pattern-8-accessibility-in-shadow-dom-aria-focus-delegation}
+## Pattern 8: Accessibility in Shadow DOM (ARIA, Focus Delegation) {#pattern-8-accessibility-in-shadow-dom-aria-focus-delegation}
 
 Shadow DOM requires explicit attention to accessibility. Use `delegatesFocus`, ARIA attributes, and proper tab ordering.
 
@@ -446,7 +446,7 @@ class ExtDialog extends HTMLElement {
 customElements.define("ext-dialog", ExtDialog);
 ```
 
-Accessibility checklist for shadow DOM components:
+### Accessibility checklist for shadow DOM components:
 
 - Use `delegatesFocus: true` so focus management works naturally.
 - Set `role`, `aria-label`, `aria-labelledby`, and `aria-modal` on interactive containers.
@@ -456,7 +456,7 @@ Accessibility checklist for shadow DOM components:
 
 ---
 
-Key Takeaways {#key-takeaways}
+## Key Takeaways {#key-takeaways}
 
 - Prefer closed Shadow DOM for content-script UI to prevent host-page tampering.
 - Use constructable stylesheets to share styles efficiently across multiple shadow roots.

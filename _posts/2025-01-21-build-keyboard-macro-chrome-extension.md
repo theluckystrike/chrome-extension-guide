@@ -18,11 +18,11 @@ This comprehensive guide walks you through creating a fully functional keyboard 
 
 ---
 
-Understanding Keyboard Macros in Chrome Extensions {#understanding-keyboard-macros}
+## Understanding Keyboard Macros in Chrome Extensions {#understanding-keyboard-macros}
 
 A keyboard macro is a sequence of inputs that can be recorded once and played back multiple times. Unlike simple keyboard shortcuts that trigger a single action, macros can encompass complex workflows including typing text, clicking elements, navigating pages, and even waiting for specific conditions.
 
-Why Build a Macro Recorder Extension?
+### Why Build a Macro Recorder Extension?
 
 The demand for keyboard macro extension solutions has grown significantly as users seek ways to automate repetitive browser tasks. Building a macro recorder Chrome extension offers several compelling advantages:
 
@@ -31,7 +31,7 @@ The demand for keyboard macro extension solutions has grown significantly as use
 - Accessibility: Create custom input sequences for users with accessibility needs
 - Workflow Optimization: Build personalized automation shortcuts extension features that match specific job requirements
 
-Technical Challenges and Considerations
+### Technical Challenges and Considerations
 
 Building a solid macro recorder presents unique technical challenges that distinguish it from typical Chrome extensions:
 
@@ -42,7 +42,7 @@ Building a solid macro recorder presents unique technical challenges that distin
 
 ---
 
-Project Architecture and File Structure {#project-architecture}
+## Project Architecture and File Structure {#project-architecture}
 
 Let's organize our keyboard macro extension with a clean, maintainable structure:
 
@@ -71,7 +71,7 @@ This architecture separates concerns effectively: the popup handles user interfa
 
 ---
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
 The manifest.json file defines our extension's capabilities and permissions. For a macro recorder, we need careful permission selection:
 
@@ -118,7 +118,7 @@ The permissions selected here balance functionality with security:
 
 ---
 
-Core Recording Module {#recording-module}
+## Core Recording Module {#recording-module}
 
 The recorder.js module handles capturing keyboard and mouse events. This is the heart of our macro recorder chrome functionality:
 
@@ -220,7 +220,7 @@ This recorder captures essential event data while filtering out unnecessary nois
 
 ---
 
-Macro Playback Module {#playback-module}
+## Macro Playback Module {#playback-module}
 
 The player.js module handles replaying recorded macros with precise timing:
 
@@ -365,7 +365,7 @@ The player executes events with timing precision, allowing speed adjustments for
 
 ---
 
-Content Script for Event Capture {#content-script}
+## Content Script for Event Capture {#content-script}
 
 The content script runs in the context of web pages and captures user interactions:
 
@@ -561,7 +561,7 @@ This content script bridges the gap between Chrome's extension APIs and the web 
 
 ---
 
-Popup Interface {#popup-interface}
+## Popup Interface {#popup-interface}
 
 The popup provides the user interface for controlling the macro recorder:
 
@@ -632,7 +632,7 @@ The popup includes essential controls for recording, stopping, and playing back 
 
 ---
 
-Popup JavaScript Logic {#popup-javascript}
+## Popup JavaScript Logic {#popup-javascript}
 
 The popup.js handles user interactions and communicates with the background script:
 
@@ -810,9 +810,9 @@ The popup provides a complete user interface for managing macros, including savi
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
-The background script handles initialization and coordination:
+### The background script handles initialization and coordination:
 
 ```javascript
 // background/background.js
@@ -845,7 +845,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 Add attractive styling to make the extension user-friendly:
 
@@ -1049,9 +1049,9 @@ header h1 {
 
 ---
 
-Advanced Features and Best Practices {#advanced-features}
+## Advanced Features and Best Practices {#advanced-features}
 
-Adding Keyboard Shortcut Triggers
+### Adding Keyboard Shortcut Triggers
 
 To make your automation shortcuts extension more powerful, add trigger configuration:
 
@@ -1064,7 +1064,7 @@ async function configureShortcut(macroId) {
 }
 ```
 
-Error Handling and Edge Cases
+### Error Handling and Edge Cases
 
 Implement solid error handling for a reliable extension:
 
@@ -1079,7 +1079,7 @@ window.addEventListener('unhandledrejection', (event) => {
 });
 ```
 
-Performance Optimization
+### Performance Optimization
 
 For large macro recordings, implement pagination and lazy loading:
 
@@ -1099,9 +1099,9 @@ async function exportMacro(macro, format = 'json') {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load Unpacked: Use Chrome's Developer Mode to load your extension
 2. Test Recording: Record macros on different websites
@@ -1110,7 +1110,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 When ready to publish, prepare your store listing:
 
@@ -1121,7 +1121,7 @@ When ready to publish, prepare your store listing:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a keyboard macro Chrome extension is an excellent project that demonstrates advanced Chrome extension capabilities. This guide covered the essential components: event recording, storage management, playback engine, and user interface.
 
@@ -1131,7 +1131,7 @@ Remember to handle edge cases carefully, test extensively across different websi
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)

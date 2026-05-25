@@ -18,27 +18,27 @@ we'll walk through the complete process of building a professional JSON Schema V
 
 ---
 
-Why Build a JSON Schema Validator Extension? {#why-build}
+## Why Build a JSON Schema Validator Extension? {#why-build}
 
 Before diving into the code, let's explore why building a JSON Schema validator Chrome extension is both a valuable learning exercise and a practical tool for your development workflow.
 
-The Problem with JSON Validation
+### The Problem with JSON Validation
 
 When working with JSON data, whether from API responses, configuration files, or data imports, developers often face the challenge of ensuring data conforms to expected structures. Manually checking each field is error-prone and time-consuming, especially as JSON objects grow in complexity. A single misplaced comma or wrong data type can cause applications to crash or behave unpredictably in production.
 
 Traditional validation approaches include writing custom validation functions, using online validators, or relying on integrated development environment (IDE) extensions. However, having a browser-based solution offers unique advantages: you can validate JSON from any webpage, test API responses directly in the browser, and quickly prototype schema designs without leaving your development environment.
 
-The Market Opportunity
+### The Market Opportunity
 
 Developer tools consistently rank among the most popular categories in the Chrome Web Store. Extensions that enhance productivity, improve code quality, or simplify common development tasks attract millions of users. A well-built JSON Schema validator can serve as the foundation for additional features like API testing, request building, and response formatting, each representing opportunities for future expansion.
 
 ---
 
-Project Setup and Architecture {#project-setup}
+## Project Setup and Architecture {#project-setup}
 
 Let's start building our JSON Schema validator Chrome extension. We'll use modern web technologies and follow Chrome's Manifest V3 guidelines for best performance and security.
 
-Creating the Project Structure
+### Creating the Project Structure
 
 First, create a new directory for your extension and set up the basic file structure:
 
@@ -50,7 +50,7 @@ mkdir -p icons popup js
 
 This creates three key directories: `icons` for your extension icon, `popup` for the user interface, and `js` for your JavaScript logic. Keeping your code organized from the start makes maintenance easier as your extension grows.
 
-The Manifest File
+### The Manifest File
 
 Every Chrome extension requires a manifest.json file that describes its configuration, permissions, and components. Create this file in your project root:
 
@@ -81,13 +81,13 @@ This Manifest V3 configuration declares the extension's name, version, and purpo
 
 ---
 
-Building the User Interface {#user-interface}
+## Building the User Interface {#user-interface}
 
 A good developer tool needs an intuitive interface that lets users focus on their work without unnecessary friction. Let's create a clean, functional popup that makes JSON Schema validation straightforward.
 
-The HTML Structure
+### The HTML Structure
 
-Create `popup/popup.html` with the following structure:
+### Create `popup/popup.html` with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -142,7 +142,7 @@ Create `popup/popup.html` with the following structure:
 
 This HTML provides two text areas for JSON input and schema definition, action buttons, and result display areas. The structure is semantically clear and accessibility-friendly, with proper labels and ARIA-ready markup.
 
-Styling the Extension
+### Styling the Extension
 
 Create `popup/popup.css` to give your extension a professional appearance:
 
@@ -336,17 +336,17 @@ This CSS creates a clean, modern interface that matches Chrome's design language
 
 ---
 
-Implementing the Validation Logic {#validation-logic}
+## Implementing the Validation Logic {#validation-logic}
 
 Now comes the core functionality: implementing JSON Schema validation in JavaScript. We'll use Ajv (Another JSON Schema Validator), one of the fastest and most compliant JSON Schema validators available.
 
-Setting Up Ajv
+### Setting Up Ajv
 
 First, download the minified Ajv library and save it in your js folder. You can also use a CDN link in your popup. For simplicity, we'll load it from a CDN in our JavaScript file.
 
-The Main Logic
+### The Main Logic
 
-Create `popup/popup.js` with the complete validation implementation:
+### Create `popup/popup.js` with the complete validation implementation:
 
 ```javascript
 // JSON Schema Validator - Chrome Extension
@@ -541,11 +541,11 @@ This JavaScript implements the core validation functionality with several import
 
 ---
 
-Adding Advanced Features {#advanced-features}
+## Adding Advanced Features {#advanced-features}
 
 A basic validator is useful, but adding advanced features makes your extension stand out from the competition.  some enhancements.
 
-Extracting JSON from Webpages
+### Extracting JSON from Webpages
 
 Many developers want to validate JSON they're viewing in their browser. Add this feature to your extension:
 
@@ -593,9 +593,9 @@ async function extractFromPage() {
 }
 ```
 
-Schema Library
+### Schema Library
 
-Allow users to save and reuse common schemas:
+### Allow users to save and reuse common schemas:
 
 ```javascript
 const savedSchemas = {
@@ -613,22 +613,22 @@ const savedSchemas = {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension to ensure it works correctly across different scenarios.
 
-Loading the Extension
+### Loading the Extension
 
-To test your extension in Chrome:
+### To test your extension in Chrome:
 
 1. Navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension directory
 4. The extension icon should appear in your toolbar
 
-Test Cases
+### Test Cases
 
-Test these scenarios:
+### Test these scenarios:
 
 | Test Case | Input JSON | Schema | Expected Result |
 |-----------|-----------|--------|-----------------|
@@ -640,18 +640,18 @@ Test these scenarios:
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and polished, it's time to share it with the world.
 
-Prepare for Publishing
+### Prepare for Publishing
 
 1. Create icons: Generate 16x16, 48x48, and 128x128 PNG icons
 2. Take screenshots: Create 1280x800 PNG screenshots of your extension
 3. Write a compelling description: Highlight key features and benefits
 4. Set a category: Choose "Developer Tools" for best visibility
 
-Upload Process
+### Upload Process
 
 1. Package your extension as a ZIP file
 2. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -661,7 +661,7 @@ Upload Process
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've built a complete JSON Schema validator Chrome extension from scratch. This extension demonstrates essential Chrome extension development concepts including Manifest V3 configuration, popup interfaces, content scripts, and integration with external libraries.
 
@@ -671,7 +671,7 @@ Remember to continue improving your extension based on user feedback, add new fe
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [JSON Schema Official Documentation](https://json-schema.org/)
 - [Ajv JSON Schema Validator](https://ajv.js.org/)

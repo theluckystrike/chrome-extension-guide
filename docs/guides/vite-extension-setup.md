@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 Vite Setup for Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 Vite is a modern build tool that provides an incredibly fast development experience for Chrome extensions. Originally designed for web applications, Vite's architecture makes it particularly well-suited for extension development, offering lightning-fast Hot Module Replacement (HMR) for popup and options pages, native TypeScript and JSX support, and efficient production builds through Rollup.
 
 This guide covers setting up Vite as your build tool, configuring multi-entry builds for different extension contexts (background service worker, content scripts, popup, and options page), and establishing a productive development workflow.
 
-Why Vite {#why-vite}
+## Why Vite {#why-vite}
 
 Vite offers several compelling advantages for Chrome extension development. First, its development server starts instantly by serving files over native ES modules rather than bundling everything upfront. This means you get near-instant server startup even for larger extension projects. The Hot Module Replacement system is extraordinarily fast, changes to your popup or options React/Vue/Svelte components update in the browser typically within 10-50 milliseconds, making for a remarkably smooth development experience.
 
@@ -21,7 +21,7 @@ Vite includes built-in support for TypeScript, JSX, and CSS modules without requ
 
 Additionally, Vite's configuration system is straightforward and JavaScript-focused, making it accessible to developers who may be less familiar with webpack's more complex configuration DSL.
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 A typical Chrome extension project built with Vite follows a structured directory layout that separates different extension contexts:
 
@@ -52,7 +52,7 @@ tsconfig.json             # TypeScript configuration
 
 This structure keeps each extension context isolated while allowing shared code to be imported where needed. The manifest.json typically stays in the project root and gets copied to the dist folder during the build process.
 
-vite.config.ts {#viteconfigts}
+## vite.config.ts {#viteconfigts}
 
 The Vite configuration for a Chrome extension requires setting up multiple entry points, each corresponding to a different extension context. Here is a comprehensive configuration:
 
@@ -91,7 +91,7 @@ export default defineConfig({
 
 This configuration defines four entry points: popup, options, background, and content. Each entry produces a corresponding JavaScript file in the dist directory. The resolve aliases provide convenient imports for shared code.
 
-Service Worker Build {#service-worker-build}
+## Service Worker Build {#service-worker-build}
 
 The background service worker presents unique challenges because it runs in a special Chrome context without access to the DOM. Unlike popup and options pages, the service worker cannot use HMR, each change requires reloading the extension in Chrome. Additionally, the service worker must be a single bundled file with no dynamic imports, as Chrome loads it as a single script.
 
@@ -113,7 +113,7 @@ rollupOptions: {
 
 The inlineDynamicImports option ensures all code is bundled into one file, which is required for service workers. Some developers prefer to create a separate build configuration specifically for the service worker to have more granular control over the output.
 
-Content Script Build {#content-script-build}
+## Content Script Build {#content-script-build}
 
 Content scripts are injected into web pages and must be completely self-contained since they run in the context of arbitrary websites. They cannot rely on any external dependencies being present, and Chrome requires them to be specified as single files in the manifest.
 
@@ -142,7 +142,7 @@ styleElement.textContent = styles;
 document.head.appendChild(styleElement);
 ```
 
-Popup and Options with Frameworks {#popup-and-options-with-frameworks}
+## Popup and Options with Frameworks {#popup-and-options-with-frameworks}
 
 Vite works smoothly with React, Vue, Svelte, and other frameworks for your popup and options pages. The HMR system works naturally, allowing you to develop your UI without constantly reloading the extension.
 
@@ -166,7 +166,7 @@ root.render(
 );
 ```
 
-The corresponding HTML file needs a root element:
+### The corresponding HTML file needs a root element:
 
 ```html
 <!-- src/popup/popup.html -->
@@ -186,7 +186,7 @@ The corresponding HTML file needs a root element:
 
 Vue and Svelte work similarly, with Vite handling the compilation automatically. Each framework's development server will reload your changes instantly.
 
-Development Workflow {#development-workflow}
+## Development Workflow {#development-workflow}
 
 The typical development workflow with Vite and Chrome extensions involves a few key steps. First, start the development build with watch mode:
 
@@ -211,7 +211,7 @@ The `vite build --watch` command continuously rebuilds your extension as you mak
 
 For a more streamlined experience, consider using the Chrome Extension Reload plugin for VS Code, which automatically reloads the extension when files change. Alternatively, the CRXJS Vite Plugin provides built-in auto-reload functionality.
 
-Vite Plugins for Extensions {#vite-plugins-for-extensions}
+## Vite Plugins for Extensions {#vite-plugins-for-extensions}
 
 Several Vite plugins simplify Chrome extension development. The most popular options include:
 
@@ -223,7 +223,7 @@ Manual Configuration provides the most control but requires more setup. You defi
 
 For most projects, starting with CRXJS is recommended as it provides the best balance of convenience and functionality.
 
-Production Build {#production-build}
+## Production Build {#production-build}
 
 The production build process creates optimized files ready for distribution. A complete build script might look like:
 
@@ -263,9 +263,9 @@ copyManifest();
 
 After building, you can upload the resulting zip file to the Chrome Web Store using the developer dashboard or the chrome-webstore-upload tool.
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Complete vite.config.ts for Extension {#complete-viteconfigts-for-extension}
+## Complete vite.config.ts for Extension {#complete-viteconfigts-for-extension}
 
 ```ts
 import { defineConfig } from 'vite';
@@ -298,7 +298,7 @@ export default defineConfig({
 });
 ```
 
-Package.json Scripts {#packagejson-scripts}
+## Package.json Scripts {#packagejson-scripts}
 
 ```json
 {
@@ -323,7 +323,7 @@ Package.json Scripts {#packagejson-scripts}
 }
 ```
 
-TypeScript Service Worker Entry {#typescript-service-worker-entry}
+## TypeScript Service Worker Entry {#typescript-service-worker-entry}
 
 ```ts
 // src/background/service-worker.ts
@@ -347,7 +347,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 For more information on related topics, see these guides:
 
@@ -355,9 +355,9 @@ For more information on related topics, see these guides:
 - [CI/CD Pipeline](./ci-cd-pipeline.md) - Automated testing and deployment workflows
 - [Architecture Patterns](./architecture-patterns.md) - Design patterns for scalable extension architecture
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Esbuild Setup](../guides/esbuild-extension-setup.md)
 - [Rollup Setup](../guides/rollup-extension-setup.md)

@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/mv3/testing-mv3-extensions/"
 last_modified_at: 2026-01-15
 ---
 
-Testing MV3 Extensions
+### Testing MV3 Extensions
 
-Unit Testing Service Workers {#unit-testing-service-workers}
+## Unit Testing Service Workers {#unit-testing-service-workers}
 Service workers have no DOM. test business logic separately.
 
 ```typescript
@@ -39,7 +39,7 @@ test('shouldBlock matches suffix', () => {
 });
 ```
 
-Mocking Chrome APIs {#mocking-chrome-apis}
+## Mocking Chrome APIs {#mocking-chrome-apis}
 ```typescript
 // __mocks__/chrome.ts
 export const chrome = {
@@ -77,7 +77,7 @@ export const chrome = {
 globalThis.chrome = chrome as any;
 ```
 
-Testing with @theluckystrike/webext-storage {#testing-with-theluckystrikewebext-storage}
+## Testing with @theluckystrike/webext-storage {#testing-with-theluckystrikewebext-storage}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -93,7 +93,7 @@ test('storage set and get', async () => {
 });
 ```
 
-Integration Testing with Puppeteer {#integration-testing-with-puppeteer}
+## Integration Testing with Puppeteer {#integration-testing-with-puppeteer}
 ```typescript
 import puppeteer from 'puppeteer';
 
@@ -119,7 +119,7 @@ const text = await page.$eval('#status', el => el.textContent);
 expect(text).toBe('Enabled');
 ```
 
-Testing with Playwright {#testing-with-playwright}
+## Testing with Playwright {#testing-with-playwright}
 ```typescript
 import { chromium } from 'playwright';
 
@@ -137,7 +137,7 @@ const page = await context.newPage();
 await page.goto(`chrome-extension://${extId}/popup.html`);
 ```
 
-Testing Service Worker Lifecycle {#testing-service-worker-lifecycle}
+## Testing Service Worker Lifecycle {#testing-service-worker-lifecycle}
 ```typescript
 // Test that extension survives SW termination
 test('survives service worker restart', async () => {
@@ -159,7 +159,7 @@ test('survives service worker restart', async () => {
 });
 ```
 
-Testing Content Scripts {#testing-content-scripts}
+## Testing Content Scripts {#testing-content-scripts}
 ```typescript
 test('content script injects UI', async () => {
   const page = await browser.newPage();
@@ -172,7 +172,7 @@ test('content script injects UI', async () => {
 });
 ```
 
-E2E Test Structure {#e2e-test-structure}
+## E2E Test Structure {#e2e-test-structure}
 ```
 tests/
   unit/           # Pure logic, no chrome APIs
@@ -182,7 +182,7 @@ tests/
   __mocks__/      # Chrome API mocks
 ```
 
-CI/CD Testing {#cicd-testing}
+## CI/CD Testing {#cicd-testing}
 ```yaml
 .github/workflows/test.yml
 name: Test
@@ -206,14 +206,14 @@ jobs:
       - run: npm run test:e2e
 ```
 
-Common Testing Pitfalls {#common-testing-pitfalls}
+## Common Testing Pitfalls {#common-testing-pitfalls}
 - Testing chrome API calls without mocks. throws errors
 - Not testing SW termination recovery. state loss bugs
 - Hardcoding extension IDs. use dynamic discovery
 - Not testing permission prompts. user flow gaps
 - Ignoring CSP in test environments. inline scripts break
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Guide: `docs/guides/testing-extensions.md`
 - MV3: `docs/mv3/service-workers.md`
 - Guide: `docs/guides/ci-cd-pipeline.md`

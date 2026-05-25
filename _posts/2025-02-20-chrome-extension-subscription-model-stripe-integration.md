@@ -19,7 +19,7 @@ This guide provides practical implementation details for developers building sub
 
 ---
 
-Why Subscriptions Work for Chrome Extensions
+### Why Subscriptions Work for Chrome Extensions
 
 Subscription models have fundamentally changed how Chrome extension developers build sustainable businesses. Unlike one-time purchases that require constant new customer acquisition, subscriptions create predictable recurring revenue that compounds over time. For extensions that require ongoing development, server infrastructure, or regular feature updates, subscriptions provide the financial foundation for long-term success.
 
@@ -29,17 +29,17 @@ From a business perspective, subscriptions offer superior predictability compare
 
 ---
 
-Stripe Account Setup for Extension Developers
+### Stripe Account Setup for Extension Developers
 
 Setting up Stripe correctly from the start saves significant headache later. Begin by creating a Stripe account at stripe.com using your business email. Stripe offers test mode immediately, so you can build and test your entire subscription flow before processing any real payments.
 
-Business Registration Requirements
+### Business Registration Requirements
 
 Stripe requires business verification for live mode processing. For Chrome extension developers, this typically means providing your legal business name (even if you're a solo developer operating as a sole proprietorship), tax ID, and bank account information for payouts. Stripe supports individual accounts, making it accessible to developers who have not yet incorporated. The verification process usually completes within a few days, though some cases require additional documentation.
 
 You'll need to choose your payout schedule, daily, weekly, or monthly, based on your cash flow needs. Stripe holds a small rolling reserve (typically 10% for 90 days) for new accounts, which protects against chargebacks but affects initial cash flow. This reserve decreases as you build a positive payment history.
 
-API Keys and Environment Configuration
+### API Keys and Environment Configuration
 
 Stripe provides two sets of API keys: test mode and live mode. Test mode keys begin with `sk_test_` (secret key) and `pk_test_` (publishable key), while live mode keys use `sk_live_` and `pk_live_`. Never expose your secret keys in Chrome extension code, these belong only on your backend server.
 
@@ -47,11 +47,11 @@ Create separate Stripe products for each subscription tier. A typical Chrome ext
 
 ---
 
-Payment Links vs Embedded Checkout
+### Payment Links vs Embedded Checkout
 
 Stripe offers two primary checkout approaches: Payment Links (hosted pages) and Embedded Checkout (iframe integration). For Chrome extensions, the choice significantly impacts user experience and conversion rates.
 
-Payment Links: Simplicity First
+### Payment Links: Simplicity First
 
 Payment Links generate a shareable URL that redirects users to Stripe's hosted checkout page. This approach requires minimal implementation, you create the link in your Stripe Dashboard or via API, then direct users to it from your extension. Stripe handles all payment form UI, card validation, and security compliance.
 
@@ -80,7 +80,7 @@ async function createSubscriptionLink(priceId, customerId) {
 }
 ```
 
-Embedded Checkout: Smooth Experience
+### Embedded Checkout: Smooth Experience
 
 Embedded Checkout renders Stripe's payment form directly within your extension or website, keeping users in your environment. This approach provides a more cohesive experience and typically converts better because users never leave your context.
 
@@ -103,11 +103,11 @@ The tradeoff is additional complexity, you need a backend endpoint that creates 
 
 ---
 
-Stripe Customer Portal
+### Stripe Customer Portal
 
 The Stripe Customer Portal provides self-service account management without building custom UI. Users can upgrade, downgrade, cancel, update payment methods, and download invoices through Stripe's hosted interface. Enabling this feature takes minutes but dramatically improves user experience.
 
-Enabling the Customer Portal
+### Enabling the Customer Portal
 
 Enable the Customer Portal in your Stripe Dashboard under Settings → Customer Portal. Configure allowed actions based on your business needs:
 
@@ -116,7 +116,7 @@ Enable the Customer Portal in your Stripe Dashboard under Settings → Customer 
 - Payment methods: Let users add, remove, or set default payment methods
 - Invoice history: Enable downloading past invoices for business expense tracking
 
-Integrating Portal Links in Your Extension
+### Integrating Portal Links in Your Extension
 
 Add a "Manage Subscription" button in your extension that redirects authenticated users to a portal session URL. Your backend creates the session:
 
@@ -146,11 +146,11 @@ This simple integration gives users full control over their subscription while k
 
 ---
 
-Webhook Endpoint Architecture
+### Webhook Endpoint Architecture
 
 Webhooks notify your backend about Stripe events in real-time, payment successes, subscription renewals, failed charges, and more. Solid webhook handling is essential for maintaining accurate subscription state and delivering features reliably.
 
-Setting Up Webhooks
+### Setting Up Webhooks
 
 Register webhook endpoints in your Stripe Dashboard or via API. Production endpoints should use HTTPS with a valid SSL certificate. Stripe sends webhook payloads as JSON with a signature in the `Stripe-Signature` header that you must verify:
 
@@ -194,7 +194,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 });
 ```
 
-Essential Events to Handle
+### Essential Events to Handle
 
 For Chrome extension subscriptions, prioritize handling these webhook events:
 
@@ -206,11 +206,11 @@ For Chrome extension subscriptions, prioritize handling these webhook events:
 
 ---
 
-License Key Generation and Validation
+### License Key Generation and Validation
 
 While Stripe manages the billing relationship, many extensions implement license keys for user authentication. This allows users to activate their subscription across multiple devices or browsers without tying access to a specific account.
 
-Generating License Keys
+### Generating License Keys
 
 Generate unique license keys using cryptographically secure random values:
 
@@ -233,7 +233,7 @@ function generateLicenseKey() {
 
 Store license keys in your database linked to customer records, subscription status, and activation limits. Track which devices or browsers have activated each license.
 
-Validating Licenses
+### Validating Licenses
 
 License validation should always occur server-side to prevent circumvention. Your extension sends the license key to your backend, which verifies it against your database and returns the subscription status:
 
@@ -267,11 +267,11 @@ async function validateLicense(licenseKey) {
 
 ---
 
-chrome.storage for License State
+### chrome.storage for License State
 
 Chrome extensions should cache subscription state locally for performance while periodically syncing with the server for accuracy. The chrome.storage API provides synchronous access and persists across browser sessions.
 
-Storing Subscription State
+### Storing Subscription State
 
 ```javascript
 // Store subscription data after validation
@@ -288,7 +288,7 @@ function cacheSubscription(data) {
 }
 ```
 
-Reading Cached State
+### Reading Cached State
 
 Check cached state for immediate UI updates while background verification happens:
 
@@ -302,9 +302,9 @@ function getCachedSubscription() {
 }
 ```
 
-Implementing Periodic Verification
+### Implementing Periodic Verification
 
-Verify subscription status periodically and after significant events:
+### Verify subscription status periodically and after significant events:
 
 ```javascript
 async function verifySubscription() {
@@ -333,11 +333,11 @@ async function verifySubscription() {
 
 ---
 
-Feature Gating Based on Subscription Tier
+### Feature Gating Based on Subscription Tier
 
 Feature gating controls which functionality users can access based on their subscription level. Effective gating maximizes conversion while maintaining a fair value exchange.
 
-Defining Feature Flags
+### Defining Feature Flags
 
 ```javascript
 const FEATURES = {
@@ -368,7 +368,7 @@ const FEATURES = {
 };
 ```
 
-Implementing Access Checks
+### Implementing Access Checks
 
 ```javascript
 function canUseFeature(featureName) {
@@ -395,7 +395,7 @@ async function handleTabSuspend() {
 }
 ```
 
-Graceful Degradation
+### Graceful Degradation
 
 When users exceed limits or access gated features, provide clear upgrade prompts rather than just blocking functionality:
 
@@ -413,13 +413,13 @@ function checkFeatureAccess(requestedFeature) {
 
 ---
 
-Grace Periods and Trial Handling
+### Grace Periods and Trial Handling
 
 Grace periods protect users from accidental service interruption due to payment failures, while trials reduce friction for new subscribers.
 
-Configuring Trial Periods
+### Configuring Trial Periods
 
-Stripe supports trial periods at subscription creation:
+### Stripe supports trial periods at subscription creation:
 
 ```javascript
 const subscription = await stripe.subscriptions.create({
@@ -434,7 +434,7 @@ const subscription = await stripe.subscriptions.create({
 
 Users enter their payment information but are not charged until the trial ends. Stripe automatically sends reminder emails before trial expiration.
 
-Implementing Grace Periods for Failed Payments
+### Implementing Grace Periods for Failed Payments
 
 When recurring payments fail, grant a grace period before revoking access:
 
@@ -466,13 +466,13 @@ During the grace period, users retain full access while Stripe automatically ret
 
 ---
 
-Churn Prevention Strategies
+### Churn Prevention Strategies
 
 Reducing churn, customers canceling their subscriptions, directly impacts revenue. Proactive churn prevention often costs less than acquiring new subscribers.
 
-Identifying At-Risk Users
+### Identifying At-Risk Users
 
-Monitor usage patterns that indicate dissatisfaction:
+### Monitor usage patterns that indicate dissatisfaction:
 
 ```javascript
 async function checkChurnRisk(userId) {
@@ -494,7 +494,7 @@ async function checkChurnRisk(userId) {
 }
 ```
 
-Win-Back Campaigns
+### Win-Back Campaigns
 
 For users who cancel, implement automated win-back sequences:
 
@@ -502,7 +502,7 @@ For users who cancel, implement automated win-back sequences:
 2. Timed email sequence: Send helpful content, feature updates, and discount offers over 14 days
 3. Exclusive return offer: Offer a discounted rate for returning within 30 days
 
-Cancellation Flow Optimization
+### Cancellation Flow Optimization
 
 Make cancellation difficult but not frustrating. Offer a pause option (suspend billing for 1-3 months) instead of cancellation:
 
@@ -520,11 +520,11 @@ async function createPauseSession(customerId) {
 
 ---
 
-Stripe Tax for Global Sales
+### Stripe Tax for Global Sales
 
 If you sell to users worldwide, you likely need to collect and remit sales tax, VAT, or GST. Stripe Tax automates this complexity.
 
-Enabling Stripe Tax
+### Enabling Stripe Tax
 
 Enable Stripe Tax in your Stripe Dashboard. You'll need to:
 
@@ -534,7 +534,7 @@ Enable Stripe Tax in your Stripe Dashboard. You'll need to:
 
 Stripe Tax determines the correct tax rate based on customer location (collected via checkout) and automatically adds it to the total.
 
-Tax Configuration for Digital Products
+### Tax Configuration for Digital Products
 
 Digital products have specific tax rules that vary by jurisdiction. Configure your products with the appropriate tax category:
 
@@ -549,11 +549,11 @@ Stripe handles nexus registration in various jurisdictions through their Stripe 
 
 ---
 
-Revenue Dashboard
+### Revenue Dashboard
 
 Tracking subscription metrics helps you understand business health and identify growth opportunities.
 
-Key Metrics to Monitor
+### Key Metrics to Monitor
 
 - Monthly Recurring Revenue (MRR): Total predictable monthly revenue
 - Annual Recurring Revenue (ARR): MRR × 12
@@ -561,7 +561,7 @@ Key Metrics to Monitor
 - Churn Rate: Percentage of subscribers canceling each month
 - Net Revenue Retention (NRR): Revenue from existing customers after accounting for churn, upgrades, and downgrades
 
-Building a Simple Dashboard
+### Building a Simple Dashboard
 
 ```javascript
 // Backend: Calculate key metrics
@@ -599,20 +599,20 @@ Stripe also provides a Revenue Recognition dashboard within their platform for m
 
 ---
 
-Testing with Stripe Test Mode
+### Testing with Stripe Test Mode
 
 Thorough testing prevents payment failures and subscription issues in production.
 
-Test Card Numbers
+### Test Card Numbers
 
-Stripe provides test card numbers for various scenarios:
+### Stripe provides test card numbers for various scenarios:
 
 - Success: 4242 4242 4242 4242 (any future date, any CVC)
 - Decline: 4000 0000 0000 0002
 - Insufficient funds: 4000 0000 0000 9995
 - Expired card: 4000 0000000000069
 
-Simulating Webhook Events
+### Simulating Webhook Events
 
 Use the Stripe CLI to test webhook handling locally:
 
@@ -625,7 +625,7 @@ stripe trigger customer.subscription.created
 stripe trigger invoice.payment_failed
 ```
 
-Testing the Full Flow
+### Testing the Full Flow
 
 Implement a complete test flow:
 
@@ -639,7 +639,7 @@ Implement a complete test flow:
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing a subscription model for your Chrome extension requires upfront investment but pays dividends in sustainable revenue and user relationships. Stripe's comprehensive tools handle the heavy lifting, payment processing, subscription management, tax compliance, and customer portals, letting you focus on building a great extension.
 
@@ -649,7 +649,7 @@ The extension ecosystem rewards developers who treat subscriptions as partnershi
 
 ---
 
-Related Resources
+### Related Resources
 
 - [Chrome Extension Stripe Payment Integration](/2025/01/18/chrome-extension-stripe-payment-integration/)
 - [Chrome Extension Monetization Strategies](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/)

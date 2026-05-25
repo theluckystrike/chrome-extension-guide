@@ -16,7 +16,7 @@ If you're a PC gamer who uses a browser alongside your games, you understand the
 
 ---
 
-Table of Contents
+### Table of Contents
 
 1. [The Gamer's Browser Dilemma](#the-gamers-browser-dilemma)
 2. [How Browser Tabs Impact Gaming Performance](#how-browser-tabs-impact-gaming-performance)
@@ -32,7 +32,7 @@ Table of Contents
 
 ---
 
-The Gamer's Browser Dilemma {#the-gamers-browser-dilemma}
+## The Gamer's Browser Dilemma {#the-gamers-browser-dilemma}
 
 Modern gaming rarely happens in isolation. The gaming experience has evolved to incorporate multiple applications running simultaneously. Here's a typical gaming session for many PC gamers:
 
@@ -57,17 +57,17 @@ For competitive gamers, even a few frames of dropped performance can mean the di
 
 ---
 
-How Browser Tabs Impact Gaming Performance {#how-browser-tabs-impact-gaming-performance}
+## How Browser Tabs Impact Gaming Performance {#how-browser-tabs-impact-gaming-performance}
 
 To understand why Tab Suspender Pro is so valuable for gamers, you need to understand how browser tabs consume system resources.
 
-Memory Consumption
+### Memory Consumption
 
 Each Chrome tab runs as a separate process with its own memory allocation. A typical tab consumes between 100 MB and 500 MB of RAM, depending on the complexity of the website. More complex sites like YouTube, Google Docs, or interactive web applications can consume 1 GB or more per tab.
 
 If you have 20 tabs open while gaming, your browser could be using 2-10 GB of RAM alone. Most gaming PCs have 16 GB of RAM, so this represents a significant portion of available memory.
 
-CPU Usage
+### CPU Usage
 
 Even when you're not actively viewing a tab, it continues using CPU resources for:
 
@@ -78,21 +78,21 @@ Even when you're not actively viewing a tab, it continues using CPU resources fo
 
 This idle CPU usage compounds across tabs, creating a constant background drain on your system.
 
-GPU Resources
+### GPU Resources
 
 Modern web pages use hardware acceleration for rendering, which means tabs compete for your GPU even when minimized. This is particularly problematic for gamers since your GPU is already working hard rendering your game.
 
-Network Bandwidth
+### Network Bandwidth
 
 Tabs maintain network connections and may perform background data fetching. This can cause network congestion, increase latency, and affect online gaming performance.
 
 ---
 
-What Is Tab Suspender Pro? {#what-is-tab-suspender-pro}
+## What Is Tab Suspender Pro? {#what-is-tab-suspender-pro}
 
 Tab Suspender Pro is a Chrome extension that automatically suspends inactive tabs to free up system resources. When a tab is suspended, Chrome unloads its content and replaces it with a lightweight placeholder. The tab's state (URL, scroll position, form data) is preserved, but it no longer consumes significant memory, CPU, or GPU resources.
 
-Key characteristics of Tab Suspender Pro:
+### Key characteristics of Tab Suspender Pro:
 
 - Automatic suspension: Tabs are suspended after a configurable period of inactivity
 - Instant restoration: Clicking a suspended tab reloads it immediately
@@ -104,7 +104,7 @@ For gamers, Tab Suspender Pro means you can keep your reference tabs open. wiki 
 
 ---
 
-How Tab Suspender Pro Enhances Gaming Performance {#how-tab-suspender-pro-enhances-gaming-performance}
+## How Tab Suspender Pro Enhances Gaming Performance {#how-tab-suspender-pro-enhances-gaming-performance}
 
 Tab Suspender Pro provides several specific benefits that directly improve gaming performance:
 
@@ -130,11 +130,11 @@ If you need to quickly check something in the browser and return to your game, T
 
 ---
 
-Key Features for Gamers {#key-features-for-gamers}
+## Key Features for Gamers {#key-features-for-gamers}
 
 Tab Suspender Pro includes several features specifically designed for gaming scenarios:
 
-Whitelist/Exclusion Lists
+### Whitelist/Exclusion Lists
 
 You can exclude specific sites from suspension. For gamers, this typically includes:
 
@@ -143,42 +143,42 @@ You can exclude specific sites from suspension. For gamers, this typically inclu
 - Music services you're listening to
 - Game clients that run in the browser
 
-Manual Suspension
+### Manual Suspension
 
 Sometimes you want to suspend tabs immediately without waiting for the inactivity timer. Tab Suspender Pro provides keyboard shortcuts and context menu options for instant suspension.
 
-Suspension Indicators
+### Suspension Indicators
 
 Visual indicators show which tabs are suspended, so you always know the status of your browser tabs at a glance.
 
-Group Support
+### Group Support
 
 If you use Chrome's tab groups feature, Tab Suspender Pro respects group boundaries and can suspend entire groups at once.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Quick keyboard shortcuts allow you to suspend all tabs or restore suspended tabs without interrupting your gaming flow.
 
 ---
 
-Configuring Tab Suspender Pro for Gaming {#configuring-tab-suspender-pro-for-gaming}
+## Configuring Tab Suspender Pro for Gaming {#configuring-tab-suspender-pro-for-gaming}
 
 To get the most out of Tab Suspender Pro for gaming, follow these configuration recommendations:
 
-Step 1: Install Tab Suspender Pro
+### Step 1: Install Tab Suspender Pro
 
 First, install Tab Suspender Pro from the Chrome Web Store:
 
 [Download Tab Suspender Pro](https://chrome.google.com/webstore/detail/tab-suspender-pro/)
 
-Step 2: Configure Suspension Timing
+### Step 2: Configure Suspension Timing
 
 In the extension settings, adjust the suspension timing:
 
 - Suspension delay: Set to 1-2 minutes of inactivity. This gives you time to switch between tabs while ensuring quick suspension when you start gaming.
 - Activation detection: Enable intelligent detection that recognizes when you're interacting with a game (alt-tab away from Chrome).
 
-Step 3: Set Up Your Whitelist
+### Step 3: Set Up Your Whitelist
 
 Add sites that should never be suspended:
 
@@ -191,43 +191,43 @@ store.steampowered.com
 play.google.com
 ```
 
-Step 4: Configure Keyboard Shortcuts
+### Step 4: Configure Keyboard Shortcuts
 
-Set up convenient keyboard shortcuts:
+### Set up convenient keyboard shortcuts:
 
 - `Ctrl+Shift+S`: Suspend current tab
 - `Ctrl+Shift+A`: Suspend all tabs
 - `Ctrl+Shift+R`: Restore all suspended tabs
 
-Step 5: Enable Gaming Mode (if available)
+### Step 5: Enable Gaming Mode (if available)
 
 If your version includes a gaming mode, enable it to automatically apply stricter resource management when you launch games.
 
 ---
 
-Real-World Gaming Scenarios {#real-world-gaming-scenarios}
+## Real-World Gaming Scenarios {#real-world-gaming-scenarios}
 
 Let's examine how Tab Suspender Pro improves specific gaming scenarios:
 
-Scenario 1: MMO Gaming
+### Scenario 1: MMO Gaming
 
 You're playing an MMO like Final Fantasy XIV or World of Warcraft. You have multiple wiki pages open for item databases, quest guides, and crafting calculators. With Tab Suspender Pro, these tabs are suspended while you're in-game, freeing 2-3 GB of RAM. When you need information, click the tab and it restores instantly. Your game continues running smoothly with the extra memory available.
 
-Scenario 2: Competitive FPS
+### Scenario 2: Competitive FPS
 
 You're playing Valorant or Counter-Strike 2. Every frame matters for competitive performance. Before starting a match, you use Tab Suspender Pro to suspend all browser tabs. Your browser drops from 1.5 GB to 50 MB of memory usage. Your system now has more resources available for the game, potentially improving your FPS by 10-20 frames.
 
-Scenario 3: Game Research Session
+### Scenario 3: Game Research Session
 
 You're planning your next game purchase and have dozens of tabs open: review videos, comparison articles, Reddit discussions, Steam pages. You decide to play a game in between research. Tab Suspender Pro automatically suspends your research tabs when you switch to the game, keeping your system responsive. When you return to research, your tabs are exactly as you left them.
 
-Scenario 4: Streaming While Gaming
+### Scenario 4: Streaming While Gaming
 
 You're streaming on Twitch using OBS. Browser tabs consuming resources can affect your stream quality. Tab Suspender Pro suspends inactive tabs, ensuring more system resources are available for both your game and your streaming software. This results in higher quality streams with fewer dropped frames.
 
 ---
 
-Performance Benchmarks: With vs Without Tab Suspender Pro {#performance-benchmarks-with-vs-without-tab-suspender-pro}
+## Performance Benchmarks: With vs Without Tab Suspender Pro {#performance-benchmarks-with-vs-without-tab-suspender-pro}
 
 Here's what you can typically expect when using Tab Suspender Pro while gaming:
 
@@ -243,7 +243,7 @@ These numbers vary based on your specific setup, the games you play, and the typ
 
 ---
 
-Tips for Maximizing Gaming Performance {#tips-for-maximizing-gaming-performance}
+## Tips for Maximizing Gaming Performance {#tips-for-maximizing-gaming-performance}
 
 Beyond using Tab Suspender Pro, here are additional tips for optimizing your system for gaming while browsing:
 
@@ -261,39 +261,39 @@ Beyond using Tab Suspender Pro, here are additional tips for optimizing your sys
 
 ---
 
-FAQ {#faq}
+## FAQ {#faq}
 
-Does Tab Suspender Pro work with all games?
+### Does Tab Suspender Pro work with all games?
 
 Tab Suspender Pro works with any game and any application. It manages browser tabs specifically, so it doesn't directly interact with games. However, by freeing browser resources, it makes those resources available for any application, including games.
 
-Will suspended tabs lose their content?
+### Will suspended tabs lose their content?
 
 No, suspended tabs preserve all their content. When you click a suspended tab, it restores the page exactly as you left it, including scroll position, form data, and video playback position.
 
-Can I manually suspend tabs while gaming?
+### Can I manually suspend tabs while gaming?
 
 Yes, you can use keyboard shortcuts or right-click context menu options to suspend tabs instantly. This is useful when you want to immediately free resources before starting a gaming session.
 
-Does Tab Suspender Pro affect streaming?
+### Does Tab Suspender Pro affect streaming?
 
 Yes, positively! By reducing browser resource consumption, Tab Suspender Pro helps ensure more system resources are available for streaming software. This can result in higher stream quality and fewer dropped frames.
 
-How quickly does Tab Suspender Pro suspend tabs?
+### How quickly does Tab Suspender Pro suspend tabs?
 
 The default is configurable, typically between 30 seconds and 5 minutes of inactivity. You can also manually suspend tabs instantly using keyboard shortcuts.
 
-Will I lose access to my tabs while gaming?
+### Will I lose access to my tabs while gaming?
 
 No, suspended tabs are just one click away. When you need information, clicking a suspended tab instantly restores it. The restoration takes only a moment and doesn't interrupt your game permanently.
 
-Does Tab Suspender Pro work with Chrome's tab groups?
+### Does Tab Suspender Pro work with Chrome's tab groups?
 
 Yes, Tab Suspender Pro is compatible with Chrome's tab groups feature. It can suspend entire groups at once, which is useful for managing large numbers of related tabs.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 For gamers who browse, Tab Suspender Pro is an essential tool that bridges the gap between productivity and performance. It allows you to maintain all your reference materials, communication tools, and research tabs without sacrificing the gaming experience. By automatically managing browser resources, Tab Suspender Pro ensures your system is always optimized for what matters most. whether that's crushing enemies in a competitive shooter, exploring open worlds in RPGs, or streaming to your audience.
 

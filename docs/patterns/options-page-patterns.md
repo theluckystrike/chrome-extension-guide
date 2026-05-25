@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/options-page-patterns/
 last_modified_at: 2026-01-15
 ---
 
-Options Page Design Patterns
+### Options Page Design Patterns
 
 This document covers design and implementation patterns for Chrome extension options pages.
 
-Manifest Options: `options_page` vs `options_ui` {#manifest-options-options-page-vs-options-ui}
+## Manifest Options: `options_page` vs `options_ui` {#manifest-options-options-page-vs-options-ui}
 
-Chrome provides two manifest approaches for options pages:
+### Chrome provides two manifest approaches for options pages:
 
-Legacy: `options_page` {#legacy-options-page}
+## Legacy: `options_page` {#legacy-options-page}
 
 ```json
 {
@@ -24,7 +24,7 @@ Legacy: `options_page` {#legacy-options-page}
 
 Creates a full browser tab for settings. Simple but opens outside the extensions management UI.
 
-Modern: `options_ui` (Preferred) {#modern-options-ui-preferred}
+## Modern: `options_ui` (Preferred) {#modern-options-ui-preferred}
 
 ```json
 {
@@ -41,9 +41,9 @@ Embeds options in `chrome://extensions` page. The `open_in_tab` key controls beh
 
 Use `options_ui` with default settings for better integration.
 
-Settings Form Patterns {#settings-form-patterns}
+## Settings Form Patterns {#settings-form-patterns}
 
-Auto-Save on Change {#auto-save-on-change}
+## Auto-Save on Change {#auto-save-on-change}
 
 ```javascript
 document.querySelectorAll('input, select, textarea').forEach(el => {
@@ -63,7 +63,7 @@ function collectFormValues() {
 }
 ```
 
-Explicit Save Button {#explicit-save-button}
+## Explicit Save Button {#explicit-save-button}
 
 ```javascript
 document.getElementById('save-btn').addEventListener('click', async () => {
@@ -75,9 +75,9 @@ document.getElementById('save-btn').addEventListener('click', async () => {
 });
 ```
 
-Loading State {#loading-state}
+## Loading State {#loading-state}
 
-Load saved settings on page initialization:
+### Load saved settings on page initialization:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -89,9 +89,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-Validation {#validation}
+## Validation {#validation}
 
-Client-side validation before saving:
+### Client-side validation before saving:
 
 ```javascript
 function validateSettings(settings) {
@@ -113,9 +113,9 @@ function validateSettings(settings) {
 }
 ```
 
-Settings Organization {#settings-organization}
+## Settings Organization {#settings-organization}
 
-Tabbed Settings Page {#tabbed-settings-page}
+## Tabbed Settings Page {#tabbed-settings-page}
 
 ```html
 <div class="tabs">
@@ -135,9 +135,9 @@ Tabbed Settings Page {#tabbed-settings-page}
 </div>
 ```
 
-Section-Based Layout {#section-based-layout}
+## Section-Based Layout {#section-based-layout}
 
-For simpler settings, use collapsible sections:
+### For simpler settings, use collapsible sections:
 
 ```html
 <details>
@@ -149,7 +149,7 @@ For simpler settings, use collapsible sections:
 </details>
 ```
 
-Reset to Defaults {#reset-to-defaults}
+## Reset to Defaults {#reset-to-defaults}
 
 ```javascript
 document.getElementById('reset-btn').addEventListener('click', async () => {
@@ -166,9 +166,9 @@ document.getElementById('reset-btn').addEventListener('click', async () => {
 });
 ```
 
-Import/Export Settings {#importexport-settings}
+## Import/Export Settings {#importexport-settings}
 
-Export to JSON {#export-to-json}
+## Export to JSON {#export-to-json}
 
 ```javascript
 document.getElementById('export-btn').addEventListener('click', async () => {
@@ -184,7 +184,7 @@ document.getElementById('export-btn').addEventListener('click', async () => {
 });
 ```
 
-Import from JSON {#import-from-json}
+## Import from JSON {#import-from-json}
 
 ```javascript
 document.getElementById('import-btn').addEventListener('change', async (e) => {
@@ -207,9 +207,9 @@ document.getElementById('import-btn').addEventListener('change', async (e) => {
 });
 ```
 
-Settings Sync {#settings-sync}
+## Settings Sync {#settings-sync}
 
-Use `chrome.storage.sync` for cross-device synchronization:
+### Use `chrome.storage.sync` for cross-device synchronization:
 
 ```javascript
 // Settings automatically sync across user's devices
@@ -223,9 +223,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-Dynamic Settings {#dynamic-settings}
+## Dynamic Settings {#dynamic-settings}
 
-Show/hide options based on other settings:
+### Show/hide options based on other settings:
 
 ```javascript
 document.getElementById('theme').addEventListener('change', (e) => {
@@ -234,7 +234,7 @@ document.getElementById('theme').addEventListener('change', (e) => {
 });
 ```
 
-Number Inputs: Range Sliders {#number-inputs-range-sliders}
+## Number Inputs: Range Sliders {#number-inputs-range-sliders}
 
 ```html
 <label for="opacity">Opacity: <span id="opacity-value">80</span>%</label>
@@ -247,7 +247,7 @@ document.getElementById('opacity').addEventListener('input', (e) => {
 });
 ```
 
-Color Pickers {#color-pickers}
+## Color Pickers {#color-pickers}
 
 ```html
 <input type="color" id="accent-color" value="#3498db">
@@ -259,7 +259,7 @@ document.getElementById('accent-color').addEventListener('change', async (e) => 
 });
 ```
 
-Keyboard Navigation and Accessibility {#keyboard-navigation-and-accessibility}
+## Keyboard Navigation and Accessibility {#keyboard-navigation-and-accessibility}
 
 - Use `<fieldset>` and `<legend>` for grouped controls
 - Ensure all inputs have associated `<label>` elements
@@ -279,7 +279,7 @@ Keyboard Navigation and Accessibility {#keyboard-navigation-and-accessibility}
 </fieldset>
 ```
 
-Settings Migration {#settings-migration}
+## Settings Migration {#settings-migration}
 
 Handle schema changes between versions:
 
@@ -303,7 +303,7 @@ async function migrateSettings() {
 migrateSettings();
 ```
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Options Page Guide](../guides/options-page.md)
 - [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)

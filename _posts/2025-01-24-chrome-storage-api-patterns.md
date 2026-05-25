@@ -18,7 +18,7 @@ This guide covers all four storage areas. `sync`, `local`, `session`, and `manag
 
 ---
 
-Storage Areas Overview {#overview}
+## Storage Areas Overview {#overview}
 
 Chrome provides four distinct storage areas, each designed for different use cases:
 
@@ -29,7 +29,7 @@ Chrome provides four distinct storage areas, each designed for different use cas
 | `chrome.storage.session` | 10 MB | No, cleared on browser close | No | Extension only |
 | `chrome.storage.managed` | Varies | Yes | Via enterprise policy | Read-only for extension |
 
-Permission Requirements
+### Permission Requirements
 
 Add the `"storage"` permission to your manifest:
 
@@ -40,7 +40,7 @@ Add the `"storage"` permission to your manifest:
 }
 ```
 
-For unlimited local storage capacity, also add:
+### For unlimited local storage capacity, also add:
 
 ```json
 {
@@ -50,11 +50,11 @@ For unlimited local storage capacity, also add:
 
 ---
 
-chrome.storage.local. Persistent Local Storage {#local}
+## chrome.storage.local. Persistent Local Storage {#local}
 
 Local storage is the workhorse for most extension data. It provides generous storage limits, fast access, and persistence across browser restarts.
 
-Basic CRUD Operations
+### Basic CRUD Operations
 
 ```javascript
 // SET. Store data
@@ -95,7 +95,7 @@ await chrome.storage.local.remove(['cache', 'tempData']);
 await chrome.storage.local.clear();
 ```
 
-Data Structure Design
+### Data Structure Design
 
 Design your storage keys thoughtfully to avoid hitting per-key size limits and to make partial updates efficient:
 
@@ -124,13 +124,13 @@ Using namespaced keys (like `cache:articles`) keeps data modular. You can update
 
 ---
 
-chrome.storage.sync. Cross-Device Synchronization {#sync}
+## chrome.storage.sync. Cross-Device Synchronization {#sync}
 
 Sync storage automatically propagates data across all Chrome instances where the user is signed in. It is ideal for user preferences and small configuration data.
 
-Quota Constraints
+### Quota Constraints
 
-Sync storage has strict limits you must respect:
+### Sync storage has strict limits you must respect:
 
 | Limit | Value |
 |-------|-------|
@@ -149,7 +149,7 @@ console.log(`Using ${bytesInUse} of 102,400 bytes`);
 const keyBytes = await chrome.storage.sync.getBytesInUse(['settings']);
 ```
 
-Sync-Safe Data Patterns
+### Sync-Safe Data Patterns
 
 Because of the strict quotas, you need to be intentional about what goes into sync storage:
 
@@ -173,7 +173,7 @@ await chrome.storage.local.set({
 });
 ```
 
-Handling Sync Conflicts
+### Handling Sync Conflicts
 
 When the same key is modified on different devices simultaneously, Chrome uses a last-write-wins strategy. To handle this gracefully, include timestamps:
 
@@ -199,7 +199,7 @@ async function getDeviceId() {
 }
 ```
 
-Chunking Large Data for Sync
+### Chunking Large Data for Sync
 
 If you need to sync data that exceeds the 8 KB per-item limit, split it into chunks:
 
@@ -248,13 +248,13 @@ async function readLargeData(key) {
 
 ---
 
-chrome.storage.session. Ephemeral Per-Session Storage {#session}
+## chrome.storage.session. Ephemeral Per-Session Storage {#session}
 
 Session storage was introduced in Manifest V3 to replace the in-memory state that MV2 background pages could maintain. Data in session storage is cleared when the browser closes but persists across service worker restarts within the same browser session.
 
-Use Cases
+### Use Cases
 
-Session storage is perfect for:
+### Session storage is perfect for:
 
 - Temporary state that should not persist across browser restarts
 - Cached API responses that expire naturally when the browser closes
@@ -284,7 +284,7 @@ if (activeWorkflow) {
 }
 ```
 
-Exposing Session Storage to Content Scripts
+### Exposing Session Storage to Content Scripts
 
 By default, session storage is only accessible from the extension's service worker, popup, and options page. To make it accessible from content scripts:
 
@@ -297,7 +297,7 @@ chrome.storage.session.setAccessLevel({
 
 After this call, content scripts can read and write session storage directly.
 
-Service Worker State Management
+### Service Worker State Management
 
 Session storage solves the biggest problem of MV3 service workers. losing in-memory state when the worker is terminated:
 
@@ -351,11 +351,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-chrome.storage.managed. Enterprise Policy Storage {#managed}
+## chrome.storage.managed. Enterprise Policy Storage {#managed}
 
 Managed storage allows IT administrators to configure your extension via enterprise policies. The extension can only read this data. it is written by administrators through Chrome Enterprise management tools.
 
-Schema Definition
+### Schema Definition
 
 Define a JSON schema for your managed storage in a separate file:
 
@@ -391,7 +391,7 @@ Define a JSON schema for your managed storage in a separate file:
 }
 ```
 
-Reference it in your manifest:
+### Reference it in your manifest:
 
 ```json
 {
@@ -401,7 +401,7 @@ Reference it in your manifest:
 }
 ```
 
-Reading Managed Settings
+### Reading Managed Settings
 
 ```javascript
 async function getEffectiveConfig() {
@@ -426,11 +426,11 @@ async function getEffectiveConfig() {
 
 ---
 
-Listening for Changes with onChanged {#on-changed}
+## Listening for Changes with onChanged {#on-changed}
 
 The `chrome.storage.onChanged` event fires whenever any storage area is modified, enabling reactive programming patterns.
 
-Basic Change Listener
+### Basic Change Listener
 
 ```javascript
 chrome.storage.onChanged.addListener((changes, areaName) => {
@@ -442,7 +442,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 });
 ```
 
-Area-Specific Listeners
+### Area-Specific Listeners
 
 You can also listen to specific storage areas:
 
@@ -462,7 +462,7 @@ chrome.storage.local.onChanged.addListener((changes) => {
 });
 ```
 
-Reactive UI Updates in Popup
+### Reactive UI Updates in Popup
 
 Use `onChanged` to keep your popup UI synchronized with background state:
 
@@ -492,7 +492,7 @@ function renderStats(stats) {
 initPopup();
 ```
 
-Cross-Tab Content Script Synchronization
+### Cross-Tab Content Script Synchronization
 
 Keep content scripts on different tabs in sync using storage change events:
 
@@ -513,11 +513,11 @@ chrome.storage.sync.onChanged.addListener((changes) => {
 
 ---
 
-Advanced Patterns {#advanced-patterns}
+## Advanced Patterns {#advanced-patterns}
 
-Storage Wrapper with Type Safety
+### Storage Wrapper with Type Safety
 
-Build a typed storage wrapper for cleaner code:
+### Build a typed storage wrapper for cleaner code:
 
 ```javascript
 // storage.js
@@ -574,7 +574,7 @@ const unsubscribe = settings.onChange('theme', (newTheme, oldTheme) => {
 });
 ```
 
-Data Migration Between Versions
+### Data Migration Between Versions
 
 When your extension updates, you may need to migrate stored data to a new format:
 
@@ -646,7 +646,7 @@ async function migrateV2ToV3() {
 }
 ```
 
-Quota-Aware Storage with Automatic Eviction
+### Quota-Aware Storage with Automatic Eviction
 
 For local storage caches, implement automatic eviction when approaching quota limits:
 
@@ -737,7 +737,7 @@ if (!articles) {
 }
 ```
 
-Batching Writes to Avoid Quota Throttling
+### Batching Writes to Avoid Quota Throttling
 
 Sync storage has write-rate limits. Batch rapid updates to avoid hitting them:
 
@@ -790,7 +790,7 @@ writer.set('currentPage', '/dashboard');
 
 ---
 
-Choosing the Right Storage Area {#choosing}
+## Choosing the Right Storage Area {#choosing}
 
 Use this decision guide to select the appropriate storage area:
 
@@ -819,7 +819,7 @@ await chrome.storage.session.set({ currentTaskId: 'abc123' });
 
 ---
 
-Related Resources {#related}
+## Related Resources {#related}
 
 - [Chrome Runtime API: Messaging and Lifecycle](/2025/01/24/chrome-runtime-api-messaging/). Use messaging to coordinate storage operations across components
 - [Chrome Scripting API Complete Reference](/2025/01/24/chrome-scripting-api-complete-reference/). Inject scripts that read from storage
@@ -828,11 +828,11 @@ Related Resources {#related}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 The Chrome Storage API is far more than a simple key-value store. With four specialized storage areas, change listeners, and cross-context availability, it provides a complete data layer for Chrome extensions.
 
-Key takeaways:
+### Key takeaways:
 
 1. Use `sync` for small user preferences that should follow the user across devices. Respect the strict quotas.
 2. Use `local` for large datasets, caches, and data that does not need to sync. Request `unlimitedStorage` if you need more than 10 MB.

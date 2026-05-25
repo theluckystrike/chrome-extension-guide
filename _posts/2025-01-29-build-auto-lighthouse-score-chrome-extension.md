@@ -18,13 +18,13 @@ we will walk you through building a Chrome extension that automatically measures
 
 ---
 
-Why Build a Lighthouse Auto Extension? {#why-build}
+## Why Build a Lighthouse Auto Extension? {#why-build}
 
 The need for a performance score chrome extension stems from a fundamental problem: performance issues often go unnoticed until they cause measurable damage. By the time a developer runs a manual Lighthouse audit, the problem may have already impacted user experience and SEO rankings.
 
 A lighthouse auto extension solves this problem by making performance measurement passive and continuous. Every page load becomes an opportunity to gather performance data, creating a comprehensive view of how your web properties perform across different pages, devices, and network conditions.
 
-The Business Case
+### The Business Case
 
 Website performance directly impacts business metrics. Research consistently shows that:
 
@@ -34,7 +34,7 @@ Website performance directly impacts business metrics. Research consistently sho
 
 By building a web vitals extension, you are not just creating a developer tool, you are creating a product that solves real business problems. Developers, QA engineers, product managers, and even executives can benefit from at-a-glance performance visibility.
 
-Technical Motivation
+### Technical Motivation
 
 From a technical standpoint, building this extension teaches you several valuable skills:
 
@@ -45,29 +45,29 @@ From a technical standpoint, building this extension teaches you several valuabl
 
 ---
 
-Understanding the Architecture {#architecture}
+## Understanding the Architecture {#architecture}
 
 Before writing any code, let us understand how our lighthouse auto extension will work. The architecture consists of three main components working in concert.
 
-The Popup Interface
+### The Popup Interface
 
 The user-facing component displays current page performance scores. It shows the key Lighthouse metrics at a glance: Performance, Accessibility, Best Practices, SEO, and Progressive Web App compliance. This interface connects to the background service worker to fetch the latest audit results for the active tab.
 
-The Background Service Worker
+### The Background Service Worker
 
 The service worker acts as the brain of the extension. It listens for tab updates, triggers Lighthouse audits, stores results, and manages communication between different parts of the extension. In Manifest V3, service workers replace the old background pages and provide better performance and security.
 
-The Content Script
+### The Content Script
 
 The content script runs in the context of web pages and can inject UI elements, intercept network requests, and interact with the page DOM. For our lighthouse auto extension, the content script may display an inline overlay showing real-time performance indicators without requiring the user to open the popup.
 
 ---
 
-Setting Up the Project {#project-setup}
+## Setting Up the Project {#project-setup}
 
 Let us start by creating the project structure. You will need a manifest file, background script, popup interface, and content script.
 
-Directory Structure
+### Directory Structure
 
 Create a new folder for your extension and set up the following structure:
 
@@ -86,7 +86,7 @@ lighthouse-auto/
  lighthouse-worker.js
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest.json file defines our extension and its capabilities. For a lighthouse auto extension, we need careful permission management:
 
@@ -134,7 +134,7 @@ Pay close attention to the permissions we are requesting. The `activeTab` permis
 
 ---
 
-Building the Background Service Worker {#background-worker}
+## Building the Background Service Worker {#background-worker}
 
 The background service worker is where the magic happens. It listens for tab updates, triggers Lighthouse audits, and stores the results for later retrieval.
 
@@ -212,7 +212,7 @@ This background script automatically triggers an audit whenever a page loads or 
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup provides users with quick access to performance scores. Let us build a clean, informative interface.
 
@@ -484,7 +484,7 @@ function updateLastAudit(timestamp) {
 
 ---
 
-Adding Content Script Functionality {#content-script}
+## Adding Content Script Functionality {#content-script}
 
 The content script allows us to show performance indicators directly on the page. This makes the extension even more useful by providing instant visual feedback without requiring users to open the popup.
 
@@ -581,11 +581,11 @@ if (document.readyState === 'loading') {
 
 ---
 
-Integrating Real Lighthouse Audits {#lighthouse-integration}
+## Integrating Real Lighthouse Audits {#lighthouse-integration}
 
 In the examples above, we simulated Lighthouse scores for demonstration. For a production extension, you need to integrate the actual Lighthouse library. Here is how to do it properly.
 
-Using Lighthouse Programmatically
+### Using Lighthouse Programmatically
 
 The Chrome Extensions API does not provide direct access to Lighthouse, so you need to load it from a worker or inline script. Here is a production-ready approach:
 
@@ -648,7 +648,7 @@ This approach loads the Lighthouse JavaScript library and executes it in the con
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your lighthouse auto extension in various scenarios:
 
@@ -657,7 +657,7 @@ Before publishing, thoroughly test your lighthouse auto extension in various sce
 3. Error handling: Test on pages that fail to load, require authentication, or have CORS restrictions
 4. Performance: Ensure the extension does not significantly impact page load times
 
-To test your extension in Chrome:
+### To test your extension in Chrome:
 
 1. Navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
@@ -666,7 +666,7 @@ To test your extension in Chrome:
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and ready, you can publish it to reach millions of users:
 
@@ -680,33 +680,33 @@ For your web vitals extension, emphasize how it helps developers and marketers m
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 As you enhance your lighthouse auto extension, consider adding these advanced features:
 
-Historical Data Tracking
+### Historical Data Tracking
 
 Store Lighthouse scores over time to create performance dashboards. This helps identify trends and regressions before they become major issues.
 
-Custom Throttling Profiles
+### Custom Throttling Profiles
 
 Allow users to simulate different network conditions like 3G, 4G, or custom throttling profiles.
 
-Score Comparison
+### Score Comparison
 
 Compare scores between different versions of a website or between your site and competitors.
 
-Alerting System
+### Alerting System
 
 Notify users when scores drop below thresholds, helping them catch performance regressions early.
 
-Export Capabilities
+### Export Capabilities
 
 Export audit results to CSV, JSON, or integrate with CI/CD pipelines for automated performance testing.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a lighthouse auto extension is a rewarding project that teaches you valuable Chrome Extension development skills while creating a genuinely useful tool. By automatically measuring performance scores, you help developers, QA teams, and website owners maintain optimal performance without manual effort.
 

@@ -12,11 +12,11 @@ The popup is the most visible and frequently used interface in Chrome extensions
 
 Chrome extensions in 2026 have evolved significantly from their early days. With the mandatory adoption of Manifest V3, developers must contend with the ephemeral nature of popup lifecycles, new constraints around background service workers, and stricter security requirements. This guide addresses these challenges head-on, providing actionable patterns that work within Chrome's modern extension architecture.
 
-Understanding Popup Lifecycle in Manifest V3
+### Understanding Popup Lifecycle in Manifest V3
 
 Before diving into design patterns, you must understand how popup lifecycle differs from Manifest V2. In MV3, the popup is a temporary HTML document that exists only while visible. This fundamental characteristic shapes every design decision you make.
 
-The Ephemeral Nature of Popups
+### The Ephemeral Nature of Popups
 
 Unlike traditional web applications that maintain persistent state across user sessions, Chrome extension popups start fresh every time they open. Consider this fundamental difference:
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', initializePopup);
 
 This lifecycle characteristic means every popup interaction must account for the possibility that no prior state exists in memory. Your extension must be designed to handle rapid open-close cycles gracefully, loading and displaying relevant information within milliseconds.
 
-Communication Between Popup and Service Worker
+### Communication Between Popup and Service Worker
 
 The popup cannot maintain direct connections to external services or maintain long-running processes. Instead, it communicates with the background service worker for any operations that outlive the popup's visibility:
 
@@ -82,11 +82,11 @@ async function fetchDashboardData(): Promise<DashboardData> {
 
 The messaging pattern ensures your popup remains responsive while delegating complex operations to the service worker, which can run independently of popup visibility.
 
-Pattern 1: State Management Architecture
+### Pattern 1: State Management Architecture
 
 Robust state management forms the backbone of any professional popup. This pattern establishes a clean separation between data fetching, state storage, and UI rendering.
 
-The State Container Pattern
+### The State Container Pattern
 
 Implement a state container that manages loading, error, and data states uniformly across your popup:
 
@@ -144,7 +144,7 @@ dashboardState.addEventListener('statechange', () => renderDashboard());
 
 This pattern provides predictable state transitions and enables reactive UI updates without coupling your components to specific data-fetching logic.
 
-Persisting State Across Sessions
+### Persisting State Across Sessions
 
 While the popup loses its in-memory state when closed, you can preserve user preferences and cached data using chrome.storage:
 
@@ -202,11 +202,11 @@ const settingsManager = new PersistentStateManager<UserSettings>({
 
 The sync storage area ensures user preferences travel with their Google account across devices, a critical feature for extensions with multi-device users.
 
-Pattern 2: Responsive Layout Strategies
+### Pattern 2: Responsive Layout Strategies
 
 Chrome popup dimensions vary significantly based on user configuration, screen size, and Chrome's own UI scaling. Your design must adapt gracefully.
 
-Fluid Width with Maximum Constraints
+### Fluid Width with Maximum Constraints
 
 Design your popup with fluid width that respects both minimum and maximum bounds:
 
@@ -257,7 +257,7 @@ body.compact {
 }
 ```
 
-CSS Grid for Structured Layouts
+### CSS Grid for Structured Layouts
 
 CSS Grid provides precise control over popup layouts, enabling complex arrangements while maintaining responsiveness:
 
@@ -311,11 +311,11 @@ CSS Grid provides precise control over popup layouts, enabling complex arrangeme
 
 The grid layout ensures consistent spacing and organization regardless of popup content, while the explicit row definitions prevent content from pushing critical elements like the header or footer out of view.
 
-Pattern 3: Action-Oriented Navigation
+### Pattern 3: Action-Oriented Navigation
 
 Effective popups minimize navigation complexity, typically offering one to three primary actions rather than deep menu structures.
 
-Tab-Based Navigation
+### Tab-Based Navigation
 
 For extensions with multiple feature areas, tabs provide intuitive organization:
 
@@ -401,11 +401,11 @@ tabController.registerTab({
 
 Keyboard navigation support (numbers 1-9 for tabs) power users expect from professional tools like Tab Suspender Pro enhances accessibility and speeds up common workflows.
 
-Pattern 4: Form Design and Validation
+### Pattern 4: Form Design and Validation
 
 Settings and configuration interfaces require careful attention to form usability and data validation.
 
-Type-Safe Form Handling
+### Type-Safe Form Handling
 
 TypeScript enables type-safe form handling that prevents runtime errors and improves developer experience:
 
@@ -543,13 +543,13 @@ class SettingsForm {
 }
 ```
 
-Pattern 5: Performance Optimization
+### Pattern 5: Performance Optimization
 
 Popup performance directly impacts user perception of your extension. These patterns ensure snappy interactions.
 
-Lazy Loading Content
+### Lazy Loading Content
 
-Defer loading of non-critical content until needed:
+### Defer loading of non-critical content until needed:
 
 ```typescript
 // performance/LazyLoader.ts
@@ -600,9 +600,9 @@ lazyLoader.observe(statsContainer, async () => {
 });
 ```
 
-Debouncing Frequent Operations
+### Debouncing Frequent Operations
 
-Prevent performance issues from rapid user interactions:
+### Prevent performance issues from rapid user interactions:
 
 ```typescript
 // performance/Debouncer.ts
@@ -636,11 +636,11 @@ searchInput.addEventListener('input', (e) => {
 });
 ```
 
-Pattern 6: Accessibility Best Practices
+### Pattern 6: Accessibility Best Practices
 
 Professional extensions serve users with diverse needs. Accessibility should be a first-class concern.
 
-Keyboard Navigation and Focus Management
+### Keyboard Navigation and Focus Management
 
 ```typescript
 // accessibility/FocusManager.ts
@@ -697,7 +697,7 @@ class FocusManager {
 }
 ```
 
-ARIA Labels and Semantic HTML
+### ARIA Labels and Semantic HTML
 
 ```html
 <!-- popup.html - Accessible structure -->
@@ -741,7 +741,7 @@ ARIA Labels and Semantic HTML
 </form>
 ```
 
-Putting It All Together: A Complete Example
+### Putting It All Together: A Complete Example
 
 This example demonstrates how these patterns work together in a production-quality popup:
 
@@ -873,7 +873,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Conclusion
+### Conclusion
 
 Building professional Chrome extension popups requires understanding and implementing patterns that address MV3's unique constraints. The patterns explored in this guide, state management, responsive layouts, navigation design, form handling, performance optimization, and accessibility, represent the accumulated best practices of successful extensions like Tab Suspender Pro.
 

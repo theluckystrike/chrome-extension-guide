@@ -9,7 +9,7 @@ Build an Email Productivity Tracker
 
 Build a Chrome extension that tracks time spent on Gmail, displays daily/weekly statistics with charts, provides a focus mode with configurable time limits, and sends notifications when over time. Uses @theluckystrike/webext-storage for persistent data and chrome.idle for intelligent pause detection.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -17,7 +17,7 @@ Prerequisites {#prerequisites}
 
 ---
 
-Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
+## Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
 
 ```bash
 mkdir email-tracker && cd email-tracker
@@ -25,7 +25,7 @@ npm init -y
 npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging chart.js
 ```
 
-Create `manifest.json`:
+### Create `manifest.json`:
 
 ```json
 {
@@ -53,7 +53,7 @@ Create `manifest.json`:
 
 ---
 
-Step 2: Gmail Detection via Content Script {#step-2-gmail-detection-via-content-script}
+## Step 2: Gmail Detection via Content Script {#step-2-gmail-detection-via-content-script}
 
 Create `content/gmail-detector.js` to detect when user is actively reading or composing emails:
 
@@ -95,7 +95,7 @@ chrome.runtime.sendMessage({ type: 'GMAIL_ACTIVITY', isActive });
 
 ---
 
-Step 3: Time Tracking with Tab and Window Events {#step-3-time-tracking-with-tab-and-window-events}
+## Step 3: Time Tracking with Tab and Window Events {#step-3-time-tracking-with-tab-and-window-events}
 
 Create `background.js` to track time using `tabs.onActivated` and `windows.onFocusChanged`:
 
@@ -208,9 +208,9 @@ See [patterns/idle-detection.md](../patterns/idle-detection.md) for more idle de
 
 ---
 
-Step 4: Statistics Popup with Daily Totals and Weekly Chart {#step-4-statistics-popup-with-daily-totals-and-weekly-chart}
+## Step 4: Statistics Popup with Daily Totals and Weekly Chart {#step-4-statistics-popup-with-daily-totals-and-weekly-chart}
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -245,7 +245,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Create `popup/popup.js`:
+### Create `popup/popup.js`:
 
 ```javascript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
@@ -313,9 +313,9 @@ loadStats();
 
 ---
 
-Step 5: Focus Mode with Notifications and Daily Limit {#step-5-focus-mode-with-notifications-and-daily-limit}
+## Step 5: Focus Mode with Notifications and Daily Limit {#step-5-focus-mode-with-notifications-and-daily-limit}
 
-Extend `background.js` with focus mode logic:
+### Extend `background.js` with focus mode logic:
 
 ```javascript
 // Focus mode functions
@@ -359,7 +359,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Step 6: CSV Export and Data Persistence {#step-6-csv-export-and-data-persistence}
+## Step 6: CSV Export and Data Persistence {#step-6-csv-export-and-data-persistence}
 
 The popup already includes CSV export. For additional data management:
 
@@ -404,7 +404,7 @@ async function cleanupOldData() {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 This extension tracks email time through:
 1. Content script detects Gmail activity via URL and DOM

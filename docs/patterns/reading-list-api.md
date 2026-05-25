@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/reading-list-api/"
 last_modified_at: 2026-01-15
 ---
 
-Reading List API Patterns
+### Reading List API Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Reading List API (Chrome 120+) provides built-in reading list management. This guide covers 8 practical patterns for integrating reading list functionality into your extension.
 
 ---
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -33,9 +33,9 @@ function isReadingListSupported(): boolean {
 
 ---
 
-Pattern 1: Reading List API Basics {#pattern-1-reading-list-api-basics}
+## Pattern 1: Reading List API Basics {#pattern-1-reading-list-api-basics}
 
-Data Model {#data-model}
+## Data Model {#data-model}
 
 ```ts
 interface ReadingListEntry {
@@ -46,7 +46,7 @@ interface ReadingListEntry {
 }
 ```
 
-Adding Entries {#adding-entries}
+## Adding Entries {#adding-entries}
 
 ```ts
 // reading-list.ts
@@ -61,7 +61,7 @@ async function addToReadingList(url: string, title: string, hasBeenRead = false)
 }
 ```
 
-Querying Entries {#querying-entries}
+## Querying Entries {#querying-entries}
 
 ```ts
 // query-reading-list.ts
@@ -79,7 +79,7 @@ async function findByUrl(url: string): Promise<ReadingListEntry | null> {
 }
 ```
 
-Updating Entries {#updating-entries}
+## Updating Entries {#updating-entries}
 
 ```ts
 // update-reading-list.ts
@@ -98,7 +98,7 @@ async function updateTitle(url: string, title: string): Promise<boolean> {
 }
 ```
 
-Removing Entries {#removing-entries}
+## Removing Entries {#removing-entries}
 
 ```ts
 // remove-reading-list.ts
@@ -121,9 +121,9 @@ async function clearReadItems(): Promise<number> {
 
 ---
 
-Pattern 2: Add Current Page to Reading List {#pattern-2-add-current-page-to-reading-list}
+## Pattern 2: Add Current Page to Reading List {#pattern-2-add-current-page-to-reading-list}
 
-Manifest {#manifest}
+## Manifest {#manifest}
 
 ```jsonc
 {
@@ -132,7 +132,7 @@ Manifest {#manifest}
 }
 ```
 
-Action Click Handler {#action-click-handler}
+## Action Click Handler {#action-click-handler}
 
 ```ts
 // background.ts
@@ -160,7 +160,7 @@ async function showBadge(tabId: number, text: string, color: string): Promise<vo
 }
 ```
 
-Duplicate Detection {#duplicate-detection}
+## Duplicate Detection {#duplicate-detection}
 
 ```ts
 // duplicate-check.ts
@@ -181,15 +181,15 @@ function normalizeUrl(url: string): string {
 
 ---
 
-Pattern 3: Context Menu Integration {#pattern-3-context-menu-integration}
+## Pattern 3: Context Menu Integration {#pattern-3-context-menu-integration}
 
-Manifest {#manifest}
+## Manifest {#manifest}
 
 ```jsonc
 { "permissions": ["contextMenus", "readingList"] }
 ```
 
-Create Context Menus {#create-context-menus}
+## Create Context Menus {#create-context-menus}
 
 ```ts
 // context-menu.ts
@@ -208,7 +208,7 @@ export function createReadingListMenus(): void {
 }
 ```
 
-Handle Clicks {#handle-clicks}
+## Handle Clicks {#handle-clicks}
 
 ```ts
 // context-menu-handler.ts
@@ -242,9 +242,9 @@ chrome.contextMenus.onShown.addListener(async (info, tab) => {
 
 ---
 
-Pattern 4: Reading List Dashboard {#pattern-4-reading-list-dashboard}
+## Pattern 4: Reading List Dashboard {#pattern-4-reading-list-dashboard}
 
-Manifest {#manifest}
+## Manifest {#manifest}
 
 ```jsonc
 {
@@ -253,7 +253,7 @@ Manifest {#manifest}
 }
 ```
 
-Dashboard Logic {#dashboard-logic}
+## Dashboard Logic {#dashboard-logic}
 
 ```ts
 // sidepanel/dashboard.ts
@@ -379,9 +379,9 @@ class Dashboard {
 
 ---
 
-Pattern 5: Reading List Sync with External Services {#pattern-5-reading-list-sync-with-external-services}
+## Pattern 5: Reading List Sync with External Services {#pattern-5-reading-list-sync-with-external-services}
 
-Sync Manager {#sync-manager}
+## Sync Manager {#sync-manager}
 
 ```ts
 // sync/manager.ts
@@ -429,9 +429,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-Pattern 6: Smart Reading Suggestions {#pattern-6-smart-reading-suggestions}
+## Pattern 6: Smart Reading Suggestions {#pattern-6-smart-reading-suggestions}
 
-Reading Progress Tracking {#reading-progress-tracking}
+## Reading Progress Tracking {#reading-progress-tracking}
 
 ```ts
 // suggestions/tracker.ts
@@ -471,7 +471,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-Estimated Reading Time {#estimated-reading-time}
+## Estimated Reading Time {#estimated-reading-time}
 
 ```ts
 // reading-time.ts
@@ -489,9 +489,9 @@ async function getEstimatedTime(url: string): Promise<number> {
 
 ---
 
-Pattern 7: Reading List Notifications {#pattern-7-reading-list-notifications}
+## Pattern 7: Reading List Notifications {#pattern-7-reading-list-notifications}
 
-Badge Updates {#badge-updates}
+## Badge Updates {#badge-updates}
 
 ```ts
 // notifications/badge.ts
@@ -510,7 +510,7 @@ chrome.runtime.onStartup.addListener(updateBadge);
 chrome.storage.onChanged.addListener(() => updateBadge());
 ```
 
-Reminder Notifications {#reminder-notifications}
+## Reminder Notifications {#reminder-notifications}
 
 ```ts
 // notifications/reminder.ts
@@ -554,9 +554,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-Pattern 8: Offline Reading Support {#pattern-8-offline-reading-support}
+## Pattern 8: Offline Reading Support {#pattern-8-offline-reading-support}
 
-Cache Manager {#cache-manager}
+## Cache Manager {#cache-manager}
 
 ```ts
 // offline/cache.ts
@@ -608,7 +608,7 @@ chrome.readingList.onEntryUpdated.addListener(async (entry) => {
 });
 ```
 
-Offline Detection {#offline-detection}
+## Offline Detection {#offline-detection}
 
 ```ts
 // offline/manager.ts
@@ -631,7 +631,7 @@ class OfflineManager {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Description | Key APIs |
 |---------|-------------|----------|
@@ -644,7 +644,7 @@ Summary {#summary}
 | Notifications | Reminders, badge updates | `chrome.notifications`, `chrome.alarms` |
 | Offline Support | Cache articles in storage | `chrome.storage.local` |
 
-Key Takeaways {#key-takeaways}
+## Key Takeaways {#key-takeaways}
 
 1. URL as key: Reading List uses URLs as unique identifiers, normalize for duplicates.
 2. Query only: Use `query()` to retrieve entries; no direct get-by-ID.

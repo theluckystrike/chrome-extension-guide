@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Page Ruler Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - Drag to measure distances on any web page
 - Pixel and REM unit support
 - Element snap mode to align with page elements
@@ -20,14 +20,14 @@ What You'll Build {#what-youll-build}
 - Multiple simultaneous measurements
 - Keyboard modifiers for precise control
 
-Manifest {#manifest}
+## Manifest {#manifest}
 - permissions: activeTab, storage, scripting
 - action with popup for settings
 - commands for keyboard shortcuts
 
 ---
 
-Step 1: Ruler Overlay System {#step-1-ruler-overlay-system}
+## Step 1: Ruler Overlay System {#step-1-ruler-overlay-system}
 
 Create a canvas overlay that covers the entire viewport:
 
@@ -70,7 +70,7 @@ class RulerOverlay {
 
 ---
 
-Step 2: Drag Measurement {#step-2-drag-measurement}
+## Step 2: Drag Measurement {#step-2-drag-measurement}
 
 Handle mouse events to draw measurement lines:
 
@@ -109,7 +109,7 @@ Handle mouse events to draw measurement lines:
   }
 ```
 
-Enable pointer events only on the overlay:
+### Enable pointer events only on the overlay:
 
 ```javascript
 // Create a separate interaction layer
@@ -129,9 +129,9 @@ interactionLayer.addEventListener('mouseup', (e) => ruler.handleMouseUp(e));
 
 ---
 
-Step 3: Crosshair Guides {#step-3-crosshair-guides}
+## Step 3: Crosshair Guides {#step-3-crosshair-guides}
 
-Draw horizontal and vertical guide lines:
+### Draw horizontal and vertical guide lines:
 
 ```javascript
 // content-script/ruler-overlay.js (continued)
@@ -170,9 +170,9 @@ Draw horizontal and vertical guide lines:
 
 ---
 
-Step 4: Element Snap Mode {#step-4-element-snap-mode}
+## Step 4: Element Snap Mode {#step-4-element-snap-mode}
 
-Snap to DOM element boundaries:
+### Snap to DOM element boundaries:
 
 ```javascript
 // content-script/ruler-overlay.js (continued)
@@ -226,9 +226,9 @@ Snap to DOM element boundaries:
 
 ---
 
-Step 5: Dimension Display {#step-5-dimension-display}
+## Step 5: Dimension Display {#step-5-dimension-display}
 
-Show measurements with labels:
+### Show measurements with labels:
 
 ```javascript
 // content-script/ruler-overlay.js (continued)
@@ -267,7 +267,7 @@ Show measurements with labels:
 
 ---
 
-Step 6: Unit Conversion & Color Sampling {#step-6-unit-conversion-color-sampling}
+## Step 6: Unit Conversion & Color Sampling {#step-6-unit-conversion-color-sampling}
 
 ```javascript
 // content-script/utils.js
@@ -306,7 +306,7 @@ export function sampleColor(x, y) {
 
 ---
 
-Step 7: Keyboard Modifiers {#step-7-keyboard-modifiers}
+## Step 7: Keyboard Modifiers {#step-7-keyboard-modifiers}
 
 ```javascript
 // content-script/ruler-overlay.js (continued)
@@ -339,7 +339,7 @@ Step 7: Keyboard Modifiers {#step-7-keyboard-modifiers}
 
 ---
 
-Step 8: Background Script {#step-8-background-script}
+## Step 8: Background Script {#step-8-background-script}
 
 ```javascript
 // background.js
@@ -364,7 +364,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-Usage Tips {#usage-tips}
+## Usage Tips {#usage-tips}
 1. Click and drag to create a measurement
 2. Press S to toggle element snap mode
 3. Press C to copy color at endpoint
@@ -372,7 +372,7 @@ Usage Tips {#usage-tips}
 5. Press Delete to clear all measurements
 6. Click the extension icon to toggle ruler on/off
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - [Dynamic Content Injection](../patterns/dynamic-content-injection.md)
 - [DOM Observer Patterns](../patterns/dom-observer-patterns.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

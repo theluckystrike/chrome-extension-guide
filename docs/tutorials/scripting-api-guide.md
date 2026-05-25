@@ -10,9 +10,9 @@ Chrome Scripting API: Programmatic Script and CSS Injection
 
 The Chrome Scripting API (`chrome.scripting`) is the cornerstone of programmatic injection in Manifest V3 extensions. It provides fine-grained control over when and how JavaScript and CSS are injected into web pages, replacing the deprecated `chrome.tabs.executeScript` and `chrome.tabs.insertCSS` methods from Manifest V2.
 
-Overview {#overview}
+## Overview {#overview}
 
-The Scripting API enables extensions to:
+### The Scripting API enables extensions to:
 
 - Inject JavaScript code or files into pages dynamically
 - Insert and remove CSS styles programmatically
@@ -20,7 +20,7 @@ The Scripting API enables extensions to:
 - Target specific frames and documents
 - Execute scripts in different JavaScript worlds (MAIN vs ISOLATED)
 
-Required Permission {#required-permission}
+## Required Permission {#required-permission}
 
 To use the Scripting API, add the `scripting` permission to your `manifest.json`:
 
@@ -38,11 +38,11 @@ For injections that only affect the active tab (user-initiated), you can use the
 }
 ```
 
-executeScript: Injecting JavaScript {#executescript}
+## executeScript: Injecting JavaScript {#executescript}
 
 The `chrome.scripting.executeScript()` method is the primary way to inject JavaScript into web pages. It supports two injection methods: files and functions.
 
-Injecting Files {#injecting-files}
+## Injecting Files {#injecting-files}
 
 Inject a JavaScript file that exists in your extension:
 
@@ -60,7 +60,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Injecting Functions {#injecting-functions}
+## Injecting Functions {#injecting-functions}
 
 Inject an inline function that executes in the target page context:
 
@@ -99,7 +99,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Return Values {#return-values}
+## Return Values {#return-values}
 
 The `executeScript` method returns an array of results, one per frame:
 
@@ -114,13 +114,13 @@ chrome.scripting.executeScript({
 });
 ```
 
-insertCSS and removeCSS: Managing Styles {#insertcss}
+## insertCSS and removeCSS: Managing Styles {#insertcss}
 
 The Scripting API provides methods to inject and remove CSS stylesheets.
 
-insertCSS: Injecting Styles {#insertcss-inject}
+## insertCSS: Injecting Styles {#insertcss-inject}
 
-Inject CSS from a file:
+### Inject CSS from a file:
 
 ```javascript
 // Inject a CSS file
@@ -130,7 +130,7 @@ chrome.scripting.insertCSS({
 });
 ```
 
-Inject inline CSS:
+### Inject inline CSS:
 
 ```javascript
 // Inject inline CSS
@@ -153,9 +153,9 @@ chrome.scripting.insertCSS({
 });
 ```
 
-removeCSS: Removing Styles {#removecss}
+## removeCSS: Removing Styles {#removecss}
 
-Remove injected CSS styles:
+### Remove injected CSS styles:
 
 ```javascript
 // Remove injected CSS by specifying the same content
@@ -171,9 +171,9 @@ chrome.scripting.removeCSS({
 });
 ```
 
-CSS Injection with runAt {#css-runat}
+## CSS Injection with runAt {#css-runat}
 
-Control when CSS is injected:
+### Control when CSS is injected:
 
 ```javascript
 // Inject CSS before the page loads
@@ -184,11 +184,11 @@ chrome.scripting.insertCSS({
 });
 ```
 
-Injection Targets: Tabs, Frames, and All Frames {#injection-targets}
+## Injection Targets: Tabs, Frames, and All Frames {#injection-targets}
 
 The Scripting API provides granular control over where scripts are injected.
 
-Target Specific Tab {#target-tab}
+## Target Specific Tab {#target-tab}
 
 ```javascript
 // Inject into a specific tab by ID
@@ -198,7 +198,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Target All Frames in a Tab {#target-all-frames}
+## Target All Frames in a Tab {#target-all-frames}
 
 ```javascript
 // Inject into all frames in a tab
@@ -210,7 +210,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Target Specific Frames {#target-specific-frames}
+## Target Specific Frames {#target-specific-frames}
 
 ```javascript
 // Inject into specific frame IDs
@@ -220,7 +220,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Get Frame IDs First {#get-frame-ids}
+## Get Frame IDs First {#get-frame-ids}
 
 ```javascript
 // Get all frame IDs in a tab
@@ -234,11 +234,11 @@ chrome.webNavigation.getAllFrames({ tabId: tab.id }, (frames) => {
 });
 ```
 
-World Targeting: MAIN vs ISOLATED {#world-targeting}
+## World Targeting: MAIN vs ISOLATED {#world-targeting}
 
 Chrome extensions operate in two distinct JavaScript worlds.
 
-ISOLATED World (Default) {#world-isolated}
+## ISOLATED World (Default) {#world-isolated}
 
 Content scripts run in an isolated world by default, they can access the DOM but cannot see page JavaScript variables:
 
@@ -258,7 +258,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-MAIN World {#world-main}
+## MAIN World {#world-main}
 
 The MAIN world allows scripts to access page JavaScript variables and be accessed by page scripts:
 
@@ -282,7 +282,7 @@ chrome.scripting.executeScript({
 // window.extensionFunction() // Returns 'Called from page!'
 ```
 
-Use Cases for MAIN World {#main-world-use-cases}
+## Use Cases for MAIN World {#main-world-use-cases}
 
 ```javascript
 // Use MAIN world to:
@@ -320,11 +320,11 @@ chrome.scripting.executeScript({
 });
 ```
 
-registerContentScripts: Dynamic Registration {#register-content-scripts}
+## registerContentScripts: Dynamic Registration {#register-content-scripts}
 
 The `chrome.scripting.registerContentScripts()` method registers content scripts at runtime, providing an alternative to static declarations in manifest.json.
 
-Registering Scripts Dynamically {#register-scripts}
+## Registering Scripts Dynamically {#register-scripts}
 
 ```javascript
 // Register content scripts at runtime
@@ -345,7 +345,7 @@ chrome.scripting.registerContentScripts([{
 });
 ```
 
-Unregistering Scripts {#unregister-scripts}
+## Unregistering Scripts {#unregister-scripts}
 
 ```javascript
 // Unregister scripts by ID
@@ -359,7 +359,7 @@ chrome.scripting.unregisterContentScripts(() => {
 });
 ```
 
-Getting Registered Scripts {#get-registered-scripts}
+## Getting Registered Scripts {#get-registered-scripts}
 
 ```javascript
 // Get all registered content scripts
@@ -368,7 +368,7 @@ chrome.scripting.getRegisteredContentScripts((scripts) => {
 });
 ```
 
-Update Scripts {#update-scripts}
+## Update Scripts {#update-scripts}
 
 ```javascript
 // Update existing scripts
@@ -378,11 +378,11 @@ chrome.scripting.updateContentScripts([{
 }]);
 ```
 
-registerContentScripts vs Manifest content_scripts {#dynamic-vs-static}
+## registerContentScripts vs Manifest content_scripts {#dynamic-vs-static}
 
 There are two ways to declare content scripts: static (manifest) and dynamic (registerContentScripts).
 
-Static Declaration (Manifest) {#static-declaration}
+## Static Declaration (Manifest) {#static-declaration}
 
 ```json
 {
@@ -405,7 +405,7 @@ Static Declaration (Manifest) {#static-declaration}
 - Fixed at extension installation/update
 - May inject on pages where it's not needed
 
-Dynamic Registration (registerContentScripts) {#dynamic-declaration}
+## Dynamic Registration (registerContentScripts) {#dynamic-declaration}
 
 ```javascript
 // Register at runtime based on conditions
@@ -428,7 +428,7 @@ async function registerForDomain(domain) {
 - Scripts don't persist across browser restarts (must re-register)
 - Needs to be re-registered on extension update
 
-When to Use Each Approach {#when-to-use-which}
+## When to Use Each Approach {#when-to-use-which}
 
 | Scenario | Recommended Approach |
 |----------|---------------------|
@@ -438,9 +438,9 @@ When to Use Each Approach {#when-to-use-which}
 | Simple extension | Static manifest |
 | Complex conditional logic | Dynamic registration |
 
-Persisting Dynamic Scripts Across Sessions {#persisting-scripts}
+## Persisting Dynamic Scripts Across Sessions {#persisting-scripts}
 
-Since `registerContentScripts` doesn't persist across browser restarts:
+### Since `registerContentScripts` doesn't persist across browser restarts:
 
 ```javascript
 // On extension startup, restore registered scripts
@@ -468,11 +468,11 @@ function restoreUserConfiguredScripts() {
 }
 ```
 
-Replacing tabs.executeScript from MV2 {#migrating-from-mv2}
+## Replacing tabs.executeScript from MV2 {#migrating-from-mv2}
 
 If you're migrating from Manifest V2, here's how to replace the deprecated methods.
 
-MV2: chrome.tabs.executeScript {#mv2-executescript}
+## MV2: chrome.tabs.executeScript {#mv2-executescript}
 
 ```javascript
 // MV2 (deprecated)
@@ -483,7 +483,7 @@ chrome.tabs.executeScript(tabId, {
 });
 ```
 
-MV3: chrome.scripting.executeScript {#mv3-executescript}
+## MV3: chrome.scripting.executeScript {#mv3-executescript}
 
 ```javascript
 // MV3 (current)
@@ -495,7 +495,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-MV2: chrome.tabs.insertCSS {#mv2-insertcss}
+## MV2: chrome.tabs.insertCSS {#mv2-insertcss}
 
 ```javascript
 // MV2 (deprecated)
@@ -504,7 +504,7 @@ chrome.tabs.insertCSS(tabId, {
 });
 ```
 
-MV3: chrome.scripting.insertCSS {#mv3-insertcss}
+## MV3: chrome.scripting.insertCSS {#mv3-insertcss}
 
 ```javascript
 // MV3 (current)
@@ -514,7 +514,7 @@ chrome.scripting.insertCSS({
 });
 ```
 
-Complete Migration Example {#migration-example}
+## Complete Migration Example {#migration-example}
 
 ```javascript
 // Before (MV2)
@@ -542,9 +542,9 @@ async function injectContentScript(tabId) {
 }
 ```
 
-Using Callback-Based APIs with Promises {#callback-to-promise}
+## Using Callback-Based APIs with Promises {#callback-to-promise}
 
-For compatibility with modern async/await code:
+### For compatibility with modern async/await code:
 
 ```javascript
 // Wrap callback-based API in a promise
@@ -572,7 +572,7 @@ async function main() {
 }
 ```
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 
 Proper error handling is essential when working with the Scripting API:
 
@@ -610,7 +610,7 @@ chrome.scripting.executeScript({
 // Error: Could not load manifest
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Use ISOLATED world by default - Only use MAIN when you need page access
 2. Minimize permissions - Use `activeTab` for user-initiated actions
@@ -619,7 +619,7 @@ Best Practices {#best-practices}
 5. Specify frames carefully - Avoid `allFrames: true` unless necessary
 6. Consider performance - Inject only what's needed, when it's needed
 
-Common Pitfalls {#common-pitfalls}
+## Common Pitfalls {#common-pitfalls}
 
 - Assuming page is ready - Use `runAt: 'document_idle'` or wait for DOM ready
 - Memory leaks - Always disconnect observers and clean up DOM modifications
@@ -629,7 +629,7 @@ Common Pitfalls {#common-pitfalls}
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Content Scripts Guide](/tutorials/content-scripts-guide/). Comprehensive guide to content script injection and isolation
 - [Permissions detailed look](/tutorials/permissions-deep detailed look/). Understanding extension permissions and security

@@ -7,10 +7,10 @@ last_modified_at: 2026-01-15
 ---
 Background Service Worker Patterns
 
-Overview {#overview}
+## Overview {#overview}
 The background service worker is the central hub of your extension. It handles events, manages state, coordinates between contexts, and runs business logic. In MV3, it's ephemeral. so patterns must account for termination and restart.
 
-Manifest Setup {#manifest-setup}
+## Manifest Setup {#manifest-setup}
 ```json
 {
   "background": {
@@ -20,9 +20,9 @@ Manifest Setup {#manifest-setup}
 }
 ```
 
-Pattern 1: Central Message Hub {#pattern-1-central-message-hub}
+## Pattern 1: Central Message Hub {#pattern-1-central-message-hub}
 
-Register all handlers at top level:
+### Register all handlers at top level:
 
 ```ts
 // background.ts
@@ -56,7 +56,7 @@ msg.onMessage({
 });
 ```
 
-Pattern 2: State Management with Storage {#pattern-2-state-management-with-storage}
+## Pattern 2: State Management with Storage {#pattern-2-state-management-with-storage}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -84,7 +84,7 @@ async function init() {
 init();
 ```
 
-Pattern 3: Event-Driven Architecture {#pattern-3-event-driven-architecture}
+## Pattern 3: Event-Driven Architecture {#pattern-3-event-driven-architecture}
 
 ```ts
 // Install/update handler
@@ -122,7 +122,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-Pattern 4: Permission-Gated Features {#pattern-4-permission-gated-features}
+## Pattern 4: Permission-Gated Features {#pattern-4-permission-gated-features}
 
 ```ts
 import { checkPermission } from "@theluckystrike/webext-permissions";
@@ -143,7 +143,7 @@ async function processTab(tabId: number) {
 }
 ```
 
-Pattern 5: Error Logging {#pattern-5-error-logging}
+## Pattern 5: Error Logging {#pattern-5-error-logging}
 
 ```ts
 async function logError(message: string) {
@@ -165,7 +165,7 @@ function withErrorHandling<T>(fn: () => Promise<T>): () => Promise<T | undefined
 }
 ```
 
-Pattern 6: Multi-Context Coordination {#pattern-6-multi-context-coordination}
+## Pattern 6: Multi-Context Coordination {#pattern-6-multi-context-coordination}
 
 Background coordinates between popup, content scripts, and options:
 
@@ -195,7 +195,7 @@ storage.watch("activeRules", async (rules) => {
 });
 ```
 
-Pattern 7: Initialization and Recovery {#pattern-7-initialization-and-recovery}
+## Pattern 7: Initialization and Recovery {#pattern-7-initialization-and-recovery}
 
 ```ts
 // Service worker can restart at any time. always re-initialize
@@ -220,7 +220,7 @@ async function ensureInitialized() {
 ensureInitialized();
 ```
 
-Service Worker Best Practices {#service-worker-best-practices}
+## Service Worker Best Practices {#service-worker-best-practices}
 1. Register all event listeners at top level (synchronously)
 2. Never rely on in-memory state. always use storage
 3. Use alarms instead of setTimeout/setInterval
@@ -229,21 +229,21 @@ Service Worker Best Practices {#service-worker-best-practices}
 6. Use messaging for cross-context communication
 7. Log errors to storage for debugging
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 - Service worker terminates after ~30 seconds of inactivity
 - All event listeners must be at top level (not inside async functions)
 - chrome.storage.session is good for ephemeral state that doesn't need to persist across restarts
 - Don't import heavy libraries. affects startup time
 - Use dynamic import() for rarely-used code paths
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 - [Service Workers (MV3)](../mv3/service-workers.md)
 - [Content Script Patterns](content-script-patterns.md)
 - [Popup Patterns](popup-patterns.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Service Worker Lifecycle](../guides/service-worker-lifecycle.md)
 - [Service Worker Debugging](../guides/service-worker-debugging.md)

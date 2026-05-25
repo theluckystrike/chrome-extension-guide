@@ -17,7 +17,7 @@ we will walk you through building a fully functional Chrome extension that check
 
 ---
 
-Why Image Alt Text Matters for Web Accessibility {#why-alt-text-matters}
+## Why Image Alt Text Matters for Web Accessibility {#why-alt-text-matters}
 
 Before diving into the technical implementation, it is crucial to understand why image alt text is so important for web accessibility. Screen readers rely on alt text to describe images to visually impaired users, making it the primary way these users can understand visual content on the web. Without proper alt text, approximately 8% of websites becomes inaccessible to blind and low-vision users.
 
@@ -27,7 +27,7 @@ Many developers understand the importance of alt text but struggle with implemen
 
 ---
 
-Understanding Chrome Extension Architecture {#extension-architecture}
+## Understanding Chrome Extension Architecture {#extension-architecture}
 
 Chrome extensions are built using standard web technologies: HTML, CSS, and JavaScript. They can interact with web pages through content scripts, communicate with browser APIs through background scripts, and provide user interfaces through popup pages or options pages.
 
@@ -37,7 +37,7 @@ Chrome extensions follow a specific file structure. The manifest.json must be in
 
 ---
 
-Setting Up the Extension Project {#project-setup}
+## Setting Up the Extension Project {#project-setup}
 
 Create a new directory for your extension project. Inside this directory, create the following essential files: manifest.json, popup.html, popup.js, content.js, and styles.css. Each file serves a specific purpose in the extension's functionality.
 
@@ -47,7 +47,7 @@ The content script is where the magic happens. This JavaScript file runs in the 
 
 ---
 
-Building the Manifest Configuration {#manifest-configuration}
+## Building the Manifest Configuration {#manifest-configuration}
 
 The manifest.json file is the heart of any Chrome extension. It tells Chrome about your extension's capabilities, permissions, and how it should behave. For our alt text checker, we need to carefully configure several key sections.
 
@@ -78,7 +78,7 @@ This manifest version 3 configuration grants the extension access to analyze any
 
 ---
 
-Creating the Content Analysis Script {#content-script}
+## Creating the Content Analysis Script {#content-script}
 
 The content script is where we implement the core functionality of scanning images and checking their alt attributes. This script runs in the context of each web page, giving us access to the full DOM and all image elements.
 
@@ -143,7 +143,7 @@ This script provides a comprehensive analysis of all images on the page, categor
 
 ---
 
-Implementing the Popup Interface {#popup-interface}
+## Implementing the Popup Interface {#popup-interface}
 
 The popup provides the user interface for interacting with your extension. When users click the extension icon, they should see a summary of accessibility issues and have options to scan the current page or view detailed results.
 
@@ -202,7 +202,7 @@ This code creates an interactive popup that communicates with your content scrip
 
 ---
 
-Adding Advanced Features {#advanced-features}
+## Adding Advanced Features {#advanced-features}
 
 While the basic implementation covers most use cases, adding advanced features makes your extension truly valuable for developers and accessibility professionals.
 
@@ -214,7 +214,7 @@ You might also consider adding support for additional accessibility checks beyon
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing your extension to the Chrome Web Store, thorough testing is essential. Start by loading your extension in developer mode through Chrome's extensions page. Enable "Developer mode" in the top right corner, then click "Load unpacked" and select your extension directory.
 
@@ -224,7 +224,7 @@ Pay special attention to edge cases. Images loaded dynamically through JavaScrip
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and polished, you can publish it to the Chrome Web Store. First, create a developer account through the Chrome Web Store Developer Dashboard. There is a one-time registration fee for new developers.
 
@@ -234,7 +234,7 @@ When submitting, ensure you comply with all Chrome Web Store policies. Your exte
 
 ---
 
-Conclusion: Empowering Web Accessibility {#conclusion}
+## Conclusion: Empowering Web Accessibility {#conclusion}
 
 Building an alt text checker extension is more than just a programming exercise, it is a contribution to making the web more accessible for everyone. By automating the tedious process of checking image alt text, you help developers, designers, and content creators ensure their websites are accessible to all users, regardless of ability.
 
@@ -244,7 +244,7 @@ As web accessibility standards continue to evolve and strengthen, tools like you
 
 ---
 
-Technical detailed look: Understanding WCAG Guidelines for Alt Text {#wcag-guidelines}
+## Technical detailed look: Understanding WCAG Guidelines for Alt Text {#wcag-guidelines}
 
 The Web Content Accessibility Guidelines (WCAG) provide specific requirements for alt text that every developer should understand. WCAG 2.1 Level AA compliance requires that all images of text have appropriate alternative text, and all non-text content has text alternatives. Level AAA requirements are even stricter, requiring long descriptions for complex images.
 
@@ -254,7 +254,7 @@ Our extension's logic should reflect these distinctions. When we encounter an im
 
 ---
 
-Handling Complex Image Scenarios {#complex-scenarios}
+## Handling Complex Image Scenarios {#complex-scenarios}
 
 Real-world web development presents numerous complex scenarios that your alt text checker must handle gracefully. One such scenario involves images within anchor tags. When an image is the only content inside a link, the alt text should describe the link's destination, not the image itself. This is because screen reader users navigate by links, and they need to understand where each link will take them.
 
@@ -264,7 +264,7 @@ CSS-generated images present another challenge. Some images are set as backgroun
 
 ---
 
-Performance Optimization for Large Pages {#performance-optimization}
+## Performance Optimization for Large Pages {#performance-optimization}
 
 When analyzing pages with hundreds or thousands of images, performance becomes a critical concern. A poorly optimized extension can slow down page loading and consume excessive memory, degrading the user experience rather than improving it.
 
@@ -276,7 +276,7 @@ Consider implementing a caching mechanism to store previous analysis results. If
 
 ---
 
-Integrating with Development Workflows {#development-workflows}
+## Integrating with Development Workflows {#development-workflows}
 
 To maximize the value of your alt text checker, consider integrating it with common development workflows. Many teams use continuous integration and continuous deployment (CI/CD) pipelines to automate testing and deployment. You can create a command-line tool or GitHub Action that runs your alt text analysis as part of the build process.
 
@@ -286,7 +286,7 @@ For teams using content management systems, you might build integrations that ch
 
 ---
 
-Privacy and Security Considerations {#privacy-security}
+## Privacy and Security Considerations {#privacy-security}
 
 When building an extension that analyzes web pages, privacy and security should be top priorities. Your extension will have access to potentially sensitive information, including the content of web pages users visit. It is essential to handle this data responsibly.
 
@@ -296,7 +296,7 @@ Be transparent about what your extension does and does not do. Include a clear p
 
 ---
 
-Future Enhancements and Community Contributions {#future-enhancements}
+## Future Enhancements and Community Contributions {#future-enhancements}
 
 Building the initial version of your alt text checker is just the beginning. The web accessibility landscape is constantly evolving, and your extension should evolve with it. Consider implementing features that use machine learning to suggest better alt text descriptions, automatically generate alt text for simple images, or detect complex images that might benefit from long descriptions.
 

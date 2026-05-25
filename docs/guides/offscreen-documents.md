@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Offscreen Documents. How to Use DOM APIs in MV3 Service Workers
 
-Introduction
+### Introduction
 
 Chrome's Manifest V3 (MV3) introduced service workers as the replacement for background pages. While this change brought significant benefits in terms of memory efficiency and security, it also introduced a major limitation: service workers cannot access the DOM. Many browser APIs that extension developers rely on, such as `AudioContext`, `Clipboard API`, and DOM parsing, require a DOM environment to function.
 
 The `chrome.offscreen` API solves this problem by allowing extensions to create hidden documents that have access to the full DOM. These offscreen documents run in their own context, allowing you to perform DOM operations, play audio, read from or write to the clipboard, and parse HTML from within your extension's service worker workflow.
 
-Why You Need Offscreen Documents
+### Why You Need Offscreen Documents
 
 There are several compelling reasons to use offscreen documents in your Chrome extension:
 
@@ -28,11 +28,11 @@ There are several compelling reasons to use offscreen documents in your Chrome e
 
 5. WebRTC and Media Streams: Media stream operations sometimes require DOM access. Offscreen documents enable you to work with media streams in a background context.
 
-The chrome.offscreen API
+### The chrome.offscreen API
 
 The `chrome.offscreen` API is straightforward to use. Here's the basic structure:
 
-Creating an Offscreen Document
+### Creating an Offscreen Document
 
 ```javascript
 async function createOffscreenDocument() {
@@ -51,7 +51,7 @@ async function createOffscreenDocument() {
 }
 ```
 
-Available Reasons
+### Available Reasons
 
 When creating an offscreen document, you must specify at least one reason from the `chrome.offscreen.Reason` enum:
 
@@ -61,7 +61,7 @@ When creating an offscreen document, you must specify at least one reason from t
 - `I18N`: For internationalization features
 - `WEB_RTC`: For WebRTC and media stream operations
 
-Closing an Offscreen Document
+### Closing an Offscreen Document
 
 Always clean up offscreen documents when you're done to free up resources:
 
@@ -71,11 +71,11 @@ async function closeOffscreenDocument() {
 }
 ```
 
-Lifecycle Management
+### Lifecycle Management
 
 Managing the lifecycle of offscreen documents is crucial for building solid extensions.
 
-Service Worker Lifecycle Considerations
+### Service Worker Lifecycle Considerations
 
 Service workers in MV3 can be terminated after periods of inactivity. When your service worker wakes up, you may need to check if an offscreen document exists and create one if needed:
 
@@ -88,7 +88,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-Message Passing
+### Message Passing
 
 Communication between your service worker and offscreen document works through message passing:
 
@@ -117,7 +117,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Persistence and Storage
+### Persistence and Storage
 
 Offscreen documents persist until explicitly closed or until the extension is unloaded. However, they can be terminated by the browser when memory is constrained. Always design your extension to handle the loss of an offscreen document gracefully:
 
@@ -134,7 +134,7 @@ async function ensureOffscreenExists() {
 }
 ```
 
-Practical Example: Audio Playback
+### Practical Example: Audio Playback
 
 Here's a complete example of using an offscreen document for audio playback:
 
@@ -181,7 +181,7 @@ async function playAudio(audioData) {
 </html>
 ```
 
-Best Practices
+### Best Practices
 
 1. Reuse Offscreen Documents: Instead of creating and destroying offscreen documents frequently, keep one alive and reuse it for multiple operations.
 
@@ -193,7 +193,7 @@ Best Practices
 
 5. Use Error Handling: Wrap offscreen API calls in try-catch blocks to handle edge cases gracefully.
 
-Conclusion
+### Conclusion
 
 The `chrome.offscreen` API is an essential tool for Chrome extension developers working with Manifest V3. By providing access to DOM APIs in a background context, it bridges the gap between the limited service worker environment and the rich web platform APIs that many extensions need.
 

@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Management API
 
-Introduction {#introduction}
+## Introduction {#introduction}
 
 The `chrome.management` API provides powerful capabilities for managing installed extensions and apps within Chrome. This API enables you to query extension information, control their enabled/disabled state, uninstall extensions programmatically, and listen for installation/uninstallation events. It's essential for building extension manager dashboards, enterprise policy tools, and productivity applications that help users organize their browser environment.
 
-Permissions and Setup {#permissions-and-setup}
+## Permissions and Setup {#permissions-and-setup}
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 To use the `chrome.management` API, you need to declare the `"management"` permission in your extension's `manifest.json`:
 Chrome Management API
@@ -29,7 +29,7 @@ Required Permission
 ```
 The "management" permission is considered a "strong" permission requiring review during Chrome Web Store submission.
 
-Permission Scope {#permission-scope}
+## Permission Scope {#permission-scope}
 
 The `"management"` permission is considered a "strong" permission and requires review during Chrome Web Store submission. However, it cannot be used with `activeTab` or on Chrome Web Store listing pages. The permission grants access to:
 
@@ -38,9 +38,9 @@ The `"management"` permission is considered a "strong" permission and requires r
 - Uninstall any extension (with user confirmation)
 - Listen to installation and state change events
 
-Getting Extension Information {#getting-extension-information}
+## Getting Extension Information {#getting-extension-information}
 
-Listing All Installed Extensions {#listing-all-installed-extensions}
+## Listing All Installed Extensions {#listing-all-installed-extensions}
 
 The `chrome.management.getAll()` method returns an array of all installed extensions and apps:
 Core Methods
@@ -56,7 +56,7 @@ async function getAllExtensions() {
 }
 ```
 
-Getting a Specific Extension {#getting-a-specific-extension}
+## Getting a Specific Extension {#getting-a-specific-extension}
 
 Use `chrome.management.get()` with an extension ID to get details about a specific extension:
 
@@ -73,7 +73,7 @@ async function getExtensionInfo(extensionId) {
 }
 ```
 
-Extension Info Object Structure {#extension-info-object-structure}
+## Extension Info Object Structure {#extension-info-object-structure}
 
 The `ExtensionInfo` object returned by the API contains comprehensive information:
 
@@ -86,9 +86,9 @@ async function getSelfInfo() {
 // Returns: { id, version, name, enabled, mayDisable, installType, ... }
 ```
 
-Working with Extension Icons {#working-with-extension-icons}
+## Working with Extension Icons {#working-with-extension-icons}
 
-Displaying Extension Icons {#displaying-extension-icons}
+## Displaying Extension Icons {#displaying-extension-icons}
 
 Icons are stored in the `icons` array with different sizes. Here's how to properly display them:
 
@@ -127,9 +127,9 @@ async function getIconAsDataUrl(extensionId, size = 128) {
 }
 ```
 
-Enabling and Disabling Extensions {#enabling-and-disabling-extensions}
+## Enabling and Disabling Extensions {#enabling-and-disabling-extensions}
 
-Programmatic Control {#programmatic-control}
+## Programmatic Control {#programmatic-control}
 
 The API allows you to enable or disable extensions programmatically:
 
@@ -163,7 +163,7 @@ async function toggleExtension(extensionId) {
   await chrome.management.setEnabled(extensionId, !ext.enabled);
 }
 
-Checking Can Enable/Disable {#checking-can-enabledisable}
+## Checking Can Enable/Disable {#checking-can-enabledisable}
 
 Not all extensions can be enabled or disabled. Check before attempting:
 
@@ -185,7 +185,7 @@ if (!canDisable) {
 }
 ```
 
-Disabling with Reason {#disabling-with-reason}
+## Disabling with Reason {#disabling-with-reason}
 
 Some extensions can be disabled programmatically with a reason:
 
@@ -200,11 +200,11 @@ Uninstall extensions programmatically:
 // Uninstall another extension (shows confirmation dialog)
 await chrome.management.uninstall(extensionId, { showConfirmDialog: true });
 
-Uninstalling Extensions {#uninstalling-extensions}
+## Uninstalling Extensions {#uninstalling-extensions}
 
-Programmatic Uninstall {#programmatic-uninstall}
+## Programmatic Uninstall {#programmatic-uninstall}
 
-Uninstall extensions with user confirmation:
+### Uninstall extensions with user confirmation:
 
 ```javascript
 // Uninstall an extension
@@ -228,7 +228,7 @@ async function uninstallWithConfirmation(extensionId) {
 }
 ```
 
-Silent Uninstall {#silent-uninstall}
+## Silent Uninstall {#silent-uninstall}
 
 For enterprise or internal use, you can silently uninstall without confirmation:
 
@@ -243,9 +243,9 @@ async function silentUninstall(extensionId) {
 }
 ```
 
-Self-Uninstall {#self-uninstall}
+## Self-Uninstall {#self-uninstall}
 
-Extensions can uninstall themselves:
+### Extensions can uninstall themselves:
 
 ```javascript
 // Silent uninstall (enterprise scenarios)
@@ -264,11 +264,11 @@ async function checkPermissionWarnings(extensionId) {
 }
 ```
 
-Listening to Events {#listening-to-events}
+## Listening to Events {#listening-to-events}
 
 The Management API provides several events for monitoring extension state changes:
 
-onInstalled Event {#oninstalled-event}
+## onInstalled Event {#oninstalled-event}
 Events
 
 onInstalled
@@ -279,9 +279,9 @@ chrome.management.onInstalled.addListener((extensionInfo) => {
 });
 ```
 
-onUninstalled Event {#onuninstalled-event}
+## onUninstalled Event {#onuninstalled-event}
 
-Listen for extension uninstallations:
+### Listen for extension uninstallations:
 
 onUninstalled
 Listen for uninstallations:
@@ -291,9 +291,9 @@ chrome.management.onUninstalled.addListener((extensionId) => {
 });
 ```
 
-onEnabled Event {#onenabled-event}
+## onEnabled Event {#onenabled-event}
 
-Listen for extensions being enabled:
+### Listen for extensions being enabled:
 
 onEnabled / onDisabled
 Listen for state changes:

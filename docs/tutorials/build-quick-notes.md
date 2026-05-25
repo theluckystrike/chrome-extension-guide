@@ -9,9 +9,9 @@ Build a Quick Notes Popup Extension
 
 This tutorial walks through building a Chrome extension for instant note-taking with auto-save, folders, and search functionality.
 
-Step 1: Manifest with Storage Permission {#step-1-manifest-with-storage-permission}
+## Step 1: Manifest with Storage Permission {#step-1-manifest-with-storage-permission}
 
-Create `manifest.json` with the required permissions:
+### Create `manifest.json` with the required permissions:
 
 ```json
 {
@@ -23,9 +23,9 @@ Create `manifest.json` with the required permissions:
 }
 ```
 
-Step 2: Popup with Textarea for Quick Note Entry {#step-2-popup-with-textarea-for-quick-note-entry}
+## Step 2: Popup with Textarea for Quick Note Entry {#step-2-popup-with-textarea-for-quick-note-entry}
 
-Create `popup.html` with a textarea and note list:
+### Create `popup.html` with a textarea and note list:
 
 ```html
 <input type="text" id="note-title" placeholder="Title">
@@ -35,7 +35,7 @@ Create `popup.html` with a textarea and note list:
 
 See [guides/popup-patterns.md](../guides/popup-patterns.md) for popup best practices.
 
-Step 3: Auto-Save on Every Keystroke (Debounced) {#step-3-auto-save-on-every-keystroke-debounced}
+## Step 3: Auto-Save on Every Keystroke (Debounced) {#step-3-auto-save-on-every-keystroke-debounced}
 
 Implement debounced auto-save using `chrome.storage.sync`:
 
@@ -51,9 +51,9 @@ editor.addEventListener('input', () => {
 
 For storage limits and detailed look, see [api-reference/storage-api-deep detailed look.md](../api-reference/storage-api-deep detailed look.md).
 
-Step 4: Note List with Preview and Timestamp {#step-4-note-list-with-preview-and-timestamp}
+## Step 4: Note List with Preview and Timestamp {#step-4-note-list-with-preview-and-timestamp}
 
-Display notes with preview and timestamps:
+### Display notes with preview and timestamps:
 
 ```javascript
 function renderNotes(notes) {
@@ -66,7 +66,7 @@ function renderNotes(notes) {
 }
 ```
 
-Step 5: Create/Delete/Edit Notes {#step-5-createdeleteedit-notes}
+## Step 5: Create/Delete/Edit Notes {#step-5-createdeleteedit-notes}
 
 Add CRUD operations for notes:
 
@@ -81,9 +81,9 @@ function deleteNote(id) {
 }
 ```
 
-Step 6: Folder/Category Organization {#step-6-foldercategory-organization}
+## Step 6: Folder/Category Organization {#step-6-foldercategory-organization}
 
-Organize notes into folders:
+### Organize notes into folders:
 
 ```json
 { "id": 1, "folder": "Work", "content": "..." }
@@ -91,7 +91,7 @@ Organize notes into folders:
 
 Filter notes by folder in the sidebar.
 
-Step 7: Full-Text Search Across All Notes {#step-7-full-text-search-across-all-notes}
+## Step 7: Full-Text Search Across All Notes {#step-7-full-text-search-across-all-notes}
 
 Implement search functionality:
 
@@ -105,7 +105,7 @@ function searchNotes(query) {
 }
 ```
 
-Step 8: Keyboard Shortcut to Open Popup {#step-8-keyboard-shortcut-to-open-popup}
+## Step 8: Keyboard Shortcut to Open Popup {#step-8-keyboard-shortcut-to-open-popup}
 
 Add a keyboard shortcut in `manifest.json`:
 
@@ -118,11 +118,11 @@ Add a keyboard shortcut in `manifest.json`:
 }
 ```
 
-See [api-reference/commands-api.md](../api-reference/commands-api.md) for more.
+### See [api-reference/commands-api.md](../api-reference/commands-api.md) for more.
 
-Additional Features {#additional-features}
+## Additional Features {#additional-features}
 
-Rich Text Basics {#rich-text-basics}
+## Rich Text Basics {#rich-text-basics}
 Use `contentEditable` for bold, italic, and lists:
 
 ```javascript
@@ -131,10 +131,10 @@ document.execCommand('italic');
 document.execCommand('insertUnorderedList');
 ```
 
-Sync Across Devices {#sync-across-devices}
+## Sync Across Devices {#sync-across-devices}
 `chrome.storage.sync` syncs automatically across devices (100KB limit).
 
-Export Notes as Text/Markdown {#export-notes-as-textmarkdown}
+## Export Notes as Text/Markdown {#export-notes-as-textmarkdown}
 ```javascript
 function exportNotes() {
   const markdown = notes.map(n => `# ${n.title}\n\n${n.content}`).join('\n\n');
@@ -143,10 +143,10 @@ function exportNotes() {
 }
 ```
 
-Pin Important Notes to Top {#pin-important-notes-to-top}
+## Pin Important Notes to Top {#pin-important-notes-to-top}
 Add a `pinned: true` property and sort notes accordingly.
 
-Note Count in Badge {#note-count-in-badge}
+## Note Count in Badge {#note-count-in-badge}
 Display note count in extension badge:
 
 ```javascript

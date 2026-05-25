@@ -99,9 +99,9 @@ Manifest Configuration (manifest.json)
 
 ---
 
-Core Implementation with TypeScript
+### Core Implementation with TypeScript
 
-Shared Types (shared/types.ts)
+### Shared Types (shared/types.ts)
 
 ```typescript
 // Core type definitions for the Markdown Previewer extension
@@ -154,7 +154,7 @@ export const DEFAULT_CONFIG: MarkdownConfig = {
 };
 ```
 
-Markdown Parser (shared/markdown.ts)
+### Markdown Parser (shared/markdown.ts)
 
 ```typescript
 import { MarkdownConfig } from './types';
@@ -223,9 +223,9 @@ export function createMarkdownParser(config: MarkdownConfig): MarkdownParser {
 
 ---
 
-UI Design Patterns
+### UI Design Patterns
 
-Popup UI (popup/popup.ts)
+### Popup UI (popup/popup.ts)
 
 The popup provides quick access to preview controls and settings:
 
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Content Script Overlay (content-script/overlay.ts)
+### Content Script Overlay (content-script/overlay.ts)
 
 The content script creates an overlay for in-page Markdown rendering:
 
@@ -456,9 +456,9 @@ export { MarkdownOverlay };
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions Analysis
+### Required Permissions Analysis
 
 | Permission | Purpose | Justification |
 |------------|---------|---------------|
@@ -466,7 +466,7 @@ Required Permissions Analysis
 | `storage` | Persist user preferences | Store theme, settings, recent files |
 | `tabs` | Query and analyze tabs | Detect Markdown content and URLs |
 
-Host Permissions
+### Host Permissions
 
 The `<all_urls>` host permission is necessary because Markdown files can exist on any domain. However, for production, consider limiting to specific patterns:
 
@@ -479,7 +479,7 @@ The `<all_urls>` host permission is necessary because Markdown files can exist o
 ]
 ```
 
-Chrome API Usage Examples
+### Chrome API Usage Examples
 
 ```typescript
 // Service Worker (background/service-worker.ts)
@@ -538,9 +538,9 @@ async function handleAnalyzeTab(tabId?: number): Promise<TabInfo | null> {
 
 ---
 
-State Management and Storage
+### State Management and Storage
 
-Storage Manager Utility (utils/storage.ts)
+### Storage Manager Utility (utils/storage.ts)
 
 ```typescript
 import { StorageSchema } from '../shared/types';
@@ -593,7 +593,7 @@ class StorageManager {
 export { StorageManager };
 ```
 
-State Management Pattern
+### State Management Pattern
 
 For complex extensions, implement a proper state management approach:
 
@@ -631,9 +631,9 @@ class StateManager<T extends Record<string, unknown>> {
 
 ---
 
-Error Handling and Edge Cases
+### Error Handling and Edge Cases
 
-Comprehensive Error Handling
+### Comprehensive Error Handling
 
 ```typescript
 // Error types for the extension
@@ -670,7 +670,7 @@ class FeatureDetector {
 }
 ```
 
-Edge Case Handling
+### Edge Case Handling
 
 1. Empty content: Show placeholder message
 2. Very large files: Implement virtual scrolling or pagination
@@ -680,9 +680,9 @@ Edge Case Handling
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Vitest
+### Unit Testing with Vitest
 
 ```typescript
 // tests/markdown.test.ts
@@ -715,7 +715,7 @@ describe('MarkdownParser', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
 Use Chrome's testing APIs with Puppeteer for end-to-end testing:
 
@@ -736,9 +736,9 @@ test('popup toggles preview', async ({ page }) => {
 
 ---
 
-Code Examples
+### Code Examples
 
-Complete Service Worker Implementation
+### Complete Service Worker Implementation
 
 ```typescript
 // background/service-worker.ts
@@ -810,9 +810,9 @@ initialize();
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Performance Optimizations
+### Performance Optimizations
 
 1. Lazy Loading: Load markdown parser only when needed
 2. Debouncing: Debounce input processing for live preview
@@ -836,9 +836,9 @@ function debounce<T extends (...args: unknown[]) => unknown>(
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Pre-Publication Requirements
+### Pre-Publication Requirements
 
 - [ ] Testing: Complete unit and integration tests passing
 - [ ] Code Review: Internal review completed
@@ -847,7 +847,7 @@ Pre-Publication Requirements
 - [ ] Screenshots: At least 1 screenshot (recommended 4-8)
 - [ ] Description: Clear, accurate description (< 132 chars for title)
 
-Manifest Requirements
+### Manifest Requirements
 
 ```json
 {
@@ -865,7 +865,7 @@ Manifest Requirements
 }
 ```
 
-Store Listing Best Practices
+### Store Listing Best Practices
 
 1. Short Description (< 132 characters): Clearly state the value proposition
 2. Long Description: Include feature list, use cases, and FAQ
@@ -873,7 +873,7 @@ Store Listing Best Practices
 4. Category: Choose appropriate category (Productivity or Developer Tools)
 5. Language: Support multiple languages if applicable
 
-Post-Publication
+### Post-Publication
 
 - Monitor user reviews and feedback
 - Track performance metrics in Chrome Web Store Developer Dashboard
@@ -882,7 +882,7 @@ Post-Publication
 
 ---
 
-Summary
+### Summary
 
 Building a Markdown previewer Chrome extension requires careful consideration of architecture, security, and user experience. Key takeaways:
 

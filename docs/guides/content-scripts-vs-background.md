@@ -8,11 +8,11 @@ last_modified_at: 2026-01-15
 
 Content Scripts vs Background Workers. When to Use Each
 
-Introduction
+### Introduction
 
 Understanding the distinction between content scripts and background workers is fundamental to Chrome extension architecture. These two components serve different purposes and communicate through message passing. Choosing the right component for each task directly impacts your extension's performance, security, and maintainability.
 
-What Are Content Scripts?
+### What Are Content Scripts?
 
 Content scripts are JavaScript files that run in the context of web pages. They can read and modify the DOM, access some page variables, and communicate with the extension's background service worker.
 
@@ -29,7 +29,7 @@ Content scripts are JavaScript files that run in the context of web pages. They 
 }
 ```
 
-Content Script Characteristics
+### Content Script Characteristics
 
 - Page Context: Runs within the web page's DOM
 - DOM Access: Full read/write access to page elements
@@ -47,7 +47,7 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-What Are Background Workers?
+### What Are Background Workers?
 
 Background workers (service workers in Manifest V3) run in the background and manage extension state, handle events, and coordinate between different parts of the extension.
 
@@ -59,7 +59,7 @@ Background workers (service workers in Manifest V3) run in the background and ma
 }
 ```
 
-Background Worker Characteristics
+### Background Worker Characteristics
 
 - No DOM Access: Cannot interact with web page content
 - Full Extension APIs: Access to all Chrome extension APIs
@@ -84,7 +84,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Comparison Table
+### Comparison Table
 
 | Feature | Content Scripts | Background Workers |
 |---------|-----------------|-------------------|
@@ -96,9 +96,9 @@ Comparison Table
 | Storage Access | chrome.storage | chrome.storage |
 | Network Requests | Page's CORS rules | Extension's permissions |
 
-When to Use Content Scripts
+### When to Use Content Scripts
 
-Direct Page Interaction
+### Direct Page Interaction
 
 Content scripts are essential when you need to:
 - Manipulate page DOM elements
@@ -114,7 +114,7 @@ const prices = Array.from(document.querySelectorAll('.price'))
 chrome.runtime.sendMessage({ action: 'pricesFound', prices });
 ```
 
-Page-Specific UI
+### Page-Specific UI
 
 Add custom UI elements directly to web pages:
 
@@ -130,9 +130,9 @@ button.addEventListener('click', () => {
 });
 ```
 
-Real-Time Page Monitoring
+### Real-Time Page Monitoring
 
-Monitor page changes and user interactions:
+### Monitor page changes and user interactions:
 
 ```javascript
 // Monitor DOM mutations
@@ -147,9 +147,9 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-When to Use Background Workers
+### When to Use Background Workers
 
-Extension-Wide State Management
+### Extension-Wide State Management
 
 Background workers maintain state across all tabs and windows:
 
@@ -173,7 +173,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Long-Running Tasks
+### Long-Running Tasks
 
 Handle operations that persist beyond individual page sessions:
 
@@ -189,9 +189,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-API Requests with Extended Permissions
+### API Requests with Extended Permissions
 
-Make requests that require extension permissions:
+### Make requests that require extension permissions:
 
 ```javascript
 // Background can make cross-origin requests
@@ -210,9 +210,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Communication Patterns
+### Communication Patterns
 
-Content Script to Background
+### Content Script to Background
 
 ```javascript
 // From content script
@@ -226,7 +226,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Background to Content Script
+### Background to Content Script
 
 ```javascript
 // From background - send to specific tab
@@ -242,7 +242,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-Long-Lived Connections
+### Long-Lived Connections
 
 ```javascript
 // Create port for ongoing communication
@@ -264,9 +264,9 @@ chrome.runtime.onConnect.addListener((port) => {
 });
 ```
 
-Performance Considerations
+### Performance Considerations
 
-Content Script Efficiency
+### Content Script Efficiency
 
 ```javascript
 // Bad: Heavy processing on every mutation
@@ -282,7 +282,7 @@ const observer = new MutationObserver(() => {
 });
 ```
 
-Background Worker Efficiency
+### Background Worker Efficiency
 
 ```javascript
 // Bad: Persistent connections
@@ -300,9 +300,9 @@ function getWebSocket() {
 }
 ```
 
-Architecture Best Practices
+### Architecture Best Practices
 
-Separation of Concerns
+### Separation of Concerns
 
 | Component | Responsibility |
 |-----------|---------------|
@@ -311,7 +311,7 @@ Separation of Concerns
 | Popup | Quick actions, current state display |
 | Options Page | Configuration management |
 
-Security Considerations
+### Security Considerations
 
 - Validate all messages: Never trust data from content scripts
 - Minimize privileges: Use minimum necessary permissions
@@ -330,7 +330,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Conclusion
+### Conclusion
 
 Content scripts and background workers serve complementary roles in Chrome extensions. Use content scripts for direct page interaction and DOM manipulation. Use background workers for state management, cross-tab coordination, and extended API access. Effective extensions use both components through clean message passing architecture.
 

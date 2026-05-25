@@ -11,43 +11,43 @@ last_modified_at: 2026-01-15
 
 dns Permission
 
-Overview {#overview}
+## Overview {#overview}
 - Permission string: `"dns"`
 - Grants access to `chrome.dns` API
 - Perform DNS lookups from the extension
 - Limited availability, check chrome.dns existence before use
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 - `chrome.dns.resolve(hostname)` resolve a hostname to IP address
   - Returns Promise with `{ resultCode, address }`
   - resultCode: 0 for success, non-zero for error
   - address: resolved IP address string
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 ```json
 { "permissions": ["dns"] }
 ```
 
-Availability {#availability}
+## Availability {#availability}
 - Originally dev channel only
 - Check `typeof chrome.dns !== 'undefined'` before use
 - Not available in all Chrome builds
 - Consider fallback strategies
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 - Network diagnostics: check if hostname resolves
 - Hostname verification: verify domains before connecting
 - DNS-based ad/tracker filtering: check DNS blocklists
 - Security tools: detect DNS rebinding attempts
 - Developer tools: DNS lookup utility
 
-Limitations {#limitations}
+## Limitations {#limitations}
 - Only A/AAAA record lookups (no MX, TXT, etc.)
 - No cache control
 - No TTL information returned
 - Single hostname per call (no batch)
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 ```typescript
 // Basic hostname resolution
 async function resolveHostname(hostname: string): Promise<string | null> {
@@ -79,7 +79,7 @@ async function navigateIfResolves(url: string): Promise<void> {
 }
 ```
 
-Common Use Cases
+### Common Use Cases
 
 Network Diagnostics and Debugging
 Build diagnostic tools that help users troubleshoot network issues. You can check if a hostname resolves correctly, identify DNS problems, and provide helpful error messages.
@@ -96,7 +96,7 @@ Before attempting to connect to a service, verify that the hostname resolves. Th
 Developer Utilities
 Build DNS lookup utilities similar to `nslookup` or `dig`. These tools are helpful for developers testing DNS configurations or troubleshooting domain issues.
 
-Best Practices
+### Best Practices
 
 Always Check for API Availability
 The `chrome.dns` API is not available in all Chrome builds. Always check for its existence before using it:
@@ -125,13 +125,13 @@ DNS resolution can behave differently on various networks (home, corporate VPN, 
 Understand the Limitations
 The API only supports A (IPv4) and AAAA (IPv6) records. If you need to query other record types, you'll need to use an external DNS service as a fallback.
 
-Cross-References
+### Cross-References
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - guides/security-best-practices.md
 - patterns/network-interception.md
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What does the dns permission do?
 The dns permission grants access to chrome.dns for resolving DNS records directly from your extension, useful for network diagnostic tools.

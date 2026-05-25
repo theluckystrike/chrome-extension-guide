@@ -10,7 +10,7 @@ Building Chrome Extensions with React
 
 Building Chrome extensions with React provides a powerful combination of modern UI development and browser API access. This guide covers advanced React patterns specifically tailored for extension development, including custom hooks for Chrome APIs, cross-context state management, and architecture patterns that scale.
 
-Understanding Extension Contexts {#understanding-extension-contexts}
+## Understanding Extension Contexts {#understanding-extension-contexts}
 
 Chrome extensions run in multiple isolated contexts, each with different capabilities and limitations. Understanding these contexts is crucial for building solid React applications:
 
@@ -22,7 +22,7 @@ Chrome extensions run in multiple isolated contexts, each with different capabil
 
 Each context requires its own React root, but they can share state through chrome.storage and message passing.
 
-Custom Hooks for Chrome APIs {#custom-hooks-for-chrome-apis}
+## Custom Hooks for Chrome APIs {#custom-hooks-for-chrome-apis}
 
 Creating reusable hooks for Chrome APIs is essential for clean, maintainable extension code. Here are the essential hooks every React extension developer should implement:
 
@@ -312,9 +312,9 @@ export function useChromeTabs(options: UseChromeTabsOptions = {}) {
 }
 ```
 
-State Management Patterns {#state-management-patterns}
+## State Management Patterns {#state-management-patterns}
 
-Zustand for Extension State
+### Zustand for Extension State
 
 Zustand is ideal for extensions because it doesn't require context providers and works across different extension contexts:
 
@@ -395,7 +395,7 @@ export const useExtensionStore = create<ExtensionState>()(
 );
 ```
 
-Cross-Context State Synchronization
+### Cross-Context State Synchronization
 
 Synchronize state between popup, options page, and background using a broadcast channel pattern:
 
@@ -447,9 +447,9 @@ export const useSyncStore = create<SyncStore>((set, get) => {
 });
 ```
 
-Extension Architecture Patterns {#extension-architecture-patterns}
+## Extension Architecture Patterns {#extension-architecture-patterns}
 
-Feature-Based Directory Structure
+### Feature-Based Directory Structure
 
 Organize your extension by feature rather than by file type:
 
@@ -482,7 +482,7 @@ src/
  content/
 ```
 
-Background-Initiated UI Updates
+### Background-Initiated UI Updates
 
 For features that require the background script to drive UI updates:
 
@@ -535,9 +535,9 @@ class ExtensionStateManager {
 }
 ```
 
-Content Script React Integration {#content-script-react-integration}
+## Content Script React Integration {#content-script-react-integration}
 
-Injecting React into web pages requires special handling:
+### Injecting React into web pages requires special handling:
 
 ```typescript
 // content-script/inject.tsx
@@ -593,9 +593,9 @@ if (!document.getElementById('extension-root')) {
 }
 ```
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
-Memoization Strategies
+### Memoization Strategies
 
 React extensions face unique performance challenges due to multiple contexts and communication overhead:
 
@@ -641,9 +641,9 @@ export function useDebouncedStorage<T>(
 }
 ```
 
-Lazy Loading Extension Features
+### Lazy Loading Extension Features
 
-Reduce initial load time by lazy loading features:
+### Reduce initial load time by lazy loading features:
 
 ```typescript
 // components/LazyFeature.tsx
@@ -677,7 +677,7 @@ function FeatureLoader() {
 }
 ```
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [React Setup Guide](./chrome-extension-react-setup.md)
 - [Content Script Frameworks](./content-script-frameworks.md)

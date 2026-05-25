@@ -9,13 +9,13 @@ Setting Up Storybook for Chrome Extension Development
 
 Storybook builds UI components in isolation, ideal for Chrome extensions where you can develop and test without loading the full extension.
 
-Why Storybook? {#why-storybook}
+## Why Storybook? {#why-storybook}
 
 - Isolated Development: Build without extension reloads
 - Visual Testing: Catch UI regressions early
 - Documentation: Auto-generate component docs
 
-Installation {#installation}
+## Installation {#installation}
 
 ```bash
 npx storybook@latest init
@@ -23,9 +23,9 @@ npx storybook@latest init
 
 Select your framework (React, Vue, Svelte).
 
-Configuration {#configuration}
+## Configuration {#configuration}
 
-Create `.storybook/main.ts`:
+### Create `.storybook/main.ts`:
 
 ```typescript
 import type { StorybookConfig } from '@storybook/react-vite';
@@ -39,7 +39,7 @@ const config: StorybookConfig = {
 export default config;
 ```
 
-Mocking Chrome APIs {#mocking-chrome-apis}
+## Mocking Chrome APIs {#mocking-chrome-apis}
 
 Chrome APIs aren't available in Storybook. Create a decorator in `.storybook/preview.ts`:
 
@@ -59,9 +59,9 @@ const preview: Preview = {
 export default preview;
 ```
 
-Extension Viewport Decorator {#extension-viewport-decorator}
+## Extension Viewport Decorator {#extension-viewport-decorator}
 
-Simulate popup dimensions (400x600):
+### Simulate popup dimensions (400x600):
 
 {% raw %}
 ```typescript
@@ -74,7 +74,7 @@ export const popupViewport: Decorator = (Story, context) => {
 ```
 {% endraw %}
 
-Popup Component Story {#popup-component-story}
+## Popup Component Story {#popup-component-story}
 
 ```typescript
 import type { Meta, StoryObj } from '@storybook/react';
@@ -93,25 +93,25 @@ export const DarkMode: StoryObj<typeof PopupHeader> = {
 };
 ```
 
-Recommended Addons {#recommended-addons}
+## Recommended Addons {#recommended-addons}
 
 - @storybook/addon-a11y - Accessibility testing
 - @storybook/addon-viewport - Device simulation
 - @storybook/addon-themes - Theme switching
 
-Visual Regression Testing {#visual-regression-testing}
+## Visual Regression Testing {#visual-regression-testing}
 
-Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=YOUR_TOKEN`
+### Integrate Chromatic: `npm install -D chromatic && npx chromatic --project-token=YOUR_TOKEN`
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [React Setup](./chrome-extension-react-setup.md)
 - [Design System](./chrome-extension-design-system.md)
 - [Testing Strategies](./chrome-extension-testing-strategies.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Design System](../guides/chrome-extension-design-system.md)
 - [React Setup](../guides/chrome-extension-react-setup.md)

@@ -18,7 +18,7 @@ we will walk you through building a fully functional auto-pagination Chrome exte
 
 ---
 
-Understanding Auto-Pagination and Infinite Scroll {#understanding-auto-pagination}
+## Understanding Auto-Pagination and Infinite Scroll {#understanding-auto-pagination}
 
 Auto-pagination, often implemented as infinite scroll, is a UX pattern that automatically loads more content when users approach the end of the current page. Instead of clicking through numbered pages or a "Load More" button, users simply scroll down and new content appears magically. This creates a smooth browsing experience that keeps users engaged longer and reduces the friction of pagination.
 
@@ -28,7 +28,7 @@ The challenge with building a universal auto-pagination extension is that every 
 
 ---
 
-Project Setup and Extension Structure {#project-setup}
+## Project Setup and Extension Structure {#project-setup}
 
 Let us start by setting up the extension project structure. Create a new folder for your extension and add the following files:
 
@@ -85,7 +85,7 @@ This manifest uses Manifest V3, the latest version of the Chrome extension platf
 
 ---
 
-The Content Script: Detecting Pagination Elements {#content-script}
+## The Content Script: Detecting Pagination Elements {#content-script}
 
 The content script is the heart of your auto-pagination extension. It runs in the context of the web page and is responsible for detecting pagination elements, monitoring scroll position, and injecting new content. Let us build a comprehensive content script that handles various pagination patterns.
 
@@ -461,7 +461,7 @@ This content script handles multiple pagination patterns and uses the Intersecti
 
 ---
 
-The Popup Interface {#popup-interface}
+## The Popup Interface {#popup-interface}
 
 The popup provides users with control over the extension. Create `popup.html`:
 
@@ -508,7 +508,7 @@ The popup provides users with control over the extension. Create `popup.html`:
 </html>
 ```
 
-Create `popup.css` for styling:
+### Create `popup.css` for styling:
 
 ```css
 * {
@@ -607,7 +607,7 @@ button {
 }
 ```
 
-Create `popup.js` to handle user interactions:
+### Create `popup.js` to handle user interactions:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -687,7 +687,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-The Background Service Worker {#background-worker}
+## The Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and can manage cross-tab state. Create `background.js`:
 
@@ -727,7 +727,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 To test your auto-pagination extension, follow these steps:
 
@@ -742,29 +742,29 @@ The extension should automatically detect the pagination elements and load the n
 
 ---
 
-Common Challenges and Solutions {#common-challenges}
+## Common Challenges and Solutions {#common-challenges}
 
 Building a universal auto-pagination extension comes with several challenges. Here are the most common issues and how to address them:
 
-Dynamic Content Loading
+### Dynamic Content Loading
 
 Many modern websites use JavaScript frameworks that load content dynamically. Your extension needs to wait for the content to be fully rendered before attempting to load the next page. The current implementation handles this by using Intersection Observer, but you may need to add additional delays or retry logic for complex sites.
 
-Content Extraction
+### Content Extraction
 
 Different websites structure their content differently. The `extractMainContent` function in our content script uses common selectors, but you will likely need to customize this for specific sites. Consider adding site-specific rules or using machine learning to identify content containers.
 
-Rate Limiting
+### Rate Limiting
 
 Some websites implement rate limiting to prevent automated scraping. Your extension should implement appropriate delays between page loads and potentially detect rate limit errors to pause pagination temporarily.
 
-Memory Management
+### Memory Management
 
 Loading many pages can consume significant memory. Consider implementing cleanup logic to remove old content or limit the total number of loaded pages.
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 Once you have the basic extension working, consider adding these advanced features:
 
@@ -776,7 +776,7 @@ Once you have the basic extension working, consider adding these advanced featur
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an auto-pagination Chrome extension is a rewarding project that solves a real problem faced by millions of web users. you have learned how to create a complete extension with a content script for detecting and managing pagination, a popup interface for user control, and a background service worker for lifecycle management.
 

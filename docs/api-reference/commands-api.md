@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/api-reference/commands-api/"
 last_modified_at: 2026-01-15
 ---
 
-Chrome Commands API Reference
+### Chrome Commands API Reference
 
 The `chrome.commands` API allows extensions to define keyboard shortcuts that trigger actions. These shortcuts can work within Chrome's context or globally across the entire operating system.
 
-Overview {#overview}
+## Overview {#overview}
 
 The Commands API provides a way to define keyboard shortcuts for your extension. These shortcuts appear in Chrome's extension settings page and can be customized by users.
 
@@ -18,7 +18,7 @@ The Commands API provides a way to define keyboard shortcuts for your extension.
 - User-customizable. users can rebind shortcuts in `chrome://extensions/shortcuts`
 - Global shortcuts. work even when Chrome is not focused (requires additional configuration)
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 
 Define commands in your `manifest.json` under the `commands` key:
 
@@ -42,7 +42,7 @@ Define commands in your `manifest.json` under the `commands` key:
 }
 ```
 
-Command Definition Properties {#command-definition-properties}
+## Command Definition Properties {#command-definition-properties}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -50,9 +50,9 @@ Command Definition Properties {#command-definition-properties}
 | `description` | `string` | Human-readable description shown in shortcuts UI |
 | `global` | `boolean` | If `true`, works when Chrome is not focused (optional) |
 
-Platform-Specific Keys {#platform-specific-keys}
+## Platform-Specific Keys {#platform-specific-keys}
 
-The `suggested_key` object supports platform-specific bindings:
+### The `suggested_key` object supports platform-specific bindings:
 
 | Platform Key | Description |
 |--------------|-------------|
@@ -62,9 +62,9 @@ The `suggested_key` object supports platform-specific bindings:
 | `linux` | Linux only |
 | `windows` | Windows only |
 
-Special Command Names {#special-command-names}
+## Special Command Names {#special-command-names}
 
-Chrome reserves certain command names for specific behaviors:
+### Chrome reserves certain command names for specific behaviors:
 
 | Command Name | Behavior |
 |--------------|----------|
@@ -83,9 +83,9 @@ Chrome reserves certain command names for specific behaviors:
 }
 ```
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-chrome.commands.getAll(callback) {#chromecommandsgetallcallback}
+## chrome.commands.getAll(callback) {#chromecommandsgetallcallback}
 
 Returns all defined commands and their current shortcuts.
 
@@ -97,7 +97,7 @@ chrome.commands.getAll((commands) => {
 });
 ```
 
-Response object (`Command`):
+### Response object (`Command`):
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -105,15 +105,15 @@ Response object (`Command`):
 | `description` | `string` | Command description |
 | `shortcut` | `string` | Current keyboard shortcut (e.g., "Ctrl+Shift+Y") |
 
-Async version (MV3) {#async-version-mv3}
+## Async version (MV3) {#async-version-mv3}
 
 ```js
 const commands = await chrome.commands.getAll();
 ```
 
-Events {#events}
+## Events {#events}
 
-chrome.commands.onCommand.addListener(callback) {#chromecommandsoncommandaddlistenercallback}
+## chrome.commands.onCommand.addListener(callback) {#chromecommandsoncommandaddlistenercallback}
 
 Fires when a registered command is activated via keyboard shortcut.
 
@@ -130,16 +130,16 @@ chrome.commands.onCommand.addListener((command, tab) => {
 });
 ```
 
-Listener parameters:
+### Listener parameters:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `command` | `string` | The command name that was triggered |
 | `tab` | `Tab` | The active tab when the command was triggered |
 
-Key Combinations {#key-combinations}
+## Key Combinations {#key-combinations}
 
-Supported Modifiers {#supported-modifiers}
+## Supported Modifiers {#supported-modifiers}
 
 | Modifier | Description |
 |----------|-------------|
@@ -149,7 +149,7 @@ Supported Modifiers {#supported-modifiers}
 | `Command` | Command key (Mac only) |
 | `MacCtrl` | Mac Control key (use when you want the Control key on Mac, not Command) |
 
-Supported Keys {#supported-keys}
+## Supported Keys {#supported-keys}
 
 - Letters: A, Z
 - Numbers: 0, 9
@@ -158,7 +158,7 @@ Supported Keys {#supported-keys}
 - Function keys: F1, F12
 - Media keys: MediaNextTrack, MediaPlayPause, MediaPrevTrack, MediaStop
 
-Key Requirements {#key-requirements}
+## Key Requirements {#key-requirements}
 
 - Must include at least one modifier (Ctrl or Alt). except for media keys
 - Maximum of 4 shortcuts per extension
@@ -177,7 +177,7 @@ Key Requirements {#key-requirements}
 }
 ```
 
-Global Shortcuts {#global-shortcuts}
+## Global Shortcuts {#global-shortcuts}
 
 Global shortcuts work even when Chrome doesn't have focus. Enable by adding `"global": true` to your command definition:
 
@@ -195,9 +195,9 @@ Global shortcuts work even when Chrome doesn't have focus. Enable by adding `"gl
 
 Global shortcuts require the user to grant permission. They can be disabled by the user in Chrome's settings or by other applications.
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Basic Command Handler {#basic-command-handler}
+## Basic Command Handler {#basic-command-handler}
 
 ```js
 // background.js
@@ -210,7 +210,7 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
 });
 ```
 
-Display Shortcuts in Options Page {#display-shortcuts-in-options-page}
+## Display Shortcuts in Options Page {#display-shortcuts-in-options-page}
 
 ```js
 // options.js
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-Global Hotkey for Quick Capture {#global-hotkey-for-quick-capture}
+## Global Hotkey for Quick Capture {#global-hotkey-for-quick-capture}
 
 ```js
 // background.js - Global shortcut for capture functionality
@@ -241,7 +241,7 @@ chrome.commands.onCommand.addListener((command, tab) => {
 });
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Commands Permission](../permissions/commands.md). Detailed permission reference
 - [Keyboard Shortcuts Guide](../guides/commands-keyboard-shortcuts.md). Step-by-step implementation guide

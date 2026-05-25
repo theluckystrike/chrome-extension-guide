@@ -40,9 +40,9 @@ A grammar checker extension typically operates across multiple Chrome extension 
 
 ---
 
-Core Components
+### Core Components
 
-Manifest Configuration
+### Manifest Configuration
 
 ```json
 {
@@ -79,7 +79,7 @@ Manifest Configuration
 
 ---
 
-Text Selection Detection Pattern
+### Text Selection Detection Pattern
 
 The foundation of a grammar checker is detecting when users select text. Here's a solid TypeScript implementation:
 
@@ -182,7 +182,7 @@ export { TextSelectionDetector, TextSelection };
 
 ---
 
-Content Script Integration
+### Content Script Integration
 
 The content script orchestrates the UI overlay and communicates with the background service worker:
 
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Background Service Worker for API Communication
+### Background Service Worker for API Communication
 
 The service worker handles API communication with grammar checking services and implements caching:
 
@@ -580,9 +580,9 @@ new GrammarServiceWorker();
 
 ---
 
-Storage and Settings Management
+### Storage and Settings Management
 
-A solid settings system using Chrome's storage API:
+### A solid settings system using Chrome's storage API:
 
 ```typescript
 // shared/settings.ts
@@ -656,9 +656,9 @@ export { SettingsManager, ExtensionSettings, DEFAULT_SETTINGS };
 
 ---
 
-Performance Optimization
+### Performance Optimization
 
-Debouncing and Throttling
+### Debouncing and Throttling
 
 ```typescript
 // shared/utils.ts
@@ -691,7 +691,7 @@ export function throttle<T extends (...args: any[]) => any>(
 }
 ```
 
-Web Worker for Heavy Processing
+### Web Worker for Heavy Processing
 
 For complex grammar analysis, offload to a Web Worker:
 
@@ -733,7 +733,7 @@ function analyzeText(text: string, rules: any[]): any[] {
 
 ---
 
-Summary
+### Summary
 
 Building a grammar checker extension requires careful consideration of multiple architectural patterns:
 

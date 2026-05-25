@@ -18,7 +18,7 @@ Whether you're building this extension as a side project, adding to your portfol
 
 ---
 
-Why Build a Web Font Checker Extension {#why-build-web-font-checker}
+## Why Build a Web Font Checker Extension {#why-build-web-font-checker}
 
 Web typography plays a crucial role in user experience, brand identity, and accessibility. However, managing fonts on the web is surprisingly complex. Font files must be loaded from servers, parsed by the browser, and rendered correctly before users see the intended typography. When things go wrong, websites can experience Flash of Invisible Text (FOIT), layout shifts when fonts finally load, or complete font rendering failures that leave pages unreadable.
 
@@ -28,7 +28,7 @@ The demand for such tools is significant. Web developers constantly battle with 
 
 ---
 
-Extension Architecture Overview {#extension-architecture}
+## Extension Architecture Overview {#extension-architecture}
 
 Before diving into code, let's understand the architecture that makes a web font checker extension work effectively. A well-structured extension follows the three-context model that Chrome extensions use, separating concerns between the service worker, popup interface, and content scripts that run on web pages.
 
@@ -38,7 +38,7 @@ This separation allows each component to focus on its specific responsibilities.
 
 ---
 
-Setting Up the Manifest V3 Configuration {#manifest-configuration}
+## Setting Up the Manifest V3 Configuration {#manifest-configuration}
 
 Every Chrome extension begins with the manifest.json file that declares the extension's capabilities, permissions, and structure. For a web font checker extension, we need careful permission selection to balance functionality with user privacy and Chrome Web Store approval requirements.
 
@@ -81,7 +81,7 @@ However, be aware that the `<all_urls>` permission may require you to explain yo
 
 ---
 
-Content Script: Scanning Font Information {#content-script}
+## Content Script: Scanning Font Information {#content-script}
 
 The content script is the heart of font detection. It runs in the context of the webpage and can access the DOM to extract font information that wouldn't otherwise be visible to extension code. This is where we'll implement the core logic for detecting fonts, measuring loading performance, and gathering typography data.
 
@@ -272,7 +272,7 @@ The `detectWebFontSources()` function goes deeper, examining where fonts are loa
 
 ---
 
-Service Worker: Managing Analysis Requests {#service-worker}
+## Service Worker: Managing Analysis Requests {#service-worker}
 
 The service worker acts as the bridge between the content script and the popup interface. It handles the communication flow, manages state, and can perform additional analysis that doesn't require direct page access. Here's how to implement the background service worker:
 
@@ -384,7 +384,7 @@ The service worker uses `chrome.scripting.executeScript()` to run code in the co
 
 ---
 
-Popup Interface: Displaying Results {#popup-interface}
+## Popup Interface: Displaying Results {#popup-interface}
 
 The popup provides the user-facing interface where users interact with the extension. A well-designed popup should present font analysis results clearly, with options for further investigation and export capabilities. Here's an implementation using vanilla JavaScript:
 
@@ -672,11 +672,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Advanced Features: Font Performance Analysis {#advanced-features}
+## Advanced Features: Font Performance Analysis {#advanced-features}
 
 A truly useful webfont checker extension goes beyond simple detection and provides actionable insights about font loading performance. Here are some advanced features you can implement to make your extension stand out:
 
-Font Loading Performance Metrics
+### Font Loading Performance Metrics
 
 Measuring font loading performance helps developers identify bottlenecks. You can detect Flash of Invisible Text (FOIT) by monitoring when fonts become available versus when content renders. Track the time between page load and font availability using the Font Loading API:
 
@@ -726,7 +726,7 @@ async function analyzeFontPerformance() {
 }
 ```
 
-Font Fallback Detection
+### Font Fallback Detection
 
 Analyzing fallback font chains helps ensure text remains readable even if custom fonts fail to load. This is crucial for accessibility and provides recommendations for better fallback configurations:
 
@@ -756,7 +756,7 @@ function analyzeFallbackFonts() {
 }
 ```
 
-Google Fonts Integration
+### Google Fonts Integration
 
 Many websites use Google Fonts, and your extension can provide specific insights about these commonly used fonts:
 
@@ -786,7 +786,7 @@ function identifyGoogleFonts(sources) {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before releasing your extension, thorough testing ensures it works correctly across different types of websites. Test your extension on pages with various font configurations:
 
@@ -796,7 +796,7 @@ You can test your extension locally by navigating to `chrome://extensions/`, ena
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your extension is tested and ready, you can publish it to the Chrome Web Store. Prepare your store listing with clear screenshots showing the extension in action, a compelling description that explains the value of your tool, and appropriate categories and tags to help users discover your extension.
 
@@ -804,7 +804,7 @@ You'll need to pay a one-time developer registration fee of $5 to publish to the
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a web font checker extension is an excellent project that teaches you valuable skills in Chrome extension development while creating a genuinely useful tool for web developers and designers. The extension architecture we covered, separating concerns between content scripts, service workers, and popup interfaces, applies to virtually any Chrome extension you might build in the future.
 

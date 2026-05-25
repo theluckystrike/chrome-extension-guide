@@ -18,11 +18,11 @@ This comprehensive guide walks you through everything you need to know about the
 
 ---
 
-Understanding the WebNavigation API {#understanding-webnavigation-api}
+## Understanding the WebNavigation API {#understanding-webnavigation-api}
 
 The Chrome WebNavigation API, accessible through the `chrome.webNavigation` namespace, provides a way to monitor and intercept navigation events in the browser. Unlike the Tabs API, which focuses on managing tab properties and state, WebNavigation specifically deals with the navigation lifecycle, from the moment a URL is requested to when the page fully loads and settles.
 
-Why WebNavigation Matters for Extension Development
+### Why WebNavigation Matters for Extension Development
 
 When building Chrome extensions, understanding when and how pages load is fundamental to many extension features. The WebNavigation API offers several advantages over other approaches:
 
@@ -35,11 +35,11 @@ The API becomes particularly valuable when combined with other Chrome APIs. For 
 
 ---
 
-Core Concepts and Event Structure {#core-concepts}
+## Core Concepts and Event Structure {#core-concepts}
 
 Before diving into implementation, it's essential to understand the event structure that WebNavigation provides. The API offers several events that fire at different stages of navigation:
 
-The onCommitted Event
+### The onCommitted Event
 
 The `onCommitted` event fires when the browser decides to proceed with navigation. This happens when the server responds with headers or when the document is initially parsed. At this point, the URL might still change (due to redirects), but the browser has committed to loading the resource.
 
@@ -60,7 +60,7 @@ The `details` object contains valuable information:
 - `transitionType`: How navigation was initiated (link, typed, form_submit, etc.)
 - `transitionQualifiers`: Additional qualifiers like "from_address_bar" or "forward_back"
 
-The onDOMContentLoaded Event
+### The onDOMContentLoaded Event
 
 This event fires when the DOM content is fully parsed, but external resources (images, stylesheets) may still be loading. It's useful when you need to access page content as early as possible without waiting for everything to load.
 
@@ -72,7 +72,7 @@ chrome.webNavigation.onDOMContentLoaded.addListener((details) => {
 });
 ```
 
-The onCompleted Event
+### The onCompleted Event
 
 The `onCompleted` event fires when the page has fully loaded, including all dependent resources like images and stylesheets. This is the appropriate event when you need guaranteed complete page access.
 
@@ -83,7 +83,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-The onBeforeNavigate Event
+### The onBeforeNavigate Event
 
 This event fires before navigation begins, when the URL is about to change. It provides an early hook for intercepting or analyzing upcoming navigation.
 
@@ -96,7 +96,7 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
 
 ---
 
-Setting Up Permissions in Manifest V3 {#manifest-v3-permissions}
+## Setting Up Permissions in Manifest V3 {#manifest-v3-permissions}
 
 Properly configuring permissions is critical for your extension to access WebNavigation events. In Manifest V3, you need to declare the webNavigation permission in your manifest.json file:
 
@@ -127,11 +127,11 @@ For production extensions, specify only the domains you need to track to comply 
 
 ---
 
-Implementing Page Load Detection Extension {#page-load-detection}
+## Implementing Page Load Detection Extension {#page-load-detection}
 
 Let's build a practical example: a page load detection extension that tracks when users visit specific types of pages. This demonstrates common patterns you'll use in real-world extensions.
 
-Background Script Setup
+### Background Script Setup
 
 Create a background script that registers WebNavigation listeners:
 
@@ -189,7 +189,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-Content Script for Analysis
+### Content Script for Analysis
 
 Once a page loads, you might want to analyze its content:
 
@@ -217,9 +217,9 @@ window.addEventListener('load', () => {
 
 ---
 
-Advanced Patterns and Use Cases {#advanced-patterns}
+## Advanced Patterns and Use Cases {#advanced-patterns}
 
-Detecting Specific Page Types
+### Detecting Specific Page Types
 
 You can combine WebNavigation with other APIs to detect specific types of pages:
 
@@ -264,7 +264,7 @@ function handleEcommerce(details) {
 }
 ```
 
-Tracking Navigation Transitions
+### Tracking Navigation Transitions
 
 Understanding how users navigate to pages can provide valuable insights:
 
@@ -312,7 +312,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 ```
 
-Handling SPAs and Client-Side Navigation
+### Handling SPAs and Client-Side Navigation
 
 Single-page applications (SPAs) present unique challenges because they often don't trigger traditional page loads. WebNavigation can help detect these navigations:
 
@@ -335,9 +335,9 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
 
 ---
 
-Error Handling and Edge Cases {#error-handling}
+## Error Handling and Edge Cases {#error-handling}
 
-Handling Failed Navigations
+### Handling Failed Navigations
 
 Not all navigations succeed. The `onErrorOccurred` event helps you track failures:
 
@@ -354,7 +354,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
 });
 ```
 
-Filtering Events Efficiently
+### Filtering Events Efficiently
 
 To reduce unnecessary processing, use the filter parameter when adding listeners:
 
@@ -378,7 +378,7 @@ You can filter by:
 - `tabId`: Listen only to specific tabs
 - `frameId`: Listen only to specific frames
 
-Preventing Memory Leaks
+### Preventing Memory Leaks
 
 When storing navigation data, implement cleanup:
 
@@ -408,11 +408,11 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 
 ---
 
-Best Practices and Performance Optimization {#best-practices}
+## Best Practices and Performance Optimization {#best-practices}
 
-Minimize Event Handler Work
+### Minimize Event Handler Work
 
-Keep your event handlers lightweight:
+### Keep your event handlers lightweight:
 
 ```javascript
 // Bad: Heavy processing in event handler
@@ -436,7 +436,7 @@ function scheduleAnalysis(url) {
 }
 ```
 
-Use Appropriate Event Timing
+### Use Appropriate Event Timing
 
 Choose the right event for your use case:
 
@@ -445,7 +445,7 @@ Choose the right event for your use case:
 - onDOMContentLoaded: For early content access
 - onCompleted: For guaranteed complete page access
 
-Respect User Privacy
+### Respect User Privacy
 
 When collecting navigation data:
 
@@ -456,9 +456,9 @@ When collecting navigation data:
 
 ---
 
-Common Pitfalls to Avoid {#common-pitfalls}
+## Common Pitfalls to Avoid {#common-pitfalls}
 
-Forgetting Host Permissions
+### Forgetting Host Permissions
 
 Many developers forget that `webNavigation` requires host permissions. Without them, events won't fire for most pages:
 
@@ -470,7 +470,7 @@ Many developers forget that `webNavigation` requires host permissions. Without t
 ]
 ```
 
-Not Checking Frame IDs
+### Not Checking Frame IDs
 
 Ignoring frame IDs can cause your extension to process the same page multiple times:
 
@@ -487,7 +487,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-Mixing Up Tabs and WebNavigation
+### Mixing Up Tabs and WebNavigation
 
 Remember that tab IDs can be reused after a tab closes. Don't rely on tab IDs for long-term storage:
 
@@ -501,9 +501,9 @@ longTermStorage[`${tabId}_${timestamp}`] = data;
 
 ---
 
-Real-World Extension Examples {#real-world-examples}
+## Real-World Extension Examples {#real-world-examples}
 
-Productivity Tracker Extension
+### Productivity Tracker Extension
 
 A productivity extension that tracks time spent on different websites:
 
@@ -528,7 +528,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 ```
 
-Content Filter Extension
+### Content Filter Extension
 
 A content filter that blocks or modifies pages based on navigation:
 
@@ -550,9 +550,9 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
 });
 ```
 
-Reading Progress Extension
+### Reading Progress Extension
 
-Track reading progress across articles:
+### Track reading progress across articles:
 
 ```javascript
 chrome.webNavigation.onCompleted.addListener((details) => {
@@ -585,11 +585,11 @@ function detectArticle(url) {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome WebNavigation API is an indispensable tool for extension developers building features that interact with page navigation. From simple page load detection to complex SPA monitoring, understanding this API enables you to create sophisticated extensions that respond precisely to browser navigation events.
 
-Key takeaways from this guide:
+### Key takeaways from this guide:
 
 1. Choose the right event: Use onBeforeNavigate, onCommitted, onDOMContentLoaded, or onCompleted depending on when you need to intercept the page
 2. Configure permissions correctly: Both webNavigation permission and appropriate host_permissions are required

@@ -18,7 +18,7 @@ Whether you are building a simple browser action popup or a complex options page
 
 ---
 
-Understanding Chrome Extension Styling Requirements {#extension-styling-requirements}
+## Understanding Chrome Extension Styling Requirements {#extension-styling-requirements}
 
 Chrome extensions present distinct styling challenges that differ significantly from traditional web development. When you style chrome extension interfaces, you must consider multiple contexts: the browser action popup that appears when users click your extension icon, the options page where users configure settings, any side panels your extension might include, and content scripts that inject UI elements into web pages. Each of these contexts has its own constraints and best practices.
 
@@ -28,7 +28,7 @@ Content script styling presents another unique challenge. When your extension in
 
 ---
 
-Setting Up Tailwind for Chrome Extension Development {#setup-tailwind}
+## Setting Up Tailwind for Chrome Extension Development {#setup-tailwind}
 
 Getting started with Tailwind in your Chrome extension project requires proper configuration to ensure styles are generated correctly and included in your extension package. The setup process involves installing dependencies, configuring content paths, and integrating with your build system.
 
@@ -80,11 +80,11 @@ When building your extension, ensure your build process outputs the processed CS
 
 ---
 
-Creating Beautiful Tailwind Popup Chrome Interfaces {#tailwind-popup-chrome}
+## Creating Beautiful Tailwind Popup Chrome Interfaces {#tailwind-popup-chrome}
 
 The popup is often the first interaction users have with your extension, making its design critical for user engagement. Using Tailwind for chrome extension popup styling allows you to create modern, responsive interfaces quickly without writing custom CSS.
 
-Essential Popup Layout Patterns
+### Essential Popup Layout Patterns
 
 Popups typically follow vertical stack layouts with clear visual hierarchy. Use flexbox utilities to align elements and manage spacing:
 
@@ -115,7 +115,7 @@ Popups typically follow vertical stack layouts with clear visual hierarchy. Use 
 
 This structure demonstrates several key Tailwind patterns: using width utilities like w-80 to control popup dimensions, spacing utilities like p-4 and py-4 for consistent padding, color utilities for semantic styling, and transition classes for smooth hover effects.
 
-Advanced Popup Styling Techniques
+### Advanced Popup Styling Techniques
 
 For more complex popups, use Tailwind's grid system to create multi-column layouts:
 
@@ -130,7 +130,7 @@ For more complex popups, use Tailwind's grid system to create multi-column layou
 </div>
 ```
 
-Create card-based designs for content sections:
+### Create card-based designs for content sections:
 
 ```html
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -150,11 +150,11 @@ Create card-based designs for content sections:
 
 ---
 
-Chrome Extension CSS Framework Best Practices {#css-framework-best-practices}
+## Chrome Extension CSS Framework Best Practices {#css-framework-best-practices}
 
 Using a CSS framework like Tailwind for chrome extension development offers numerous advantages, but following best practices ensures you maximize these benefits while avoiding common pitfalls.
 
-Optimizing for Extension Performance
+### Optimizing for Extension Performance
 
 Chrome extensions should remain lightweight to ensure fast loading times and minimal memory consumption. Tailwind's Just-In-Time compiler generates only the CSS you use, making it inherently efficient. However, you can optimize further by being intentional about your class usage.
 
@@ -173,7 +173,7 @@ Use CSS custom properties for values you might need to change dynamically:
 
 Then reference these in your configuration or use them directly in your stylesheets.
 
-Maintaining Consistency Across Extension Pages
+### Maintaining Consistency Across Extension Pages
 
 If your extension includes multiple pages, popup, options page, side panel, maintaining visual consistency becomes important for user experience. Create reusable component patterns using Tailwind's @apply directive:
 
@@ -201,13 +201,13 @@ These component classes combine multiple utility classes into reusable abstracti
 
 ---
 
-Handling Dark Mode in Chrome Extensions {#dark-mode-support}
+## Handling Dark Mode in Chrome Extensions {#dark-mode-support}
 
 Modern users often prefer dark mode, and Chrome itself supports system-wide dark themes. Your extension should adapt to these preferences to provide a smooth experience.
 
 Tailwind's dark mode support uses either the 'media' strategy (automatic detection based on system preferences) or the 'class' strategy (manual control through a CSS class). For Chrome extensions, the 'class' approach often works better because you can detect Chrome's theme through the browser API:
 
-Enable dark mode in your configuration:
+### Enable dark mode in your configuration:
 
 ```javascript
 module.exports = {
@@ -216,7 +216,7 @@ module.exports = {
 }
 ```
 
-Then implement dark variants throughout your interface:
+### Then implement dark variants throughout your interface:
 
 ```html
 <div class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200">
@@ -244,7 +244,7 @@ chrome.theme.getThemeCSS((css) => {
 
 ---
 
-Content Script Styling with Shadow DOM {#content-script-styling}
+## Content Script Styling with Shadow DOM {#content-script-styling}
 
 When injecting UI elements into web pages through content scripts, style isolation becomes critical. Without isolation, your extension's styles might conflict with the page's existing CSS, and the page's styles might affect your injected elements unexpectedly.
 
@@ -309,11 +309,11 @@ Alternatively, include your Tailwind-generated CSS within the shadow DOM by inje
 
 ---
 
-Chrome Extension UI Design Patterns {#ui-design-patterns}
+## Chrome Extension UI Design Patterns {#ui-design-patterns}
 
 Creating effective Chrome extension interfaces requires understanding common design patterns that work well within the browser context.
 
-Settings and Options Pages
+### Settings and Options Pages
 
 Options pages typically need more space than popups and often include forms, toggles, and grouped settings. Use Tailwind's form utilities and grid layouts:
 
@@ -345,9 +345,9 @@ Options pages typically need more space than popups and often include forms, tog
 </div>
 ```
 
-Notifications and Toasts
+### Notifications and Toasts
 
-For temporary notifications, create floating toast elements:
+### For temporary notifications, create floating toast elements:
 
 ```html
 <div class="fixed bottom-4 right-4 max-w-sm p-4 bg-gray-900 text-white rounded-lg shadow-lg transform transition-all duration-300">
@@ -363,19 +363,19 @@ For temporary notifications, create floating toast elements:
 
 ---
 
-Troubleshooting Extension Styling Issues {#troubleshooting}
+## Troubleshooting Extension Styling Issues {#troubleshooting}
 
 Even with Tailwind's solid system, you may encounter issues when styling chrome extensions. Understanding common problems and their solutions helps you work efficiently.
 
-CSS Not Loading in Extension
+### CSS Not Loading in Extension
 
 If your Tailwind classes aren't appearing, verify several common causes. First, ensure your build process completed successfully and generated the CSS file. Check that the CSS file path in your HTML matches the actual output location. Confirm your tailwind.config.js content array includes all relevant file types and paths.
 
-Styles Leaking to Host Pages
+### Styles Leaking to Host Pages
 
 If your extension's styles affect the surrounding web page in content script contexts, ensure you're using Shadow DOM for isolation. Without Shadow DOM, your injected elements inherit page styles, and your styles might affect page elements.
 
-Popup Scrolling Issues
+### Popup Scrolling Issues
 
 Chrome popups have height limits. If your content exceeds available space, implement internal scrolling:
 
@@ -387,7 +387,7 @@ Chrome popups have height limits. If your content exceeds available space, imple
 
 ---
 
-Conclusion
+### Conclusion
 
 Mastering Tailwind CSS for chrome extension styling opens up possibilities for creating professional, responsive, and maintainable extension interfaces. From setting up your build pipeline to implementing advanced features like dark mode and Shadow DOM isolation, Tailwind provides the tools necessary for modern extension development.
 
@@ -397,24 +397,24 @@ Remember to test your extension's styling across different contexts, popups, opt
 
 ---
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
-Can I use Tailwind CSS with Manifest V3 extensions?
+### Can I use Tailwind CSS with Manifest V3 extensions?
 
 Yes, Tailwind CSS works smoothly with Manifest V3. The configuration and setup process remains identical whether you use Manifest V2 or V3. Both versions support the same HTML, CSS, and JavaScript capabilities that Tailwind leverages.
 
-How do I include fonts in my Tailwind-styled extension?
+### How do I include fonts in my Tailwind-styled extension?
 
 Add Google Fonts or custom fonts using @font-face in your CSS, then configure Tailwind to use those fonts in your theme extension. Alternatively, link fonts directly in your HTML head section, though this adds HTTP requests that may slow loading.
 
-What's the best way to handle responsive layouts in extension popups?
+### What's the best way to handle responsive layouts in extension popups?
 
 Chrome extension popups don't truly resize responsively like web pages. Instead, design for your popup's fixed dimensions and use percentage-based widths for flexible internal layouts. Test at minimum and maximum expected sizes to ensure content remains visible and properly formatted.
 
-Can I use Tailwind plugins with Chrome extensions?
+### Can I use Tailwind plugins with Chrome extensions?
 
 Yes, Tailwind plugins work normally with Chrome extensions. Popular plugins like @tailwindcss/forms, @tailwindcss/typography, and others can enhance your extension's styling capabilities just as they would in regular web projects.
 
-How do I debug Tailwind classes in extension popups?
+### How do I debug Tailwind classes in extension popups?
 
 Use Chrome's Developer Tools to inspect elements in your extension popup. You can view computed styles, see which classes are applied, and temporarily modify styles to test changes before updating your source files.

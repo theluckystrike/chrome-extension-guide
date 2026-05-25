@@ -11,22 +11,22 @@ last_modified_at: 2026-01-15
 
 clipboardWrite Permission
 
-What It Grants {#what-it-grants}
+## What It Grants {#what-it-grants}
 Allows the extension to write content to the system clipboard using `navigator.clipboard.writeText()` or `document.execCommand('copy')`.
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 {
   "permissions": ["clipboardWrite"]
 }
 ```
 
-User Warning {#user-warning}
+## User Warning {#user-warning}
 "Modify data you copy and paste". triggers a warning.
 
-How to Write Clipboard {#how-to-write-clipboard}
+## How to Write Clipboard {#how-to-write-clipboard}
 
-In Popup/Options Page {#in-popupoptions-page}
+## In Popup/Options Page {#in-popupoptions-page}
 ```typescript
 // Modern Clipboard API (preferred)
 await navigator.clipboard.writeText('Hello from extension!');
@@ -44,7 +44,7 @@ document.execCommand('copy');
 textarea.remove();
 ```
 
-In Service Worker (MV3) {#in-service-worker-mv3}
+## In Service Worker (MV3) {#in-service-worker-mv3}
 Service workers cannot write clipboard directly. Use offscreen document:
 ```typescript
 // background.ts
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-Context Menu Copy Pattern {#context-menu-copy-pattern}
+## Context Menu Copy Pattern {#context-menu-copy-pattern}
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -88,7 +88,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-Messaging Integration {#messaging-integration}
+## Messaging Integration {#messaging-integration}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -111,7 +111,7 @@ m.onMessage('COPY_TAB_URL', async ({ format }) => {
 });
 ```
 
-Storage for Clipboard History {#storage-for-clipboard-history}
+## Storage for Clipboard History {#storage-for-clipboard-history}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -126,28 +126,28 @@ async function trackCopy(text: string) {
 }
 ```
 
-When to Use {#when-to-use}
+## When to Use {#when-to-use}
 - Copy-to-clipboard buttons in popup/sidebar
 - URL/text formatting and copying
 - Code snippet copying
 - Context menu copy actions
 - Clipboard transformation tools
 
-When NOT to Use {#when-not-to-use}
+## When NOT to Use {#when-not-to-use}
 - In content scripts on the user's page without clear intent
 - Don't overwrite clipboard unexpectedly. always user-initiated
 
-Permission Check {#permission-check}
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('clipboardWrite');
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Related: `docs/permissions/clipboardRead.md`, `docs/permissions/offscreen.md`
 - Tutorial: `docs/tutorials/build-clipboard-manager.md`
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I copy text to clipboard in a Chrome extension?
 Use navigator.clipboard.writeText('your text') in your content script or popup. No special permission is required for writing to clipboard in most contexts.

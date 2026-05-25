@@ -10,7 +10,7 @@ Chrome Declarative Net Request API Reference
 
 The `chrome.declarativeNetRequest` API lets you block, redirect, and modify network requests using declarative rules. It is the MV3 replacement for the `chrome.webRequest` blocking API and is designed to be performant and privacy-preserving -- the browser evaluates rules without exposing request details to the extension.
 
-Permissions {#permissions}
+## Permissions {#permissions}
 
 ```json
 {
@@ -28,7 +28,7 @@ Add `declarativeNetRequestFeedback` to use `getMatchedRules` for debugging:
 }
 ```
 
-Rule Sources {#rule-sources}
+## Rule Sources {#rule-sources}
 
 Chrome supports three rule sources, each with different lifetimes and quota limits.
 
@@ -38,7 +38,7 @@ Chrome supports three rule sources, each with different lifetimes and quota limi
 | Dynamic | `updateDynamicRules()` | Across sessions | 30,000 | User-configurable rules |
 | Session | `updateSessionRules()` | Current session only | 5,000 | Temporary rules, debugging |
 
-Static rules in the manifest {#static-rules-in-the-manifest}
+## Static rules in the manifest {#static-rules-in-the-manifest}
 
 ```json
 {
@@ -55,7 +55,7 @@ Static rulesets can be enabled or disabled at runtime with `updateEnabledRuleset
 
 ---
 
-Rule Structure {#rule-structure}
+## Rule Structure {#rule-structure}
 
 ```ts
 interface Rule {
@@ -66,7 +66,7 @@ interface Rule {
 }
 ```
 
-RuleAction {#ruleaction}
+## RuleAction {#ruleaction}
 
 ```ts
 interface RuleAction {
@@ -89,7 +89,7 @@ interface ModifyHeaderInfo {
 }
 ```
 
-RuleCondition {#rulecondition}
+## RuleCondition {#rulecondition}
 
 ```ts
 interface RuleCondition {
@@ -116,7 +116,7 @@ type ResourceType =
   | "webbundle" | "other";
 ```
 
-urlFilter Syntax {#urlfilter-syntax}
+## urlFilter Syntax {#urlfilter-syntax}
 
 | Pattern | Meaning |
 |---------|---------|
@@ -126,7 +126,7 @@ urlFilter Syntax {#urlfilter-syntax}
 | `\|` at end | Anchor to the end of the URL |
 | `^` | Separator character (anything except alphanumeric, `_`, `-`, `.`, `%`) |
 
-Examples:
+### Examples:
 
 | urlFilter | Matches | Does Not Match |
 |-----------|---------|----------------|
@@ -137,9 +137,9 @@ Examples:
 
 ---
 
-Action Types {#action-types}
+## Action Types {#action-types}
 
-block {#block}
+## block {#block}
 
 Cancels the request. The browser shows a network error.
 
@@ -154,7 +154,7 @@ Cancels the request. The browser shows a network error.
 }
 ```
 
-redirect {#redirect}
+## redirect {#redirect}
 
 Redirects the request to a different URL, an extension page, or a transformed URL.
 
@@ -172,7 +172,7 @@ Redirects the request to a different URL, an extension page, or a transformed UR
 }
 ```
 
-allow {#allow}
+## allow {#allow}
 
 Allows a request that would otherwise be blocked by a lower-priority rule.
 
@@ -187,7 +187,7 @@ Allows a request that would otherwise be blocked by a lower-priority rule.
 }
 ```
 
-allowAllRequests {#allowallrequests}
+## allowAllRequests {#allowallrequests}
 
 Allows all requests originating from a matching main_frame or sub_frame. Used to allowlist entire pages.
 
@@ -199,7 +199,7 @@ Allows all requests originating from a matching main_frame or sub_frame. Used to
 }
 ```
 
-upgradeScheme {#upgradescheme}
+## upgradeScheme {#upgradescheme}
 
 Upgrades the URL from `http://` to `https://`.
 
@@ -211,7 +211,7 @@ Upgrades the URL from `http://` to `https://`.
 }
 ```
 
-modifyHeaders {#modifyheaders}
+## modifyHeaders {#modifyheaders}
 
 Adds, sets, or removes request and response headers.
 
@@ -232,7 +232,7 @@ Adds, sets, or removes request and response headers.
 
 ---
 
-Rule Priority and Evaluation Order {#rule-priority-and-evaluation-order}
+## Rule Priority and Evaluation Order {#rule-priority-and-evaluation-order}
 
 When multiple rules match the same request:
 
@@ -243,9 +243,9 @@ When multiple rules match the same request:
 
 ---
 
-Methods {#methods}
+## Methods {#methods}
 
-chrome.declarativeNetRequest.updateDynamicRules(options) {#chromedeclarativenetrequestupdatedynamicrulesoptions}
+## chrome.declarativeNetRequest.updateDynamicRules(options) {#chromedeclarativenetrequestupdatedynamicrulesoptions}
 
 Adds or removes dynamic rules. Dynamic rules persist across browser sessions.
 
@@ -276,7 +276,7 @@ await chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-chrome.declarativeNetRequest.updateSessionRules(options) {#chromedeclarativenetrequestupdatesessionrulesoptions}
+## chrome.declarativeNetRequest.updateSessionRules(options) {#chromedeclarativenetrequestupdatesessionrulesoptions}
 
 Same interface as `updateDynamicRules`, but session rules do not persist across browser restarts.
 
@@ -287,7 +287,7 @@ function updateSessionRules(options: {
 }): Promise<void>;
 ```
 
-chrome.declarativeNetRequest.getDynamicRules(filter?) {#chromedeclarativenetrequestgetdynamicrulesfilter}
+## chrome.declarativeNetRequest.getDynamicRules(filter?) {#chromedeclarativenetrequestgetdynamicrulesfilter}
 
 ```ts
 function getDynamicRules(filter?: { ruleIds?: number[] }): Promise<Rule[]>;
@@ -298,13 +298,13 @@ const allDynamic = await chrome.declarativeNetRequest.getDynamicRules();
 const specific = await chrome.declarativeNetRequest.getDynamicRules({ ruleIds: [1, 2] });
 ```
 
-chrome.declarativeNetRequest.getSessionRules(filter?) {#chromedeclarativenetrequestgetsessionrulesfilter}
+## chrome.declarativeNetRequest.getSessionRules(filter?) {#chromedeclarativenetrequestgetsessionrulesfilter}
 
 ```ts
 function getSessionRules(filter?: { ruleIds?: number[] }): Promise<Rule[]>;
 ```
 
-chrome.declarativeNetRequest.updateEnabledRulesets(options) {#chromedeclarativenetrequestupdateenabledrulesetsoptions}
+## chrome.declarativeNetRequest.updateEnabledRulesets(options) {#chromedeclarativenetrequestupdateenabledrulesetsoptions}
 
 Enables or disables static rulesets defined in the manifest.
 
@@ -321,13 +321,13 @@ await chrome.declarativeNetRequest.updateEnabledRulesets({
 });
 ```
 
-chrome.declarativeNetRequest.getEnabledRulesets() {#chromedeclarativenetrequestgetenabledrulesets}
+## chrome.declarativeNetRequest.getEnabledRulesets() {#chromedeclarativenetrequestgetenabledrulesets}
 
 ```ts
 function getEnabledRulesets(): Promise<string[]>;
 ```
 
-chrome.declarativeNetRequest.getMatchedRules(filter?) {#chromedeclarativenetrequestgetmatchedrulesfilter}
+## chrome.declarativeNetRequest.getMatchedRules(filter?) {#chromedeclarativenetrequestgetmatchedrulesfilter}
 
 Returns rules that matched recent requests. Requires `declarativeNetRequestFeedback`.
 
@@ -355,7 +355,7 @@ for (const info of rulesMatchedInfo) {
 
 ---
 
-Quota Limits {#quota-limits}
+## Quota Limits {#quota-limits}
 
 | Constant | Value | Description |
 |----------|-------|-------------|
@@ -373,9 +373,9 @@ console.log(`Can still add ${available} static rules`);
 
 ---
 
-Full Examples {#full-examples}
+## Full Examples {#full-examples}
 
-Ad Blocker (static rules) {#ad-blocker-static-rules}
+## Ad Blocker (static rules) {#ad-blocker-static-rules}
 
 `rules/ads.json`:
 
@@ -399,7 +399,7 @@ Ad Blocker (static rules) {#ad-blocker-static-rules}
 ]
 ```
 
-CORS Fixer (dynamic rules) {#cors-fixer-dynamic-rules}
+## CORS Fixer (dynamic rules) {#cors-fixer-dynamic-rules}
 
 ```ts
 await chrome.declarativeNetRequest.updateDynamicRules({
@@ -418,7 +418,7 @@ await chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-Redirect Manager (dynamic rules) {#redirect-manager-dynamic-rules}
+## Redirect Manager (dynamic rules) {#redirect-manager-dynamic-rules}
 
 ```ts
 async function addRedirect(from: string, to: string) {
@@ -439,7 +439,7 @@ async function addRedirect(from: string, to: string) {
 await addRedirect("||old-site.com", "https://new-site.com");
 ```
 
-Header Modifier (session rules) {#header-modifier-session-rules}
+## Header Modifier (session rules) {#header-modifier-session-rules}
 
 ```ts
 await chrome.declarativeNetRequest.updateSessionRules({
@@ -459,7 +459,7 @@ await chrome.declarativeNetRequest.updateSessionRules({
 
 ---
 
-Gotchas and Limitations {#gotchas-and-limitations}
+## Gotchas and Limitations {#gotchas-and-limitations}
 
 1. No access to request/response bodies. DNR only operates on URLs, headers, and metadata.
 2. No programmatic evaluation. You cannot run JavaScript to decide whether to block. Rules are purely declarative.
@@ -471,7 +471,7 @@ Gotchas and Limitations {#gotchas-and-limitations}
 8. Rule IDs must be unique within their source (static/dynamic/session), but the same ID can exist in different sources.
 9. `allowAllRequests` only works with `main_frame` and `sub_frame` resource types.
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Scripting API Reference](scripting-api.md) -- injecting scripts and CSS
 - [Tabs API Reference](tabs-api.md) -- querying tabs for rule targeting

@@ -18,7 +18,7 @@ Whether you're building a simple productivity tool or a complex enterprise appli
 
 ---
 
-Understanding Internationalization in Chrome Extensions {#understanding-i18n}
+## Understanding Internationalization in Chrome Extensions {#understanding-i18n}
 
 Internationalization, commonly abbreviated as i18n (because there are 18 letters between the "i" and the "n"), is the process of designing and developing your application in a way that makes it adaptable to various languages and regions without requiring code changes. For Chrome extensions, this involves creating a system that can dynamically load the appropriate language files based on the user's browser settings or explicitly selected language preference.
 
@@ -28,7 +28,7 @@ One of the key advantages of using Chrome's i18n system is that it follows estab
 
 ---
 
-Setting Up Your Extension's Locale Structure {#locale-structure}
+## Setting Up Your Extension's Locale Structure {#locale-structure}
 
 The first step in implementing internationalization is establishing the proper folder structure for your locale files. Chrome extensions expect a specific directory layout where all translation files reside in a _locales folder at the root of your extension, with each language having its own subfolder containing a messages.json file.
 
@@ -40,7 +40,7 @@ This structure allows Chrome to automatically detect and load the appropriate tr
 
 ---
 
-Creating the Messages.json File {#messages-json}
+## Creating the Messages.json File {#messages-json}
 
 The messages.json file is the heart of your extension's internationalization system. This JSON file contains key-value pairs where each key is a unique identifier for a string, and the value is an object specifying the translated message and optionally providing placeholders and metadata.
 
@@ -86,7 +86,7 @@ Chrome supports variable substitution through placeholders, allowing you to inse
 
 ---
 
-Configuring the Manifest for Internationalization {#manifest-configuration}
+## Configuring the Manifest for Internationalization {#manifest-configuration}
 
 Your manifest.json file needs to be configured to support internationalization properly. While the basic manifest structure remains the same, there are specific fields you need to add or modify to enable the i18n system.
 
@@ -113,7 +113,7 @@ Notice the "__MSG_*__" syntax, this is how you reference strings from your messa
 
 ---
 
-Using Internationalized Strings in Your Code {#using-strings-in-code}
+## Using Internationalized Strings in Your Code {#using-strings-in-code}
 
 Now that you have your locale structure and messages.json files set up, it's time to use these internationalized strings throughout your extension's JavaScript code and HTML files. Chrome provides the chrome.i18n API for this purpose, offering several methods to retrieve and display translated strings.
 
@@ -152,7 +152,7 @@ This approach keeps your HTML clean and eliminates the need for JavaScript to ha
 
 ---
 
-Handling User Language Preferences {#language-preferences}
+## Handling User Language Preferences {#language-preferences}
 
 Chrome extensions inherit the browser's language settings by default, which provides a smooth experience for most users. However, you may want to give users the ability to explicitly select their preferred language within your extension, independent of their browser settings. This is particularly useful for bilingual users or those who prefer using an extension in a different language than their browser interface.
 
@@ -179,7 +179,7 @@ It's important to note that while you can display your extension in any language
 
 ---
 
-Best Practices for Translation Management {#translation-best-practices}
+## Best Practices for Translation Management {#translation-best-practices}
 
 Managing translations for a growing extension can become complex, especially as you add more languages and your codebase evolves. Following best practices from the beginning will save you significant time and headaches as your project scales.
 
@@ -193,7 +193,7 @@ Always provide clear and detailed descriptions for every string in your messages
 
 ---
 
-Testing Your Internationalized Extension {#testing-i18n}
+## Testing Your Internationalized Extension {#testing-i18n}
 
 Thorough testing is crucial to ensure your internationalization implementation works correctly across all supported languages. Chrome provides developer tools that make this process straightforward.
 
@@ -209,7 +209,7 @@ Pay particular attention to text expansion, some languages, particularly German 
 
 ---
 
-Advanced Internationalization Patterns {#advanced-patterns}
+## Advanced Internationalization Patterns {#advanced-patterns}
 
 As your extension grows more sophisticated, you may need to implement advanced internationalization patterns beyond basic string translation. These include handling pluralization, RTL (right-to-left) language support, date and time formatting, and dynamic content translation.
 
@@ -233,7 +233,7 @@ const formattedDate = new Intl.DateTimeFormat(chrome.i18n.getUILanguage()).forma
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing internationalization in your Chrome extension is one of the most impactful investments you can make in your project's global success. By following the patterns and best practices outlined in this guide, you can create an extension that smoothly serves users in their native languages, regardless of where they are in the world.
 
@@ -245,7 +245,7 @@ The effort you invest in internationalization today will pay dividends in user s
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Localization Workflow Guide]({% post_url 2025-01-18-chrome-extension-localization-workflow-guide %})
 - [Advanced i18n Workflow for Chrome Extensions]({% post_url 2025-01-29-advanced-i18n-workflow-for-chrome-extensions %})

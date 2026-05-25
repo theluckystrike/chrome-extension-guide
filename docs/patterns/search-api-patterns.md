@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/search-api-patterns/"
 last_modified_at: 2026-01-15
 ---
 
-Chrome Search API Patterns
+### Chrome Search API Patterns
 
 The `chrome.search` API enables programmatic web searches from your Chrome extension. This document covers patterns for implementing search functionality in extensions.
 
-Basic Usage: chrome.search.query() {#basic-usage-chromesearchquery}
+## Basic Usage: chrome.search.query() {#basic-usage-chromesearchquery}
 
 The primary method is `chrome.search.query()`, which triggers a search using the user's default search engine.
 
@@ -21,15 +21,15 @@ chrome.search.query({
 });
 ```
 
-Disposition Options {#disposition-options}
+## Disposition Options {#disposition-options}
 
 - `CURRENT_TAB`: Opens results in the active tab (replaces current page)
 - `NEW_TAB`: Opens results in a new tab
 - `NEW_WINDOW`: Opens results in a new window
 
-Common Use Cases {#common-use-cases}
+## Common Use Cases {#common-use-cases}
 
-1. Search from Context Menu {#1-search-from-context-menu}
+## 1. Search from Context Menu {#1-search-from-context-menu}
 
 ```javascript
 // manifest.json
@@ -54,7 +54,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-2. Search from Omnibox {#2-search-from-omnibox}
+## 2. Search from Omnibox {#2-search-from-omnibox}
 
 ```javascript
 // manifest.json
@@ -71,7 +71,7 @@ chrome.omnibox.onInputEntered.addListener((text) => {
 });
 ```
 
-3. Search Selected Text {#3-search-selected-text}
+## 3. Search Selected Text {#3-search-selected-text}
 
 ```javascript
 // Search selected text via keyboard shortcut or context menu
@@ -87,7 +87,7 @@ chrome.commands.onCommand.addListener((command) => {
 });
 ```
 
-Combining with Omnibox API for Custom Search Engines {#combining-with-omnibox-api-for-custom-search-engines}
+## Combining with Omnibox API for Custom Search Engines {#combining-with-omnibox-api-for-custom-search-engines}
 
 ```javascript
 // Multi-engine search via omnibox
@@ -105,7 +105,7 @@ chrome.omnibox.onInputEntered.addListener((url) => {
 });
 ```
 
-Building Multi-Engine Search {#building-multi-engine-search}
+## Building Multi-Engine Search {#building-multi-engine-search}
 
 ```javascript
 const searchEngines = {
@@ -121,7 +121,7 @@ function searchWithEngine(query, engine = 'google', disposition = 'NEW_TAB') {
 }
 ```
 
-Search Suggestions with chrome.omnibox.onInputChanged {#search-suggestions-with-chromeomniboxoninputchanged}
+## Search Suggestions with chrome.omnibox.onInputChanged {#search-suggestions-with-chromeomniboxoninputchanged}
 
 ```javascript
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
@@ -140,7 +140,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 });
 ```
 
-Search History Integration with chrome.history {#search-history-integration-with-chromehistory}
+## Search History Integration with chrome.history {#search-history-integration-with-chromehistory}
 
 ```javascript
 // Get recent searches for suggestions
@@ -153,7 +153,7 @@ chrome.history.search({ text: query, maxResults: 10 }, (results) => {
 });
 ```
 
-Permission Requirements {#permission-requirements}
+## Permission Requirements {#permission-requirements}
 
 Add `"search"` to your `manifest.json` permissions:
 
@@ -163,13 +163,13 @@ Add `"search"` to your `manifest.json` permissions:
 }
 ```
 
-Limitations {#limitations}
+## Limitations {#limitations}
 
 - Can only trigger searches: The API cannot read search results programmatically
 - Uses default search engine: By default, uses the user's configured search engine
 - No direct results access: Cannot parse or analyze search engine results through this API
 
-Alternative: Direct API Calls {#alternative-direct-api-calls}
+## Alternative: Direct API Calls {#alternative-direct-api-calls}
 
 For programmatic results, call search engine APIs directly:
 
@@ -184,7 +184,7 @@ fetch('https://custom-search-api.example.com/search?q=query')
   });
 ```
 
-Building a Search Aggregator Popup {#building-a-search-aggregator-popup}
+## Building a Search Aggregator Popup {#building-a-search-aggregator-popup}
 
 ```javascript
 // popup.js - Display results from multiple engines
@@ -203,7 +203,7 @@ async function searchAllEngines(query) {
 }
 ```
 
-Code Examples Summary {#code-examples-summary}
+## Code Examples Summary {#code-examples-summary}
 
 | Pattern | File | Description |
 |---------|------|-------------|
@@ -211,7 +211,7 @@ Code Examples Summary {#code-examples-summary}
 | Multi-engine search | `examples/multi-engine-search/` | Search with Google, Bing, DuckDuckGo |
 | Omnibox search provider | `examples/omnibox-search/` | Custom search via address bar |
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Permissions: search](../permissions/search.md)
 - [Omnibox API Patterns](omnibox-api.md)

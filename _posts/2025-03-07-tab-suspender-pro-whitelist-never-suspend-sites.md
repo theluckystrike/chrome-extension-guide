@@ -18,7 +18,7 @@ This comprehensive guide walks you through every aspect of configuring and manag
 
 ---
 
-Why the Whitelist Matters {#why-whitelist-matters}
+## Why the Whitelist Matters {#why-whitelist-matters}
 
 Understanding why the whitelist matters begins with recognizing which types of sites should never be suspended. When Tab Suspender Pro suspends a tab, it essentially freezes the page, stopping all JavaScript execution, network requests, and background processes. For most websites, this is perfectly acceptable, the content remains intact, and when you revisit the tab, it quickly restores to its previous state. However, certain categories of sites cannot tolerate this behavior.
 
@@ -36,7 +36,7 @@ Beyond these specific categories, the whitelist provides a safety net for any we
 
 ---
 
-How to Add Sites to the Whitelist {#how-to-add-sites}
+## How to Add Sites to the Whitelist {#how-to-add-sites}
 
 Adding sites to your Tab Suspender Pro whitelist is straightforward, though the exact method varies slightly depending on your current view. The extension provides multiple convenient ways to manage your whitelist, ensuring you can quickly add exceptions whether you are actively browsing or configuring settings.
 
@@ -50,7 +50,7 @@ Bulk Addition allows you to add multiple domains at once by separating each doma
 
 ---
 
-URL Pattern Matching {#url-pattern-matching}
+## URL Pattern Matching {#url-pattern-matching}
 
 Tab Suspender Pro supports powerful pattern matching capabilities beyond simple domain matching. Understanding these patterns enables precise control over which pages get suspended and which remain active, even within the same domain.
 
@@ -66,7 +66,7 @@ When constructing patterns, remember that the extension matches against the full
 
 ---
 
-Whitelisting by Domain vs Exact URL {#domain-vs-exact-url}
+## Whitelisting by Domain vs Exact URL {#domain-vs-exact-url}
 
 Choosing between domain-level whitelisting and exact URL whitelisting depends on your specific needs and the behavior of the websites you use. Each approach offers distinct advantages and trade-offs.
 
@@ -82,7 +82,7 @@ Recommended Strategy: Most users benefit from a hybrid approach. Whitelist entir
 
 ---
 
-Managing Large Whitelists {#managing-large-whitelists}
+## Managing Large Whitelists {#managing-large-whitelists}
 
 As you use Tab Suspender Pro over time, your whitelist naturally grows. Managing a large, comprehensive whitelist requires organization and periodic maintenance to remain effective.
 
@@ -98,7 +98,7 @@ Use Tags or Categories (if available in your extension version) to label whiteli
 
 ---
 
-Import/Export Whitelist Settings {#import-export-whitelist}
+## Import/Export Whitelist Settings {#import-export-whitelist}
 
 Tab Suspender Pro's import and export functionality transforms whitelist management from a tedious per-device chore into a streamlined, cross-device operation. Whether you are switching computers, setting up multiple profiles, or simply backing up your configuration, understanding these features is essential.
 
@@ -116,7 +116,7 @@ Sharing Configurations with others becomes straightforward through exported file
 
 ---
 
-Conclusion
+### Conclusion
 
 Mastering the Tab Suspender Pro whitelist feature unlocks the full potential of this powerful extension. By carefully configuring which sites should never be suspended, you enjoy significant memory savings while ensuring your critical web applications remain accessible and functional. The whitelist transforms tab suspension from a blunt instrument into a sophisticated memory management tool tailored to your specific workflow.
 

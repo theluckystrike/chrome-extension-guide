@@ -18,11 +18,11 @@ Understanding how to properly implement sync data across browsers capabilities c
 
 ---
 
-Understanding Chrome's Storage APIs {#understanding-chrome-storage-apis}
+## Understanding Chrome's Storage APIs {#understanding-chrome-storage-apis}
 
 Chrome provides several storage APIs designed for different use cases. Understanding these options is essential before implementing any synchronization strategy. Each API has distinct characteristics that make it suitable for specific scenarios.
 
-The Chrome Storage API Overview
+### The Chrome Storage API Overview
 
 The Chrome Storage API is the primary mechanism extensions use to store data. Unlike the standard localStorage API available in web pages, the Chrome Storage API offers several advantages specifically designed for extension development. It provides asynchronous storage operations, larger storage quotas, and most importantly, built-in synchronization capabilities through the sync storage area.
 
@@ -30,7 +30,7 @@ The storage API offers two distinct storage areas: local and sync. The local sto
 
 Local storage is ideal for device-specific data that should never leave the local machine, such as cached content, device-specific preferences, or large datasets that would be impractical to sync. Sync storage, conversely, is perfect for user preferences, settings, and any data that should be available across devices. The sync storage area uses Chrome's sync infrastructure to automatically handle data propagation, conflict resolution, and offline support.
 
-Storage Quotas and Limitations
+### Storage Quotas and Limitations
 
 Understanding storage quotas is crucial for designing efficient synchronization systems. The sync storage area provides approximately 100KB of storage per extension per user, with a maximum of 512 bytes per key. While these limits may seem restrictive, they are designed primarily for preferences and settings rather than large data storage.
 
@@ -40,11 +40,11 @@ For extensions requiring more storage, consider implementing a hybrid approach. 
 
 ---
 
-Implementing Basic Chrome Extension Sync Storage {#implementing-basic-sync-storage}
+## Implementing Basic Chrome Extension Sync Storage {#implementing-basic-sync-storage}
 
 Now that you understand the storage options available, let's explore how to implement basic synchronization functionality. The Chrome Storage API uses a straightforward promise-based interface that integrates well with modern JavaScript patterns.
 
-Writing Data to Sync Storage
+### Writing Data to Sync Storage
 
 Writing data to sync storage is remarkably simple. The chrome.storage.sync API provides a set method that accepts an object containing key-value pairs. These values can be strings, numbers, booleans, arrays, or objects, providing flexibility for storing complex data structures.
 
@@ -83,7 +83,7 @@ saveUserPreferences(myPreferences)
 
 When you store data in sync storage, Chrome automatically handles the synchronization process in the background. The data propagates to all devices where the user is signed in with the same Google account. This automatic synchronization eliminates the need for implementing complex sync logic manually.
 
-Reading Data from Sync Storage
+### Reading Data from Sync Storage
 
 Reading synchronized data requires using the get method, which retrieves data from storage. The method accepts either a string representing the key to retrieve or an array of keys for multiple values.
 
@@ -123,7 +123,7 @@ getUserPreferences()
   .catch(error => console.error('Failed to retrieve:', error));
 ```
 
-Listening for Storage Changes
+### Listening for Storage Changes
 
 One of the most powerful features of the Chrome Storage API is the ability to listen for changes. This capability enables your extension to react immediately when synchronized data changes, whether those changes originate from the local device or from another device where the user is signed in.
 
@@ -161,11 +161,11 @@ This listener fires whenever data changes in the specified storage area, regardl
 
 ---
 
-Advanced Synchronization Patterns {#advanced-synchronization-patterns}
+## Advanced Synchronization Patterns {#advanced-synchronization-patterns}
 
 While the basic Chrome Storage API provides straightforward synchronization, real-world applications often require more sophisticated approaches. This section explores advanced patterns for handling complex synchronization scenarios.
 
-Handling Conflict Resolution
+### Handling Conflict Resolution
 
 When multiple devices modify synchronized data simultaneously, conflicts arise. The Chrome Storage API handles conflicts automatically using a last-write-wins strategy, but this may not be appropriate for all use cases. Understanding how to implement custom conflict resolution can significantly improve data integrity.
 
@@ -222,7 +222,7 @@ class SyncManager {
 }
 ```
 
-Implementing Offline Support
+### Implementing Offline Support
 
 Robust synchronization requires handling offline scenarios gracefully. Users may lose internet connectivity at any time, and your extension must continue functioning correctly while offline, then synchronize when connectivity returns.
 
@@ -309,17 +309,17 @@ class OfflineSyncManager {
 
 ---
 
-Best Practices for Chrome Extension Sync Storage {#best-practices}
+## Best Practices for Chrome Extension Sync Storage {#best-practices}
 
 Implementing synchronization is one thing, but implementing it well requires adhering to established best practices. These guidelines will help you build reliable, efficient, and user-friendly synchronization systems.
 
-Minimize Sync Data Size
+### Minimize Sync Data Size
 
 Every kilobyte you synchronize across devices impacts performance and uses the limited sync storage quota. Optimize your data structures to minimize storage footprint. Store only essential data in sync storage, and use identifiers or references rather than duplicating entire datasets.
 
 For example, instead of synchronizing a complete list of user bookmarks with all metadata, store only the bookmark IDs and essential properties. Retrieve full details locally or on-demand. This approach dramatically reduces synchronization overhead while still providing the smooth experience users expect.
 
-Implement Proper Error Handling
+### Implement Proper Error Handling
 
 Network failures, quota exceeded errors, and synchronization conflicts can all cause storage operations to fail. Your extension must handle these failures gracefully without leaving users in inconsistent states.
 
@@ -360,7 +360,7 @@ notifyUserOfQuotaIssue() {
 }
 ```
 
-Provide User Control Over Synchronization
+### Provide User Control Over Synchronization
 
 Not all users want automatic synchronization of all data. Some may prefer device-specific settings, while others might have privacy concerns. Providing user controls over what gets synchronized enhances the user experience and builds trust.
 
@@ -412,11 +412,11 @@ class SyncPreferencesManager {
 
 ---
 
-Real-World Synchronization Architecture {#real-world-architecture}
+## Real-World Synchronization Architecture {#real-world-architecture}
 
 Building a complete synchronization system requires combining all the concepts discussed above into a cohesive architecture. This section presents a production-ready pattern for implementing comprehensive sync data across browsers functionality.
 
-Complete Synchronization Service
+### Complete Synchronization Service
 
 ```javascript
 // Complete synchronization service
@@ -595,7 +595,7 @@ console.log('Current user data:', userData);
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing solid chrome extension sync storage is essential for building extensions that provide smooth experiences across devices. The Chrome Storage API provides powerful built-in synchronization capabilities, but understanding how to use these features effectively requires careful design and implementation.
 

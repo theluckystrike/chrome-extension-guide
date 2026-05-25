@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/api-reference/offscreen-api/"
 last_modified_at: 2026-01-15
 ---
 
-chrome.offscreen API Reference
+### chrome.offscreen API Reference
 
 The `chrome.offscreen` API enables extensions to create offscreen documents for DOM access in Manifest V3. Required for DOM operations that were handled by background pages in MV2.
 
 ---
 
-Overview {#overview}
+## Overview {#overview}
 
 - Permission: `"offscreen"` in manifest.json
 - MV3 Only: Not available in Manifest V2
@@ -22,9 +22,9 @@ Overview {#overview}
 
 ---
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-createDocument(params) {#createdocumentparams}
+## createDocument(params) {#createdocumentparams}
 
 Creates a new offscreen document.
 
@@ -40,7 +40,7 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-closeDocument() {#closedocument}
+## closeDocument() {#closedocument}
 
 Closes the current offscreen document. No parameters.
 
@@ -48,7 +48,7 @@ Closes the current offscreen document. No parameters.
 await chrome.offscreen.closeDocument();
 ```
 
-hasDocument() {#hasdocument}
+## hasDocument() {#hasdocument}
 
 Checks if an offscreen document exists (Chrome 116+). Returns `Promise<boolean>`.
 
@@ -60,7 +60,7 @@ if (!(await chrome.offscreen.hasDocument())) {
 
 ---
 
-Reason Enum {#reason-enum}
+## Reason Enum {#reason-enum}
 
 | Reason | Description |
 |--------|-------------|
@@ -82,7 +82,7 @@ Reason Enum {#reason-enum}
 
 ---
 
-Constraints {#constraints}
+## Constraints {#constraints}
 
 - Only ONE offscreen document at a time per extension
 - Cannot have a visible UI
@@ -91,7 +91,7 @@ Constraints {#constraints}
 
 ---
 
-Common Pattern {#common-pattern}
+## Common Pattern {#common-pattern}
 
 ```javascript
 // 1. Check hasDocument()
@@ -115,9 +115,9 @@ await chrome.offscreen.closeDocument();
 
 ---
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-DOM Scraping {#dom-scraping}
+## DOM Scraping {#dom-scraping}
 
 ```javascript
 // Service worker
@@ -148,7 +148,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Clipboard Access {#clipboard-access}
+## Clipboard Access {#clipboard-access}
 
 ```javascript
 async function readClipboard() {
@@ -163,7 +163,7 @@ async function readClipboard() {
 }
 ```
 
-Audio Playback {#audio-playback}
+## Audio Playback {#audio-playback}
 
 ```javascript
 async function playAudio(audioUrl) {
@@ -178,7 +178,7 @@ async function playAudio(audioUrl) {
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Offscreen Documents Guide](../guides/offscreen-documents.md)
 - [Offscreen Permissions](../permissions/offscreen.md)

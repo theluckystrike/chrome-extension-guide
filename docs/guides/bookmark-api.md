@@ -7,12 +7,12 @@ last_modified_at: 2026-01-15
 ---
 Bookmark API Guide
 
-Overview {#overview}
+## Overview {#overview}
 - Requires `"bookmarks"` permission (cross-ref `docs/permissions/bookmarks.md`)
 - Full CRUD access to the bookmark tree
 - Bookmark tree is a hierarchy: BookmarkTreeNode objects with `id`, `parentId`, `title`, `url`, `children`
 
-Reading Bookmarks {#reading-bookmarks}
+## Reading Bookmarks {#reading-bookmarks}
 ```javascript
 // Get entire bookmark tree
 chrome.bookmarks.getTree((tree) => {
@@ -40,7 +40,7 @@ chrome.bookmarks.search({ url: 'https://developer.chrome.com/' }, (results) => {
 });
 ```
 
-Creating Bookmarks & Folders {#creating-bookmarks-folders}
+## Creating Bookmarks & Folders {#creating-bookmarks-folders}
 ```javascript
 // Create a bookmark
 chrome.bookmarks.create({
@@ -65,7 +65,7 @@ chrome.bookmarks.create({
 });
 ```
 
-Updating & Deleting {#updating-deleting}
+## Updating & Deleting {#updating-deleting}
 ```javascript
 // Update title/URL
 chrome.bookmarks.update('123', {
@@ -86,7 +86,7 @@ chrome.bookmarks.remove('123');
 chrome.bookmarks.removeTree('123');
 ```
 
-Bookmark Events {#bookmark-events}
+## Bookmark Events {#bookmark-events}
 ```javascript
 chrome.bookmarks.onCreated.addListener((id, bookmark) => {
   console.log('New bookmark:', bookmark.title, bookmark.url);
@@ -109,7 +109,7 @@ chrome.bookmarks.onChildrenReordered.addListener((id, reorderInfo) => {
 });
 ```
 
-Syncing Bookmark State {#syncing-bookmark-state}
+## Syncing Bookmark State {#syncing-bookmark-state}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -127,21 +127,21 @@ async function tagBookmark(id, tags) {
 }
 ```
 
-Practical Patterns {#practical-patterns}
+## Practical Patterns {#practical-patterns}
 - Duplicate detector: search by URL on `onCreated` to find dupes
 - Bookmark organizer: auto-sort into folders by domain
 - Export/import: traverse tree, serialize to JSON, download as file
 - Bookmark bar quick switcher: swap folder contents based on context (work/personal)
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 - Trying to modify root nodes (ids "0", "1", "2"). they're read-only
 - Confusing `remove` (single) with `removeTree` (recursive)
 - Not handling the asynchronous nature of all bookmark APIs
 - Forgetting that `search` matches both title AND URL substrings
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Bookmarks API Reference](../api-reference/bookmarks-api.md)
 - [History API](../guides/history-api.md)

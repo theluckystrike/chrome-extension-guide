@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/api-reference/permissions-api/"
 last_modified_at: 2026-01-15
 ---
 
-chrome.permissions API Reference
+### chrome.permissions API Reference
 
-Overview {#overview}
+## Overview {#overview}
 
 The `chrome.permissions` API allows extensions to request and manage optional permissions at runtime, rather than declaring them all upfront in the manifest. This enables a principle of least privilege, your extension starts with minimal access and requests more only when the user needs specific features.
 
@@ -18,7 +18,7 @@ Key points:
 - Requests must be triggered by a user gesture (e.g., button click)
 - Users can revoke permissions at any time via Chrome's extension settings
 
-Manifest Setup {#manifest-setup}
+## Manifest Setup {#manifest-setup}
 
 To use the Permissions API, declare your optional permissions in `manifest.json`:
 
@@ -46,9 +46,9 @@ To use the Permissions API, declare your optional permissions in `manifest.json`
 - `optional_permissions`: Permissions that can be requested at runtime
 - `optional_host_permissions`: Host permissions that can be requested at runtime
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-contains(permissions, callback) {#containspermissions-callback}
+## contains(permissions, callback) {#containspermissions-callback}
 
 Checks whether the extension has the specified permissions granted.
 
@@ -69,11 +69,11 @@ Parameters:
   - `origins` (string[]): Array of host patterns
 - `callback` (function): Called with boolean result
 
-Returns: `boolean` - `true` if all specified permissions are granted
+### Returns: `boolean` - `true` if all specified permissions are granted
 
 ---
 
-request(permissions, callback) {#requestpermissions-callback}
+## request(permissions, callback) {#requestpermissions-callback}
 
 Requests access to the specified optional permissions. Must be called from a user gesture handler (e.g., click event).
 
@@ -98,13 +98,13 @@ Parameters:
   - `origins` (string[]): Array of host patterns
 - `callback` (function): Called with boolean result
 
-Returns: `boolean` - `true` if the user granted the permission
+### Returns: `boolean` - `true` if the user granted the permission
 
 This method must be called synchronously within a user gesture handler. Chrome will display a prompt asking the user to grant or deny the permission.
 
 ---
 
-remove(permissions, callback) {#removepermissions-callback}
+## remove(permissions, callback) {#removepermissions-callback}
 
 Removes access to the specified permissions. Cannot remove required (non-optional) permissions.
 
@@ -125,11 +125,11 @@ Parameters:
   - `origins` (string[]): Array of host patterns
 - `callback` (function): Called with boolean result
 
-Returns: `boolean` - `true` if the permission was removed
+### Returns: `boolean` - `true` if the permission was removed
 
 ---
 
-getAll(callback) {#getallcallback}
+## getAll(callback) {#getallcallback}
 
 Retrieves all permissions granted to the extension.
 
@@ -143,11 +143,11 @@ chrome.permissions.getAll((permissions) => {
 Parameters:
 - `callback` (function): Called with permissions object
 
-Returns: `{ permissions: string[], origins: string[] }`
+### Returns: `{ permissions: string[], origins: string[] }`
 
-Events {#events}
+## Events {#events}
 
-onAdded {#onadded}
+## onAdded {#onadded}
 
 Fired when permissions are added to the extension.
 
@@ -160,7 +160,7 @@ chrome.permissions.onAdded.addListener((permissions) => {
 
 ---
 
-onRemoved {#onremoved}
+## onRemoved {#onremoved}
 
 Fired when permissions are removed from the extension.
 
@@ -171,12 +171,12 @@ chrome.permissions.onRemoved.addListener((permissions) => {
 });
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
-1. Start Minimal {#1-start-minimal}
+## 1. Start Minimal {#1-start-minimal}
 Declare only essential permissions in your manifest. Request additional permissions only when the user attempts to use a feature that requires them.
 
-2. Explain Before Requesting {#2-explain-before-requesting}
+## 2. Explain Before Requesting {#2-explain-before-requesting}
 Always show a clear explanation of why you need the permission before calling `request()`. Use your extension's UI to inform users:
 
 ```javascript
@@ -190,7 +190,7 @@ document.getElementById('enableFeature').addEventListener('click', () => {
 });
 ```
 
-3. Handle Denial Gracefully {#3-handle-denial-gracefully}
+## 3. Handle Denial Gracefully {#3-handle-denial-gracefully}
 Users may deny permission requests. Design your UI to provide alternative functionality or clear messaging when permissions are denied.
 
 ```javascript
@@ -204,7 +204,7 @@ chrome.permissions.request({ permissions: ['tabs'] }, granted => {
 });
 ```
 
-4. Remove Unused Permissions {#4-remove-unused-permissions}
+## 4. Remove Unused Permissions {#4-remove-unused-permissions}
 If a feature is disabled or no longer needed, consider removing the permission to reduce your extension's attack surface:
 
 ```javascript
@@ -213,9 +213,9 @@ function cleanupPermissions() {
 }
 ```
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Request Optional Permission on Button Click {#request-optional-permission-on-button-click}
+## Request Optional Permission on Button Click {#request-optional-permission-on-button-click}
 
 ```javascript
 document.getElementById('enableBookmarks').addEventListener('click', () => {
@@ -230,7 +230,7 @@ document.getElementById('enableBookmarks').addEventListener('click', () => {
 });
 ```
 
-Progressive Host Permission Request {#progressive-host-permission-request}
+## Progressive Host Permission Request {#progressive-host-permission-request}
 
 ```javascript
 document.getElementById('connectBtn').addEventListener('click', () => {
@@ -245,7 +245,7 @@ document.getElementById('connectBtn').addEventListener('click', () => {
 });
 ```
 
-Permission-Gated UI {#permission-gated-ui}
+## Permission-Gated UI {#permission-gated-ui}
 
 ```javascript
 function updateUI() {
@@ -260,7 +260,7 @@ chrome.permissions.onAdded.addListener(updateUI);
 chrome.permissions.onRemoved.addListener(updateUI);
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Permissions Model](../guides/permissions-model.md) - Understanding Chrome's permission system
 - [Advanced Permissions Tutorial](../tutorials/advanced-permissions.md) - Detailed look into permission strategies

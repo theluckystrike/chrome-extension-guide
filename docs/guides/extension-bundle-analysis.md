@@ -9,9 +9,9 @@ Extension Bundle Analysis
 
 This guide covers analyzing and optimizing your Chrome extension's bundle size for better performance and user experience.
 
-Why Bundle Size Matters {#why-bundle-size-matters}
+## Why Bundle Size Matters {#why-bundle-size-matters}
 
-Extension bundle size directly impacts several critical factors:
+### Extension bundle size directly impacts several critical factors:
 
 - Install Speed: Smaller extensions install faster, reducing friction for new users
 - Review Time: Google's review process may be faster for leaner extensions
@@ -20,11 +20,11 @@ Extension bundle size directly impacts several critical factors:
 
 The Chrome Web Store allows extension packages up to 2GB, but well-optimized extensions should aim for under 5MB for optimal performance.
 
-Bundle Analysis Tools {#bundle-analysis-tools}
+## Bundle Analysis Tools {#bundle-analysis-tools}
 
-Webpack Bundle Analyzer {#webpack-bundle-analyzer}
+## Webpack Bundle Analyzer {#webpack-bundle-analyzer}
 
-Visualize your bundle contents as an interactive treemap:
+### Visualize your bundle contents as an interactive treemap:
 
 ```javascript
 // webpack.config.js
@@ -41,11 +41,11 @@ module.exports = {
 };
 ```
 
-Run with: `npx webpack --profile --json > stats.json && npx webpack-bundle-analyzer stats.json`
+### Run with: `npx webpack --profile --json > stats.json && npx webpack-bundle-analyzer stats.json`
 
-Rollup Plugin Visualizer {#rollup-plugin-visualizer}
+## Rollup Plugin Visualizer {#rollup-plugin-visualizer}
 
-For Rollup-based builds:
+### For Rollup-based builds:
 
 ```javascript
 // rollup.config.js
@@ -62,17 +62,17 @@ export default {
 };
 ```
 
-Source Map Explorer {#source-map-explorer}
+## Source Map Explorer {#source-map-explorer}
 
-Analyze source maps to understand original source contributions:
+### Analyze source maps to understand original source contributions:
 
 ```bash
 npx source-map-explorer dist//*.js
 ```
 
-Measuring Bundle Size {#measuring-bundle-size}
+## Measuring Bundle Size {#measuring-bundle-size}
 
-Total Extension Size {#total-extension-size}
+## Total Extension Size {#total-extension-size}
 
 ```bash
 Check unpacked size
@@ -82,9 +82,9 @@ Check compressed vs raw
 gzip -c dist/*.js | wc -c  # Compare to sum of file sizes
 ```
 
-Per-File Breakdown {#per-file-breakdown}
+## Per-File Breakdown {#per-file-breakdown}
 
-Generate a detailed size report:
+### Generate a detailed size report:
 
 ```javascript
 // analysis script
@@ -118,7 +118,7 @@ function analyzeBundle(dir) {
 analyzeBundle('./dist');
 ```
 
-Common Bloat Sources {#common-bloat-sources}
+## Common Bloat Sources {#common-bloat-sources}
 
 1. Unused Dependencies: Importing entire libraries when only a function is needed
 2. Large Libraries: moment.js (~300KB), lodash full (~70KB), full React (~100KB)
@@ -126,11 +126,11 @@ Common Bloat Sources {#common-bloat-sources}
 4. Source Maps in Production: Never ship .map files to production
 5. Duplicate Code: Multiple versions of the same dependency
 
-Optimization Strategies {#optimization-strategies}
+## Optimization Strategies {#optimization-strategies}
 
-Tree Shaking {#tree-shaking}
+## Tree Shaking {#tree-shaking}
 
-Ensure ES modules are used throughout your codebase:
+### Ensure ES modules are used throughout your codebase:
 
 ```javascript
 // webpack.config.js
@@ -143,7 +143,7 @@ module.exports = {
 };
 ```
 
-Verify tree-shaking is working:
+### Verify tree-shaking is working:
 
 ```javascript
 // In your bundle, unused exports should be marked with /* unused export */
@@ -153,9 +153,9 @@ import { isEmpty } from 'lodash';
 import { isEmpty, isEqual } from 'lodash';
 ```
 
-Code Splitting by Context {#code-splitting-by-context}
+## Code Splitting by Context {#code-splitting-by-context}
 
-Separate bundles for different extension contexts:
+### Separate bundles for different extension contexts:
 
 ```javascript
 // webpack.config.js
@@ -184,9 +184,9 @@ module.exports = {
 };
 ```
 
-Dynamic Imports {#dynamic-imports}
+## Dynamic Imports {#dynamic-imports}
 
-Lazy load features in extension pages:
+### Lazy load features in extension pages:
 
 ```javascript
 // popup.js - Only load heavy components when needed
@@ -196,7 +196,7 @@ document.getElementById('advanced-settings').addEventListener('click', async () 
 });
 ```
 
-Replacing Heavy Libraries {#replacing-heavy-libraries}
+## Replacing Heavy Libraries {#replacing-heavy-libraries}
 
 | Library | Replacement | Savings |
 |---------|-------------|---------|
@@ -205,7 +205,7 @@ Replacing Heavy Libraries {#replacing-heavy-libraries}
 | React (full) | Preact + preact/compat | ~100KB → ~4KB |
 | Axios | fetch + small wrapper | ~15KB → ~0KB |
 
-Date Library Migration {#example-date-library-migration}
+## Date Library Migration {#example-date-library-migration}
 
 ```javascript
 // Before (moment.js)
@@ -217,7 +217,7 @@ import { format } from 'date-fns';
 const formatted = format(new Date(date), 'yyyy-MM-dd');
 ```
 
-Image Optimization {#image-optimization}
+## Image Optimization {#image-optimization}
 
 - Icons: Use SVG for all icons and UI elements
 - Photos: Convert to WebP for significant size reduction
@@ -247,7 +247,7 @@ module.exports = {
 };
 ```
 
-Font Subsetting {#font-subsetting}
+## Font Subsetting {#font-subsetting}
 
 For custom fonts, create subsets including only needed characters:
 
@@ -256,9 +256,9 @@ Using fonttools
 pyftsubset font.woff2 --unicodes=U+0-FF --layout-features=...
 ```
 
-CI Size Monitoring {#ci-size-monitoring}
+## CI Size Monitoring {#ci-size-monitoring}
 
-Using size-limit {#using-size-limit}
+## Using size-limit {#using-size-limit}
 
 ```json
 // package.json
@@ -280,9 +280,9 @@ Using size-limit {#using-size-limit}
 }
 ```
 
-Run: `npx size-limit`
+### Run: `npx size-limit`
 
-Using bundlesize {#using-bundlesize}
+## Using bundlesize {#using-bundlesize}
 
 ```json
 // package.json
@@ -302,7 +302,7 @@ GitHub Actions
   run: npx bundlesize
 ```
 
-Best Practices Summary {#best-practices-summary}
+## Best Practices Summary {#best-practices-summary}
 
 1. Analyze bundles regularly during development
 2. Set size budgets in CI to catch regressions
@@ -312,15 +312,15 @@ Best Practices Summary {#best-practices-summary}
 6. Optimize all images and consider WebP/SVG
 7. Verify tree-shaking is working on each dependency
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Extension Size Optimization](extension-size-optimization.md) - Detailed look into size reduction techniques
 - [Performance](performance.md) - Runtime performance best practices
 - [Lazy Loading Patterns](lazy-loading-patterns.md) - Code splitting and lazy loading strategies
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Bundle Optimization](../patterns/bundle-optimization.md)
 - [Size Optimization](../guides/extension-size-optimization.md)

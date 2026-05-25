@@ -18,7 +18,7 @@ Understanding how to work with the File System Access API is essential for any e
 
 ---
 
-What is the File System Access API? {#what-is-file-system-access-api}
+## What is the File System Access API? {#what-is-file-system-access-api}
 
 The File System Access API is a web API that allows web applications and Chrome extensions to read, write, and manage files on the user's local filesystem. Originally developed as part of the File System API proposal, it has evolved into a standardized mechanism that provides a secure way for applications to access files without requiring the entire filesystem to be exposed.
 
@@ -30,17 +30,17 @@ Chrome was one of the first browsers to implement the File System Access API, an
 
 ---
 
-Why Use File System Access in Chrome Extensions? {#why-use-file-system-access}
+## Why Use File System Access in Chrome Extensions? {#why-use-file-system-access}
 
 Chrome extensions benefit enormously from file system access capabilities.  the key reasons why you might want to implement this API in your extension.
 
-Enhanced Productivity Tools
+### Enhanced Productivity Tools
 
 Productivity extensions often need to store and retrieve data efficiently. While Chrome's storage APIs like chrome.storage offer convenient data persistence, they have limitations in terms of data size and format flexibility. File system access allows you to work with standard file formats like JSON, CSV, XML, and Markdown, making your extension compatible with existing workflows and tools.
 
 For example, a password manager extension could export passwords to encrypted files that users can back up or transfer between devices. A note-taking app could save notes as Markdown files that users can edit in their preferred text editor. A data analysis tool could import large datasets from CSV files without the size constraints of browser storage.
 
-Data Portability
+### Data Portability
 
 When you store data in the file system, users gain full control over their data. They can back up files, edit them externally, share them with other applications, and import data from other sources. This level of data portability is increasingly important as users become more concerned about data ownership and vendor lock-in.
 
@@ -50,7 +50,7 @@ Extensions that use file system access for data storage give users the freedom t
 - Move data between devices manually
 - Export data in standard formats for use elsewhere
 
-Integration with Desktop Workflows
+### Integration with Desktop Workflows
 
 Many users have established workflows that involve desktop applications and local files. By supporting file system access, your Chrome extension can integrate smoothly with these workflows rather than creating isolated data silos.
 
@@ -58,11 +58,11 @@ Consider a developer who uses local config files for their development environme
 
 ---
 
-Permissions and Manifest Configuration {#permissions-manifest}
+## Permissions and Manifest Configuration {#permissions-manifest}
 
 Implementing file system access in your Chrome extension requires careful attention to permissions and manifest configuration. The File System Access API itself doesn't require special permissions in the manifest, but the way you use it determines what your extension can do.
 
-Understanding Permission Requirements
+### Understanding Permission Requirements
 
 The File System Access API operates through user-mediated file picks. When your extension needs to read or write a file, it must first request that the user select the file or directory through a file picker dialog. This user action serves as the permission grant for each individual file access.
 
@@ -94,7 +94,7 @@ Here's an example manifest configuration for an extension that uses file system 
 }
 ```
 
-User Consent and Privacy Considerations
+### User Consent and Privacy Considerations
 
 The File System Access API is designed with user privacy and security in mind. Every file access operation requires explicit user consent through the file picker. Users choose exactly which files or directories your extension can access, and they can revoke this access at any time.
 
@@ -108,11 +108,11 @@ When designing your extension, respect this permission model. Avoid repeatedly a
 
 ---
 
-Core API Methods and Usage {#core-api-methods}
+## Core API Methods and Usage {#core-api-methods}
 
 The File System Access API provides several key methods for working with files and directories.  each of these in detail with practical examples.
 
-Opening Files with showOpenFilePicker()
+### Opening Files with showOpenFilePicker()
 
 The `showOpenFilePicker()` method is the entry point for file access in your extension. This method displays a file picker dialog and returns a handle to the selected file(s).
 
@@ -155,7 +155,7 @@ The options object allows you to customize the file picker behavior:
 - excludeAcceptAllOption: Whether to hide the "All Files" option
 - startIn: A starting directory or file for the picker
 
-Reading File Contents
+### Reading File Contents
 
 Once you have a file handle, you can read its contents using the File System API's file handling capabilities:
 
@@ -205,7 +205,7 @@ async function readFileLines(fileHandle) {
 }
 ```
 
-Writing Files with showSaveFilePicker()
+### Writing Files with showSaveFilePicker()
 
 For saving files, you use the `showSaveFilePicker()` method, which displays a save dialog:
 
@@ -240,7 +240,7 @@ async function saveFile(defaultName = 'document.txt') {
 }
 ```
 
-Writing Content to Files
+### Writing Content to Files
 
 After obtaining a save file handle, you can write content using the createWritable() method:
 
@@ -283,11 +283,11 @@ async function appendToFile(fileHandle, content) {
 
 ---
 
-Working with Directories {#working-with-directories}
+## Working with Directories {#working-with-directories}
 
 The File System Access API also supports directory operations, enabling you to build tools that manage file collections and directory structures.
 
-Opening Directories
+### Opening Directories
 
 Use `showDirectoryPicker()` to allow users to select a directory:
 
@@ -308,7 +308,7 @@ async function openDirectory() {
 }
 ```
 
-Reading Directory Contents
+### Reading Directory Contents
 
 Once you have a directory handle, you can iterate through its contents:
 
@@ -356,7 +356,7 @@ async function getDirectoryDetails(dirHandle) {
 }
 ```
 
-Creating Files in Directories
+### Creating Files in Directories
 
 You can create new files within an opened directory:
 
@@ -378,7 +378,7 @@ async function createDirectoryInDirectory(dirHandle, dirName) {
 }
 ```
 
-Recursive Directory Operations
+### Recursive Directory Operations
 
 For more complex operations, you can implement recursive functions that traverse directory trees:
 
@@ -423,11 +423,11 @@ async function copyDirectoryContents(sourceDir, targetDir) {
 
 ---
 
-Error Handling and Best Practices {#error-handling}
+## Error Handling and Best Practices {#error-handling}
 
 Proper error handling is crucial when working with file system operations. Users may cancel operations, files may become unavailable, or permissions may be revoked. Your extension must handle these scenarios gracefully.
 
-Comprehensive Error Handling
+### Comprehensive Error Handling
 
 Here's a solid approach to error handling:
 
@@ -486,7 +486,7 @@ async function safeWriteFile(fileHandle, content) {
 }
 ```
 
-Checking File Modifications
+### Checking File Modifications
 
 Since users can modify files outside your extension, it's important to check for changes:
 
@@ -513,7 +513,7 @@ async function checkFileModified(fileHandle) {
 }
 ```
 
-Performance Considerations
+### Performance Considerations
 
 When working with large files or many files, consider these performance tips:
 
@@ -527,13 +527,13 @@ When working with large files or many files, consider these performance tips:
 
 ---
 
-Security Best Practices {#security-best-practices}
+## Security Best Practices {#security-best-practices}
 
 Security should be a primary concern when implementing file system access in your extension.
 
-Validate All File Paths
+### Validate All File Paths
 
-Never blindly trust file paths from external sources:
+### Never blindly trust file paths from external sources:
 
 ```javascript
 function isPathSafe(basePath, targetPath) {
@@ -554,7 +554,7 @@ async function safeReadFromDirectory(dirHandle, requestedPath) {
 }
 ```
 
-Limit File Type Access
+### Limit File Type Access
 
 Only accept the file types your extension needs to function:
 
@@ -578,7 +578,7 @@ async function validateFileForImport(fileHandle) {
 }
 ```
 
-Secure Data Handling
+### Secure Data Handling
 
 When handling sensitive data, implement additional security measures:
 
@@ -606,11 +606,11 @@ function encryptData(data) {
 
 ---
 
-Practical Examples {#practical-examples}
+## Practical Examples {#practical-examples}
 
 Let's put everything together with a complete, practical example of a file-based note-taking extension.
 
-Background Script Implementation
+### Background Script Implementation
 
 ```javascript
 // background.js - Main extension logic
@@ -696,11 +696,11 @@ async function handleSaveFileAs(content) {
 
 ---
 
-Browser Compatibility and Limitations {#browser-compatibility}
+## Browser Compatibility and Limitations {#browser-compatibility}
 
 While the File System Access API is well-supported in Chrome, there are important considerations for cross-browser compatibility.
 
-Chrome Version Requirements
+### Chrome Version Requirements
 
 The File System Access API was introduced in Chrome 86 and has been stable since Chrome 89. For the best experience, target Chrome 89 or later:
 
@@ -728,7 +728,7 @@ function checkBrowserSupport() {
 }
 ```
 
-Alternative Approaches for Other Browsers
+### Alternative Approaches for Other Browsers
 
 For extensions that need to work in browsers without File System Access API support, consider these alternatives:
 
@@ -738,7 +738,7 @@ For extensions that need to work in browsers without File System Access API supp
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The File System Access API opens up powerful possibilities for Chrome extension developers. By enabling true read-write access to local files, your extensions can become integral parts of users' workflows, handling data in ways that browser storage APIs cannot match.
 

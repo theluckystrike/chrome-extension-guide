@@ -18,7 +18,7 @@ Whether you're building a productivity extension that tracks your browsing histo
 
 ---
 
-Understanding the WebNavigation API Fundamentals {#understanding-webnavigation-api}
+## Understanding the WebNavigation API Fundamentals {#understanding-webnavigation-api}
 
 The chrome.webNavigation API enables your extension to receive notifications about navigation events occurring in the browser. Unlike the chrome.tabs API which focuses on tab management, WebNavigation specifically tracks the lifecycle of page loads and transitions. This distinction is crucial because navigation events can occur without creating new tabs, and multiple navigation events can happen within a single tab.
 
@@ -28,7 +28,7 @@ Each of these events includes a details object containing rich information about
 
 ---
 
-Setting Up Your Extension Manifest {#setting-up-extension-manifest}
+## Setting Up Your Extension Manifest {#setting-up-extension-manifest}
 
 Before using the WebNavigation API, you must declare the appropriate permissions in your extension's manifest.json file. The permission requirement exists because navigation monitoring raises significant privacy considerations. Users and administrators should be aware that extensions can track their browsing activity.
 
@@ -62,7 +62,7 @@ When you specify host permissions, the WebNavigation API will only deliver event
 
 ---
 
-Listening to Navigation Events {#listening-navigation-events}
+## Listening to Navigation Events {#listening-navigation-events}
 
 Now that your manifest is configured, you can begin listening to navigation events in your background script or service worker. The following example demonstrates how to set up comprehensive navigation monitoring:
 
@@ -119,7 +119,7 @@ The optional url filter parameter allows you to specify which URLs should trigge
 
 ---
 
-Detecting and Tracking Redirects {#detecting-redirects}
+## Detecting and Tracking Redirects {#detecting-redirects}
 
 One of the most valuable use cases for the WebNavigation API is detecting redirects. Whether you're building a link checker, a security tool, or an analytics extension, understanding redirect chains is essential. The API provides several mechanisms for tracking redirects.
 
@@ -198,7 +198,7 @@ This pattern is particularly useful for security extensions that need to detect 
 
 ---
 
-Filtering Events by URL Patterns {#filtering-url-patterns}
+## Filtering Events by URL Patterns {#filtering-url-patterns}
 
 Efficient extensions filter events at the browser level rather than processing every navigation and discarding unwanted ones. The WebNavigation API supports URL filters that can match based on various criteria:
 
@@ -246,7 +246,7 @@ URL filters support numerous matching schemes. The hostPrefix matches URLs where
 
 ---
 
-Working with Frames and iFrames {#working-with-frames}
+## Working with Frames and iFrames {#working-with-frames}
 
 Modern web pages frequently use frames and iframes, and the WebNavigation API provides frame-specific information that allows you to track navigation within these embedded contexts. The frameId and parentFrameId properties enable precise identification of which frame initiated or received a navigation.
 
@@ -280,7 +280,7 @@ This frame-level granularity is particularly valuable for extensions that need t
 
 ---
 
-Handling Single-Page Application Navigation {#handling-spa-navigation}
+## Handling Single-Page Application Navigation {#handling-spa-navigation}
 
 Traditional web pages trigger full page loads when users navigate, but single-page applications (SPAs) use JavaScript to manipulate the DOM and browser history without full page reloads. The WebNavigation API includes specific support for SPA navigation through the onHistoryStateUpdated event.
 
@@ -334,7 +334,7 @@ Many modern SPAs combine multiple navigation methods, so implementing both handl
 
 ---
 
-Practical Example: Building a Navigation Logger Extension {#practical-example}
+## Practical Example: Building a Navigation Logger Extension {#practical-example}
 
 Let's combine everything we've learned into a practical extension that logs navigation events:
 
@@ -450,7 +450,7 @@ This implementation provides a foundation that you can extend based on your spec
 
 ---
 
-Best Practices and Performance Considerations {#best-practices}
+## Best Practices and Performance Considerations {#best-practices}
 
 When implementing WebNavigation API in your extensions, following best practices ensures optimal performance and user experience:
 
@@ -468,7 +468,7 @@ Test Thoroughly: Different browsers and versions may handle navigation events sl
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome WebNavigation API provides powerful capabilities for monitoring and responding to browser navigation events. From basic page load tracking to sophisticated redirect chain analysis and SPA navigation handling, this API enables extensions to build rich, navigation-aware functionality.
 

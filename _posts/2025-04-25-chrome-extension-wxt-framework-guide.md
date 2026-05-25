@@ -18,7 +18,7 @@ Enter WXT, a revolutionary framework that brings modern tooling and developer ex
 
 ---
 
-What is WXT Framework? {#what-is-wxt}
+## What is WXT Framework? {#what-is-wxt}
 
 WXT is a next-generation development framework for building browser extensions. Created by the developers behind Vue.js ecosystem tools, WXT brings the same philosophy that made Vite famous to the world of Chrome, Firefox, and Edge extensions. It handles all the complex build configuration, manifest generation, and cross-browser compatibility so you can focus entirely on building your extension's functionality.
 
@@ -28,29 +28,29 @@ The framework supports Chrome, Firefox, Safari, and Edge extensions from a singl
 
 ---
 
-Why Choose WXT for Chrome Extension Development? {#why-choose-wxt}
+## Why Choose WXT for Chrome Extension Development? {#why-choose-wxt}
 
 Traditional Chrome extension development requires manually configuring webpack or vite, writing complex manifest files, setting up content script injection strategies, and dealing with the intricacies of extension-specific build requirements. WXT eliminates these problems by providing a unified, opinionated solution that just works.
 
-Lightning-Fast Development with Hot Reload
+### Lightning-Fast Development with Hot Reload
 
 One of WXT's most compelling features is its instant HMR implementation. Unlike traditional extension development where you need to manually reload your extension after every code change, WXT watches your files and automatically injects changes without losing extension state. This means you can see your popup UI update in real-time, debug your background scripts without interruption, and iterate on content scripts without refreshing the host page. The development velocity improvement is immediately apparent, you'll wonder how you ever managed without it.
 
-First-Class TypeScript Support
+### First-Class TypeScript Support
 
 TypeScript has become the standard for serious JavaScript development, and WXT embraces this fully. The framework provides complete type definitions for all Chrome extension APIs, giving you autocomplete, type checking, and refactoring support right in your IDE. When you type `chrome.storage.local.get`, WXT knows exactly what that returns and can guide you through the API. This typed approach catches errors at compile time rather than runtime, significantly reducing debugging headaches.
 
-Simplified Manifest Management
+### Simplified Manifest Management
 
 Writing `manifest.json` manually is error-prone and tedious. WXT generates your manifest automatically based on your source files and configuration, ensuring consistency and correctness. When you add a new popup HTML file, WXT automatically registers it in the manifest. When you import a new permission, WXT includes it appropriately. This auto-manifest feature alone saves hours of frustration and eliminates a common source of extension loading errors.
 
-Content Script Made Easy
+### Content Script Made Easy
 
 Content scripts in Chrome extensions have always been tricky. You need to handle injection timing, communicate with background scripts, manage DOM access carefully, and deal with cross-origin restrictions. WXT simplifies all of this with its content script auto-import system. Simply create a file in the appropriate directory, and WXT handles the injection, hot reloading, and module sharing automatically. You can import modules directly into your content scripts, share code between different parts of your extension, and use modern JavaScript features without compatibility concerns.
 
 ---
 
-Getting Started with WXT {#getting-started}
+## Getting Started with WXT {#getting-started}
 
 Installing WXT is straightforward. You'll need Node.js 18 or higher, and then you can create a new project with a single command. The interactive initializer will guide you through project setup, asking about your preferred framework (Vue, React, Svelte, or vanilla), whether you want TypeScript, and which features you'd like to enable.
 
@@ -60,7 +60,7 @@ The development workflow with WXT is refreshingly simple. Run `npm run dev` and 
 
 ---
 
-WXT Project Structure Explained {#project-structure}
+## WXT Project Structure Explained {#project-structure}
 
 Understanding the WXT project structure helps you organize your extension effectively. The framework follows explicit conventions that enable its magic, but these conventions are also fully documented and customizable when needed.
 
@@ -72,7 +72,7 @@ Content scripts go in `src/content/`. WXT's content script system is particularl
 
 ---
 
-Building a Real Extension with WXT {#building-real-extension}
+## Building a Real Extension with WXT {#building-real-extension}
 
 Let's walk through creating a practical extension with WXT to demonstrate its capabilities. We'll build a simple but functional extension that saves page notes, something that requires background storage, popup interaction, and content script injection.
 
@@ -84,7 +84,7 @@ The beauty of this architecture is how cleanly the pieces separate. Your popup h
 
 ---
 
-WXT vs Traditional Development {#wxt-vs-traditional}
+## WXT vs Traditional Development {#wxt-vs-traditional}
 
 The difference between WXT and traditional extension development becomes apparent immediately when you start building. In a traditional setup, you'd spend significant time configuring your bundler to handle extension-specific requirements: content scripts need different treatment than background scripts, popup scripts run in a different context, and you need to carefully manage which modules get included where.
 
@@ -94,29 +94,29 @@ Build times demonstrate the difference dramatically. A traditional webpack setup
 
 ---
 
-Advanced WXT Features {#advanced-features}
+## Advanced WXT Features {#advanced-features}
 
 Beyond the basics, WXT provides several advanced features that become valuable as your extension grows in complexity.
 
-Multi-Browser Support
+### Multi-Browser Support
 
 Writing extensions for multiple browsers traditionally means maintaining separate manifest files, handling API differences, and often rewriting significant code. WXT abstracts these differences into a unified configuration. Define your extension once, and WXT generates the appropriate artifacts for Chrome, Firefox, Safari, and Edge. You can target specific browsers or build for all of them simultaneously.
 
-Automated Testing
+### Automated Testing
 
 WXT integrates smoothly with Vitest for unit testing and provides utilities for integration testing your extension. You can test background scripts, popup components, and content scripts in isolation or as integrated units. The testing story for extensions has historically been poor, but WXT brings modern testing practices to this space.
 
-Extension-Specific Utilities
+### Extension-Specific Utilities
 
 WXT includes a collection of utilities specifically designed for extension development. The `useStorage` composable provides reactive storage access in your popup and options pages. The `useTab` composable gives you easy access to current tab information. The messaging helpers simplify inter-context communication. These utilities are optional but incredibly helpful when building complex extensions.
 
-DevTools Integration
+### DevTools Integration
 
 Building extensions that extend Chrome's DevTools is straightforward with WXT. Simply add a `devtools` directory to your source, create your panel or sidebar, and WXT handles the registration. You can build powerful debugging and development tools that integrate directly into Chrome's developer experience.
 
 ---
 
-Performance Benefits of WXT {#performance-benefits}
+## Performance Benefits of WXT {#performance-benefits}
 
 Performance matters in extensions both for the user's experience and for Chrome's extension review process. WXT helps you build performant extensions by default.
 
@@ -128,7 +128,7 @@ Service worker optimization is built into WXT. The framework understands how ser
 
 ---
 
-Community and Ecosystem {#community-ecosystem}
+## Community and Ecosystem {#community-ecosystem}
 
 WXT has quickly grown a passionate community of extension developers. The official Discord server provides help and discussion. The GitHub repository offers detailed documentation and responds actively to issues and pull requests. Several third-party plugins extend WXT's functionality for specific use cases.
 
@@ -138,7 +138,7 @@ Templates created by the community accelerate new projects further. Want to buil
 
 ---
 
-Migrating Existing Extensions to WXT {#migrating-to-wxt}
+## Migrating Existing Extensions to WXT {#migrating-to-wxt}
 
 If you have an existing Chrome extension built with traditional tooling, migrating to WXT is often straightforward. The process typically takes a few hours depending on your project's size and complexity.
 
@@ -150,7 +150,7 @@ The WXT team has documented migration patterns for common scenarios. The migrati
 
 ---
 
-Conclusion: Is WXT Right for You? {#conclusion}
+## Conclusion: Is WXT Right for You? {#conclusion}
 
 WXT represents a significant step forward in Chrome extension development tooling. If you're starting a new extension project in 2025, WXT should be your first choice. The developer experience improvements alone justify the switch, faster builds, instant HMR, and TypeScript support make development genuinely enjoyable.
 

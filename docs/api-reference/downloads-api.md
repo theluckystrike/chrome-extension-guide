@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/api-reference/downloads-api/"
 last_modified_at: 2026-01-15
 ---
 
-Chrome Downloads API Reference
+### Chrome Downloads API Reference
 
 The `chrome.downloads` API lets you initiate, monitor, search, pause, resume, cancel, and manage file downloads. You can also control where files are saved and open downloaded files.
 
-Permissions {#permissions}
+## Permissions {#permissions}
 
 ```json
 {
@@ -28,7 +28,7 @@ For opening downloaded files or controlling the download UI, you may also need:
 
 See the [downloads permission reference](../permissions/downloads.md) for details.
 
-DownloadItem Object {#downloaditem-object}
+## DownloadItem Object {#downloaditem-object}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -54,11 +54,11 @@ DownloadItem Object {#downloaditem-object}
 
 DangerType values: `"file"`, `"url"`, `"content"`, `"uncommon"`, `"host"`, `"unwanted"`, `"safe"`, `"accepted"`.
 
-Core Methods {#core-methods}
+## Core Methods {#core-methods}
 
-chrome.downloads.download(options) {#chromedownloadsdownloadoptions}
+## chrome.downloads.download(options) {#chromedownloadsdownloadoptions}
 
-Initiate a new download.
+### Initiate a new download.
 
 ```ts
 // Download a file
@@ -114,9 +114,9 @@ DownloadOptions:
 | `headers` | `HeaderNameValuePair[]` | Custom HTTP headers |
 | `body` | `string` | POST body |
 
-chrome.downloads.search(query) {#chromedownloadssearchquery}
+## chrome.downloads.search(query) {#chromedownloadssearchquery}
 
-Search the download history.
+### Search the download history.
 
 ```ts
 // All downloads
@@ -157,9 +157,9 @@ const large = await chrome.downloads.search({
 });
 ```
 
-chrome.downloads.pause(downloadId) / resume(downloadId) / cancel(downloadId) {#chromedownloadspausedownloadid-resumedownloadid-canceldownloadid}
+## chrome.downloads.pause(downloadId) / resume(downloadId) / cancel(downloadId) {#chromedownloadspausedownloadid-resumedownloadid-canceldownloadid}
 
-Control active downloads.
+### Control active downloads.
 
 ```ts
 // Pause
@@ -172,7 +172,7 @@ await chrome.downloads.resume(downloadId);
 await chrome.downloads.cancel(downloadId);
 ```
 
-chrome.downloads.open(downloadId) {#chromedownloadsopendownloadid}
+## chrome.downloads.open(downloadId) {#chromedownloadsopendownloadid}
 
 Open a downloaded file with the system's default application. Requires user gesture in MV3.
 
@@ -180,7 +180,7 @@ Open a downloaded file with the system's default application. Requires user gest
 await chrome.downloads.open(downloadId);
 ```
 
-chrome.downloads.show(downloadId) {#chromedownloadsshowdownloadid}
+## chrome.downloads.show(downloadId) {#chromedownloadsshowdownloadid}
 
 Show the downloaded file in the system file manager (Finder/Explorer).
 
@@ -188,7 +188,7 @@ Show the downloaded file in the system file manager (Finder/Explorer).
 await chrome.downloads.show(downloadId);
 ```
 
-chrome.downloads.showDefaultFolder() {#chromedownloadsshowdefaultfolder}
+## chrome.downloads.showDefaultFolder() {#chromedownloadsshowdefaultfolder}
 
 Open the default downloads folder.
 
@@ -196,7 +196,7 @@ Open the default downloads folder.
 chrome.downloads.showDefaultFolder();
 ```
 
-chrome.downloads.erase(query) {#chromedownloadserasequery}
+## chrome.downloads.erase(query) {#chromedownloadserasequery}
 
 Remove download entries from the history (does not delete the file).
 
@@ -208,7 +208,7 @@ await chrome.downloads.erase({ state: "complete" });
 await chrome.downloads.erase({ id: downloadId });
 ```
 
-chrome.downloads.removeFile(downloadId) {#chromedownloadsremovefiledownloadid}
+## chrome.downloads.removeFile(downloadId) {#chromedownloadsremovefiledownloadid}
 
 Delete the downloaded file from disk.
 
@@ -216,7 +216,7 @@ Delete the downloaded file from disk.
 await chrome.downloads.removeFile(downloadId);
 ```
 
-chrome.downloads.getFileIcon(downloadId, options?) {#chromedownloadsgetfileicondownloadid-options}
+## chrome.downloads.getFileIcon(downloadId, options?) {#chromedownloadsgetfileicondownloadid-options}
 
 Get the file's icon as a data URL.
 
@@ -225,9 +225,9 @@ const iconUrl = await chrome.downloads.getFileIcon(downloadId, { size: 32 });
 // iconUrl is a data:image/png;base64,... string
 ```
 
-chrome.downloads.setShelfEnabled(enabled). deprecated {#chromedownloadssetshelfenabledenabled-deprecated}
+## chrome.downloads.setShelfEnabled(enabled). deprecated {#chromedownloadssetshelfenabledenabled-deprecated}
 
-Use `chrome.downloads.setUiOptions()` instead:
+### Use `chrome.downloads.setUiOptions()` instead:
 
 ```ts
 // Hide the download shelf/bubble
@@ -239,9 +239,9 @@ await chrome.downloads.setUiOptions({ enabled: true });
 
 Requires the `"downloads.ui"` permission.
 
-Events {#events}
+## Events {#events}
 
-chrome.downloads.onCreated {#chromedownloadsoncreated}
+## chrome.downloads.onCreated {#chromedownloadsoncreated}
 
 ```ts
 chrome.downloads.onCreated.addListener((downloadItem) => {
@@ -250,7 +250,7 @@ chrome.downloads.onCreated.addListener((downloadItem) => {
 });
 ```
 
-chrome.downloads.onChanged {#chromedownloadsonchanged}
+## chrome.downloads.onChanged {#chromedownloadsonchanged}
 
 Fires when any property of a download changes. `changeInfo` only contains the changed properties.
 
@@ -275,7 +275,7 @@ chrome.downloads.onChanged.addListener((delta) => {
 });
 ```
 
-chrome.downloads.onDeterminingFilename {#chromedownloadsondeterminingfilename}
+## chrome.downloads.onDeterminingFilename {#chromedownloadsondeterminingfilename}
 
 Intercept and modify the filename before a download starts. Only one extension can handle this event.
 
@@ -292,7 +292,7 @@ chrome.downloads.onDeterminingFilename.addListener((downloadItem, suggest) => {
 });
 ```
 
-chrome.downloads.onErased {#chromedownloadsonerased}
+## chrome.downloads.onErased {#chromedownloadsonerased}
 
 ```ts
 chrome.downloads.onErased.addListener((downloadId) => {
@@ -300,9 +300,9 @@ chrome.downloads.onErased.addListener((downloadId) => {
 });
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
-Download manager with progress tracking:
+### Download manager with progress tracking:
 
 ```ts
 // shared/messages.ts
@@ -352,9 +352,9 @@ msg.onMessage({
 });
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Track download statistics:
+### Track download statistics:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -389,9 +389,9 @@ chrome.downloads.onChanged.addListener(async (delta) => {
 });
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 
-Download generated content (export data) {#download-generated-content-export-data}
+## Download generated content (export data) {#download-generated-content-export-data}
 
 ```ts
 function downloadAsFile(content: string, filename: string, mimeType: string) {
@@ -408,7 +408,7 @@ downloadAsFile(
 );
 ```
 
-Wait for a download to complete {#wait-for-a-download-to-complete}
+## Wait for a download to complete {#wait-for-a-download-to-complete}
 
 ```ts
 function waitForDownload(downloadId: number): Promise<chrome.downloads.DownloadItem> {
@@ -429,7 +429,7 @@ function waitForDownload(downloadId: number): Promise<chrome.downloads.DownloadI
 }
 ```
 
-Batch download with progress {#batch-download-with-progress}
+## Batch download with progress {#batch-download-with-progress}
 
 ```ts
 async function batchDownload(urls: string[]) {
@@ -441,7 +441,7 @@ async function batchDownload(urls: string[]) {
 }
 ```
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 
 1. `download()` returns immediately with a download ID. The download happens asynchronously. Use `onChanged` to track completion.
 
@@ -457,7 +457,7 @@ Gotchas {#gotchas}
 
 7. `removeFile` requires the download to be complete. You cannot delete an in-progress download's partial file. cancel it first.
 
-Related {#related}
+## Related {#related}
 
 - [downloads permission](../permissions/downloads.md)
 - [Storage API detailed look](storage-api-deep detailed look.md)

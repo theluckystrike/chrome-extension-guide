@@ -20,7 +20,7 @@ In this tutorial, we will explore the technical foundations of chrome extension 
 
 ---
 
-Understanding Chrome Extension Override Pages {#understanding-override-pages}
+## Understanding Chrome Extension Override Pages {#understanding-override-pages}
 
 Before we dive into implementation, it's essential to understand what override pages are and how they work within the Chrome Extensions ecosystem. Override pages are a special type of Chrome extension that replaces built-in Chrome pages with custom implementations. Chrome supports overriding several internal pages, including the bookmarks page, history page, and most popular among developers, the new tab page.
 
@@ -32,7 +32,7 @@ One important thing to understand is that override pages are treated as special 
 
 ---
 
-Prerequisites and Development Environment {#prerequisites}
+## Prerequisites and Development Environment {#prerequisites}
 
 Before we begin building our custom new tab page extension, let's ensure you have all the necessary tools and knowledge in place. Developing Chrome extensions requires a basic understanding of web technologies including HTML, CSS, and JavaScript. If you are comfortable with these technologies, you will find extension development straightforward and enjoyable.
 
@@ -44,7 +44,7 @@ Finally, you will need a Google Account to publish your extension to the Chrome 
 
 ---
 
-Manifest Configuration for New Tab Override {#manifest-configuration}
+## Manifest Configuration for New Tab Override {#manifest-configuration}
 
 The heart of any Chrome extension is its manifest.json file. This configuration file tells Chrome about your extension, what permissions it needs, and which files to load. For a new tab override extension, the manifest requires specific configuration to tell Chrome that you want to replace the default new tab page.
 
@@ -73,7 +73,7 @@ Notice that we also added the "storage" permission. This will allow our extensio
 
 ---
 
-Building the Custom New Tab Page HTML {#building-html}
+## Building the Custom New Tab Page HTML {#building-html}
 
 Now that we understand the manifest configuration, let's build the actual new tab page. We'll create a visually appealing newtab.html file that serves as the foundation of our custom new tab page extension. This page will include a search bar, quick links to favorite sites, and a beautiful background.
 
@@ -116,7 +116,7 @@ The structure is intentionally simple, focusing on functionality while leaving r
 
 ---
 
-Styling Your Custom New Tab Page {#styling-css}
+## Styling Your Custom New Tab Page {#styling-css}
 
 The visual appearance of your new tab page is crucial for user adoption. A beautiful, well-designed new tab page feels like a breath of fresh air every time users open a new tab, while a poorly designed one feels like an obstacle. Let's create CSS that transforms our basic HTML into a stunning custom new tab page extension.
 
@@ -261,7 +261,7 @@ The styling is fully responsive, ensuring it looks good on various screen sizes.
 
 ---
 
-Adding Functionality with JavaScript {#javascript-functionality}
+## Adding Functionality with JavaScript {#javascript-functionality}
 
 Now comes the exciting part, adding interactivity to our custom new tab page. The JavaScript will handle search functionality, display and manage quick links, and show daily inspirational quotes. This is where our extension truly becomes functional rather than just a static page.
 
@@ -345,7 +345,7 @@ The daily quote feature adds a touch of inspiration to the new tab experience. B
 
 ---
 
-Testing Your Extension Locally {#testing-extension}
+## Testing Your Extension Locally {#testing-extension}
 
 Before publishing your extension to the Chrome Web Store, you need to test it thoroughly to ensure everything works correctly. Chrome provides excellent developer tools for testing extensions without needing to package them. Here's how to load and test your new tab override chrome extension.
 
@@ -359,7 +359,7 @@ If you make changes to your extension files while the extension is loaded, you w
 
 ---
 
-Best Practices for New Tab Extensions {#best-practices}
+## Best Practices for New Tab Extensions {#best-practices}
 
 Creating a successful new tab extension requires more than just technical implementation. Users have high expectations for their new tab page since they will see it dozens of times per day. Following best practices ensures your extension provides value while respecting user privacy and maintaining performance.
 
@@ -373,7 +373,7 @@ Finally, keep your extension updated. Chrome regularly updates its browser and e
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have thoroughly tested your custom new tab page extension and are satisfied with its functionality, the next step is publishing it to the Chrome Web Store so others can discover and install it. Publishing requires a Google Account and a small one-time developer registration fee.
 
@@ -385,7 +385,7 @@ After your extension is approved and published, users can find it by searching t
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 You have now learned how to build a complete chrome extension new tab override from scratch. We covered the fundamental concepts of chrome extension override pages, examined the manifest configuration required, built a beautiful HTML structure, added stunning CSS styling, and implemented practical JavaScript functionality. We also explored testing procedures, best practices, and the publishing process.
 

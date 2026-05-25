@@ -9,9 +9,9 @@ Build a Reading Progress Tracker Extension
 
 This tutorial walks through building a Chrome extension that tracks reading progress, saves position, and displays reading statistics.
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
-Create `manifest.json` with the required permissions:
+### Create `manifest.json` with the required permissions:
 
 ```json
 {
@@ -32,9 +32,9 @@ Create `manifest.json` with the required permissions:
 
 The `activeTab` permission allows access to the current tab, while `storage` enables persisting reading positions and stats.
 
-Step 2: Content Script Setup {#step-2-content-script-setup}
+## Step 2: Content Script Setup {#step-2-content-script-setup}
 
-Create `content.js` to inject the progress bar:
+### Create `content.js` to inject the progress bar:
 
 ```javascript
 // content.js
@@ -53,9 +53,9 @@ progressBar.style.cssText = `
 document.body.appendChild(progressBar);
 ```
 
-Step 3: Scroll Position Tracking {#step-3-scroll-position-tracking}
+## Step 3: Scroll Position Tracking {#step-3-scroll-position-tracking}
 
-Calculate reading progress using scroll mathematics:
+### Calculate reading progress using scroll mathematics:
 
 ```javascript
 function getScrollProgress() {
@@ -80,7 +80,7 @@ function getArticleContent() {
 }
 ```
 
-Step 4: Progress Bar Rendering {#step-4-progress-bar-rendering}
+## Step 4: Progress Bar Rendering {#step-4-progress-bar-rendering}
 
 Update the progress bar width based on scroll position:
 
@@ -97,9 +97,9 @@ function updateProgressBar() {
 }
 ```
 
-Step 5: Save Position to Storage {#step-5-save-position-to-storage}
+## Step 5: Save Position to Storage {#step-5-save-position-to-storage}
 
-Persist reading position keyed by URL:
+### Persist reading position keyed by URL:
 
 ```javascript
 function saveProgress() {
@@ -117,9 +117,9 @@ function saveProgress() {
 }
 ```
 
-Step 6: Resume Reading Position {#step-6-resume-reading-position}
+## Step 6: Resume Reading Position {#step-6-resume-reading-position}
 
-Restore saved position when revisiting a page:
+### Restore saved position when revisiting a page:
 
 ```javascript
 function restoreProgress() {
@@ -141,9 +141,9 @@ function restoreProgress() {
 restoreProgress();
 ```
 
-Step 7: Reading Statistics {#step-7-reading-statistics}
+## Step 7: Reading Statistics {#step-7-reading-statistics}
 
-Track reading time and statistics:
+### Track reading time and statistics:
 
 ```javascript
 let startTime = Date.now();
@@ -177,9 +177,9 @@ function updateStats() {
 }
 ```
 
-Step 8: Popup for Reading History {#step-8-popup-for-reading-history}
+## Step 8: Popup for Reading History {#step-8-popup-for-reading-history}
 
-Create `popup.html` to display reading statistics:
+### Create `popup.html` to display reading statistics:
 
 ```html
 <!DOCTYPE html>
@@ -222,9 +222,9 @@ chrome.storage.local.get('readingStats', (result) => {
 });
 ```
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
-Use passive listeners and throttling for smooth performance:
+### Use passive listeners and throttling for smooth performance:
 
 ```javascript
 // Use passive listener for better scroll performance
@@ -246,9 +246,9 @@ function throttle(func, limit) {
 }
 ```
 
-Badge Updates {#badge-updates}
+## Badge Updates {#badge-updates}
 
-Update the extension badge to show progress:
+### Update the extension badge to show progress:
 
 ```javascript
 // background.js
@@ -260,9 +260,9 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-Auto-Detection {#auto-detection}
+## Auto-Detection {#auto-detection}
 
-Automatically detect article pages vs non-article pages:
+### Automatically detect article pages vs non-article pages:
 
 ```javascript
 function isArticlePage() {
@@ -278,7 +278,7 @@ function isArticlePage() {
 }
 ```
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)

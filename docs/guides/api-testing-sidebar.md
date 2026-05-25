@@ -43,7 +43,7 @@ api-tester-sidebar/
 
 ---
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest.json defines the extension's capabilities, permissions, and entry points. For an API testing sidebar, we need careful permission management.
 
@@ -81,7 +81,7 @@ The manifest.json defines the extension's capabilities, permissions, and entry p
 }
 ```
 
-Permission Rationale
+### Permission Rationale
 
 - sidePanel: Required to use the Side Panel API
 - storage: Persist request history and user preferences
@@ -92,9 +92,9 @@ Permission Rationale
 
 ---
 
-Core TypeScript Implementation
+### Core TypeScript Implementation
 
-Shared Types (shared/types.ts)
+### Shared Types (shared/types.ts)
 
 ```typescript
 export interface HttpRequest {
@@ -143,7 +143,7 @@ export interface SidebarState {
 }
 ```
 
-HTTP Client (shared/http-client.ts)
+### HTTP Client (shared/http-client.ts)
 
 ```typescript
 import { HttpRequest, HttpResponse } from './types';
@@ -229,7 +229,7 @@ export class HttpClient {
 }
 ```
 
-Storage Manager (shared/storage.ts)
+### Storage Manager (shared/storage.ts)
 
 ```typescript
 import { HttpRequest, HttpResponse, ExtensionSettings } from './types';
@@ -304,9 +304,9 @@ export class StorageManager {
 
 ---
 
-UI Design Patterns
+### UI Design Patterns
 
-Side Panel HTML Structure
+### Side Panel HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -397,7 +397,7 @@ Side Panel HTML Structure
 </html>
 ```
 
-Side Panel TypeScript Implementation
+### Side Panel TypeScript Implementation
 
 ```typescript
 import { HttpRequest, HttpResponse } from '../shared/types';
@@ -572,9 +572,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Service Worker Setup (background/service-worker.ts)
+### Service Worker Setup (background/service-worker.ts)
 
 ```typescript
 // Handle extension installation
@@ -608,11 +608,11 @@ async function handleExecuteRequest(request: unknown): Promise<HttpResponse> {
 
 ---
 
-State Management
+### State Management
 
 The extension uses a combination of Chrome Storage API and in-memory state management. For complex applications, consider using a state management library like Zustand or building a custom pub/sub system.
 
-Event-Based Communication Pattern
+### Event-Based Communication Pattern
 
 ```typescript
 type EventCallback<T = unknown> = (data: T) => void;
@@ -641,9 +641,9 @@ export const eventBus = new EventBus();
 
 ---
 
-Error Handling
+### Error Handling
 
-Comprehensive Error Handling Strategy
+### Comprehensive Error Handling Strategy
 
 ```typescript
 class ErrorHandler {
@@ -682,9 +682,9 @@ class ErrorHandler {
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Vitest
+### Unit Testing with Vitest
 
 ```typescript
 import { describe, it, expect, vi } from 'vitest';
@@ -729,15 +729,15 @@ describe('HttpClient', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
 Use Chrome's testing APIs and Playwright for end-to-end testing of the sidebar functionality.
 
 ---
 
-Performance Optimization
+### Performance Optimization
 
-Key Optimizations
+### Key Optimizations
 
 1. Lazy Loading: Load heavy components only when needed
 2. Request Debouncing: Debounce input changes to reduce re-renders
@@ -762,9 +762,9 @@ function debounce<T extends (...args: unknown[]) => unknown>(
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Before publishing to Chrome Web Store:
+### Before publishing to Chrome Web Store:
 
 - [ ] Test in incognito mode
 - [ ] Verify all permissions are necessary
@@ -777,7 +777,7 @@ Before publishing to Chrome Web Store:
 - [ ] Verify manifest.json syntax
 - [ ] Run Chrome Lighthouse extension audit
 
-Building for Production
+### Building for Production
 
 ```bash
 Build with TypeScript
@@ -792,7 +792,7 @@ npx chrome-extension-test
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an API testing sidebar extension requires careful consideration of Chrome's extension architecture, security permissions, and user experience. This guide covered the essential patterns for creating a professional-grade extension using Manifest V3, TypeScript, and modern web technologies.
 

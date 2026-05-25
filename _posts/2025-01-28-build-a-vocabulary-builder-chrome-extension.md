@@ -19,7 +19,7 @@ This guide assumes you have a basic understanding of HTML, CSS, and JavaScript. 
 
 ---
 
-Why Build a Vocabulary Builder Extension? {#why-build-vocabulary-extension}
+## Why Build a Vocabulary Builder Extension? {#why-build-vocabulary-extension}
 
 The Chrome browser is the gateway to the internet for billions of users, and it is where most vocabulary encounters happen, whether through reading articles, researching topics, or communicating in foreign languages. This makes Chrome the ideal platform for a vocabulary learning tool. Users are already in their browser when they encounter new words, so having a vocabulary extension right at their fingertips eliminates friction from the learning process.
 
@@ -29,29 +29,29 @@ From a development perspective, vocabulary builder extensions are excellent proj
 
 ---
 
-Core Features of a Successful Vocabulary Builder {#core-features}
+## Core Features of a Successful Vocabulary Builder {#core-features}
 
 Before diving into code, it is essential to understand what makes a vocabulary builder extension truly useful. The best extensions in this category share several core features that we will implement in our project.
 
-Word Capture System
+### Word Capture System
 
 The foundation of any vocabulary builder is the ability to quickly and easily capture new words. Users should be able to add a word with minimal friction, ideally with a single click or keyboard shortcut. When they encounter an unfamiliar word while browsing, they need a fast way to save it for later review without interrupting their reading flow.
 
 Our word capture system will allow users to select any text on a webpage and save it instantly. We will also provide a manual entry option for users who want to add words they have encountered elsewhere. The captured word should automatically pull associated information such as the page URL where it was found, the context sentence, and a timestamp. This contextual information helps users remember where they encountered the word, which aids in long-term retention.
 
-Definition and Translation Integration
+### Definition and Translation Integration
 
 Simply saving a word is not enough, users need to understand what the word means. A quality vocabulary builder should automatically fetch definitions, translations, and other relevant information when a word is captured. This requires integration with dictionary APIs or translation services.
 
 For our extension, we will implement an integration with a free dictionary API to fetch definitions, part of speech information, phonetic pronunciations, and example sentences. We will also include pronunciation audio when available, as hearing words pronounced correctly is crucial for language learning. The extension should handle cases where a word is not found gracefully, allowing users to enter their own definitions manually.
 
-Flashcard Review System
+### Flashcard Review System
 
 The flashcard review system is where the actual learning happens. Research has consistently shown that spaced repetition is the most effective method for long-term vocabulary retention. Our extension will implement a spaced repetition algorithm that schedules word reviews at optimal intervals based on how well the user knows each word.
 
 When users review their vocabulary list, they will see the word and try to recall its meaning before revealing the definition. They will then rate their recall on a simple scale, perhaps from "completely forgot" to "remembered perfectly." The algorithm uses these ratings to adjust the next review date, presenting easy words less frequently and difficult words more often. This optimized scheduling maximizes learning efficiency while minimizing the time users need to spend reviewing.
 
-Progress Tracking and Statistics
+### Progress Tracking and Statistics
 
 Users love seeing their progress visualized. A good vocabulary builder should track metrics such as total words learned, current streak days, mastery level distribution, and review accuracy. These statistics provide motivation and help users understand their learning patterns.
 
@@ -59,7 +59,7 @@ We will implement a dashboard that displays these metrics in an easy-to-understa
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension begins with a manifest file and a set of source files. For our vocabulary builder, we will use Manifest V3, which is the current standard for Chrome extensions. Let us set up the basic project structure.
 
@@ -69,7 +69,7 @@ Creating the manifest.json file is our first step. This file tells Chrome about 
 
 ---
 
-Implementing Word Capture {#implementing-word-capture}
+## Implementing Word Capture {#implementing-word-capture}
 
 The word capture functionality is the gateway to our extension. Users will spend most of their time browsing the web, so the capture process must be smooth and intuitive. We will implement two methods for capturing words: context menu capture and text selection capture.
 
@@ -81,7 +81,7 @@ Once a word is captured, we need to fetch its definition automatically. Our back
 
 ---
 
-Building the Flashcard Review System {#flashcard-review}
+## Building the Flashcard Review System {#flashcard-review}
 
 The flashcard review system is where our extension truly becomes a learning tool. We will create an interactive flashcard interface that presents words one at a time, allowing users to test their recall before revealing the answer.
 
@@ -93,7 +93,7 @@ The algorithm tracks several metrics for each word: the repetition number (how m
 
 ---
 
-Data Storage and Management {#data-storage}
+## Data Storage and Management {#data-storage}
 
 Efficient data storage is crucial for a vocabulary builder extension. Users may thousands of words over time, so we need a storage solution that is both performant and easy to manage. Chrome provides the chrome.storage API, which is specifically designed for extension data and offers several advantages over localStorage.
 
@@ -103,7 +103,7 @@ For data organization, we will implement a system that separates words by status
 
 ---
 
-User Interface Design {#user-interface-design}
+## User Interface Design {#user-interface-design}
 
 A vocabulary builder extension must balance functionality with simplicity. Users should be able to navigate between capturing words, reviewing flashcards, viewing their word list, and checking statistics without confusion. We will design a tab-based interface within the popup that provides clear navigation.
 
@@ -113,7 +113,7 @@ Visual feedback is important for user engagement. We will use subtle animations 
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your vocabulary builder extension is complete, it is time to share it with the world. Publishing to the Chrome Web Store involves several steps that ensure your extension meets Google's quality and security standards.
 
@@ -123,7 +123,7 @@ Your extension's listing page is crucial for discoverability. You will need to c
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a vocabulary builder Chrome extension is a rewarding project that combines interesting technical challenges with real-world utility. Throughout this guide, we have covered the essential components: word capture systems, definition integration, flashcard review with spaced repetition, progress tracking, and proper extension architecture.
 

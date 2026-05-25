@@ -13,14 +13,14 @@ declarativeNetRequestWithHostAccess
 
 The `declarativeNetRequestWithHostAccess` permission allows extensions to use declarative Net Request (DNR) rules that interact with specific host URLs, combining DNR capabilities with host permissions.
 
-What It Grants {#what-it-grants}
+## What It Grants {#what-it-grants}
 
 This permission enables DNR rules that require access to specific hosts, including:
 - Redirect rules that point to URLs on specific domains
 - Modify headers rules that target requests to particular hosts
 - Rules that use URL patterns requiring host permission validation
 
-Difference from declarativeNetRequest {#difference-from-declarativenetrequest}
+## Difference from declarativeNetRequest {#difference-from-declarativenetrequest}
 
 | Feature | declarativeNetRequest | declarativeNetRequestWithHostAccess |
 |---------|----------------------|--------------------------------------|
@@ -32,7 +32,7 @@ Difference from declarativeNetRequest {#difference-from-declarativenetrequest}
 
 The standard `declarativeNetRequest` permission allows blocking requests and redirects to `extensionPath` URLs without host permissions. However, redirecting to specific URLs or modifying headers for particular hosts requires this permission.
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -47,7 +47,7 @@ Manifest Configuration {#manifest-configuration}
 
 The host permissions must explicitly list the domains your rules will interact with.
 
-User Warning {#user-warning}
+## User Warning {#user-warning}
 
 When users install an extension with this permission, they will see a warning indicating that the extension can:
 - Read and change your data on specified websites
@@ -55,7 +55,7 @@ When users install an extension with this permission, they will see a warning in
 
 This is because the permission effectively grants host-level access combined with request modification capabilities.
 
-When It's Needed {#when-its-needed}
+## When It's Needed {#when-its-needed}
 
 Use `declarativeNetRequestWithHostAccess` when:
 1. Creating redirect rules that point to specific external URLs
@@ -63,7 +63,7 @@ Use `declarativeNetRequestWithHostAccess` when:
 3. Using `urlTransform` rules with custom URLs
 4. Applying rules to `*://*/*` patterns combined with host-specific conditions
 
-When It's NOT Needed {#when-its-not-needed}
+## When It's NOT Needed {#when-its-not-needed}
 
 You can use basic `declarativeNetRequest` without this permission for:
 - Blocking requests based on URL patterns
@@ -71,9 +71,9 @@ You can use basic `declarativeNetRequest` without this permission for:
 - Removing headers regardless of host
 - Basic URL pattern matching without host-specific redirects
 
-@theluckystrike/webext-permissions {#theluckystrikewebext-permissions}
+## @theluckystrike/webext-permissions {#theluckystrikewebext-permissions}
 
-This permission can be validated using `@theluckystrike/webext-permissions`:
+### This permission can be validated using `@theluckystrike/webext-permissions`:
 
 ```javascript
 import { hasPermission } from '@theluckystrike/webext-permissions';
@@ -81,12 +81,12 @@ import { hasPermission } from '@theluckystrike/webext-permissions';
 const hasDnrWithHostAccess = await hasPermission('declarativeNetRequestWithHostAccess');
 ```
 
-Related Permissions {#related-permissions}
+## Related Permissions {#related-permissions}
 
 - [declarativeNetRequest](./declarativeNetRequest.md) - Basic DNR without host access
 - [declarativeNetRequestFeedback](./declarativeNetRequestFeedback.md) - Feedback on DNR rule matches
 
-Example Use Case {#example-use-case}
+## Example Use Case {#example-use-case}
 
 An extension that redirects all requests from `site-a.com` to `site-b.com` would require:
 
@@ -116,7 +116,7 @@ With a rule like:
 }
 ```
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 When do I need host permissions with declarativeNetRequest?
 Host permissions are needed if you want to modify requests to specific websites or need access to request headers for the rules.

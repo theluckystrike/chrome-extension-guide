@@ -18,7 +18,7 @@ we'll walk through building a complete performance monitor Chrome extension with
 
 ---
 
-Why Build a Performance Monitor Extension? {#why-build}
+## Why Build a Performance Monitor Extension? {#why-build}
 
 The demand for performance monitoring tools in browsers has never been higher. Web applications are becoming increasingly complex, and users expect smooth, lag-free experiences. A performance monitor extension serves multiple purposes:
 
@@ -32,7 +32,7 @@ The Chrome browser provides rich APIs through the chrome.debugger and chrome.per
 
 ---
 
-Prerequisites and Project Setup {#prerequisites}
+## Prerequisites and Project Setup {#prerequisites}
 
 Before we begin, make sure you have:
 
@@ -64,7 +64,7 @@ Create a new folder for your extension and set up the manifest file first.
 
 ---
 
-Creating the Manifest V3 Configuration {#manifest}
+## Creating the Manifest V3 Configuration {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. For our performance monitor extension, we'll request the necessary permissions to access performance metrics:
 
@@ -105,7 +105,7 @@ This manifest requests minimal permissions while still allowing us to monitor pe
 
 ---
 
-Implementing the FPS Counter Chrome Feature {#fps-counter}
+## Implementing the FPS Counter Chrome Feature {#fps-counter}
 
 The fps (frames per second) counter is essential for measuring UI smoothness. A smooth user interface typically requires 60 fps, which means each frame has approximately 16.67 milliseconds to render. When fps drops below 30, users typically perceive lag.
 
@@ -221,7 +221,7 @@ This content script uses the `requestAnimationFrame` API for accurate fps measur
 
 ---
 
-Building the Memory Monitor Extension Features {#memory-monitor}
+## Building the Memory Monitor Extension Features {#memory-monitor}
 
 Memory monitoring is crucial for detecting memory leaks and understanding how web applications consume resources. Our memory monitor extension feature provides detailed insights:
 
@@ -308,7 +308,7 @@ This enhanced memory monitoring class provides trend analysis and potential leak
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click on the extension icon. It should display all the performance metrics in a clear, readable format:
 
@@ -729,7 +729,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background service worker coordinates communication between the content script and the popup:
 
@@ -774,7 +774,7 @@ setInterval(() => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we've built all the components, let's test our performance monitor extension:
 
@@ -799,35 +799,35 @@ Now that we've built all the components, let's test our performance monitor exte
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic performance monitor working, consider adding these advanced features:
 
-Network Request Monitoring
+### Network Request Monitoring
 
 Track network requests using the `chrome.webRequest` API to monitor:
 - Number of active requests
 - Total data transferred
 - Request latency
 
-Long Task Detection
+### Long Task Detection
 
 Use the `PerformanceObserver` API to detect "long tasks" that block the main thread for more than 50ms.
 
-Custom Metrics Dashboard
+### Custom Metrics Dashboard
 
 Create a full-page dashboard (rather than just a popup) to display:
 - Historical charts with date range selection
 - Export data to CSV/JSON
 - Alert thresholds and notifications
 
-Battery Impact Monitoring
+### Battery Impact Monitoring
 
 Use the `navigator.getBattery()` API to track how your extension and the monitored page affect battery life.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a performance monitor extension is an excellent project that teaches you many important concepts in Chrome extension development:
 
@@ -849,7 +849,7 @@ Start with the basic implementation in this guide, then progressively add featur
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Performance API Reference](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API)

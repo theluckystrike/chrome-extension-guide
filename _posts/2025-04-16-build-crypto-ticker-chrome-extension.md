@@ -17,7 +17,7 @@ Whether you're a beginner developer looking to understand Chrome extension archi
 
 ---
 
-Prerequisites and Development Environment Setup {#prerequisites}
+## Prerequisites and Development Environment Setup {#prerequisites}
 
 Before we begin building our crypto ticker extension, let's ensure you have the necessary tools and knowledge. You'll need a code editor like Visual Studio Code, Google Chrome browser, and basic familiarity with HTML, CSS, and JavaScript. No prior Chrome extension experience is required, we'll explain each concept thoroughly.
 
@@ -25,7 +25,7 @@ First, create a new folder for your project called `crypto-ticker-extension`. In
 
 Chrome extensions are essentially web applications that run within the Chrome browser. They can interact with web pages, access browser APIs, and provide additional functionality to users. Our crypto ticker will use the Chrome extension popup system, a small window that appears when users click the extension icon in the toolbar.
 
-Choosing a Cryptocurrency API
+### Choosing a Cryptocurrency API
 
 Selecting the right API is crucial for reliability and rate limits:
 
@@ -65,7 +65,7 @@ const API_OPTIONS = {
 };
 ```
 
-Best Practices for API Integration
+### Best Practices for API Integration
 
 Handle rate limiting and errors gracefully:
 
@@ -126,7 +126,7 @@ class CryptoAPIService {
 }
 ```
 
-Setting Up Automatic Refresh
+### Setting Up Automatic Refresh
 
 Implement automatic price updates using the Alarms API:
 
@@ -165,7 +165,7 @@ async function refreshPrices() {
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 Every Chrome extension begins with a `manifest.json` file that defines the extension's configuration, permissions, and capabilities. This JSON file tells Chrome how your extension should behave and what resources it requires. Create a new file called `manifest.json` in your project folder with the following content:
 
@@ -196,7 +196,7 @@ The manifest version 3 is the latest standard for Chrome extensions, offering im
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon in the Chrome toolbar. We'll create a clean, modern interface that displays cryptocurrency prices in an easy-to-read format. Create `popup.html` with the following structure:
 
@@ -261,7 +261,7 @@ This HTML structure provides a clean interface with cards for Bitcoin, Ethereum,
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 A well-designed extension looks professional and is more enjoyable to use. Let's create attractive styles in `popup.css` that make our crypto ticker visually appealing:
 
@@ -397,7 +397,7 @@ The styling uses a dark theme with gradients that match the cryptocurrency brand
 
 ---
 
-Implementing the JavaScript Logic {#javascript-logic}
+## Implementing the JavaScript Logic {#javascript-logic}
 
 Now comes the core functionality, fetching real-time cryptocurrency prices and displaying them to users. We'll use a free API to get price data and implement automatic refresh functionality. Create `popup.js`:
 
@@ -504,7 +504,7 @@ This JavaScript code handles fetching data from CoinGecko's free API, formatting
 
 ---
 
-Creating Extension Icons {#icons}
+## Creating Extension Icons {#icons}
 
 Every Chrome extension needs icons to display in the toolbar and extension management page. Create an `icons` folder in your project directory. You can create simple PNG icons using any image editing tool or generate them programmatically. For a production extension, you'll need icons at 16x16, 48x48, and 128x128 pixels.
 
@@ -512,7 +512,7 @@ For testing purposes, you can use placeholder icons or create simple colored squ
 
 ---
 
-Loading and Testing Your Extension {#testing}
+## Loading and Testing Your Extension {#testing}
 
 Now that we've created all the necessary files, let's load the extension into Chrome and test it:
 
@@ -527,7 +527,7 @@ If you encounter any issues, check the extension's console logs by right-clickin
 
 ---
 
-Enhancing Your Extension {#enhancements}
+## Enhancing Your Extension {#enhancements}
 
 Now that you have a working crypto ticker, consider adding these enhancements to make it even better:
 
@@ -543,7 +543,7 @@ Multiple Currency Support: Add support for displaying prices in different fiat c
 
 ---
 
-Advanced: Implementing Price Alerts
+### Advanced: Implementing Price Alerts
 
 Here's how to implement price alerts in your crypto ticker:
 
@@ -608,7 +608,7 @@ class PriceAlertManager {
 
 ---
 
-Advanced: Adding Charts and Historical Data
+### Advanced: Adding Charts and Historical Data
 
 Displaying historical price data makes your extension more useful:
 
@@ -641,7 +641,7 @@ function renderPriceChart(prices) {
 
 ---
 
-Security Best Practices
+### Security Best Practices
 
 When building financial extensions, security is paramount:
 
@@ -669,7 +669,7 @@ function validatePriceData(data) {
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you're satisfied with your extension, you can publish it to the Chrome Web Store for others to discover and install. Here's how:
 
@@ -683,7 +683,7 @@ Your extension will be reviewed by Google before publication. Make sure to follo
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've successfully built a fully functional crypto price ticker Chrome extension. This project demonstrates fundamental concepts of Chrome extension development including manifest configuration, popup interfaces, styling, and JavaScript integration with external APIs.
 
@@ -695,11 +695,11 @@ Now that you have the foundation, feel free to experiment with additional featur
 
 ---
 
-Handling API Errors Gracefully {#error-handling}
+## Handling API Errors Gracefully {#error-handling}
 
 Real-world applications must handle various failure scenarios. Let's add solid error handling.
 
-Implementing Error States
+### Implementing Error States
 
 ```javascript
 // popup.js - Enhanced error handling
@@ -761,7 +761,7 @@ class CryptoTicker {
 }
 ```
 
-Adding Retry Logic
+### Adding Retry Logic
 
 ```javascript
 async function fetchWithRetry(url, retries = 3, delay = 1000) {
@@ -780,11 +780,11 @@ async function fetchWithRetry(url, retries = 3, delay = 1000) {
 
 ---
 
-Adding More Cryptocurrencies {#more-coins}
+## Adding More Cryptocurrencies {#more-coins}
 
 Extend your ticker to support additional cryptocurrencies.
 
-Updating the Manifest
+### Updating the Manifest
 
 ```json
 {
@@ -793,7 +793,7 @@ Updating the Manifest
 }
 ```
 
-Dynamic Coin Addition
+### Dynamic Coin Addition
 
 ```javascript
 // config.js - Configurable coin list
@@ -824,11 +824,11 @@ async function fetchAllPrices() {
 
 ---
 
-Localizing Your Extension {#localization}
+## Localizing Your Extension {#localization}
 
 Make your extension accessible to users worldwide.
 
-Setting Up i18n
+### Setting Up i18n
 
 ```json
 {
@@ -842,7 +842,7 @@ Setting Up i18n
 }
 ```
 
-Translation Files
+### Translation Files
 
 ```json
 // locales/en/messages.json
@@ -856,7 +856,7 @@ Translation Files
 }
 ```
 
-Using Translations in JavaScript
+### Using Translations in JavaScript
 
 ```javascript
 function t(key, substitutions = {}) {
@@ -872,7 +872,7 @@ function displayLastUpdate() {
 
 ---
 
-Conclusion and Next Steps {#next-steps}
+## Conclusion and Next Steps {#next-steps}
 
 Your crypto ticker extension now has professional-grade features including error handling, support for multiple cryptocurrencies, and internationalization. Consider these enhancements:
 

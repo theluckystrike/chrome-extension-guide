@@ -18,7 +18,7 @@ we will walk through the complete process of creating a clipboard manager chrome
 
 ---
 
-Why Build a Clipboard History Extension? {#why-build-clipboard-history}
+## Why Build a Clipboard History Extension? {#why-build-clipboard-history}
 
 Before we dive into the code, let us understand why creating a clipboard history extension is worth your time. The clipboard is one of the most frequently used features in any operating system, yet it remains surprisingly limited by default. Most operating systems only remember the most recent item you copied, which means valuable data is lost the moment you copy something new.
 
@@ -28,7 +28,7 @@ The demand for clipboard history functionality is evident in the popularity of e
 
 ---
 
-Understanding Chrome Extension Architecture {#extension-architecture}
+## Understanding Chrome Extension Architecture {#extension-architecture}
 
 Before writing any code, let us familiarize ourselves with the Chrome extension architecture. A Chrome extension is essentially a collection of files that modify the behavior of the Chrome browser. These files can include HTML pages, CSS stylesheets, JavaScript files, images, and other resources.
 
@@ -38,7 +38,7 @@ Understanding how these components communicate is essential. Chrome extensions u
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us start building our clipboard history extension by setting up the project structure. Create a new folder for your extension and add the following files: manifest.json, background.js, popup.html, popup.js, popup.css, and an icons folder for your extension icon.
 
@@ -81,7 +81,7 @@ This manifest version 3 configuration defines our extension with all the necessa
 
 ---
 
-Implementing the Background Script {#background-script}
+## Implementing the Background Script {#background-script}
 
 The background script is the engine of our clipboard history Chrome extension. It runs continuously in the background and monitors clipboard changes. Let us implement the core functionality.
 
@@ -204,11 +204,11 @@ This background script handles all the core functionality of our copy history ch
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 Now let us create the user interface for our clipboard manager chrome extension. The popup will display the clipboard history and allow users to copy items back to the clipboard, delete items, or clear the entire history.
 
-Create the popup.html file:
+### Create the popup.html file:
 
 ```html
 <!DOCTYPE html>
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test our clipboard history Chrome extension. First, we need to load the extension into Chrome. Open Chrome and navigate to chrome://extensions/. Enable Developer mode using the toggle in the top right corner. Then click the "Load unpacked" button and select the folder containing your extension files.
 
@@ -565,7 +565,7 @@ Test the following features to ensure everything works correctly. First, copy mu
 
 ---
 
-Enhancing Your Clipboard Manager Chrome Extension {#enhancements}
+## Enhancing Your Clipboard Manager Chrome Extension {#enhancements}
 
 While our basic clipboard history Chrome extension works well, there are many ways to enhance it. Consider adding features like keyboard shortcuts for quick paste, synchronization across devices using chrome.storage.sync, image clipboard support, pinned favorites, and categorization with tags.
 
@@ -573,7 +573,7 @@ You could also add rich notifications when items are copied, integration with cl
 
 ---
 
-Deployment and Publishing {#deployment}
+## Deployment and Publishing {#deployment}
 
 Once you are satisfied with your clipboard log extension, you can publish it to the Chrome Web Store. First, create a ZIP file of your extension folder. Then, navigate to the Chrome Web Store Developer Dashboard and create a new listing. Upload your ZIP file, fill in the required information including a detailed description, screenshots, and privacy practices. Finally, submit your extension for review.
 
@@ -581,7 +581,7 @@ Make sure to optimize your listing for search terms like "chrome extension clipb
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional clipboard history Chrome extension from scratch. This copy history chrome extension demonstrates key concepts in Chrome extension development including manifest configuration, background scripts, popup interfaces, storage management, and message passing between extension components.
 
@@ -589,10 +589,10 @@ The skills you have learned in this tutorial apply to many other types of Chrome
 
 As you continue developing Chrome extensions, remember that the best extensions solve real problems for users. The clipboard manager chrome extension you built addresses a genuine problem that millions of users experience daily. With further enhancements and optimizations, this could become a widely-used tool in the Chrome Web Store.
 
-Keep experimenting, keep learning, and happy coding!
+### Keep experimenting, keep learning, and happy coding!
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 To further your Chrome extension development journey, explore the official Chrome Extensions documentation at developer.chrome.com/docs/extensions. Join community forums to connect with other developers, and examine open-source Chrome extensions on GitHub to learn from real-world implementations. The Chrome Extension Guide by theluckystrike provides additional tutorials and resources for building professional-grade extensions.

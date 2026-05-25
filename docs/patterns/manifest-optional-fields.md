@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/manifest-optional-fiel
 last_modified_at: 2026-01-15
 ---
 
-Optional Manifest.json Fields
+### Optional Manifest.json Fields
 
 Chrome extension manifest.json includes many optional fields beyond the required ones. Understanding when to use these fields helps you build more powerful and professional extensions.
 
-Runtime Permissions {#runtime-permissions}
+## Runtime Permissions {#runtime-permissions}
 
-optional_permissions {#optional-permissions}
+## optional_permissions {#optional-permissions}
 
 Request permissions at runtime instead of install time for progressive disclosure:
 
@@ -24,9 +24,9 @@ Request permissions at runtime instead of install time for progressive disclosur
 
 Users approve these when your extension first needs them, reducing install-time friction and increasing conversion.
 
-optional_host_permissions {#optional-host-permissions}
+## optional_host_permissions {#optional-host-permissions}
 
-Request host permissions on-demand for specific sites:
+### Request host permissions on-demand for specific sites:
 
 ```json
 {
@@ -36,9 +36,9 @@ Request host permissions on-demand for specific sites:
 
 Enables features that only apply to certain websites without requiring broad access upfront.
 
-Security & Messaging {#security-messaging}
+## Security & Messaging {#security-messaging}
 
-content_security_policy {#content-security-policy}
+## content_security_policy {#content-security-policy}
 
 Customize Content Security Policy for extension pages and sandboxed scripts:
 
@@ -51,7 +51,7 @@ Customize Content Security Policy for extension pages and sandboxed scripts:
 }
 ```
 
-externally_connectable {#externally-connectable}
+## externally_connectable {#externally-connectable}
 
 Allow web pages or other extensions to message yours:
 
@@ -64,11 +64,11 @@ Allow web pages or other extensions to message yours:
 }
 ```
 
-Extension Modularity {#extension-modularity}
+## Extension Modularity {#extension-modularity}
 
-export / import {#export-import}
+## export / import {#export-import}
 
-Share modules between extensions:
+### Share modules between extensions:
 
 ```json
 {
@@ -83,11 +83,11 @@ Share modules between extensions:
 
 Enables extension families and shared libraries.
 
-Development & Distribution {#development-distribution}
+## Development & Distribution {#development-distribution}
 
-key {#key}
+## key {#key}
 
-Maintain consistent extension ID during development:
+### Maintain consistent extension ID during development:
 
 ```json
 {
@@ -97,9 +97,9 @@ Maintain consistent extension ID during development:
 
 Essential when testing web accessible resources or Chrome Web Store features requiring consistent IDs.
 
-minimum_chrome_version {#minimum-chrome-version}
+## minimum_chrome_version {#minimum-chrome-version}
 
-Prevent installation on outdated Chrome versions:
+### Prevent installation on outdated Chrome versions:
 
 ```json
 {
@@ -109,9 +109,9 @@ Prevent installation on outdated Chrome versions:
 
 Ensures users have required APIs and security features.
 
-offline_enabled {#offline-enabled}
+## offline_enabled {#offline-enabled}
 
-Declare offline capability:
+### Declare offline capability:
 
 ```json
 {
@@ -121,9 +121,9 @@ Declare offline capability:
 
 Indicates the extension functions without internet, shown in Chrome Web Store.
 
-short_name {#short-name}
+## short_name {#short-name}
 
-Short name for limited-space contexts (max 12 characters):
+### Short name for limited-space contexts (max 12 characters):
 
 ```json
 {
@@ -133,9 +133,9 @@ Short name for limited-space contexts (max 12 characters):
 
 Used in the extension toolbar, new tab page, and other constrained UI.
 
-update_url {#update-url}
+## update_url {#update-url}
 
-Self-hosted extension updates for enterprise distribution:
+### Self-hosted extension updates for enterprise distribution:
 
 ```json
 {
@@ -145,9 +145,9 @@ Self-hosted extension updates for enterprise distribution:
 
 Bypasses Chrome Web Store for enterprise or private distribution.
 
-version_name {#version-name}
+## version_name {#version-name}
 
-Human-readable version string separate from version code:
+### Human-readable version string separate from version code:
 
 ```json
 {
@@ -158,11 +158,11 @@ Human-readable version string separate from version code:
 
 Displayed in chrome://extensions and the Web Store.
 
-Privacy & Enterprise {#privacy-enterprise}
+## Privacy & Enterprise {#privacy-enterprise}
 
-incognito {#incognito}
+## incognito {#incognito}
 
-Control incognito mode behavior:
+### Control incognito mode behavior:
 
 ```json
 {
@@ -173,9 +173,9 @@ Control incognito mode behavior:
 - `"spanning"`: Single background page, events tagged with incognito flag
 - `"split"`: Separate background page per incognito window
 
-storage.managed_schema {#storagemanaged-schema}
+## storage.managed_schema {#storagemanaged-schema}
 
-Define enterprise-managed settings schema:
+### Define enterprise-managed settings schema:
 
 ```json
 {
@@ -187,7 +187,7 @@ Define enterprise-managed settings schema:
 
 Allows administrators to push policies via Chrome Enterprise policies.
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Manifest Fields Reference](../reference/manifest-fields.md)
 - [Manifest JSON Reference](../guides/manifest-json-reference.md)

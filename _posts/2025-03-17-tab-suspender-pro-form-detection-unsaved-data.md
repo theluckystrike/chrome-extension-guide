@@ -17,7 +17,7 @@ Tab Suspender Pro represents a significant advancement in tab management technol
 
 The frustration of losing form data is more common than you might think. According to user surveys and support forum data, accidental data loss due to tab suspension is one of the top reasons users abandon tab suspender extensions. Whether you're writing a lengthy support ticket, filling out a complex application, or composing an important email, the moment your tab gets suspended before you hit submit, all that work vanishes. Tab Suspender Pro addresses this problem directly by implementing a smart detection system that recognizes form inputs and prevents suspension until your work is safely saved or submitted.
 
-How Form Detection Works in Tab Suspender Pro
+### How Form Detection Works in Tab Suspender Pro
 
 Understanding the mechanics behind Tab Suspender Pro's form detection feature helps you appreciate the sophisticated technology that protects your data. The system operates on multiple detection levels, combining browser event monitoring with intelligent heuristics to accurately identify when a tab contains unsaved user input.
 
@@ -29,7 +29,7 @@ What makes Tab Suspender Pro's detection particularly intelligent is its ability
 
 The form detection system also incorporates timing heuristics to improve accuracy. When you stop typing in a form field, the extension doesn't immediately conclude that you're finished. Instead, it waits for a configurable idle period before assessing whether the form content has been abandoned. This prevents premature suspension of tabs where you might be thinking about what to write next or temporarily distracted by another task.
 
-Preventing Suspension of Tabs with Unsaved Input
+### Preventing Suspension of Tabs with Unsaved Input
 
 The primary purpose of Tab Suspender Pro's form detection is to prevent the suspension of tabs that contain unsaved user input. Once the extension identifies a tab as containing active form data, it implements several protective measures to ensure your work remains safe until you're ready to let it go.
 
@@ -41,7 +41,7 @@ For users who work with multiple forms across different tabs, Tab Suspender Pro 
 
 The extension also protects against a particularly sneaky form of data loss: auto-save false positives. Many web applications claim to auto-save your work, but users have learned through painful experience that these auto-save features aren't always reliable. Tab Suspender Pro takes a conservative approach, treating any form with input as potentially unsaved regardless of what the website might claim about auto-save functionality. This errs on the side of caution and protects users from the disappointment of discovering that their "auto-saved" work actually disappeared.
 
-Configuring Form Detection Sensitivity
+### Configuring Form Detection Sensitivity
 
 Tab Suspender Pro recognizes that different users have different needs when it comes to form protection. Some users want maximum protection and are willing to accept higher resource usage from tabs that might otherwise be suspended. Others prefer a balance that allows more aggressive tab suspension while still protecting important work. The extension provides comprehensive configuration options that let you tune the form detection sensitivity to match your preferences.
 
@@ -55,7 +55,7 @@ Beyond the basic sensitivity levels, Tab Suspender Pro offers granular controls 
 
 The configuration interface also includes options for visual feedback and notifications. You can choose to receive alerts when tabs are protected due to form activity, view detailed information about why specific tabs are being protected, and customize the appearance of the extension's toolbar icons to match your preferences. This transparency ensures you always understand what's happening with your tabs.
 
-Supported Form Types
+### Supported Form Types
 
 Tab Suspender Pro's form detection system is designed to recognize and protect a wide variety of form types found across the modern web. Understanding which form types are supported helps you know when you can rely on the extension's protection and when you might need to take additional precautions.
 
@@ -69,7 +69,7 @@ The extension also handles more complex form scenarios including file upload fie
 
 For modern web applications that use custom form implementations, Tab Suspender Pro employs additional detection methods beyond traditional HTML form elements. The system can identify form-like interactions in single-page applications, content management systems, and web-based productivity tools. This includes detecting rich text editing, code editors, spreadsheet-like interfaces, and other complex input mechanisms that might not use standard HTML form tags.
 
-Handling Complex Web Applications
+### Handling Complex Web Applications
 
 Modern web applications have evolved far beyond simple HTML forms. Today's most powerful productivity tools run entirely in the browser, from email clients and document editors to development environments and project management platforms. Tab Suspender Pro includes specialized handling for these complex web applications, ensuring your work remains protected even in sophisticated environments.
 
@@ -83,7 +83,7 @@ E-commerce applications and shopping cart interfaces receive appropriate protect
 
 Social media platforms and messaging applications present unique challenges because they often have continuous form-like activity even when you're not actively working. Tab Suspender Pro handles these intelligently, distinguishing between passive content consumption and active message composition or post creation. When you're actively typing a message or composing a post, the protection activates; when you're simply viewing content, normal suspension rules apply.
 
-Manual Override Options
+### Manual Override Options
 
 Despite Tab Suspender Pro's sophisticated automatic detection, there are times when you need manual control over tab suspension behavior. The extension provides comprehensive manual override options that give you complete flexibility to suspend or protect tabs according to your specific needs at any moment.
 
@@ -99,7 +99,7 @@ The extension also supports keyboard shortcuts for quick override actions. Rathe
 
 For users who work with complex multi-monitor setups or particular workflow patterns, Tab Suspender Pro provides additional organization features. You can tag and categorize tabs, create groups that share common suspension rules, and apply overrides to entire groups with a single action. This makes managing large numbers of tabs significantly easier, especially when working on complex projects that span multiple web applications.
 
-Conclusion
+### Conclusion
 
 Tab Suspender Pro's form detection feature represents a thoughtful solution to one of the most frustrating problems in tab management. By intelligently detecting when you're working with forms and protecting that work from accidental suspension, the extension delivers genuine value that goes beyond simple resource management. Whether you're filling out important applications, composing lengthy emails, working on documents, or managing complex web-based workflows, you can trust that your unsaved work remains protected.
 

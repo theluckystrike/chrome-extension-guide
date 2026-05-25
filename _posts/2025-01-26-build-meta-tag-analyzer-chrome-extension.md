@@ -18,17 +18,17 @@ By the end of this tutorial, you will have created a powerful SEO meta checker C
 
 ---
 
-Why Build a Meta Tag Analyzer Extension? {#why-build-meta-analyzer}
+## Why Build a Meta Tag Analyzer Extension? {#why-build-meta-analyzer}
 
 Before we dive into the code, let us explore why building a meta tag analyzer extension is a valuable project in 2025. The SEO industry continues to evolve, but meta tags have remained a fundamental aspect of on-page optimization. Here is why having a dedicated tool matters:
 
-The Importance of Meta Tags in 2025
+### The Importance of Meta Tags in 2025
 
 Meta tags serve as the first impression for both search engines and social media platforms. The title tag appears as the clickable headline in search results, while the meta description provides the summary that potential visitors see. Open Graph tags determine how your content appears when shared on Facebook, LinkedIn, and other social platforms. Twitter Card tags control how your links look on Twitter.
 
 A well-optimized set of meta tags can significantly improve your click-through rates from search results and social media shares. However, manually checking these tags by viewing page source code is time-consuming and inefficient. This is where a meta tag analyzer extension becomes invaluable.
 
-Market Demand for SEO Tools
+### Market Demand for SEO Tools
 
 The SEO software market continues to grow, with businesses investing heavily in tools that help improve their online visibility. A meta tag analyzer extension fills a specific niche: it provides instant, accessible analysis without requiring users to sign up for expensive SaaS platforms or switch between multiple tools.
 
@@ -36,7 +36,7 @@ Building this extension will teach you valuable skills in Chrome extension devel
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Our meta tag analyzer extension will include the following features:
 
@@ -52,7 +52,7 @@ Let us start building this extension step by step.
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension and set up the basic file structure:
 
@@ -73,7 +73,7 @@ For this tutorial, we will focus on creating the core files. You can generate si
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the heart of every Chrome extension. For Manifest V3, we need to define our extension's permissions, host permissions, and the files it will use. Here is our manifest configuration:
 
@@ -116,7 +116,7 @@ This manifest requests permission to run scripts on all URLs and to access the a
 
 ---
 
-Building the Content Script {#content-script}
+## Building the Content Script {#content-script}
 
 The content script runs on the web page and extracts all the meta tags we need to analyze. Create a file named `content.js`:
 
@@ -187,7 +187,7 @@ This content script extracts all the meta tags we want to analyze and sends them
 
 ---
 
-Creating the Popup HTML {#popup-html}
+## Creating the Popup HTML {#popup-html}
 
 The popup provides the user interface for our meta tag analyzer. Create `popup.html`:
 
@@ -337,7 +337,7 @@ The popup provides the user interface for our meta tag analyzer. Create `popup.h
 
 ---
 
-Styling the Popup {#popup-css}
+## Styling the Popup {#popup-css}
 
 Create `popup.css` to make your extension look professional and easy to read:
 
@@ -516,7 +516,7 @@ footer {
 
 ---
 
-Building the Popup JavaScript {#popup-js}
+## Building the Popup JavaScript {#popup-js}
 
 Now create `popup.js` to handle the logic of fetching and displaying the meta tag data:
 
@@ -731,7 +731,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have created all the necessary files, it is time to test your extension:
 
@@ -744,23 +744,23 @@ You should see a comprehensive breakdown of all meta tags on the page, including
 
 ---
 
-Understanding the Code {#code-explanation}
+## Understanding the Code {#code-explanation}
 
 Let us walk through the key components of what we have built:
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 Our manifest.json uses the latest Manifest V3 format, which requires different handling compared to the older Manifest V2. We use `scripting` permission to execute our content script and `activeTab` to access the current tab.
 
-Content Script Injection
+### Content Script Injection
 
 Instead of a traditional content script that runs automatically, we use `chrome.scripting.executeScript()` to inject our extraction function directly when the user clicks the extension icon. This approach is more efficient and follows Manifest V3 best practices.
 
-Data Extraction Logic
+### Data Extraction Logic
 
 The `extractMetaTags()` function uses standard DOM methods to query meta tags. We check both `name` attributes (for traditional meta tags) and `property` attributes (for Open Graph tags).
 
-Status Calculations
+### Status Calculations
 
 Our popup includes logic to calculate whether meta tags meet recommended best practices:
 - Title tags: 30-60 characters
@@ -770,7 +770,7 @@ Our popup includes logic to calculate whether meta tags meet recommended best pr
 
 ---
 
-Enhancements and Future Improvements {#future-enhancements}
+## Enhancements and Future Improvements {#future-enhancements}
 
 Now that you have a working meta tag analyzer extension, consider adding these enhancements:
 
@@ -796,7 +796,7 @@ Store analysis history so users can compare meta tags across different pages or 
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension and added any desired enhancements, you can publish it to the Chrome Web Store:
 
@@ -810,7 +810,7 @@ When writing your store listing, be sure to include the keywords: meta tag analy
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have built a fully functional meta tag analyzer extension for Chrome. This extension demonstrates important concepts in Chrome extension development, including Manifest V3 architecture, content script injection, popup UI design, and real-time data analysis.
 

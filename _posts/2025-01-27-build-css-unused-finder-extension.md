@@ -18,17 +18,17 @@ This comprehensive guide walks you through the process of building a production-
 
 ---
 
-Why You Need a CSS Unused Rules Finder Extension
+### Why You Need a CSS Unused Rules Finder Extension
 
 Before diving into the code, let's explore why detecting unused CSS matters and how a dedicated Chrome extension can help solve this pervasive problem.
 
-The Problem with Unused CSS
+### The Problem with Unused CSS
 
 Modern web applications often include massive stylesheets that contain thousands of lines of CSS. Studies have shown that many production websites ship significantly more CSS than they actually use. A typical website might load 500KB of CSS but only render styles that use a fraction of those rules. This wasted CSS affects performance in several critical ways.
 
 First, browsers must parse and process all loaded CSS, even rules that never match any element. This parsing time adds to the total page load duration. Second, larger CSS files mean more data needs to be transferred over the network, increasing latency and bandwidth costs. Third, the browser's style calculation process becomes more expensive when it has to evaluate more rules, even unused ones.
 
-Existing Solutions and Their Limitations
+### Existing Solutions and Their Limitations
 
 Chrome DevTools already includes a CSS coverage feature that can identify unused CSS. You can access it by opening DevTools (F12), going to the three-dot menu, selecting "More tools," and then choosing "Coverage." While this built-in tool is useful for manual inspections, it has significant limitations for developers who want automated, repeatable analysis.
 
@@ -38,11 +38,11 @@ A custom dead CSS finder chrome extension can address these limitations by provi
 
 ---
 
-Architecture Overview
+### Architecture Overview
 
 Our CSS Unused Rules Finder Extension will use Chrome's powerful APIs to analyze web pages and identify CSS rules that don't match any elements in the DOM.
 
-Core Components
+### Core Components
 
 The extension consists of three main components that work together to provide comprehensive unused CSS detection.
 
@@ -54,11 +54,11 @@ The popup interface provides users with controls to initiate scans, view results
 
 ---
 
-Project Setup
+### Project Setup
 
 Let's start building the extension by setting up the project structure and manifest configuration.
 
-Creating the Manifest
+### Creating the Manifest
 
 Every Chrome extension begins with a manifest file that defines its capabilities and permissions. Create a file named `manifest.json` in your project directory with the following configuration:
 
@@ -92,9 +92,9 @@ Every Chrome extension begins with a manifest file that defines its capabilities
 
 This manifest requests the necessary permissions for analyzing web pages. The `activeTab` permission allows us to execute scripts in the currently active tab, while `scripting` enables the CSSOM analysis capabilities.
 
-Directory Structure
+### Directory Structure
 
-Create the following directory structure for your extension:
+### Create the following directory structure for your extension:
 
 ```
 css-unused-finder/
@@ -114,13 +114,13 @@ css-unused-finder/
 
 ---
 
-Implementing the Content Script
+### Implementing the Content Script
 
 The content script is the heart of our extension. It performs the actual work of analyzing CSS rules and identifying which ones are unused.
 
-CSS Analysis Logic
+### CSS Analysis Logic
 
-Create `content.js` with the following implementation:
+### Create `content.js` with the following implementation:
 
 ```javascript
 // Content script for analyzing CSS usage
@@ -227,7 +227,7 @@ The script handles several important edge cases. It skips at-rules like `@media`
 
 ---
 
-Creating the Background Service Worker
+### Creating the Background Service Worker
 
 The background script manages extension state and handles communication between the popup and content scripts. Create `background.js`:
 
@@ -327,7 +327,7 @@ The background script uses Chrome's `scripting` API to execute code in the conte
 
 ---
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup provides the user interface for the extension. Create `popup.html`:
 
@@ -398,9 +398,9 @@ The popup provides the user interface for the extension. Create `popup.html`:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
-Create `popup.css` with attractive styling:
+### Create `popup.css` with attractive styling:
 
 ```css
 * {
@@ -622,9 +622,9 @@ h1 {
 }
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
-Create `popup.js` to handle user interactions:
+### Create `popup.js` to handle user interactions:
 
 ```javascript
 // Popup script for CSS Unused Rules Finder
@@ -773,39 +773,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Enhancing the Extension with Advanced Features
+### Enhancing the Extension with Advanced Features
 
 Now that we have a working extension, let's explore ways to enhance it with more powerful features.
 
-Supporting CSS Frameworks and Preprocessors
+### Supporting CSS Frameworks and Preprocessors
 
 Many websites use CSS frameworks like Bootstrap, Tailwind, or custom preprocessing pipelines. Our basic implementation might flag framework utility classes as unused if they don't appear in the current page but are part of a larger design system. Consider adding a feature that allows users to whitelist certain stylesheets or selectors.
 
-Batch Analysis Across Multiple Pages
+### Batch Analysis Across Multiple Pages
 
 A single-page analysis has limitations because it only checks CSS rules against the current page state. Some CSS rules might be used on other pages of the site. Consider adding a crawling feature that visits multiple pages and aggregates unused CSS across the entire site.
 
-Integration with Development Tools
+### Integration with Development Tools
 
 For professional-grade tooling, consider adding features like browser storage for results history, keyboard shortcuts for quick analysis, and options to ignore specific selectors or patterns.
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
 Before publishing your extension, thorough testing ensures it works correctly across various websites.
 
-Manual Testing
+### Manual Testing
 
 Load your extension in developer mode by navigating to `chrome://extensions/`, enabling "Developer mode," and clicking "Load unpacked." Test it on various types of websites including simple static sites, complex web applications, and sites with inline styles versus external stylesheets.
 
-Handling Edge Cases
+### Handling Edge Cases
 
 Pay attention to how your extension handles websites with dynamically generated content, Shadow DOM, iframes, and CSS-in-JS solutions. Each of these presents unique challenges for unused CSS detection.
 
 ---
 
-Publishing Your Extension
+### Publishing Your Extension
 
 Once you've thoroughly tested your extension, you can publish it to the Chrome Web Store. Prepare the following assets:
 
@@ -813,7 +813,7 @@ Your extension needs compelling icon graphics in the required sizes (16x16, 48x4
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a CSS Unused Rules Finder Extension demonstrates how Chrome extension development can solve real-world problems. This tool addresses a genuine problem for web developers: identifying and removing dead CSS that bloats stylesheets and slows down websites.
 

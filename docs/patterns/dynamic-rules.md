@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/dynamic-rules/"
 last_modified_at: 2026-01-15
 ---
 
-Dynamic Rules Pattern (declarativeNetRequest)
+### Dynamic Rules Pattern (declarativeNetRequest)
 
 The `declarativeNetRequest` API provides a powerful way to modify network requests without needing broad host permissions. Dynamic rules allow extensions to add, remove, or modify network rules at runtime, giving users control over blocking, redirecting, and header modifications.
 
-Overview {#overview}
+## Overview {#overview}
 
-Dynamic rules enable extensions to:
+### Dynamic rules enable extensions to:
 
 - Add or remove network rules at runtime
 - Provide user-configurable blocking and redirecting
@@ -21,7 +21,7 @@ Dynamic rules enable extensions to:
 
 This pattern is essential for ad blockers, privacy tools, and any extension that needs flexible network control without requiring extensive permissions.
 
-Static vs Dynamic vs Session Rules {#static-vs-dynamic-vs-session-rules}
+## Static vs Dynamic vs Session Rules {#static-vs-dynamic-vs-session-rules}
 
 Understanding the three types of declarativeNetRequest rules is crucial for choosing the right approach:
 
@@ -33,9 +33,9 @@ Understanding the three types of declarativeNetRequest rules is crucial for choo
 
 Static rules are defined in the manifest and bundled with the extension. Dynamic rules are added programmatically and persist until explicitly removed. Session rules are temporary and don't survive browser restarts.
 
-Adding Dynamic Rules {#adding-dynamic-rules}
+## Adding Dynamic Rules {#adding-dynamic-rules}
 
-The `chrome.declarativeNetRequest.updateDynamicRules()` method manages dynamic rules:
+### The `chrome.declarativeNetRequest.updateDynamicRules()` method manages dynamic rules:
 
 ```javascript
 // Add new dynamic rules
@@ -57,16 +57,16 @@ chrome.declarativeNetRequest.updateDynamicRules({
 });
 ```
 
-Rule Structure {#rule-structure}
+## Rule Structure {#rule-structure}
 
-Each rule contains:
+### Each rule contains:
 
 - `id`: Unique identifier (required, positive integer)
 - `priority`: Rule precedence (higher priority wins on conflicts)
 - `action`: What to do when matched
 - `condition`: When to apply the rule
 
-Available Actions {#available-actions}
+## Available Actions {#available-actions}
 
 ```javascript
 // Block requests
@@ -92,9 +92,9 @@ Available Actions {#available-actions}
 { action: { type: "upgradeScheme" } }
 ```
 
-Rule Conditions {#rule-conditions}
+## Rule Conditions {#rule-conditions}
 
-The `condition` object defines when a rule applies:
+### The `condition` object defines when a rule applies:
 
 ```javascript
 {
@@ -126,7 +126,7 @@ The `condition` object defines when a rule applies:
 }
 ```
 
-URL Filter Patterns {#url-filter-patterns}
+## URL Filter Patterns {#url-filter-patterns}
 
 - `*` matches any characters
 - `|` serves as anchor (start `|`, end `|`, or both)
@@ -143,7 +143,7 @@ urlFilter: "http://"
 urlFilter: "https://.*\\.js$"
 ```
 
-User-Configurable Rules {#user-configurable-rules}
+## User-Configurable Rules {#user-configurable-rules}
 
 A powerful pattern is allowing users to define their own blocking rules. Store user preferences and convert them to DNR rules:
 
@@ -183,9 +183,9 @@ function isValidUrlFilter(pattern) {
 }
 ```
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Complete CRUD Operations {#complete-crud-operations}
+## Complete CRUD Operations {#complete-crud-operations}
 
 ```javascript
 // Add multiple rules at once
@@ -222,7 +222,7 @@ const rules = await chrome.declarativeNetRequest.getDynamicRules();
 console.log("Current rules:", rules);
 ```
 
-Header Modification Example {#header-modification-example}
+## Header Modification Example {#header-modification-example}
 
 ```javascript
 async function addHeaderModificationRule() {
@@ -251,7 +251,7 @@ async function addHeaderModificationRule() {
 }
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Validate user input: Always validate URL patterns before adding rules to prevent regex DoS attacks
 2. Use appropriate priority: Set priorities to handle rule conflicts correctly
@@ -259,7 +259,7 @@ Best Practices {#best-practices}
 4. Monitor limits: Keep track of rule counts to avoid hitting limits (30,000 for dynamic)
 5. Test regex carefully: Regex filters that are too broad can impact performance
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Declarative Net Request API Reference](../api-reference/declarative-net-request-api.md)
 - [declarativeNetRequest Permissions](../permissions/declarativeNetRequest.md)

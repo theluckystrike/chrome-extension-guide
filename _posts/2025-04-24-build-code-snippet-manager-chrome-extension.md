@@ -18,7 +18,7 @@ we will walk through building a complete code snippet manager Chrome extension f
 
 ---
 
-Why Build a Code Snippet Manager Extension? {#why-build-snippet-manager}
+## Why Build a Code Snippet Manager Extension? {#why-build-snippet-manager}
 
 Before diving into the code, let us explore why a custom snippet manager is worth building. The Chrome Web Store offers several existing snippet managers, but they often come with limitations. Some require paid subscriptions for basic features, others sync to cloud services you may not trust with your code, and many include more complexity than you actually need.
 
@@ -28,7 +28,7 @@ A quality code snippet manager should support multiple programming languages, pr
 
 ---
 
-Project Structure and Manifest Configuration {#project-structure}
+## Project Structure and Manifest Configuration {#project-structure}
 
 Every Chrome extension begins with a manifest file that tells Chrome about the extension is capabilities and permissions. Create a new folder for your project and start with the manifest.json file:
 
@@ -65,7 +65,7 @@ Your project folder should contain the following files: manifest.json, popup.htm
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface is what users see when they click the extension icon. It needs to be clean, fast, and functional. Let us create an intuitive interface that handles snippet creation, browsing, searching, and copying:
 
@@ -122,7 +122,7 @@ This HTML structure provides a clean layout with a header containing the title a
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 The CSS should make your extension feel professional and comfortable to use. Focus on readability, clear visual hierarchy, and efficient use of space:
 
@@ -329,7 +329,7 @@ The styling creates a modern, clean interface with a light color scheme that is 
 
 ---
 
-Implementing Core Functionality {#core-functionality}
+## Implementing Core Functionality {#core-functionality}
 
 The JavaScript file handles all the logic for saving, loading, searching, and managing snippets. This is where the extension comes to life:
 
@@ -509,7 +509,7 @@ The copy functionality uses the modern Clipboard API for smooth one-click copyin
 
 ---
 
-Adding Context Menu Integration {#context-menu}
+## Adding Context Menu Integration {#context-menu}
 
 To make your snippet manager even more useful, add context menu integration that allows users to save selected text from any webpage. Add this to your manifest and JavaScript:
 
@@ -524,7 +524,7 @@ In manifest.json, add the contextMenus permission and a background script:
 }
 ```
 
-Create background.js:
+### Create background.js:
 
 ```javascript
 // Create context menu on install
@@ -559,7 +559,7 @@ This background script adds a "Save to Code Snippets" option that appears when y
 
 ---
 
-Keyboard Shortcuts for Power Users {#keyboard-shortcuts}
+## Keyboard Shortcuts for Power Users {#keyboard-shortcuts}
 
 The manifest already defines a keyboard shortcut, but you need to implement it in the background script. Add this to background.js:
 
@@ -575,7 +575,7 @@ With this shortcut (Ctrl+Shift+S or Command+Shift+S on Mac), you can instantly o
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that all the code is in place, it is time to test your extension. Open Chrome and navigate to chrome://extensions/. Enable Developer mode in the top right corner if it is not already enabled. Click "Load unpacked" and select your project folder.
 
@@ -585,7 +585,7 @@ Check the context menu by selecting text on any webpage and right-clicking. You 
 
 ---
 
-Enhancing Your Extension {#future-enhancements}
+## Enhancing Your Extension {#future-enhancements}
 
 This basic implementation provides a solid foundation, but there are many features you can add to make your snippet manager even more powerful. Consider adding syntax highlighting using a library like Prism.js or Highlight.js to make code blocks visually appealing and color-coded. Implement folder or category organization to group snippets by project or topic.
 
@@ -595,7 +595,7 @@ Adding export and import functionality would let you backup your snippets or sha
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You have successfully built a fully functional code snippet manager Chrome extension from scratch. The extension allows you to save code snippets with titles, programming language tags, and custom labels, search through your entire collection instantly, copy any snippet to your clipboard with a single click, save selected text from any webpage using context menus, and access your snippets quickly with keyboard shortcuts.
 

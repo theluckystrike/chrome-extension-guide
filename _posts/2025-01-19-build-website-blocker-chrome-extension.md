@@ -18,7 +18,7 @@ This comprehensive tutorial will guide you through building a fully functional f
 
 ---
 
-Why Build a Website Blocker Extension?
+### Why Build a Website Blocker Extension?
 
 Before diving into the code, let's explore why creating a website blocker extension is worthwhile. The demand for block sites chrome tools is massive, with millions of users actively searching for solutions to combat digital distractions. Building this extension will teach you several important Chrome API concepts:
 
@@ -32,7 +32,7 @@ These skills are transferable to virtually any Chrome extension you might build 
 
 ---
 
-Project Setup and Manifest Configuration
+### Project Setup and Manifest Configuration
 
 Every Chrome extension begins with the manifest file. This JSON configuration tells Chrome about your extension's capabilities, permissions, and file structure. For our website blocker, we'll need specific permissions to manage blocking rules and store user data.
 
@@ -76,11 +76,11 @@ The key permission here is `declarativeNetRequest`, which is the Manifest V3 rep
 
 ---
 
-Creating the HTML Popup Interface
+### Creating the HTML Popup Interface
 
 The popup is what users see when they click the extension icon in their browser toolbar. We'll create a clean, intuitive interface that allows users to quickly toggle blocking, view their focus status, and access settings.
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -267,7 +267,7 @@ header h1 {
 
 ---
 
-Implementing the Popup Logic
+### Implementing the Popup Logic
 
 The popup JavaScript handles user interactions and communicates with the background service worker. Create `popup.js`:
 
@@ -427,7 +427,7 @@ openSettings.addEventListener('click', () => {
 
 ---
 
-Building the Background Service Worker
+### Building the Background Service Worker
 
 The background service worker handles the extension's lifecycle and manages blocking rules. Create `background.js`:
 
@@ -485,7 +485,7 @@ chrome.declarativeNetRequest.onRuleMatchedDebug?.addListener(async (info) => {
 
 ---
 
-Creating the Options Page
+### Creating the Options Page
 
 The options page allows users to manage their blocklist and customize settings. Create `options.html`:
 
@@ -572,7 +572,7 @@ The options page allows users to manage their blocklist and customize settings. 
 </html>
 ```
 
-Create `options.js`:
+### Create `options.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -629,7 +629,7 @@ function applyPreset(type) {
 
 ---
 
-Creating the Blocked Page
+### Creating the Blocked Page
 
 When users try to visit a blocked website, they'll see this page instead. Create `blocked.html`:
 
@@ -712,7 +712,7 @@ When users try to visit a blocked website, they'll see this page instead. Create
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
 Now that we've created all the files, let's test the extension in Chrome:
 
@@ -729,7 +729,7 @@ Click the extension icon to test:
 
 ---
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
 When you're ready to share your extension, follow these steps:
 
@@ -743,7 +743,7 @@ Make sure your extension follows Chrome's policies, particularly around user pri
 
 ---
 
-Advanced Features to Consider
+### Advanced Features to Consider
 
 Once you have the basic extension working, here are some advanced features you could implement:
 
@@ -757,7 +757,7 @@ Once you have the basic extension working, here are some advanced features you c
 
 ---
 
-Conclusion
+### Conclusion
 
 Congratulations! You've built a complete website blocker Chrome extension with focus timers, customizable blocklists, and productivity tracking. This project demonstrates the core concepts of Chrome extension development including the Declarative Net Request API, Storage API, and message passing between components.
 

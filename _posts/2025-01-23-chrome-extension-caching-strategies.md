@@ -16,7 +16,7 @@ Whether you're building a simple productivity tool or a complex data-intensive a
 
 ---
 
-Understanding Caching in the Chrome Extension Context
+### Understanding Caching in the Chrome Extension Context
 
 Before diving into specific implementations, it's important to understand why caching matters so much in Chrome extensions. Unlike traditional web applications, Chrome extensions often need to work with limited resources, make repeated API calls, and provide instant feedback to users. Every network request has a cost in terms of latency, bandwidth, and battery life. By implementing smart caching strategies, you can dramatically reduce these costs while improving the overall user experience.
 
@@ -26,7 +26,7 @@ One of the unique challenges in Chrome extension caching is managing the lifecyc
 
 ---
 
-The Cache API for Extension Resources
+### The Cache API for Extension Resources
 
 The Cache API is one of the most powerful caching mechanisms available to Chrome extension developers. Originally designed for service workers, it provides a programmatic way to store network requests and their responses, making it ideal for caching API responses, static assets, and any data retrieved from the network. The Cache API works by storing Request objects paired with Response objects, allowing you to later retrieve them by matching against requests.
 
@@ -66,7 +66,7 @@ The Cache API excels at handling network requests but has some important limitat
 
 ---
 
-Chrome Storage API as a Caching Layer
+### Chrome Storage API as a Caching Layer
 
 While chrome.storage is often thought of primarily as a storage solution, it also serves as an excellent caching mechanism for extension data. The chrome.storage.local area provides persistent storage that remains on the user's machine, making it ideal for caching user preferences, API responses, and any data that needs to persist across sessions. The API is asynchronous and works smoothly within service worker contexts.
 
@@ -107,7 +107,7 @@ One of the key advantages of using chrome.storage for caching is its built-in ch
 
 ---
 
-Implementing Offline-First Caching Patterns
+### Implementing Offline-First Caching Patterns
 
 Building offline-capable Chrome extensions requires a thoughtful approach to caching that prioritizes local data availability. The offline-first pattern ensures your extension works smoothly even when network connectivity is unavailable, providing a better user experience and increasing the reliability of your extension. This approach involves checking for cached data before attempting network requests, storing responses locally, and synchronizing when connectivity returns.
 
@@ -178,7 +178,7 @@ The offline-first approach also requires handling the case when data must be ref
 
 ---
 
-Cache Invalidation and Maintenance Strategies
+### Cache Invalidation and Maintenance Strategies
 
 A solid caching strategy isn't complete without proper cache invalidation and maintenance. Without these mechanisms, your cache will grow unbounded, potentially consuming significant disk space, and may serve stale data to users. Effective cache management involves setting appropriate expiration times, implementing manual invalidation triggers, and regularly cleaning up old entries.
 
@@ -239,7 +239,7 @@ Another important aspect of cache maintenance is monitoring storage quotas and i
 
 ---
 
-Advanced Caching Strategies for Performance
+### Advanced Caching Strategies for Performance
 
 Beyond basic caching, there are several advanced strategies you can employ to further optimize your extension's performance. These include pre-fetching content based on user behavior predictions, using compression to store more data in limited storage, implementing cache versioning for smooth updates, and leveraging IndexedDB for large-scale structured data caching.
 
@@ -295,7 +295,7 @@ Compression can significantly increase the effective storage capacity of your ca
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing effective caching strategies is essential for building high-performance Chrome extensions that provide excellent user experiences. Throughout this guide, we've explored the multiple caching mechanisms available to extension developers, from the Cache API for network requests to chrome.storage for persistent data, and from basic caching to advanced offline-first patterns.
 

@@ -10,7 +10,7 @@ Chrome Extension Options Page. How to Build a Settings UI
 
 The options page is one of the most critical components of any Chrome extension. It's where users configure their preferences, customize behavior, and control how your extension interacts with their browsing experience. A well-designed options page improves user satisfaction, reduces support requests, and makes your extension feel professional and polished. This guide covers everything you need to know to build a production-quality options page, from choosing the right layout to implementing solid storage patterns.
 
-Embedded vs Full-Page Options {#embedded-vs-full-page}
+## Embedded vs Full-Page Options {#embedded-vs-full-page}
 
 Chrome extensions support two distinct options page configurations, each with its own use cases and trade-offs. Understanding when to use each type will help you make the right decision for your extension.
 
@@ -39,7 +39,7 @@ For full-page options with modern Manifest V3, use the more flexible `options_ui
 
 The `open_in_tab: true` setting gives users a dedicated tab, while removing it embeds the options within Chrome's extensions management page. Most developers prefer `open_in_tab: true` for complex settings, as it provides a better user experience and avoids the constrained iframe environment.
 
-Chrome Storage Integration {#chrome-storage-integration}
+## Chrome Storage Integration {#chrome-storage-integration}
 
 The chrome.storage API is the backbone of any options page. Unlike localStorage in web pages, chrome.storage is specifically designed for extensions and offers several important advantages. It synchronizes across a user's devices when they're signed into Chrome (with the `sync` area), persists independently of the extension's lifecycle, and provides asynchronous operations that won't block the UI.
 
@@ -76,7 +76,7 @@ async function saveSettings(settings) {
 
 For production extensions, consider using a library like `@theluckystrike/webext-storage` or `webext-storage` to handle schema validation, type safety, and default value management. These libraries simplify storage operations and catch configuration errors early.
 
-Form Design Patterns {#form-design}
+## Form Design Patterns {#form-design}
 
 Designing effective forms for extension options requires balancing functionality with simplicity. Users should be able to understand and modify settings quickly, without feeling overwhelmed by complexity.
 
@@ -114,7 +114,7 @@ Here's an example of a well-structured options form section:
 </section>
 ```
 
-Save and Load Patterns {#save-load-patterns}
+## Save and Load Patterns {#save-load-patterns}
 
 There are two primary approaches to saving settings: auto-save on every change, or manual save with a button. Each approach has merits depending on your use case.
 
@@ -163,7 +163,7 @@ document.getElementById('reset-button').addEventListener('click', async () => {
 
 Most modern extensions use auto-save because it provides a better user experience. However, always provide a visual indicator (a checkmark, toast message, or button state change) so users know their changes were saved.
 
-Dark Mode Support {#dark-mode-support}
+## Dark Mode Support {#dark-mode-support}
 
 Supporting dark mode in your options page is essential for providing a polished user experience. Many users prefer dark interfaces, especially when working late or in low-light environments. Your options page should respect these preferences.
 
@@ -213,7 +213,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', app
 
 For full dark mode support, audit all your CSS to ensure proper contrast ratios and avoid hardcoded colors. Pay special attention to form inputs, borders, and interactive element states. Test your options page in both light and dark modes to catch visibility issues.
 
-Best Practices Summary {#best-practices}
+## Best Practices Summary {#best-practices}
 
 Building a great options page requires attention to several key areas. First, always load settings when the page initializes and populate form fields accordingly. Users should see their current configuration immediately upon opening the options page. Second, validate all input before saving, check that URLs are valid, numbers are within expected ranges, and required fields are present. Third, provide clear labels and help text for complex settings so users understand what each option does. Fourth, consider adding import and export functionality so users can back up their configuration or transfer settings between devices. Finally, test your options page thoroughly across different Chrome versions, screen sizes, and accessibility settings.
 

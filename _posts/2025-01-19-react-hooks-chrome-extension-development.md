@@ -18,11 +18,11 @@ React hooks provide a way to use state and other React features without writing 
 
 ---
 
-Why Use React Hooks in Chrome Extensions? {#why-hooks}
+## Why Use React Hooks in Chrome Extensions? {#why-hooks}
 
 Before diving into specific implementations, it is essential to understand why React hooks are particularly valuable in the context of Chrome extension development. Chrome extensions operate in a unique environment that presents several challenges not found in traditional web applications.
 
-The Extension Context Challenge
+### The Extension Context Challenge
 
 Chrome extensions must work across multiple execution contexts: the background service worker, content scripts injected into web pages, the popup that appears when clicking the extension icon, options pages for settings, and potentially side panels or devtools panels. Each of these contexts has its own lifecycle, memory space, and limitations.
 
@@ -30,17 +30,17 @@ The background service worker in Manifest V3 can be terminated by Chrome when id
 
 React hooks provide an elegant solution to these challenges by offering a consistent API for managing state across different components and contexts. The useState hook gives you stateful capabilities in functional components, useEffect handles side effects and cleanup, and custom hooks let you extract and reuse stateful logic across your extension.
 
-Benefits of React Hooks in Extensions
+### Benefits of React Hooks in Extensions
 
 Using React hooks in your Chrome extension offers several compelling advantages. First, hooks promote code reuse through custom hooks, allowing you to encapsulate complex logic like communicating with the Chrome Storage API or listening to browser events into reusable functions. Second, hooks make your code more declarative, you describe what should happen rather than manually managing the intricate details of DOM updates and event listeners. Third, hooks work beautifully with React's ecosystem, giving you access to powerful libraries for state management, routing, and UI components that can enhance your extension.
 
 ---
 
-Using useState in Chrome Extensions {#useState}
+## Using useState in Chrome Extensions {#useState}
 
 The useState hook is the fundamental building block for adding state to your React extension components. It returns a stateful value and a function to update it, enabling you to track and manipulate data within your components.
 
-Basic useState Implementation
+### Basic useState Implementation
 
 In a Chrome extension popup or options page, useState works exactly as it would in any React application. Here is a simple example of a popup that allows users to toggle a feature:
 
@@ -76,7 +76,7 @@ export default Popup;
 
 This example demonstrates the basic pattern: useState creates a piece of state, and the update function modifies both the local state and persists the value to Chrome storage. This ensures that when the popup is reopened, the user's preference is preserved.
 
-Managing Complex State with useState
+### Managing Complex State with useState
 
 For more complex state management, you can use multiple useState calls or combine related data into objects:
 
@@ -122,11 +122,11 @@ This pattern is particularly useful for extension options pages where you need t
 
 ---
 
-Using useEffect for Side Effects in Extensions {#useEffect}
+## Using useEffect for Side Effects in Extensions {#useEffect}
 
 The useEffect hook is essential for performing side effects in your React components, operations that happen outside the pure render logic, such as fetching data, subscribing to events, or interacting with Chrome APIs. In the context of Chrome extensions, useEffect becomes even more critical due to the asynchronous nature of the Chrome APIs and the need to manage the extension lifecycle properly.
 
-Reading from Chrome Storage
+### Reading from Chrome Storage
 
 One of the most common use cases for useEffect in extension development is loading data from Chrome storage when a component mounts:
 
@@ -163,7 +163,7 @@ function UserPreferences() {
 
 The empty dependency array `[]` tells React to run this effect only once when the component mounts, similar to componentDidMount in class components. This is perfect for initialization tasks like loading saved settings.
 
-Setting Up Listeners and Subscriptions
+### Setting Up Listeners and Subscriptions
 
 UseEffect is also ideal for setting up listeners that respond to Chrome events or browser changes. For example, you might want your popup to respond when the active tab changes:
 
@@ -216,7 +216,7 @@ function ActiveTabTracker() {
 
 The cleanup function returned by useEffect is crucial in extensions. It ensures that when your component unmounts, such as when the user closes the popup, event listeners are properly removed, preventing memory leaks and unexpected behavior.
 
-Reacting to Storage Changes
+### Reacting to Storage Changes
 
 Chrome extensions often need to respond when storage changes, whether from other extension contexts or from user interactions in different parts of your extension. The chrome.storage.onChanged listener combined with useEffect provides a clean solution:
 
@@ -258,11 +258,11 @@ This pattern is invaluable for keeping your extension's UI in sync across multip
 
 ---
 
-Creating Custom Hooks for Extension Logic {#custom-hooks}
+## Creating Custom Hooks for Extension Logic {#custom-hooks}
 
 Custom hooks are one of React's most powerful features, allowing you to extract component logic into reusable functions. In Chrome extension development, custom hooks shine by encapsulating complex Chrome API interactions, storage operations, and event listeners into clean, reusable units.
 
-Building a useChromeStorage Hook
+### Building a useChromeStorage Hook
 
 One of the most useful custom hooks you can create for extension development abstracts the Chrome Storage API into a React-friendly interface:
 
@@ -346,7 +346,7 @@ function Settings() {
 }
 ```
 
-Building a useActiveTab Hook
+### Building a useActiveTab Hook
 
 Another powerful custom hook tracks the currently active tab and responds to tab changes:
 
@@ -429,7 +429,7 @@ function PageAnalyzer() {
 }
 ```
 
-Building a useMessageListener Hook
+### Building a useMessageListener Hook
 
 Message passing is fundamental to Chrome extension architecture, allowing communication between content scripts, background scripts, and popup pages. A custom hook can simplify listening for messages:
 
@@ -466,7 +466,7 @@ function useMessageListener() {
 export default useMessageListener;
 ```
 
-Building a useExtensionPermission Hook
+### Building a useExtensionPermission Hook
 
 Checking and requesting extension permissions is another area where custom hooks provide significant value:
 
@@ -554,11 +554,11 @@ function PermissionWrapper({ children }) {
 
 ---
 
-Best Practices for React Hooks in Extensions {#best-practices}
+## Best Practices for React Hooks in Extensions {#best-practices}
 
 Now that you understand how to use useState, useEffect, and custom hooks in your Chrome extension, let us discuss some best practices to ensure your code is robust, maintainable, and performs well.
 
-Always Clean Up Listeners and Timers
+### Always Clean Up Listeners and Timers
 
 One of the most critical practices when using useEffect in Chrome extensions is properly cleaning up listeners, timers, and other resources. Failing to clean up can lead to memory leaks, duplicate listeners, and unexpected behavior:
 
@@ -584,7 +584,7 @@ useEffect(() => {
 }, []);
 ```
 
-Handle Chrome API Errors Gracefully
+### Handle Chrome API Errors Gracefully
 
 Chrome APIs can fail for various reasons, the user may have revoked permissions, the extension context may be invalid, or there may be quota limits. Always wrap Chrome API calls in try-catch blocks:
 
@@ -605,7 +605,7 @@ useEffect(() => {
 }, []);
 ```
 
-Avoid Stale Closures with Proper Dependencies
+### Avoid Stale Closures with Proper Dependencies
 
 The dependency array in useEffect is crucial for ensuring your effects have access to the latest state values. Failing to include dependencies can lead to stale closures where your effect references outdated values:
 
@@ -628,7 +628,7 @@ useEffect(() => {
 }, [count]);
 ```
 
-Use Lazy Initialization for Expensive Operations
+### Use Lazy Initialization for Expensive Operations
 
 If your initial state calculation is expensive, use lazy initialization to avoid recalculating it on every render:
 
@@ -642,7 +642,7 @@ const [expensiveValue] = useState(() => {
 const [expensiveValue] = useState(computeExpensiveInitialValue(props));
 ```
 
-Keep Custom Hooks Focused
+### Keep Custom Hooks Focused
 
 When creating custom hooks, keep them focused on a single responsibility. This makes them easier to test, debug, and reuse:
 
@@ -658,7 +658,7 @@ function useExtensionStateAndStorageAndMessaging() { /* ... */ }
 
 ---
 
-Putting It All Together: A Complete Example {#complete-example}
+## Putting It All Together: A Complete Example {#complete-example}
 
 Let us bring together everything we have learned in a more complete example, a settings panel for a Chrome extension that demonstrates useState, useEffect, custom hooks, and proper state management:
 
@@ -768,7 +768,7 @@ export default SettingsPage;
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 React hooks provide a powerful, elegant solution for managing state and side effects in Chrome extension development. The useState hook gives you straightforward state management within components, useEffect handles the complexities of the extension lifecycle and Chrome API interactions, and custom hooks enable you to encapsulate and reuse complex logic across your extension.
 

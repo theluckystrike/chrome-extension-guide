@@ -18,7 +18,7 @@ This project will teach you fundamental Chrome extension development concepts wh
 
 ---
 
-Why Build a Web Annotation Extension? {#why-build}
+## Why Build a Web Annotation Extension? {#why-build}
 
 The demand for web annotation tools continues to grow as more people work and study online. A well-designed web annotation extension solves real problems for researchers, students, journalists, and knowledge workers. Building this extension will give you hands-on experience with several Chrome extension APIs while creating a product that people actually want to use.
 
@@ -28,11 +28,11 @@ The web annotation extension market is not saturated with quality options. Many 
 
 ---
 
-Understanding the Extension Architecture {#architecture}
+## Understanding the Extension Architecture {#architecture}
 
 Before writing code, let us understand how our web annotation extension will work. A typical annotation extension consists of several components that work together smoothly.
 
-Core Components
+### Core Components
 
 The manifest file defines our extension metadata and declares which permissions we need. For a web annotation extension, we will need permissions to access the active tab, execute content scripts, and store data using the Chrome storage API.
 
@@ -44,7 +44,7 @@ Background scripts (or service workers in Manifest V3) handle extension-wide log
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project and set up the following file structure:
 
@@ -64,7 +64,7 @@ This structure separates our concerns clearly. The manifest defines configuratio
 
 ---
 
-Creating the Manifest File {#manifest}
+## Creating the Manifest File {#manifest}
 
 The manifest.json file is the heart of our Chrome extension. Here is our Manifest V3 compatible configuration:
 
@@ -103,11 +103,11 @@ This manifest declares the minimum permissions needed for our annotation functio
 
 ---
 
-Implementing Content Scripts for Text Highlighting {#content-scripts}
+## Implementing Content Scripts for Text Highlighting {#content-scripts}
 
 The content script is where the magic happens. This JavaScript file runs in the context of every web page and handles text selection, highlight creation, and DOM manipulation.
 
-Basic Content Script Setup
+### Basic Content Script Setup
 
 ```javascript
 // content.js
@@ -240,11 +240,11 @@ The script also includes logic to restore highlights when the page is reloaded. 
 
 ---
 
-Building the Popup Interface {#popup}
+## Building the Popup Interface {#popup}
 
 The popup provides the interface for viewing and managing annotations. When users click the extension icon, they see a list of their highlights for the current page and can access annotations from other pages.
 
-Popup HTML Structure
+### Popup HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -287,7 +287,7 @@ Popup HTML Structure
 </html>
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
 ```javascript
 // popup.js
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
-Popup Styling
+### Popup Styling
 
 ```css
 /* popup.css */
@@ -500,7 +500,7 @@ section h2 {
 
 ---
 
-Implementing Background Service Worker {#background}
+## Implementing Background Service Worker {#background}
 
 The background service worker handles extension-wide logic and message passing:
 
@@ -537,7 +537,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that you have built all the components, it is time to test your extension in Chrome.
 
@@ -555,33 +555,33 @@ To test the functionality:
 
 ---
 
-Best Practices and Improvements {#best-practices}
+## Best Practices and Improvements {#best-practices}
 
 While this basic implementation works, there are several improvements you can make to create a production-ready extension.
 
-Color Customization
+### Color Customization
 
 Allow users to choose their preferred highlight colors. Store the color preference in Chrome storage and apply it when creating highlights.
 
-Export and Sync
+### Export and Sync
 
 Implement functionality to export annotations as PDF, Markdown, or JSON. Consider adding Chrome sync storage to synchronize annotations across devices.
 
-Search Functionality
+### Search Functionality
 
 Add a search feature that allows users to find annotations across all pages. This requires indexing all stored annotations and providing a search interface.
 
-Note Attachments
+### Note Attachments
 
 Enhance the highlight functionality to allow attaching notes to each highlight. This turns simple highlights into rich annotations with personal commentary.
 
-Privacy Considerations
+### Privacy Considerations
 
 Be transparent about data storage. Consider adding an option to store annotations locally only, without any cloud synchronization, for users who prioritize privacy.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have tested your extension and added any desired improvements, you can publish it to the Chrome Web Store.
 
@@ -594,7 +594,7 @@ Ensure your extension follows Chrome Web Store policies, including proper privac
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a web annotation Chrome extension is an excellent project that teaches fundamental extension development skills while creating a genuinely useful tool. You have learned how to work with content scripts for DOM manipulation, implement popup interfaces, use Chrome storage for persistence, and structure a Manifest V3 extension.
 

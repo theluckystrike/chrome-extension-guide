@@ -18,7 +18,7 @@ we will walk you through building a complete content blocker Chrome extension fr
 
 ---
 
-Why Build a Content Blocker Extension? {#why-build}
+## Why Build a Content Blocker Extension? {#why-build}
 
 Content blocker and element hider extensions are among the most popular categories in the Chrome Web Store. They solve real problems for real users:
 
@@ -32,11 +32,11 @@ The demand for these tools is enormous. Extensions like uBlock Origin and Elemen
 
 ---
 
-Understanding the Architecture {#architecture}
+## Understanding the Architecture {#architecture}
 
 Before writing any code, let's understand how Chrome extensions work with content blocking.
 
-How Content Scripts Work
+### How Content Scripts Work
 
 Chrome extensions can inject JavaScript into web pages using content scripts. These scripts run in the context of the loaded page, giving them full access to the DOM (Document Object Model). This means content scripts can:
 
@@ -45,7 +45,7 @@ Chrome extensions can inject JavaScript into web pages using content scripts. Th
 - Store user preferences using Chrome's storage API
 - Communicate with the extension's background service worker
 
-The Extension Components
+### The Extension Components
 
 Our content blocker extension will consist of:
 
@@ -56,7 +56,7 @@ Our content blocker extension will consist of:
 
 ---
 
-Step 1: Create the Manifest File {#manifest}
+## Step 1: Create the Manifest File {#manifest}
 
 Every Chrome extension starts with a manifest.json file. For a content blocker using Manifest V3, we need to declare specific permissions.
 
@@ -102,7 +102,7 @@ Create a new folder for your extension and add the following manifest.json:
 }
 ```
 
-Key permissions explained:
+### Key permissions explained:
 
 - storage: Allows saving user preferences (blocked selectors)
 - activeTab: Access to the current tab when user interacts with extension
@@ -111,7 +111,7 @@ Key permissions explained:
 
 ---
 
-Step 2: Create the Content Script {#content-script}
+## Step 2: Create the Content Script {#content-script}
 
 The content script is the heart of our extension. It runs on every page and applies the blocking rules. Create content.js:
 
@@ -229,7 +229,7 @@ if (document.readyState === 'loading') {
 }
 ```
 
-This content script handles:
+### This content script handles:
 
 - Loading user preferences from Chrome's storage
 - Hiding elements matching blocked selectors
@@ -238,7 +238,7 @@ This content script handles:
 
 ---
 
-Step 3: Create the Popup Interface {#popup}
+## Step 3: Create the Popup Interface {#popup}
 
 The popup provides users with an interface to manage their blocking rules. Create popup.html:
 
@@ -412,7 +412,7 @@ The popup provides users with an interface to manage their blocking rules. Creat
 </html>
 ```
 
-Now create popup.js to handle user interactions:
+### Now create popup.js to handle user interactions:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -527,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Step 4: Create the Background Service Worker {#background}
+## Step 4: Create the Background Service Worker {#background}
 
 The background service worker handles extension lifecycle events. Create background.js:
 
@@ -594,11 +594,11 @@ chrome.contextMenus?.onClicked.addListener((info, tab) => {
 
 ---
 
-Step 5: Create Extension Icons {#icons}
+## Step 5: Create Extension Icons {#icons}
 
 Your extension needs icons. Create a simple icons folder with placeholder PNG files. For testing, you can create basic colored squares, but for publishing, design professional icons.
 
-At minimum, you need:
+### At minimum, you need:
 
 - icons/icon16.png (16x16 pixels)
 - icons/icon48.png (48x48 pixels)
@@ -606,7 +606,7 @@ At minimum, you need:
 
 ---
 
-Step 6: Testing Your Extension {#testing}
+## Step 6: Testing Your Extension {#testing}
 
 Now let's test our content blocker extension:
 
@@ -618,16 +618,16 @@ Now let's test our content blocker extension:
 6. Add some custom selectors and click "Save Rules"
 7. Refresh the page to see the blocking in action
 
-Debugging Tips
+### Debugging Tips
 
-If elements aren't being hidden:
+### If elements aren't being hidden:
 
 1. Check the console for errors (right-click → Inspect → Console)
 2. Verify your CSS selectors are correct
 3. Ensure the content script is loading (check the Extensions page)
 4. Make sure the page hasn't already loaded the elements before your script runs
 
-Common Selector Issues
+### Common Selector Issues
 
 ```javascript
 //  Wrong: Using jQuery-style selectors
@@ -648,13 +648,13 @@ $('.ad-container')
 
 ---
 
-Advanced Features to Consider {#advanced}
+## Advanced Features to Consider {#advanced}
 
 Once you have the basic extension working, consider adding these advanced features:
 
 1. Site-Specific Rules
 
-Allow different blocking rules for different websites:
+### Allow different blocking rules for different websites:
 
 ```javascript
 const siteRules = {
@@ -680,7 +680,7 @@ document.addEventListener('click', (e) => {
 
 3. Import/Export Rules
 
-Allow users to share their blocking configurations:
+### Allow users to share their blocking configurations:
 
 ```javascript
 // Export
@@ -717,7 +717,7 @@ function trackBlock(count) {
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 When you're ready to share your extension with the world:
 
@@ -743,7 +743,7 @@ When you're ready to share your extension with the world:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a content blocker Chrome extension is an excellent project that teaches you valuable skills:
 
@@ -757,4 +757,4 @@ The extension we built in this guide provides a solid foundation that you can ex
 
 Remember to test thoroughly across different websites and browsers, and always consider user privacy when handling data. With the knowledge from this guide, you're well-equipped to create a polished, professional content blocking extension that can help thousands of users focus on what matters most.
 
-Start building today, and happy coding!
+### Start building today, and happy coding!

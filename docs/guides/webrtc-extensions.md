@@ -7,20 +7,20 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extensions and WebRTC
 
-Overview {#overview}
+## Overview {#overview}
 WebRTC enables peer-to-peer audio/video communication in browsers. Chrome Extensions can use WebRTC for screen recording, tab audio capture, video conferencing, and collaborative tools. This guide covers essential patterns for WebRTC in extension contexts with emphasis on Manifest V3 (MV3) compatibility.
 WebRTC in Chrome Extensions
 
 This guide covers implementing real-time communication features in Chrome Extensions using WebRTC APIs, including screen capture, media processing, and peer-to-peer connections.
 
-Overview
+### Overview
 
 Chrome Extensions support WebRTC through several mechanisms:
 - Content scripts can use standard `navigator.mediaDevices.getUserMedia()`
 - Service workers use `chrome.tabCapture` and `chrome.desktopCapture`
 - Offscreen documents provide a bridge for media processing
 
-Manifest Setup {#manifest-setup}
+## Manifest Setup {#manifest-setup}
 ```json
 {
   "name": "Screen Recorder Extension",
@@ -31,9 +31,9 @@ Manifest Setup {#manifest-setup}
 }
 ```
 
-Using WebRTC APIs from Extension Contexts {#using-webrtc-apis-from-extension-contexts}
+## Using WebRTC APIs from Extension Contexts {#using-webrtc-apis-from-extension-contexts}
 
-chrome.tabCapture {#chrometabcapture}
+## chrome.tabCapture {#chrometabcapture}
 Captures the visible area of the currently active tab as a MediaStream. Note: `capture()` does not accept a `tabId`. it always captures the active tab. In MV3, consider using `chrome.tabCapture.getMediaStreamId()` instead.
 ```ts
 async function captureTab(): Promise<MediaStream | null> {
@@ -47,7 +47,7 @@ async function captureTab(): Promise<MediaStream | null> {
 }
 ```
 
-chrome.desktopCapture {#chromedesktopcapture}
+## chrome.desktopCapture {#chromedesktopcapture}
 Shows a native picker UI for the user to select a source:
 ```ts
 function chooseSource(callback: (streamId: string) => void) {
@@ -62,7 +62,7 @@ function chooseSource(callback: (streamId: string) => void) {
 }
 ```
 
-getDisplayMedia() {#getdisplaymedia}
+## getDisplayMedia() {#getdisplaymedia}
 Standard WebRTC API that works in extension contexts:
 ```ts
 async function startScreenShare(): Promise<MediaStream | null> {
@@ -382,7 +382,7 @@ Add required permissions to `manifest.json`:
 }
 ```
 
-Screen Capture with chrome.tabCapture
+### Screen Capture with chrome.tabCapture
 
 The `chrome.tabCapture` API captures the visible area of a tab as a MediaStream:
 
@@ -407,7 +407,7 @@ chrome.tabCapture.capture({
 });
 ```
 
-Audio Not Being Captured {#audio-not-being-captured}
+## Audio Not Being Captured {#audio-not-being-captured}
 ```ts
 async function captureWithFallback(): Promise<MediaStream> {
   let stream = await new Promise<MediaStream>((resolve) => {
@@ -473,7 +473,7 @@ const configuration = {
   ]
 };
 
-const peerConnection = new RTCPeerConnection(configuration);
+### const peerConnection = new RTCPeerConnection(configuration);
 
 peerConnection.onicecandidate = (event) => {
   if (event.candidate) {

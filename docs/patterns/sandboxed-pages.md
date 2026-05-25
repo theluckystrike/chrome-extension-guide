@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/sandboxed-pages/"
 last_modified_at: 2026-01-15
 ---
 
-Sandboxed Pages in Chrome Extensions
+### Sandboxed Pages in Chrome Extensions
 
 Sandboxed pages are a powerful pattern in Chrome extensions that allow running code with relaxed Content Security Policy (CSP), enabling features that would otherwise be blocked. This pattern is essential for certain use cases but requires careful security considerations.
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
 To use sandboxed pages, declare them in your `manifest.json`:
 
@@ -27,9 +27,9 @@ To use sandboxed pages, declare them in your `manifest.json`:
 
 Sandboxed pages run with relaxed CSP that allows `eval()`, `new Function()`, and inline scripts that would otherwise violate the extension's CSP.
 
-Security Model {#security-model}
+## Security Model {#security-model}
 
-Sandboxed pages operate under significant restrictions:
+### Sandboxed pages operate under significant restrictions:
 
 - No chrome.* APIs: Cannot access any Chrome extension APIs directly
 - No network requests: Cannot make XMLHttpRequest or fetch calls
@@ -38,7 +38,7 @@ Sandboxed pages operate under significant restrictions:
 
 This security model protects the extension from potentially malicious code running in the sandbox while allowing dangerous operations like `eval` within a controlled environment.
 
-Communication: postMessage {#communication-postmessage}
+## Communication: postMessage {#communication-postmessage}
 
 Since sandboxed pages cannot directly access extension APIs, communication happens via `postMessage`:
 
@@ -76,9 +76,9 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
-Template Engines {#template-engines}
+## Template Engines {#template-engines}
 
 Many template engines (Handlebars, EJS, Underscore.js) rely on `eval` for runtime compilation:
 
@@ -91,7 +91,7 @@ const output = template({ greeting: 'Hello', name: 'World' });
 ```
 {% endraw %}
 
-User-Provided Scripts {#user-provided-scripts}
+## User-Provided Scripts {#user-provided-scripts}
 
 Allow users to write custom scripts that get executed safely:
 
@@ -104,11 +104,11 @@ const safeEval = (script, context) => {
 };
 ```
 
-Rich Text Editors {#rich-text-editors}
+## Rich Text Editors {#rich-text-editors}
 
 Some rich text editors use `eval` for dynamic style calculations or markdown parsing.
 
-Multiple Sandboxed Pages {#multiple-sandboxed-pages}
+## Multiple Sandboxed Pages {#multiple-sandboxed-pages}
 
 For different libraries or security requirements, use multiple sandboxes:
 
@@ -126,23 +126,23 @@ For different libraries or security requirements, use multiple sandboxes:
 
 Each sandbox runs in its own isolated context with separate CSP relaxations.
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
 - iframe overhead: Each sandboxed page requires an iframe, adding DOM overhead
 - Message serialization: Complex data passed via postMessage incurs serialization costs
 - Startup latency: Loading sandbox pages takes time; consider preloading
 - Memory usage: Each iframe maintains its own JavaScript context
 
-Alternatives {#alternatives}
+## Alternatives {#alternatives}
 
-Before using sandboxed pages, consider these alternatives:
+### Before using sandboxed pages, consider these alternatives:
 
 1. Pre-compile templates at build time: Use Handlebars precompilation to avoid runtime `eval`
 2. Use eval-free libraries: Libraries like Nunjucks support precompilation
 3. Web Workers: For heavy computation without DOM requirements
 4. Native JS templating: Use template literals which don't require `eval`
 
-Testing Sandboxed Pages {#testing-sandboxed-pages}
+## Testing Sandboxed Pages {#testing-sandboxed-pages}
 
 For debugging, navigate directly to the sandbox page URL:
 
@@ -152,7 +152,7 @@ chrome-extension://<extension-id>/sandbox.html
 
 This allows direct inspection and debugging of the sandbox environment.
 
-Complete Template Engine Sandbox {#example-complete-template-engine-sandbox}
+## Complete Template Engine Sandbox {#example-complete-template-engine-sandbox}
 
 ```javascript
 // popup.js
@@ -192,7 +192,7 @@ function renderWithSandbox(template, data) {
 </script>
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [CSP Reference](../reference/csp-reference.md)
 - [CSP Workarounds](./csp-workarounds.md)

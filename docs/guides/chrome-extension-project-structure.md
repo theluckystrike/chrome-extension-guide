@@ -9,7 +9,7 @@ Chrome Extension Project Structure
 
 A well-organized project structure is the foundation of maintainable Chrome extension development. The right structure depends on your extension's complexity, whether you use a build tool, and how your team prefers to work. This guide covers recommended patterns from simple single-file extensions to complex monorepos.
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 - [Simple Projects (No Build)](#simple-projects-no-build)
 - [Standard Projects (With Build)](#standard-projects-with-build)
@@ -20,7 +20,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-Simple Projects (No Build) {#simple-projects-no-build}
+## Simple Projects (No Build) {#simple-projects-no-build}
 
 For basic extensions that don't require a build step, keep everything flat and simple. This works well for single-purpose utilities, experiments, or prototypes.
 
@@ -41,14 +41,14 @@ my-extension/
      icon-128.png
 ```
 
-When This Structure Works {#when-this-structure-works}
+## When This Structure Works {#when-this-structure-works}
 
 - No TypeScript, no minification needed
 - Single content script, no complex logic
 - Quick prototyping or personal tools
 - Total size under 10KB
 
-manifest.json Example {#manifestjson-example}
+## manifest.json Example {#manifestjson-example}
 
 ```json
 {
@@ -76,7 +76,7 @@ manifest.json Example {#manifestjson-example}
 
 ---
 
-Standard Projects (With Build) {#standard-projects-with-build}
+## Standard Projects (With Build) {#standard-projects-with-build}
 
 Most production extensions benefit from a build tool like Vite, esbuild, or webpack. A `src/` directory holds source files, while the build output goes to `dist/` or `build/`. This separation keeps your development files clean and allows for TypeScript, minification, and multi-file organization.
 
@@ -116,7 +116,7 @@ my-extension/
  README.md
 ```
 
-Why Separate Contexts {#why-separate-contexts}
+## Why Separate Contexts {#why-separate-contexts}
 
 Chrome extensions run code in multiple isolated contexts: the background service worker, popup pages, content scripts, and options pages. Each context has different capabilities and restrictions. Organizing by context makes it clear which code runs where and prevents accidental dependencies between incompatible contexts.
 
@@ -126,7 +126,7 @@ For a detailed example of this structure with Vite, see [Vite Setup for Chrome E
 
 ---
 
-Large Projects (Monorepo) {#large-projects-monorepo}
+## Large Projects (Monorepo) {#large-projects-monorepo}
 
 When maintaining multiple extensions or a companion web application, a monorepo structure shared packages reduce duplication and ensure consistency across projects.
 
@@ -154,7 +154,7 @@ monorepo/
  README.md
 ```
 
-package.json Workspaces Configuration {#packagejson-workspaces-configuration}
+## package.json Workspaces Configuration {#packagejson-workspaces-configuration}
 
 ```json
 {
@@ -170,7 +170,7 @@ package.json Workspaces Configuration {#packagejson-workspaces-configuration}
 }
 ```
 
-Benefits of Monorepo {#benefits-of-monorepo}
+## Benefits of Monorepo {#benefits-of-monorepo}
 
 - Shared code lives in one place, updated in one PR
 - Consistent TypeScript configuration across all projects
@@ -181,7 +181,7 @@ For a comprehensive guide to TypeScript in extensions, see [TypeScript for Chrom
 
 ---
 
-File Naming Conventions {#file-naming-conventions}
+## File Naming Conventions {#file-naming-conventions}
 
 Consistent naming makes your project navigable. Choose a convention and apply it everywhere.
 
@@ -191,7 +191,7 @@ Consistent naming makes your project navigable. Choose a convention and apply it
 | camelCase | `messageHandler.ts` | TypeScript-heavy teams |
 | Context prefix | `bg-messaging.ts`, `popup-App.tsx` | Large projects |
 
-Recommended Patterns {#recommended-patterns}
+## Recommended Patterns {#recommended-patterns}
 
 - `index.ts`. Entry point for each context
 - `*.test.ts`. Unit tests alongside source
@@ -201,9 +201,9 @@ Recommended Patterns {#recommended-patterns}
 
 ---
 
-Where to Put Special Files {#where-to-put-special-files}
+## Where to Put Special Files {#where-to-put-special-files}
 
-Assets (Images, Fonts, SVGs) {#assets-images-fonts-svgs}
+## Assets (Images, Fonts, SVGs) {#assets-images-fonts-svgs}
 
 ```
 src/
@@ -216,7 +216,7 @@ src/
       Inter-Regular.woff2
 ```
 
-Reference in manifest:
+### Reference in manifest:
 
 ```json
 {
@@ -228,7 +228,7 @@ Reference in manifest:
 }
 ```
 
-Locales (i18n) {#locales-i18n}
+## Locales (i18n) {#locales-i18n}
 
 ```
 src/
@@ -241,7 +241,7 @@ src/
       messages.json
 ```
 
-Manifest reference:
+### Manifest reference:
 
 ```json
 {
@@ -249,7 +249,7 @@ Manifest reference:
 }
 ```
 
-JSON Schemas {#json-schemas}
+## JSON Schemas {#json-schemas}
 
 ```
 src/
@@ -260,7 +260,7 @@ src/
 
 ---
 
-TypeScript Project References {#typescript-project-references}
+## TypeScript Project References {#typescript-project-references}
 
 For large projects, TypeScript project references enable incremental builds and strict separation between contexts.
 
@@ -272,7 +272,7 @@ tsconfig.json                 # Base config
  tsconfig.shared.json
 ```
 
-Base tsconfig.json {#base-tsconfigjson}
+## Base tsconfig.json {#base-tsconfigjson}
 
 ```json
 {
@@ -287,7 +287,7 @@ Base tsconfig.json {#base-tsconfigjson}
 }
 ```
 
-Context tsconfig (e.g., background.json) {#context-tsconfig-eg-backgroundjson}
+## Context tsconfig (e.g., background.json) {#context-tsconfig-eg-backgroundjson}
 
 ```json
 {
@@ -307,15 +307,15 @@ This pattern ensures that changes to shared types trigger rebuilds of all depend
 
 ---
 
-Choosing the Right Structure {#choosing-the-right-structure}
+## Choosing the Right Structure {#choosing-the-right-structure}
 
 Start simple and evolve as needed. A flat structure works for single-purpose extensions. Add `src/` and a build tool when TypeScript or multiple files become unwieldy. Move to monorepo when maintaining multiple extensions or a web companion app.
 
 Remember: the goal is maintainability. If you can't find files, or changing one thing breaks another, your structure needs adjustment.
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Architecture Patterns](../guides/architecture-patterns.md)
 - [Monorepo](../guides/chrome-extension-monorepo.md)

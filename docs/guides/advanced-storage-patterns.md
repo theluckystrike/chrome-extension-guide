@@ -10,15 +10,15 @@ Advanced Storage Patterns for Chrome Extensions
 
 Building solid Chrome extensions requires sophisticated data storage strategies that go beyond basic CRUD operations. This guide covers advanced patterns for managing storage in production extensions, including quota optimization, data migration, conflict resolution, and enterprise-grade backup solutions.
 
-Overview {#overview}
+## Overview {#overview}
 
 As extensions grow in complexity, developers face numerous storage challenges: managing limited sync quotas, handling multi-device synchronization conflicts, migrating user data across extension versions, and efficiently storing large datasets. This guide provides battle-tested patterns for addressing these challenges while maintaining performance and reliability.
 
 The Chrome Storage API provides four distinct storage areas, each designed for specific use cases. Understanding when to use each area, and how to combine them effectively, is fundamental to building extensions that scale.
 
-Chrome Storage API detailed look {#chrome-storage-api-deep detailed look}
+### Chrome Storage API detailed look {#chrome-storage-api-deep detailed look}
 
-Understanding Storage Areas {#understanding-storage-areas}
+## Understanding Storage Areas {#understanding-storage-areas}
 
 Chrome extensions have access to four storage APIs, each with unique characteristics that make them suitable for different scenarios.
 
@@ -86,7 +86,7 @@ if (config.companyPolicy) {
 }
 ```
 
-Storage Quotas and Limitations {#storage-quotas-and-limitations}
+## Storage Quotas and Limitations {#storage-quotas-and-limitations}
 
 Understanding and managing storage quotas is critical for production extensions. Each storage area has different limitations that affect how you design your data storage strategy.
 
@@ -152,11 +152,11 @@ class StorageQuotaManager {
 }
 ```
 
-Data Migration Strategies {#data-migration-strategies}
+## Data Migration Strategies {#data-migration-strategies}
 
 When releasing new versions of your extension, you often need to migrate user data from old formats to new ones. A solid migration system ensures users don't lose their data during updates.
 
-Schema Versioning {#schema-versioning}
+## Schema Versioning {#schema-versioning}
 
 Implement a schema versioning system to track data structure changes:
 
@@ -235,7 +235,7 @@ class DataMigrationManager {
 }
 ```
 
-Graceful Degradation {#graceful-degradation}
+## Graceful Degradation {#graceful-degradation}
 
 Always implement fallback logic for corrupted or missing data:
 
@@ -263,11 +263,11 @@ async function safeGetData(key, defaultValue = null) {
 }
 ```
 
-Conflict Resolution for Sync Storage {#conflict-resolution-for-sync-storage}
+## Conflict Resolution for Sync Storage {#conflict-resolution-for-sync-storage}
 
 When using chrome.storage.sync, conflicts can occur when the same data is modified on multiple devices before synchronization completes. Implementing proper conflict resolution is essential for maintaining data integrity.
 
-Last-Write-Wins Strategy {#last-write-wins}
+## Last-Write-Wins Strategy {#last-write-wins}
 
 The simplest approach is last-write-wins, where the most recent change takes precedence:
 
@@ -290,9 +290,9 @@ class SyncConflictResolver {
 }
 ```
 
-Merge Strategy for Complex Objects {#merge-strategy-for-complex-objects}
+## Merge Strategy for Complex Objects {#merge-strategy-for-complex-objects}
 
-For complex nested objects, implement intelligent merging:
+### For complex nested objects, implement intelligent merging:
 
 ```javascript
 class MergeConflictResolver {
@@ -333,7 +333,7 @@ class MergeConflictResolver {
 }
 ```
 
-Conflict Detection and Notification {#conflict-detection-and-notification}
+## Conflict Detection and Notification {#conflict-detection-and-notification}
 
 Let users know when conflicts occur and how they're resolved:
 
@@ -384,11 +384,11 @@ class SyncConflictNotifier {
 }
 ```
 
-IndexedDB for Large Datasets {#indexeddb-for-large-datasets}
+## IndexedDB for Large Datasets {#indexeddb-for-large-datasets}
 
 For extensions that need to store large amounts of structured data, IndexedDB provides a powerful solution beyond Chrome Storage API limits.
 
-Setting Up IndexedDB {#setting-up-indexeddb}
+## Setting Up IndexedDB {#setting-up-indexeddb}
 
 ```javascript
 class ExtensionDatabase {
@@ -479,7 +479,7 @@ class ExtensionDatabase {
 }
 ```
 
-Caching API Responses with IndexedDB {#caching-api-responses-with-indexeddb}
+## Caching API Responses with IndexedDB {#caching-api-responses-with-indexeddb}
 
 ```javascript
 class APICache {
@@ -537,11 +537,11 @@ class APICache {
 }
 ```
 
-Backup and Export Patterns {#backup-and-export-patterns}
+## Backup and Export Patterns {#backup-and-export-patterns}
 
 Providing users with backup and export capabilities is essential for data portability and recovery.
 
-Implementing Data Export {#implementing-data-export}
+## Implementing Data Export {#implementing-data-export}
 
 ```javascript
 class DataExporter {
@@ -628,7 +628,7 @@ class DataExporter {
 }
 ```
 
-Scheduled Automatic Backups {#scheduled-automatic-backups}
+## Scheduled Automatic Backups {#scheduled-automatic-backups}
 
 ```javascript
 class AutomaticBackup {
@@ -679,7 +679,7 @@ class AutomaticBackup {
 }
 ```
 
-Best Practices Summary {#best-practices-summary}
+## Best Practices Summary {#best-practices-summary}
 
 1. Choose the right storage area: Use sync for cross-device preferences, local for persistent data, session for ephemeral state, and managed for enterprise configurations.
 
@@ -697,13 +697,13 @@ Best Practices Summary {#best-practices-summary}
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Storage API](../guides/storage-api.md) - Core storage API documentation
 - [Local vs Sync Storage](../guides/storage-local-vs-sync.md) - Choosing between storage types
 - [Caching Strategies](../guides/caching-strategies.md) - Implementing effective caches
 
-Related Articles
+### Related Articles
 
 - [State Management](../patterns/state-management.md) - Managing application state across contexts
 - [Performance Optimization](../guides/performance.md) - General performance techniques

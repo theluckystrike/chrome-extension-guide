@@ -17,17 +17,17 @@ we'll walk through building a fully functional image to svg chrome extension usi
 
 ---
 
-Why Build an SVG Converter Chrome Extension?
+### Why Build an SVG Converter Chrome Extension?
 
 Before diving into the code, let's understand why this extension is valuable and what makes it different from existing solutions.
 
-The Problem with Raster Graphics
+### The Problem with Raster Graphics
 
 Raster images (PNG, JPEG, GIF, WebP) are composed of a fixed grid of pixels. When you scale a raster image beyond its original dimensions, it becomes pixelated and loses quality. This limitation makes raster graphics unsuitable for responsive web design, print media, and applications requiring scalable icons or logos.
 
 Vector graphics (SVG, EPS, AI) use mathematical equations to define shapes, lines, and curves. This means they can be scaled infinitely without any loss of quality. SVGs are also smaller in file size, editable with code, and fully animatable with CSS and JavaScript.
 
-Why a Chrome Extension?
+### Why a Chrome Extension?
 
 Building an svg converter extension as a Chrome extension provides several advantages over standalone web applications:
 
@@ -39,7 +39,7 @@ Building an svg converter extension as a Chrome extension provides several advan
 
 ---
 
-Project Architecture and Technologies
+### Project Architecture and Technologies
 
 Our SVG converter extension will use the following technologies:
 
@@ -50,7 +50,7 @@ Our SVG converter extension will use the following technologies:
 - Chrome File System Access API: For direct file saving
 - Vanilla JavaScript: For optimal performance and minimal bundle size
 
-Understanding the Vectorization Process
+### Understanding the Vectorization Process
 
 Converting a raster image to SVG involves several steps:
 
@@ -63,9 +63,9 @@ Converting a raster image to SVG involves several steps:
 
 ---
 
-Step-by-Step Implementation
+### Step-by-Step Implementation
 
-Step 1: Setting Up the Project Structure
+### Step 1: Setting Up the Project Structure
 
 Create a new directory for your extension with the following structure:
 
@@ -87,7 +87,7 @@ svg-converter/
          messages.json
 ```
 
-Step 2: Creating the Manifest
+### Step 2: Creating the Manifest
 
 The manifest.json file defines your extension's configuration and permissions:
 
@@ -130,7 +130,7 @@ This manifest requests the minimum permissions necessary:
 - `scripting`: To inject scripts for image detection
 - `<all_urls>`: To allow image conversion from any website
 
-Step 3: Building the Popup Interface
+### Step 3: Building the Popup Interface
 
 The popup provides the user interface for our image to svg chrome tool:
 
@@ -223,7 +223,7 @@ The popup provides the user interface for our image to svg chrome tool:
 </html>
 ```
 
-Step 4: Styling the Extension
+### Step 4: Styling the Extension
 
 Create a clean, modern interface with popup.css:
 
@@ -441,7 +441,7 @@ button {
 }
 ```
 
-Step 5: Implementing the Vector Conversion Logic
+### Step 5: Implementing the Vector Conversion Logic
 
 The core of our svg converter extension is the popup.js file, which handles image loading, conversion, and file saving:
 
@@ -805,7 +805,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Step 6: Adding Background Script Functionality
+### Step 6: Adding Background Script Functionality
 
 The background script can enhance the extension with page action capabilities:
 
@@ -853,9 +853,9 @@ function detectImagesOnPage() {
 
 ---
 
-Advanced Features and Enhancements
+### Advanced Features and Enhancements
 
-Batch Processing
+### Batch Processing
 
 For users who need to convert multiple images at once, implement batch processing:
 
@@ -886,7 +886,7 @@ async function batchConvert(images) {
 }
 ```
 
-Integration with Online Services
+### Integration with Online Services
 
 For better vectorization quality, integrate with online APIs:
 
@@ -913,7 +913,7 @@ async function convertWithOnlineAPI(imageData) {
 }
 ```
 
-Page Context Menu Integration
+### Page Context Menu Integration
 
 Add right-click menu options for quick conversion:
 
@@ -938,9 +938,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 ---
 
-Testing and Deployment
+### Testing and Deployment
 
-Testing Your Extension
+### Testing Your Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
@@ -948,7 +948,7 @@ Testing Your Extension
 4. Test with various image types and sizes
 5. Verify the conversion quality and file output
 
-Publishing to Chrome Web Store
+### Publishing to Chrome Web Store
 
 1. Create a developer account at the Chrome Web Store
 2. Prepare promotional assets (screenshots, icon)
@@ -957,7 +957,7 @@ Publishing to Chrome Web Store
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an svg converter extension for Chrome is a rewarding project that demonstrates powerful web technologies including canvas manipulation, image processing, and Chrome extension APIs. This guide covered the essential components needed to create a production-ready tool.
 

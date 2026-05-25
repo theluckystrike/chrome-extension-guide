@@ -18,7 +18,7 @@ This tutorial assumes you have basic knowledge of HTML, CSS, and JavaScript. By 
 
 ---
 
-Why Build Your Own API Tester Chrome Extension?
+### Why Build Your Own API Tester Chrome Extension?
 
 Before we dive into the code, let us explore why building a custom API tester Chrome extension is worth your time. The most obvious reason is convenience. Instead of opening a separate application every time you need to test an endpoint, your extension is just a click away. This smooth integration into your browser workflow can significantly boost productivity.
 
@@ -30,7 +30,7 @@ Finally, there is the satisfaction of using a tool you built yourself. Many deve
 
 ---
 
-Project Architecture and File Structure
+### Project Architecture and File Structure
 
 Every Chrome extension requires a manifest file and a user interface. For our API tester extension, we will need the following files:
 
@@ -45,7 +45,7 @@ Let us start by creating the project directory and setting up our manifest file.
 
 ---
 
-Setting Up the Manifest File
+### Setting Up the Manifest File
 
 The manifest.json is the heart of every Chrome extension. It tells Chrome about your extension's permissions, UI components, and version. Create a new file called `manifest.json` in your project directory with the following content:
 
@@ -84,7 +84,7 @@ The `action` section defines our popup. When users click the extension icon, Chr
 
 ---
 
-Building the User Interface
+### Building the User Interface
 
 Now let us create the popup interface where users will enter their API requests. Open a new file called `popup.html` and add the following structure:
 
@@ -165,7 +165,7 @@ This interface provides all the essential features of an API tester. Users can s
 
 ---
 
-Stylizing the Extension
+### Stylizing the Extension
 
 A well-designed interface makes the extension pleasant to use. Create `popup.css` with these styles:
 
@@ -334,7 +334,7 @@ The styling keeps the interface clean and professional. We have used a neutral c
 
 ---
 
-Implementing the JavaScript Logic
+### Implementing the JavaScript Logic
 
 Now comes the core functionality, handling the HTTP requests. Create `popup.js`:
 
@@ -472,7 +472,7 @@ A key feature is the timing measurement. We use `performance.now()` to measure h
 
 ---
 
-Loading and Testing Your Extension
+### Loading and Testing Your Extension
 
 Now that we have all the files, it is time to load our extension into Chrome and test it. Follow these steps:
 
@@ -487,7 +487,7 @@ You should see the JSON response displayed in the response section, along with t
 
 ---
 
-Enhancements and Future Improvements
+### Enhancements and Future Improvements
 
 While our API tester is functional, there are many ways you could enhance it. Here are some ideas for features you might want to add:
 
@@ -505,7 +505,7 @@ These enhancements would transform your simple API tester into a production-read
 
 ---
 
-Publishing Your Extension
+### Publishing Your Extension
 
 Once you are satisfied with your extension, you can publish it to the Chrome Web Store. First, create a ZIP file of your extension directory (excluding any development files). Then, create a developer account on the Chrome Web Store Developer Dashboard, pay the one-time registration fee, and upload your extension.
 
@@ -513,7 +513,7 @@ Before publishing, ensure you have created proper icons and consider adding scre
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an API tester Chrome extension is an excellent project that combines practical utility with learning opportunity. Throughout this guide, you have created a fully functional HTTP client that can send requests, handle various authentication methods, and display responses, all without leaving your browser.
 

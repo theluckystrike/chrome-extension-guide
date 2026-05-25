@@ -18,7 +18,7 @@ This comprehensive guide will walk you through setting up a complete CI/CD pipel
 
 ---
 
-Why CI/CD Matters for Chrome Extension Development {#why-ci-cd-matters}
+## Why CI/CD Matters for Chrome Extension Development {#why-ci-cd-matters}
 
 Developing Chrome extensions presents unique challenges that make automation particularly valuable. Unlike traditional web applications, Chrome extensions must work across different browser versions, handle various manifest versions, and comply with strict Web Store policies. Manually managing builds, tests, and deployments becomes error-prone as your extension grows in complexity.
 
@@ -30,7 +30,7 @@ Beyond testing, CI/CD pipelines automate the build process, generating productio
 
 ---
 
-Setting Up Your GitHub Actions Workflow {#setting-up-workflow}
+## Setting Up Your GitHub Actions Workflow {#setting-up-workflow}
 
 The foundation of CI/CD for Chrome extensions is the GitHub Actions workflow file. This YAML file, stored in your repository's `.github/workflows` directory, defines the automation triggers, jobs, and steps that constitute your pipeline. Let us create a comprehensive workflow that handles testing, building, and deployment.
 
@@ -40,7 +40,7 @@ First, create the workflows directory if it does not exist:
 mkdir -p .github/workflows
 ```
 
-Now, create your main workflow file:
+### Now, create your main workflow file:
 
 ```yaml
 name: CI/CD Pipeline
@@ -56,7 +56,7 @@ This configuration triggers the workflow on every push and pull request to the m
 
 ---
 
-Implementing Automated Testing Jobs {#automated-testing}
+## Implementing Automated Testing Jobs {#automated-testing}
 
 The testing phase is critical for maintaining extension quality. Your workflow should run comprehensive tests across multiple environments to catch compatibility issues early. Here is a complete test job configuration:
 
@@ -107,7 +107,7 @@ Adding type checking catches type errors before they reach production, reducing 
 
 ---
 
-Building Your Chrome Extension {#building-extension}
+## Building Your Chrome Extension {#building-extension}
 
 The build job transforms your source code into a distributable extension package. For Chrome extensions, this typically involves bundling JavaScript files, generating the extension ZIP file, and preparing assets for Web Store submission.
 
@@ -159,7 +159,7 @@ If you use a build tool like Webpack, Rollup, or Vite, your build script should 
 
 ---
 
-Automated Chrome Web Store Deployment {#webstore-deployment}
+## Automated Chrome Web Store Deployment {#webstore-deployment}
 
 Deploying to the Chrome Web Store can be automated using the Chrome Web Store Publishing API. This eliminates manual upload through the developer dashboard and enables true continuous deployment for your extension.
 
@@ -172,7 +172,7 @@ Add the following secrets to your repository:
 - `CHROME_REFRESH_TOKEN`: Your Web Store refresh token
 - `CHROME_EXTENSION_ID`: Your published extension ID
 
-Now create the deployment job:
+### Now create the deployment job:
 
 {% raw %}
 ```yaml
@@ -209,11 +209,11 @@ This deployment job only runs on the main branch after a successful build, preve
 
 ---
 
-Version Management and Changelog Generation {#versioning}
+## Version Management and Changelog Generation {#versioning}
 
 Proper version management is essential for Chrome extension releases. Semantic versioning helps users understand the nature of updates, while automated changelog generation saves time during release preparation.
 
-Update your `package.json` to include version information:
+### Update your `package.json` to include version information:
 
 ```json
 {
@@ -224,7 +224,7 @@ Update your `package.json` to include version information:
 }
 ```
 
-Install the release management tool:
+### Install the release management tool:
 
 ```bash
 npm install --save-dev standard-version
@@ -246,7 +246,7 @@ Configure standard-version in a separate configuration file or add to package.js
 }
 ```
 
-Then update your workflow to include version bumping:
+### Then update your workflow to include version bumping:
 
 {% raw %}
 ```yaml
@@ -281,7 +281,7 @@ This configuration automatically bumps the version based on git tags, generates 
 
 ---
 
-Best Practices for Chrome Extension CI/CD {#best-practices}
+## Best Practices for Chrome Extension CI/CD {#best-practices}
 
 Implementing CI/CD is not just about automation, it requires thoughtful design to maximize benefits while minimizing friction. Here are essential best practices for Chrome extension pipelines.
 
@@ -326,13 +326,13 @@ Fifth, add quality gates at appropriate stages. Beyond unit tests, consider addi
 
 ---
 
-Advanced Workflow Configurations {#advanced-configurations}
+## Advanced Workflow Configurations {#advanced-configurations}
 
 As your extension grows, you may need more sophisticated CI/CD setups. Here are advanced configurations for complex scenarios.
 
-Multi-Environment Deployment
+### Multi-Environment Deployment
 
-Deploy to different environments based on branches:
+### Deploy to different environments based on branches:
 
 ```yaml
   deploy-staging:
@@ -352,9 +352,9 @@ Deploy to different environments based on branches:
         run: echo "Deploying to production"
 ```
 
-Scheduled Background Job Checks
+### Scheduled Background Job Checks
 
-Run periodic health checks on your extension:
+### Run periodic health checks on your extension:
 
 ```yaml
 on:
@@ -370,7 +370,7 @@ jobs:
           echo "Running extension health checks"
 ```
 
-Pull Request Previews
+### Pull Request Previews
 
 Generate preview builds for pull requests to test changes before merging:
 
@@ -391,7 +391,7 @@ Generate preview builds for pull requests to test changes before merging:
 
 ---
 
-Troubleshooting Common CI/CD Issues {#troubleshooting}
+## Troubleshooting Common CI/CD Issues {#troubleshooting}
 
 Even well-designed CI/CD pipelines encounter issues. Here are common problems and their solutions.
 
@@ -426,7 +426,7 @@ For Web Store submission failures, verify your credentials are current and your 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing CI/CD for Chrome Extensions with GitHub Actions transforms your development workflow from manual, error-prone processes into reliable, automated pipelines. This guide covered the essential components: automated testing across multiple environments, production builds, automated Web Store deployment, version management, and best practices for maintaining solid automation.
 
@@ -438,7 +438,7 @@ Remember that CI/CD is an ongoing investment. Regularly review and optimize your
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Testing Automation Guide]({% post_url 2025-01-16-chrome-extension-testing-automation-guide %})
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})
@@ -451,7 +451,7 @@ Ready to monetize? The Extension Monetization Playbook covers freemium models, S
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Testing Automation Guide](/2025/01/16/chrome-extension-testing-automation-guide/) - Comprehensive testing strategies for extensions
 - [Testing Chrome Extensions with Jest and Puppeteer](/2025/01/18/testing-chrome-extensions-with-jest-and-puppeteer/) - Unit and integration testing best practices

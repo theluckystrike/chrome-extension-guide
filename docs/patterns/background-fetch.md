@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/background-fetch/"
 last_modified_at: 2026-01-15
 ---
 
-Background Fetch Patterns
+### Background Fetch Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 Background data fetching enables extensions to retrieve and update data periodically without requiring user interaction. This is essential for extensions that display live data such as weather updates, stock prices, notifications, or any content that changes over time. However, Chrome's Manifest V3 service worker lifecycle introduces significant complexity, the service worker can terminate after just 30 seconds of inactivity, making traditional polling approaches unreliable.
 
 This guide covers patterns for implementing solid background fetching in MV3 extensions, working within the constraints of the service worker lifecycle while maintaining data freshness and minimizing resource usage.
 
-Alarm-Based Polling {#alarm-based-polling}
+## Alarm-Based Polling {#alarm-based-polling}
 
 The most reliable approach for periodic background fetching in MV3 is using `chrome.alarms`. Unlike `setInterval`, alarms are designed to survive service worker termination and will wake the worker when triggered. The minimum allowed interval is 30 seconds, which is sufficient for most use cases.
 
@@ -49,7 +49,7 @@ function updateBadge(data) {
 
 Register alarms in the `onInstalled` event to ensure they're recreated when the extension updates or Chrome restarts. Always check the alarm name in the listener to support multiple data sources.
 
-Fetch with Timeout {#fetch-with-timeout}
+## Fetch with Timeout {#fetch-with-timeout}
 
 Service workers have limited execution time and will be terminated when idle. Always wrap fetch calls with a timeout to ensure the worker doesn't get killed mid-operation:
 
@@ -87,7 +87,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 Keep timeouts short, target under 5 seconds for each request. If multiple requests are needed, execute them sequentially and consider whether all are required before the worker suspends.
 
-Conditional Fetching {#conditional-fetching}
+## Conditional Fetching {#conditional-fetching}
 
 Avoid re-fetching unchanged data using HTTP caching headers. Check for ETag or Last-Modified headers in previous responses and use them in subsequent requests:
 
@@ -138,7 +138,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-Error Handling with Adaptive Polling {#error-handling-with-adaptive-polling}
+## Error Handling with Adaptive Polling {#error-handling-with-adaptive-polling}
 
 Track consecutive failures and adjust polling frequency accordingly. After repeated failures, reduce fetch frequency to avoid wasting resources:
 
@@ -174,7 +174,7 @@ async function handleFetchSuccess() {
 
 When a fetch succeeds, reset the failure counter and restore the normal polling interval. This adaptive approach balances data freshness with server and network reliability.
 
-Push-Based Alternative {#push-based-alternative}
+## Push-Based Alternative {#push-based-alternative}
 
 For real-time updates, consider server-pushed notifications instead of polling. Chrome supports Firebase Cloud Messaging (FCM) for push notifications to extensions:
 
@@ -196,7 +196,7 @@ chrome.gcm.onMessage.addListener((message) => {
 
 Push notifications eliminate unnecessary polling and provide near-instant updates. However, they require server-side infrastructure to send messages and add complexity compared to simple polling.
 
-Multiple Data Sources {#multiple-data-sources}
+## Multiple Data Sources {#multiple-data-sources}
 
 When fetching from multiple APIs, use separate alarms with different intervals based on data importance:
 
@@ -232,7 +232,7 @@ async function fetchAndCachePrices() {
 
 Separate alarms allow independent control of polling frequency. Critical data like prices can update every few minutes while less time-sensitive content like news updates every 30 minutes or longer.
 
-Best Practices Summary {#best-practices-summary}
+## Best Practices Summary {#best-practices-summary}
 
 - Always use `chrome.alarms` for periodic fetching in MV3, never use `setInterval` directly
 - Implement timeouts on all fetch operations to prevent worker termination mid-request
@@ -242,7 +242,7 @@ Best Practices Summary {#best-practices-summary}
 - Cache fetched data in `chrome.storage.local` so popup and content scripts can access it without triggering their own fetches
 - Consider push notifications for time-critical updates instead of aggressive polling
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Alarms API](/permissions/alarms.md)
 - [Service Worker Lifecycle](/guides/service-worker-lifecycle.md)

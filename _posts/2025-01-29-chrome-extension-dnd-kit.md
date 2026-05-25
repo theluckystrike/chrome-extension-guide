@@ -18,7 +18,7 @@ we will explore how to integrate dnd-kit into your Chrome extension, covering ev
 
 ---
 
-What is dnd-kit and Why It Matters for Chrome Extensions {#what-is-dnd-kit}
+## What is dnd-kit and Why It Matters for Chrome Extensions {#what-is-dnd-kit}
 
 [dnd-kit](https://dndkit.com/) is a modern drag and drop library for React that provides a lightweight, accessible, and performant way to add drag functionality to your applications. Unlike older drag and drop libraries like react-beautiful-dnd or react-dnd, dnd-kit is designed with flexibility and future-proofing in mind, making it an excellent choice for Chrome extensions built with modern React patterns.
 
@@ -33,7 +33,7 @@ The library is modular, meaning you only import what you need, keeping your exte
 
 ---
 
-Key Features of dnd-kit for Extension Development {#key-features}
+## Key Features of dnd-kit for Extension Development {#key-features}
 
 dnd-kit offers several features that make it particularly well-suited for Chrome extension development:
 
@@ -67,11 +67,11 @@ The library includes multiple collision detection algorithms, allowing you to ch
 
 ---
 
-Setting Up dnd-kit in Your Chrome Extension {#setup}
+## Setting Up dnd-kit in Your Chrome Extension {#setup}
 
 Let's walk through the process of adding dnd-kit to a Chrome extension project. This section assumes you have a basic Chrome extension structure with React already set up.
 
-Installation
+### Installation
 
 First, install dnd-kit and its dependencies using your preferred package manager:
 
@@ -79,13 +79,13 @@ First, install dnd-kit and its dependencies using your preferred package manager
 npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 ```
 
-Or if you are using Yarn:
+### Or if you are using Yarn:
 
 ```bash
 yarn add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 ```
 
-Basic Implementation
+### Basic Implementation
 
 Here is a simple example of implementing a sortable list in your Chrome extension using dnd-kit:
 
@@ -179,11 +179,11 @@ This basic implementation provides a fully functional sortable list with mouse a
 
 ---
 
-Advanced dnd-kit Patterns for Chrome Extensions {#advanced-patterns}
+## Advanced dnd-kit Patterns for Chrome Extensions {#advanced-patterns}
 
 Once you have the basics working, you can implement more advanced patterns to create sophisticated drag and drop experiences in your Chrome extension.
 
-Multiple Sortable Lists
+### Multiple Sortable Lists
 
 Many Chrome extensions need to manage items across multiple lists or columns. For example, a Kanban-style task manager might have columns for "To Do," "In Progress," and "Done." dnd-kit handles this scenario elegantly with its multiple containers support.
 
@@ -309,13 +309,13 @@ function MultiColumnKanban() {
 }
 ```
 
-Drag Between Lists
+### Drag Between Lists
 
 A drag drop library chrome extension often needs to allow users to move items between different lists or containers. This is a common pattern for bookmark managers, tab group organizers, and task management tools.
 
 The key to implementing drag between lists is handling the `onDragOver` event to provide immediate visual feedback as the user drags an item over a different container.
 
-Implementing Drag Handles
+### Implementing Drag Handles
 
 Sometimes you want the drag functionality to be triggered only from a specific handle element within your item, rather than the entire item. This is useful when your items contain interactive elements like checkboxes, buttons, or text inputs.
 
@@ -349,7 +349,7 @@ function SortableItemWithHandle({ id, content }) {
 
 ---
 
-Best Practices for dnd-kit in Chrome Extensions {#best-practices}
+## Best Practices for dnd-kit in Chrome Extensions {#best-practices}
 
 When implementing dnd-kit in your Chrome extension, following these best practices will ensure a smooth user experience and maintain performance.
 
@@ -378,7 +378,7 @@ Users expect their arrangement of items to persist across browser sessions. Impl
 
 4. Test Across Different Scenarios
 
-Chrome extensions run in various contexts:
+### Chrome extensions run in various contexts:
 
 - Popup windows: Limited space, typically short interactions
 - Options pages: Full-page interfaces with more complex layouts
@@ -389,11 +389,11 @@ Test your dnd-kit implementation in each context to ensure it works correctly.
 
 ---
 
-Accessibility Considerations {#accessibility}
+## Accessibility Considerations {#accessibility}
 
 Accessibility is not optional. it is essential for reaching all users and is often a requirement for certain markets and use cases. dnd-kit provides excellent accessibility support, but you need to configure it properly.
 
-Keyboard Navigation
+### Keyboard Navigation
 
 dnd-kit's keyboard sensor provides comprehensive keyboard support:
 
@@ -402,7 +402,7 @@ dnd-kit's keyboard sensor provides comprehensive keyboard support:
 - Escape: Cancel the current drag operation
 - Arrow keys (while dragging): Move the item within the list
 
-Screen Reader Support
+### Screen Reader Support
 
 The library automatically adds appropriate ARIA attributes to sortable elements. However, you should also provide meaningful labels and descriptions for your specific use case:
 
@@ -417,17 +417,17 @@ The library automatically adds appropriate ARIA attributes to sortable elements.
 </div>
 ```
 
-Focus Management
+### Focus Management
 
 Ensure that focus is properly managed during drag operations. When an item is picked up or dropped, focus should move to the appropriate element to maintain keyboard navigation flow.
 
 ---
 
-Common Issues and Solutions {#troubleshooting}
+## Common Issues and Solutions {#troubleshooting}
 
 Here are solutions to common problems you might encounter when implementing dnd-kit in Chrome extensions:
 
-Issue: Drag Not Working in Popup
+### Issue: Drag Not Working in Popup
 
 Chrome popup windows have limited functionality. If drag and drop does not work in your popup, ensure that you have properly configured the pointer sensor with activation constraints:
 
@@ -441,7 +441,7 @@ const sensors = useSensors(
 );
 ```
 
-Issue: Items Not Dropping Correctly
+### Issue: Items Not Dropping Correctly
 
 If items are not dropping in the expected position, adjust your collision detection algorithm:
 
@@ -452,13 +452,13 @@ If items are not dropping in the expected position, adjust your collision detect
 >
 ```
 
-Issue: Performance Issues with Many Items
+### Issue: Performance Issues with Many Items
 
 For extensions with many sortable items, implement virtualization or consider using a different UI pattern that does not require rendering all items simultaneously.
 
 ---
 
-Real-World Examples of dnd-kit in Chrome Extensions {#examples}
+## Real-World Examples of dnd-kit in Chrome Extensions {#examples}
 
 Many successful Chrome extensions use drag and drop functionality that could benefit from dnd-kit implementation:
 
@@ -470,7 +470,7 @@ Many successful Chrome extensions use drag and drop functionality that could ben
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 dnd-kit is an excellent choice for implementing drag and drop functionality in Chrome extensions. Its lightweight footprint, accessibility support, and flexible API make it ideal for the unique constraints of browser extension development. Whether you are building a simple sortable list or a complex multi-column Kanban board, dnd-kit provides the tools you need to create intuitive, performant drag and drop experiences.
 

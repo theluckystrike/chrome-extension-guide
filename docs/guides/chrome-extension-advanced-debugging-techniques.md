@@ -9,7 +9,7 @@ Advanced Debugging Techniques for Chrome Extensions
 
 Debugging Chrome extensions at an advanced level requires understanding the intricate interactions between multiple execution contexts, the Chrome DevTools Protocol, and the unique lifecycle of service workers. This guide covers sophisticated debugging techniques that go beyond basic console.log statements, including programmatic debugging, memory analysis, performance profiling, and a comprehensive case study of debugging the Tab Suspender Pro extension.
 
-Table of Contents
+### Table of Contents
 
 - [Chrome DevTools Protocol for Extensions](#chrome-devtools-protocol-for-extensions)
 - [Remote Debugging Techniques](#remote-debugging-techniques)
@@ -23,11 +23,11 @@ Table of Contents
 
 ---
 
-Chrome DevTools Protocol for Extensions
+### Chrome DevTools Protocol for Extensions
 
 The Chrome DevTools Protocol (CDP) provides programmatic access to Chrome's debugging capabilities. For extension developers, CDP opens possibilities that the standard DevTools UI cannot provide.
 
-Connecting to Extension Contexts
+### Connecting to Extension Contexts
 
 You can connect to any extension context programmatically using CDP. This is particularly useful for automated testing and CI/CD pipelines:
 
@@ -62,7 +62,7 @@ async function connectToServiceWorker(
 }
 ```
 
-Using CDP for Extension Diagnostics
+### Using CDP for Extension Diagnostics
 
 CDP allows you to capture performance traces, evaluate code, and monitor memory programmatically:
 
@@ -103,9 +103,9 @@ async function capturePerformanceMetrics(
 }
 ```
 
-Listening to Console Messages
+### Listening to Console Messages
 
-Capture console output from any extension context:
+### Capture console output from any extension context:
 
 ```typescript
 function listenToConsoleMessages(session: CDPSession): void {
@@ -119,13 +119,13 @@ function listenToConsoleMessages(session: CDPSession): void {
 
 ---
 
-Remote Debugging Techniques
+### Remote Debugging Techniques
 
 Remote debugging extends your development environment to physical devices or virtual machines, essential for debugging issues that only appear in production environments.
 
-Setting Up Remote Debugging
+### Setting Up Remote Debugging
 
-Configure Chrome for remote debugging:
+### Configure Chrome for remote debugging:
 
 ```typescript
 interface RemoteConfig {
@@ -152,7 +152,7 @@ async function startRemoteDebugging(config: RemoteConfig): Promise<void> {
 }
 ```
 
-Debugging Extensions on Android
+### Debugging Extensions on Android
 
 Use ADB to connect to Chrome on Android devices:
 
@@ -188,11 +188,11 @@ async function setupAndroidForward(): Promise<void> {
 
 ---
 
-Memory Leak Detection with Heap Snapshots
+### Memory Leak Detection with Heap Snapshots
 
 Memory leaks in Chrome extensions can stem from retained object references, event listener leaks, or closure-related issues. Heap snapshots provide the detailed information needed to identify these problems.
 
-Taking Heap Snapshots
+### Taking Heap Snapshots
 
 ```typescript
 interface HeapSnapshot {
@@ -253,9 +253,9 @@ class MemoryLeakDetector {
 }
 ```
 
-Common Leak Patterns in Extensions
+### Common Leak Patterns in Extensions
 
-TypeScript examples of common memory leak patterns:
+### TypeScript examples of common memory leak patterns:
 
 ```typescript
 // LEAK 1: Event listeners not removed
@@ -333,11 +333,11 @@ function createMessageHandlerFixed(
 
 ---
 
-Performance Timeline Analysis
+### Performance Timeline Analysis
 
 Performance timeline analysis helps identify bottlenecks in extension startup, message passing, and background processing.
 
-Recording Performance Traces
+### Recording Performance Traces
 
 ```typescript
 interface TraceEvent {
@@ -395,7 +395,7 @@ class PerformanceTracer {
 }
 ```
 
-Timeline Analysis for Extension Events
+### Timeline Analysis for Extension Events
 
 ```typescript
 interface EventTimeline {
@@ -440,11 +440,11 @@ class ExtensionTimelineAnalyzer {
 
 ---
 
-Network Waterfall Debugging
+### Network Waterfall Debugging
 
 Extensions frequently make network requests for API calls, resource fetching, and communication with backend services. Network waterfall debugging helps identify bottlenecks.
 
-Intercepting Network Requests
+### Intercepting Network Requests
 
 ```typescript
 interface NetworkRequest {
@@ -507,7 +507,7 @@ class NetworkDebugger {
 }
 ```
 
-Debugging API Rate Limiting
+### Debugging API Rate Limiting
 
 ```typescript
 class RateLimitDebugger {
@@ -535,11 +535,11 @@ class RateLimitDebugger {
 
 ---
 
-Service Worker Lifecycle Debugging
+### Service Worker Lifecycle Debugging
 
 Service workers in Chrome extensions have complex lifecycle behaviors that can cause debugging challenges.
 
-Lifecycle Event Logging
+### Lifecycle Event Logging
 
 ```typescript
 type ServiceWorkerState = 
@@ -600,7 +600,7 @@ const lifecycleLogger = new ServiceWorkerLifecycleLogger();
 lifecycleLogger.logLifecycle();
 ```
 
-Debugging Service Worker Termination
+### Debugging Service Worker Termination
 
 ```typescript
 class ServiceWorkerTerminationDebugger {
@@ -632,11 +632,11 @@ class ServiceWorkerTerminationDebugger {
 
 ---
 
-Content Script Isolation Issues
+### Content Script Isolation Issues
 
 Content scripts run in an isolated world within web pages, which can cause unexpected behavior when sharing state or communicating with the extension.
 
-Understanding Isolation Boundaries
+### Understanding Isolation Boundaries
 
 ```typescript
 // content-script.ts runs in isolated world
@@ -647,7 +647,7 @@ const isolatedVariable = 'I am isolated';
 console.log(typeof isolatedVariable); // 'undefined' in page context
 ```
 
-Debugging Message Passing Failures
+### Debugging Message Passing Failures
 
 ```typescript
 // content-script.ts
@@ -696,7 +696,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Resolving Context Isolation Issues
+### Resolving Context Isolation Issues
 
 ```typescript
 // Inject code that works within isolation constraints
@@ -729,20 +729,20 @@ document.addEventListener('extension-data', (e: Event) => {
 
 ---
 
-Case Study: Tab Suspender Pro Debugging
+### Case Study: Tab Suspender Pro Debugging
 
 Tab Suspender Pro is a production extension that suspends inactive tabs to reduce memory usage. This case study demonstrates how advanced debugging techniques identified and resolved critical issues.
 
-Problem Description
+### Problem Description
 
 Users reported:
 1. High memory usage despite tab suspension
 2. Service worker unexpectedly terminating
 3. Content scripts not re-injecting after tab revival
 
-Investigation Process
+### Investigation Process
 
-Step 1: Memory Leak Detection
+### Step 1: Memory Leak Detection
 
 Heap snapshot analysis revealed that suspended tab references were being retained:
 
@@ -797,7 +797,7 @@ class TabSuspenderFixed {
 }
 ```
 
-Step 2: Service Worker Lifecycle Debugging
+### Step 2: Service Worker Lifecycle Debugging
 
 Logging revealed the service worker was being terminated due to memory pressure:
 
@@ -836,7 +836,7 @@ class ServiceWorkerMonitor {
 }
 ```
 
-Step 3: Content Script Re-injection Issues
+### Step 3: Content Script Re-injection Issues
 
 The revival process failed because content scripts weren't properly re-injected:
 
@@ -887,7 +887,7 @@ private waitForTabReady(tabId: number): Promise<void> {
 }
 ```
 
-Resolution Summary
+### Resolution Summary
 
 | Issue | Root Cause | Solution |
 |-------|------------|----------|
@@ -897,7 +897,7 @@ Resolution Summary
 
 ---
 
-Summary
+### Summary
 
 Advanced debugging techniques for Chrome extensions require understanding the unique architecture of extension contexts and their interactions. Key takeaways:
 

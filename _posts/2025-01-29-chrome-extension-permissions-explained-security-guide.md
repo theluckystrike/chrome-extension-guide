@@ -30,23 +30,23 @@ Chrome's permission system exists to protect users from malicious or poorly desi
 
 ---
 
-Understanding Permission Categories {#permission-categories}
+## Understanding Permission Categories {#permission-categories}
 
 Chrome extension permissions fall into three main categories: required permissions, optional permissions, and host permissions. Each category serves a different purpose and carries different implications for user security and extension functionality.
 
-Required Permissions
+### Required Permissions
 
 Required permissions are declared in the `permissions` array in the extension's manifest.json file. These permissions are requested when the user installs the extension, and they cannot be granted or revoked after installation. The extension has access to these capabilities immediately upon installation, which means users must trust the extension completely from the start.
 
 Required permissions should be used sparingly. The more required permissions an extension requests, the more concerning its access becomes. Extensions that request many required permissions will display a scary warning dialog during installation that lists all the data they can access. This warning often scares users away from installing the extension, which is why experienced developers minimize their required permissions whenever possible.
 
-Optional Permissions
+### Optional Permissions
 
 Optional permissions, declared in the `optional_permissions` array, represent a powerful pattern for building trustworthy extensions. These permissions are not granted at installation time but are requested later, when the user actually needs them. Users can see exactly why the permission is being requested and can choose to deny it without losing access to the extension's basic functionality.
 
 The optional permissions pattern significantly improves user trust. Instead of asking for everything upfront, the extension demonstrates its trustworthiness by only requesting access when necessary. For example, an extension might work perfectly fine without accessing your bookmarks, but offer enhanced features if you grant that permission. This transparency helps users make informed decisions about what data they want to share.
 
-Host Permissions
+### Host Permissions
 
 Host permissions are a special category that controls which websites an extension can access. They are declared using the `host_permissions` field in Manifest V3 and can take several forms: specific URLs like `https://example.com/*`, wildcards like `https://*.google.com/*`, or the broad `<all_urls>` permission that grants access to every website you visit.
 
@@ -54,7 +54,7 @@ Host permissions are particularly sensitive because they determine whether an ex
 
 ---
 
-Common Permissions Explained in Plain English {#common-permissions-explained}
+## Common Permissions Explained in Plain English {#common-permissions-explained}
 
 Understanding what each permission actually does helps you evaluate whether an extension's access is justified. Here is a breakdown of the most common permissions you will encounter.
 
@@ -96,17 +96,17 @@ These permissions are used by extensions that need to monitor or modify network 
 
 ---
 
-activeTab vs Broad Host Permissions {#activetab-vs-host-permissions}
+## activeTab vs Broad Host Permissions {#activetab-vs-host-permissions}
 
 One of the most important decisions Chrome extension developers face is choosing between `activeTab` and broad host permissions. This choice has significant implications for user security, user trust, and Chrome Web Store review times.
 
-Why activeTab Is the Preferred Choice
+### Why activeTab Is the Preferred Choice
 
 The `activeTab` permission should be your default choice whenever possible. It provides several important benefits that make your extension more trustworthy and easier to distribute. When an extension uses only `activeTab`, Chrome does not show the frightening "Read and change all your data on all websites" warning during installation. This alone can significantly improve your conversion rate, as many users click away from extensions that display such warnings.
 
 From a security perspective, `activeTab` limits the potential damage from a compromised or malicious extension. Because access is temporary and only granted when the user explicitly invokes the extension, there is no persistent capability for the extension to monitor your browsing. Even if an extension with `activeTab` were to be compromised, the attacker would only have access to whatever tab the user happens to be viewing at the moment of invocation.
 
-When Host Permissions Are Necessary
+### When Host Permissions Are Necessary
 
 Despite the advantages of `activeTab`, there are legitimate cases where broader host permissions are necessary. Some extensions need to function automatically whenever certain websites are loaded, without requiring user interaction. Content scripts that modify webpage behavior on page load, for example, require host permissions for the websites they modify.
 
@@ -116,7 +116,7 @@ Even when host permissions are necessary, developers should still follow the pri
 
 ---
 
-Case Study: Tab Suspender Pro as Minimal-Permission Example {#tab-suspender-pro-example}
+## Case Study: Tab Suspender Pro as Minimal-Permission Example {#tab-suspender-pro-example}
 
 Tab Suspender Pro exemplifies the minimal permission approach that users should look for when evaluating extensions. This popular extension, which automatically suspends inactive tabs to reduce Chrome memory usage by up to 80%, demonstrates how powerful functionality can be achieved with minimal access.
 
@@ -126,23 +126,23 @@ This stands in stark contrast to extensions that request far more access than th
 
 ---
 
-Understanding Permission Escalation Risks {#permission-escalation-risks}
+## Understanding Permission Escalation Risks {#permission-escalation-risks}
 
 Permission escalation is a security concern that users and developers must understand. In the context of Chrome extensions, it refers to the potential for an extension to gain more access over time than it was initially granted, or for a compromised extension to abuse its permissions.
 
-The Risk of Broad Permissions
+### The Risk of Broad Permissions
 
 Extensions with broad permissions represent a larger attack surface than those with narrow permissions. If an extension with `<all_urls>` access is compromised or turns malicious, the attacker gains access to everything you do in your browser. This could include capturing passwords as you enter them, reading sensitive emails, or even modifying transaction details on banking websites.
 
 The Chrome Web Store has policies against malicious behavior, and Google removes extensions that violate these policies. However, the review process is not perfect, and some malicious extensions do make it through. By minimizing the permissions you grant, you limit the potential damage from such extensions.
 
-Runtime Permission Requests
+### Runtime Permission Requests
 
 When extensions request additional permissions at runtime through the optional permissions pattern, users should pay attention to what is being requested and why. A legitimate extension will explain clearly why it needs the additional permission and how it will use that access. Be suspicious of extensions that request permissions without clear justification or that request permissions that seem unrelated to their core functionality.
 
 ---
 
-The Optional Permissions Pattern in Practice {#optional-permissions-pattern}
+## The Optional Permissions Pattern in Practice {#optional-permissions-pattern}
 
 Implementing the optional permissions pattern correctly is one of the best things developers can do to build user trust. only request the permissions you absolutely need, and give users control over optional access. Extensions like Tab Suspender Pro demonstrate that powerful functionality does not require broad permissions. By following these best practices, we can all contribute to a safer Chrome extension ecosystem.
 
@@ -150,7 +150,7 @@ For more detailed information about specific permissions, see the [Complete Chro
 
 ---
 
-Take Action
+### Take Action
 
 Ready to build a secure Chrome extension with proper permissions? Start by reviewing your current extension's manifest.json and identifying any permissions that can be removed or made optional. Test the optional permissions pattern in your next project and see how users respond to the increased transparency. Your users will thank you for respecting their privacy and security.
 

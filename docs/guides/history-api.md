@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 History API Guide
 
-Overview {#overview}
+## Overview {#overview}
 - Requires `"history"` permission (cross-ref `docs/permissions/history.md`)
 - Provides access to browser browsing history with full CRUD operations
 - All methods return data through callbacks or promises (MV3)
 - History items include URL, title, visit count, last visit time, and typed count
 
-Required Permission {#required-permission}
+## Required Permission {#required-permission}
 
 Add the history permission to your `manifest.json`:
 
@@ -25,7 +25,7 @@ Add the history permission to your `manifest.json`:
 
 In Manifest V3, history permission is a "host permission" for the purposes of permission warnings. Users will see a warning indicating your extension can "Read and change all your data on all websites."
 
-Searching History {#searching-history}
+## Searching History {#searching-history}
 
 The `chrome.history.search()` method is the primary way to query browser history. It accepts a query object and returns matching history items.
 
@@ -246,7 +246,7 @@ chrome.history.onVisited.addListener((result) => {
   // Update extension state or trigger actions
 The `referringVisitId` can trace how the user navigated to this page (e.g., from a search, direct link, or bookmark).
 
-Adding URLs - chrome.history.addUrl
+### Adding URLs - chrome.history.addUrl
 
 Manually add a URL to the browsing history. Useful for tracking external links or programmatic history entries.
 
@@ -261,7 +261,7 @@ chrome.history.addUrl({
 
 This won't duplicate entries if the URL already exists, it will update the last visit time instead.
 
-Deleting History
+### Deleting History
 
 Deleting a Specific URL - chrome.history.deleteUrl
 Removes all visits for a specific URL from history.
@@ -299,7 +299,7 @@ chrome.history.deleteAll(() => {
 });
 ```
 
-Event Listeners
+### Event Listeners
 
 chrome.history.onVisited
 Fires whenever a page is visited (user navigates to a URL).
@@ -329,11 +329,11 @@ chrome.history.onVisitRemoved.addListener((removed) => {
 });
 ```
 
-Privacy Considerations {#privacy-considerations}
+## Privacy Considerations {#privacy-considerations}
 
 When working with the History API, developers must handle sensitive user data responsibly.
 
-Data Sensitivity
+### Data Sensitivity
 
 Browser history contains deeply personal information about user behavior, including:
 - Websites visited and frequency
@@ -341,7 +341,7 @@ Browser history contains deeply personal information about user behavior, includ
 - Online activity patterns
 - Potential visits to sensitive sites (health, financial, political)
 
-Best Practices
+### Best Practices
 
 1. Minimize permission scope: Only request history access when absolutely necessary
 2. Local processing: Process history data locally rather than transmitting to external servers
@@ -349,7 +349,7 @@ Best Practices
 4. User transparency: Clearly explain in your extension's description why you need history access
 5. Provide controls: Give users options to exclude certain sites or time periods
 
-User Trust
+### User Trust
 
 History permissions trigger significant privacy warnings in Chrome. Users are likely to be skeptical of extensions requesting this permission. Consider whether alternative approaches could achieve your goals without accessing history:
 
@@ -357,11 +357,11 @@ History permissions trigger significant privacy warnings in Chrome. Users are li
 - Implement user-initiated bookmarking instead of automatic tracking
 - Use the [Storage API](./storage-api.md) for any data your extension generates
 
-Compliance
+### Compliance
 
 Be aware that accessing browser history may subject your extension to additional scrutiny during the Chrome Web Store review process. Ensure your extension's privacy policy accurately describes history data usage.
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 
 - Confusing `search()` with `getVisits()`. search finds matching items, getVisits gets all visits to a specific URL
 - Not handling the asynchronous nature of all history methods
@@ -369,16 +369,16 @@ Common Mistakes {#common-mistakes}
 - Forgetting that `search` with no parameters returns recent history items
 - Not checking `visitCount` before assuming a page is frequently visited
 
-Practical Patterns {#practical-patterns}
+## Practical Patterns {#practical-patterns}
 
 - History cleaner: Implement scheduled cleanup of old history items
 - Visit tracker: Monitor new visits and build a personalized dashboard
 - Duplicate finder: Search for URLs with multiple visits to identify bookmark candidates
 - Time-based analysis: Analyze browsing patterns by time of day or day of week
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Bookmarks API](./bookmark-api.md)
 - [Tabs API](./tabs-api.md)
@@ -389,7 +389,7 @@ The `removed` object contains:
 - `allHistory`: Boolean, true if all history was cleared
 - `urls`: Array of URLs that were removed
 
-Building a History Analytics Dashboard
+### Building a History Analytics Dashboard
 
 Here's a practical example of building a simple history analytics extension:
 
@@ -492,7 +492,7 @@ function getDailySummary() {
 }
 ```
 
-Privacy Considerations
+### Privacy Considerations
 
 User Trust
 - Always inform users: Make it clear in your extension's description how you use history data
@@ -525,7 +525,7 @@ Legal Compliance
 - Provide clear privacy policies
 - Allow users to opt out of data collection
 
-Common Use Cases
+### Common Use Cases
 
 1. Reading List / History Manager: Allow users to save and organize interesting pages
 2. Productivity Analytics: Show users their browsing patterns (time spent, frequent sites)

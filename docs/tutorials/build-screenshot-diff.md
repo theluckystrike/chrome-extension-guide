@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 Build a Screenshot Diff Extension. Tutorial
 
-What We're Building {#what-were-building}
+## What We're Building {#what-were-building}
 - Capture page snapshots and compare them visually
 - Highlight pixel differences with red overlay
 - Side-by-side and slider comparison modes
 - Snapshot history per URL with IndexedDB storage
 
-manifest.json {#manifestjson}
+## manifest.json {#manifestjson}
 ```json
 {
   "manifest_version": 3,
@@ -27,7 +27,7 @@ manifest.json {#manifestjson}
 - `activeTab` for capturing visible tab
 - `storage` permission (IndexedDB works without it, but good practice)
 
-Step 1: Capture Current Tab {#step-1-capture-current-tab}
+## Step 1: Capture Current Tab {#step-1-capture-current-tab}
 ```javascript
 // background.js
 async function captureTab() {
@@ -38,7 +38,7 @@ async function captureTab() {
 - Returns base64 data URL of visible viewport
 - Cross-ref: `docs/tutorials/build-screenshot-tool.md`
 
-Step 2: Save to IndexedDB {#step-2-save-to-indexeddb}
+## Step 2: Save to IndexedDB {#step-2-save-to-indexeddb}
 Chrome storage has 5MB limit, use IndexedDB for images.
 
 ```javascript
@@ -67,7 +67,7 @@ async function saveSnapshot(url, imageData) {
 ```
 - Cross-ref: `docs/patterns/indexeddb-extensions.md`
 
-Step 3: Popup UI for Snapshot History {#step-3-popup-ui-for-snapshot-history}
+## Step 3: Popup UI for Snapshot History {#step-3-popup-ui-for-snapshot-history}
 ```javascript
 // popup.js
 async function loadSnapshotsForUrl() {
@@ -84,7 +84,7 @@ async function loadSnapshotsForUrl() {
 }
 ```
 
-Step 4: Pixel-by-Pixel Comparison {#step-4-pixel-by-pixel-comparison}
+## Step 4: Pixel-by-Pixel Comparison {#step-4-pixel-by-pixel-comparison}
 ```javascript
 // diff.js
 function compareImages(img1Data, img2Data, threshold = 30) {
@@ -113,7 +113,7 @@ function compareImages(img1Data, img2Data, threshold = 30) {
 ```
 - Cross-ref: `docs/patterns/image-manipulation.md`
 
-Step 5: Visual Diff Display {#step-5-visual-diff-display}
+## Step 5: Visual Diff Display {#step-5-visual-diff-display}
 ```javascript
 // renderer.js
 function renderDiffOverlay(original, modified, diffData) {
@@ -138,7 +138,7 @@ function renderDiffOverlay(original, modified, diffData) {
 }
 ```
 
-Step 6: Side-by-Side & Slider Comparison {#step-6-side-by-side-slider-comparison}
+## Step 6: Side-by-Side & Slider Comparison {#step-6-side-by-side-slider-comparison}
 ```html
 <!-- comparison.html -->
 <div class="comparison-container">
@@ -156,7 +156,7 @@ slider.addEventListener("input", e => {
 });
 ```
 
-Step 7: Handle Viewport Differences {#step-7-handle-viewport-differences}
+## Step 7: Handle Viewport Differences {#step-7-handle-viewport-differences}
 ```javascript
 function normalizeForComparison(img1, img2) {
   const canvas = document.createElement("canvas");
@@ -181,7 +181,7 @@ function normalizeForComparison(img1, img2) {
 }
 ```
 
-Step 8: Full Page Capture {#step-8-full-page-capture}
+## Step 8: Full Page Capture {#step-8-full-page-capture}
 ```javascript
 async function captureFullPage() {
   const heights = [];
@@ -203,7 +203,7 @@ async function captureFullPage() {
 }
 ```
 
-Step 9: Export Diff as Image {#step-9-export-diff-as-image}
+## Step 9: Export Diff as Image {#step-9-export-diff-as-image}
 ```javascript
 function exportDiff(diffCanvas) {
   const link = document.createElement("a");
@@ -213,7 +213,7 @@ function exportDiff(diffCanvas) {
 }
 ```
 
-Summary {#summary}
+## Summary {#summary}
 | Feature | Implementation |
 |---------|----------------|
 | Capture | `chrome.tabs.captureVisibleTab()` |

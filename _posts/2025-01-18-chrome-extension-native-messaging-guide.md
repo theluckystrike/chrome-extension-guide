@@ -18,7 +18,7 @@ This comprehensive guide will walk you through the entire native messaging ecosy
 
 ---
 
-Understanding Native Messaging Architecture {#understanding-native-messaging}
+## Understanding Native Messaging Architecture {#understanding-native-messaging}
 
 Native messaging in Chrome extensions operates on a client-server model where your extension acts as the client and a separately installed native application serves as the host. This architecture allows bidirectional communication through standard input and output streams, enabling JSON-based message passing between processes.
 
@@ -28,7 +28,7 @@ The native messaging architecture consists of three main components that work to
 
 Understanding this architecture is crucial because it informs many design decisions you will make when implementing native messaging in your extension. The asynchronous nature of message passing, the requirement for JSON serialization, and the need for proper error handling are all aspects that require careful consideration during development.
 
-When to Use Native Messaging
+### When to Use Native Messaging
 
 Native messaging is particularly valuable in scenarios where your extension needs capabilities that are not available within the Chrome extension sandbox. Accessing system hardware such as USB devices, serial ports, or Bluetooth peripherals often requires direct system access that extensions cannot provide. Integrating with existing desktop applications like productivity tools, development environments, or customer relationship management systems becomes possible when your extension can communicate with their native counterparts.
 
@@ -36,11 +36,11 @@ Performance-critical operations that involve heavy computational tasks or large 
 
 ---
 
-Setting Up Your Extension for Native Messaging {#manifest-configuration}
+## Setting Up Your Extension for Native Messaging {#manifest-configuration}
 
 Before you can establish communication with a native host application, you need to configure your extension's manifest file properly. This configuration tells Chrome about the native host that your extension is authorized to communicate with.
 
-Declaring Native Messaging Permissions
+### Declaring Native Messaging Permissions
 
 Open your extension's manifest.json file and add the required configuration. You will need to specify the `nativeMessaging` permission in the permissions array, which grants your extension the ability to communicate with registered native host applications.
 
@@ -81,7 +81,7 @@ Beyond the permission, you must declare the native messaging connections your ex
 
 The `native_connections` object maps connection identifiers to arrays of native host names. In this example, `com.example.myapp` is the connection identifier that you will use in your extension code, while `com.example.myapp.host` is the name of the native host as registered on the user's system.
 
-Configuring the Native Host Manifest
+### Configuring the Native Host Manifest
 
 The native host application must also be properly configured to accept connections from your extension. On Windows, this is done through the Windows Registry, while on macOS and Linux, you use a JSON manifest file.
 
@@ -105,11 +105,11 @@ On Windows, the same configuration is stored in the registry under the path `HKE
 
 ---
 
-Implementing the Extension Side {#extension-implementation}
+## Implementing the Extension Side {#extension-implementation}
 
 Now that you have configured both the extension manifest and the native host, you can implement the actual messaging functionality in your extension. The Chrome runtime API provides two main methods for sending messages to native hosts, each suited for different use cases.
 
-Sending Messages to Native Hosts
+### Sending Messages to Native Hosts
 
 The primary method for communicating with native hosts is `chrome.runtime.sendNativeMessage()`. This method opens a connection to the specified native host and sends a message, returning a promise that resolves with the response from the native host.
 
@@ -170,7 +170,7 @@ function sendThroughPort(message) {
 }
 ```
 
-Handling Connection Errors
+### Handling Connection Errors
 
 Robust error handling is essential when working with native messaging because many failure scenarios can occur. The native host might not be installed, could be running an incompatible version, might crash during execution, or could become unresponsive. Your extension must handle all these situations gracefully.
 
@@ -207,11 +207,11 @@ async function safeSendNativeMessage(message) {
 
 ---
 
-Implementing the Native Host Application {#native-host-implementation}
+## Implementing the Native Host Application {#native-host-implementation}
 
 The native host application is a standalone executable that implements the native messaging protocol. It must read messages from standard input, process them, and write responses to standard output using JSON serialization with newline delimiters.
 
-A Simple Python Native Host Example
+### A Simple Python Native Host Example
 
 Python provides an excellent starting point for implementing native messaging hosts due to its simplicity and cross-platform compatibility. Here is a complete example that demonstrates the core concepts:
 
@@ -289,7 +289,7 @@ if __name__ == '__main__':
     main()
 ```
 
-A Node.js Native Host Example
+### A Node.js Native Host Example
 
 For developers who prefer JavaScript throughout their stack, Node.js provides similar capabilities:
 
@@ -393,11 +393,11 @@ main().catch(console.error);
 
 ---
 
-Security Best Practices {#security-best-practices}
+## Security Best Practices {#security-best-practices}
 
 Security is paramount when implementing native messaging because the native host runs with the full privileges of the user account that launched it. A compromised extension could potentially cause significant damage if proper security measures are not in place.
 
-Validating Messages
+### Validating Messages
 
 Always validate all incoming messages in your native host application. Never trust data from the extension without thorough validation. Check message types, validate string lengths, verify numeric ranges, and sanitize any data that will be used in file operations or command execution.
 
@@ -427,7 +427,7 @@ def handle_message(message):
     # ...
 ```
 
-Limiting Allowed Origins
+### Limiting Allowed Origins
 
 Configure your native host manifest with the smallest possible set of allowed origins. In production, specify the exact extension ID that should have access rather than allowing all extensions. This prevents other extensions from accidentally or maliciously communicating with your native host.
 
@@ -443,13 +443,13 @@ Configure your native host manifest with the smallest possible set of allowed or
 }
 ```
 
-Running with Minimal Privileges
+### Running with Minimal Privileges
 
 Design your native host to run with the minimum privileges necessary to accomplish its task. Avoid running as an administrator or root user unless absolutely required. Consider implementing additional authentication within the native host itself, such as requiring a secret key in each message that must match a stored value.
 
 ---
 
-Debugging Native Messaging {#debugging-native-messaging}
+## Debugging Native Messaging {#debugging-native-messaging}
 
 Debugging native messaging implementations can be challenging because the native host runs in a separate process from Chrome. Several techniques can help you identify and resolve issues.
 
@@ -475,7 +475,7 @@ def main():
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Chrome Extension Native Messaging opens up a world of possibilities for extension developers who need to bridge the gap between web technologies and desktop applications. By understanding the architecture, properly configuring both the extension and native host, implementing solid error handling, and following security best practices, you can create powerful integrations that significantly enhance your extension's capabilities.
 

@@ -20,7 +20,7 @@ This comprehensive guide explores the principles, patterns, and practical implem
 
 ---
 
-Understanding Local-First Architecture {#understanding-local-first}
+## Understanding Local-First Architecture {#understanding-local-first}
 
 Local-first software development is an architectural philosophy that prioritizes local data storage and processing while treating network connectivity as a secondary concern. This approach stands in contrast to the traditional cloud-centric model, where applications depend entirely on server communication for their core functionality.
 
@@ -28,7 +28,7 @@ The core principles of local-first development include keeping data on the user'
 
 Chrome extensions are particularly well-suited for local-first architecture because they have access to powerful browser storage APIs that web applications can only dream of. The extension's service worker can intercept network requests, cache responses, and serve cached data when offline. Content scripts can interact directly with IndexedDB for complex data operations. Background pages can maintain state and process data without any user interaction. These capabilities make Chrome extensions ideal candidates for local-first implementation.
 
-Why Local-First Matters for Extensions
+### Why Local-First Matters for Extensions
 
 The benefits of local-first architecture extend far beyond simple offline functionality. Users benefit from instant response times because there is no need to wait for network requests to complete. Applications feel more responsive and reliable when every interaction does not depend on network connectivity. This reliability builds user trust and satisfaction, as users can confidently use their extensions regardless of their current situation.
 
@@ -36,11 +36,11 @@ From a development perspective, local-first architecture simplifies many common 
 
 ---
 
-Chrome Extension Storage Options {#storage-options}
+## Chrome Extension Storage Options {#storage-options}
 
 Chrome extensions have access to several storage mechanisms, each suited to different use cases. Understanding these options is crucial for implementing effective local-first architecture.
 
-Chrome Storage API
+### Chrome Storage API
 
 The Chrome Storage API provides a simple key-value storage mechanism specifically designed for extensions. It offers two main storage areas: sync storage and local storage. Sync storage automatically synchronizes across all devices where the user is signed into Chrome, while local storage persists only on the current device.
 
@@ -58,7 +58,7 @@ chrome.storage.local.get(['key']).then((result) => {
 });
 ```
 
-IndexedDB
+### IndexedDB
 
 IndexedDB is a powerful NoSQL database system built into the browser that provides substantial storage capacity and supports complex queries, transactions, and indexing. For extensions handling large amounts of structured data, IndexedDB is the storage solution of choice.
 
@@ -84,7 +84,7 @@ request.onsuccess = (event) => {
 };
 ```
 
-Cache API
+### Cache API
 
 The Cache API provides storage for network requests and their corresponding responses. Originally designed for service workers to enable progressive web apps, the Cache API is equally valuable for Chrome extensions that need to cache network resources for offline use.
 
@@ -92,11 +92,11 @@ The Cache API stores Request and Response pairs, making it ideal for caching API
 
 ---
 
-Service Workers in Chrome Extensions {#service-workers}
+## Service Workers in Chrome Extensions {#service-workers}
 
 Service workers form the backbone of offline functionality in Chrome extensions. They act as a programmable network proxy, intercepting all network requests made by your extension and enabling you to implement custom caching strategies.
 
-Service Worker Lifecycle
+### Service Worker Lifecycle
 
 Understanding the service worker lifecycle is essential for building reliable offline extensions. The lifecycle includes installation, activation, and fetch phases, each offering opportunities to configure your extension's offline behavior.
 
@@ -133,7 +133,7 @@ self.addEventListener('fetch', (event) => {
 });
 ```
 
-Implementing Caching Strategies
+### Implementing Caching Strategies
 
 Different types of content require different caching strategies. Understanding when to use each strategy helps you build extensions that balance performance, freshness, and offline availability.
 
@@ -145,11 +145,11 @@ Stale-while-revalidate strategy provides a good balance for most use cases. The 
 
 ---
 
-Building a Local-First Extension Example {#practical-example}
+## Building a Local-First Extension Example {#practical-example}
 
 Let's build a practical example that demonstrates local-first architecture in action. We will create a simple note-taking extension that stores notes locally, works completely offline, and can sync when connected.
 
-Manifest Configuration
+### Manifest Configuration
 
 First, ensure your manifest.json properly declares the necessary permissions and service worker:
 
@@ -168,9 +168,9 @@ First, ensure your manifest.json properly declares the necessary permissions and
 }
 ```
 
-Background Service Worker Implementation
+### Background Service Worker Implementation
 
-The service worker handles the core offline functionality:
+### The service worker handles the core offline functionality:
 
 ```javascript
 // background.js - Service Worker
@@ -254,9 +254,9 @@ async function networkFirstStrategy(request) {
 }
 ```
 
-IndexedDB Data Layer
+### IndexedDB Data Layer
 
-The data layer manages notes using IndexedDB:
+### The data layer manages notes using IndexedDB:
 
 ```javascript
 // data-layer.js - IndexedDB Operations
@@ -360,11 +360,11 @@ notesDB.init();
 
 ---
 
-Synchronization Strategies {#synchronization}
+## Synchronization Strategies {#synchronization}
 
 While local-first architecture prioritizes offline functionality, most extensions eventually need to sync data with a backend server. Implementing solid synchronization requires careful consideration of conflict resolution and data consistency.
 
-Implementing Background Sync
+### Implementing Background Sync
 
 The Background Sync API allows your extension to defer actions until the user has stable connectivity. This is particularly useful for user-initiated actions that should be synchronized automatically.
 
@@ -415,7 +415,7 @@ async function syncNotes() {
 }
 ```
 
-Conflict Resolution
+### Conflict Resolution
 
 When syncing data, conflicts are inevitable when the same data is modified offline on multiple devices. There are several strategies for handling these conflicts, each with trade-offs.
 
@@ -427,17 +427,17 @@ Automatic merge attempts to combine changes from different versions. This works 
 
 ---
 
-Testing Offline Functionality {#testing}
+## Testing Offline Functionality {#testing}
 
 Thorough testing is essential to ensure your local-first extension works correctly in all scenarios. Chrome provides developer tools that make testing offline functionality straightforward.
 
-Using Chrome DevTools
+### Using Chrome DevTools
 
 Chrome DevTools allows you to simulate offline conditions without actually disconnecting your network. Open DevTools, go to the Application tab, and select Service Workers in the left sidebar. From there, you can check the "Offline" checkbox to simulate offline conditions.
 
 You can also use the Network tab to throttle your connection to simulate slow networks. This helps you understand how your extension performs under various network conditions and ensure your caching strategies are working correctly.
 
-Testing Service Worker Lifecycle
+### Testing Service Worker Lifecycle
 
 Test the service worker installation by navigating to chrome://extensions, enabling developer mode, and clicking "Update" on your extension. Monitor the Console in DevTools to see installation logs and catch any errors.
 
@@ -445,25 +445,25 @@ Test activation by incrementing your extension's version number in the manifest 
 
 ---
 
-Best Practices and Optimization {#best-practices}
+## Best Practices and Optimization {#best-practices}
 
 Building successful local-first Chrome extensions requires attention to several best practices that ensure reliability, performance, and user satisfaction.
 
-Storage Management
+### Storage Management
 
 Regularly clean up old data to prevent storage from growing unbounded. Implement data retention policies that archive or delete old records. Use Chrome's storage API to monitor available quota and alert users when storage is running low.
 
-Error Handling
+### Error Handling
 
 Always implement comprehensive error handling for storage operations. IndexedDB operations can fail for various reasons, including quota exceeded, private browsing mode, and corruption. Graceful degradation ensures your extension remains functional even when storage operations fail.
 
-Performance Optimization
+### Performance Optimization
 
 Minimize the amount of data stored in Chrome Storage API by using IndexedDB for larger datasets. Index your IndexedDB stores properly to ensure fast queries. Lazy-load data when possible rather than loading everything at startup.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Local-first architecture represents a powerful approach to Chrome extension development that prioritizes user experience through reliable offline functionality. By leveraging Chrome's powerful storage APIs, service workers, and thoughtful synchronization strategies, you can build extensions that work smoothly regardless of network conditions.
 

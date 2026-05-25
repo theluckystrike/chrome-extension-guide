@@ -18,11 +18,11 @@ This tutorial targets developers who want to create a capture element chrome fun
 
 ---
 
-Understanding Canvas Screenshot Technology {#understanding-canvas-screenshot}
+## Understanding Canvas Screenshot Technology {#understanding-canvas-screenshot}
 
 Before diving into code, it's important to understand what we're building and how canvas screenshot technology works in the browser environment.
 
-How Canvas Screenshot Extensions Work
+### How Canvas Screenshot Extensions Work
 
 A canvas screenshot extension operates by rendering HTML DOM elements onto an HTML5 Canvas, then converting that canvas to an image format like PNG or JPEG. The most popular library for this purpose is html2canvas, which parses the DOM and recreates it as canvas elements. This process allows you to take screenshots of web pages without requiring server-side rendering.
 
@@ -37,7 +37,7 @@ When building a capture element chrome extension, you have several approaches:
 
 Each approach has its use cases, and a well-designed extension should support multiple capture modes.
 
-Why Use html2canvas for Your Extension
+### Why Use html2canvas for Your Extension
 
 The html2canvas library has become the de facto standard for client-side screenshots in JavaScript applications. Here are compelling reasons to use it for your chrome extension:
 
@@ -51,11 +51,11 @@ For a canvas screenshot extension, html2canvas provides the perfect balance of f
 
 ---
 
-Project Setup and Extension Structure {#project-setup}
+## Project Setup and Extension Structure {#project-setup}
 
 Let's start building our canvas screenshot extension. First, we'll set up the project structure following Chrome extension best practices.
 
-Creating the Extension Directory
+### Creating the Extension Directory
 
 Create a new folder for your extension and set up the following structure:
 
@@ -81,7 +81,7 @@ canvas-screenshot-extension/
 
 This structure separates concerns between the popup UI, content scripts that run on pages, and the background service worker.
 
-Writing the Manifest File
+### Writing the Manifest File
 
 Every Chrome extension needs a manifest.json file that describes its configuration. For our canvas screenshot extension using Manifest V3, here's the manifest:
 
@@ -125,13 +125,13 @@ This manifest grants the extension the necessary permissions to access the activ
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. Let's create an intuitive interface with multiple capture options.
 
-HTML Structure
+### HTML Structure
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -191,7 +191,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
 Add some clean CSS in `popup/popup.css`:
 
@@ -315,7 +315,7 @@ h1 {
 }
 ```
 
-Popup Logic
+### Popup Logic
 
 The popup JavaScript handles user interactions and communicates with the background script:
 
@@ -407,17 +407,17 @@ function saveSettings() {
 
 ---
 
-Content Script: The Core Capture Logic {#content-script}
+## Content Script: The Core Capture Logic {#content-script}
 
 The content script runs on every webpage and contains the actual html2canvas implementation. This is where the capture element chrome magic happens.
 
-Setting Up html2canvas
+### Setting Up html2canvas
 
 First, you need to include html2canvas in your extension. Download the minified version from the official repository and place it in the lib folder. The content script will inject this library dynamically.
 
-Content Script Implementation
+### Content Script Implementation
 
-Create `content/content.js`:
+### Create `content/content.js`:
 
 ```javascript
 // content/content.js
@@ -618,7 +618,7 @@ function startElementSelection() {
 
 This content script provides the core capture element chrome functionality. It handles three capture modes: full page, visible viewport, and selected element.
 
-Content Script Styles
+### Content Script Styles
 
 Add some styles for the selection overlay in `content/styles.css`:
 
@@ -632,7 +632,7 @@ Add some styles for the selection overlay in `content/styles.css`:
 
 ---
 
-Background Service Worker {#background-service}
+## Background Service Worker {#background-service}
 
 The background script handles extension lifecycle events and can be used for additional functionality:
 
@@ -668,11 +668,11 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 ---
 
-Advanced Features and Optimization {#advanced-features}
+## Advanced Features and Optimization {#advanced-features}
 
 Now that you have a working canvas screenshot extension, let's explore some advanced features to make it even more powerful.
 
-Handling Cross-Origin Images
+### Handling Cross-Origin Images
 
 One of the biggest challenges with html2canvas is capturing images from other domains. To handle this, you need to set up proper CORS handling. Add this to your capture function:
 
@@ -698,7 +698,7 @@ async function captureWithCORS(element, settings) {
 
 For images that still fail to load, you can implement a fallback that replaces them with placeholders.
 
-Capturing Shadow DOM
+### Capturing Shadow DOM
 
 Modern web applications often use Shadow DOM. To capture elements inside shadow roots:
 
@@ -721,7 +721,7 @@ async function captureShadowDOM() {
 }
 ```
 
-Implementing Delayed Capture
+### Implementing Delayed Capture
 
 Some websites load content dynamically with animations or AJAX calls. You can implement a delay option:
 
@@ -738,7 +738,7 @@ Add this as a configurable option in your popup.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your canvas screenshot extension:
 
@@ -748,7 +748,7 @@ Before publishing, thoroughly test your canvas screenshot extension:
 4. Check image quality - Ensure the output matches expectations
 5. Test edge cases - Handle pages with iframes, canvas elements, and web components
 
-Common Issues and Solutions
+### Common Issues and Solutions
 
 | Issue | Solution |
 |-------|----------|
@@ -759,7 +759,7 @@ Common Issues and Solutions
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once testing is complete, follow these steps to publish:
 
@@ -772,7 +772,7 @@ Make sure your extension's description mentions the keywords: canvas screenshot 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a canvas screenshot extension is a rewarding project that teaches you valuable skills in Chrome extension development, DOM manipulation, and canvas rendering. we've covered:
 

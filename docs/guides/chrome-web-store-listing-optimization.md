@@ -16,11 +16,11 @@ Your CWS listing serves as your digital storefront, and unlike web SEO where you
 
 ---
 
-Understanding CWS Search Algorithm Factors
+### Understanding CWS Search Algorithm Factors
 
 The Chrome Web Store employs a multi-factor ranking algorithm that determines where your extension appears in search results. Understanding these factors is the foundation of effective optimization.
 
-Primary Ranking Signals
+### Primary Ranking Signals
 
 The algorithm prioritizes several key factors when ranking extensions. Install count remains a significant signal, extensions with higher installation counts signal quality and trust to the algorithm. However, quality matters more than sheer volume, as the algorithm also considers user engagement and retention rates.
 
@@ -30,7 +30,7 @@ Update recency signals active development. Extensions that receive regular updat
 
 Keyword relevance plays a crucial role. The algorithm scans your extension name, short description, and detailed description for keyword matches to user search queries. Strategic keyword placement throughout your listing elements improves relevance scoring.
 
-User Engagement Metrics
+### User Engagement Metrics
 
 Beyond basic rankings, the algorithm considers how users interact with your listing. Click-through rate (CTR) from search results matters, if users see your listing but don't click, it signals relevance issues. Install-to-uninstall ratio affects rankings; high uninstall rates suggest quality problems.
 
@@ -38,17 +38,17 @@ The algorithm also considers user demographics and cohort behavior. Extensions t
 
 ---
 
-Title Optimization: Balancing Keywords and Branding
+### Title Optimization: Balancing Keywords and Branding
 
 Your extension title is the most visible and weight-bearing element for search rankings. Optimizing it requires balancing keyword relevance with brand building.
 
-Title Structure Best Practices
+### Title Structure Best Practices
 
 Keep your title under 75 characters to ensure full visibility across all display contexts. The optimal structure leads with your primary keyword or core value proposition, followed by a differentiating descriptor or brand name. For example, "Tab Manager Pro. Organize Tabs with Keyboard Shortcuts" clearly communicates function while including secondary keywords.
 
 The primary keyword should appear as early as possible in the title. Search algorithms typically weight words at the beginning more heavily, so position your most important term at the start.
 
-Avoiding Common Title Mistakes
+### Avoiding Common Title Mistakes
 
 Keyword stuffing in titles hurts both rankings and user perception. Titles like "Best Free Tab Manager Organizer Tool for Chrome" appear spammy and reduce click-through rates. Instead, focus on clarity and readability.
 
@@ -58,11 +58,11 @@ Consider testing variations over time. If you have an established brand, priorit
 
 ---
 
-Description Structure: The Critical First 132 Characters
+### Description Structure: The Critical First 132 Characters
 
 The short description, limited to 132 characters, appears in search results and category listings, making it your most valuable real estate for generating clicks.
 
-Crafting the Perfect Short Description
+### Crafting the Perfect Short Description
 
 Write your short description as a compelling benefit statement, not a feature list. Lead with what users accomplish rather than what the extension does. Action-oriented language performs significantly better than passive descriptions.
 
@@ -70,7 +70,7 @@ Include your primary keyword naturally within these 132 characters. However, pri
 
 Test different variations. The Chrome Web Store doesn't provide A/B testing for descriptions directly, but you can change your description and monitor install rate changes in your developer dashboard.
 
-Detailed Description Architecture
+### Detailed Description Architecture
 
 Your detailed description (up to 16,384 characters) provides space to build trust and convince users to install. Structure it for scannability and conversion.
 
@@ -86,11 +86,11 @@ Privacy and support: End with a clear privacy statement explaining data handling
 
 ---
 
-Category Selection Strategy
+### Category Selection Strategy
 
 Choosing the right category significantly impacts visibility and competition. The Chrome Web Store offers categories including Productivity, Developer Tools, Search Tools, Shopping, Social & Communication, Fun, Accessibility, News & Weather, and others.
 
-Strategic Category Selection
+### Strategic Category Selection
 
 Select the single most specific category that accurately describes your extension. Being in the wrong category hurts rankings more than being in a less relevant but accurate category. The algorithm may filter out extensions in mismatched categories.
 
@@ -98,7 +98,7 @@ Research competitors in your potential categories. If you notice that similar ex
 
 For extensions with multiple use cases, choose the category where your primary value proposition lies. You can mention secondary use cases in your detailed description, but your primary category should reflect your core function.
 
-Category Competition Analysis
+### Category Competition Analysis
 
 Evaluate the competition level in each potential category. Highly competitive categories like Productivity require more optimization effort to stand out, while niche categories may offer easier visibility but smaller total audience.
 
@@ -106,17 +106,17 @@ Consider the intent behind category browsing. Users browsing Developer Tools lik
 
 ---
 
-Screenshot Best Practices: The 1280x800 Standard
+### Screenshot Best Practices: The 1280x800 Standard
 
 Screenshots are often the deciding factor in conversion. With users making quick judgments based on visual content, your screenshots must communicate value instantly.
 
-Screenshot Requirements
+### Screenshot Requirements
 
 Upload at least one screenshot and up to five. The recommended size is 1280x800 pixels, which displays well across different contexts, from mobile preview to desktop store views.
 
 Lead with your most compelling screenshot. This image appears in search results and category listings, making it your primary visual advertisement. Show the actual extension interface, not promotional graphics or stock photos.
 
-Creating Effective Visual Narratives
+### Creating Effective Visual Narratives
 
 Each screenshot should tell a story about a specific benefit or feature. Rather than showing every UI element, highlight the most valuable aspects. Use annotations sparingly to draw attention to key areas, excessive text overlays appear cluttered.
 
@@ -128,17 +128,17 @@ Consider creating screenshots for different user segments. Power users appreciat
 
 ---
 
-Promo Tile Design: 440x280 Visual Impact
+### Promo Tile Design: 440x280 Visual Impact
 
 Promo tiles (440x280 pixels) appear in store promotions and featured sections. They offer additional visual presence beyond screenshots.
 
-Design Principles for Promo Tiles
+### Design Principles for Promo Tiles
 
 Design promo tiles that work as standalone advertisements. Include your extension name, a brief benefit statement, and an appealing visual representation. Maintain visual consistency with your screenshots and icon.
 
 The promo tile should communicate your value proposition at a glance. Use contrasting colors, clear typography, and a focal point that draws attention.
 
-Creating Test Variations
+### Creating Test Variations
 
 Create multiple promo tile variations to test which performs best. While the Chrome Web Store doesn't offer internal A/B testing, you can gather user feedback through surveys or analyze install patterns after making changes.
 
@@ -146,11 +146,11 @@ Test different visual approaches: feature-focused versus benefit-focused, single
 
 ---
 
-Locale-Specific Listings: Global Expansion Strategy
+### Locale-Specific Listings: Global Expansion Strategy
 
 Expanding to multiple locales can dramatically increase your install base. However, locale-specific listings require more than translation, they need localization.
 
-Beyond Translation: True Localization
+### Beyond Translation: True Localization
 
 Machine translation often produces awkward phrasing that reduces conversion rates. Invest in professional translation that accounts for cultural nuances and local terminology.
 
@@ -158,7 +158,7 @@ Adapt your messaging for local markets. What resonates in English-speaking marke
 
 Consider localization beyond text. Visual elements, color schemes, and examples may need adaptation for cultural relevance in different markets.
 
-Managing Multiple Locale Listings
+### Managing Multiple Locale Listings
 
 The Chrome Web Store supports locale-specific listings through the developer dashboard. Create separate listings for each locale you target, customizing title, description, screenshots, and promo tiles.
 
@@ -168,17 +168,17 @@ Monitor performance by locale in your developer dashboard. Identify which market
 
 ---
 
-Review Generation Strategies
+### Review Generation Strategies
 
 Positive reviews build social proof and influence both ranking and conversion rates. However, generating reviews requires a thoughtful approach that respects user experience.
 
-Timing Review Requests
+### Timing Review Requests
 
 Prompt for reviews at the right moment, after users have successfully used your extension multiple times, not on first launch. Users who have experienced value are far more likely to leave positive reviews.
 
 Identify natural touchpoints where users have successfully completed a task. After saving their first item, organizing their first set of tabs, or completing their first transaction with your extension, these moments create opportunities for review requests.
 
-Responding to Reviews
+### Responding to Reviews
 
 Respond professionally to all reviews, positive and negative. Thank users for positive feedback and acknowledge their specific comments to show genuine engagement.
 
@@ -188,17 +188,17 @@ Never incentivize reviews, as this violates Chrome Web Store policies and can re
 
 ---
 
-A/B Testing with CWS Experiments
+### A/B Testing with CWS Experiments
 
 The Chrome Web Store offers limited built-in experimentation, but strategic testing can still optimize your listing performance.
 
-What You Can Test
+### What You Can Test
 
 Test variations of your short description, screenshots, and promo tiles by making changes and monitoring developer dashboard metrics. While not true A/B testing, this approach provides insights into what resonates.
 
 Test one element at a time to isolate the impact of changes. If you modify both title and screenshots simultaneously, you won't know which change drove results.
 
-Measuring Results
+### Measuring Results
 
 Track key metrics in your developer dashboard: install rate (installs per impression), uninstall rate, and user ratings. Look for statistically significant changes before concluding that a variation performs better.
 
@@ -206,11 +206,11 @@ Document your tests and results in a spreadsheet. Over time, this data builds in
 
 ---
 
-Analytics and Conversion Tracking
+### Analytics and Conversion Tracking
 
 Understanding your listing performance requires analyzing available metrics and making data-driven optimization decisions.
 
-Key Metrics to Monitor
+### Key Metrics to Monitor
 
 The Chrome Web Store developer dashboard provides several metrics. Installs shows total and daily installation volume. Impressions indicates how often your listing appeared in search results or category pages. Install rate (installs divided by impressions) measures conversion effectiveness.
 
@@ -218,7 +218,7 @@ Uninstall rate reveals user satisfaction issues. High uninstall rates within the
 
 User feedback through reviews provides qualitative insights. Monitor reviews for common complaints or feature requests that can guide optimization.
 
-Using Analytics for Optimization
+### Using Analytics for Optimization
 
 Identify which keywords drive traffic by analyzing your listing's performance for different search terms. While CWS doesn't provide detailed keyword-level data, you can infer keyword effectiveness through your overall search impression patterns.
 
@@ -226,7 +226,7 @@ Test and iterate based on data. Every change is an experiment, monitor results a
 
 ---
 
-Related Resources
+### Related Resources
 
 For more information on publishing and monetizing your Chrome extension, explore these related guides:
 

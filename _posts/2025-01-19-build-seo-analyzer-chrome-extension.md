@@ -18,7 +18,7 @@ This comprehensive tutorial will guide you through building a fully functional S
 
 ---
 
-Why Build an SEO Chrome Extension?
+### Why Build an SEO Chrome Extension?
 
 The demand for SEO tools has never been higher. Marketing professionals, content creators, web developers, and business owners all need quick ways to assess the SEO health of web pages without leaving their browsers. While there are many online SEO tools available, having a dedicated Chrome extension provides several distinct advantages that make building your own worthwhile.
 
@@ -30,7 +30,7 @@ Building an SEO analyzer also provides excellent learning opportunities. You wil
 
 ---
 
-Project Setup and Manifest Configuration
+### Project Setup and Manifest Configuration
 
 Every Chrome extension begins with the manifest file, which serves as the configuration blueprint telling Chrome about your extension's capabilities, permissions, and file structure. For our SEO analyzer, we need specific permissions to access webpage content and interact with browser tabs.
 
@@ -71,7 +71,7 @@ For the icon files, you will need to create simple 16x16, 48x48, and 128x128 pix
 
 ---
 
-The Popup Interface
+### The Popup Interface
 
 The popup is what users see when they click your extension icon in the Chrome toolbar. For our SEO analyzer, we want a clean, informative interface that displays analysis results clearly. Create `popup.html` with the following structure:
 
@@ -129,7 +129,7 @@ The popup is what users see when they click your extension icon in the Chrome to
 
 The popup structure divides SEO analysis into four main categories: meta tags, content analysis, links, and images. Each category gets its own section with a results list that we will populate dynamically after analysis. The overall score prominently displays at the top, giving users an immediate sense of the page's SEO health.
 
-Create `popup.css` to style the popup attractively:
+### Create `popup.css` to style the popup attractively:
 
 ```css
 * {
@@ -268,7 +268,7 @@ The CSS provides a clean, modern interface with clear visual feedback. Results a
 
 ---
 
-The Analysis Logic
+### The Analysis Logic
 
 Now we need to create the JavaScript that performs the actual SEO analysis. This is where the core functionality of our SEO tool extension lives. Create `analyzer.js`:
 
@@ -494,7 +494,7 @@ The scoring system awards points for positive SEO signals and reduces or withhol
 
 ---
 
-Connecting Popup and Analyzer
+### Connecting Popup and Analyzer
 
 Now we need to create the popup JavaScript that connects the user interface to our analyzer. Create `popup.js`:
 
@@ -572,7 +572,7 @@ The popup script handles user interactions and displays the analysis results. Wh
 
 ---
 
-Background Service Worker
+### Background Service Worker
 
 Finally, create the background service worker to handle extension lifecycle events:
 
@@ -593,7 +593,7 @@ The background service worker is minimal in this case since most of our function
 
 ---
 
-Loading and Testing Your Extension
+### Loading and Testing Your Extension
 
 Now that you have created all the necessary files, it's time to load your extension into Chrome and test it. Follow these steps to get your SEO analyzer running:
 
@@ -607,7 +607,7 @@ Try testing your extension on different types of pages to see how it handles var
 
 ---
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
 When your SEO tool extension is working correctly and provides valuable analysis, you may want to publish it to the Chrome Web Store to reach a wider audience. The publishing process involves creating a developer account, preparing your extension for distribution, and submitting it for review.
 
@@ -619,7 +619,7 @@ The review process typically takes a few days. Google checks for policy complian
 
 ---
 
-Conclusion and Next Steps
+### Conclusion and Next Steps
 
 Congratulations! You have successfully built a comprehensive SEO analyzer Chrome extension that can analyze web pages for critical on-page SEO factors. This extension provides real value to users seeking quick SEO insights without leaving their browsers, filling a genuine gap in the Chrome Web Store.
 

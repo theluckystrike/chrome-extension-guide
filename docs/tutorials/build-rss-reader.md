@@ -9,13 +9,13 @@ Build an RSS Reader Chrome Extension
 
 This tutorial walks through building a fully functional RSS feed reader extension with feed management, periodic polling, and unread badges.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 - Chrome browser
 - Basic JavaScript knowledge
 - Understanding of Chrome Extension architecture
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with required permissions for alarms, storage, and notifications:
 
@@ -44,7 +44,7 @@ Key permissions explained:
 - offscreen: Create DOMParser context for XML parsing
 - badge: Display unread count
 
-Step 2: Options Page for Feed Management {#step-2-options-page-for-feed-management}
+## Step 2: Options Page for Feed Management {#step-2-options-page-for-feed-management}
 
 Create `options.html` and `options.js` for managing RSS feed URLs:
 
@@ -86,7 +86,7 @@ function updateFeedList() {
 }
 ```
 
-Step 3: Background Service Worker with Alarm Polling {#step-3-background-service-worker-with-alarm-polling}
+## Step 3: Background Service Worker with Alarm Polling {#step-3-background-service-worker-with-alarm-polling}
 
 Set up periodic feed fetching using the Alarms API:
 
@@ -119,7 +119,7 @@ async function pollAllFeeds() {
 }
 ```
 
-Step 4: RSS Parsing with Offscreen Documents {#step-4-rss-parsing-with-offscreen-documents}
+## Step 4: RSS Parsing with Offscreen Documents {#step-4-rss-parsing-with-offscreen-documents}
 
 Service workers cannot use DOMParser directly. Use offscreen documents:
 
@@ -174,9 +174,9 @@ async function parseFeed(feedUrl) {
 }
 ```
 
-Step 5: Storage Schema {#step-5-storage-schema}
+## Step 5: Storage Schema {#step-5-storage-schema}
 
-Define structured storage for feeds and articles:
+### Define structured storage for feeds and articles:
 
 ```javascript
 // Storage structure
@@ -206,7 +206,7 @@ async function saveArticles(feedUrl, newArticles) {
 }
 ```
 
-Step 6: Popup UI for Viewing Articles {#step-6-popup-ui-for-viewing-articles}
+## Step 6: Popup UI for Viewing Articles {#step-6-popup-ui-for-viewing-articles}
 
 Create `popup.html` and `popup.js` to display articles grouped by feed:
 
@@ -258,7 +258,7 @@ async function loadArticles() {
 loadArticles();
 ```
 
-Step 7: Mark as Read & Open in New Tab {#step-7-mark-as-read-open-in-new-tab}
+## Step 7: Mark as Read & Open in New Tab {#step-7-mark-as-read-open-in-new-tab}
 
 Add functionality to track read state:
 
@@ -277,9 +277,9 @@ async function markAsRead(feedUrl, articleLink) {
 }
 ```
 
-Step 8: Badge Count for Unread Articles {#step-8-badge-count-for-unread-articles}
+## Step 8: Badge Count for Unread Articles {#step-8-badge-count-for-unread-articles}
 
-Display unread count in the extension badge:
+### Display unread count in the extension badge:
 
 ```javascript
 async function updateBadgeCount() {
@@ -296,7 +296,7 @@ async function updateBadgeCount() {
 }
 ```
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 
 Implement solid error handling for common issues:
 
@@ -332,7 +332,7 @@ async function fetchAndParseFeed(feedUrl) {
 }
 ```
 
-Summary {#summary}
+## Summary {#summary}
 
 This RSS reader extension demonstrates:
 - Alarms API for periodic polling (see `api-reference/alarms-api.md`)

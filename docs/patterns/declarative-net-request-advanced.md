@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/declarative-net-reques
 last_modified_at: 2026-01-15
 ---
 
-DeclarativeNetRequest Advanced Patterns
+### DeclarativeNetRequest Advanced Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The DeclarativeNetRequest API is Chrome's recommended way to block or modify network requests in Chrome Extensions (Manifest V3). Unlike the deprecated `webRequestBlocking` API, DeclarativeNetRequest operates declaratively. you define rules upfront, and the browser executes them efficiently without keeping your service worker awake.
 
@@ -23,11 +23,11 @@ Key facts:
 
 ---
 
-Pattern 1: Dynamic User-Configurable Rules {#pattern-1-dynamic-user-configurable-rules}
+## Pattern 1: Dynamic User-Configurable Rules {#pattern-1-dynamic-user-configurable-rules}
 
 Dynamic rules allow users to configure blocking behavior at runtime. Unlike static rules (which require extension updates to modify), dynamic rules can be added, updated, and removed programmatically.
 
-Understanding Dynamic Rules {#understanding-dynamic-rules}
+## Understanding Dynamic Rules {#understanding-dynamic-rules}
 
 Dynamic rules persist across browser sessions and are stored by Chrome. Users can view and manage them on the extension details page under "Dynamic rules."
 
@@ -122,7 +122,7 @@ async function toggleRule(ruleId: number, enabled: boolean): Promise<void> {
 }
 ```
 
-User Interface for Rule Management {#user-interface-for-rule-management}
+## User Interface for Rule Management {#user-interface-for-rule-management}
 
 ```tsx
 // popup/RuleManager.tsx
@@ -205,7 +205,7 @@ function escapeHtml(str: string): string {
 
 ---
 
-Pattern 2: Session Rules for Temporary Blocking {#pattern-2-session-rules-for-temporary-blocking}
+## Pattern 2: Session Rules for Temporary Blocking {#pattern-2-session-rules-for-temporary-blocking}
 
 Session rules are perfect for temporary blocking scenarios like:
 - Feature tours that block certain pages temporarily
@@ -278,7 +278,7 @@ function escapeRegex(str: string): string {
 
 ---
 
-Pattern 3: Rule Priorities and allowAllRequests {#pattern-3-rule-priorities-and-allowallrequests}
+## Pattern 3: Rule Priorities and allowAllRequests {#pattern-3-rule-priorities-and-allowallrequests}
 
 Rule priority determines which rule wins when multiple rules match the same request. The `allowAllRequests` action is particularly powerful for whitelisting.
 
@@ -369,11 +369,11 @@ async function setupSelectiveBlocking(): Promise<void> {
 
 ---
 
-Pattern 4: Regular Expression Filters {#pattern-4-regular-expression-filters}
+## Pattern 4: Regular Expression Filters {#pattern-4-regular-expression-filters}
 
 Regex filters provide powerful pattern matching but come with performance considerations and Chrome's RE2 syntax limitations.
 
-RE2 Syntax Limitations {#re2-syntax-limitations}
+## RE2 Syntax Limitations {#re2-syntax-limitations}
 
 Chrome uses RE2 for regex matching, which doesn't support:
 - Lookahead/Lookbehind assertions: `(?=...)`, `(?!...)`, `(?<=...)`, `(?<!...)`
@@ -462,7 +462,7 @@ async function getRegexRuleCount(): Promise<number> {
 
 ---
 
-Pattern 5: Header Modification {#pattern-5-header-modification}
+## Pattern 5: Header Modification {#pattern-5-header-modification}
 
 Header modification is a powerful feature for both request and response headers. This enables scenarios like:
 - Adding authentication headers to requests
@@ -614,7 +614,7 @@ async function setupCorsHeaders(): Promise<void> {
 
 ---
 
-Pattern 6: URL Redirects and Transforms {#pattern-6-url-redirects-and-transforms}
+## Pattern 6: URL Redirects and Transforms {#pattern-6-url-redirects-and-transforms}
 
 Redirect rules can transform URLs on the fly, useful for:
 - URL shortening expansion
@@ -704,7 +704,7 @@ async function setupSmartRedirect(): Promise<void> {
 
 ---
 
-Pattern 7: Complex Rule Conditions {#pattern-7-complex-rule-conditions}
+## Pattern 7: Complex Rule Conditions {#pattern-7-complex-rule-conditions}
 
 Conditions support multiple criteria for precise targeting.
 
@@ -803,9 +803,9 @@ async function blockAllImagesExceptTrusted(): Promise<void> {
 
 ---
 
-Pattern 8: Testing and Debugging {#pattern-8-testing-and-debugging}
+## Pattern 8: Testing and Debugging {#pattern-8-testing-and-debugging}
 
-Using testMatchOutcome {#using-testmatchoutcome}
+## Using testMatchOutcome {#using-testmatchoutcome}
 
 ```ts
 // background/testing.ts
@@ -843,7 +843,7 @@ async function debugRequest(url: string): Promise<void> {
 }
 ```
 
-Debugging in chrome://extensions {#debugging-in-chromeextensions}
+## Debugging in chrome://extensions {#debugging-in-chromeextensions}
 
 1. Navigate to `chrome://extensions`
 2. Enable "Developer mode" (top right)
@@ -856,7 +856,7 @@ Debugging in chrome://extensions {#debugging-in-chromeextensions}
 
 ---
 
-Pattern 9: Migration from webRequestBlocking {#pattern-9-migration-from-webrequestblocking}
+## Pattern 9: Migration from webRequestBlocking {#pattern-9-migration-from-webrequestblocking}
 
 If migrating from Manifest V2's `webRequestBlocking`, here's the approach:
 
@@ -928,7 +928,7 @@ function patternToRegex(pattern: string): string {
 
 ---
 
-Rule Limits Summary {#rule-limits-summary}
+## Rule Limits Summary {#rule-limits-summary}
 
 | Rule Type | Limit | Persistence |
 |-----------|-------|-------------|
@@ -937,7 +937,7 @@ Rule Limits Summary {#rule-limits-summary}
 | Session Rules | 5,000 | Browser restart |
 | Regex Rules | 5,000 | Combined total |
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Use static rules for fixed, unchanging rules (declarative in manifest)
 2. Use dynamic rules for user-configurable features
@@ -948,7 +948,7 @@ Best Practices {#best-practices}
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Declarative Net Request API Reference](/api_reference/declarative-net-request-api.md)
 - [Declarative Net Request Overview](/mv3/declarative-net-request.md)

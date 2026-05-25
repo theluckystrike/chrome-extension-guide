@@ -10,7 +10,7 @@ Chrome Extension Updates. How to Handle Version Upgrades and Data Migration
 
 When you publish a Chrome extension, your work doesn't end at launch. Users expect smooth updates, and as your extension evolves, you'll need to handle version upgrades gracefully while preserving user data. This guide covers the essential patterns for managing extension updates, implementing data migrations, and handling breaking changes without losing your users' trust or their valuable data.
 
-Understanding chrome.runtime.onInstalled
+### Understanding chrome.runtime.onInstalled
 
 The `chrome.runtime.onInstalled` event is the foundation of any update management strategy. This event fires when your extension is first installed, updated to a new version, or when Chrome itself is updated. Understanding when and how this event fires is critical for proper initialization and migration handling.
 Chrome Extension Update Strategies
@@ -20,7 +20,7 @@ Introduction
 - Poor update strategies can lead to user data loss, broken functionality, and negative reviews
 - This guide covers auto-updates, versioning, migration, testing, and deployment strategies
 
-Auto-Update Mechanism
+### Auto-Update Mechanism
 
 How Chrome Auto-Updates Work
 - Chrome checks for extension updates every few hours (typically 5-6 hours)
@@ -49,7 +49,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 The `details` object provides crucial information: `reason` tells you why the event fired, `previousVersion` reveals what version users were on before the update (only available when reason is "update"), and `id` identifies your extension. This distinction between install, update, and Chrome update scenarios allows you to execute different logic for each case, ensuring first-time users get a proper welcome while existing users have their data migrated smoothly.
 
-Version Checking and Comparison
+### Version Checking and Comparison
 
 Before running any migration, you need reliable version comparison logic. Version strings like "1.2.3" require careful parsing because simple string comparison fails with numbers like "1.10.0" being considered less than "1.2.0" in lexicographic ordering.
 
@@ -80,7 +80,7 @@ function isMajorVersionBump(oldVersion, newVersion) {
 
 Version checking serves multiple purposes: determining which migrations to run, deciding whether to show a "What's New" dialog, and identifying breaking changes that require special handling. Store your current schema version in chrome.storage.local so you can track what migrations have already been applied.
 
-Data Migration Scripts
+### Data Migration Scripts
 
 Data migration is perhaps the most critical aspect of extension updates. When you change your storage schema, you must transform existing user data to match the new structure. Without proper migrations, users upgrading from older versions will lose their settings or encounter errors.
 // Manifest V3 - automatic, no code needed
@@ -372,7 +372,7 @@ function getUpdateType(previousVersion, currentVersion) {
 }
 ```
 
-Update Notification Patterns
+### Update Notification Patterns
 
 In-App Notifications
 ```javascript
@@ -417,7 +417,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 })();
 ```
 
-Staged Rollouts in Chrome Web Store
+### Staged Rollouts in Chrome Web Store
 
 Understanding Staged Rollouts
 - Chrome Web Store supports gradual rollout percentages
@@ -439,7 +439,7 @@ Monitoring During Rollout
 - Review user feedback and ratings
 - Track storage error rates in telemetry
 
-Rollback Strategies
+### Rollback Strategies
 
 Preventing Bad Updates
 - Always test locally before publishing
@@ -464,7 +464,7 @@ Keep old CRX files for emergency rollback
    myextension-1.1.0.crx
 ```
 
-Forced Updates for Security Fixes
+### Forced Updates for Security Fixes
 
 Implementing Forced Updates
 ```javascript
@@ -498,7 +498,7 @@ Security Update Checklist
 - [ ] Have rollback plan ready
 - [ ] Document the security vulnerability
 
-Self-Hosted Extension Updates
+### Self-Hosted Extension Updates
 
 Update Manifest XML Format
 For self-hosted extensions, Chrome checks an XML manifest for updates:
@@ -543,9 +543,9 @@ Manifest.json Update URL
 }
 ```
 
-Reference: https://developer.chrome.com/docs/extensions/develop/distribute/host-on-linux
+### Reference: https://developer.chrome.com/docs/extensions/develop/distribute/host-on-linux
 
-Testing Updates Locally
+### Testing Updates Locally
 
 Local Testing Methods
 1. Load unpacked extension: `chrome://extensions` → "Load unpacked"
@@ -586,7 +586,7 @@ Testing Checklist
 - [ ] Test forced update scenario
 - [ ] Test rollback behavior
 
-Update Architecture Best Practices
+### Update Architecture Best Practices
 
 Summary Checklist
 - [ ] Use semantic versioning consistently

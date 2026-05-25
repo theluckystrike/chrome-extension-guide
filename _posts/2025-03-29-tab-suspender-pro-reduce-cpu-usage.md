@@ -17,7 +17,7 @@ Tab Suspender Pro offers a powerful solution to this problem. By intelligently s
 
 ---
 
-Table of Contents
+### Table of Contents
 
 1. [Why Chrome Tabs Consume CPU Even When Idle](#why-chrome-tabs-consume-cpu-even-when-idle)
 2. [How Tab Suspension Eliminates CPU Waste](#how-tab-suspension-eliminates-cpu-waste)
@@ -29,29 +29,29 @@ Table of Contents
 
 ---
 
-Why Chrome Tabs Consume CPU Even When Idle {#why-chrome-tabs-consume-cpu-even-when-idle}
+## Why Chrome Tabs Consume CPU Even When Idle {#why-chrome-tabs-consume-cpu-even-when-idle}
 
 Most users assume that if they're not actively viewing a tab, it's not doing anything. This is a dangerous misconception that leads to significant CPU waste. Modern web pages are far more complex than static documents, they're dynamic applications that continue running code even when you're not looking at them.
 
-Background Animations and Visual Effects
+### Background Animations and Visual Effects
 
 One of the biggest CPU drains comes from animations that continue running in background tabs. Websites increasingly use CSS animations, JavaScript-driven transitions, and canvas-based effects for visual appeal. When you have a tab open with any animation, whether it's a subtle hover effect, a loading spinner, or an elaborate animated hero section, Chrome continues rendering these animations at 60 frames per second, consuming CPU cycles for nothing.
 
 Social media sites are particularly notorious for this. A Twitter/X tab, for example, might have animated trending topics, auto-playing video previews, and dynamic content refreshes all happening simultaneously. Even Facebook and LinkedIn use continuous animations for notifications, typing indicators, and live updates.
 
-Timers and Intervals Running Unchecked
+### Timers and Intervals Running Unchecked
 
 JavaScript provides several timing mechanisms that continue running in background tabs: setInterval, setTimeout, requestAnimationFrame, and Web Workers. Many websites use these for legitimate purposes like updating stock prices, refreshing news feeds, or maintaining real-time connections. However, these timers don't automatically pause when you switch tabs, they keep firing, consuming CPU resources around the clock.
 
 Consider a tab left open to a weather website that updates every 30 seconds. Even though you're not looking at it, it's making network requests, processing JSON data, and updating the DOM. A news site might refresh its headlines every minute. A project management tool might poll for new notifications every 15 seconds. Multiply this by 20 or 30 tabs, and you have a significant amount of unnecessary CPU activity.
 
-Background Scripts and Network Activity
+### Background Scripts and Network Activity
 
 Modern web applications often use background scripts that continue running regardless of tab visibility. Web Workers, for instance, run in the background to handle heavy computations, process large datasets, or maintain persistent connections. Service workers can handle push notifications, background sync, and caching operations even when the parent tab isn't active.
 
 Additionally, many websites maintain WebSocket connections for real-time communication. A Slack tab, for example, keeps a persistent connection open to receive messages instantly. This connection requires periodic heartbeat messages and processing, consuming CPU even when you're not actively using Slack.
 
-JavaScript Event Loops Never Sleep
+### JavaScript Event Loops Never Sleep
 
 The JavaScript event loop in each tab is designed to respond to events, but it doesn't know you're not using the tab. It continues processing any events that fire, including:
 
@@ -62,7 +62,7 @@ The JavaScript event loop in each tab is designed to respond to events, but it d
 
 Each of these operations requires CPU time, and when you have 20, 30, or 50 tabs open, these background processes accumulate into a significant drain on your system resources.
 
-The CPU Multiplier Effect
+### The CPU Multiplier Effect
 
 Chrome's multi-process architecture means each tab runs in its own process for security and stability. While this isolation protects against crashes, it also means each tab has its own JavaScript engine, its own rendering pipeline, and its own set of background tasks. A single tab might use 1-3% CPU at idle, but 30 tabs can easily add up to 30% or more of your total CPU capacity, simply from sitting there doing nothing you requested.
 
@@ -70,11 +70,11 @@ This becomes especially problematic on laptops, where high CPU usage directly tr
 
 ---
 
-How Tab Suspension Eliminates CPU Waste {#how-tab-suspension-eliminates-cpu-waste}
+## How Tab Suspension Eliminates CPU Waste {#how-tab-suspension-eliminates-cpu-waste}
 
 Tab Suspender Pro solves the idle tab CPU problem through a process called tab suspension. When a tab is suspended, Chrome essentially freezes it in place, stopping all JavaScript execution, network activity, and rendering processes. The tab remains visible in your tab bar (with a visual indicator showing it's suspended), but it consumes virtually zero CPU.
 
-The Suspension Process
+### The Suspension Process
 
 When Tab Suspender Pro determines a tab should be suspended (based on your configured rules), it performs several operations:
 
@@ -85,7 +85,7 @@ When Tab Suspender Pro determines a tab should be suspended (based on your confi
 
 This approach is fundamentally different from closing a tab. When you close a tab, you lose all your work and must find the page again. When you suspend a tab, everything is preserved exactly as you left it.
 
-What Gets Stopped When Suspended
+### What Gets Stopped When Suspended
 
 When Tab Suspender Pro suspends a tab, it completely halts all resource consumption:
 
@@ -97,11 +97,11 @@ When Tab Suspender Pro suspends a tab, it completely halts all resource consumpt
 
 This comprehensive shutdown is what makes tab suspension so effective for CPU reduction. It's not just minimizing activity, it's completely stopping everything.
 
-The Instant Resume Feature
+### The Instant Resume Feature
 
 One of Tab Suspender Pro's most impressive features is how quickly suspended tabs can be restored. When you click on a suspended tab, Chrome recreates the tab process, loads the saved content from storage, and restores your scroll position, all in typically under a second.
 
-The extension intelligently manages this process:
+### The extension intelligently manages this process:
 
 - Pre-loaded content: The HTML, CSS, and basic JavaScript are already saved, so pages render almost instantly
 - Scroll position preservation: You return to exactly where you were
@@ -112,11 +112,11 @@ This smooth experience means you get all the CPU benefits of suspension without 
 
 ---
 
-Measuring CPU Usage Before and After {#measuring-cpu-usage-before-and-after}
+## Measuring CPU Usage Before and After {#measuring-cpu-usage-before-and-after}
 
 To understand how much CPU Tab Suspender Pro is saving you, you need to measure your Chrome CPU usage before and after installing and configuring the extension. Here's how to do it accurately.
 
-Using Chrome's Task Manager
+### Using Chrome's Task Manager
 
 Chrome includes a built-in Task Manager that shows CPU usage for each tab:
 
@@ -127,7 +127,7 @@ Chrome includes a built-in Task Manager that shows CPU usage for each tab:
 
 This gives you a per-tab breakdown that's invaluable for identifying which sites consume the most CPU.
 
-Using System Monitoring Tools
+### Using System Monitoring Tools
 
 For a broader view of Chrome's total CPU usage:
 
@@ -137,9 +137,9 @@ For a broader view of Chrome's total CPU usage:
 
 Record your baseline CPU usage with all your typical tabs open but before Tab Suspender Pro activates. Then, after waiting for tabs to suspend, measure again to see the difference.
 
-Expected Results
+### Expected Results
 
-Most users see dramatic improvements:
+### Most users see dramatic improvements:
 
 - Baseline: 20-40+ % CPU from Chrome with 20+ idle tabs
 - After suspension: 5-15% CPU with the same tabs suspended
@@ -148,11 +148,11 @@ This represents a 50-75% reduction in Chrome's CPU consumption, directly transla
 
 ---
 
-Configuring Aggressive Suspension for Maximum CPU Savings {#configuring-aggressive-suspension-for-maximum-cpu-savings}
+## Configuring Aggressive Suspension for Maximum CPU Savings {#configuring-aggressive-suspension-for-maximum-cpu-savings}
 
 Tab Suspender Pro offers extensive configuration options that let you tune the suspension behavior for optimal CPU savings. Here's how to configure the most aggressive settings for maximum performance.
 
-Quick Suspension Settings
+### Quick Suspension Settings
 
 The fastest path to CPU savings is reducing the time before tabs suspend:
 
@@ -160,7 +160,7 @@ The fastest path to CPU savings is reducing the time before tabs suspend:
 - Activity detection: Configure which activities count as "active" (mouse movement, keyboard input, video playback)
 - Manual suspend hotkey: Set a keyboard shortcut to instantly suspend the current tab
 
-Domain-Specific Rules
+### Domain-Specific Rules
 
 Not all tabs are equal in their CPU consumption. Configure different rules for different sites:
 
@@ -168,9 +168,9 @@ Not all tabs are equal in their CPU consumption. Configure different rules for d
 - Productivity tools: Email and collaboration tools might need longer before suspension (5-10 minutes)
 - Development environments: Any local development servers should be whitelisted entirely
 
-Exclusion Rules
+### Exclusion Rules
 
-Certain tabs should never be suspended:
+### Certain tabs should never be suspended:
 
 - Active downloads: Tabs with ongoing downloads
 - Video calls: Meeting tabs that might receive audio
@@ -179,7 +179,7 @@ Certain tabs should never be suspended:
 
 Configure these in the whitelist to prevent accidental suspension of important content.
 
-Battery and Power Settings
+### Battery and Power Settings
 
 Tab Suspender Pro can adjust its behavior based on power source:
 
@@ -190,11 +190,11 @@ This dynamic adjustment ensures you get maximum CPU savings when battery life ma
 
 ---
 
-Identifying CPU-Hungry Tabs {#identifying-cpu-hungry-tabs}
+## Identifying CPU-Hungry Tabs {#identifying-cpu-hungry-tabs}
 
 Some websites consume dramatically more CPU than others. Identifying these resource hogs helps you configure Tab Suspender Pro more effectively and decide which sites to whitelist versus which to suspend aggressively.
 
-The Worst Offenders
+### The Worst Offenders
 
 These types of sites typically consume the most CPU when idle:
 
@@ -205,9 +205,9 @@ These types of sites typically consume the most CPU when idle:
 - Streaming platforms: Even when not playing video, sites like YouTube and Twitch have active UI elements
 - Web-based IDEs and code editors: These run full development environments in the browser
 
-How to Identify High-CPU Tabs
+### How to Identify High-CPU Tabs
 
-Use Chrome's Task Manager to find resource-hungry tabs:
+### Use Chrome's Task Manager to find resource-hungry tabs:
 
 1. Open Task Manager (Shift + Escape)
 2. Sort by CPU column
@@ -216,7 +216,7 @@ Use Chrome's Task Manager to find resource-hungry tabs:
 
 You'll often find that a small number of tabs (perhaps 3-5) account for the majority of your CPU usage. Suspending these specific sites provides disproportionate benefits.
 
-Creating Targeted Suspension Rules
+### Creating Targeted Suspension Rules
 
 Once you've identified your worst CPU offenders, create specific rules for them:
 
@@ -226,25 +226,25 @@ Once you've identified your worst CPU offenders, create specific rules for them:
 
 ---
 
-Real-World Results and User Experiences {#real-world-results-and-user-experiences}
+## Real-World Results and User Experiences {#real-world-results-and-user-experiences}
 
 Users who have implemented Tab Suspender Pro with aggressive settings report impressive results:
 
-Laptop Users
+### Laptop Users
 
 "I used to get 2 hours of battery life with my work setup. After configuring Tab Suspender Pro to suspend tabs after 30 seconds of inactivity, I'm getting 4+ hours. The fans never spin up anymore, and my laptop stays cool even during long coding sessions."
 
-Power Users
+### Power Users
 
 "With 80+ tabs open at any time, Chrome was consuming 80% of my CPU. After Tab Suspender Pro suspended the idle ones, my CPU usage dropped to around 15-20%. It's like having a new computer."
 
-Developers
+### Developers
 
 "My development workflow involves lots of documentation tabs, API references, and Stack Overflow pages. Tab Suspender Pro keeps them all available but stops them from killing my CPU while I'm focused on code."
 
-Battery Life Improvements
+### Battery Life Improvements
 
-The CPU reductions directly translate to battery improvements:
+### The CPU reductions directly translate to battery improvements:
 
 - 15-30% improvement: For users with moderate tab usage
 - 50-100% improvement: For power users with many tabs
@@ -252,7 +252,7 @@ The CPU reductions directly translate to battery improvements:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Chrome's multi-tab browsing experience has become the norm, but the CPU cost of having many idle tabs open has been a persistent problem. Tab Suspender Pro provides an elegant solution that eliminates this waste entirely.
 

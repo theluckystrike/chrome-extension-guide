@@ -9,7 +9,7 @@ Build a Website Annotator Extension
 
 This tutorial guides you through building a Chrome extension that allows users to add sticky notes to any position on a webpage, save annotations per URL, and manage their notes.
 
-Project Overview {#project-overview}
+## Project Overview {#project-overview}
 
 The Website Annotator extension enables users to:
 - Add sticky notes to any position on a webpage
@@ -18,9 +18,9 @@ The Website Annotator extension enables users to:
 - Color-code notes for organization
 - View all annotated pages in a popup
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
-Create your `manifest.json` with the required permissions:
+### Create your `manifest.json` with the required permissions:
 
 ```json
 {
@@ -43,9 +43,9 @@ Create your `manifest.json` with the required permissions:
 
 We use `activeTab` permission for minimal access - the extension only works on pages the user explicitly activates.
 
-Step 2: Content Script Setup {#step-2-content-script-setup}
+## Step 2: Content Script Setup {#step-2-content-script-setup}
 
-Create `content.js` to handle note creation and positioning:
+### Create `content.js` to handle note creation and positioning:
 
 ```javascript
 // content.js - Main content script
@@ -65,7 +65,7 @@ function handleClick(e) {
 }
 ```
 
-Step 3: Click-to-Add Notes {#step-3-click-to-add-notes}
+## Step 3: Click-to-Add Notes {#step-3-click-to-add-notes}
 
 When users click on a page, create a note at that position:
 
@@ -90,9 +90,9 @@ function createNote(x, y, url) {
 }
 ```
 
-Step 4: Note UI Components {#step-4-note-ui-components}
+## Step 4: Note UI Components {#step-4-note-ui-components}
 
-Style your notes with a floating card design:
+### Style your notes with a floating card design:
 
 ```css
 .annotator-note {
@@ -116,7 +116,7 @@ Style your notes with a floating card design:
 }
 ```
 
-Step 5: Draggable Notes {#step-5-draggable-notes}
+## Step 5: Draggable Notes {#step-5-draggable-notes}
 
 Implement drag functionality using mouse events:
 
@@ -149,7 +149,7 @@ document.addEventListener('mouseup', () => {
 });
 ```
 
-Step 6: Position Storage {#step-6-position-storage}
+## Step 6: Position Storage {#step-6-position-storage}
 
 Save note positions relative to viewport for consistent placement:
 
@@ -176,9 +176,9 @@ function loadNotes(url) {
 }
 ```
 
-Step 7: Persistence Across Page Visits {#step-7-persistence-across-page-visits}
+## Step 7: Persistence Across Page Visits {#step-7-persistence-across-page-visits}
 
-Notes are automatically restored when revisiting a page:
+### Notes are automatically restored when revisiting a page:
 
 ```javascript
 function restoreNote(data, url) {
@@ -199,9 +199,9 @@ function getColor(colorName) {
 }
 ```
 
-Step 8: Note List in Popup {#step-8-note-list-in-popup}
+## Step 8: Note List in Popup {#step-8-note-list-in-popup}
 
-Create `popup.html` to show all annotated pages:
+### Create `popup.html` to show all annotated pages:
 
 ```html
 <style>
@@ -230,7 +230,7 @@ chrome.storage.local.get(null, (items) => {
 });
 ```
 
-Handling Page Layout Changes {#handling-page-layout-changes}
+## Handling Page Layout Changes {#handling-page-layout-changes}
 
 When page layouts change, notes may appear misplaced. Anchor notes to DOM elements:
 
@@ -245,9 +245,9 @@ function anchorToElement(note, selector) {
 }
 ```
 
-Export Notes as Markdown {#export-notes-as-markdown}
+## Export Notes as Markdown {#export-notes-as-markdown}
 
-Allow users to export all notes:
+### Allow users to export all notes:
 
 ```javascript
 function exportAsMarkdown() {
@@ -267,7 +267,7 @@ function exportAsMarkdown() {
 }
 ```
 
-Shadow DOM Isolation {#shadow-dom-isolation}
+## Shadow DOM Isolation {#shadow-dom-isolation}
 
 Use Shadow DOM to prevent page styles from affecting notes:
 
@@ -286,7 +286,7 @@ function createNoteWithShadow() {
 }
 ```
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [DOM Observer Pattern](/docs/patterns/dom-observer-patterns.md) - For detecting page changes
 - [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md) - For advanced injection

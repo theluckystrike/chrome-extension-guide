@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/cross-browser-compatib
 last_modified_at: 2026-01-15
 ---
 
-Cross-Browser Compatibility
+### Cross-Browser Compatibility
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions can run on multiple Chromium-based browsers (Edge, Brave, Opera, Vivaldi) and, with care, on Firefox. This guide covers practical patterns for writing extensions that work across browsers without maintaining separate codebases.
 
 ---
 
-The Browser Extension Landscape {#the-browser-extension-landscape}
+## The Browser Extension Landscape {#the-browser-extension-landscape}
 
 | Browser | Engine | API Namespace | Manifest | Store |
 |---------|--------|--------------|----------|-------|
@@ -27,7 +27,7 @@ The Browser Extension Landscape {#the-browser-extension-landscape}
 
 ---
 
-Pattern 1: Unified API Namespace {#pattern-1-unified-api-namespace}
+## Pattern 1: Unified API Namespace {#pattern-1-unified-api-namespace}
 
 Firefox uses `browser.*` with native Promises. Chrome uses `chrome.*` with callbacks (and increasingly Promises). Create a unified accessor:
 
@@ -39,7 +39,7 @@ export const api: typeof chrome =
     : chrome;
 ```
 
-Usage:
+### Usage:
 
 ```ts
 import { api } from "./browser-api";
@@ -49,7 +49,7 @@ const tabs = await api.tabs.query({ active: true, currentWindow: true });
 
 For projects using `@anthropic-ai/webext-*` packages, the libraries already abstract over `chrome.*`. but direct API calls still need this wrapper.
 
-Type-Safe Approach with Declaration Merging {#type-safe-approach-with-declaration-merging}
+## Type-Safe Approach with Declaration Merging {#type-safe-approach-with-declaration-merging}
 
 ```ts
 // types/browser.d.ts
@@ -61,7 +61,7 @@ export {};
 
 ---
 
-Pattern 2: Feature Detection over User-Agent Sniffing {#pattern-2-feature-detection-over-user-agent-sniffing}
+## Pattern 2: Feature Detection over User-Agent Sniffing {#pattern-2-feature-detection-over-user-agent-sniffing}
 
 Never rely on `navigator.userAgent` to determine browser capabilities. Instead, detect features directly:
 
@@ -87,7 +87,7 @@ if (supports.sidePanel) {
 
 ---
 
-Pattern 3: Manifest Differences {#pattern-3-manifest-differences}
+## Pattern 3: Manifest Differences {#pattern-3-manifest-differences}
 
 Chrome and Firefox have small but critical manifest differences. Use a build script to generate per-browser manifests from a shared base:
 
@@ -136,7 +136,7 @@ function buildFirefoxManifest(base: ManifestBase) {
 }
 ```
 
-Key Manifest Differences {#key-manifest-differences}
+## Key Manifest Differences {#key-manifest-differences}
 
 | Feature | Chrome MV3 | Firefox MV3 |
 |---------|-----------|-------------|
@@ -148,7 +148,7 @@ Key Manifest Differences {#key-manifest-differences}
 
 ---
 
-Pattern 4: Polyfilling Missing APIs {#pattern-4-polyfilling-missing-apis}
+## Pattern 4: Polyfilling Missing APIs {#pattern-4-polyfilling-missing-apis}
 
 Some APIs exist only in certain browsers. Create graceful fallbacks:
 
@@ -181,7 +181,7 @@ export async function executeScript(
 
 ---
 
-Pattern 5: Storage API Compatibility {#pattern-5-storage-api-compatibility}
+## Pattern 5: Storage API Compatibility {#pattern-5-storage-api-compatibility}
 
 The storage API is mostly consistent, but session storage is Chrome-only:
 
@@ -216,7 +216,7 @@ export async function getSessionValue<T>(key: string, fallback: T): Promise<T> {
 
 ---
 
-Pattern 6: Conditional Imports with Build Tools {#pattern-6-conditional-imports-with-build-tools}
+## Pattern 6: Conditional Imports with Build Tools {#pattern-6-conditional-imports-with-build-tools}
 
 Use your bundler to swap modules per target browser:
 
@@ -258,7 +258,7 @@ notify("Hello", "Cross-browser notification");
 
 ---
 
-Pattern 7: Testing Across Browsers {#pattern-7-testing-across-browsers}
+## Pattern 7: Testing Across Browsers {#pattern-7-testing-across-browsers}
 
 Use Playwright or Puppeteer to test your extension in multiple browsers:
 
@@ -294,9 +294,9 @@ test("extension loads in Chromium", async () => {
 
 ---
 
-Common Pitfalls {#common-pitfalls}
+## Common Pitfalls {#common-pitfalls}
 
-1. Promise vs Callback Styles {#1-promise-vs-callback-styles}
+## 1. Promise vs Callback Styles {#1-promise-vs-callback-styles}
 Chrome historically used callbacks. Firefox always used Promises. Modern Chrome (MV3) supports Promises for most APIs, but some older APIs still need callbacks:
 
 ```ts
@@ -316,7 +316,7 @@ export function promisify<T>(
 }
 ```
 
-2. Extension URL Schemes {#2-extension-url-schemes}
+## 2. Extension URL Schemes {#2-extension-url-schemes}
 ```ts
 // Chrome: chrome-extension://<id>/page.html
 // Firefox: moz-extension://<uuid>/page.html
@@ -325,7 +325,7 @@ export function promisify<T>(
 const url = chrome.runtime.getURL("options.html");
 ```
 
-3. Context Menu Differences {#3-context-menu-differences}
+## 3. Context Menu Differences {#3-context-menu-differences}
 ```ts
 // Chrome supports "action" context; Firefox does not
 const contexts: chrome.contextMenus.ContextType[] = ["page", "selection"];
@@ -343,7 +343,7 @@ chrome.contextMenus.create({
 
 ---
 
-Build Script: Multi-Browser Package {#build-script-multi-browser-package}
+## Build Script: Multi-Browser Package {#build-script-multi-browser-package}
 
 ```json
 {
@@ -361,7 +361,7 @@ Build Script: Multi-Browser Package {#build-script-multi-browser-package}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Strategy | When to Use |
 |----------|------------|

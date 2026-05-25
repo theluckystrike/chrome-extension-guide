@@ -11,7 +11,7 @@ Keeping your Chrome extension up-to-date is crucial for security, performance, a
 
 ---
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions can be updated through two primary mechanisms:
 
@@ -22,18 +22,18 @@ Understanding how these mechanisms work is essential for building reliable updat
 
 ---
 
-How Chrome Auto-Update Works {#how-auto-update-works}
+## How Chrome Auto-Update Works {#how-auto-update-works}
 
 Chrome automatically checks for extension updates approximately every few hours. The process follows these steps:
 
-Update Check Process
+### Update Check Process
 
 1. Background Check: Chrome queries the Chrome Web Store for new versions
 2. Version Comparison: If a newer version exists, Chrome downloads it
 3. Silent Update: The new version is installed silently in the background
 4. Extension Restart: The updated extension is loaded on the next browser restart or when triggered
 
-Key Behaviors to Understand
+### Key Behaviors to Understand
 
 ```javascript
 // Chrome's update behavior:
@@ -47,11 +47,11 @@ Key Behaviors to Understand
 
 ---
 
-Version Bumping {#version-bumping}
+## Version Bumping {#version-bumping}
 
 Proper semantic versioning is critical for managing updates and communicating changes to users.
 
-Semantic Versioning for Extensions
+### Semantic Versioning for Extensions
 
 ```
 MAJOR.MINOR.PATCH
@@ -60,7 +60,7 @@ MAJOR.MINOR.PATCH
    Breaking changes, API modifications
 ```
 
-Version Update Examples
+### Version Update Examples
 
 ```json
 {
@@ -86,7 +86,7 @@ Version Update Examples
 }
 ```
 
-Best Practices for Version Numbers
+### Best Practices for Version Numbers
 
 - Always increment the version when publishing
 - Never reuse version numbers
@@ -95,7 +95,7 @@ Best Practices for Version Numbers
 
 ---
 
-The Update Manifest (Self-Hosted) {#update-manifest}
+## The Update Manifest (Self-Hosted) {#update-manifest}
 
 If you host your extension outside the Chrome Web Store, you need an update manifest.
 
@@ -114,7 +114,7 @@ update.xml Structure
 </gupdate>
 ```
 
-Hosting the Update Manifest
+### Hosting the Update Manifest
 
 ```javascript
 // In your manifest.json for self-hosted updates:
@@ -127,11 +127,11 @@ Hosting the Update Manifest
 
 ---
 
-Staged Rollouts {#staged-rollouts}
+## Staged Rollouts {#staged-rollouts}
 
 Chrome Web Store supports staged rollouts to gradually release updates.
 
-Using Staged Rollouts
+### Using Staged Rollouts
 
 1. Upload your new version to the Chrome Web Store
 2. Don't publish. instead, use the staging feature
@@ -139,7 +139,7 @@ Using Staged Rollouts
 4. Monitor: Watch for errors and user feedback
 5. Increase gradually: Move to 10%, 25%, 50%, 100%
 
-Staged Rollout Best Practices
+### Staged Rollout Best Practices
 
 | Stage | Percentage | Duration | Actions |
 |-------|------------|----------|---------|
@@ -148,7 +148,7 @@ Staged Rollout Best Practices
 | Majority | 50% | 48-72h | Ensure stability at scale |
 | Full | 100% | - | Complete rollout |
 
-Monitoring During Rollout
+### Monitoring During Rollout
 
 ```javascript
 // Track update-related metrics
@@ -169,11 +169,11 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 ---
 
-Handling Breaking Changes {#handling-breaking-changes}
+## Handling Breaking Changes {#handling-breaking-changes}
 
 Breaking changes require careful planning to maintain user experience and data integrity.
 
-Types of Breaking Changes
+### Types of Breaking Changes
 
 1. Storage Schema Changes. New data format in chrome.storage
 2. API Changes. Modified or removed extension APIs
@@ -181,7 +181,7 @@ Types of Breaking Changes
 4. Manifest Changes. Modified manifest structure
 5. UI/UX Changes. Significant interface redesigns
 
-Strategy 1: Version-Gated Features
+### Strategy 1: Version-Gated Features
 
 ```javascript
 // background.js - Service Worker
@@ -217,7 +217,7 @@ function compareVersions(v1, v2) {
 }
 ```
 
-Strategy 2: Feature Flags
+### Strategy 2: Feature Flags
 
 ```javascript
 // lib/feature-flags.js
@@ -252,7 +252,7 @@ if (await isFeatureEnabled('newBookmarkSystem')) {
 }
 ```
 
-Strategy 3: Graceful Degradation
+### Strategy 3: Graceful Degradation
 
 ```javascript
 // content-script.js - Handling breaking changes gracefully
@@ -286,11 +286,11 @@ async function hasNewAPI() {
 
 ---
 
-Data Migration on Update {#data-migration}
+## Data Migration on Update {#data-migration}
 
 Migrating user data between versions is critical for maintaining continuity.
 
-Using chrome.runtime.onInstalled
+### Using chrome.runtime.onInstalled
 
 ```javascript
 // background.js
@@ -403,11 +403,11 @@ function getDefaultSettings() {
 
 ---
 
-First-Run vs Update Flows {#first-run-vs-update}
+## First-Run vs Update Flows {#first-run-vs-update}
 
 Distinguishing between first installation and updates allows for appropriate user experiences.
 
-Comprehensive Update Handler
+### Comprehensive Update Handler
 
 ```javascript
 // background.js - Complete update handling
@@ -564,7 +564,7 @@ function generateId() {
 }
 ```
 
-Handling the Update Reason
+### Handling the Update Reason
 
 ```javascript
 // Quick reference for onInstalled reason values
@@ -586,13 +586,13 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 ---
 
-Rollback Planning {#rollback-planning}
+## Rollback Planning {#rollback-planning}
 
 Having a rollback strategy is essential for handling problematic updates.
 
-Version Retention
+### Version Retention
 
-Keep previous versions available for quick rollback:
+### Keep previous versions available for quick rollback:
 
 ```bash
 Store previous CRX files
@@ -602,7 +602,7 @@ Store previous CRX files
    myextension-1.2.0.crx
 ```
 
-Automatic Rollback Triggers
+### Automatic Rollback Triggers
 
 ```javascript
 // background.js - Monitor for critical errors
@@ -672,14 +672,14 @@ async function performRollback(version) {
 }
 ```
 
-Rollback Best Practices
+### Rollback Best Practices
 
 1. Monitor Error Rates: Track errors per version in analytics
 2. Maintain Version History: Keep track of previous working versions
 3. Quick Hotfix Process: Have a process to push emergency fixes
 4. User Communication: Be transparent about issues and fixes
 
-Emergency Update Process
+### Emergency Update Process
 
 ```javascript
 // Emergency: Force a specific version recommendation
@@ -715,11 +715,11 @@ async function emergencyHotfix() {
 
 ---
 
-Testing Update Handling {#testing-updates}
+## Testing Update Handling {#testing-updates}
 
 Always test your update handling thoroughly before releasing.
 
-Manual Testing Checklist
+### Manual Testing Checklist
 
 - [ ] Fresh install on new profile
 - [ ] Update from previous version
@@ -729,7 +729,7 @@ Manual Testing Checklist
 - [ ] Offline update scenarios
 - [ ] Rollback scenarios
 
-Testing Data Migration
+### Testing Data Migration
 
 ```javascript
 // Test migration in development
@@ -759,7 +759,7 @@ async function testMigration() {
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Extension Updates](../guides/extension-updates.html). Detailed look into the update mechanism and best practices for managing releases
 - [Storage Migration Strategies](../patterns/storage-migration-strategies.html). Advanced patterns for migrating user data across versions

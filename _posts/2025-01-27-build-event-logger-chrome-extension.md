@@ -17,7 +17,7 @@ The ability to monitor and log events in real-time across any web page opens up 
 
 ---
 
-Understanding the Event Logger Extension Architecture {#architecture}
+## Understanding the Event Logger Extension Architecture {#architecture}
 
 Before diving into code, it is essential to understand the architecture of a well-designed event logger extension. The extension we will build consists of several key components that work together to provide a smooth debugging experience.
 
@@ -27,7 +27,7 @@ Understanding how these components interact is crucial for building a reliable e
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Every Chrome extension begins with a manifest file that defines the extension's capabilities and permissions. For our event logger extension, we need to carefully specify the permissions required for accessing web page content and interacting with DevTools.
 
@@ -78,11 +78,11 @@ This manifest file defines several critical components. The host_permissions wit
 
 ---
 
-Building the Content Script for Event Capture {#content-script}
+## Building the Content Script for Event Capture {#content-script}
 
 The content script is the heart of our event logger extension. It runs within the context of each web page and is responsible for capturing all DOM events and JavaScript events that occur on the page. This script must be carefully designed to minimize performance impact while providing comprehensive event coverage.
 
-Create content.js with the following implementation:
+### Create content.js with the following implementation:
 
 ```javascript
 // Event Logger Chrome Extension - Content Script
@@ -341,11 +341,11 @@ This content script provides comprehensive event capture capabilities. It uses e
 
 ---
 
-Creating the Background Service Worker {#background-worker}
+## Creating the Background Service Worker {#background-worker}
 
 The background service worker manages the extension's lifecycle and provides persistent storage for captured events. It acts as a central hub for communication between the content script, popup, and DevTools panel.
 
-Create background.js:
+### Create background.js:
 
 ```javascript
 // Event Logger Chrome Extension - Background Service Worker
@@ -406,11 +406,11 @@ chrome.runtime.onStartup.addListener(() => {
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides quick access to the most commonly used logging controls without requiring the full DevTools panel. This is perfect for quick debugging sessions.
 
-Create popup.html:
+### Create popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -553,7 +553,7 @@ Create popup.html:
 </html>
 ```
 
-Create popup.js to handle the popup logic:
+### Create popup.js to handle the popup logic:
 
 ```javascript
 // Popup script for Event Logger Chrome Extension
@@ -648,11 +648,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Creating the DevTools Panel {#devtools-panel}
+## Creating the DevTools Panel {#devtools-panel}
 
 For comprehensive event analysis, we need a custom DevTools panel. This provides a full-featured interface for filtering, searching, and analyzing captured events.
 
-Create devtools.html:
+### Create devtools.html:
 
 ```html
 <!DOCTYPE html>
@@ -800,7 +800,7 @@ Create devtools.html:
 </html>
 ```
 
-Create devtools.js:
+### Create devtools.js:
 
 ```javascript
 // DevTools panel script for Event Logger Chrome Extension
@@ -987,9 +987,9 @@ setInterval(fetchEvents, 1000);
 
 ---
 
-Adding CSS Styles {#styles}
+## Adding CSS Styles {#styles}
 
-Create styles.css for basic extension styling:
+### Create styles.css for basic extension styling:
 
 ```css
 /* Event Logger Chrome Extension Styles */
@@ -1079,7 +1079,7 @@ h1, h2, h3 {
 
 ---
 
-Testing Your Event Logger Extension {#testing}
+## Testing Your Event Logger Extension {#testing}
 
 Now that we have built all the components, it is time to test our extension. Follow these steps to load and test the extension in Chrome:
 
@@ -1091,7 +1091,7 @@ For more detailed analysis, click "DevTools" in the popup to open the custom Dev
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Once you have the basic event logger working, consider adding these advanced features to make it even more powerful:
 
@@ -1105,7 +1105,7 @@ Integration with External Tools can export events to logging services, analytics
 
 ---
 
-Best Practices and Optimization {#best-practices}
+## Best Practices and Optimization {#best-practices}
 
 When building and using event logger extensions, follow these best practices to ensure optimal performance and reliability:
 
@@ -1119,7 +1119,7 @@ Consider implementing lazy loading for the DevTools panel to improve extension l
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an event logger Chrome extension is a rewarding project that provides practical value for web developers and debugging workflows. The extension we built in this guide provides comprehensive event capture capabilities, including DOM events, JavaScript events, network requests, and programmatically added event listeners.
 

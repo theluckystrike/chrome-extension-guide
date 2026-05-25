@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Meeting Notes Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 A Chrome extension for quick note-taking during online meetings with timestamp tracking and meeting history.
 
 - Quick note-taking during online meetings (Google Meet, Zoom web)
@@ -15,7 +15,7 @@ A Chrome extension for quick note-taking during online meetings with timestamp t
 - Timestamp notes relative to meeting start
 - Auto-detect meeting pages
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -42,7 +42,7 @@ Manifest {#manifest}
 }
 ```
 
-Step 1: Meeting Detection {#step-1-meeting-detection}
+## Step 1: Meeting Detection {#step-1-meeting-detection}
 
 Content script detects meeting pages via URL pattern and extracts meeting info from the DOM.
 
@@ -92,7 +92,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Step 2: Side Panel Note Editor {#step-2-side-panel-note-editor}
+## Step 2: Side Panel Note Editor {#step-2-side-panel-note-editor}
 
 Simple rich text editor with meeting title and auto-save functionality.
 
@@ -152,7 +152,7 @@ class NoteEditor {
 }
 ```
 
-Step 3: Timestamping {#step-3-timestamping}
+## Step 3: Timestamping {#step-3-timestamping}
 
 Track meeting start time and provide quick timestamp insertion via button or keyboard shortcut.
 
@@ -183,7 +183,7 @@ function makeTimestampsClickable() {
 }
 ```
 
-Step 4: Note Storage {#step-4-note-storage}
+## Step 4: Note Storage {#step-4-note-storage}
 
 Save per-meeting notes using @theluckystrike/webext-storage with auto-save and retention limits.
 
@@ -229,7 +229,7 @@ async function loadMeetingNotes(url: string): Promise<MeetingNotes | null> {
 }
 ```
 
-Step 5: Meeting History {#step-5-meeting-history}
+## Step 5: Meeting History {#step-5-meeting-history}
 
 List past meeting notes in popup with search and delete capabilities.
 
@@ -261,7 +261,7 @@ function filterMeetings(query: string, meetings: MeetingNotes[]): MeetingNotes[]
 }
 ```
 
-Step 6: Export {#step-6-export}
+## Step 6: Export {#step-6-export}
 
 Export notes as markdown, copy to clipboard, or share via email.
 
@@ -302,7 +302,7 @@ async function exportAllMeetings() {
 }
 ```
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 
 - [Side Panel API](../permissions/sidePanel.md)
 - [Side Panel Patterns](../patterns/side-panel.md)

@@ -9,7 +9,7 @@ Build a REST API Tester Extension
 
 Build a mini-Postman REST API tester as a Chrome extension. Send HTTP requests and view formatted responses.
 
-Manifest {#manifest}
+## Manifest {#manifest}
 
 ```json
 {
@@ -22,7 +22,7 @@ Manifest {#manifest}
 }
 ```
 
-Sending Requests {#sending-requests}
+## Sending Requests {#sending-requests}
 
 ```typescript
 async function sendRequest(req: { url: string; method: string; headers: Record<string,string>; body?: string; }): Promise<{ status: number; statusText: string; body: string; timing: number; }> {
@@ -32,7 +32,7 @@ async function sendRequest(req: { url: string; method: string; headers: Record<s
 }
 ```
 
-Display Response {#display-response}
+## Display Response {#display-response}
 
 ```typescript
 function displayResponse(res: { status: number; statusText: string; body: string; }): void {
@@ -43,7 +43,7 @@ function displayResponse(res: { status: number; statusText: string; body: string
 }
 ```
 
-History Storage {#history-storage}
+## History Storage {#history-storage}
 
 ```typescript
 async function saveHistory(req: any, res: any): Promise<void> {
@@ -53,7 +53,7 @@ async function saveHistory(req: any, res: any): Promise<void> {
 }
 ```
 
-Environment Variables {#environment-variables}
+## Environment Variables {#environment-variables}
 
 {% raw %}
 ```typescript
@@ -63,7 +63,7 @@ function substitute(text: string, vars: Record<string, string>): string {
 ```
 {% endraw %}
 
-Export/Import {#exportimport}
+## Export/Import {#exportimport}
 
 ```typescript
 function exportCollection(name: string, requests: any[]): void {
@@ -73,7 +73,7 @@ function exportCollection(name: string, requests: any[]): void {
 }
 ```
 
-Send Handler {#send-handler}
+## Send Handler {#send-handler}
 
 ```typescript
 async function handleSend(): Promise<void> {
@@ -89,7 +89,7 @@ async function handleSend(): Promise<void> {
 }
 ```
 
-UI Structure {#ui-structure}
+## UI Structure {#ui-structure}
 
 ```html
 <div class="url-bar">
@@ -102,14 +102,14 @@ UI Structure {#ui-structure}
 <div id="error"></div>
 ```
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 - Add Bearer token and Basic Auth helpers
 - Build history browser UI
 - Add response search/filter
 - Support WebSocket connections
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Cross-Origin Requests](/patterns/cross-origin-requests)
 - [Popup Patterns](/guides/popup-patterns)

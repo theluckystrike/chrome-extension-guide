@@ -10,7 +10,7 @@ Performance Optimization for Chrome Extensions
 
 Performance is critical for Chrome extensions. Users expect extensions to be fast, responsive, and memory-efficient. A poorly optimized extension can drain battery, slow down browsing, and lead to negative reviews. This tutorial covers essential techniques for building high-performance Chrome extensions.
 
-Prerequisites
+### Prerequisites
 
 - Basic understanding of Chrome extension architecture (Manifest V3)
 - Familiarity with JavaScript/TypeScript
@@ -20,14 +20,14 @@ Prerequisites
 
 Memory leaks are the most common performance issue in Chrome extensions. They occur when objects are retained in memory even after they're no longer needed.
 
-Common Memory Leak Sources
+### Common Memory Leak Sources
 
 - Event listeners not removed: Listeners persist after page navigation
 - Closures holding references: Variables captured by closures prevent garbage collection
 - DOM references: Storing references to removed DOM elements
 -  timers and intervals: Not clearing timers when cleanup is needed
 
-Before: Memory Leak Example
+### Before: Memory Leak Example
 
 ```javascript
 //  BAD: Event listener never removed
@@ -47,7 +47,7 @@ setInterval(() => {
 }, 5000);
 ```
 
-After: Proper Memory Management
+### After: Proper Memory Management
 
 ```javascript
 //  GOOD: Clean up on removal
@@ -87,7 +87,7 @@ function getElementData(element) {
 }
 ```
 
-Memory Management Best Practices
+### Memory Management Best Practices
 
 - Use `chrome.runtime.onSuspend` to clean up resources in service workers
 - Implement a cleanup function that runs when content scripts are disconnected
@@ -109,7 +109,7 @@ function initContentScript() {
 
 Content scripts run in the context of web pages, so DOM operations directly impact page performance.
 
-Before: Inefficient DOM Manipulation
+### Before: Inefficient DOM Manipulation
 
 ```javascript
 //  BAD: Multiple reflows
@@ -143,7 +143,7 @@ function measureElements() {
 }
 ```
 
-After: Optimized DOM Manipulation
+### After: Optimized DOM Manipulation
 
 ```javascript
 //  GOOD: DocumentFragment for batch updates
@@ -189,7 +189,7 @@ function measureElements() {
 }
 ```
 
-Using requestAnimationFrame for Animations
+### Using requestAnimationFrame for Animations
 
 ```javascript
 //  GOOD: Use requestAnimationFrame for visual updates
@@ -217,7 +217,7 @@ function animateElements(elements) {
 
 Load resources only when needed to reduce initial load time and memory usage.
 
-Dynamic Import for Code Splitting
+### Dynamic Import for Code Splitting
 
 ```javascript
 //  GOOD: Lazy load heavy modules
@@ -242,7 +242,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Intersection Observer for Lazy Initialization
+### Intersection Observer for Lazy Initialization
 
 ```javascript
 //  GOOD: Initialize content script features only when visible
@@ -262,7 +262,7 @@ function setupLazyInitialization() {
 }
 ```
 
-Lazy Loading Images and Resources
+### Lazy Loading Images and Resources
 
 ```javascript
 //  GOOD: Lazy load images in extension popup
@@ -288,7 +288,7 @@ function setupImageLazyLoading() {
 
 Service workers in Manifest V3 are event-driven and can be terminated when idle. Understanding this lifecycle is crucial for building reliable extensions.
 
-Before: Ignoring Service Worker Lifecycle
+### Before: Ignoring Service Worker Lifecycle
 
 ```javascript
 //  BAD: Assuming service worker stays alive
@@ -310,7 +310,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-After: Proper Service Worker Lifecycle Handling
+### After: Proper Service Worker Lifecycle Handling
 
 ```javascript
 //  GOOD: Use chrome.storage for persistence
@@ -353,7 +353,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Managing Service Worker Lifetime
+### Managing Service Worker Lifetime
 
 ```javascript
 //  GOOD: Prevent service worker from being terminated during critical operations
@@ -383,7 +383,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 A smaller extension loads faster and uses less memory. Use these techniques to minimize your bundle size.
 
-Tree Shaking and Code Splitting
+### Tree Shaking and Code Splitting
 
 ```javascript
 //  GOOD: Import only what you need
@@ -398,7 +398,7 @@ async function loadAnalytics() {
 }
 ```
 
-Webpack/Vite Configuration for Extensions
+### Webpack/Vite Configuration for Extensions
 
 ```javascript
 // vite.config.js - Optimize for production
@@ -423,7 +423,7 @@ export default defineConfig({
 });
 ```
 
-Measuring Bundle Size
+### Measuring Bundle Size
 
 ```javascript
 //  GOOD: Use source-map-explorer to analyze bundle
@@ -442,7 +442,7 @@ Measuring Bundle Size
 }
 ```
 
-Replacing Heavy Libraries
+### Replacing Heavy Libraries
 
 ```javascript
 //  BAD: Using heavy libraries
@@ -460,9 +460,9 @@ import { debounce, throttle } from 'lodash-es';
 
 6. Avoiding Performance Anti-Patterns
 
-Common Anti-Patterns and Fixes
+### Common Anti-Patterns and Fixes
 
-Polling vs Event-Driven
+### Polling vs Event-Driven
 
 ```javascript
 //  BAD: Polling for changes
@@ -485,7 +485,7 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-Synchronous XHR
+### Synchronous XHR
 
 ```javascript
 //  BAD: Synchronous requests block the thread
@@ -503,7 +503,7 @@ async function fetchData() {
 }
 ```
 
-Expensive Computations in Hot Paths
+### Expensive Computations in Hot Paths
 
 ```javascript
 //  BAD: Expensive computation on every render
@@ -526,7 +526,7 @@ function getFormattedPrice(price) {
 }
 ```
 
-Excessive Message Passing
+### Excessive Message Passing
 
 ```javascript
 //  BAD: Too many message round trips
@@ -547,7 +547,7 @@ async function processPage() {
 
 7. Measuring Performance with Chrome DevTools
 
-Profiling Content Scripts
+### Profiling Content Scripts
 
 1. Open Chrome DevTools (F12)
 2. Navigate to the page with your extension
@@ -555,14 +555,14 @@ Profiling Content Scripts
 4. Click Record and perform actions
 5. Look for your content script in the timeline
 
-Analyzing Service Worker Performance
+### Analyzing Service Worker Performance
 
 1. Open `chrome://extensions`
 2. Find your extension and click Service Worker link
 3. Use the Performance profiler in DevTools
 4. Check the Memory heap snapshot for leaks
 
-Memory Profiling
+### Memory Profiling
 
 1. Open DevTools and go to the Memory tab
 2. Take a heap snapshot
@@ -583,7 +583,7 @@ function measurePerformance() {
 }
 ```
 
-Using chrome.debugger for Advanced Profiling
+### Using chrome.debugger for Advanced Profiling
 
 ```javascript
 //  GOOD: Log performance metrics
@@ -615,7 +615,7 @@ function measureOperation(name, operation) {
 }
 ```
 
-Performance Checklist
+### Performance Checklist
 
 Use this checklist to verify your extension is optimized:
 
@@ -630,7 +630,7 @@ Use this checklist to verify your extension is optimized:
 - [ ] Memory heap snapshots show no leaks
 - [ ] Content scripts use document_idle for injection
 
-Summary
+### Summary
 
 Performance optimization for Chrome extensions requires attention to memory management, DOM manipulation, lazy loading, service worker lifecycle, and bundle size. By following these patterns and anti-patterns, you can build extensions that are fast, responsive, and resource-efficient.
 
@@ -641,7 +641,7 @@ Key takeaways:
 - Persist data using chrome.storage instead of in-memory caches
 - Use Chrome DevTools to profile and identify bottlenecks
 
-Related Articles
+### Related Articles
 
 - [Performance Profiling](../patterns/performance-profiling.md)
 - [Memory Management](../patterns/memory-management.md)

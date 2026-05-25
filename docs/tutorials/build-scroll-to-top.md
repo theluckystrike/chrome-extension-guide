@@ -11,14 +11,14 @@ A floating button that smoothly scrolls to top when clicked, with customizable a
 
 Prerequisites: Basic JavaScript and Chrome Extensions knowledge.
 
-What We're Building {#what-were-building}
+## What We're Building {#what-were-building}
 - Floating button appears when scrolled down (threshold: 300px)
 - Smooth scroll animation to top of page
 - Customizable position, color, size, opacity, shape
 - Per-site or global preference storage
 - Optional circular progress ring showing scroll position
 
-Step 1: Manifest with Content Script {#step-1-manifest-with-content-script}
+## Step 1: Manifest with Content Script {#step-1-manifest-with-content-script}
 
 Create `manifest.json` with content script running on all URLs:
 
@@ -40,7 +40,7 @@ Create `manifest.json` with content script running on all URLs:
 }
 ```
 
-Step 2: Floating Button with Shadow DOM {#step-2-floating-button-with-shadow-dom}
+## Step 2: Floating Button with Shadow DOM {#step-2-floating-button-with-shadow-dom}
 
 Content script creates an isolated button using Shadow DOM to prevent page style conflicts:
 
@@ -59,7 +59,7 @@ shadow.innerHTML = `
 document.body.appendChild(button);
 ```
 
-Step 3: Scroll Listener with Passive Optimization {#step-3-scroll-listener-with-passive-optimization}
+## Step 3: Scroll Listener with Passive Optimization {#step-3-scroll-listener-with-passive-optimization}
 
 Show button when scrolled past 300px, hide otherwise. Use passive listener and requestAnimationFrame:
 
@@ -76,9 +76,9 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 ```
 
-Step 4: Smooth Scroll Action {#step-4-smooth-scroll-action}
+## Step 4: Smooth Scroll Action {#step-4-smooth-scroll-action}
 
-On button click, smoothly scroll to top:
+### On button click, smoothly scroll to top:
 
 ```javascript
 button.addEventListener('click', () => {
@@ -86,7 +86,7 @@ button.addEventListener('click', () => {
 });
 ```
 
-Step 5: Popup with Position Options {#step-5-popup-with-position-options}
+## Step 5: Popup with Position Options {#step-5-popup-with-position-options}
 
 Add position controls (left/right, offset) in popup.html:
 
@@ -98,9 +98,9 @@ Add position controls (left/right, offset) in popup.html:
 <input type="number" id="offset" value="20" placeholder="Offset (px)">
 ```
 
-Step 6: Style Customization {#step-6-style-customization}
+## Step 6: Style Customization {#step-6-style-customization}
 
-Allow customization: color, size, opacity, shape (circle/square/pill):
+### Allow customization: color, size, opacity, shape (circle/square/pill):
 
 ```javascript
 // In content.js, read from storage and apply styles
@@ -119,9 +119,9 @@ chrome.storage.sync.get(['btnColor', 'btnSize', 'btnShape'], ( prefs ) => {
 });
 ```
 
-Step 7: Per-Site or Global Preferences {#step-7-per-site-or-global-preferences}
+## Step 7: Per-Site or Global Preferences {#step-7-per-site-or-global-preferences}
 
-Store settings per-site using domain keys or globally:
+### Store settings per-site using domain keys or globally:
 
 ```javascript
 // Save per-site
@@ -132,7 +132,7 @@ chrome.storage.local.set({ [`settings_${domain}`]: prefs });
 chrome.storage.sync.set({ globalSettings: prefs });
 ```
 
-Step 8: Circular Progress Ring {#step-8-circular-progress-ring}
+## Step 8: Circular Progress Ring {#step-8-circular-progress-ring}
 
 Add SVG progress ring around button showing scroll percentage:
 
@@ -142,14 +142,14 @@ shadow.querySelector('svg circle').style.strokeDashoffset =
   2 * Math.PI * 40 * (1 - progress);
 ```
 
-Performance Best Practices {#performance-best-practices}
+## Performance Best Practices {#performance-best-practices}
 - Use `{ passive: true }` on scroll listener
 - Use requestAnimationFrame for visibility toggle
 - Shadow DOM isolates button from page styles
 - Debounce expensive operations
 - Exclude specific sites via `matches` in manifest
 
-Handling Custom Scroll Containers {#handling-custom-scroll-containers}
+## Handling Custom Scroll Containers {#handling-custom-scroll-containers}
 
 For sites with custom scroll containers, detect and handle:
 
@@ -160,7 +160,7 @@ if (scrollable) {
 }
 ```
 
-Excluding Specific Sites {#excluding-specific-sites}
+## Excluding Specific Sites {#excluding-specific-sites}
 
 Add to manifest's content_scripts.matches or use runtime.onInstalled:
 
@@ -168,12 +168,12 @@ Add to manifest's content_scripts.matches or use runtime.onInstalled:
 "exclude_matches": ["*://*.facebook.com/*", "*://*.twitter.com/*"]
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - See [Content Script Patterns](../guides/content-script-patterns.md)
 - See [Dynamic Content Injection](../patterns/dynamic-content-injection.md)
 - See [Shadow DOM Advanced](../patterns/shadow-dom-advanced.md)
 
-What You Learned {#what-you-learned}
+## What You Learned {#what-you-learned}
 - Content script injection on all URLs
 - Shadow DOM for style isolation
 - Passive scroll listeners with requestAnimationFrame

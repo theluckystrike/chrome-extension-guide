@@ -18,11 +18,11 @@ Whether you're a beginner looking to understand Chrome extension architecture or
 
 ---
 
-Why Build Your Own API Tester Extension?
+### Why Build Your Own API Tester Extension?
 
 Before we dive into the code, let's explore why building your own http client extension is worth the effort. The Chrome Web Store hosts several popular API testing tools, but creating your own offers unique advantages that make this project particularly valuable.
 
-The Case for a Custom API Tester
+### The Case for a Custom API Tester
 
 The demand for rest client chrome extension tools continues to grow as more applications rely on API-first architectures. Developers constantly need to test endpoints, debug responses, and verify that their APIs work correctly. Having a lightweight, always-accessible tool right in your browser eliminates the need to switch between applications or install heavyweight desktop applications.
 
@@ -34,11 +34,11 @@ Finally, a well-built API tester can become a valuable addition to your develope
 
 ---
 
-Understanding Chrome Extension Architecture for API Testing
+### Understanding Chrome Extension Architecture for API Testing
 
 Chrome extensions operate on a unique architecture that differs from traditional web applications. Before writing code, you need to understand how the pieces fit together, particularly for an extension that makes HTTP requests.
 
-Manifest V3: The Modern Extension Platform
+### Manifest V3: The Modern Extension Platform
 
 Google's transition to Manifest V3 brought significant changes to how extensions work. Unlike the older Manifest V2, MV3 requires extensions to use service workers instead of background pages, implements stricter security requirements, and provides improved performance through declarative rules.
 
@@ -46,7 +46,7 @@ For our API tester, Manifest V3 offers several relevant features. The `host_perm
 
 Understanding these permissions is crucial because they determine what your extension can do. The `host_permissions: ["<all_urls>"]` permission grants access to make requests to any website, which is essential for an API tester. However, this broad permission may trigger additional review during Chrome Web Store publication, so consider specifying narrower origins if your use case allows.
 
-The Popup Model
+### The Popup Model
 
 API tester extensions typically use a popup interface, a small window that appears when users click the extension icon. This approach keeps the extension lightweight and fast, loading only when needed. Unlike full-page alternatives, popups provide quick access without navigating away from your current tab.
 
@@ -54,11 +54,11 @@ Our popup will contain the complete user interface: URL input, HTTP method selec
 
 ---
 
-Setting Up Your Development Environment
+### Setting Up Your Development Environment
 
 Let's begin building our API tester extension. First, create a new folder for your project and set up the essential files.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Every Chrome extension requires a manifest.json file that defines the extension's configuration, permissions, and components. Create this file in your project folder with the following content:
 
@@ -88,7 +88,7 @@ Every Chrome extension requires a manifest.json file that defines the extension'
 
 This manifest declares the minimum permissions needed for a functional API tester. The `storage` permission allows us to save request history and user preferences, while `host_permissions` enables making HTTP requests to any URL.
 
-Project Structure
+### Project Structure
 
 Organize your project with a clean, maintainable structure. Here's the recommended file organization:
 
@@ -109,13 +109,13 @@ This structure separates concerns clearly: HTML defines the interface, CSS handl
 
 ---
 
-Building the User Interface
+### Building the User Interface
 
 The user interface is critical for user experience. A well-designed interface makes testing APIs intuitive and efficient. Let's create a clean, functional UI that supports all common API testing operations.
 
-HTML Structure
+### HTML Structure
 
-Create popup.html with the following structure:
+### Create popup.html with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -207,7 +207,7 @@ Create popup.html with the following structure:
 
 This HTML structure provides a complete interface for API testing. The URL bar includes a method selector and input field. Tabbed panels handle headers, request body, and authentication. The response section displays status, timing, and formatted response data.
 
-Styling the Interface
+### Styling the Interface
 
 Create popup.css to make the interface visually appealing and functional:
 
@@ -468,13 +468,13 @@ This CSS creates a clean, modern interface that matches Chrome's design language
 
 ---
 
-Implementing Core Functionality
+### Implementing Core Functionality
 
 Now comes the heart of our API tester, the JavaScript logic that sends requests and handles responses. Let's build a solid implementation that handles various HTTP scenarios.
 
-The Request Handler
+### The Request Handler
 
-Create popup.js with the core request logic:
+### Create popup.js with the core request logic:
 
 ```javascript
 // Core request sending function
@@ -532,7 +532,7 @@ async function sendRequest(requestConfig) {
 
 This function handles the core HTTP request logic. It measures response time, attempts to parse JSON responses automatically, and handles errors gracefully. The function returns a consistent response object regardless of success or failure.
 
-Building the Request Configuration
+### Building the Request Configuration
 
 We need a function to gather all the input values and build a request configuration object:
 
@@ -594,7 +594,7 @@ function buildRequestConfig() {
 
 This function validates user input, builds the headers object from the UI, handles authentication, and returns a complete request configuration ready for the fetch API.
 
-Displaying Responses
+### Displaying Responses
 
 A good API tester formats responses clearly so developers can quickly understand the results:
 
@@ -656,11 +656,11 @@ The response display function provides visual feedback through color-coded statu
 
 ---
 
-Adding History and Persistence
+### Adding History and Persistence
 
 A truly useful API tester saves request history so developers can revisit previous requests. Let's implement this feature using Chrome's storage API.
 
-Saving Request History
+### Saving Request History
 
 ```javascript
 async function saveToHistory(request, response) {
@@ -691,7 +691,7 @@ async function saveToHistory(request, response) {
 
 This function saves complete request and response information to Chrome's local storage. We limit history to 100 entries to prevent storage from growing unbounded.
 
-Loading History
+### Loading History
 
 ```javascript
 async function loadHistory() {
@@ -709,11 +709,11 @@ Simple retrieval of saved history for display or restoration.
 
 ---
 
-Implementing Environment Variables
+### Implementing Environment Variables
 
 Advanced API testers support environment variables that allow you to swap values between different environments (development, staging, production). Let's add this useful feature.
 
-Variable Substitution
+### Variable Substitution
 
 ```javascript
 function substituteVariables(text, variables) {
@@ -733,7 +733,7 @@ function substituteVariables(text, variables) {
 This function finds patterns like `{{variableName}}` and replaces them with values from the variables object.
 {% endraw %}
 
-Environment Management UI
+### Environment Management UI
 
 You can add an environment panel to your UI that allows users to define variables:
 
@@ -762,11 +762,11 @@ async function getActiveEnvironment() {
 
 ---
 
-Export and Import Collections
+### Export and Import Collections
 
 Developers often need to share API collections with team members or back up their work. Let's implement export and import functionality.
 
-Exporting Collections
+### Exporting Collections
 
 ```javascript
 function exportCollection(requests, filename = 'api-collection') {
@@ -791,7 +791,7 @@ function exportCollection(requests, filename = 'api-collection') {
 }
 ```
 
-Importing Collections
+### Importing Collections
 
 ```javascript
 async function importCollection(file) {
@@ -820,7 +820,7 @@ async function importCollection(file) {
 
 ---
 
-Event Handling and UI Interaction
+### Event Handling and UI Interaction
 
 Now let's wire everything together with proper event handlers:
 
@@ -933,17 +933,17 @@ function updateAuthFields(authType) {
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
 Before deploying your extension, thoroughly test it to ensure it handles various scenarios correctly.
 
-Loading the Extension
+### Loading the Extension
 
 Open Chrome and navigate to `chrome://extensions/`. Enable Developer mode using the toggle in the top right corner. Click "Load unpacked" and select your extension folder. The extension icon should appear in your browser toolbar.
 
-Test Scenarios
+### Test Scenarios
 
-Test these common scenarios to verify functionality:
+### Test these common scenarios to verify functionality:
 
 GET Request: Enter `https://jsonplaceholder.typicode.com/posts/1` and send. You should receive a JSON response with status 200.
 
@@ -953,27 +953,27 @@ Error Handling: Try sending a request to an invalid URL and verify the error dis
 
 Headers: Test custom headers by adding `Content-Type: application/json` and verify it's sent with the request.
 
-Debugging
+### Debugging
 
 If issues arise, use Chrome's developer tools. Right-click your extension's popup and select "Inspect" to open the popup's devtools. Check the Console for errors and use the Network tab to debug request issues.
 
 ---
 
-Publishing Your Extension
+### Publishing Your Extension
 
 Once testing is complete, you can publish your extension to the Chrome Web Store.
 
-Preparing for Publication
+### Preparing for Publication
 
 Create icon files in your icons folder (16x16, 48x48, and 128x128 pixels). Update your manifest with a detailed description and screenshots. Ensure you comply with Chrome Web Store policies, particularly regarding the broad host permissions.
 
-The Publishing Process
+### The Publishing Process
 
 Zip your extension folder (excluding unnecessary files). Navigate to the Chrome Web Store Developer Dashboard, create a new listing, upload your zip file, and submit for review. The review process typically takes from a few hours to several days.
 
 ---
 
-Future Enhancements
+### Future Enhancements
 
 Your API tester can grow with additional features over time. Consider adding these enhancements:
 
@@ -989,7 +989,7 @@ Code Generation: Generate code snippets in various languages (JavaScript, Python
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an API Tester Chrome Extension is an excellent project that teaches fundamental Chrome extension development while creating a genuinely useful tool. You've learned how to create a Manifest V3 extension, build a responsive popup interface, implement HTTP request handling, add history persistence, support environment variables, and enable export/import functionality.
 
@@ -999,7 +999,7 @@ The skills you've gained, working with Chrome's storage API, handling cross-orig
 
 ---
 
-See Also
+### See Also
 
 - [Chrome Extension Development Complete Beginner's Guide](/tutorials/chrome-extension-development-2025-complete-beginners-guide/)
 - [Manifest V3 Migration Guide](/tutorials/migrating-to-manifest-v3/)

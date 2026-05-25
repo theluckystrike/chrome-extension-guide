@@ -18,7 +18,7 @@ This comprehensive guide walks you through everything you need to know about imp
 
 ---
 
-Understanding the Shape Detection API {#understanding-shape-detection-api}
+## Understanding the Shape Detection API {#understanding-shape-detection-api}
 
 The Shape Detection API is a web platform API that provides interfaces for detecting various shapes within images. Unlike traditional approaches that require sending images to external servers for processing, this API leverages the device's hardware acceleration and built-in machine learning models to perform detection locally. This approach offers significant advantages in terms of privacy, latency, and cost.
 
@@ -28,7 +28,7 @@ Before implementing any shape detection functionality, it is crucial to understa
 
 ---
 
-Setting Up Your Chrome Extension for Shape Detection {#setting-up-extension}
+## Setting Up Your Chrome Extension for Shape Detection {#setting-up-extension}
 
 Before diving into the code, you need to configure your Chrome extension properly to use the Shape Detection API. This involves understanding the permissions required and the manifest version you are using.
 
@@ -40,7 +40,7 @@ The Shape Detection API is available in both extension background scripts and co
 
 ---
 
-Implementing Face Detection in Chrome Extensions {#face-detection-chrome}
+## Implementing Face Detection in Chrome Extensions {#face-detection-chrome}
 
 Face detection chrome functionality is one of the most sought-after features for extension developers. Whether you are building a productivity tool that detects faces in meeting screenshots or a social media extension that identifies people in images, the FaceDetector provides the capabilities you need.
 
@@ -92,7 +92,7 @@ When building a shape detection extension that uses face detection, consider the
 
 ---
 
-Building Barcode Detection Capabilities {#barcode-detection}
+## Building Barcode Detection Capabilities {#barcode-detection}
 
 Barcode detection is another powerful feature of the Shape Detection API that enables Chrome extensions to function as portable barcode scanners. This capability is invaluable for inventory management extensions, price comparison tools, and authentication applications.
 
@@ -136,7 +136,7 @@ When implementing barcode detection in your extension, consider the image qualit
 
 ---
 
-Text Detection API for OCR Functionality {#text-detection-api}
+## Text Detection API for OCR Functionality {#text-detection-api}
 
 The text detection API, provided through the TextDetector interface, brings optical character recognition capabilities directly to Chrome extensions. This functionality enables you to extract text from images, photos, screenshots, and documents without relying on external OCR services.
 
@@ -177,7 +177,7 @@ When implementing text detection in your extension, remember that the TextDetect
 
 ---
 
-Handling Browser Compatibility and Feature Detection {#browser-compatibility}
+## Handling Browser Compatibility and Feature Detection {#browser-compatibility}
 
 Building a solid shape detection extension requires careful handling of browser compatibility. The Shape Detection API has different levels of support across browsers and operating systems, so implementing proper feature detection is essential for providing a good user experience.
 
@@ -201,7 +201,7 @@ For extensions that need to work across browsers or platforms where the Shape De
 
 ---
 
-Performance Optimization Tips {#performance-optimization}
+## Performance Optimization Tips {#performance-optimization}
 
 Performance is critical when implementing shape detection in Chrome extensions. The detection process can be computationally expensive, and poor implementation can lead to slowdowns, battery drain, and poor user experience. Here are essential optimization strategies for building efficient shape detection extensions.
 
@@ -241,7 +241,7 @@ Cache detection results when appropriate. If you are analyzing the same image mu
 
 ---
 
-Privacy Considerations for Shape Detection Extensions {#privacy-considerations}
+## Privacy Considerations for Shape Detection Extensions {#privacy-considerations}
 
 When building extensions that use shape detection, particularly face detection chrome features, privacy should be a primary consideration. Users entrust extensions with sensitive capabilities, and developers have a responsibility to handle this trust carefully.
 
@@ -253,7 +253,7 @@ If your extension stores detection results or transmits them somewhere, you must
 
 ---
 
-Real-World Use Cases and Examples {#use-cases}
+## Real-World Use Cases and Examples {#use-cases}
 
 Understanding how to apply the Shape Detection API in practice helps cement the concepts and inspires new extension ideas. Here are several real-world use cases that demonstrate the API's versatility.
 
@@ -267,7 +267,7 @@ Document management extensions can use text detection to extract information fro
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Shape Detection API unlocks powerful capabilities for Chrome extension developers, enabling the creation of intelligent tools that can detect faces, read barcodes, and extract text from images, all without server-side processing. Throughout this guide, we have explored the fundamentals of each detector, implementation patterns for face detection chrome functionality, barcode scanning, and text detection api usage, as well as critical considerations for performance and privacy.
 

@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/analytics-telemetry/"
 last_modified_at: 2026-01-15
 ---
 
-Extension Analytics and Telemetry
+### Extension Analytics and Telemetry
 
-Overview {#overview}
+## Overview {#overview}
 
 Understanding how users interact with your extension is critical for prioritizing features and catching regressions. However, Chrome extensions face unique constraints: no third-party analytics scripts in service workers, strict Content Security Policy, and heightened user expectations around privacy. This guide covers production patterns for building a privacy-respecting, first-party analytics system entirely within your extension.
 
@@ -16,7 +16,7 @@ Understanding how users interact with your extension is critical for prioritizin
 
 ---
 
-Pattern 1: Privacy-Respecting Analytics Architecture {#pattern-1-privacy-respecting-analytics-architecture}
+## Pattern 1: Privacy-Respecting Analytics Architecture {#pattern-1-privacy-respecting-analytics-architecture}
 
 Build a self-contained analytics layer that runs entirely in your service worker:
 
@@ -149,7 +149,7 @@ export const analytics = new Analytics({
 
 ---
 
-Pattern 2: Event Tracking Without Third-Party Scripts {#pattern-2-event-tracking-without-third-party-scripts}
+## Pattern 2: Event Tracking Without Third-Party Scripts {#pattern-2-event-tracking-without-third-party-scripts}
 
 Chrome extensions cannot load remote scripts in service workers. All tracking must be first-party:
 
@@ -218,7 +218,7 @@ document.getElementById("settings-btn")?.addEventListener("click", () => {
 
 ---
 
-Pattern 3: Feature Usage Measurement {#pattern-3-feature-usage-measurement}
+## Pattern 3: Feature Usage Measurement {#pattern-3-feature-usage-measurement}
 
 Track which features are used, how often, and for how long:
 
@@ -283,7 +283,7 @@ function onAnnotationToolClosed() {
 
 ---
 
-Pattern 4: Error Telemetry and Crash Reporting {#pattern-4-error-telemetry-and-crash-reporting}
+## Pattern 4: Error Telemetry and Crash Reporting {#pattern-4-error-telemetry-and-crash-reporting}
 
 Capture unhandled errors and report them without leaking sensitive data:
 
@@ -381,7 +381,7 @@ chrome.action.onClicked.addListener(
 
 ---
 
-Pattern 5: Opt-In/Opt-Out Consent Management {#pattern-5-opt-inopt-out-consent-management}
+## Pattern 5: Opt-In/Opt-Out Consent Management {#pattern-5-opt-inopt-out-consent-management}
 
 Implement a transparent consent flow that respects user choice:
 
@@ -497,7 +497,7 @@ document.getElementById("decline")?.addEventListener("click", async () => {
 
 ---
 
-Pattern 6: Batched Event Submission {#pattern-6-batched-event-submission}
+## Pattern 6: Batched Event Submission {#pattern-6-batched-event-submission}
 
 Queue events locally and submit them in batches to reduce network overhead:
 
@@ -605,9 +605,9 @@ export class EventBatcher {
 
 ---
 
-Pattern 7: Session and Daily Active User Tracking {#pattern-7-session-and-daily-active-user-tracking}
+## Pattern 7: Session and Daily Active User Tracking {#pattern-7-session-and-daily-active-user-tracking}
 
-Count active users without storing any user-identifying information:
+### Count active users without storing any user-identifying information:
 
 ```ts
 // analytics/usage.ts
@@ -703,7 +703,7 @@ chrome.idle.setDetectionInterval(300); // 5 minutes
 
 ---
 
-Pattern 8: A/B Testing Infrastructure for Extensions {#pattern-8-ab-testing-infrastructure-for-extensions}
+## Pattern 8: A/B Testing Infrastructure for Extensions {#pattern-8-ab-testing-infrastructure-for-extensions}
 
 Run experiments to test UI variations and feature flags:
 
@@ -836,7 +836,7 @@ document.getElementById("save-btn")?.addEventListener("click", async () => {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

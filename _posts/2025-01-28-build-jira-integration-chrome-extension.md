@@ -18,27 +18,27 @@ By the end of this article, you will have a fully functional extension that can 
 
 ---
 
-Why Build a Jira Chrome Extension? {#why-build-jira-extension}
+## Why Build a Jira Chrome Extension? {#why-build-jira-extension}
 
 The demand for Jira integrations has never been higher. Development teams spend significant time switching between their browser and the Jira dashboard, context-switching that breaks focus and reduces productivity. A well-designed Jira Chrome Extension eliminates this friction by bringing Jira functionality directly into the browser.
 
-Real-World Use Cases
+### Real-World Use Cases
 
 A Jira Chrome Extension serves numerous practical purposes. Support teams can create bug tickets directly from customer emails without leaving their inbox. Developers can log issues while browsing documentation or code reviews. Project managers can quickly check ticket status without navigating away from their current task.
 
 The most successful Jira extensions in the Chrome Web Store include features like one-click issue creation, inline time tracking, sprint analytics, and customizable notifications. Building an extension that solves one of these problems well can attract thousands of active users.
 
-Market Opportunity
+### Market Opportunity
 
 Jira powers over 180,000 organizations globally, with millions of daily active users. The Chrome Web Store has several Jira-related extensions, but many are outdated, poorly maintained, or lack modern features. A well-built extension with excellent UX can quickly gain traction in this space.
 
 ---
 
-Prerequisites and Setup {#prerequisites}
+## Prerequisites and Setup {#prerequisites}
 
 Before we start coding, let us ensure you have everything needed to build a Jira Chrome Extension. You will need a basic understanding of JavaScript, HTML, and CSS. Familiarity with REST APIs and OAuth authentication will be helpful but is not strictly required.
 
-Development Environment
+### Development Environment
 
 First, create a new directory for your extension and initialize the basic structure:
 
@@ -50,7 +50,7 @@ mkdir -p popup background icons
 
 You will also need a Jira account. If you do not have one, you can create a free Jira Cloud account at [atlassian.com](https://www.atlassian.com/software/jira). For development, we recommend using a free Jira site rather than a production instance.
 
-Understanding Jira API
+### Understanding Jira API
 
 Jira provides a solid REST API that allows you to perform virtually any action available in the web interface. The API is organized around resources like issues, projects, users, and boards. For our extension, we will focus on authentication, issue creation, and issue search.
 
@@ -58,7 +58,7 @@ Jira Cloud uses OAuth 2.0 for third-party authentication. This is more secure th
 
 ---
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 A well-organized Chrome Extension follows a clear file structure. Here is what our Jira extension will look like:
 
@@ -83,7 +83,7 @@ The manifest.json defines the extension configuration. The popup directory conta
 
 ---
 
-Creating the Manifest {#manifest-configuration}
+## Creating the Manifest {#manifest-configuration}
 
 The manifest.json is the heart of every Chrome Extension. For our Jira integration, we need to configure permissions, declare the extension type, and define the popup interface.
 
@@ -121,13 +121,13 @@ The host_permissions section is critical. It grants our extension access to Jira
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is the main user interface of our extension. It appears when users click the extension icon in Chrome. Let us create a clean, functional popup that allows users to create Jira issues quickly.
 
-HTML Structure
+### HTML Structure
 
-Create popup/popup.html:
+### Create popup/popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -189,9 +189,9 @@ Create popup/popup.html:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
-Create popup/popup.css to make the popup look professional:
+### Create popup/popup.css to make the popup look professional:
 
 ```css
 * {
@@ -316,7 +316,7 @@ button:disabled {
 
 ---
 
-Implementing the Jira API Client {#jira-api-client}
+## Implementing the Jira API Client {#jira-api-client}
 
 The API client handles all communication with Jira. We will create a utility module that encapsulates authentication and API calls. Create utils/jira-api.js:
 
@@ -447,7 +447,7 @@ This API client handles authentication storage, makes authenticated requests to 
 
 ---
 
-Connecting Popup to the API {#popup-logic}
+## Connecting Popup to the API {#popup-logic}
 
 Now we need to connect the popup UI to our API client. Create popup/popup.js:
 
@@ -543,11 +543,11 @@ The popup handles user interactions, form submissions, and displays results. Whe
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background script handles events that occur in the background, such as installation, updates, or messages from content scripts. While our current implementation primarily uses the popup, adding a background worker provides extensibility for future features.
 
-Create background/background.js:
+### Create background/background.js:
 
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
@@ -578,7 +578,7 @@ async function handleCreateIssue(data) {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, it is time to test the extension. Follow these steps to load your extension in Chrome:
 
@@ -597,29 +597,29 @@ Make sure to test with different project keys and issue types. Verify that error
 
 ---
 
-Best Practices and Security Considerations {#best-practices}
+## Best Practices and Security Considerations {#best-practices}
 
 When building a Jira extension that handles authentication, security is paramount. Here are essential best practices to follow:
 
-Secure Credential Storage
+### Secure Credential Storage
 
 Never store credentials in plain text or localStorage, which is accessible to content scripts. Chrome's storage API provides better security, but for production extensions, consider using the identity API with OAuth 2.0 for the most secure authentication flow.
 
-HTTPS Only
+### HTTPS Only
 
 Always use HTTPS for API requests. Jira Cloud requires secure connections, and Chrome extensions are subject to Content Security Policy restrictions that prevent HTTP requests in most contexts.
 
-Error Handling
+### Error Handling
 
 Implement comprehensive error handling throughout your extension. Users should receive clear, actionable error messages when something goes wrong. Handle network errors, authentication failures, and API rate limits gracefully.
 
-User Experience
+### User Experience
 
 Keep the popup lightweight and fast. Users expect instant responses from browser extensions. Lazy-load non-critical data and use loading states to provide feedback during async operations.
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working, you can publish it to the Chrome Web Store. Here is the process:
 
@@ -633,7 +633,7 @@ For the store listing, use relevant keywords like "Jira," "issue creator," "Atla
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You now have a complete, production-ready Jira Integration Chrome Extension. The extension demonstrates key concepts including Manifest V3 configuration, secure API client implementation, popup UI design, and Chrome storage for persistence.
 
@@ -645,7 +645,7 @@ Start building today, and transform how you and your team interact with Jira!
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 To take your Jira extension to the better, consider adding these advanced features:
 

@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-to-extension
 last_modified_at: 2026-01-15
 ---
 
-Extension-to-Extension Communication Patterns
+### Extension-to-Extension Communication Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions can communicate with each other. send messages, share data, and expose APIs. This is useful for extension suites (a family of extensions that work together), plugin architectures (one core extension that others extend), and integration points (your extension coordinating with a well-known third-party extension). This guide covers practical patterns for building reliable, secure inter-extension communication.
 
 ---
 
-The Communication Model {#the-communication-model}
+## The Communication Model {#the-communication-model}
 
 ```
          
@@ -40,7 +40,7 @@ Extensions communicate through two primary channels:
 
 ---
 
-Pattern 1: Sending Messages to Another Extension {#pattern-1-sending-messages-to-another-extension}
+## Pattern 1: Sending Messages to Another Extension {#pattern-1-sending-messages-to-another-extension}
 
 Use `chrome.runtime.sendMessage` with the target extension's ID as the first argument:
 
@@ -91,7 +91,7 @@ The receiving extension must declare itself as externally connectable (see Patte
 
 ---
 
-Pattern 2: Externally Connectable Manifest Configuration {#pattern-2-externally-connectable-manifest-configuration}
+## Pattern 2: Externally Connectable Manifest Configuration {#pattern-2-externally-connectable-manifest-configuration}
 
 The receiving extension must whitelist sender extension IDs in its manifest:
 
@@ -137,7 +137,7 @@ async function handleTranslation(
 }
 ```
 
-For long-lived connections, use `chrome.runtime.connect`:
+### For long-lived connections, use `chrome.runtime.connect`:
 
 ```ts
 // Extension A. long-lived connection to Extension B
@@ -184,7 +184,7 @@ You can also allow web pages to connect by adding `matches` to `externally_conne
 
 ---
 
-Pattern 3: Shared Web Accessible Resources {#pattern-3-shared-web-accessible-resources}
+## Pattern 3: Shared Web Accessible Resources {#pattern-3-shared-web-accessible-resources}
 
 When two extensions have content scripts on the same page, they can share data through web accessible resources:
 
@@ -225,7 +225,7 @@ This is useful for exposing static configuration, API schemas, or shared assets 
 
 ---
 
-Pattern 4: Typed Message Protocol {#pattern-4-typed-message-protocol}
+## Pattern 4: Typed Message Protocol {#pattern-4-typed-message-protocol}
 
 Define a shared protocol so both extensions have type safety at their boundary:
 
@@ -368,7 +368,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 ---
 
-Pattern 5: Version Negotiation {#pattern-5-version-negotiation}
+## Pattern 5: Version Negotiation {#pattern-5-version-negotiation}
 
 When two extensions evolve independently, they need to agree on a protocol version:
 
@@ -445,7 +445,7 @@ async function safeGetData(key: string): Promise<unknown> {
 }
 ```
 
-For breaking changes, maintain backward-compatible handlers:
+### For breaking changes, maintain backward-compatible handlers:
 
 ```ts
 // Extension B. background.ts
@@ -470,7 +470,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 ---
 
-Pattern 6: Detecting If Another Extension Is Installed {#pattern-6-detecting-if-another-extension-is-installed}
+## Pattern 6: Detecting If Another Extension Is Installed {#pattern-6-detecting-if-another-extension-is-installed}
 
 There is no `chrome.management.get` for other extensions. Use these techniques to detect a partner extension:
 
@@ -524,7 +524,7 @@ function getPartnerVersion(): string | null {
 }
 ```
 
-Build a discovery service that caches results:
+### Build a discovery service that caches results:
 
 ```ts
 // lib/extension-discovery.ts
@@ -571,7 +571,7 @@ export async function discoverAllPartners(
 
 ---
 
-Pattern 7: Shared Storage via Web Accessible JSON {#pattern-7-shared-storage-via-web-accessible-json}
+## Pattern 7: Shared Storage via Web Accessible JSON {#pattern-7-shared-storage-via-web-accessible-json}
 
 For one-way data sharing (one extension publishes, others consume), use a web accessible page that bridges to extension storage:
 
@@ -673,7 +673,7 @@ async function getPartnerStatus(
 
 ---
 
-Pattern 8: Validating Sender Extension Identity {#pattern-8-validating-sender-extension-identity}
+## Pattern 8: Validating Sender Extension Identity {#pattern-8-validating-sender-extension-identity}
 
 Always verify `sender.id` before processing external messages. any extension (or web page, if configured) can send you messages:
 
@@ -766,7 +766,7 @@ chrome.runtime.onConnectExternal.addListener((port) => {
 });
 ```
 
-Rate limiter for external callers:
+### Rate limiter for external callers:
 
 ```ts
 // lib/rate-limiter.ts
@@ -817,7 +817,7 @@ export function getRateLimiter(extensionId: string): TokenBucketLimiter {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-uninstall/"
 last_modified_at: 2026-01-15
 ---
 
-Extension Uninstall Patterns
+### Extension Uninstall Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 When users uninstall your Chrome extension, you have an opportunity to collect valuable feedback and clean up resources. This guide covers patterns for handling extension uninstallation gracefully.
 
-Uninstall URL {#uninstall-url}
+## Uninstall URL {#uninstall-url}
 
 Set an uninstall URL that opens automatically when users uninstall your extension:
 
@@ -40,7 +40,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-Uninstall Survey Best Practices {#uninstall-survey-best-practices}
+## Uninstall Survey Best Practices {#uninstall-survey-best-practices}
 
 - Keep it short: 1-3 questions maximum
 - Use multiple choice: "Why are you uninstalling?" with predefined options
@@ -52,7 +52,7 @@ Example questions:
 - "How satisfied were you with the extension?"
 - "Would you recommend this extension to others?"
 
-Cleanup on Uninstall {#cleanup-on-uninstall}
+## Cleanup on Uninstall {#cleanup-on-uninstall}
 
 Chrome automatically clears the following on uninstall:
 - `chrome.storage` (local, sync, and managed)
@@ -74,7 +74,7 @@ app.get('/uninstall-survey', (req, res) => {
 });
 ```
 
-Detecting Uninstall (Self) {#detecting-uninstall-self}
+## Detecting Uninstall (Self) {#detecting-uninstall-self}
 
 Extensions cannot directly detect their own uninstall from within the extension code. However:
 
@@ -89,7 +89,7 @@ chrome.runtime.onSuspend.addListener(() => {
 });
 ```
 
-Detecting Other Extension Uninstall {#detecting-other-extension-uninstall}
+## Detecting Other Extension Uninstall {#detecting-other-extension-uninstall}
 
 Use the `chrome.management.onUninstalled` listener to detect when other extensions are uninstalled:
 
@@ -109,9 +109,9 @@ Common use cases:
 - Check for conflicting extensions
 - Monitor competitor extensions
 
-Self-Uninstall {#self-uninstall}
+## Self-Uninstall {#self-uninstall}
 
-Extensions can uninstall themselves programmatically:
+### Extensions can uninstall themselves programmatically:
 
 ```js
 chrome.management.uninstallSelf({ showConfirmDialog: true });
@@ -128,9 +128,9 @@ function handleLicenseExpired() {
 }
 ```
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Complete Uninstall URL with Tracking {#complete-uninstall-url-with-tracking}
+## Complete Uninstall URL with Tracking {#complete-uninstall-url-with-tracking}
 
 ```js
 // In background script
@@ -153,7 +153,7 @@ function generateAnonymousId() {
 }
 ```
 
-Server-Side Cleanup {#server-side-cleanup}
+## Server-Side Cleanup {#server-side-cleanup}
 
 ```js
 // Express.js example
@@ -172,7 +172,7 @@ app.get('/uninstall', async (req, res) => {
 });
 ```
 
-Self-Uninstall with Confirmation {#self-uninstall-with-confirmation}
+## Self-Uninstall with Confirmation {#self-uninstall-with-confirmation}
 
 ```js
 document.getElementById('uninstall-btn').addEventListener('click', () => {
@@ -182,7 +182,7 @@ document.getElementById('uninstall-btn').addEventListener('click', () => {
 });
 ```
 
-Companion Extension Detection {#companion-extension-detection}
+## Companion Extension Detection {#companion-extension-detection}
 
 ```js
 // Check if companion extension exists on startup
@@ -205,7 +205,7 @@ chrome.management.onUninstalled.addListener((id) => {
 });
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Lifecycle Events](../reference/lifecycle-events.md) - Understanding extension lifecycle
 - [Management Permission](../permissions/management.md) - Using management API

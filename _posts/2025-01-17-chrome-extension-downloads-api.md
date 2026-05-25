@@ -18,7 +18,7 @@ This comprehensive tutorial will walk you through everything you need to know ab
 
 ---
 
-Understanding the Chrome Downloads API {#understanding-downloads-api}
+## Understanding the Chrome Downloads API {#understanding-downloads-api}
 
 The Chrome Downloads API, accessible through the chrome.downloads namespace, provides a complete interface for initiating, managing, and monitoring file downloads directly from your Chrome extension. This API is particularly powerful because it operates at the browser level, meaning downloads initiated through your extension behave exactly like downloads initiated manually by the user through Chrome's built-in download manager.
 
@@ -26,7 +26,7 @@ One of the key advantages of using the Chrome Downloads API over traditional web
 
 The API supports a wide range of download scenarios, from simple file retrievals to complex multi-file downloads with custom filename handling, pause and resume functionality, and detailed progress tracking. Understanding these capabilities will help you design your extension's download features to be both powerful and intuitive for users.
 
-Key Features of the Downloads API
+### Key Features of the Downloads API
 
 The Chrome Downloads API offers several important features that make it suitable for building sophisticated download functionality in your extension. First and foremost is the ability to initiate downloads programmatically with full control over the download parameters. You can specify the download URL, the filename and location where the file should be saved, whether to prompt the user for download location, and various other options that control how the download behaves.
 
@@ -36,11 +36,11 @@ Another powerful feature is the ability to search and manage existing downloads.
 
 ---
 
-Setting Up Your Extension for Downloads {#manifest-configuration}
+## Setting Up Your Extension for Downloads {#manifest-configuration}
 
 Before you can use the Chrome Downloads API in your extension, you need to properly configure your manifest file. This is a critical step that many developers overlook, and failing to configure the manifest correctly will result in your extension being unable to use the API.
 
-Declaring Permissions in Manifest V3
+### Declaring Permissions in Manifest V3
 
 Open your extension's manifest.json file and add the required permissions. For the Downloads API, you need to declare the "downloads" permission in the permissions array. Here's an example of what your manifest section should look like:
 
@@ -62,7 +62,7 @@ Notice that I've also included host permissions. This is important because by de
 
 For testing purposes during development, you can also use the "downloads" permission with the "activeTab" permission to limit downloads to the active tab, which provides a more restricted but also more secure permission model that can be useful during development.
 
-Understanding Permission Behavior
+### Understanding Permission Behavior
 
 It's important to understand that the "downloads" permission alone does not allow your extension to access the contents of downloaded files or the user's file system beyond what Chrome's built-in download manager provides. The permission simply grants your extension the ability to interact with Chrome's download system, the actual file operations are still performed by Chrome itself, which provides an important security boundary. To understand how the downloads permission fits into Chrome's broader security model, see our [Chrome extension permissions security guide](/2025/01/29/chrome-extension-permissions-explained-security-guide/).
 
@@ -70,11 +70,11 @@ This design means that your extension can initiate downloads, receive informatio
 
 ---
 
-Initiating Downloads {#initiating-downloads}
+## Initiating Downloads {#initiating-downloads}
 
 The most fundamental operation in the Downloads API is initiating a download. This is accomplished using the chrome.downloads.download() method, which accepts a DownloadOptions object and returns a promise that resolves with the ID of the newly created download.
 
-Basic Download Implementation
+### Basic Download Implementation
 
 Here's a simple example of how to initiate a basic download:
 
@@ -100,7 +100,7 @@ downloadFile('https://example.com/files/document.pdf', 'document.pdf');
 
 In this example, we're initiating a download from a specified URL and saving it with a specific filename. The saveAs property is set to false, which means Chrome will use the specified filename directly without prompting the user to choose a location. If you want to show the Save As dialog to let users choose where to save the file, you would set saveAs to true instead.
 
-Advanced Download Options
+### Advanced Download Options
 
 The DownloadOptions object supports many additional properties that give you fine-grained control over how downloads behave.  some of the most useful ones:
 
@@ -124,11 +124,11 @@ For large files or unreliable network connections, you can use the incognito pro
 
 ---
 
-Monitoring Download Progress {#monitoring-downloads}
+## Monitoring Download Progress {#monitoring-downloads}
 
 One of the most valuable features of the Chrome Downloads API is its comprehensive event system that allows your extension to monitor download progress in real-time. This enables you to build rich user interfaces that show detailed progress information and provide meaningful feedback as downloads proceed.
 
-Listening for Download Events
+### Listening for Download Events
 
 Chrome provides several event types that your extension can listen to:
 
@@ -160,7 +160,7 @@ chrome.downloads.onCreated.addListener((downloadItem) => {
 
 The onChanged event is particularly useful because it's fired whenever any property of a download changes. This includes state changes (in_progress, complete, interrupted), error conditions, and progress updates. By examining the downloadDelta object, you can determine exactly what changed and respond accordingly.
 
-Retrieving Download Information
+### Retrieving Download Information
 
 To get detailed information about a download, you can use the chrome.downloads.get() method:
 
@@ -183,11 +183,11 @@ The DownloadItem object contains comprehensive information about the download, i
 
 ---
 
-Managing Downloads {#managing-downloads}
+## Managing Downloads {#managing-downloads}
 
 Beyond initiating downloads, the Chrome Downloads API provides methods for managing existing downloads. This includes pausing, resuming, canceling, and removing downloads, as well as searching through download history.
 
-Pause, Resume, and Cancel
+### Pause, Resume, and Cancel
 
 For downloads that support it, you can pause and resume downloads programmatically:
 
@@ -225,7 +225,7 @@ async function cancelDownload(downloadId) {
 
 It's important to note that not all downloads can be paused. The ability to pause depends on the server supporting range requests and the download being in progress. If a download cannot be paused, the API will return an error.
 
-Searching Download History
+### Searching Download History
 
 The chrome.downloads.search() method allows you to query the download history with various filters:
 
@@ -255,11 +255,11 @@ The search method supports many query parameters including URL, filename, start 
 
 ---
 
-Error Handling and Best Practices {#error-handling}
+## Error Handling and Best Practices {#error-handling}
 
 Building solid download functionality requires careful attention to error handling and following best practices that ensure your extension provides a good user experience even when things go wrong.
 
-Handling Network Errors
+### Handling Network Errors
 
 Network errors are among the most common issues you'll encounter when working with downloads. The Downloads API provides detailed error information through the downloadDelta object in the onChanged event:
 
@@ -294,7 +294,7 @@ function getErrorMessage(errorCode) {
 
 Providing meaningful error messages to users is crucial for a good user experience. When a download fails, users should understand what went wrong and what they can do about it.
 
-Best Practices for Download Extensions
+### Best Practices for Download Extensions
 
 When implementing download functionality in your Chrome extension, there are several best practices you should follow to ensure your extension works reliably and provides a good user experience.
 
@@ -308,7 +308,7 @@ Finally, respect user privacy and security. Only request the minimum permissions
 
 ---
 
-Complete Example: Download Manager Extension {#complete-example}
+## Complete Example: Download Manager Extension {#complete-example}
 
 To tie everything together, let's look at a simplified example of how you might build a download manager extension using the Chrome Downloads API:
 
@@ -379,7 +379,7 @@ This example demonstrates the core patterns you would use in a production downlo
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Downloads API is a powerful tool that enables extension developers to build sophisticated download management functionality. Through this comprehensive tutorial, you've learned how to configure your extension for downloads, initiate downloads with various options, monitor download progress in real-time, and manage existing downloads effectively.
 
@@ -387,7 +387,7 @@ The key to building successful download extensions lies in proper error handling
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Downloads API Guide]({% post_url 2025-03-08-chrome-extension-downloads-api-guide %})
 - [File System Access API for Chrome Extensions]({% post_url 2025-01-22-file-system-access-api-chrome-extensions %})

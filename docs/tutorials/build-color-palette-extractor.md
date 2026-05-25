@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Color Palette Extractor
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - Extract dominant colors from any web page
 - Analyze backgrounds, text, borders, and images
 - Copy individual colors or full palette
@@ -15,14 +15,14 @@ What You'll Build {#what-youll-build}
 - Color naming and WCAG contrast checking
 - Format toggle: HEX, RGB, HSL
 
-Manifest {#manifest}
+## Manifest {#manifest}
 - permissions: activeTab, scripting, clipboardWrite
 - action with popup
 - host_permissions: \<all_urls\> for image analysis
 
 ---
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 ```json
 {
@@ -41,9 +41,9 @@ Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 ---
 
-Step 2: Content Script - Color Scanning {#step-2-content-script-color-scanning}
+## Step 2: Content Script - Color Scanning {#step-2-content-script-color-scanning}
 
-Scan page elements for colors using getComputedStyle:
+### Scan page elements for colors using getComputedStyle:
 
 ```javascript
 // content.js
@@ -76,9 +76,9 @@ function extractPageColors() {
 
 ---
 
-Step 3: Image Color Extraction {#step-3-image-color-extraction}
+## Step 3: Image Color Extraction {#step-3-image-color-extraction}
 
-Sample pixels from images using canvas:
+### Sample pixels from images using canvas:
 
 ```javascript
 async function extractImageColors(images) {
@@ -108,9 +108,9 @@ async function extractImageColors(images) {
 
 ---
 
-Step 4: Color Analysis {#step-4-color-analysis}
+## Step 4: Color Analysis {#step-4-color-analysis}
 
-Group similar colors and sort by frequency:
+### Group similar colors and sort by frequency:
 
 ```javascript
 function analyzeColors(colors) {
@@ -138,7 +138,7 @@ function analyzeColors(colors) {
 
 ---
 
-Step 5: Popup UI {#step-5-popup-ui}
+## Step 5: Popup UI {#step-5-popup-ui}
 
 ```html
 <div class="palette-popup">
@@ -167,7 +167,7 @@ Step 5: Popup UI {#step-5-popup-ui}
 
 ---
 
-Step 6: Color Format Toggle {#step-6-color-format-toggle}
+## Step 6: Color Format Toggle {#step-6-color-format-toggle}
 
 ```javascript
 let currentFormat = 'hex';
@@ -195,7 +195,7 @@ function formatColor(hex) {
 
 ---
 
-Step 7: Copy to Clipboard {#step-7-copy-to-clipboard}
+## Step 7: Copy to Clipboard {#step-7-copy-to-clipboard}
 
 ```javascript
 async function copyColor(hex) {
@@ -213,7 +213,7 @@ async function copyFullPalette(colors) {
 
 ---
 
-Step 8: Export Palette {#step-8-export-palette}
+## Step 8: Export Palette {#step-8-export-palette}
 
 ```javascript
 function exportAsCss(colors) {
@@ -247,7 +247,7 @@ function exportAsImage(colors) {
 
 ---
 
-Bonus: Color Naming & Contrast {#bonus-color-naming-contrast}
+## Bonus: Color Naming & Contrast {#bonus-color-naming-contrast}
 
 ```javascript
 function getColorName(hex) {
@@ -273,7 +273,7 @@ function checkWcagContrast(fg, bg) {
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Clipboard Patterns](../patterns/clipboard-patterns.md). Copy colors to clipboard
 - [Content Script Patterns](../guides/content-script-patterns.md). Page scanning techniques
@@ -281,7 +281,7 @@ Cross-References {#cross-references}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 You built a color palette extractor with activeTab permissions, content script scanning (getComputedStyle), image pixel sampling via canvas, color grouping and sorting, popup UI with format toggle, clipboard operations, and export options (CSS/JSON/PNG). Includes color naming and WCAG contrast checking. Test at chrome://extensions/ with Developer mode enabled.
 -e 

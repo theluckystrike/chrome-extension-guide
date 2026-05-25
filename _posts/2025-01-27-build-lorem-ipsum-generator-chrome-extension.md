@@ -18,7 +18,7 @@ This tutorial is designed for developers who want to expand their Chrome extensi
 
 ---
 
-Why Build a Lorem Ipsum Chrome Extension? {#why-build-lorem-ipsum-extension}
+## Why Build a Lorem Ipsum Chrome Extension? {#why-build-lorem-ipsum-extension}
 
 Before we dive into the code, let us explore why building a Lorem Ipsum generator as a Chrome extension makes perfect sense. The Chrome browser is the most popular web browser in the world, with billions of users relying on it daily for work and personal tasks. By building a Chrome extension, you are placing your tool directly in the workflow of millions of potential users.
 
@@ -28,11 +28,11 @@ The development process itself is straightforward. Chrome extensions primarily u
 
 ---
 
-Project Planning and Architecture {#project-planning}
+## Project Planning and Architecture {#project-planning}
 
 Every successful Chrome extension starts with a solid plan. Let us outline the architecture of our Lorem Ipsum generator extension before writing any code.
 
-Core Features
+### Core Features
 
 Our Lorem Ipsum generator extension will include the following features:
 
@@ -42,7 +42,7 @@ Our Lorem Ipsum generator extension will include the following features:
 4. Customizable Options: Allow users to choose between classic Lorem Ipsum and modern placeholder alternatives.
 5. Word Count Display: Show the word count and character count of generated text.
 
-File Structure
+### File Structure
 
 A Chrome extension typically consists of several key files. For our Lorem Ipsum generator, we will need:
 
@@ -56,7 +56,7 @@ This simple structure keeps our code organized and maintainable. As you build mo
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the backbone of every Chrome extension. It tells Chrome about your extension's name, version, permissions, and the files that should be loaded. Let us create a Manifest V3 compliant manifest for our Lorem Ipsum generator.
 
@@ -89,7 +89,7 @@ If you are following along, you will need to create an icons folder and add plac
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon in the browser toolbar. It is essentially a small web page that appears in a pop-up window. Let us create an attractive and functional interface for our Lorem Ipsum generator.
 
@@ -156,7 +156,7 @@ This HTML structure provides a clean, intuitive interface. We have input control
 
 ---
 
-Styling the Popup {#styling-popup}
+## Styling the Popup {#styling-popup}
 
 Now let us add some CSS to make our extension look professional and polished. Create a file called popup.css:
 
@@ -313,7 +313,7 @@ This CSS provides a modern, clean look that follows Chrome's design guidelines. 
 
 ---
 
-Implementing the Lorem Ipsum Algorithm {#lorem-ipsum-algorithm}
+## Implementing the Lorem Ipsum Algorithm {#lorem-ipsum-algorithm}
 
 Now we need to create the JavaScript file that generates the Lorem Ipsum text. This is the core functionality of our extension. Create a file called lorem ipsum.js:
 
@@ -442,7 +442,7 @@ This JavaScript module provides three different types of placeholder text genera
 
 ---
 
-Connecting the Logic to the UI {#popup-javascript}
+## Connecting the Logic to the UI {#popup-javascript}
 
 Now we need to create the popup.js file that connects our UI to our generation logic:
 
@@ -519,7 +519,7 @@ This script handles all the user interactions in our popup. It listens for click
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Before publishing your extension, you need to test it thoroughly to ensure everything works correctly. Chrome provides a simple way to load unpacked extensions for testing.
 
@@ -534,7 +534,7 @@ If you encounter any errors, check the console for JavaScript errors. You can ri
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. Here are the steps:
 
@@ -548,7 +548,7 @@ Once approved, your extension will be available in the Chrome Web Store for anyo
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete Lorem Ipsum Generator Chrome Extension from scratch. This extension demonstrates key concepts in Chrome extension development, including Manifest V3 configuration, popup UI creation, JavaScript logic implementation, and clipboard integration.
 

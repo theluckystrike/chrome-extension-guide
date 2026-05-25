@@ -16,7 +16,7 @@ we will explore everything you need to know about using Tab Suspender Pro with m
 
 ---
 
-Table of Contents
+### Table of Contents
 
 1. [Understanding Multi-Window Tab Management](#understanding-multi-window-tab-management)
 2. [Per-Window Suspension Rules](#per-window-suspension-rules)
@@ -29,7 +29,7 @@ Table of Contents
 
 ---
 
-Understanding Multi-Window Tab Management {#understanding-multi-window-tab-management}
+## Understanding Multi-Window Tab Management {#understanding-multi-window-tab-management}
 
 Chrome's architecture treats each window as an independent entity, but they all share the same memory pool at the system level. When you open multiple windows, you might have a research window with 50 tabs, a development window with 20 tabs, and a communication window with 10 tabs. Without proper management, each of these windows contributes to your overall memory consumption, and traditional tab suspenders often apply the same rules across all windows uniformly.
 
@@ -39,11 +39,11 @@ The multi-window functionality becomes particularly valuable when you consider t
 
 ---
 
-Per-Window Suspension Rules {#per-window-suspension-rules}
+## Per-Window Suspension Rules {#per-window-suspension-rules}
 
 One of the most powerful features of Tab Suspender Pro for multi-window users is the ability to set different suspension rules for different windows. Rather than applying a one-size-fits-all approach, you can configure each window to behave according to its specific purpose and your workflow needs.
 
-Setting Up Window-Specific Rules
+### Setting Up Window-Specific Rules
 
 To configure per-window suspension rules, you first need to access the extension's settings panel. Click on the Tab Suspender Pro icon in your Chrome toolbar and select "Window Settings" from the dropdown menu. Here, you will see a list of all currently open windows, identified by their active tab title or a custom name you can assign.
 
@@ -57,7 +57,7 @@ Auto-Suspend Intensity: This setting controls how aggressively the extension sus
 
 Window Priority Level: You can assign priority levels to windows that determine their suspension behavior relative to other windows. High-priority windows will have longer timeouts and more lenient suspension rules, while low-priority windows will be suspended more aggressively.
 
-Practical Examples
+### Practical Examples
 
 Consider a typical developer workflow with three windows:
 
@@ -69,55 +69,55 @@ Window 3 - Communication (High Priority, Special Rules): This window contains yo
 
 ---
 
-Suspend All Tabs in a Specific Window {#suspend-all-tabs-in-a-specific-window}
+## Suspend All Tabs in a Specific Window {#suspend-all-tabs-in-a-specific-window}
 
 Sometimes you need to quickly suspend all tabs in a particular window without waiting for the idle timeout to elapse. Tab Suspender Pro provides several convenient ways to do this, giving you instant control over your memory usage.
 
-Using the Context Menu
+### Using the Context Menu
 
 Right-click anywhere in the window's tab strip, and you will see a "Suspend All Tabs in This Window" option. This immediately suspends every tab in the window, regardless of their individual idle times. The suspended tabs will display the Tab Suspender Pro placeholder page, showing the original page title and a button to restore each tab.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 For power users who prefer keyboard navigation, Tab Suspender Pro offers customizable keyboard shortcuts. The default shortcut to suspend all tabs in the current window is Ctrl+Shift+W (Cmd+Shift+W on Mac). You can customize this in the extension settings if it conflicts with other Chrome shortcuts.
 
-Bulk Actions Panel
+### Bulk Actions Panel
 
 When you click the Tab Suspender Pro icon and view the window management panel, each window has a "Suspend All" button. This is particularly useful when you want to review the tab count before suspending and ensures you do not accidentally suspend tabs you need.
 
-Selective Suspension
+### Selective Suspension
 
 You can also suspend all tabs except specific ones. Hold the Ctrl/Cmd key while clicking "Suspend All" to exclude the currently active tab or any tabs you have pinned. This is useful when you want to clear memory but keep your current work accessible.
 
 ---
 
-Window-Aware Tab Counting {#window-aware-tab-counting}
+## Window-Aware Tab Counting {#window-aware-tab-counting}
 
 Understanding how many tabs you have open and where they are located becomes crucial in a multi-window setup. Tab Suspender Pro provides window-aware tab counting that gives you detailed insights into your tab distribution across windows.
 
-The Tab Count Dashboard
+### The Tab Count Dashboard
 
 When you click the Tab Suspender Pro icon, you see not just a total tab count, but a breakdown by window. Each window is listed with its name, the number of active tabs, the number of suspended tabs, and the estimated memory savings for that window. This transparency helps you make informed decisions about which windows to prioritize.
 
 For example, you might discover that your "Research" window has 45 tabs but only 5 are active, while your "Development" window has 15 tabs with 12 active. With this information, you can decide to aggressively suspend the research window while being more lenient with your development window.
 
-Memory Impact Visualization
+### Memory Impact Visualization
 
 Tab Suspender Pro calculates the estimated memory savings for each window based on the number of suspended tabs and the average memory consumption of typical web pages. This feature helps you understand the tangible benefits of tab suspension in your specific workflow.
 
 The memory impact display updates in real-time as tabs are suspended or restored, giving you immediate feedback on your memory usage. You might be surprised to find that a single window with many suspended tabs is saving more memory than another window with fewer but all-active tabs.
 
-Setting Per-Window Thresholds
+### Setting Per-Window Thresholds
 
 You can configure automatic suspension triggers based on window-specific tab counts. For instance, you might want any window with more than 20 tabs to automatically enable more aggressive suspension rules. This threshold-based automation ensures that large windows are always optimized without manual intervention.
 
 ---
 
-Focus Window Auto-Suspend {#focus-window-auto-suspend}
+## Focus Window Auto-Suspend {#focus-window-auto-suspend}
 
 One of the most intelligent features of Tab Suspender Pro for multi-window users is the Focus Window concept. You can designate one window as your "focus window". the window where you are currently working. and Tab Suspender Pro will treat it differently from all other windows.
 
-How Focus Window Works
+### How Focus Window Works
 
 When you activate a window (by clicking on it or switching to it), Tab Suspender Pro recognizes it as your focus window. The extension can then automatically adjust suspension behavior:
 
@@ -127,7 +127,7 @@ Automatic Detection: Tab Suspender Pro uses Chrome's window focus events to dete
 
 Manual Focus Designation: You can also manually designate a focus window by right-clicking the Tab Suspender Pro icon and selecting "Set as Focus Window." This is useful when you want a specific window to remain active even while you are working in another window temporarily.
 
-Configuring Focus Window Behavior
+### Configuring Focus Window Behavior
 
 In the extension settings, you can configure exactly how the focus window feature behaves:
 
@@ -139,11 +139,11 @@ Auto-Focus Triggers: You can configure which actions trigger auto-focus, such as
 
 ---
 
-Managing Workspaces with Multiple Windows {#managing-workspaces-with-multiple-windows}
+## Managing Workspaces with Multiple Windows {#managing-workspaces-with-multiple-windows}
 
 For users who work on distinct projects or contexts throughout the day, the workspace functionality in Tab Suspender Pro provides an elegant solution for managing multiple window configurations.
 
-Creating Workspace Profiles
+### Creating Workspace Profiles
 
 A workspace in Tab Suspender Pro is a saved configuration that includes multiple windows, each with their own suspension rules. You might create workspaces like:
 
@@ -153,43 +153,43 @@ Research Workspace: Contains your main research window, a reference materials wi
 
 Communication Workspace: Focuses on email, chat, and calendar windows with minimal suspension to ensure you never miss a message.
 
-Switching Between Workspaces
+### Switching Between Workspaces
 
 When you switch workspaces, Tab Suspender Pro can automatically apply the saved configuration to your currently open windows. This is particularly useful if you have different window arrangements for different tasks. You can create a keyboard shortcut to cycle through workspaces or trigger workspace switching from the extension popup.
 
-Preserving Window Context
+### Preserving Window Context
 
 Tab Suspender Pro's workspace feature remembers not just your suspension rules but also which tabs were suspended or active in each window. When you switch back to a workspace, your tabs are exactly as you left them. This context preservation means you can confidently suspend everything when stepping away, knowing that your workflow will be restored precisely when you return.
 
 ---
 
-Best Practices and Tips {#best-practices-and-tips}
+## Best Practices and Tips {#best-practices-and-tips}
 
 To get the most out of Tab Suspender Pro's multi-window capabilities, consider these expert recommendations:
 
-Start with Defaults, Then Customize
+### Start with Defaults, Then Customize
 
 When you first enable multi-window features, start with the default configuration. Observe how your windows behave for a few days, noting which tabs get suspended and when. This baseline will help you identify which windows need more aggressive or more lenient rules.
 
-Name Your Windows
+### Name Your Windows
 
 Give descriptive names to your important windows in Tab Suspender Pro. Instead of "Window 1" or "Gmail - Google Chrome," use names like "Development Environment" or "Research Project A." This makes it much easier to quickly identify the right window when configuring rules.
 
-Use Whitelists Generously
+### Use Whitelists Generously
 
 Whitelist tabs that are critical or expensive to reload. Local development servers, web apps with complex state, and pages with unsaved form data should always be whitelisted. The memory savings from suspending other tabs far outweigh the convenience of automatic suspension for these critical pages.
 
-Leverage Keyboard Shortcuts
+### Leverage Keyboard Shortcuts
 
 Learn the keyboard shortcuts for common actions like suspending all tabs in a window or toggling the focus window. These shortcuts become instinctive quickly and significantly speed up your workflow.
 
-Review Window Statistics Regularly
+### Review Window Statistics Regularly
 
 Periodically check the window statistics to understand your tab usage patterns. You might discover that one window consistently has a high number of tabs that are rarely used. a perfect candidate for more aggressive suspension rules.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Tab Suspender Pro's multi-window management capabilities represent a significant advancement in browser tab management for power users. By understanding and utilizing per-window suspension rules, window-aware tab counting, focus window auto-suspend, and workspace management, you can create a browsing environment that adapts intelligently to your workflow.
 

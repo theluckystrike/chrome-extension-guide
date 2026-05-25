@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a QR Code Generator Extension. Full Tutorial
 
-What We're Building {#what-were-building}
+## What We're Building {#what-were-building}
 - Popup UI with current tab URL auto-populated
 - Custom text/URL input field for any content
 - QR code generation using Canvas API (no external library needed)
@@ -18,14 +18,14 @@ What We're Building {#what-were-building}
 - History of recently generated codes stored locally
 - Clean, minimal popup design with instant generation
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - Basic Chrome extension knowledge (cross-ref: `docs/guides/extension-architecture.md`)
 - Node.js + npm installed
 - No external QR library required. we'll use a lightweight pure JS implementation
 
 ---
 
-Step 1: Project Setup and manifest.json {#step-1-project-setup-and-manifestjson}
+## Step 1: Project Setup and manifest.json {#step-1-project-setup-and-manifestjson}
 
 ```bash
 mkdir qrcodegen-ext && cd qrcodegen-ext
@@ -54,9 +54,9 @@ npm init -y
 
 ---
 
-Step 2: QR Code Generation Library (Pure JS) {#step-2-qr-code-generation-library-pure-js}
+## Step 2: QR Code Generation Library (Pure JS) {#step-2-qr-code-generation-library-pure-js}
 
-Create `qrcode.js`. a minimal QR generator using Canvas:
+### Create `qrcode.js`. a minimal QR generator using Canvas:
 
 ```js
 // qrcode.js. Pure JS QR Code generator
@@ -115,9 +115,9 @@ Cross-ref: For clipboard patterns, see `docs/patterns/clipboard-patterns.md`.
 
 ---
 
-Step 3: Popup UI {#step-3-popup-ui}
+## Step 3: Popup UI {#step-3-popup-ui}
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -186,9 +186,9 @@ Cross-ref: For popup patterns, see `docs/guides/popup-patterns.md`.
 
 ---
 
-Step 4: Popup Logic {#step-4-popup-logic}
+## Step 4: Popup Logic {#step-4-popup-logic}
 
-Create `popup.js`:
+### Create `popup.js`:
 
 ```js
 import { generateQR } from './qrcode.js';
@@ -245,7 +245,7 @@ document.getElementById('download-btn').addEventListener('click', () => {
 
 ---
 
-Step 5: Context Menu Integration {#step-5-context-menu-integration}
+## Step 5: Context Menu Integration {#step-5-context-menu-integration}
 
 Add to `background.js`:
 
@@ -269,7 +269,7 @@ Cross-ref: For context menu patterns, see `docs/patterns/context-menu-patterns.m
 
 ---
 
-Step 6: Testing and Building {#step-6-testing-and-building}
+## Step 6: Testing and Building {#step-6-testing-and-building}
 
 1. Load unpacked in `chrome://extensions/`
 2. Click extension icon. popup shows with current tab URL
@@ -278,7 +278,7 @@ Step 6: Testing and Building {#step-6-testing-and-building}
 5. Right-click any page → "Generate QR Code"
 6. Build with `zip -r qrcodegen.zip .`
 
-Summary {#summary}
+## Summary {#summary}
 - Pure JS QR generation using Canvas API
 - Configurable size and error correction
 - Clipboard and download functionality

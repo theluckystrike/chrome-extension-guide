@@ -17,7 +17,7 @@ This article covers everything from timing your review requests to handling nega
 
 ---
 
-Why Reviews Matter for CWS Ranking {#why-reviews-matter}
+## Why Reviews Matter for CWS Ranking {#why-reviews-matter}
 
 The Chrome Web Store uses reviews as a significant ranking factor in its search algorithm. Extensions with higher average ratings and more reviews consistently rank higher in search results for relevant keywords. This isn't just speculation, Google has confirmed that user ratings and review velocity directly influence visibility within the store.
 
@@ -29,7 +29,7 @@ The relationship between reviews and ranking creates a flywheel effect: more rev
 
 ---
 
-Optimal Timing for Review Prompts {#optimal-timing}
+## Optimal Timing for Review Prompts {#optimal-timing}
 
 Timing your review requests dramatically impacts conversion rates. Ask too early, and users haven't experienced enough value to leave positive feedback. Ask too late, and the moment has passed, users move on to other tools. The optimal window typically falls between 7 and 14 days after installation, when users have had meaningful interaction with your extension's core features.
 
@@ -48,11 +48,11 @@ Avoid prompting immediately after bug fixes or feature releases, as users may st
 
 ---
 
-In-Extension Review Request Flow (UI Patterns) {#in-extension-flow}
+## In-Extension Review Request Flow (UI Patterns) {#in-extension-flow}
 
 The design of your review prompt significantly affects conversion rates. A poorly designed prompt feels intrusive and damages user experience; a well-designed one feels natural and contextual. Here are proven UI patterns that balance effectiveness with user experience.
 
-The Feedback First Approach
+### The Feedback First Approach
 
 Instead of directly asking for a store review, implement a two-step feedback flow. First, present a simple in-extension prompt asking if the user is satisfied with the extension. Users who indicate satisfaction can be routed to the store review page. Those who indicate dissatisfaction are routed to a support channel where you can address their concerns privately.
 
@@ -73,13 +73,13 @@ function showFeedbackPrompt() {
 }
 ```
 
-Timing Your In-Extension Prompts
+### Timing Your In-Extension Prompts
 
 Use chrome.storage to track when users last saw a review prompt. Never show the same user multiple prompts in short succession. Track prompt impressions in local storage and respect reasonable cooldown periods, typically 30 to 60 days between prompts for the same user.
 
 Implement event-based triggers that align with positive user experiences. When a user manually suspends tabs, pauses auto-suspend, or adjusts settings, the extension has demonstrated value. These moments of active engagement are optimal for introducing feedback requests.
 
-Visual Design Considerations
+### Visual Design Considerations
 
 Keep review prompts minimal and non-blocking. Use small, dismissible UI elements rather than modal dialogs that interrupt workflows. The extension popup itself should never be hijacked for marketing purposes, users open popups to accomplish tasks, not to be bombarded with requests.
 
@@ -87,7 +87,7 @@ Consider using browser action badges or small icons that users can click when th
 
 ---
 
-Review Prompt Frequency and Fatigue {#prompt-frequency}
+## Review Prompt Frequency and Fatigue {#prompt-frequency}
 
 Every user interaction with your extension is a potential moment to request feedback, but overexposure breeds resentment. Finding the right frequency requires balancing acquisition goals with user experience preservation.
 
@@ -114,7 +114,7 @@ Consider implementing a "snooze" feature that allows users to delay the prompt r
 
 ---
 
-Responding to Negative Reviews Publicly {#responding-negative-reviews}
+## Responding to Negative Reviews Publicly {#responding-negative-reviews}
 
 Every extension will eventually receive negative reviews. How you respond publicly shapes perceptions of your brand and can actually turn criticism into opportunities for conversion.
 
@@ -130,13 +130,13 @@ Never engage in arguments or respond to criticism with criticism. Potential user
 
 ---
 
-Turning 1-Star into 5-Star (Support Flow) {#turn-negative-to-positive}
+## Turning 1-Star into 5-Star (Support Flow) {#turn-negative-to-positive}
 
 The ultimate review acquisition strategy transforms dissatisfied users into your biggest advocates. This requires a structured support flow that addresses issues before they result in permanent negative reviews.
 
 When users indicate dissatisfaction through in-extension feedback, immediately route them to a support channel, email, a dedicated support form, or a community forum. This moves the conversation away from the public review space where negativity is permanent.
 
-Your support workflow should include:
+### Your support workflow should include:
 
 Immediate acknowledgment within hours, not days. Users who feel heard are far more likely to revise their opinions.
 
@@ -150,7 +150,7 @@ Track the success rate of this flow. If many users who report issues never respo
 
 ---
 
-Review Velocity and Ranking Correlation {#review-velocity}
+## Review Velocity and Ranking Correlation {#review-velocity}
 
 Review velocity, the rate at which your extension gains new reviews, correlates strongly with CWS ranking. Google's algorithm favors extensions showing consistent, growing engagement over those with stagnant review counts.
 
@@ -162,7 +162,7 @@ Encourage ongoing reviews from long-term users. Anniversary prompts, asking for 
 
 ---
 
-Tab Suspender Pro Review Strategy {#tab-suspender-pro-strategy}
+## Tab Suspender Pro Review Strategy {#tab-suspender-pro-strategy}
 
 Tab Suspender Pro, a popular tab management extension with thousands of reviews, employs several effective review acquisition strategies worth studying.
 
@@ -174,11 +174,11 @@ Importantly, Tab Suspender Pro maintains an active support presence in the Chrom
 
 ---
 
-Avoiding CWS Review Policy Violations {#policy-compliance}
+## Avoiding CWS Review Policy Violations {#policy-compliance}
 
 The Chrome Web Store has strict policies regarding review manipulation. Violations can result in suspension or removal of your extension. Understanding these policies is essential for sustainable review acquisition.
 
-Prohibited practices include:
+### Prohibited practices include:
 
 - Paying for reviews or offering incentives in exchange for positive reviews
 - Creating fake reviews or using bot accounts
@@ -186,7 +186,7 @@ Prohibited practices include:
 - Soliciting only positive reviews while discouraging negative feedback
 - Using extension functionality to prompt reviews in deceptive ways
 
-Permitted practices include:
+### Permitted practices include:
 
 - In-extension prompts that direct satisfied users to the store
 - Linking to your extension from your website or social media
@@ -200,11 +200,11 @@ For detailed policy information, refer to the [Chrome Web Store review guideline
 
 ---
 
-Automated Review Monitoring {#review-monitoring}
+## Automated Review Monitoring {#review-monitoring}
 
 Manually checking for new reviews wastes time you could spend on product development. Implement automated monitoring to stay informed without constant manual checking.
 
-API-Based Monitoring
+### API-Based Monitoring
 
 Use the Chrome Web Store Publishing API to programmatically fetch review data. Set up scheduled tasks (via GitHub Actions, cron jobs, or cloud functions) that:
 
@@ -227,7 +227,7 @@ async function fetchNewReviews(extensionId, lastCheckTime) {
 }
 ```
 
-Review Aggregation Dashboards
+### Review Aggregation Dashboards
 
 Create a simple dashboard that aggregates review metrics across time. Track average rating, review volume, and sentiment trends. This helps you identify patterns, perhaps a recent update caused a spike in negative reviews that requires attention.
 
@@ -235,29 +235,29 @@ Consider integrating with tools like Zapier or Make to route new reviews to Slac
 
 ---
 
-Leveraging Positive Reviews in Marketing {#leveraging-reviews}
+## Leveraging Positive Reviews in Marketing {#leveraging-reviews}
 
 Positive reviews are marketing assets that can amplify your reach beyond the Chrome Web Store. Strategic use of reviews in marketing increases conversion rates across channels.
 
-Website Integration
+### Website Integration
 
 Feature reviews prominently on your extension's landing page. Authentic user quotes with star ratings build credibility. Include specific metrics when possible, "Tab Suspender Pro saved me 80% memory usage!" is more compelling than generic praise.
 
-Social Proof in Paid Ads
+### Social Proof in Paid Ads
 
 When running paid advertising, incorporate social proof elements. Ads featuring "4.7 stars from 2,000+ reviews" outperform generic creative significantly. The Chrome Web Store badge signals marketplace validation that independent websites cannot claim.
 
-Review Screenshots
+### Review Screenshots
 
 Request permission from reviewers to use their reviews in marketing materials. Screenshots of positive reviews add authenticity to promotional content. Always credit reviewers appropriately, this encourages others to share their experiences.
 
-Case Studies
+### Case Studies
 
 For particularly enthusiastic reviewers, consider reaching out to develop case studies. Document how your extension solved their specific problems. These in-depth stories provide compelling content for your marketing funnel.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a strong review portfolio for your Chrome extension requires patience, strategy, and genuine commitment to user satisfaction. The strategies outlined in this guide, from timing review prompts to handling negative feedback, work because they prioritize user experience while creating opportunities for authentic feedback.
 

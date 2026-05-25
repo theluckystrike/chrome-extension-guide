@@ -20,7 +20,7 @@ Understanding the core philosophies behind each approach is essential. Chrome ex
 
 ---
 
-What is a Chrome Extension? {#what-is-chrome-extension}
+## What is a Chrome Extension? {#what-is-chrome-extension}
 
 A Chrome extension is a software program that customizes the Chrome browsing experience. Extensions operate within the Chrome browser environment, accessing web pages through content scripts or the Chrome Extension APIs. They can modify web pages, interact with browser functionality, and provide additional features directly within the Chrome interface.
 
@@ -32,7 +32,7 @@ Development for Chrome extensions requires familiarity with the manifest.json fi
 
 ---
 
-What is an Electron App? {#what-is-electron-app}
+## What is an Electron App? {#what-is-electron-app}
 
 Electron is a framework for building cross-platform desktop applications using web technologies. Originally developed by GitHub for the Atom code editor, Electron packages Chromium (the open-source browser engine behind Chrome) and Node.js into a single executable, allowing developers to create desktop applications using familiar HTML, CSS, and JavaScript.
 
@@ -44,7 +44,7 @@ Distribution of Electron applications requires more effort than Chrome extension
 
 ---
 
-Development Complexity Comparison {#development-complexity}
+## Development Complexity Comparison {#development-complexity}
 
 The learning curve for Chrome extensions is generally gentler than Electron. If you already build websites, you can create a basic Chrome extension in hours by combining HTML, CSS, and JavaScript with a manifest file. The Chrome Extension API is well-documented, and many tutorials cover common use cases. Debugging happens directly within Chrome DevTools, a toolset most web developers already know.
 
@@ -56,7 +56,7 @@ Resource requirements also vary. Chrome extensions are lightweight, typically co
 
 ---
 
-Distribution and Discovery {#distribution}
+## Distribution and Discovery {#distribution}
 
 Chrome extensions benefit from immediate access to the Chrome Web Store, Google's official marketplace for browser extensions. The store provides exposure to millions of Chrome users actively browsing for tools to enhance their experience. Search functionality within the store helps users discover relevant extensions, and ratings and reviews build social proof for quality extensions.
 
@@ -68,7 +68,7 @@ The discoverability challenge differs between platforms. Chrome extensions can r
 
 ---
 
-Capabilities and Limitations {#capabilities}
+## Capabilities and Limitations {#capabilities}
 
 Chrome extensions excel at enhancing web experiences. They can inject content scripts to modify pages, block ads, automate form filling, or add sidebars to web applications. They integrate smoothly with browser features like bookmarks, history, and tabs. Background processing enables extensions to handle tasks even when no tabs are open, though with limitations on execution time and resource usage.
 
@@ -80,7 +80,7 @@ The trade-off comes with increased responsibility. Electron developers must hand
 
 ---
 
-Performance Considerations {#performance}
+## Performance Considerations {#performance}
 
 Chrome extensions benefit from Chrome's efficient process management. The browser handles memory allocation and process isolation, distributing resources intelligently across tabs and extensions. Well-designed extensions consume minimal memory because they share Chrome's renderer processes. The browser's built-in optimizations benefit extensions automatically.
 
@@ -92,7 +92,7 @@ Performance tuning in Electron requires more sophisticated techniques. Applicati
 
 ---
 
-Monetization Models {#monetization}
+## Monetization Models {#monetization}
 
 Chrome extensions have established monetization pathways through the Chrome Web Store. Paid extensions exist, though they face skepticism from users accustomed to free alternatives. More commonly, extensions use freemium models with basic free features and premium upgrades. The Chrome Web Store handles payment processing, simplifying revenue collection for developers.
 
@@ -104,7 +104,7 @@ Both platforms face piracy challenges. Chrome extensions can be relatively easil
 
 ---
 
-Security Considerations {#security}
+## Security Considerations {#security}
 
 Chrome extensions operate within the browser's security model, which restricts access to sensitive APIs and user data. Extensions must declare permissions explicitly, and users review these permissions during installation. Chrome regularly scans extensions for malware and can disable harmful extensions remotely. This security infrastructure protects users but requires developers to follow best practices carefully.
 
@@ -116,7 +116,7 @@ The Electron security documentation provides extensive guidance on secure develo
 
 ---
 
-Which Should You Build? {#conclusion}
+## Which Should You Build? {#conclusion}
 
 The choice between Chrome extension and Electron application depends on your specific requirements, target users, and business goals. Consider these key factors when making your decision.
 

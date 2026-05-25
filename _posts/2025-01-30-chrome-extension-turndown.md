@@ -18,7 +18,7 @@ This comprehensive guide walks you through implementing Turndown in your Chrome 
 
 ---
 
-Understanding Turndown and Its Role in Chrome Extensions
+### Understanding Turndown and Its Role in Chrome Extensions
 
 Turndown is a JavaScript library that converts HTML markup into Markdown. Developed by DOM manipulation expert Dom Christie, Turndown has gained widespread adoption in the web development community for its reliability and flexibility. Unlike simple regex-based converters, Turndown uses a proper HTML parser and maintains a sophisticated rule-based system for handling different HTML elements.
 
@@ -26,7 +26,7 @@ When building Chrome extensions, you often need to capture web page content and 
 
 The library handles virtually every HTML element you might encounter, from simple paragraphs and headings to complex structures like tables, code blocks, and nested lists. It also provides extensive customization options, allowing you to control how specific elements convert, add custom rules for proprietary HTML, and fine-tune the output formatting to match your requirements.
 
-Why Turndown Is the Best Choice for Chrome Extensions
+### Why Turndown Is the Best Choice for Chrome Extensions
 
 Several factors make Turndown the optimal choice for Chrome extension development. First, it's designed to work smoothly in browser environments, with no Node.js dependencies that could complicate your extension's architecture. The library runs entirely in the client's browser, aligning perfectly with Chrome Extensions' client-side execution model.
 
@@ -36,7 +36,7 @@ The extensibility of Turndown deserves special mention. You can add custom rules
 
 ---
 
-Setting Up Turndown in Your Chrome Extension Project
+### Setting Up Turndown in Your Chrome Extension Project
 
 Before implementing Turndown, you need to set up your Chrome extension project and install the necessary dependencies. Assuming you have a basic Chrome extension structure in place, the first step involves adding Turndown to your project.
 
@@ -54,7 +54,7 @@ For simpler projects or those without a build system, you can include Turndown d
 
 However, for production extensions, bundling Turndown with your code is the recommended approach. This ensures your extension works offline and avoids dependency on external resources that might be blocked or unavailable.
 
-Configuring Your Extension's Manifest
+### Configuring Your Extension's Manifest
 
 When using Turndown in a Chrome extension, you need to ensure proper configuration in your manifest file. For extensions using content scripts that convert page content, you'll need to specify the appropriate permissions. Here's an example manifest configuration:
 
@@ -81,7 +81,7 @@ Remember that with Manifest V3, content scripts run in an isolated world, meanin
 
 ---
 
-Implementing Basic HTML to Markdown Conversion
+### Implementing Basic HTML to Markdown Conversion
 
 With Turndown installed, implementing basic HTML to Markdown conversion is straightforward. The core functionality revolves around creating a TurndownService instance and calling its turndown method with the HTML content you want to convert.
 
@@ -111,7 +111,7 @@ function convertPageContent() {
 
 This simple implementation handles the core conversion task. When you pass HTML to the turndown method, it returns the equivalent Markdown string. The service automatically handles common HTML elements, converting headings to Markdown headers, links to Markdown links, images to Markdown images, and so on.
 
-Handling Different HTML Sources
+### Handling Different HTML Sources
 
 Chrome extensions often need to convert HTML from various sources, each with its own characteristics and challenges.  how to handle the most common scenarios.
 
@@ -174,11 +174,11 @@ function convertAfterContentLoaded() {
 
 ---
 
-Advanced Turndown Configuration and Customization
+### Advanced Turndown Configuration and Customization
 
 While the default Turndown settings work well for most use cases, understanding the configuration options allows you to tailor the output precisely to your needs. The TurndownService constructor accepts an options object that controls various aspects of the conversion process.
 
-Configuring Heading Style
+### Configuring Heading Style
 
 Turndown can generate headings in either ATX or SETEXT style. ATX-style headings use hash symbols (# through ######), while SETEXT style uses underline equals signs (for h1) or dashes (for h2). ATX is the default and most widely supported:
 
@@ -188,7 +188,7 @@ const turndownService = new TurndownService({
 });
 ```
 
-Managing Code Blocks
+### Managing Code Blocks
 
 Code block handling is particularly important for technical content. Turndown supports both indented code blocks (the GitHub Flavored Markdown style) and fenced code blocks:
 
@@ -201,7 +201,7 @@ const turndownService = new TurndownService({
 
 The fenced code block style uses triple backticks, which provides better compatibility with various Markdown processors and syntax highlighters.
 
-Customizing Link and Image Handling
+### Customizing Link and Image Handling
 
 You can control how links and images are processed during conversion. This is particularly useful when you need to handle relative URLs or process images differently:
 
@@ -221,7 +221,7 @@ const turndownService = new TurndownService({
 });
 ```
 
-Bullet List and Emphasis Options
+### Bullet List and Emphasis Options
 
 Turndown provides fine-grained control over list formatting and text emphasis:
 
@@ -238,11 +238,11 @@ These options allow you to match the output formatting with your preferred Markd
 
 ---
 
-Creating Custom Turndown Rules
+### Creating Custom Turndown Rules
 
 One of Turndown's most powerful features is its rule-based system for handling HTML elements. You can add custom rules to handle proprietary HTML elements, modify the conversion of existing elements, or add special processing for specific content types.
 
-Adding Custom Element Rules
+### Adding Custom Element Rules
 
 Suppose your extension needs to handle a custom element or modify how a standard element converts. You can add custom rules using the addRule method:
 
@@ -270,7 +270,7 @@ turndownService.addRule('callout', {
 });
 ```
 
-Handling Tables with Greater Control
+### Handling Tables with Greater Control
 
 Tables are among the more complex HTML structures to convert. Turndown provides basic table support, but you can enhance it with custom rules for better formatting:
 
@@ -317,7 +317,7 @@ turndownService.addRule('table', {
 });
 ```
 
-Processing Links for Offline Use
+### Processing Links for Offline Use
 
 When building an extension that saves content for offline reading, you might want to process links differently:
 
@@ -344,11 +344,11 @@ turndownService.addRule('absoluteLinks', {
 
 ---
 
-Building a Complete Content Converter Extension
+### Building a Complete Content Converter Extension
 
 Now that you understand Turndown's capabilities let's put everything together into a functional Chrome extension. We'll create an extension that allows users to select content on any page and convert it to Markdown.
 
-Project Structure
+### Project Structure
 
 ```
 markdown-converter/
@@ -362,7 +362,7 @@ markdown-converter/
      turndown.js
 ```
 
-The Manifest File
+### The Manifest File
 
 ```json
 {
@@ -388,7 +388,7 @@ The Manifest File
 }
 ```
 
-Content Script Implementation
+### Content Script Implementation
 
 ```javascript
 // content.js
@@ -438,7 +438,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-Popup Interface
+### Popup Interface
 
 ```html
 <!-- popup.html -->
@@ -468,7 +468,7 @@ Popup Interface
 </html>
 ```
 
-Popup Script
+### Popup Script
 
 ```javascript
 // popup.js
@@ -505,11 +505,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Best Practices and Performance Optimization
+### Best Practices and Performance Optimization
 
 When implementing Turndown in production Chrome extensions, several best practices ensure optimal performance and user experience.
 
-Efficient DOM Manipulation
+### Efficient DOM Manipulation
 
 Avoid unnecessary DOM operations during conversion. Instead of converting entire pages, target specific content areas when possible. Use efficient selectors and consider the page structure when designing your conversion logic:
 
@@ -524,7 +524,7 @@ if (articleContent) {
 // markdown = turndownService.turndown(document.documentElement.innerHTML);
 ```
 
-Handling Large Content
+### Handling Large Content
 
 For pages with extensive content, consider processing in chunks to avoid blocking the main thread:
 
@@ -546,7 +546,7 @@ async function convertLargeContent(html) {
 }
 ```
 
-Error Handling and Fallbacks
+### Error Handling and Fallbacks
 
 Always implement proper error handling to ensure your extension remains functional even with problematic HTML:
 
@@ -568,7 +568,7 @@ function safeConvert(html) {
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing Turndown in your Chrome extension provides powerful HTML to Markdown conversion capabilities that can enhance a wide variety of extension types. From content clipping tools to note-taking applications, Turndown's flexibility and reliability make it an excellent choice for any project requiring Markdown output.
 

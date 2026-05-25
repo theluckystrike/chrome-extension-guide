@@ -109,9 +109,9 @@ Manifest Configuration (manifest.json)
 
 ---
 
-Core Implementation with TypeScript
+### Core Implementation with TypeScript
 
-Shared Types (shared/types.ts)
+### Shared Types (shared/types.ts)
 
 ```typescript
 // Core type definitions for the text expander extension
@@ -177,7 +177,7 @@ export type MessageType =
   | { type: 'SETTINGS_UPDATED'; settings: ExtensionSettings };
 ```
 
-Constants (shared/constants.ts)
+### Constants (shared/constants.ts)
 
 ```typescript
 export const STORAGE_KEYS = {
@@ -207,7 +207,7 @@ export const MAX_ABBREVIATION_LENGTH = 20;
 export const SNIPPET_LIMIT = 500;
 ```
 
-Snippet Repository (services/snippet-repository.ts)
+### Snippet Repository (services/snippet-repository.ts)
 
 ```typescript
 import { Snippet, ExtensionSettings } from '../shared/types';
@@ -336,7 +336,7 @@ export class SnippetRepository {
 export const snippetRepository = new SnippetRepository();
 ```
 
-Expansion Engine (services/expansion-engine.ts)
+### Expansion Engine (services/expansion-engine.ts)
 
 {% raw %}
 ```typescript
@@ -444,9 +444,9 @@ export class ExpansionEngine {
 
 ---
 
-UI Design
+### UI Design
 
-Popup Interface (popup/popup.html)
+### Popup Interface (popup/popup.html)
 
 ```html
 <!DOCTYPE html>
@@ -525,7 +525,7 @@ Popup Interface (popup/popup.html)
 </html>
 ```
 
-Content Script for Text Expansion (content/content.ts)
+### Content Script for Text Expansion (content/content.ts)
 
 ```typescript
 // Content script that handles text expansion in input fields
@@ -699,9 +699,9 @@ if (document.readyState === 'loading') {
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions Explained
+### Required Permissions Explained
 
 | Permission | Purpose | Security Consideration |
 |------------|---------|----------------------|
@@ -711,7 +711,7 @@ Required Permissions Explained
 | `contextMenus` | Right-click menu integration | Optional feature |
 | `alarms` | Schedule periodic sync | Optional |
 
-Host Permissions
+### Host Permissions
 
 ```json
 "host_permissions": [
@@ -723,9 +723,9 @@ This is required because text expansion needs to work across all websites. For m
 
 ---
 
-State Management and Storage
+### State Management and Storage
 
-Storage Pattern Using Repository Pattern
+### Storage Pattern Using Repository Pattern
 
 ```typescript
 // Use repository pattern for data access
@@ -756,9 +756,9 @@ export async function syncToCloud(snippets: Snippet[]): Promise<void> {
 
 ---
 
-Error Handling and Edge Cases
+### Error Handling and Edge Cases
 
-Error Handling Strategies
+### Error Handling Strategies
 
 ```typescript
 export class ExpansionError extends Error {
@@ -806,7 +806,7 @@ export function shouldDisableOnSite(url: string): boolean {
 }
 ```
 
-Common Edge Cases
+### Common Edge Cases
 
 1. Rich text editors: Many editors use custom implementations - test extensively
 2. Password fields: Never expand in password-type inputs
@@ -816,9 +816,9 @@ Common Edge Cases
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Tests (Jest)
+### Unit Tests (Jest)
 
 ```typescript
 // tests/expansion-engine.test.ts
@@ -880,7 +880,7 @@ describe('ExpansionEngine', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
 ```typescript
 // tests/integration/content.test.ts
@@ -901,9 +901,9 @@ testInChromium('should expand text in input field', async (page) => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Optimization Strategies
+### Optimization Strategies
 
 1. Lazy Loading: Load snippet repository only when needed
 2. Caching: Cache frequently used snippets in memory
@@ -932,9 +932,9 @@ class OptimizedExpander {
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Pre-Publication Requirements
+### Pre-Publication Requirements
 
 - [ ] All features implemented and tested
 - [ ] No console errors in production
@@ -942,7 +942,7 @@ Pre-Publication Requirements
 - [ ] Screenshots and promotional assets prepared
 - [ ] Extension icon at required sizes (16, 48, 128px)
 
-Chrome Web Store Submission
+### Chrome Web Store Submission
 
 1. Developer Dashboard: Create developer account ($5 one-time fee)
 2. Upload: Package as ZIP (no .crx files)
@@ -952,7 +952,7 @@ Chrome Web Store Submission
    - Privacy policy URL
 4. Review Process: Typically 1-7 days
 
-Post-Publication
+### Post-Publication
 
 - [ ] Monitor crash reports in developer dashboard
 - [ ] Respond to user reviews
@@ -961,9 +961,9 @@ Post-Publication
 
 ---
 
-Summary
+### Summary
 
-Building a text expander extension requires:
+### Building a text expander extension requires:
 
 1. Manifest V3 with proper permissions for storage and scripting
 2. TypeScript for type safety across all contexts

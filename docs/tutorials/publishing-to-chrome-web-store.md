@@ -11,7 +11,7 @@ This comprehensive guide walks you through the entire process of publishing your
 
 ---
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Before publishing, ensure your extension meets these minimum requirements:
 
@@ -22,9 +22,9 @@ Before publishing, ensure your extension meets these minimum requirements:
 
 ---
 
-Step 1: Set Up Your Chrome Web Store Developer Account {#step-1-developer-account}
+## Step 1: Set Up Your Chrome Web Store Developer Account {#step-1-developer-account}
 
-Creating a Developer Account
+### Creating a Developer Account
 
 1. Navigate to the Chrome Web Store Developer Dashboard
    
@@ -47,7 +47,7 @@ Creating a Developer Account
    - Contact Email: A valid email for user support inquiries
    - Website (optional): Your personal or company website
 
-Developer Account Tiers
+### Developer Account Tiers
 
 | Tier | User Base | Restrictions |
 |------|-----------|--------------|
@@ -58,11 +58,11 @@ Google grants trusted status based on your history of compliant extensions. Focu
 
 ---
 
-Step 2: Prepare Your Extension Assets {#step-2-prepare-assets}
+## Step 2: Prepare Your Extension Assets {#step-2-prepare-assets}
 
-Required Assets
+### Required Assets
 
-Icons
+### Icons
 
 Your extension needs multiple icon sizes for different contexts:
 
@@ -80,7 +80,7 @@ Recommended sizes (also include):
 
 > Best Practice: Create a 512x512 icon and scale it down. Use a simple, recognizable design that works at small sizes. Avoid text in icons as it becomes unreadable at 16x16.
 
-Screenshots
+### Screenshots
 
 You must provide at least one screenshot. For the best store presence, include:
 
@@ -91,9 +91,9 @@ You must provide at least one screenshot. For the best store presence, include:
 
 > Tip: Create screenshots that highlight your extension's main value proposition. Include annotations or callouts to draw attention to key features.
 
-Store Listing Details
+### Store Listing Details
 
-Prepare these text assets:
+### Prepare these text assets:
 
 | Asset | Requirements | Tips |
 |-------|--------------|------|
@@ -127,11 +127,11 @@ Privacy: TabMaster stores all data locally on your device. No browsing data is s
 
 ---
 
-Step 3: Verify Manifest Requirements {#step-3-manifest-requirements}
+## Step 3: Verify Manifest Requirements {#step-3-manifest-requirements}
 
 Your `manifest.json` must meet Chrome Web Store requirements. Here's a checklist:
 
-Required Fields
+### Required Fields
 
 ```json
 {
@@ -147,14 +147,14 @@ Required Fields
 }
 ```
 
-Manifest V3 Requirements
+### Manifest V3 Requirements
 
 - No remote code: All JavaScript must be bundled in the extension
 - Service workers: Use `service_worker` instead of `background.scripts`
 - Host permissions: Declare in `host_permissions` array
 - Optional permissions: Use `optional_permissions` where possible
 
-Permissions Best Practices
+### Permissions Best Practices
 
 ```json
 {
@@ -173,7 +173,7 @@ Permissions Best Practices
 
 > Tip: Request only the permissions your extension absolutely needs. Overly broad permissions (like `<all_urls>`) trigger human review and may be rejected.
 
-Common Manifest Issues
+### Common Manifest Issues
 
 | Issue | Solution |
 |-------|----------|
@@ -184,9 +184,9 @@ Common Manifest Issues
 
 ---
 
-Step 4: Create a Privacy Policy {#step-4-privacy-policy}
+## Step 4: Create a Privacy Policy {#step-4-privacy-policy}
 
-A privacy policy is required if your extension:
+### A privacy policy is required if your extension:
 
 - Collects any user data
 - Uses cookies
@@ -194,7 +194,7 @@ A privacy policy is required if your extension:
 - Makes network requests to external servers
 - Includes analytics or tracking
 
-Privacy Policy Requirements
+### Privacy Policy Requirements
 
 Your privacy policy must include:
 
@@ -204,7 +204,7 @@ Your privacy policy must include:
 4. User rights. How users can access or delete their data
 5. Contact information. How users can reach you with concerns
 
-Privacy Policy Template
+### Privacy Policy Template
 
 ```markdown
 Privacy Policy for [Extension Name]
@@ -240,7 +240,7 @@ Contact
 For privacy concerns, contact: [email]
 ```
 
-Hosting Your Privacy Policy
+### Hosting Your Privacy Policy
 
 Host your privacy policy on:
 - A dedicated page on your website
@@ -251,11 +251,11 @@ Host your privacy policy on:
 
 ---
 
-Step 5: Prepare Your Extension for Review {#step-5-prepare-for-review}
+## Step 5: Prepare Your Extension for Review {#step-5-prepare-for-review}
 
-Before submitting, thoroughly review your extension:
+### Before submitting, thoroughly review your extension:
 
-Pre-Submission Checklist
+### Pre-Submission Checklist
 
 - [ ] Extension works without errors
 - [ ] All features function as described
@@ -266,7 +266,7 @@ Pre-Submission Checklist
 - [ ] Privacy policy is hosted and accessible
 - [ ] No copyrighted or trademarked content without permission
 
-Testing Your Extension
+### Testing Your Extension
 
 1. Load unpacked in Chrome and test all features
 2. Test in incognito mode if your extension works there
@@ -282,9 +282,9 @@ chrome --pack-extension=/path/to/extension --pack-extension-key=/path/to/key.pem
 
 ---
 
-Step 6: Submit Your Extension {#step-6-submit-extension}
+## Step 6: Submit Your Extension {#step-6-submit-extension}
 
-Publishing Process
+### Publishing Process
 
 1. Package your extension
    
@@ -316,7 +316,7 @@ Publishing Process
    
    Click "Submit for Review" or "Publish" (depending on visibility settings).
 
-Visibility Options
+### Visibility Options
 
 | Option | Description |
 |--------|-------------|
@@ -328,9 +328,9 @@ Visibility Options
 
 ---
 
-Step 7: Understanding the Review Process {#step-7-review-process}
+## Step 7: Understanding the Review Process {#step-7-review-process}
 
-Review Timeline
+### Review Timeline
 
 | Submission Type | Typical Time |
 |----------------|--------------|
@@ -338,7 +338,7 @@ Review Timeline
 | Update | 24 hours to a few days |
 | Complex/reviewed | Up to several weeks |
 
-What Reviewers Check
+### What Reviewers Check
 
 Automated Checks
 - Manifest validity and conformance
@@ -352,7 +352,7 @@ Human Review (for certain extensions)
 - Policy conformance
 - User experience quality
 
-What Happens After Review
+### What Happens After Review
 
 If approved: Your extension becomes live in the store.
 
@@ -365,7 +365,7 @@ If rejected: You'll receive an email with:
 
 ---
 
-Step 8: Common Rejection Reasons and Fixes {#step-8-common-rejections}
+## Step 8: Common Rejection Reasons and Fixes {#step-8-common-rejections}
 
 1. Unnecessary Permissions
 
@@ -436,9 +436,9 @@ Fix:
 
 ---
 
-Step 9: Managing Updates {#step-9-managing-updates}
+## Step 9: Managing Updates {#step-9-managing-updates}
 
-Publishing Updates
+### Publishing Updates
 
 1. Increment your version number in `manifest.json`
    
@@ -456,14 +456,14 @@ Publishing Updates
 
 > Tip: Test updates thoroughly before publishing. Use a beta group or unlisted version to test.
 
-Update Best Practices
+### Update Best Practices
 
 - Version incrementally: Follow semantic versioning
 - Changelog: Keep a list of changes for each version
 - Test thoroughly: Verify updates don't break existing functionality
 - Roll back if needed: You can republish previous versions
 
-Auto-Update Behavior
+### Auto-Update Behavior
 
 Chrome automatically checks for updates:
 - Approximately every few hours
@@ -472,9 +472,9 @@ Chrome automatically checks for updates:
 
 Users don't need to take action. updates install silently unless you've configured otherwise.
 
-Managing Rollbacks
+### Managing Rollbacks
 
-To roll back to a previous version:
+### To roll back to a previous version:
 
 1. Go to your developer dashboard
 2. Find the published extension
@@ -483,16 +483,16 @@ To roll back to a previous version:
 
 ---
 
-Step 10: Post-Publication Tips {#step-10-post-publication}
+## Step 10: Post-Publication Tips {#step-10-post-publication}
 
-Promoting Your Extension
+### Promoting Your Extension
 
 - Store SEO: Use relevant keywords in name and description
 - Screenshots: Update periodically to show new features
 - User reviews: Respond professionally to reviews
 - Website: Create a landing page with installation link
 
-Monitoring Performance
+### Monitoring Performance
 
 Track these metrics in your developer dashboard:
 - Users: Daily/weekly active users
@@ -500,7 +500,7 @@ Track these metrics in your developer dashboard:
 - Reviews: User feedback and ratings
 - Crashes: Error reports from users
 
-Handling Issues
+### Handling Issues
 
 If problems arise:
 1. Respond quickly to user reviews
@@ -510,7 +510,7 @@ If problems arise:
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Chrome Web Store Review Process](../guides/chrome-extension-review-process.html). Detailed look into the review stages and what reviewers look for
 - [Automated Publishing with CI/CD](../guides/chrome-extension-automated-publishing.html). Set up automated publishing workflows using GitHub Actions

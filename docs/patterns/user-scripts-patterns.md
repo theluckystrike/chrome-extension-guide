@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/user-scripts-patterns/
 last_modified_at: 2026-01-15
 ---
 
-UserScripts API Patterns (Chrome 120+)
+### UserScripts API Patterns (Chrome 120+)
 
 The `chrome.userScripts` API allows Chrome extensions to register and manage user-provided scripts, similar to how Tampermonkey and Greasemonkey work. This enables users to customize web page behavior with their own JavaScript.
 
-API Overview {#api-overview}
+## API Overview {#api-overview}
 
-The userScripts API provides four main methods:
+### The userScripts API provides four main methods:
 
 | Method | Description |
 |--------|-------------|
@@ -21,7 +21,7 @@ The userScripts API provides four main methods:
 | `unregister(scriptIds)` | Unregister scripts by their IDs |
 | `getScripts()` | Retrieve all registered user scripts |
 
-Script Properties {#script-properties}
+## Script Properties {#script-properties}
 
 When defining a user script, the following properties are available:
 
@@ -36,14 +36,14 @@ When defining a user script, the following properties are available:
 }
 ```
 
-Execution Worlds {#execution-worlds}
+## Execution Worlds {#execution-worlds}
 
 User scripts can run in one of two worlds:
 
 - `USER_SCRIPT`: Separate JavaScript world with limited API access. Scripts in this world share state and can access some Chrome extension APIs.
 - `ISOLATED`: Same world as content scripts, full API access but no shared state.
 
-Registering Scripts Dynamically {#registering-scripts-dynamically}
+## Registering Scripts Dynamically {#registering-scripts-dynamically}
 
 ```javascript
 async function registerUserScript(script) {
@@ -62,7 +62,7 @@ async function registerUserScript(script) {
 }
 ```
 
-Script Management {#script-management}
+## Script Management {#script-management}
 
 ```javascript
 // List active scripts
@@ -82,9 +82,9 @@ async function enableScript(scriptConfig) {
 }
 ```
 
-Userscript Header Parser {#userscript-header-parser}
+## Userscript Header Parser {#userscript-header-parser}
 
-Userscripts typically include metadata in comments:
+### Userscripts typically include metadata in comments:
 
 ```javascript
 // ==UserScript==
@@ -116,14 +116,14 @@ function parseUserscriptHeader(code) {
 }
 ```
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 - User scripts run in a restricted environment with limited API access
 - Only available when extension is in developer mode
 - Requires `"userScripts"` permission in manifest
 - Scripts in `USER_SCRIPT` world have reduced API surface for security
 
-Permission Requirements {#permission-requirements}
+## Permission Requirements {#permission-requirements}
 
 ```json
 {
@@ -134,22 +134,22 @@ Permission Requirements {#permission-requirements}
 
 The extension must also have developer mode enabled for userScripts to function.
 
-Limitations {#limitations}
+## Limitations {#limitations}
 
 - Developer mode must be enabled for userScripts to run
 - Not suitable for extensions distributed to general users via Chrome Web Store
 - Primarily intended for personal use or developer testing
 
-Migration from Content Scripts {#migration-from-content-scripts}
+## Migration from Content Scripts {#migration-from-content-scripts}
 
-To migrate from dynamic content scripts to userScripts:
+### To migrate from dynamic content scripts to userScripts:
 
 1. Replace `chrome.scripting.registerContentScripts` with `chrome.userScripts.register`
 2. Add `world: "USER_SCRIPT"` for user script behavior
 3. Implement userscript header parsing for compatibility
 4. Add UI for users to import/edit scripts
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [User Scripts API](./user-scripts-api.md) - Full API reference
 - [Scripting API](../api-reference/scripting-api.md) - Chrome's scripting API

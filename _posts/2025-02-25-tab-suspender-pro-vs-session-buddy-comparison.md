@@ -18,11 +18,11 @@ Tab Suspender Pro represents the cutting edge of tab suspension technology, whil
 
 ---
 
-Understanding the Two Philosophies: Suspend vs. Session Management {#two-philosophies}
+## Understanding the Two Philosophies: Suspend vs. Session Management {#two-philosophies}
 
 Before diving into the specific features and capabilities of each extension, it is essential to understand the fundamentally different philosophies that drive Tab Suspender Pro and Session Buddy. These differences shape everything from how the extensions interact with your browser to the specific problems they solve best.
 
-Tab Suspender Pro: Active Tab Resource Management
+### Tab Suspender Pro: Active Tab Resource Management
 
 Tab Suspender Pro operates on the principle of tab suspension. This approach addresses the immediate problem of browser resource consumption by "freezing" inactive tabs rather than closing them entirely. When a tab is suspended, the extension essentially pauses the web page's execution, releasing the CPU cycles and memory that the active page consumes while maintaining a placeholder in your tab bar. The suspended tab displays a lightweight static preview showing the page title and favicon, making it easy to identify without consuming significant resources.
 
@@ -30,7 +30,7 @@ The key advantage of this approach is that your workflow remains uninterrupted. 
 
 This approach is particularly effective for users who tend to keep many tabs open for extended periods but do not necessarily need all of them active simultaneously. Researchers, writers, developers, and anyone who frequently multitasks across multiple projects can benefit enormously from tab suspension. The extension essentially gives you the best of both worlds: you can keep all your tabs accessible without suffering the performance penalties that typically accompany having dozens of active pages.
 
-Session Buddy: Complete Session Save and Restore
+### Session Buddy: Complete Session Save and Restore
 
 Session Buddy takes a fundamentally different approach by focusing on session management and preservation. Rather than keeping tabs in a suspended state within your browser, Session Buddy allows you to save entire browsing sessions as named collections that can be restored at any time. When you save a session, the extension captures the complete state of your browsing environment, including all open windows and tabs, their URLs, and in some cases, additional metadata like tab titles and favicons.
 
@@ -40,11 +40,11 @@ The session management approach is particularly valuable for users who work on m
 
 ---
 
-Feature Comparison: Tab Suspender Pro vs Session Buddy {#feature-comparison}
+## Feature Comparison: Tab Suspender Pro vs Session Buddy {#feature-comparison}
 
 Now that we understand the fundamental philosophies behind each extension, let us examine the specific features and capabilities that differentiate Tab Suspender Pro from Session Buddy in practical terms.
 
-Tab Suspension and Memory Management
+### Tab Suspension and Memory Management
 
 Tab Suspender Pro excels at memory management through its sophisticated suspension system. The extension can automatically suspend tabs after a configurable period of inactivity, with options ranging from immediate suspension to waiting several hours before suspending inactive tabs. Users can create custom rules based on website domains, allowing critical sites like email clients, messaging apps, or productivity tools to remain always active while other tabs are automatically managed.
 
@@ -52,7 +52,7 @@ The extension preserves comprehensive state information when suspending tabs, in
 
 Memory savings with Tab Suspender Pro can be substantial. In testing with 50 open tabs containing typical web content (news sites, social media, productivity tools), the extension reduced memory consumption by approximately 60-70% when most tabs were suspended. This makes a noticeable difference on computers with limited RAM or when running other memory-intensive applications alongside Chrome.
 
-Session Management and Organization
+### Session Management and Organization
 
 Session Buddy provides powerful session management capabilities that go far beyond simple tab saving. The extension allows users to create named sessions, making it easy to organize tabs by project, topic, or any other categorization that makes sense for their workflow. You can save the current session with a single click, giving it a descriptive name that makes it easy to find later.
 
@@ -60,7 +60,7 @@ The extension also provides solid search and filtering capabilities within saved
 
 One particularly useful feature is Session Buddy's ability to handle window arrangements. When you restore a session, the extension attempts to recreate your original window layout, including which tabs were in which window. This is invaluable for users who work with multiple monitor setups or who have organized their browsing into distinct window contexts.
 
-Whitelist and Exception Management
+### Whitelist and Exception Management
 
 Both extensions provide mechanisms for excluding certain sites from their primary functions, though the implementation differs based on each tool's philosophy.
 
@@ -70,11 +70,11 @@ Session Buddy does not have a traditional whitelist feature because its approach
 
 ---
 
-When to Use Each Extension: Choosing the Right Tool {#when-to-use}
+## When to Use Each Extension: Choosing the Right Tool {#when-to-use}
 
 Understanding when to use each extension, or potentially both, depends heavily on your specific workflow and the problems you are trying to solve. Let us examine the scenarios where each extension shines.
 
-Best Use Cases for Tab Suspender Pro
+### Best Use Cases for Tab Suspender Pro
 
 Tab Suspender Pro is the ideal choice in several common scenarios. If you tend to keep many tabs open for extended periods and want to reduce browser memory consumption without losing access to your tabs, Tab Suspender Pro provides exactly what you need. The automatic suspension feature is perfect for users who want a set-it-and-forget-it solution that requires minimal ongoing attention.
 
@@ -84,7 +84,7 @@ Developers who keep multiple documentation tabs, code references, and developmen
 
 Students and knowledge workers who juggle multiple projects and sources simultaneously will find that Tab Suspender Pro helps maintain context across different projects without the memory overhead of keeping everything fully active. The ability to quickly suspend and unsuspend tabs also makes it easy to switch between different work contexts without losing your place.
 
-Best Use Cases for Session Buddy
+### Best Use Cases for Session Buddy
 
 Session Buddy excels in scenarios where complete session preservation is the primary concern. If you frequently close your browser and need to restore exactly which tabs you had open previously, Session Buddy provides reliable session saving and restoration. Unlike Chrome's built-in session restore, which can be unpredictable and does not allow you to manage which sessions are saved, Session Buddy gives you explicit control.
 
@@ -96,7 +96,7 @@ Users who participate in bug reproduction or technical troubleshooting will find
 
 ---
 
-Can They Work Together? {#work-together}
+## Can They Work Together? {#work-together}
 
 A common question among users exploring these tools is whether Tab Suspender Pro and Session Buddy can be used simultaneously. The short answer is yes, these extensions can work together complementarily, each addressing different aspects of tab management.
 
@@ -108,11 +108,11 @@ However, there are a few considerations when using both extensions together. You
 
 ---
 
-Performance Impact Analysis {#performance-impact}
+## Performance Impact Analysis {#performance-impact}
 
 Understanding the performance implications of each extension helps set realistic expectations and optimize their configuration for your specific hardware and workflow.
 
-Tab Suspender Pro Performance Characteristics
+### Tab Suspender Pro Performance Characteristics
 
 Tab Suspender Pro is designed specifically to improve performance by reducing memory consumption. The extension itself is lightweight, consuming minimal resources when operating. The primary performance benefit comes from suspended tabs releasing their memory and CPU usage back to the system.
 
@@ -122,7 +122,7 @@ The suspension and unsuspension process itself is designed to be fast, though th
 
 One potential performance consideration is that Tab Suspender Pro continuously monitors tab activity to determine when to suspend. This monitoring uses minimal resources, but it does run in the background throughout your browsing session. The trade-off is worthwhile for most users given the substantial memory savings achieved.
 
-Session Buddy Performance Characteristics
+### Session Buddy Performance Characteristics
 
 Session Buddy has a different performance profile because its operations are typically episodic rather than continuous. The extension consumes minimal resources during normal browsing; its main resource usage occurs when you save or restore sessions.
 
@@ -132,15 +132,15 @@ The storage implications of Session Buddy are worth considering. Each saved sess
 
 ---
 
-The Verdict: Which Extension Should You Choose? {#verdict}
+## The Verdict: Which Extension Should You Choose? {#verdict}
 
 After examining both Tab Suspender Pro and Session Buddy in detail, the choice between them ultimately depends on your specific needs and workflow preferences. However, we can provide clear guidance based on different user profiles and use cases.
 
-Choose Tab Suspender Pro If:
+### Choose Tab Suspender Pro If:
 
 You keep many tabs open for extended periods and want to reduce browser memory consumption without losing access to your tabs. Tab Suspender Pro is the superior choice for users who want automatic, transparent tab management that requires minimal ongoing attention. If you frequently switch between many projects or research topics within a single browsing session, the suspension approach maintains your workflow context without the memory penalty. Researchers, developers, writers, and power users who value having all their tabs accessible will find Tab Suspender Pro delivers the best experience.
 
-Choose Session Buddy If:
+### Choose Session Buddy If:
 
 You need reliable session preservation and the ability to switch between completely different browsing contexts. Session Buddy is ideal for users who frequently close their browser and need to restore specific tab sets, or who work on distinct projects that benefit from separate session organization. If you work across multiple computers or need to share tab collections with others, Session Buddy's export features provide exactly what you need.
 
@@ -150,7 +150,7 @@ For users who want comprehensive tab management that addresses both resource opt
 
 ---
 
-Conclusion
+### Conclusion
 
 Both Tab Suspender Pro and Session Buddy address real challenges that modern web users face when managing numerous browser tabs. Tab Suspender Pro represents the evolution of tab suspension technology, providing intelligent automatic resource management that keeps your browser fast without requiring you to close tabs or lose your place. Session Buddy offers solid session management for users who need explicit control over saving and restoring complete browsing contexts.
 

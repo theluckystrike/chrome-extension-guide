@@ -18,7 +18,7 @@ In this tutorial, we will build a fully functional Chrome extension that allows 
 
 ---
 
-Why Build an Image Gallery Extension? {#why-build-image-gallery-extension}
+## Why Build an Image Gallery Extension? {#why-build-image-gallery-extension}
 
 The demand for image gallery extensions continues to grow as users consume more visual content online. An image gallery extension serves multiple purposes in a user's browsing experience, making it one of the most useful categories of Chrome extensions you can create.
 
@@ -30,7 +30,7 @@ Finally, from a development perspective, building an image gallery extension tea
 
 ---
 
-Project Setup and Directory Structure {#project-setup}
+## Project Setup and Directory Structure {#project-setup}
 
 Before writing any code, we need to set up our project structure properly. A well-organized directory structure makes development smoother and your extension easier to maintain.
 
@@ -66,11 +66,11 @@ Initialize a new npm project if you plan to use any build tools, though for this
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the backbone of any Chrome extension. It tells Chrome about your extension's permissions, files, and capabilities. For our image gallery extension, we need specific permissions to access web pages and store data.
 
-Create your manifest.json with the following configuration:
+### Create your manifest.json with the following configuration:
 
 ```json
 {
@@ -111,11 +111,11 @@ The `host_permissions` set to `<all_urls>` allows your extension to work on any 
 
 ---
 
-Building the Content Script for Image Detection {#content-script}
+## Building the Content Script for Image Detection {#content-script}
 
 The content script is the part of your extension that runs on web pages to detect and capture images. This is where the core functionality of finding images begins.
 
-Create content.js with the following implementation:
+### Create content.js with the following implementation:
 
 ```javascript
 // Content script for detecting and capturing images
@@ -217,11 +217,11 @@ The script also adds visual feedback by highlighting images when users hover ove
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It needs to be simple, fast, and provide immediate access to the core functionality.
 
-Create popup.html:
+### Create popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -265,7 +265,7 @@ Create popup.html:
 </html>
 ```
 
-Create popup.css for styling:
+### Create popup.css for styling:
 
 ```css
 * {
@@ -370,7 +370,7 @@ button {
 }
 ```
 
-Create popup.js to handle the logic:
+### Create popup.js to handle the logic:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -452,11 +452,11 @@ The popup provides a clean interface with two main actions: collecting images fr
 
 ---
 
-Building the Gallery View {#gallery-view}
+## Building the Gallery View {#gallery-view}
 
 The gallery is where users view and organize their collected images. This needs to be a full-featured interface with sorting, filtering, and viewing capabilities.
 
-Create gallery.html:
+### Create gallery.html:
 
 ```html
 <!DOCTYPE html>
@@ -524,7 +524,7 @@ Create gallery.html:
 </html>
 ```
 
-Create gallery.css with responsive styling:
+### Create gallery.css with responsive styling:
 
 ```css
 * {
@@ -727,7 +727,7 @@ h1 {
 }
 ```
 
-Create gallery.js to handle all gallery functionality:
+### Create gallery.js to handle all gallery functionality:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -880,11 +880,11 @@ This gallery implementation provides a complete image collection extension exper
 
 ---
 
-The Background Service Worker {#background-worker}
+## The Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and coordinates between different parts of your extension.
 
-Create background.js:
+### Create background.js:
 
 ```javascript
 // Background service worker for Image Gallery Extension
@@ -935,13 +935,13 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Before deploying your extension, you need to test it thoroughly in Chrome's developer mode.
 
 Open Chrome and navigate to `chrome://extensions/`. Enable "Developer mode" using the toggle in the top right corner. Click "Load unpacked" and select your extension's folder.
 
-Test the following scenarios:
+### Test the following scenarios:
 
 1. Visit various websites with different image types
 2. Click the extension icon and collect images
@@ -955,7 +955,7 @@ Make sure your extension handles edge cases gracefully, such as pages with no im
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic image gallery extension working, consider adding these advanced features to make your extension stand out:
 
@@ -971,7 +971,7 @@ Export Options: Provide ways to export images, such as downloading individual im
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an image gallery Chrome extension is an excellent project that teaches you fundamental concepts of extension development while creating something genuinely useful. Throughout this guide, we've covered the complete development process from project setup to creating a fully functional photo viewer chrome extension.
 

@@ -18,11 +18,11 @@ Whether you are a seasoned developer looking to expand your portfolio or an entr
 
 ---
 
-Why Build a Travel Planner Chrome Extension? {#why-build-travel-planner}
+## Why Build a Travel Planner Chrome Extension? {#why-build-travel-planner}
 
 The travel technology market is experiencing unprecedented growth, with millions of people planning trips online every single day. A well-designed travel planner extension can solve genuine problems that travelers face daily. Let us explore why this is an excellent project choice for developers in 2025.
 
-The Market Opportunity
+### The Market Opportunity
 
 The travel planning process typically involves visiting multiple websites: airlines for flights, hotel booking platforms for accommodations, car rental services, and travel review sites. This fragmentation creates cognitive overload and makes it easy to miss the best deals. A Chrome extension that aggregates these functions into a unified interface addresses a real user need.
 
@@ -30,7 +30,7 @@ Users spend an average of 35 different website visits when planning a single tri
 
 The Chrome Web Store has numerous travel-related extensions, but most focus narrowly on single tasks like finding coupon codes or tracking flight prices. A comprehensive travel planner that combines itinerary management, flight search, and trip organization fills a notable gap in the marketplace. Users are increasingly demanding all-in-one solutions that simplify rather than complicate their workflows.
 
-Key Features Users Want
+### Key Features Users Want
 
 Based on analysis of user reviews and market research, the most desired features for a travel planner extension include flight search and comparison, price alerts for specific routes, trip itinerary management, destination inspiration, packing list generation, and currency conversion. Your extension does not need to include all of these features from day one, but having a clear roadmap will help you prioritize development.
 
@@ -38,7 +38,7 @@ Starting with core functionality like flight search and basic trip management al
 
 ---
 
-Project Setup and Manifest V3 Configuration {#project-setup}
+## Project Setup and Manifest V3 Configuration {#project-setup}
 
 Every Chrome extension begins with the manifest file, which serves as the blueprint for your extension. In 2025, all new extensions must use Manifest V3, which offers improved security, better performance, and stricter privacy controls compared to the legacy Manifest V2 format.
 
@@ -86,11 +86,11 @@ The background service worker handles long-running tasks like periodic price che
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is the face of your extension, the first thing users see when they click the extension icon. It should be clean, intuitive, and fast. We will build a popup that allows users to search flights, view saved trips, and access quick features like currency conversion.
 
-Create the popup.html file with the following structure:
+### Create the popup.html file with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -329,7 +329,7 @@ The CSS uses a modern design system with consistent spacing, subtle shadows, and
 
 ---
 
-Implementing the Popup Logic {#popup-logic}
+## Implementing the Popup Logic {#popup-logic}
 
 The JavaScript in popup.js handles user interactions and communicates with the background service worker. This is where the magic happens, form submissions, API calls, and local storage operations all come together.
 
@@ -452,7 +452,7 @@ This JavaScript implements form handling, storage operations, and message passin
 
 ---
 
-Background Service Worker for Flight Search {#background-service-worker}
+## Background Service Worker for Flight Search {#background-service-worker}
 
 The background service worker handles computationally intensive tasks that should not block the popup interface. This includes API calls to flight search providers, price monitoring, and notification delivery.
 
@@ -622,29 +622,29 @@ The background service worker manages the core business logic of your extension.
 
 ---
 
-Integrating Flight Search APIs {#flight-api-integration}
+## Integrating Flight Search APIs {#flight-api-integration}
 
 While our mock implementation works for development, a production travel planner extension needs real flight data. Several APIs provide flight search functionality, each with different pricing and capabilities.
 
-Skyscanner API
+### Skyscanner API
 
 Skyscanner offers one of the most popular flight search APIs, providing comprehensive coverage of airlines and travel agencies worldwide. Their API uses a session-based approach where you create a session, poll for results, and then retrieve the complete flight data. The pricing is usage-based, with free tier options for low-volume applications.
 
 To integrate Skyscanner, you would replace the mock flight generation in our background script with actual API calls. The workflow involves creating a flight search session, polling for results using the session token, and then formatting the response for display in your extension. Skyscanner provides detailed documentation and code samples in multiple programming languages.
 
-Amadeus API
+### Amadeus API
 
 Amadeus is another excellent choice for flight data, offering real-time pricing, airport information, and airline schedules. Their API is more structured than Skyscanner and provides additional features like seat maps and flight status tracking. Amadeus offers a free developer tier with generous limits for testing and development.
 
 The Amadeus integration follows a similar pattern: authenticate with your API key, submit a flight offers search request, and process the returned offers. Their response format is comprehensive but can be complex, so plan to spend time parsing the data into a format suitable for your extension UI.
 
-Google QPX (Deprecated Alternatives)
+### Google QPX (Deprecated Alternatives)
 
 Google's QPX Express API was discontinued in 2018, but several alternatives have emerged to fill the void. Kiwi.com, Rome2Rio, and Duffel all offer flight search capabilities that can power your extension. Research each option's pricing, data coverage, and terms of service before making a commitment.
 
 ---
 
-Storing Trip Data Locally {#local-storage}
+## Storing Trip Data Locally {#local-storage}
 
 Chrome extensions can use the chrome.storage API to persist data locally. This is perfect for storing user trips, preferences, and search history without requiring a backend server. The storage is automatically synchronized across the user's Chrome instances if they are signed in.
 
@@ -715,7 +715,7 @@ This advanced storage implementation includes data validation, sanitization, and
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is complete and tested, the final step is publishing to the Chrome Web Store. This process involves preparing your extension assets, creating a developer account, and submitting for review.
 
@@ -725,7 +725,7 @@ Google reviews new extensions manually, which typically takes 24-72 hours. Durin
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a travel planner Chrome extension is an excellent project that combines practical utility with valuable development skills. You have learned how to set up a Manifest V3 extension, create an intuitive popup interface, implement background service worker logic, integrate flight search APIs, and publish to the Chrome Web Store.
 

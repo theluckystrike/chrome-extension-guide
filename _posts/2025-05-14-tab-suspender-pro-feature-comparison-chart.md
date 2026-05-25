@@ -18,7 +18,7 @@ This detailed feature chart provides an exhaustive breakdown of every capability
 
 ---
 
-Complete Feature List with Descriptions
+### Complete Feature List with Descriptions
 
 Tab Suspender Pro distinguishes itself from other tab suspension extensions through its extensive feature set that balances automation with user control. The extension employs a multi-layered approach to tab management, offering both push-button simplicity for casual users and deep customization options for power users who require precise control over their browsing environment.
 
@@ -34,7 +34,7 @@ Tab Preloading: Tab Suspender Pro includes intelligent preloading capabilities t
 
 ---
 
-Auto-Suspension
+### Auto-Suspension
 
 The auto-suspension functionality in Tab Suspender Pro represents the cornerstone of its value proposition, providing automated tab management that requires minimal configuration while delivering maximum memory savings. The system is designed to be both powerful and unobtrusive, working silently in the background to optimize your browser's performance.
 
@@ -50,7 +50,7 @@ Suspension Scheduling: Advanced users can take advantage of scheduling features 
 
 ---
 
-Manual Controls
+### Manual Controls
 
 While auto-suspension handles the bulk of tab management automatically, Tab Suspender Pro provides comprehensive manual controls that give you instant action over individual tabs or groups of tabs. These controls are accessible through multiple interfaces, ensuring you can manage tabs exactly how and when you need to.
 
@@ -66,7 +66,7 @@ Undo Functionality: Recognizing that accidents happen, Tab Suspender Pro include
 
 ---
 
-Whitelist Options
+### Whitelist Options
 
 The whitelist system in Tab Suspender Pro provides precise control over which tabs remain immune from automatic suspension. This feature is essential for users who need certain sites to remain active at all times, such as webmail clients, communication tools, or productivity applications that require real-time updates.
 
@@ -82,7 +82,7 @@ Whitelist Import and Export: Tab Suspender Pro allows you to export your whiteli
 
 ---
 
-Detection Features (Audio, Video, Form)
+### Detection Features (Audio, Video, Form)
 
 One of the most sophisticated aspects of Tab Suspender Pro is its intelligent detection system that recognizes when tabs are performing important tasks that should not be interrupted by suspension. This multi-faceted detection system evaluates numerous factors to ensure that active processes are never inadvertently suspended.
 
@@ -100,7 +100,7 @@ Tab Pinning Recognition: Pinned tabs receive automatic whitelist protection in T
 
 ---
 
-UI Customization
+### UI Customization
 
 Tab Suspender Pro offers extensive customization options that allow you to tailor the extension's appearance and behavior to match your preferences and workflow. From visual themes to notification preferences, every aspect of the user interface can be adjusted to create a personalized experience.
 
@@ -116,7 +116,7 @@ Keyboard Shortcut Configuration: While the extension includes sensible default k
 
 ---
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Tab Suspender Pro includes a comprehensive keyboard shortcut system that enables rapid tab management without requiring you to switch between mouse and keyboard. These shortcuts are designed to be intuitive and follow common conventions used in Chrome and other productivity applications.
 
@@ -132,7 +132,7 @@ Custom Shortcut Creation: Beyond the predefined shortcuts, Tab Suspender Pro all
 
 ---
 
-Sync Capabilities
+### Sync Capabilities
 
 Tab Suspender Pro leverages Chrome's built-in sync functionality to ensure that your settings, whitelist, and preferences remain consistent across all your devices where you are signed in with the same Google account. This cross-device synchronization is essential for users who work across multiple computers or frequently switch between devices.
 
@@ -146,7 +146,7 @@ Selective Sync: For users who want fine-grained control over what synchronizes, 
 
 ---
 
-Platform Compatibility
+### Platform Compatibility
 
 Tab Suspender Pro is designed to work across the entire Chrome ecosystem, ensuring that you can enjoy its benefits regardless of which Chromium-based browser you prefer or which operating system you use.
 
@@ -162,7 +162,7 @@ Mobile Chrome Considerations: While Tab Suspender Pro is a desktop extension and
 
 ---
 
-Conclusion
+### Conclusion
 
 Tab Suspender Pro represents the gold standard in Chrome tab management extensions, offering a comprehensive feature set that addresses every aspect of tab suspension and memory optimization. From its intelligent auto-suspension system that works silently in the background to its powerful manual controls that give you instant action over individual tabs, from sophisticated detection capabilities that protect your active content to extensive customization options that let you tailor the experience to your exact preferences, Tab Suspender Pro delivers a complete solution for anyone looking to reclaim browser memory and improve performance.
 

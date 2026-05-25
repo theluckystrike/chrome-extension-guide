@@ -18,7 +18,7 @@ This project is ideal for developers and content creators who work with markdown
 
 ---
 
-Why Build a Markdown Editor Extension {#why-build-markdown-editor}
+## Why Build a Markdown Editor Extension {#why-build-markdown-editor}
 
 Before we dive into the code, let us explore why building a markdown editor extension is an excellent project choice and what makes these extensions so valuable to users.
 
@@ -30,7 +30,7 @@ From a development perspective, building a markdown editor extension teaches you
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Our markdown editor extension will include several powerful features that make it stand out from basic text editors. The core functionality centers on providing a split-pane interface where users can write markdown on one side and see the rendered HTML preview on the other.
 
@@ -46,7 +46,7 @@ Finally, we will implement keyboard shortcuts for common actions. Power users ca
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file structure to function correctly. Let us set up our project directory and create all necessary files.
 
@@ -83,7 +83,7 @@ This manifest file uses Manifest V3, which is the current standard for Chrome ex
 
 ---
 
-Creating the Popup HTML {#popup-html}
+## Creating the Popup HTML {#popup-html}
 
 Now let us create the popup.html file that defines our extension user interface. We need a split-pane layout with an editor on the left and preview on the right.
 
@@ -121,7 +121,7 @@ This HTML structure provides a clean layout with a toolbar at the top for action
 
 ---
 
-Styling the Extension {#popup-css}
+## Styling the Extension {#popup-css}
 
 The CSS file styles our extension to create a professional appearance and ensures the split-pane layout works correctly.
 
@@ -258,7 +258,7 @@ This CSS creates a responsive split-pane layout that adapts to the popup dimensi
 
 ---
 
-Implementing the JavaScript Logic {#popup-javascript}
+## Implementing the JavaScript Logic {#popup-javascript}
 
 The JavaScript file handles all the functionality including markdown parsing, live preview updates, storage persistence, and user interactions.
 
@@ -413,7 +413,7 @@ This JavaScript implementation provides all the core functionality for our markd
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Now that we have created all the necessary files, let us test the extension in Chrome to ensure everything works correctly.
 
@@ -433,7 +433,7 @@ Close the extension popup and reopen it. Your content should still be present, d
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension and confirmed all features work correctly, you may want to publish it to the Chrome Web Store for others to discover and install.
 
@@ -449,7 +449,7 @@ After submitting, your extension will undergo a review process. Google reviews e
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete markdown editor Chrome extension with live preview functionality. This extension provides real-time markdown parsing, syntax highlighting, persistent storage, and export capabilities all within a clean, modern interface.
 

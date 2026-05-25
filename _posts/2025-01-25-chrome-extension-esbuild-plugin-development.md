@@ -18,7 +18,7 @@ The Chrome Extension ecosystem in 2025 demands modern tooling that can handle th
 
 ---
 
-Understanding the Need for Custom esbuild Plugins {#why-custom-plugins}
+## Understanding the Need for Custom esbuild Plugins {#why-custom-plugins}
 
 Chrome Extensions present unique bundling challenges that generic build tools struggle to address out of the box. Unlike traditional web applications, extensions require careful handling of multiple contexts: background scripts run in a service worker environment, content scripts execute within web page contexts, and popup pages behave like mini web applications. Each of these contexts has different requirements and restrictions.
 
@@ -28,7 +28,7 @@ Custom esbuild plugins solve these problems by automating repetitive tasks and e
 
 ---
 
-Setting Up Your Development Environment {#development-environment}
+## Setting Up Your Development Environment {#development-environment}
 
 Before diving into plugin development, ensure your environment is properly configured. You'll need Node.js version 18 or higher, npm or yarn for package management, and a basic understanding of JavaScript module systems. Create a new directory for your extension project and initialize it with the necessary dependencies.
 
@@ -66,7 +66,7 @@ This setup provides the foundation for building solid esbuild plugins for your C
 
 ---
 
-Building Your First esbuild Plugin for Chrome Extensions {#first-plugin}
+## Building Your First esbuild Plugin for Chrome Extensions {#first-plugin}
 
 An esbuild plugin is simply an object with a name and a setup function that receives a build instance. The build instance provides hooks that let you intervene at various stages of the bundling process. For Chrome Extensions, the most useful hooks are onStart, onResolve, onLoad, and onEnd.
 
@@ -103,7 +103,7 @@ This basic plugin demonstrates the plugin structure. However, a truly useful Chr
 
 ---
 
-Automating Manifest Generation {#manifest-generation}
+## Automating Manifest Generation {#manifest-generation}
 
 The manifest.json file is the backbone of every Chrome Extension. It defines permissions, declares background scripts, specifies content scripts, and configures browser action settings. Manually maintaining this file becomes error-prone as your extension grows. A custom esbuild plugin can generate your manifest automatically based on your build configuration.
 
@@ -203,7 +203,7 @@ This plugin automatically scans your build output and generates a valid manifest
 
 ---
 
-Handling Environment Variables Across Contexts {#environment-variables}
+## Handling Environment Variables Across Contexts {#environment-variables}
 
 Chrome Extensions run in multiple contexts, each with different environment variable requirements. Background scripts have access to Node.js built-ins during development but not in production. Content scripts run in isolated worlds within web pages. Popup scripts behave like regular web pages. Managing environment variables across these contexts requires careful handling.
 
@@ -265,7 +265,7 @@ This plugin injects different environment variables based on the target context,
 
 ---
 
-Implementing Hot Reload for Development {#hot-reload}
+## Implementing Hot Reload for Development {#hot-reload}
 
 Development speed is crucial when building Chrome Extensions. Every time you make a change, you shouldn't need to manually reload your extension in Chrome. Implementing hot reload through esbuild can dramatically improve your development workflow.
 
@@ -324,7 +324,7 @@ For complete hot reload functionality, you'll also need a content script that co
 
 ---
 
-Optimizing Build Performance {#build-optimization}
+## Optimizing Build Performance {#build-optimization}
 
 esbuild is already incredibly fast, but you can further optimize your Chrome Extension builds with strategic plugin configurations. Here are techniques to squeeze out maximum performance.
 
@@ -374,7 +374,7 @@ async function watchMode(ctx: esbuild.BuildContext) {
 
 ---
 
-Best Practices for Chrome Extension esbuild Plugins {#best-practices}
+## Best Practices for Chrome Extension esbuild Plugins {#best-practices}
 
 Following established best practices ensures your plugins remain maintainable and compatible with future esbuild versions. Always define clear interfaces for your plugin options, making them self-documenting and type-safe. Use semantic versioning for your plugins and document breaking changes clearly.
 
@@ -386,7 +386,7 @@ Test your plugins thoroughly with various edge cases. Chrome Extensions can be u
 
 ---
 
-Putting It All Together: Complete Build Configuration {#complete-config}
+## Putting It All Together: Complete Build Configuration {#complete-config}
 
 Here's a comprehensive example that brings all these concepts together:
 
@@ -448,7 +448,7 @@ This configuration provides a complete development and production build pipeline
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building custom esbuild plugins for Chrome Extension development transforms how you approach extension projects. By automating manifest generation, properly handling environment variables across contexts, enabling hot reload, and implementing build optimizations, you create a development experience that is both efficient and enjoyable.
 

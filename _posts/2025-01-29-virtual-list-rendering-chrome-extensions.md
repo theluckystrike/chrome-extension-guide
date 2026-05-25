@@ -17,15 +17,15 @@ This comprehensive guide covers everything you need to know about implementing v
 
 ---
 
-Understanding Virtual List Rendering {#understanding-virtual-lists}
+## Understanding Virtual List Rendering {#understanding-virtual-lists}
 
-What Is Virtualization?
+### What Is Virtualization?
 
 Virtualization is a technique that renders only the items currently visible in the viewport, along with a small buffer of items above and below the visible area. Instead of creating DOM elements for every item in your dataset, which could mean thousands of elements for a large list, virtualization creates only the approximately 10-20 elements needed to fill the visible area at any given time.
 
 When users scroll through a virtualized list, the library or implementation dynamically recycles DOM elements, updating their content to match the new visible items. This approach dramatically reduces memory consumption and improves rendering performance, making it essential for any chrome extension virtual list implementation.
 
-Why Virtual Lists Matter for Chrome Extensions
+### Why Virtual Lists Matter for Chrome Extensions
 
 Chrome extensions operate under unique constraints that make virtual list extension implementations particularly valuable:
 
@@ -39,13 +39,13 @@ User Experience: Scrolling through hundreds or thousands of items should feel in
 
 ---
 
-Core Concepts of Virtualized Scrolling {#core-concepts}
+## Core Concepts of Virtualized Scrolling {#core-concepts}
 
-The Windowing Technique
+### The Windowing Technique
 
 The fundamental concept behind virtualized scroll chrome implementations is called "windowing." Imagine a sliding window that moves over your dataset, showing only the items that fall within the window's current position.
 
-The window has three key properties:
+### The window has three key properties:
 
 1. Viewport Height: The visible area where items are displayed
 2. Item Height: The height of each list item (can be fixed or variable)
@@ -56,13 +56,13 @@ Based on these properties, you can calculate:
 - Which items are currently visible (`startIndex` to `endIndex`)
 - The total scroll height (`totalItems * itemHeight`)
 
-The Buffer Zone
+### The Buffer Zone
 
 A critical aspect of virtualized scrolling Chrome extensions is maintaining a buffer zone. The buffer includes items rendered slightly outside the visible viewport to prevent empty space from appearing during fast scrolling.
 
 Typically, implementations render 3-5 extra items above and below the visible area. This buffer ensures that when users scroll quickly, new content appears instantly without visible loading gaps.
 
-Position Calculation
+### Position Calculation
 
 The scroll position directly determines which items should be visible. You calculate this using:
 
@@ -75,9 +75,9 @@ This calculation ensures that regardless of scroll position, you always render t
 
 ---
 
-Implementing Virtual List in Your Extension {#implementation}
+## Implementing Virtual List in Your Extension {#implementation}
 
-Approach 1: Fixed-Height Items
+### Approach 1: Fixed-Height Items
 
 The simplest virtual list extension implementation uses fixed-height items. This approach works well for uniform content like tables or lists with consistent item heights.
 
@@ -151,7 +151,7 @@ class VirtualListManager {
 }
 ```
 
-Approach 2: Variable-Height Items
+### Approach 2: Variable-Height Items
 
 Real-world chrome extension virtual list implementations often need to handle variable-height content. This is more complex but necessary for rich content like emails, messages, or social media posts.
 
@@ -269,11 +269,11 @@ class VariableHeightVirtualList {
 
 ---
 
-Handling Infinite List Extension Patterns {#infinite-lists}
+## Handling Infinite List Extension Patterns {#infinite-lists}
 
 Infinite list extension implementations require additional considerations beyond basic virtualization. When working with dynamic data that loads incrementally, you need to handle fetching, appending, and managing the data pipeline.
 
-Implementing Infinite Scrolling
+### Implementing Infinite Scrolling
 
 ```javascript
 // InfiniteListHandler.js
@@ -330,7 +330,7 @@ class InfiniteListHandler {
 }
 ```
 
-Integration Example
+### Integration Example
 
 Here's how you would combine these pieces into a working chrome extension virtual list:
 
@@ -383,9 +383,9 @@ async function fetchItemsFromStorage(offset, limit) {
 
 ---
 
-Performance Optimization Strategies {#optimization}
+## Performance Optimization Strategies {#optimization}
 
-Debouncing Scroll Events
+### Debouncing Scroll Events
 
 Even with virtualization, processing every scroll event can impact performance. Debouncing ensures you only render after scrolling settles:
 
@@ -406,7 +406,7 @@ const handleScroll = debounce(() => {
 container.addEventListener('scroll', handleScroll);
 ```
 
-Using requestAnimationFrame
+### Using requestAnimationFrame
 
 For smoother rendering, use requestAnimationFrame to sync updates with the browser's refresh cycle:
 
@@ -426,9 +426,9 @@ const scheduleRender = () => {
 container.addEventListener('scroll', scheduleRender);
 ```
 
-Memoization
+### Memoization
 
-Cache expensive computations to avoid redundant processing:
+### Cache expensive computations to avoid redundant processing:
 
 ```javascript
 class MemoizedVirtualList extends VirtualListManager {
@@ -478,7 +478,7 @@ class MemoizedVirtualList extends VirtualListManager {
 
 ---
 
-Common Pitfalls and How to Avoid Them {#pitfalls}
+## Common Pitfalls and How to Avoid Them {#pitfalls}
 
 1. Incorrect Height Calculations
 
@@ -509,7 +509,7 @@ Solution: Balance buffer size based on your use case. For most extensions, 3-5 i
 
 Users expect to see something when lists are empty, loading, or have errors.
 
-Solution: Add conditional rendering:
+### Solution: Add conditional rendering:
 
 ```javascript
 if (this.items.length === 0 && !this.loading) {
@@ -520,31 +520,31 @@ if (this.items.length === 0 && !this.loading) {
 
 ---
 
-Real-World Use Cases {#use-cases}
+## Real-World Use Cases {#use-cases}
 
-Tab Manager Extensions
+### Tab Manager Extensions
 
 Tab managers like Tab Suspender Pro use virtual list extension patterns to display hundreds or thousands of open tabs efficiently. Each tab item includes a favicon, title, and preview, information that would quickly overwhelm DOM rendering without virtualization.
 
-Email Clients
+### Email Clients
 
 Email extensions displaying inbox lists must handle thousands of messages. Virtualization ensures that switching between folders or searching through emails remains instant, regardless of mailbox size.
 
-File Browsers
+### File Browsers
 
 Cloud storage extensions displaying files and folders benefit from virtualized scrolling when users have thousands of files to navigate.
 
-RSS Readers
+### RSS Readers
 
 Feed aggregators with hundreds of articles per subscription use virtual lists to maintain smooth scrolling performance.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing virtual list rendering in Chrome extensions is essential for building performant, user-friendly extensions that handle large datasets. By understanding the core concepts of virtualization, windowing, buffering, and position calculation, you can create chrome extension virtual list implementations that feel responsive and use minimal memory.
 
-Remember these key principles:
+### Remember these key principles:
 
 1. Render only what is visible plus a small buffer
 2. Calculate positions precisely to maintain accurate scroll behavior

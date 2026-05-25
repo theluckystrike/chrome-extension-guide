@@ -18,11 +18,11 @@ By the end of this tutorial, you'll have a working Chrome extension that monitor
 
 ---
 
-Understanding GitHub Notifications and Chrome Extensions {#understanding-github-notifications}
+## Understanding GitHub Notifications and Chrome Extensions {#understanding-github-notifications}
 
 Before diving into the code, it's essential to understand how GitHub notifications work and how Chrome extensions can interact with the GitHub API. This knowledge will help you design a solid and efficient notification system that meets the needs of modern developers.
 
-How GitHub Notifications Work
+### How GitHub Notifications Work
 
 GitHub provides a comprehensive notifications API that allows developers to access their notification inbox programmatically. The API provides information about:
 
@@ -35,7 +35,7 @@ GitHub provides a comprehensive notifications API that allows developers to acce
 
 The GitHub Notifications API uses a polling mechanism where clients can fetch new notifications since their last check. This makes it ideal for building a Chrome extension that periodically checks for updates and alerts users when new activity occurs.
 
-Chrome Extension Capabilities for Notifications
+### Chrome Extension Capabilities for Notifications
 
 Chrome extensions provide several powerful features that make them perfect for building notification systems:
 
@@ -48,11 +48,11 @@ Chrome extensions provide several powerful features that make them perfect for b
 
 ---
 
-Project Setup and Structure {#project-setup}
+## Project Setup and Structure {#project-setup}
 
 Let's start by setting up the project structure for our GitHub notification extension. We'll use Manifest V3, the latest version of the Chrome extension manifest format.
 
-Creating the Project Directory
+### Creating the Project Directory
 
 First, create a new directory for your extension project:
 
@@ -61,9 +61,9 @@ mkdir github-notifier-extension
 cd github-notifier-extension
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
-Create the `manifest.json` file with all necessary permissions:
+### Create the `manifest.json` file with all necessary permissions:
 
 ```json
 {
@@ -101,7 +101,7 @@ Create the `manifest.json` file with all necessary permissions:
 }
 ```
 
-Essential Permissions Explained
+### Essential Permissions Explained
 
 Understanding each permission is crucial for building a secure and functional extension:
 
@@ -113,11 +113,11 @@ Understanding each permission is crucial for building a secure and functional ex
 
 ---
 
-Authentication with GitHub {#authentication}
+## Authentication with GitHub {#authentication}
 
 Implementing secure authentication is critical for accessing private repositories and user-specific notifications. We'll use OAuth 2.0 to authenticate users with their GitHub accounts.
 
-Setting Up OAuth Application
+### Setting Up OAuth Application
 
 Before implementing authentication, you need to create an OAuth application in GitHub:
 
@@ -128,7 +128,7 @@ Before implementing authentication, you need to create an OAuth application in G
    - Homepage URL: https://your-extension-site.com
    - Authorization callback URL: https://YOUR_EXTENSION_ID.chromiumapp.org/
 
-Implementing OAuth Flow
+### Implementing OAuth Flow
 
 Create an `auth.js` module to handle the authentication flow:
 
@@ -205,7 +205,7 @@ class GitHubAuth {
 export default new GitHubAuth();
 ```
 
-Token Management Best Practices
+### Token Management Best Practices
 
 When handling authentication tokens in your extension, follow these security guidelines:
 
@@ -216,11 +216,11 @@ When handling authentication tokens in your extension, follow these security gui
 
 ---
 
-GitHub API Integration {#github-api-integration}
+## GitHub API Integration {#github-api-integration}
 
 Now let's create the core module that interacts with GitHub's API to fetch notifications and repository data.
 
-Creating the GitHub API Module
+### Creating the GitHub API Module
 
 ```javascript
 // github-api.js - GitHub API integration
@@ -302,7 +302,7 @@ class GitHubAPI {
 export default new GitHubAPI();
 ```
 
-Understanding Rate Limits
+### Understanding Rate Limits
 
 GitHub's API imposes rate limits that you must respect:
 
@@ -353,11 +353,11 @@ export default new RateLimiter();
 
 ---
 
-Background Service Worker Implementation {#background-worker}
+## Background Service Worker Implementation {#background-worker}
 
 The background service worker is the heart of your extension, responsible for polling GitHub and triggering notifications.
 
-Creating the Background Script
+### Creating the Background Script
 
 ```javascript
 // background.js - Background service worker
@@ -505,11 +505,11 @@ async function checkAuthStatus() {
 
 ---
 
-Notification System Implementation {#notification-system}
+## Notification System Implementation {#notification-system}
 
 Now let's create the notification system that displays native Chrome notifications to users.
 
-Creating the Notification Manager
+### Creating the Notification Manager
 
 ```javascript
 // notifications.js - Notification management
@@ -634,11 +634,11 @@ export class NotificationManager {
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides users with quick access to their notifications and settings.
 
-Creating the Popup HTML
+### Creating the Popup HTML
 
 ```html
 <!-- popup.html -->
@@ -692,7 +692,7 @@ Creating the Popup HTML
 </html>
 ```
 
-Creating the Popup Styles
+### Creating the Popup Styles
 
 ```css
 /* popup.css */
@@ -842,7 +842,7 @@ body {
 }
 ```
 
-Creating the Popup JavaScript
+### Creating the Popup JavaScript
 
 ```javascript
 // popup.js - Popup interface logic
@@ -968,18 +968,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Extension Testing and Debugging {#testing}
+## Extension Testing and Debugging {#testing}
 
 Testing Chrome extensions requires a different approach than regular web applications. Here's how to properly test your GitHub notifier.
 
-Loading the Extension
+### Loading the Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension directory
 4. The extension icon should appear in your toolbar
 
-Testing Checklist
+### Testing Checklist
 
 - [ ] OAuth authentication flow works correctly
 - [ ] Notifications are fetched and displayed properly
@@ -989,9 +989,9 @@ Testing Checklist
 - [ ] Mark as read functionality works
 - [ ] Background polling works at set intervals
 
-Debugging Tips
+### Debugging Tips
 
-Use Chrome DevTools to debug your extension:
+### Use Chrome DevTools to debug your extension:
 
 ```javascript
 // In any extension script, use console.log for debugging
@@ -1004,32 +1004,32 @@ Use Chrome DevTools to debug your extension:
 
 ---
 
-Best Practices and Optimization {#best-practices}
+## Best Practices and Optimization {#best-practices}
 
 Building a production-ready GitHub notification extension requires attention to several important considerations.
 
-Performance Optimization
+### Performance Optimization
 
 - Minimize API calls: Cache notification data and only fetch updates
 - Use efficient polling: Set appropriate intervals (5-15 minutes recommended)
 - Lazy load content: Load notification details on-demand in the popup
 - Optimize badge updates: Only update when new notifications arrive
 
-User Experience Improvements
+### User Experience Improvements
 
 - Provide clear feedback: Show loading states and error messages
 - Offer customization: Allow users to filter notification types
 - Respect user preferences: Honor quiet hours and notification settings
 - Fast startup: Keep the popup loading time under 500ms
 
-Security Considerations
+### Security Considerations
 
 - Secure token storage: Use Chrome's recommended security practices
 - Validate all data: Sanitize API responses before displaying
 - Implement HTTPS: Only communicate over secure connections
 - Handle errors gracefully: Provide meaningful error messages
 
-Error Handling
+### Error Handling
 
 ```javascript
 // Comprehensive error handling example
@@ -1059,11 +1059,11 @@ async function safeApiCall(apiFunction, fallbackValue = null) {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a GitHub notification Chrome extension is a rewarding project that demonstrates the power of Chrome's extension APIs combined with the GitHub REST API. Throughout this guide, we've covered everything from project setup and authentication to building a complete notification system with a user-friendly interface.
 
-Key takeaways from this tutorial include:
+### Key takeaways from this tutorial include:
 
 1. Manifest V3: Use the latest Chrome extension manifest version for better security and performance
 2. OAuth Authentication: Implement secure GitHub authentication using OAuth 2.0
@@ -1086,7 +1086,7 @@ Start building your GitHub notifier today and transform the way you manage your 
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [GitHub REST API Documentation](https://docs.github.com/en/rest)
 - [Chrome Extension Development Docs](https://developer.chrome.com/docs/extensions/mv3/)

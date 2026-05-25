@@ -18,7 +18,7 @@ The Chrome Identity API, exposed through the `chrome.identity` namespace, provid
 
 ---
 
-Understanding the Chrome Identity API {#understanding-chrome-identity-api}
+## Understanding the Chrome Identity API {#understanding-chrome-identity-api}
 
 The Chrome Identity API is Chrome's built-in mechanism for handling user authentication in extensions and packaged apps. It abstracts away the complexity of OAuth flows and provides two primary authentication methods: the Google Sign-In flow for users with Google accounts, and the interactive login flow for other identity providers. For most Chrome extensions targeting Google services, the Identity API offers the most straightforward and secure path to authentication.
 
@@ -26,7 +26,7 @@ At its core, the chrome.identity API enables your extension to obtain OAuth2 tok
 
 The API operates through two main methods: `getAuthToken()` and `launchWebAuthFlow()`. The `getAuthToken()` method retrieves OAuth2 tokens directly from the user's authenticated Google session, making it ideal for extensions that primarily interact with Google APIs. The `launchWebAuthFlow()` method, on the other hand, handles OAuth redirects for non-Google identity providers or when you need more granular control over the authentication process. Understanding when to use each method is crucial for building efficient authentication flows.
 
-Why Use Chrome Identity Instead of Custom OAuth
+### Why Use Chrome Identity Instead of Custom OAuth
 
 Implementing custom OAuth flows in Chrome extensions presents numerous challenges that the Identity API elegantly solves. First, managing OAuth redirects in extension contexts is complex because extensions operate in isolated environments with unique security constraints. The chrome.identity API handles these redirect complexities automatically, managing the OAuth callback URLs and token exchanges without requiring you to set up additional backend infrastructure.
 
@@ -36,7 +36,7 @@ User experience significantly improves when using the Identity API. Users who ar
 
 ---
 
-Setting Up Google OAuth Credentials {#setting-up-google-oauth-credentials}
+## Setting Up Google OAuth Credentials {#setting-up-google-oauth-credentials}
 
 Before implementing the Chrome extension Identity API in your code, you need to configure OAuth credentials in the Google Cloud Console. This setup is mandatory for any extension that uses chrome.identity for Google Sign-In. The process involves creating a project, enabling the necessary APIs, configuring the OAuth consent screen, and generating OAuth client credentials.
 
@@ -46,7 +46,7 @@ The OAuth consent screen configuration requires careful attention. You must spec
 
 After configuring the consent screen, create OAuth client credentials. Select "Chrome App" as the application type, though this also applies to extensions. You will need your extension's ID, which you can obtain from the Chrome Management Console or by packaging your extension. For development, you can use your development extension ID. Once created, you will receive a client ID and client secret that you will use in your extension's code.
 
-Configuring the Manifest File
+### Configuring the Manifest File
 
 Your extension's manifest.json file requires specific permissions and configuration to use the Identity API. You must declare the "identity" permission in the permissions array. Additionally, if you are using specific Google APIs, you may need to declare those as permissions or matches in the appropriate manifest sections. The OAuth configuration itself goes in the "oauth2" section of the manifest, where you specify the client ID and the scopes your extension requires.
 
@@ -74,7 +74,7 @@ Note that manifest version 3 (MV3) is the current standard, and all new extensio
 
 ---
 
-Implementing Google Sign-In in Your Extension {#implementing-google-sign-in}
+## Implementing Google Sign-In in Your Extension {#implementing-google-sign-in}
 
 With your OAuth credentials configured and the manifest updated, you can now implement the actual authentication logic in your extension's JavaScript code. The implementation typically involves a background service worker (for MV3) or a background page (for MV2), where the authentication state is managed, and popup or content scripts that trigger authentication when needed.
 
@@ -113,7 +113,7 @@ async function fetchUserInfo(token) {
 
 The `interactive` parameter controls whether the API can prompt the user for authentication. When set to `true`, the API will show a sign-in prompt if necessary. When set to `false`, it will only return a token if one is already available, making it suitable for silent authentication scenarios. Understanding this distinction is important for providing appropriate user experiences in different contexts.
 
-Handling Token Management
+### Handling Token Management
 
 Token management is a critical aspect of maintaining secure authentication in Chrome extensions. OAuth tokens have finite lifetimes, typically one hour for access tokens. Your extension must handle token expiration gracefully by detecting 401 errors and refreshing tokens as needed. The Chrome Identity API provides `chrome.identity.removeCachedAuthToken()` for invalidating tokens when necessary.
 
@@ -153,7 +153,7 @@ This pattern ensures that expired tokens are automatically detected and replaced
 
 ---
 
-Best Practices for Chrome Extension Authentication {#best-practices}
+## Best Practices for Chrome Extension Authentication {#best-practices}
 
 Implementing authentication is only part of the equation; following best practices ensures your implementation is secure, maintainable, and provides a positive user experience. These guidelines reflect lessons learned from real-world extension development and address common pitfalls that developers encounter.
 
@@ -163,7 +163,7 @@ Scope management is another critical consideration. Request only the minimum sco
 
 Error handling deserves careful attention throughout your authentication implementation. Users encounter various authentication issues, from network problems to revoked permissions to expired credentials. Provide clear, actionable error messages that help users understand what went wrong and how to resolve it. Distinguish between recoverable errors (like network timeouts) that can be retried and non-reversible errors (like permission revocation) that require explicit user action.
 
-User Experience Considerations
+### User Experience Considerations
 
 The authentication experience significantly impacts user adoption and retention. Design your authentication flow to be as frictionless as possible while still maintaining security. For most extensions, automatic token retrieval without user intervention provides the best experience. Only require explicit sign-in actions when necessary, such as initial setup or after token expiration.
 
@@ -173,7 +173,7 @@ Sign-out functionality is often overlooked but equally important. Users should b
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting-common-issues}
+## Troubleshooting Common Issues {#troubleshooting-common-issues}
 
 Even with careful implementation, authentication issues can arise during development and after deployment. Understanding common problems and their solutions helps you quickly resolve issues and maintain a positive user experience. This section covers the most frequently encountered challenges with chrome extension google login implementations.
 
@@ -183,7 +183,7 @@ Token-related errors often manifest as "Token expired" or "Invalid credentials" 
 
 Redirect URI issues plague extensions using `launchWebAuthFlow()`. The redirect URI must exactly match what is registered in your OAuth configuration, including the extension ID. For Chrome extensions, the redirect URI follows the format `https://<extension-id>.chromiumapp.org/`. Any discrepancy, including trailing slashes or different protocols, will cause authentication failures. Double-check this URI in your Google Cloud Console OAuth client configuration.
 
-Debugging Authentication Problems
+### Debugging Authentication Problems
 
 Chrome provides helpful debugging tools for authentication issues. The `chrome.identity` API returns detailed error objects that include both the error type and a description. Log these errors comprehensively during development to understand exactly what is happening. Additionally, the Chrome extension management page shows OAuth permissions and can help identify configuration issues.
 
@@ -193,7 +193,7 @@ The Chrome Web Store dashboard also provides useful diagnostic information. Afte
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing Google Sign-In in Chrome extensions using the Identity API transforms a complex authentication challenge into a manageable task. The chrome.identity API provides robust, secure, and user-friendly authentication that integrates smoothly with Chrome's existing authentication infrastructure. By following the setup procedures outlined in this guide, implementing proper token management, and adhering to best practices, you can create authentication experiences that feel natural to users while maintaining enterprise-grade security.
 

@@ -17,11 +17,11 @@ Table of Contents
 
 ---
 
-Understanding the Pricing Landscape
+### Understanding the Pricing Landscape
 
 The Chrome Web Store deprecated direct payments in 2020, forcing developers to adopt external payment processors like Stripe, Paddle, LemonSqueezy, or Gumroad. This shift actually opened up more sophisticated pricing strategies previously unavailable to extension developers.
 
-Why Pricing Strategy Matters
+### Why Pricing Strategy Matters
 
 - Revenue Sustainability: Proper pricing ensures long-term viability
 - User Acquisition: Right-priced extensions convert better
@@ -30,11 +30,11 @@ Why Pricing Strategy Matters
 
 ---
 
-Freemium vs Premium: Finding Your Balance
+### Freemium vs Premium: Finding Your Balance
 
 The freemium model offers core functionality for free while reserving advanced features for paying customers. This approach maximizes user acquisition while converting a portion to paid plans.
 
-When to Choose Freemium
+### When to Choose Freemium
 
 | Factor | Freemium Ideal | Premium-Only Ideal |
 |--------|----------------|-------------------|
@@ -43,7 +43,7 @@ When to Choose Freemium
 | Feature differentiation | Clear upgrade path | All features needed |
 | Competition | Saturated market | Unique offering |
 
-Implementing Freemium Effectively
+### Implementing Freemium Effectively
 
 The key to successful freemium is identifying trigger moments, points where users realize they need more:
 
@@ -70,7 +70,7 @@ function trackAction(action: string) {
 }
 ```
 
-The 5% Rule
+### The 5% Rule
 
 Industry data suggests freemium apps convert 2-5% of users to paid plans. Plan your revenue projections accordingly:
 
@@ -80,11 +80,11 @@ Industry data suggests freemium apps convert 2-5% of users to paid plans. Plan y
 
 ---
 
-Subscription Tier Design
+### Subscription Tier Design
 
-The Three-Tier Model
+### The Three-Tier Model
 
-Most successful SaaS extensions use three tiers:
+### Most successful SaaS extensions use three tiers:
 
 ```
 
@@ -100,7 +100,7 @@ Most successful SaaS extensions use three tiers:
 
 ```
 
-Tier Naming Conventions
+### Tier Naming Conventions
 
 Avoid generic names. Instead, use names that convey value:
 
@@ -108,7 +108,7 @@ Avoid generic names. Instead, use names that convey value:
 - Pro → "Professional," "Plus," or "Premium"
 - Enterprise → "Team," "Business," or "Organization"
 
-Annual vs Monthly Pricing
+### Annual vs Monthly Pricing
 
 Offering annual plans typically yields 15-20% higher revenue per user. Implement this with clear savings messaging:
 
@@ -134,20 +134,20 @@ function calculateSavings() {
 
 ---
 
-One-Time Purchase Model
+### One-Time Purchase Model
 
 Despite the SaaS trend, one-time purchases remain viable for Chrome extensions, especially for productivity tools.
 
-When One-Time Works
+### When One-Time Works
 
 - Utility tools: Extensions with clear, finite use cases
 - Lifetime value: Low maintenance products
 - Simple functionality: Limited feature set that doesn't require ongoing development
 - Price-sensitive markets: Lower upfront cost attracts more buyers
 
-Pricing One-Time Purchases
+### Pricing One-Time Purchases
 
-Calculate your one-time price using this formula:
+### Calculate your one-time price using this formula:
 
 ```
 Annual SaaS Price × 3 = One-Time Price
@@ -158,7 +158,7 @@ This accounts for:
 - Updates included for life
 - One-time support cost
 
-Real-World One-Time Pricing
+### Real-World One-Time Pricing
 
 | Extension Type | One-Time Price | SaaS Equivalent |
 |---------------|----------------|------------------|
@@ -167,7 +167,7 @@ Real-World One-Time Pricing
 | Screenshot Tool | $24.99 | $2.49/mo |
 | Data Exporter | $19.99 | $1.99/mo |
 
-Implementation
+### Implementation
 
 ```typescript
 async function validateLifetimeLicense(licenseKey: string): Promise<boolean> {
@@ -193,11 +193,11 @@ async function validateLifetimeLicense(licenseKey: string): Promise<boolean> {
 
 ---
 
-Trial Periods That Convert
+### Trial Periods That Convert
 
 Trial periods are critical for conversion. The right length and structure can double your conversion rate.
 
-Optimal Trial Lengths
+### Optimal Trial Lengths
 
 | Trial Type | Best Duration | Conversion Rate |
 |-----------|---------------|-----------------|
@@ -205,7 +205,7 @@ Optimal Trial Lengths
 | Card required | 14-30 days | 15-25% |
 | Freemium to paid | No trial | 5-10% |
 
-The 14-Day Sweet Spot
+### The 14-Day Sweet Spot
 
 Research shows 14-day trials balance user activation with urgency:
 
@@ -214,7 +214,7 @@ Research shows 14-day trials balance user activation with urgency:
 - Days 8-11: User evaluates value
 - Days 12-14: Decision time
 
-Trial Implementation
+### Trial Implementation
 
 ```typescript
 const TRIAL_CONFIG = {
@@ -254,7 +254,7 @@ async function checkTrialStatus(): Promise<TrialStatus> {
 }
 ```
 
-Trial Conversion Best Practices
+### Trial Conversion Best Practices
 
 1. Day 3 Reminder: "Getting started with [Feature]"
 2. Day 7 Reminder: "You're halfway through your trial"
@@ -262,9 +262,9 @@ Trial Conversion Best Practices
 
 ---
 
-Pricing Psychology Strategies
+### Pricing Psychology Strategies
 
-The Charm Pricing Effect
+### The Charm Pricing Effect
 
 Prices ending in .99 convert 24% better than whole numbers:
 
@@ -272,7 +272,7 @@ Prices ending in .99 convert 24% better than whole numbers:
 - ~~$20~~ → $19.99
 - ~~$50~~ → $49.99
 
-Anchoring
+### Anchoring
 
 Show the highest tier first to make others seem like deals:
 
@@ -285,7 +285,7 @@ Show the highest tier first to make others seem like deals:
     
 ```
 
-Decoy Effect
+### Decoy Effect
 
 Introduce a decoy option to steer users toward your target tier:
 
@@ -300,7 +300,7 @@ Introduce a decoy option to steer users toward your target tier:
         (not ideal)    (sweet spot)       (decoy)
 ```
 
-Loss Aversion
+### Loss Aversion
 
 Frame pricing in terms of what users lose by not upgrading:
 
@@ -310,9 +310,9 @@ Frame pricing in terms of what users lose by not upgrading:
 
 ---
 
-Real-World Examples
+### Real-World Examples
 
-Example 1: Grammar Checker
+### Example 1: Grammar Checker
 
 Model: Freemium → Subscription
 Pricing: Free (500 words) / $4.99/mo (unlimited)
@@ -322,7 +322,7 @@ Conversion tactics:
 - Block final save for free users
 - "Premium saves you 2 hours/week" messaging
 
-Example 2: Password Manager
+### Example 2: Password Manager
 
 Model: Subscription
 Pricing: $2.99/mo or $29.99/year
@@ -332,7 +332,7 @@ Why it works:
 - Cross-device sync as premium feature
 - Annual discount (17% savings)
 
-Example 3: Screenshot Tool
+### Example 3: Screenshot Tool
 
 Model: One-time purchase
 Pricing: $24.99 (lifetime)
@@ -342,7 +342,7 @@ Why it works:
 - Free alternatives are limited
 - One-time payment appeals to privacy-conscious users
 
-Example 4: Email Finder
+### Example 4: Email Finder
 
 Model: Credits-based subscription
 Pricing: $0 (10 credits) / $19/mo (500 credits)
@@ -354,9 +354,9 @@ Why it works:
 
 ---
 
-Implementation Checklist
+### Implementation Checklist
 
-Before Launch
+### Before Launch
 
 - [ ] Define clear feature differentiation between tiers
 - [ ] Set up external payment processor (Stripe/Paddle/LemonSqueezy)
@@ -364,7 +364,7 @@ Before Launch
 - [ ] Create upgrade UI in extension popup/options
 - [ ] Set up customer support flow
 
-Pricing Page Elements
+### Pricing Page Elements
 
 - [ ] Clear tier comparison table
 - [ ] Savings calculation for annual plans
@@ -372,7 +372,7 @@ Pricing Page Elements
 - [ ] Money-back guarantee messaging
 - [ ] Support contact information
 
-Post-Launch Optimization
+### Post-Launch Optimization
 
 - [ ] A/B test pricing tiers
 - [ ] Monitor conversion rates by tier
@@ -382,7 +382,7 @@ Post-Launch Optimization
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Extension Monetization Guide](../guides/extension-monetization.md). Comprehensive overview of monetization strategies for Chrome extensions
 - [How to Monetize Your Chrome Extension](../guides/monetization-overview.md). Complete guide covering freemium, subscriptions, one-time purchases, and more
@@ -398,7 +398,7 @@ For detailed implementation guides on payment processing, license key systems, a
 
 ---
 
-Next Steps
+### Next Steps
 
 1. Audit your features: Identify which justify premium pricing
 2. Research competitors: Understand market pricing norms

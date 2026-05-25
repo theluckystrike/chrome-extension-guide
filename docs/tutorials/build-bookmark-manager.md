@@ -7,14 +7,14 @@ last_modified_at: 2026-01-15
 ---
 Build a Bookmark Manager Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 A side panel bookmark manager with search, folder navigation, tags, and duplicate detection.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - Side panel API (cross-ref `docs/mv3/side-panel.md`)
 - Bookmark API (cross-ref `docs/guides/bookmark-api.md`)
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 ```
 bookmark-manager/
   manifest.json
@@ -25,7 +25,7 @@ bookmark-manager/
     panel.js
 ```
 
-Step 1: Manifest {#step-1-manifest}
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -38,7 +38,7 @@ Step 1: Manifest {#step-1-manifest}
 }
 ```
 
-Step 2: Background Service Worker {#step-2-background-service-worker}
+## Step 2: Background Service Worker {#step-2-background-service-worker}
 ```javascript
 // Open side panel on icon click
 chrome.action.onClicked.addListener((tab) => {
@@ -57,7 +57,7 @@ chrome.bookmarks.onChanged.addListener((id, info) => {
 });
 ```
 
-Step 3: Side Panel HTML {#step-3-side-panel-html}
+## Step 3: Side Panel HTML {#step-3-side-panel-html}
 ```html
 <!DOCTYPE html>
 <html>
@@ -77,7 +77,7 @@ Step 3: Side Panel HTML {#step-3-side-panel-html}
 </html>
 ```
 
-Step 4: Panel CSS {#step-4-panel-css}
+## Step 4: Panel CSS {#step-4-panel-css}
 ```css
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: system-ui; font-size: 13px; background: #1a1a2e; color: #e0e0e0; }
@@ -96,7 +96,7 @@ body { font-family: system-ui; font-size: 13px; background: #1a1a2e; color: #e0e
 .collapsed > .folder, .collapsed > .bookmark { display: none; }
 ```
 
-Step 5: Panel JavaScript {#step-5-panel-javascript}
+## Step 5: Panel JavaScript {#step-5-panel-javascript}
 ```javascript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -210,7 +210,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 loadBookmarks();
 ```
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 - Add drag-and-drop reordering with `chrome.bookmarks.move`
 - Add broken link checker (fetch HEAD, check status)
 - Import from HTML bookmark file

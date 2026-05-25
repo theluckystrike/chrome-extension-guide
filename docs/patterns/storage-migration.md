@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/storage-migration/"
 last_modified_at: 2026-01-15
 ---
 
-Storage Area Migration Pattern
+### Storage Area Migration Pattern
 
-Overview {#overview}
+## Overview {#overview}
 
 The Storage Area Migration Pattern provides a structured approach for moving data between different `chrome.storage` areas, handling quota limitations, and migrating from deprecated storage mechanisms in Manifest V2 to the more secure chrome.storage APIs in Manifest V3.
 
@@ -17,7 +17,7 @@ This pattern addresses three primary scenarios:
 - Handling sync storage quota limits by splitting large data
 - Migrating from localStorage to chrome.storage when upgrading from MV2 to MV3
 
-When to Migrate {#when-to-migrate}
+## When to Migrate {#when-to-migrate}
 
 There are several scenarios where storage migration becomes necessary:
 
@@ -29,7 +29,7 @@ There are several scenarios where storage migration becomes necessary:
 
 4. Schema version upgrades: When changing the data schema between extension versions, migration ensures existing user data is preserved in the new format.
 
-Local to Sync Migration {#local-to-sync-migration}
+## Local to Sync Migration {#local-to-sync-migration}
 
 The simplest migration moves data from `storage.local` to `storage.sync`. This process must account for sync's strict quota limits:
 
@@ -65,7 +65,7 @@ async function migrateLocalToSync() {
 }
 ```
 
-Sync Quota Handling {#sync-quota-handling}
+## Sync Quota Handling {#sync-quota-handling}
 
 The `storage.sync` API imposes strict quota limits that require careful handling:
 
@@ -87,7 +87,7 @@ async function getStorageStrategy() {
 }
 ```
 
-Chunking Large Values {#chunking-large-values}
+## Chunking Large Values {#chunking-large-values}
 
 When you need to store values larger than 8KB in sync, chunking provides a solution:
 
@@ -133,7 +133,7 @@ async function readLargeValue(key) {
 }
 ```
 
-localStorage to chrome.storage (MV3) {#localstorage-to-chromestorage-mv3}
+## localStorage to chrome.storage (MV3) {#localstorage-to-chromestorage-mv3}
 
 Service workers cannot access `localStorage` in Manifest V3. Use a content script or popup as a bridge:
 
@@ -173,7 +173,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Atomic Migration {#atomic-migration}
+## Atomic Migration {#atomic-migration}
 
 For reliable migrations, follow an atomic pattern that prevents data loss:
 
@@ -209,9 +209,9 @@ async function needsMigration() {
 }
 ```
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Complete Migration Runner {#complete-migration-runner}
+## Complete Migration Runner {#complete-migration-runner}
 
 ```js
 class StorageMigration {
@@ -263,7 +263,7 @@ class StorageMigration {
 }
 ```
 
-Migration Verification {#migration-verification}
+## Migration Verification {#migration-verification}
 
 ```js
 async function verifyMigration(sourceArea, targetArea, originalData) {
@@ -281,9 +281,9 @@ async function verifyMigration(sourceArea, targetArea, originalData) {
 }
 ```
 
-Rollback Strategy {#rollback-strategy}
+## Rollback Strategy {#rollback-strategy}
 
-If migration fails, implement a rollback mechanism:
+### If migration fails, implement a rollback mechanism:
 
 ```js
 async function migrateWithRollback() {
@@ -303,13 +303,13 @@ async function migrateWithRollback() {
 }
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Migration Wizard Pattern](./migration-wizard.md) - UI-driven migration workflows
 - [Storage Patterns Reference](../reference/storage-patterns.md) - Complete storage API reference
 - [Size Limits Reference](../reference/size-limits.md) - Detailed quota and limit specifications
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Chrome Storage API Documentation](https://developer.chrome.com/docs/extensions/storage)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro)

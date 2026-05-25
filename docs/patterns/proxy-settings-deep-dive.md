@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings-deep de
 last_modified_at: 2026-01-15
 ---
 
-Proxy Settings detailed look
+### Proxy Settings detailed look
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Proxy Settings API (`chrome.proxy`) enables extensions to programmatically control Chrome's proxy configuration. This detailed look covers advanced patterns, technical details, and implementation strategies for building solid proxy management extensions.
 
@@ -18,11 +18,11 @@ Error API: `chrome.proxy.onProxyError`
 
 ---
 
-chrome.proxy.settings API {#chromeproxysettings-api}
+## chrome.proxy.settings API {#chromeproxysettings-api}
 
 The `chrome.proxy.settings` API uses the `ChromeSetting` pattern, providing get, set, and clear operations:
 
-Setting Proxy Configuration {#setting-proxy-configuration}
+## Setting Proxy Configuration {#setting-proxy-configuration}
 
 ```javascript
 chrome.proxy.settings.set({
@@ -41,7 +41,7 @@ chrome.proxy.settings.set({
 });
 ```
 
-Getting Current Configuration {#getting-current-configuration}
+## Getting Current Configuration {#getting-current-configuration}
 
 ```javascript
 chrome.proxy.settings.get({ incognito: false }, (config) => {
@@ -49,7 +49,7 @@ chrome.proxy.settings.get({ incognito: false }, (config) => {
 });
 ```
 
-Clearing Configuration {#clearing-configuration}
+## Clearing Configuration {#clearing-configuration}
 
 ```javascript
 chrome.proxy.settings.clear({}, () => {
@@ -59,7 +59,7 @@ chrome.proxy.settings.clear({}, () => {
 
 ---
 
-Proxy Modes {#proxy-modes}
+## Proxy Modes {#proxy-modes}
 
 | Mode | Description | Use Case |
 |------|-------------|----------|
@@ -71,9 +71,9 @@ Proxy Modes {#proxy-modes}
 
 ---
 
-Fixed Servers Configuration {#fixed-servers-configuration}
+## Fixed Servers Configuration {#fixed-servers-configuration}
 
-Single Proxy for All Protocols {#single-proxy-for-all-protocols}
+## Single Proxy for All Protocols {#single-proxy-for-all-protocols}
 
 ```javascript
 const config = {
@@ -95,7 +95,7 @@ const config = {
 };
 ```
 
-Per-Protocol Proxies {#per-protocol-proxies}
+## Per-Protocol Proxies {#per-protocol-proxies}
 
 ```javascript
 const perProtocolConfig = {
@@ -111,11 +111,11 @@ const perProtocolConfig = {
 
 ---
 
-PAC Script Configuration {#pac-script-configuration}
+## PAC Script Configuration {#pac-script-configuration}
 
 Proxy Auto-Configuration (PAC) scripts enable dynamic, URL-based proxy routing:
 
-Inline PAC Script {#inline-pac-script}
+## Inline PAC Script {#inline-pac-script}
 
 ```javascript
 const pacConfig = {
@@ -145,7 +145,7 @@ const pacConfig = {
 };
 ```
 
-PAC Script Return Values {#pac-script-return-values}
+## PAC Script Return Values {#pac-script-return-values}
 
 - `"DIRECT"`. Connect directly without proxy
 - `"PROXY host:port"`. Use specified proxy
@@ -154,9 +154,9 @@ PAC Script Return Values {#pac-script-return-values}
 
 ---
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 
-Listening for Proxy Errors {#listening-for-proxy-errors}
+## Listening for Proxy Errors {#listening-for-proxy-errors}
 
 ```javascript
 chrome.proxy.onProxyError.addListener((details) => {
@@ -179,7 +179,7 @@ chrome.proxy.onProxyError.addListener((details) => {
 });
 ```
 
-Connection Testing {#connection-testing}
+## Connection Testing {#connection-testing}
 
 ```javascript
 async function testProxyConnection(host, port) {
@@ -202,11 +202,11 @@ async function testProxyConnection(host, port) {
 
 ---
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
-VPN/Proxy Switcher Extensions {#vpnproxy-switcher-extensions}
+## VPN/Proxy Switcher Extensions {#vpnproxy-switcher-extensions}
 
-Build a toggle switch between different proxy profiles:
+### Build a toggle switch between different proxy profiles:
 
 ```javascript
 async function toggleProxy(enabled, profile) {
@@ -228,9 +228,9 @@ async function toggleProxy(enabled, profile) {
 }
 ```
 
-Development Proxies {#development-proxies}
+## Development Proxies {#development-proxies}
 
-Route traffic through local development proxies:
+### Route traffic through local development proxies:
 
 ```javascript
 const devConfig = {
@@ -248,9 +248,9 @@ const devConfig = {
 };
 ```
 
-Content Filtering {#content-filtering}
+## Content Filtering {#content-filtering}
 
-Filter content based on domain categories:
+### Filter content based on domain categories:
 
 ```javascript
 const filteredConfig = {
@@ -271,7 +271,7 @@ const filteredConfig = {
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [permissions/proxy.md](../permissions/proxy.md). Permission requirements
 - [patterns/proxy-settings.md](./proxy-settings.md). Basic proxy patterns
@@ -279,7 +279,7 @@ Cross-References {#cross-references}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 The `chrome.proxy.settings` API provides comprehensive control over Chrome's proxy configuration. Key points:
 

@@ -18,21 +18,21 @@ By the end of this tutorial, you will have created an extension that provides a 
 
 ---
 
-Prerequisites and Setup {#prerequisites}
+## Prerequisites and Setup {#prerequisites}
 
 Before diving into the code, ensure you have the following tools and accounts ready:
 
-Required Tools
+### Required Tools
 
 You will need a modern code editor like Visual Studio Code, Node.js installed on your system, and the latest version of Google Chrome or a Chromium-based browser for testing. Basic knowledge of HTML, CSS, and JavaScript will help you understand the implementation details, though we will explain each component thoroughly.
 
-OpenAI API Key
+### OpenAI API Key
 
 To make your extension functional, you will need an OpenAI API key. Visit [platform.openai.com](https://platform.openai.com) to create an account and generate an API key. Keep in mind that API calls will incur charges based on usage, so monitor your usage through the OpenAI dashboard.
 
 ---
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 Create a new folder for your project and set up the following directory structure:
 
@@ -58,7 +58,7 @@ This structure separates the various components of the extension logically. The 
 
 ---
 
-The Manifest File: Configuring Your Extension {#manifest-file}
+## The Manifest File: Configuring Your Extension {#manifest-file}
 
 The manifest.json file is the heart of any Chrome extension. It tells Chrome about your extension's capabilities, permissions, and entry points. For our ChatGPT sidebar extension, we will use Manifest V3, which is the current standard:
 
@@ -107,7 +107,7 @@ This manifest configuration enables several key features. The sidePanel permissi
 
 ---
 
-Background Service Worker: Handling API Communication {#background-worker}
+## Background Service Worker: Handling API Communication {#background-worker}
 
 The background service worker acts as the bridge between your extension and OpenAI's API. It handles authentication, manages API requests, and keeps sensitive operations away from the user-facing interfaces. Create a background.js file with the following implementation:
 
@@ -190,7 +190,7 @@ This service worker implements several critical functions. It listens for messag
 
 ---
 
-The Popup Interface: Configuration and Quick Access {#popup-interface}
+## The Popup Interface: Configuration and Quick Access {#popup-interface}
 
 The popup provides a lightweight interface for quick configuration and access. While the sidebar is where the main interaction happens, the popup serves as a convenient entry point and settings management interface.
 
@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-The Sidebar: Main AI Interaction Interface {#sidebar-implementation}
+## The Sidebar: Main AI Interaction Interface {#sidebar-implementation}
 
 The sidebar is where users will spend most of their time interacting with the AI. It needs to be visually appealing, responsive, and provide a smooth chat experience.
 
@@ -812,7 +812,7 @@ function escapeHtml(text) {
 
 ---
 
-Content Script: Handling Text Selection {#content-script}
+## Content Script: Handling Text Selection {#content-script}
 
 The content script enables the powerful feature of selecting text on any webpage and getting AI explanations. Create content.js:
 
@@ -841,18 +841,18 @@ document.addEventListener('mouseup', (e) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that you have created all the necessary files, it is time to test your extension in Chrome:
 
-Loading the Extension
+### Loading the Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right corner
 3. Click "Load unpacked" and select your project folder
 4. The extension icon should appear in your Chrome toolbar
 
-Using the Extension
+### Using the Extension
 
 1. Click the extension icon to open the popup
 2. Enter your OpenAI API key and click "Save Key"
@@ -860,9 +860,9 @@ Using the Extension
 4. Type messages and interact with the AI
 5. Select text on any webpage and use the sidebar to get contextual explanations
 
-Troubleshooting
+### Troubleshooting
 
-If you encounter issues, check the following:
+### If you encounter issues, check the following:
 
 - API Key Error: Ensure your API key is saved correctly. The key must start with `sk-`
 - API Quota: Check your OpenAI account for available credits
@@ -871,37 +871,37 @@ If you encounter issues, check the following:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 This basic implementation provides a solid foundation, but there are many ways to enhance your ChatGPT sidebar extension:
 
-Conversation History
+### Conversation History
 
 Implement local storage to save conversation history, allowing users to revisit previous discussions. Use Chrome's storage API with appropriate data encryption for sensitive conversations.
 
-Multiple AI Models
+### Multiple AI Models
 
 Expand the model selector to include GPT-4 Turbo, Claude, or other AI providers. Each provider has different API endpoints and authentication methods.
 
-Voice Input
+### Voice Input
 
 Integrate the Web Speech API to enable voice-to-text input, making the extension more accessible and convenient for hands-free use.
 
-Text-to-Speech
+### Text-to-Speech
 
 Add speech synthesis to have the AI responses read aloud. This is particularly useful for language learners or users who prefer audio feedback.
 
-Prompt Templates
+### Prompt Templates
 
 Create pre-built prompt templates for common tasks like summarizing articles, translating text, or explaining complex concepts. Users can select templates from a dropdown menu.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Implement keyboard shortcuts to quickly open the sidebar, send messages, or toggle the extension. Use the Chrome commands API for global shortcuts that work even when the extension is not focused.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have tested your extension thoroughly and added any desired enhancements, you can publish it to the Chrome Web Store:
 
@@ -915,7 +915,7 @@ Ensure you comply with Chrome's policies, particularly regarding user data handl
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a ChatGPT sidebar Chrome extension is an excellent project that combines modern web development techniques with the power of AI. This guide covered the essential components: manifest configuration, background service workers, popup interfaces, sidebar implementation, and content scripts.
 
@@ -925,28 +925,28 @@ As you continue developing, remember to prioritize user experience, security bes
 
 ---
 
-Frequently Asked Questions {#faq}
+## Frequently Asked Questions {#faq}
 
-Is this extension free to use?
+### Is this extension free to use?
 
 The extension itself is free, but users need their own OpenAI API key, which incurs usage-based charges. OpenAI provides free credits for new accounts.
 
-Can I use this with other AI models?
+### Can I use this with other AI models?
 
 Yes, the implementation supports different GPT models. You can expand it to support other AI providers by modifying the API calls in the background script.
 
-Is my API key secure?
+### Is my API key secure?
 
 API keys are stored in Chrome's local storage. For production extensions, consider implementing OAuth2 authentication to avoid storing keys directly.
 
-Does this work on all websites?
+### Does this work on all websites?
 
 Yes, the extension works on all URLs due to the host permissions in the manifest. However, some websites with strict Content Security Policies may have limitations.
 
-Can I customize the sidebar appearance?
+### Can I customize the sidebar appearance?
 
 Yes, the sidebar uses standard CSS and can be fully customized. You can modify the colors, fonts, layout, and add additional UI elements.
 
-How do I handle rate limiting from OpenAI?
+### How do I handle rate limiting from OpenAI?
 
 Implement request queuing and exponential backoff in your background script. Show appropriate error messages to users when rate limits are exceeded.

@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/publishing/privacy-policy-templ
 last_modified_at: 2026-01-15
 ---
 
-Privacy Policy Template for Chrome Extensions
+### Privacy Policy Template for Chrome Extensions
 
 A practical guide with copy-paste privacy policy templates for Chrome extensions. This guide helps you create a compliant privacy policy for the Chrome Web Store.
 
 ---
 
-Why You Need a Privacy Policy {#why-you-need-a-privacy-policy}
+## Why You Need a Privacy Policy {#why-you-need-a-privacy-policy}
 
 A privacy policy is required by the Chrome Web Store (CWS) if your extension handles any user data. This includes:
 
@@ -25,7 +25,7 @@ Google reviews your privacy policy during the extension review process. A clear,
 
 ---
 
-When Is a Privacy Policy Required? {#when-is-a-privacy-policy-required}
+## When Is a Privacy Policy Required? {#when-is-a-privacy-policy-required}
 
 | Extension Type | Privacy Policy Required? |
 |----------------|-------------------------|
@@ -42,7 +42,7 @@ When Is a Privacy Policy Required? {#when-is-a-privacy-policy-required}
 
 ---
 
-Template: Minimal Extension (No Data Collection) {#template-minimal-extension-no-data-collection}
+## Template: Minimal Extension (No Data Collection) {#template-minimal-extension-no-data-collection}
 
 Use this template if your extension only uses local storage and doesn't collect or transmit any user data.
 
@@ -70,7 +70,7 @@ If you have questions about this privacy policy, please contact us at [email add
 *Disclaimer: This privacy policy is provided for informational purposes only and does not constitute legal advice.*
 ```
 
-Copy-Paste Version {#copy-paste-version}
+## Copy-Paste Version {#copy-paste-version}
 
 ```markdown
 Privacy Policy
@@ -97,7 +97,7 @@ If you have questions about this privacy policy, please contact us at your-email
 
 ---
 
-Template: Extension with Permissions {#template-extension-with-permissions}
+## Template: Extension with Permissions {#template-extension-with-permissions}
 
 Use this template if your extension uses permissions like `tabs`, `activeTab`, `cookies`, or host permissions.
 
@@ -146,7 +146,7 @@ If you have questions about this privacy policy, please contact us at [email add
 *Disclaimer: This privacy policy is provided for informational purposes only and does not constitute legal advice.*
 ```
 
-Copy-Paste Version (with activeTab and tabs) {#copy-paste-version-with-activetab-and-tabs}
+## Copy-Paste Version (with activeTab and tabs) {#copy-paste-version-with-activetab-and-tabs}
 
 ```markdown
 Privacy Policy
@@ -190,17 +190,17 @@ If you have questions about this privacy policy, please contact us at your-email
 
 ---
 
-Using @theluckystrike/webext-permissions for Transparency {#using-theluckystrikewebext-permissions-for-transparency}
+## Using @theluckystrike/webext-permissions for Transparency {#using-theluckystrikewebext-permissions-for-transparency}
 
 The `@theluckystrike/webext-permissions` library helps you programmatically check and display what permissions your extension has been granted. This is excellent for transparency in your privacy policy or a dedicated permissions page.
 
-Installation {#installation}
+## Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-permissions
 ```
 
-Usage Example {#usage-example}
+## Usage Example {#usage-example}
 
 ```ts
 import { getGrantedPermissions, describePermission } from "@theluckystrike/webext-permissions";
@@ -240,7 +240,7 @@ async function buildTransparencyPage(): Promise<string> {
 }
 ```
 
-In Your Privacy Policy {#in-your-privacy-policy}
+## In Your Privacy Policy {#in-your-privacy-policy}
 
 You can reference this library in your privacy policy:
 
@@ -248,17 +248,17 @@ You can reference this library in your privacy policy:
 
 ---
 
-Using @theluckystrike/webext-storage for Local-Only Data {#using-theluckystrikewebext-storage-for-local-only-data}
+## Using @theluckystrike/webext-storage for Local-Only Data {#using-theluckystrikewebext-storage-for-local-only-data}
 
 The `@theluckystrike/webext-storage` library provides type-safe local storage for Chrome extensions. All data is stored locally and never transmitted.
 
-Installation {#installation}
+## Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-storage
 ```
 
-Usage Example {#usage-example}
+## Usage Example {#usage-example}
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -286,7 +286,7 @@ const prefs = await storage.userPreferences.get();
 console.log(prefs.theme); // 'dark'
 ```
 
-In Your Privacy Policy {#in-your-privacy-policy}
+## In Your Privacy Policy {#in-your-privacy-policy}
 
 Reference this library to document local-only storage:
 
@@ -294,7 +294,7 @@ Reference this library to document local-only storage:
 
 ---
 
-Template: Extension with Analytics {#template-extension-with-analytics}
+## Template: Extension with Analytics {#template-extension-with-analytics}
 
 Use this template if your extension uses analytics or collects any user data.
 
@@ -354,7 +354,7 @@ If you have questions about this privacy policy or want to opt out of analytics,
 *Disclaimer: This privacy policy is provided for informational purposes only and does not constitute legal advice.*
 ```
 
-Copy-Paste Version with Analytics {#copy-paste-version-with-analytics}
+## Copy-Paste Version with Analytics {#copy-paste-version-with-analytics}
 
 ```markdown
 Privacy Policy
@@ -420,72 +420,72 @@ If you have questions about this privacy policy, please contact us at your-email
 
 ---
 
-Where to Host Your Privacy Policy {#where-to-host-your-privacy-policy}
+## Where to Host Your Privacy Policy {#where-to-host-your-privacy-policy}
 
 You have several options for hosting your privacy policy where it can be publicly accessed:
 
-1. GitHub Pages (Recommended) {#1-github-pages-recommended}
+## 1. GitHub Pages (Recommended) {#1-github-pages-recommended}
 Host your privacy policy as a static page:
 - Create a `docs` folder in your repository
 - Add your privacy policy as `docs/privacy-policy.html` or `.md`
 - Enable GitHub Pages in repository settings
 - URL: `https://yourusername.github.io/your-repo/privacy-policy.html`
 
-2. GitHub Gist {#2-github-gist}
+## 2. GitHub Gist {#2-github-gist}
 Create a secret or public Gist:
 - Create a new Gist with your privacy policy
 - Copy the raw URL
 - Use the Gist URL in your Chrome Web Store listing
 - `https://gist.github.com/yourusername/gist-id`
 
-3. Your Own Website {#3-your-own-website}
+## 3. Your Own Website {#3-your-own-website}
 If you already have a website:
 - Add a dedicated `/privacy-policy` page
 - Link to it from your extension's Chrome Web Store listing
 
-4. Notion (Public Page) {#4-notion-public-page}
+## 4. Notion (Public Page) {#4-notion-public-page}
 - Create a Notion page with your privacy policy
 - Publish it as a public page
 - Use the public URL
 
-5. Inline in Extension (Not Recommended for CWS) {#5-inline-in-extension-not-recommended-for-cws}
+## 5. Inline in Extension (Not Recommended for CWS) {#5-inline-in-extension-not-recommended-for-cws}
 While you can include the policy in your extension, the Chrome Web Store requires a publicly accessible URL that reviewers can verify.
 
 ---
 
-Privacy Policy Checklist {#privacy-policy-checklist}
+## Privacy Policy Checklist {#privacy-policy-checklist}
 
 Use this checklist before submitting to the Chrome Web Store:
 
-Required Elements {#required-elements}
+## Required Elements {#required-elements}
 - [ ] Publicly accessible URL (not just in the extension)
 - [ ] Clear explanation of what data your extension accesses
 - [ ] Description of how data is used
 - [ ] Contact information for questions
 
-Permissions Documentation {#permissions-documentation}
+## Permissions Documentation {#permissions-documentation}
 - [ ] List all permissions your extension uses
 - [ ] Explain why each permission is needed
 - [ ] Be specific about what data each permission accesses
 
-Data Collection {#data-collection}
+## Data Collection {#data-collection}
 - [ ] State whether you collect any user data
 - [ ] If analytics are used, explain what is collected and how
 - [ ] Mention if data is stored locally or transmitted
 
-Transparency {#transparency}
+## Transparency {#transparency}
 - [ ] Include a clear statement about local-only storage if applicable
 - [ ] Reference libraries used (like `@theluckystrike/webext-storage`)
 - [ ] Provide a way for users to contact you
 
-Legal {#legal}
+## Legal {#legal}
 - [ ] Include a disclaimer (not legal advice)
 - [ ] Date the policy
 - [ ] Update the policy when your extension changes
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 A good privacy policy for your Chrome extension should:
 

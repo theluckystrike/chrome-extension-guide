@@ -99,11 +99,11 @@ kanban-extension/
 
 ---
 
-Core Implementation with TypeScript
+### Core Implementation with TypeScript
 
-Shared Types
+### Shared Types
 
-Define your core data models in `src/shared/types.ts`:
+### Define your core data models in `src/shared/types.ts`:
 
 ```typescript
 // Core Kanban types
@@ -151,7 +151,7 @@ export const STORAGE_KEYS = {
 } as const;
 ```
 
-Background Service Worker
+### Background Service Worker
 
 The background service worker handles storage operations and coordinates between contexts:
 
@@ -284,9 +284,9 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 ---
 
-UI Design
+### UI Design
 
-Popup View
+### Popup View
 
 The popup provides quick access to view and manage tasks:
 
@@ -336,9 +336,9 @@ The popup provides quick access to view and manage tasks:
 </html>
 ```
 
-Side Panel - Full Kanban Board
+### Side Panel - Full Kanban Board
 
-The side panel provides the complete Kanban experience:
+### The side panel provides the complete Kanban experience:
 
 ```typescript
 // src/sidepanel/sidepanel.ts
@@ -448,9 +448,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions
+### Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -459,7 +459,7 @@ Required Permissions
 | `sidePanel` | Enable the side panel feature |
 | `alarms` | Schedule periodic autosave |
 
-Using Chrome APIs in TypeScript
+### Using Chrome APIs in TypeScript
 
 ```typescript
 // Type declarations for Chrome APIs
@@ -489,9 +489,9 @@ declare global {
 
 ---
 
-State Management and Storage Patterns
+### State Management and Storage Patterns
 
-Optimistic Updates with Rollback
+### Optimistic Updates with Rollback
 
 For responsive UX, update the UI immediately, then sync with storage:
 
@@ -551,9 +551,9 @@ class KanbanStore {
 
 ---
 
-Error Handling and Edge Cases
+### Error Handling and Edge Cases
 
-Comprehensive Error Handling
+### Comprehensive Error Handling
 
 ```typescript
 // src/utils/error-handler.ts
@@ -597,7 +597,7 @@ function reportError(error: Error, context: string): void {
 }
 ```
 
-Edge Case Handling
+### Edge Case Handling
 
 - Empty board: Show onboarding UI with sample data option
 - Storage quota exceeded: Implement data cleanup or export
@@ -606,9 +606,9 @@ Edge Case Handling
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Tests for Core Logic
+### Unit Tests for Core Logic
 
 ```typescript
 // tests/kanban-store.test.ts
@@ -651,7 +651,7 @@ describe('KanbanStore', () => {
 });
 ```
 
-Integration Tests
+### Integration Tests
 
 - Test background service worker message handling
 - Test popup-to-background communication
@@ -659,9 +659,9 @@ Integration Tests
 
 ---
 
-Code Examples
+### Code Examples
 
-Drag and Drop Implementation
+### Drag and Drop Implementation
 
 ```typescript
 // src/sidepanel/drag-drop.ts
@@ -720,7 +720,7 @@ export class DragDropManager {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
 1. Lazy Loading: Only load visible columns/tasks
 2. Virtual Scrolling: For boards with many tasks
@@ -737,9 +737,9 @@ const debouncedSave = debounce((state: KanbanState) => {
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Before publishing to the Chrome Web Store:
+### Before publishing to the Chrome Web Store:
 
 - [ ] Manifest: Verify all permissions are necessary
 - [ ] Icons: Include 16x16, 48x48, and 128x128 PNG icons
@@ -750,7 +750,7 @@ Before publishing to the Chrome Web Store:
 - [ ] Build: Run production build (minified, no source maps)
 - [ ] Version: Increment version number in manifest.json
 
-Building for Production
+### Building for Production
 
 ```bash
 Using webpack or your preferred bundler
@@ -767,7 +767,7 @@ npx chrome-webstore-upload upload \
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a Kanban board Chrome extension requires careful consideration of architecture, state management, and cross-context communication. This guide covered the essential patterns for creating a production-ready extension using Manifest V3, TypeScript, and modern Chrome APIs. Key takeaways:
 

@@ -18,27 +18,27 @@ Building a web vitals tracker Chrome extension empowers you to monitor these ess
 
 ---
 
-Understanding Core Web Vitals {#understanding-core-web-vitals}
+## Understanding Core Web Vitals {#understanding-core-web-vitals}
 
 Before diving into the implementation, let's explore why Core Web Vitals matter and how a chrome extension web vitals tool can transform your development workflow.
 
-Why Core Web Vitals Matter
+### Why Core Web Vitals Matter
 
 Google introduced Core Web Vitals as part of their Page Experience signal, making them direct ranking factors since 2021. Websites that fail to meet the recommended thresholds risk lower search visibility, reduced organic traffic, and diminished user trust. A well-optimized site not only ranks higher but also delivers superior user experiences that translate into better engagement and conversions.
 
-Largest Contentful Paint (LCP)
+### Largest Contentful Paint (LCP)
 
 Largest Contentful Paint measures the time required for the largest content element in the viewport to render completely. This typically includes hero images, large text blocks, or video elements. An optimal LCP score is 2.5 seconds or less, while anything above 4.0 seconds indicates poor performance.
 
 Common causes of poor LCP include slow server response times, render-blocking JavaScript and CSS, unoptimized images, and insufficient caching strategies. A solid LCP FID CLS chrome extension should capture these metrics with precision and provide actionable recommendations.
 
-First Input Delay (FID)
+### First Input Delay (FID)
 
 First Input Delay measures the time between a user's first interaction with a page (click, tap, or keyboard input) and the browser's ability to process that interaction. FID specifically captures input responsiveness during the initial load, before the main thread becomes idle.
 
 A good FID score is 100 milliseconds or less. Delays occur when the main thread is busy parsing, compiling, or executing JavaScript. Heavy JavaScript bundles, third-party scripts, and complex rendering operations are common culprits.
 
-Cumulative Layout Shift (CLS)
+### Cumulative Layout Shift (CLS)
 
 Cumulative Layout Shift quantifies visual stability by measuring how much page content shifts unexpectedly during the loading process. Elements that pop, slide, or reflow create confusing and frustrating user experiences. An optimal CLS score is 0.1 or less, while anything above 0.25 indicates poor stability.
 
@@ -46,20 +46,20 @@ Common causes of layout shifts include dynamically loaded content without reserv
 
 ---
 
-Project Architecture {#project-architecture}
+## Project Architecture {#project-architecture}
 
 Our build web vitals extension will use the modern Chrome Extension Manifest V3 architecture. This ensures compatibility with current Chrome Web Store requirements and provides access to the latest extension APIs.
 
-Extension Components
+### Extension Components
 
-The extension consists of four primary components:
+### The extension consists of four primary components:
 
 1. Manifest File (manifest.json): Defines extension permissions, content scripts, and configuration
 2. Content Script (content.js): Runs in the context of web pages, collecting Web Vitals data
 3. Popup (popup.html/popup.js): Displays collected metrics to users
 4. Background Service Worker: Handles long-term data storage and messaging
 
-Required Permissions
+### Required Permissions
 
 For our core web vitals extension, we'll need the following permissions:
 
@@ -69,9 +69,9 @@ For our core web vitals extension, we'll need the following permissions:
 
 ---
 
-Step-by-Step Implementation {#step-by-step-implementation}
+## Step-by-Step Implementation {#step-by-step-implementation}
 
-Step 1: Creating the Manifest
+### Step 1: Creating the Manifest
 
 The manifest.json file serves as the configuration backbone of your Chrome extension:
 
@@ -111,7 +111,7 @@ The manifest.json file serves as the configuration backbone of your Chrome exten
 
 This manifest configuration enables your web vitals extension chrome to run on all websites while maintaining minimal permission requirements.
 
-Step 2: Implementing the Web Vitals Collector
+### Step 2: Implementing the Web Vitals Collector
 
 The content script is the heart of your extension, responsible for collecting performance metrics directly from the web page. We'll use the web-vitals JavaScript library, developed by Google, for accurate metric collection:
 
@@ -150,7 +150,7 @@ onCLS((metric) => {
 
 This implementation captures all three core web vitals chrome metrics and transmits them to the extension's background service worker for processing and storage.
 
-Step 3: Creating the Service Worker
+### Step 3: Creating the Service Worker
 
 The service worker acts as the central hub for your extension, managing data flow between content scripts and the popup interface:
 
@@ -182,7 +182,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This service worker enables your google web vitals tracker to accumulate performance data across multiple page loads and sessions.
 
-Step 4: Building the Popup Interface
+### Step 4: Building the Popup Interface
 
 The popup provides users with an intuitive interface to view their LCP FID CLS chrome metrics:
 
@@ -268,9 +268,9 @@ This popup implementation provides instant visual feedback on chrome extension w
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
-Historical Data Tracking
+### Historical Data Tracking
 
 A truly useful build web vitals extension should track performance over time. Implement a historical data system that stores metrics across multiple sessions:
 
@@ -295,7 +295,7 @@ chrome.storage.local.get(['vitalsHistory'], (result) => {
 });
 ```
 
-Performance Scoring Algorithm
+### Performance Scoring Algorithm
 
 Create a composite score that combines all three core web vitals chrome metrics into a single performance rating:
 
@@ -309,7 +309,7 @@ function calculateOverallScore(metrics) {
 }
 ```
 
-Export Functionality
+### Export Functionality
 
 Allow users to export their LCP FID CLS chrome data for further analysis:
 
@@ -330,9 +330,9 @@ function exportData() {
 
 ---
 
-Best Practices for Web Vitals Measurement {#best-practices}
+## Best Practices for Web Vitals Measurement {#best-practices}
 
-Accurate Data Collection
+### Accurate Data Collection
 
 When building a google web vitals tracker, accuracy is paramount. Follow these guidelines:
 
@@ -340,7 +340,7 @@ When building a google web vitals tracker, accuracy is paramount. Follow these g
 2. Measure in real conditions: Test on actual user devices and network conditions, not just controlled lab environments
 3. Collect sufficient samples: Individual page loads can vary significantly; aggregate data from multiple visits for meaningful insights
 
-Understanding Metric Thresholds
+### Understanding Metric Thresholds
 
 Your chrome extension web vitals implementation should clearly communicate metric status:
 
@@ -350,7 +350,7 @@ Your chrome extension web vitals implementation should clearly communicate metri
 | FID | ≤ 100ms | 100ms - 300ms | > 300ms |
 | CLS | ≤ 0.1 | 0.1 - 0.25 | > 0.25 |
 
-Privacy Considerations
+### Privacy Considerations
 
 When collecting performance data, respect user privacy:
 
@@ -361,18 +361,18 @@ When collecting performance data, respect user privacy:
 
 ---
 
-Testing Your Extension {#testing-your-extension}
+## Testing Your Extension {#testing-your-extension}
 
 Before publishing your build web vitals extension, thoroughly test it across various scenarios:
 
-Manual Testing
+### Manual Testing
 
 1. Install the extension in developer mode
 2. Visit websites with known performance characteristics
 3. Verify metrics match values from Chrome DevTools
 4. Test the popup interface on multiple browsers
 
-Automated Testing
+### Automated Testing
 
 Implement automated tests to ensure consistent behavior:
 
@@ -404,7 +404,7 @@ describe('Web Vitals Collector', () => {
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your core web vitals extension is complete and tested, follow these steps to publish:
 
@@ -414,7 +414,7 @@ Once your core web vitals extension is complete and tested, follow these steps t
 4. Submit for review: Google reviews typically complete within hours to a few days
 5. Monitor feedback: Address any review issues promptly
 
-Store Listing Optimization
+### Store Listing Optimization
 
 For maximum visibility, optimize your chrome extension web vitals store listing:
 
@@ -425,7 +425,7 @@ For maximum visibility, optimize your chrome extension web vitals store listing:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a Web Vitals Tracker Chrome Extension is an excellent project that combines practical utility with valuable learning opportunities. By monitoring LCP, FID, and CLS metrics in real-time, you gain immediate insights into website performance without leaving your browser.
 

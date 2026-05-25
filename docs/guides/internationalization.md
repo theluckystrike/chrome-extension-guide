@@ -17,11 +17,11 @@ Internationalization (i18n) is essential for reaching a global audience with you
 
 When you implement proper internationalization, your extension can automatically adapt to the user's language preferences, providing a native experience regardless of where your users are located. The system supports over 50 locales out of the box, including right-to-left (RTL) languages like Arabic and Hebrew.
 
-Setting Up the _locales Directory Structure
+### Setting Up the _locales Directory Structure
 
 The foundation of Chrome extension internationalization lies in the `_locales` directory. This folder must be placed in the root of your extension and contains subdirectories for each language you want to support. Each subdirectory is named using the language code (such as "en" for English, "es" for Spanish, or "fr" for French) and contains a `messages.json` file with the translated strings.
 
-Your extension directory should follow this structure:
+### Your extension directory should follow this structure:
 
 ```
 extension/
@@ -51,7 +51,7 @@ The `messages.json` file in each locale folder contains the actual translations.
 
 Remember to specify the `default_locale` property in your `manifest.json` file when using the `_locales` directory. This is a required field that tells Chrome which locale to use as the fallback when a user's preferred language isn't available.
 
-Understanding the messages.json Format
+### Understanding the messages.json Format
 
 The `messages.json` file uses a JSON structure where each key represents a unique message identifier, and the value contains the translated string along with metadata for translators. Understanding this format is crucial for creating maintainable translation files.
 
@@ -146,11 +146,11 @@ document.getElementById("title").textContent =
 
 This approach ensures your extension name and description are properly translated based on the user's locale.
 
-Translating UI Elements
+### Translating UI Elements
 
 Translating UI elements in HTML requires a different approach since HTML files cannot directly access the i18n system. The common pattern involves using `data-i18n` attributes in your HTML elements and a small JavaScript initialization script to populate them with translated strings.
 
-In your HTML:
+### In your HTML:
 
 ```html
 <div id="popup">
@@ -231,7 +231,7 @@ Finally, remember that Chrome Web Store listings require separate localization. 
 }
 ```
 
-Predefined Messages
+### Predefined Messages
 
 | Key | Description | Example Values |
 |-----|-------------|----------------|
@@ -241,7 +241,7 @@ Predefined Messages
 | `@@bidi_start_edge` | Start edge | `left`/`right` |
 | `@@bidi_end_edge` | End edge | `right`/`left` |
 
-chrome.i18n API Methods
+### chrome.i18n API Methods
 
 getMessage(messageName, substitutions?)
 ```javascript
@@ -278,7 +278,7 @@ Locale Fallback Chain
 3. Default locale (from manifest)
 4. Empty string
 
-RTL Language Support
+### RTL Language Support
 
 Supported RTL Locales
 Arabic (ar), Hebrew (he), Persian (fa), Urdu (ur), etc.
@@ -301,7 +301,7 @@ function isRTL() {
 }
 ```
 
-Best Practices for Managing Translations at Scale
+### Best Practices for Managing Translations at Scale
 
 1. Structured Message Keys
 ```javascript

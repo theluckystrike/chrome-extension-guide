@@ -7,12 +7,12 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Architecture detailed look
 
-The Extension Component Model {#the-extension-component-model}
+## The Extension Component Model {#the-extension-component-model}
 - How Chrome loads and isolates extension components
 - Process model: each component runs in its own context
 - Diagram description: Background SW <-> Content Scripts <-> Popup/Options <-> DevTools
 
-Background Service Worker {#background-service-worker}
+## Background Service Worker {#background-service-worker}
 - Entry point defined in `manifest.json` `"background": { "service_worker": "background.js" }`
 - Lifecycle: install -> activate -> idle -> terminate -> wake
 - No DOM access, no `window` object
@@ -20,26 +20,26 @@ Background Service Worker {#background-service-worker}
 - Persistence: use `chrome.storage` (via `@theluckystrike/webext-storage`) to persist state across restarts
 - `const storage = createStorage(defineSchema({ lastRun: 'number' }), 'local')`
 
-Content Scripts {#content-scripts}
+## Content Scripts {#content-scripts}
 - Injected into web pages via `manifest.json` `"content_scripts"` or `chrome.scripting.executeScript`
 - Isolated world: shares DOM but NOT JavaScript scope with the page
 - Can access limited Chrome APIs: `chrome.runtime`, `chrome.storage`
 - Communication with background: use `@theluckystrike/webext-messaging`
 - `const messenger = createMessenger<MyMessages>(); messenger.sendMessage('getData', { key: 'value' })`
 
-Popup and Options Pages {#popup-and-options-pages}
+## Popup and Options Pages {#popup-and-options-pages}
 - Popup: triggered by clicking extension icon, lives as long as popup is open
 - Options: full page for extension settings, opened via right-click -> Options
 - Both have full Chrome API access like background
 - State management: use `@theluckystrike/webext-storage` `watch()` for reactive updates
 - `storage.watch('theme', (newVal, oldVal) => updateUI(newVal))`
 
-DevTools Pages {#devtools-pages}
+## DevTools Pages {#devtools-pages}
 - Custom panels in Chrome DevTools
 - Access to `chrome.devtools.*` APIs
 - Communication pattern: DevTools -> Background -> Content Script
 
-Inter-Component Communication Patterns {#inter-component-communication-patterns}
+## Inter-Component Communication Patterns {#inter-component-communication-patterns}
 - Popup <-> Background: direct `chrome.runtime` messaging
 - Content <-> Background: `chrome.runtime.sendMessage` / `chrome.tabs.sendMessage`
 - Using `@theluckystrike/webext-messaging` for type-safe messaging across all components:

@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/dom-observer-patterns/
 last_modified_at: 2026-01-15
 ---
 
-DOM Observer Patterns for Content Scripts
+### DOM Observer Patterns for Content Scripts
 
 This guide covers patterns for observing DOM changes in Chrome extension content scripts using MutationObserver, IntersectionObserver, and ResizeObserver.
 
-Basic MutationObserver Setup {#basic-mutationobserver-setup}
+## Basic MutationObserver Setup {#basic-mutationobserver-setup}
 
 ```javascript
 const observer = new MutationObserver((mutations) => {
@@ -26,9 +26,9 @@ observer.observe(document.body, {
 });
 ```
 
-Waiting for Dynamic Elements {#waiting-for-dynamic-elements}
+## Waiting for Dynamic Elements {#waiting-for-dynamic-elements}
 
-Observe until target element appears, then disconnect:
+### Observe until target element appears, then disconnect:
 
 ```javascript
 function waitForElement(selector, parent = document) {
@@ -48,7 +48,7 @@ function waitForElement(selector, parent = document) {
 }
 ```
 
-SPA Navigation Detection {#spa-navigation-detection}
+## SPA Navigation Detection {#spa-navigation-detection}
 
 For SPAs that don't trigger page reloads, observe URL and body changes:
 
@@ -64,7 +64,7 @@ const navObserver = new MutationObserver(() => {
 navObserver.observe(document.body, { childList: true, subtree: true });
 ```
 
-Efficient Observation {#efficient-observation}
+## Efficient Observation {#efficient-observation}
 
 - Minimize scope: Observe specific containers, not `document.body`
 - Use attribute filters: Observe only needed attributes
@@ -80,18 +80,18 @@ function debounce(fn, delay) {
 }
 ```
 
-Disconnecting Observers {#disconnecting-observers}
+## Disconnecting Observers {#disconnecting-observers}
 
-Always disconnect when done to avoid memory leaks:
+### Always disconnect when done to avoid memory leaks:
 
 ```javascript
 // When element is removed or feature is disabled
 observer.disconnect();
 ```
 
-Shadow DOM Observation {#shadow-dom-observation}
+## Shadow DOM Observation {#shadow-dom-observation}
 
-Observe inside shadow roots by targeting shadow hosts:
+### Observe inside shadow roots by targeting shadow hosts:
 
 ```javascript
 const shadowHost = document.querySelector('#host');
@@ -100,9 +100,9 @@ const observer = new MutationObserver(callback);
 observer.observe(shadowRoot, { childList: true, subtree: true });
 ```
 
-Intersection Observer {#intersection-observer}
+## Intersection Observer {#intersection-observer}
 
-Trigger when elements enter viewport:
+### Trigger when elements enter viewport:
 
 ```javascript
 const observer = new IntersectionObserver((entries) => {
@@ -116,9 +116,9 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(document.querySelector('.lazy-load'));
 ```
 
-Resize Observer {#resize-observer}
+## Resize Observer {#resize-observer}
 
-Detect layout changes on specific elements:
+### Detect layout changes on specific elements:
 
 ```javascript
 const resizeObserver = new ResizeObserver((entries) => {
@@ -130,14 +130,14 @@ const resizeObserver = new ResizeObserver((entries) => {
 resizeObserver.observe(document.querySelector('#container'));
 ```
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
 - Avoid `subtree: true` on complex pages, observe specific containers
 - Use `attributeFilter` to watch only needed attributes
 - Disconnect observers when features are disabled
 - Combine with `requestAnimationFrame` for visual updates
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script Isolation](../patterns/content-script-isolation.md)

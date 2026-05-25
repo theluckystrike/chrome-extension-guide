@@ -18,7 +18,7 @@ I'll walk you through building a complete social media dashboard Chrome extensio
 
 ---
 
-Why Build a Social Media Dashboard Chrome Extension? {#why-build}
+## Why Build a Social Media Dashboard Chrome Extension? {#why-build}
 
 The demand for social media tools chrome extensions continues to grow exponentially. Marketing professionals, content creators, and business owners need quick access to their social metrics without switching between dozens of browser tabs. A Chrome extension offers several compelling advantages over traditional web-based dashboards.
 
@@ -32,11 +32,11 @@ The competitive landscape for social media dashboard extensions is still relativ
 
 ---
 
-Understanding the Architecture {#architecture}
+## Understanding the Architecture {#architecture}
 
 Before diving into code, let's establish the architectural foundation for your social media dashboard extension. A well-structured Chrome extension consists of several key components, each serving a specific purpose in the overall ecosystem.
 
-The Manifest File
+### The Manifest File
 
 Every Chrome extension begins with the manifest.json file. For our social media dashboard, we'll use Manifest V3, which is the current standard and offers improved security and performance. The manifest defines the extension's permissions, background workers, popup interface, and content script capabilities.
 
@@ -80,7 +80,7 @@ Every Chrome extension begins with the manifest.json file. For our social media 
 
 The permissions array is critical for our extension. We need storage to save user preferences and authentication tokens, notifications to alert users of important updates, and various host permissions to allow our extension to communicate with social media APIs.
 
-Service Workers and Background Processing
+### Service Workers and Background Processing
 
 In Manifest V3, background pages have been replaced by service workers. These are event-driven scripts that run independently of any web page. For a social media dashboard, the service worker handles several crucial functions:
 
@@ -133,7 +133,7 @@ async function refreshAllPlatforms() {
 }
 ```
 
-The Popup Interface
+### The Popup Interface
 
 The popup is what users see when they click your extension icon. This needs to be a comprehensive yet clean interface that displays the most important information at a glance while providing navigation to more detailed views.
 
@@ -197,7 +197,7 @@ For our social media dashboard, the popup should display notification previews f
 
 ---
 
-Integrating Twitter API {#twitter-integration}
+## Integrating Twitter API {#twitter-integration}
 
 Twitter integration is often the first platform developers tackle when building social media tools Chrome extensions. The Twitter API (now X API) provides comprehensive endpoints for reading tweets, posting updates, accessing user information, and retrieving notifications and engagement metrics.
 
@@ -301,7 +301,7 @@ Also important is handling the OAuth flow correctly. Chrome extensions have spec
 
 ---
 
-Integrating LinkedIn API {#linkedin-integration}
+## Integrating LinkedIn API {#linkedin-integration}
 
 LinkedIn integration presents unique challenges compared to Twitter. The LinkedIn API has more restrictive access policies, and many features require approval from LinkedIn's partner team. However, basic functionality like reading profile information, connections, and notifications is available through their Marketing API and Organization APIs.
 
@@ -419,7 +419,7 @@ For LinkedIn chrome extension development, you may also want to consider content
 
 ---
 
-Building the Dashboard UI {#dashboard-ui}
+## Building the Dashboard UI {#dashboard-ui}
 
 The user interface is where your social media dashboard extension truly differentiates itself. A well-designed dashboard consolidates information from multiple platforms into a cohesive, easy-to-navigate interface. Users should be able to see their most important metrics at a glance and drill down into specific platforms or notification types as needed.
 
@@ -645,7 +645,7 @@ section h2 {
 
 ---
 
-Implementing Authentication Flow {#authentication}
+## Implementing Authentication Flow {#authentication}
 
 Authentication is one of the most critical and complex aspects of building a social media dashboard extension. Each platform uses OAuth 2.0 for authentication, and managing multiple OAuth flows within a Chrome extension requires careful architecture.
 
@@ -819,7 +819,7 @@ async function disconnectPlatform(platform) {
 
 ---
 
-Adding Notifications and Real-Time Updates {#notifications}
+## Adding Notifications and Real-Time Updates {#notifications}
 
 A key feature that makes Chrome extensions powerful for social media management is the ability to send desktop notifications. When users receive mentions, likes, or messages, your extension can alert them immediately rather than waiting for them to check manually.
 
@@ -885,7 +885,7 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 
 ---
 
-Testing and Deployment {#deployment}
+## Testing and Deployment {#deployment}
 
 Before publishing your social media dashboard extension to the Chrome Web Store, thorough testing is essential. Start by testing locally in development mode. Load your unpacked extension by navigating to chrome://extensions/, enabling Developer mode, and clicking "Load unpacked."
 
@@ -904,7 +904,7 @@ Upload this zip file to the Chrome Web Store Developer Dashboard. After review (
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a social media dashboard Chrome extension is a rewarding project that combines web development skills with real utility. By integrating Twitter, LinkedIn, and other platforms into a unified interface, you create a tool that can significantly improve productivity for social media managers, marketers, and professionals who maintain active social presences.
 

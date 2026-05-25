@@ -12,7 +12,7 @@ order: 23
 
 Idle Permission
 
-Overview {#overview}
+## Overview {#overview}
 
 - Permission string: `"idle"`
 - Grants access to: `chrome.idle` API
@@ -20,9 +20,9 @@ Overview {#overview}
 
 ---
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-`chrome.idle.queryState(detectionIntervalInSeconds)` {#chromeidlequerystatedetectionintervalinseconds}
+## `chrome.idle.queryState(detectionIntervalInSeconds)` {#chromeidlequerystatedetectionintervalinseconds}
 
 Returns Promise resolving to `"active"`, `"idle"`, or `"locked"`.
 
@@ -32,7 +32,7 @@ chrome.idle.queryState(30).then((state) => {
 });
 ```
 
-`chrome.idle.setDetectionInterval(intervalInSeconds)` {#chromeidlesetdetectionintervalintervalinseconds}
+## `chrome.idle.setDetectionInterval(intervalInSeconds)` {#chromeidlesetdetectionintervalintervalinseconds}
 
 Sets threshold for idle detection (minimum 15 seconds).
 
@@ -40,7 +40,7 @@ Sets threshold for idle detection (minimum 15 seconds).
 chrome.idle.setDetectionInterval(60);
 ```
 
-`chrome.idle.getAutoLockDelay()` {#chromeidlegetautolockdelay}
+## `chrome.idle.getAutoLockDelay()` {#chromeidlegetautolockdelay}
 
 Returns system auto-lock delay in seconds (0 if never).
 
@@ -50,9 +50,9 @@ chrome.idle.getAutoLockDelay().then((delay) => console.log(delay));
 
 ---
 
-Events {#events}
+## Events {#events}
 
-`chrome.idle.onStateChanged.addListener(callback)` {#chromeidleonstatechangedaddlistenercallback}
+## `chrome.idle.onStateChanged.addListener(callback)` {#chromeidleonstatechangedaddlistenercallback}
 
 Fires with new state: `"active"`, `"idle"`, or `"locked"`. Detection interval set by `setDetectionInterval` determines when "idle" fires.
 
@@ -64,7 +64,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 
 ---
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 { "permissions": ["idle"] }
@@ -72,7 +72,7 @@ Manifest Declaration {#manifest-declaration}
 
 ---
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
 - Auto-save drafts when user goes idle
 - Presence detection for collaboration tools
@@ -82,7 +82,7 @@ Use Cases {#use-cases}
 
 ---
 
-MV3 Considerations {#mv3-considerations}
+## MV3 Considerations {#mv3-considerations}
 
 - `onStateChanged` wakes the service worker
 - Use with `chrome.alarms` for periodic idle checks
@@ -90,9 +90,9 @@ MV3 Considerations {#mv3-considerations}
 
 ---
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Basic Idle Detection {#basic-idle-detection}
+## Basic Idle Detection {#basic-idle-detection}
 
 ```javascript
 chrome.idle.setDetectionInterval(30);
@@ -101,7 +101,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-Auto-Save Pattern {#auto-save-pattern}
+## Auto-Save Pattern {#auto-save-pattern}
 
 ```javascript
 let isDirty = false;
@@ -116,7 +116,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-Security Pattern {#security-pattern}
+## Security Pattern {#security-pattern}
 
 ```javascript
 chrome.idle.onStateChanged.addListener((state) => {
@@ -127,7 +127,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-Presence Detection for Collaboration
+### Presence Detection for Collaboration
 
 ```javascript
 function updatePresence(state) {
@@ -142,7 +142,7 @@ function updatePresence(state) {
 chrome.idle.onStateChanged.addListener(updatePresence);
 ```
 
-Resource Management
+### Resource Management
 
 ```javascript
 chrome.idle.onStateChanged.addListener((state) => {
@@ -158,7 +158,7 @@ chrome.idle.onStateChanged.addListener((state) => {
 });
 ```
 
-Common Use Cases
+### Common Use Cases
 
 Auto-Save and Draft Management
 The most common use case for the idle API is automatically saving user work when they step away. This protects against data loss if the user forgets to save or if the browser crashes.
@@ -175,7 +175,7 @@ Reduce background activity when the user is away to conserve system resources an
 Time Tracking and Productivity
 Track how much time users spend active versus idle. This is useful for productivity extensions that help users understand their work patterns and identify time wastage.
 
-Best Practices
+### Best Practices
 
 Set Appropriate Detection Intervals
 The default detection interval may not suit all use cases. For auto-save, 30-60 seconds is typically good. For resource management, longer intervals (5-10 minutes) might be more appropriate.
@@ -200,13 +200,13 @@ Allow users to configure idle detection settings. Some users may want immediate 
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - `permissions/power.md`
 - `patterns/idle-detection.md`
 - `guides/idle-detection.md`
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I detect when user is idle?
 Use chrome.idle.queryState() to check current idle state, or chrome.idle.onStateChanged.addListener to be notified when idle state changes.

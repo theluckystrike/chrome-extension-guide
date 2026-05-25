@@ -18,11 +18,11 @@ This comprehensive guide walks you through everything you need to know about DOM
 
 ---
 
-Understanding Content Scripts and DOM Access {#understanding-content-scripts}
+## Understanding Content Scripts and DOM Access {#understanding-content-scripts}
 
 Content scripts are JavaScript files that run in the context of web pages. They are the primary mechanism Chrome extensions use to interact with and manipulate the DOM of web pages. When a user visits a page that matches the content script's match patterns, Chrome injects the script into the page, giving it access to the page's DOM.
 
-How Content Scripts Work
+### How Content Scripts Work
 
 Content scripts operate in an isolated world within the context of the web page. This isolation means they have their own JavaScript execution environment, separate from the page's own JavaScript. While this provides security benefits, it also means content scripts cannot directly access variables or functions defined by the page's scripts.
 
@@ -43,7 +43,7 @@ To define a content script in Manifest V3, you specify it in the manifest.json f
 
 The `matches` array defines which pages the content script should be injected into. You can use specific URLs, wildcards, or special match patterns like `<all_urls>` to control where your DOM manipulation code runs.
 
-The Run At Property
+### The Run At Property
 
 The `run_at` property determines when your content script is injected relative to the page loading process. This is crucial for DOM manipulation because you need the elements you want to modify to exist before you can manipulate them:
 
@@ -55,11 +55,11 @@ For most DOM manipulation tasks, `document_end` or `document_idle` is appropriat
 
 ---
 
-Basic DOM Manipulation Techniques {#basic-dom-techniques}
+## Basic DOM Manipulation Techniques {#basic-dom-techniques}
 
 Once your content script is injected, you have full access to the standard DOM APIs. These are the same APIs available to regular JavaScript running in a web page, but they're operating on the actual page DOM.
 
-Selecting Elements
+### Selecting Elements
 
 The foundation of DOM manipulation is element selection. Content scripts can use all standard selection methods:
 
@@ -79,7 +79,7 @@ const container = document.querySelector('.content-container');
 
 For DOM manipulation extension development, `querySelector` and `querySelectorAll` are typically the most versatile because they support the full range of CSS selectors.
 
-Creating New Elements
+### Creating New Elements
 
 To add new content to a page, you first create elements and then insert them:
 
@@ -106,7 +106,7 @@ notification.style.cssText = `
 document.body.appendChild(notification);
 ```
 
-Modifying Existing Elements
+### Modifying Existing Elements
 
 Content scripts can modify any aspect of existing elements:
 
@@ -126,9 +126,9 @@ card.classList.add('highlighted');
 card.classList.remove('out-of-stock');
 ```
 
-Removing Elements
+### Removing Elements
 
-Sometimes you need to remove unwanted content:
+### Sometimes you need to remove unwanted content:
 
 ```javascript
 // Remove specific elements
@@ -144,11 +144,11 @@ if (sidebar) {
 
 ---
 
-Advanced DOM Manipulation Patterns {#advanced-patterns}
+## Advanced DOM Manipulation Patterns {#advanced-patterns}
 
 Beyond basic operations, professional extension developers use several advanced patterns to create solid DOM manipulation features.
 
-Waiting for Elements to Appear
+### Waiting for Elements to Appear
 
 Web pages often load content dynamically through JavaScript. If you need to manipulate elements that aren't immediately available, you need to wait for them:
 
@@ -186,7 +186,7 @@ waitForElement('.dynamic-content').then(element => {
 });
 ```
 
-Observing DOM Changes
+### Observing DOM Changes
 
 MutationObserver allows your extension to react to changes in the DOM:
 
@@ -219,7 +219,7 @@ observer.observe(document.body, {
 
 This pattern is essential for single-page applications and websites that load content dynamically.
 
-Communicating with the Extension Background
+### Communicating with the Extension Background
 
 Content scripts often need to communicate with other parts of your extension. The message passing system allows this:
 
@@ -245,11 +245,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Injecting CSS for DOM Manipulation {#injecting-css}
+## Injecting CSS for DOM Manipulation {#injecting-css}
 
 DOM manipulation often involves adding or modifying styles. Chrome extensions provide several ways to inject CSS.
 
-Using Content Script CSS
+### Using Content Script CSS
 
 As shown in the manifest configuration, you can inject CSS files alongside your content scripts:
 
@@ -265,7 +265,7 @@ As shown in the manifest configuration, you can inject CSS files alongside your 
 }
 ```
 
-Injecting CSS Dynamically
+### Injecting CSS Dynamically
 
 For more control, you can inject CSS from JavaScript:
 
@@ -296,7 +296,7 @@ injectCSS(`
 `);
 ```
 
-Toggling Styles
+### Toggling Styles
 
 You might want to provide users with the ability to toggle your extension's styling modifications:
 
@@ -333,11 +333,11 @@ function getExtensionStyles() {
 
 ---
 
-Best Practices for DOM Manipulation Extensions {#best-practices}
+## Best Practices for DOM Manipulation Extensions {#best-practices}
 
 Building reliable DOM manipulation features requires following established best practices.
 
-Respect Page Functionality
+### Respect Page Functionality
 
 When manipulating DOM, be careful not to break essential page functionality:
 
@@ -359,7 +359,7 @@ enhancedForm.addEventListener('submit', (event) => {
 });
 ```
 
-Use Specific Match Patterns
+### Use Specific Match Patterns
 
 Instead of using `<all_urls>`, be as specific as possible with your match patterns to improve performance and reduce potential conflicts:
 
@@ -377,9 +377,9 @@ Instead of using `<all_urls>`, be as specific as possible with your match patter
 }
 ```
 
-Handle Page Reflows Efficiently
+### Handle Page Reflows Efficiently
 
-Repeated DOM modifications can cause performance issues:
+### Repeated DOM modifications can cause performance issues:
 
 ```javascript
 // Inefficient: Multiple reflows
@@ -401,7 +401,7 @@ const list = document.getElementById('my-list');
 list.appendChild(fragment); // Single reflow
 ```
 
-Clean Up When Necessary
+### Clean Up When Necessary
 
 If your content script adds event listeners or creates elements that persist, clean them up when appropriate:
 
@@ -428,13 +428,13 @@ window.addEventListener('unload', cleanup);
 
 ---
 
-Common Use Cases for DOM Manipulation Extensions {#common-use-cases}
+## Common Use Cases for DOM Manipulation Extensions {#common-use-cases}
 
 Understanding practical applications helps you apply these techniques effectively.
 
-Content Highlighting and Annotation
+### Content Highlighting and Annotation
 
-One popular use case is highlighting specific content:
+### One popular use case is highlighting specific content:
 
 ```javascript
 function highlightText(selector, color = 'yellow') {
@@ -454,7 +454,7 @@ function highlightText(selector, color = 'yellow') {
 }
 ```
 
-Form Enhancement
+### Form Enhancement
 
 Extensions often enhance forms with additional validation or auto-fill:
 
@@ -480,7 +480,7 @@ function enhanceFormFields() {
 }
 ```
 
-Custom Overlays and Modals
+### Custom Overlays and Modals
 
 Creating extension-generated overlays that appear on top of page content:
 
@@ -515,11 +515,11 @@ function showExtensionModal(content) {
 
 ---
 
-Troubleshooting DOM Manipulation Issues {#troubleshooting}
+## Troubleshooting DOM Manipulation Issues {#troubleshooting}
 
 Even experienced developers encounter problems with DOM manipulation in extensions.
 
-Script Not Running
+### Script Not Running
 
 If your content script isn't executing:
 
@@ -528,17 +528,17 @@ If your content script isn't executing:
 3. Ensure you're not trying to access elements that don't exist yet
 4. Check for console errors in the extension service worker
 
-Elements Not Found
+### Elements Not Found
 
-Dynamic content can be challenging:
+### Dynamic content can be challenging:
 
 1. Use MutationObserver to wait for dynamically added elements
 2. Ensure your script runs at the appropriate time (`run_at`)
 3. Check if the page uses iframes - content scripts don't run in iframes by default
 
-Conflicts with Page Scripts
+### Conflicts with Page Scripts
 
-Isolation can cause unexpected behavior:
+### Isolation can cause unexpected behavior:
 
 1. Avoid using the same variable names as the page
 2. Use unique class names with prefixes to avoid collisions
@@ -546,7 +546,7 @@ Isolation can cause unexpected behavior:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 DOM manipulation is the backbone of countless Chrome extensions. From simple page modifications to complex productivity tools, understanding how to effectively work with the DOM through content scripts opens up tremendous possibilities.
 

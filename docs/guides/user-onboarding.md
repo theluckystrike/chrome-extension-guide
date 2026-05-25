@@ -9,11 +9,11 @@ User Onboarding Guide
 
 A comprehensive guide to designing effective onboarding experiences for Chrome extensions that drive user adoption and retention.
 
-Overview {#overview}
+## Overview {#overview}
 
 First impressions are critical in determining whether users continue using your extension or uninstall it within the first few minutes. A well-designed onboarding experience guides users through initial setup, demonstrates value quickly, and reduces the overall uninstall rate. This guide covers best practices for creating onboarding flows that educate users, request permissions appropriately, and set expectations for ongoing value.
 
-onInstalled Welcome Page {#oninstalled-welcome-page}
+## onInstalled Welcome Page {#oninstalled-welcome-page}
 
 The `onInstalled` event is the entry point for your onboarding experience. When a user installs your extension, you can automatically open a welcome page that guides them through setup.
 
@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 The `details.reason` property distinguishes between fresh installations and updates, allowing you to tailor the experience accordingly.
 
-Onboarding Page Design {#onboarding-page-design}
+## Onboarding Page Design {#onboarding-page-design}
 
 Effective onboarding pages share several key characteristics that maximize user engagement and comprehension:
 
@@ -90,7 +90,7 @@ Include clear call-to-action - The final step should have a prominent button tha
 </html>
 ```
 
-Progressive Disclosure {#progressive-disclosure}
+## Progressive Disclosure {#progressive-disclosure}
 
 Rather than overwhelming users with all features at once, implement progressive disclosure to reveal functionality as users explore your extension. This approach reduces initial cognitive load and encourages continued discovery.
 
@@ -177,7 +177,7 @@ function showBadge(elementId, text) {
 }
 ```
 
-Permission Requests {#permission-requests}
+## Permission Requests {#permission-requests}
 
 Requesting permissions requires careful consideration to maintain user trust. Always explain each permission in plain language and provide graceful degradation when users decline.
 
@@ -220,7 +220,7 @@ function enableLimitedMode() {
 
 Allow skipping gracefully - Design your extension to function (perhaps with reduced functionality) when users decline permissions. This approach builds trust and prevents users from feeling pressured.
 
-Update Notifications {#update-notifications}
+## Update Notifications {#update-notifications}
 
 When your extension updates, users may miss new features or breaking changes. Show a changelog notification to keep users informed:
 
@@ -257,7 +257,7 @@ function showUpdateNotification(changelog) {
 }
 ```
 
-Tracking Completion {#tracking-completion}
+## Tracking Completion {#tracking-completion}
 
 Store onboarding state using `@theluckystrike/webext-storage` to track progress and enable users to resume where they left off. This is especially valuable for multi-step onboarding flows.
 
@@ -326,27 +326,27 @@ async function initOnboarding() {
 
 Don't repeat completed steps - Always check stored state before showing onboarding content. If a user has completed certain steps, skip them automatically while allowing manual review if desired.
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
 The following examples demonstrate complete implementations of key onboarding patterns:
 
-Multi-Step Wizard Welcome Page {#multi-step-wizard-welcome-page}
+## Multi-Step Wizard Welcome Page {#multi-step-wizard-welcome-page}
 
 A full implementation of a step-by-step wizard that guides users through setup with progress tracking and state persistence.
 
-Permission Request with Explanation UI {#permission-request-with-explanation-ui}
+## Permission Request with Explanation UI {#permission-request-with-explanation-ui}
 
 Demonstrates how to present permission requests with clear explanations and graceful fallback when users decline.
 
-Feature Tooltip System {#feature-tooltip-system}
+## Feature Tooltip System {#feature-tooltip-system}
 
 Shows contextual hints that appear on first use, track dismissal state, and can be revisited by users.
 
-Update Changelog Notification {#update-changelog-notification}
+## Update Changelog Notification {#update-changelog-notification}
 
 Implements automatic changelog display when users install updates, keeping them informed of new features.
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 For more information on related topics, consult these additional guides:
 
@@ -354,9 +354,9 @@ For more information on related topics, consult these additional guides:
 - [State Management Patterns](../patterns/state-management.md) - Comprehensive guide to storing and retrieving extension state
 - [Listing Optimization](../publishing/listing-optimization.md) - Tips for optimizing your Chrome Web Store listing to improve conversion rates
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Onboarding Patterns](../patterns/extension-onboarding.md)
 - [User Research](../guides/chrome-extension-user-research.md)

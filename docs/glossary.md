@@ -13,7 +13,7 @@ This glossary provides definitions for the most important Chrome extension devel
 
 ---
 
-A
+### A
 
 Action API
 The Action API (formerly Browser Action) controls the extension's icon in the Chrome toolbar. It allows you to set the icon, badge text, title, and popup. Learn more in our [Action API guide](/docs/guides/action-api/).
@@ -26,7 +26,7 @@ Proven approaches for structuring Chrome extension code, including the MVVM patt
 
 ---
 
-B
+### B
 
 Background Script
 A script that runs in the background of the browser, handling events and managing extension state. In Manifest V3, background scripts are replaced by service workers. See [Background Service Worker Patterns](/docs/guides/background-patterns/).
@@ -39,7 +39,7 @@ An API for creating, organizing, and managing browser bookmarks. Useful for buil
 
 ---
 
-C
+### C
 
 Chrome DevTools
 Developer tools built into Chrome for debugging extensions, inspecting elements, monitoring network requests, and profiling performance. Learn about [advanced debugging](/docs/guides/advanced-debugging/).
@@ -67,7 +67,7 @@ A browser security mechanism that restricts how resources can be loaded. Extensi
 
 ---
 
-D
+### D
 
 Declarative Content
 An API that allows extensions to take actions based on page content without requiring host permissions for every URL. See the [Declarative Content guide](/docs/guides/declarative-content/).
@@ -80,7 +80,7 @@ Allows extensions to extend Chrome DevTools with custom panels, tabs, and profil
 
 ---
 
-E
+### E
 
 Enterprise Deployment
 Methods for distributing extensions to organizations through group policies and enterprise management. See the [Enterprise Deployment guide](/docs/guides/enterprise-deployment/).
@@ -90,7 +90,7 @@ The sequence of events from installation through updates to uninstallation, incl
 
 ---
 
-H
+### H
 
 History API
 An API for interacting with browser history, allowing extensions to read and manage browsing history. See the [History API documentation](/docs/guides/history-api/).
@@ -100,7 +100,7 @@ Permissions that grant access to specific website domains or all URLs. Required 
 
 ---
 
-I
+### I
 
 Identity API
 Provides OAuth authentication for accessing user Google accounts and services. Essential for extensions that integrate with Google APIs. See the [Identity OAuth guide](/docs/guides/identity-oauth/).
@@ -113,7 +113,7 @@ The process of making extensions support multiple languages. Chrome provides bui
 
 ---
 
-M
+### M
 
 Manifest File (manifest.json)
 The central configuration file for Chrome extensions that declares permissions, components, and capabilities. See the [Manifest Fields reference](/docs/reference/manifest-fields/).
@@ -135,7 +135,7 @@ See Manifest V3.
 
 ---
 
-N
+### N
 
 Native Messaging
 Allows extensions to communicate with native applications installed on the user's computer. Useful for system integration. See the [Native Messaging guide](/docs/guides/native-messaging/).
@@ -145,7 +145,7 @@ Enables extensions to display system notifications to users. See the [Notificati
 
 ---
 
-O
+### O
 
 Offscreen Document
 A hidden HTML document that content scripts can use for tasks requiring a DOM, like audio processing or WebRTC. See the [Offscreen API guide](/docs/guides/offscreen-api/).
@@ -158,7 +158,7 @@ A dedicated page for configuring extension settings, accessible from the extensi
 
 ---
 
-P
+### P
 
 Permissions
 Access rights that extensions request to use specific APIs or website data. Must be declared in the manifest. See the [Permissions guide](/docs/guides/permissions/).
@@ -174,7 +174,7 @@ Server-driven notifications sent to extensions in real-time. Requires the Chrome
 
 ---
 
-S
+### S
 
 Scripting API
 An API for programmatically injecting content scripts and managing CSS in web pages. See the [Scripting API documentation](/docs/guides/scripting-api/).
@@ -193,7 +193,7 @@ A type of storage that automatically syncs across all devices where the user is 
 
 ---
 
-T
+### T
 
 Tab Groups API
 Allows organizing browser tabs into groups with custom colors and titles. See the [Tab Groups guide](/docs/guides/tab-groups/).
@@ -209,7 +209,7 @@ Enables extensions to use Chrome's text-to-speech capabilities. See the [TTS API
 
 ---
 
-W
+### W
 
 Web Accessible Resources
 Files within an extension that can be accessed by web pages or content scripts. Must be explicitly declared in the manifest. See the [Web Accessible Resources guide](/docs/guides/web-accessible-resources/).
@@ -231,7 +231,7 @@ See Service Worker.
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [API Reference](/docs/api-reference/)
 - [Getting Started Guide](/docs/getting-started/)

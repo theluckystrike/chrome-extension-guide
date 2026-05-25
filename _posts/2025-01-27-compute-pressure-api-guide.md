@@ -18,13 +18,13 @@ This comprehensive guide explores everything you need to know about implementing
 
 ---
 
-Understanding the Compute Pressure API {#understanding-compute-pressure}
+## Understanding the Compute Pressure API {#understanding-compute-pressure}
 
 The Compute Pressure API is a web platform API that exposes system pressure states to web applications and extensions, allowing them to make informed decisions about resource allocation based on current system conditions. Originally developed to help web applications throttle their operations during periods of high system load, this API has become invaluable for extension developers who need to create responsive, resource-aware applications that provide the best possible user experience while respecting system limitations.
 
 The API works by categorizing system pressure into distinct states that represent different levels of resource utilization. These states provide a simplified but meaningful representation of how stressed a user's system is, allowing developers to adjust their application's behavior accordingly without requiring them to implement complex system monitoring logic themselves. This abstraction makes it significantly easier to build extensions that respond appropriately to varying system conditions.
 
-The Four Pressure States
+### The Four Pressure States
 
 The Compute Pressure API defines four distinct pressure states that represent progressively more stressed system conditions. Understanding these states is crucial for implementing effective adaptive behavior in your extensions.
 
@@ -36,7 +36,7 @@ The third state is serious, indicating that the system is under significant load
 
 The fourth and most critical state is critical, which indicates that the system is severely resource-constrained and immediate action is required. Extensions should perform only essential operations in this state, deferring all non-critical tasks until the system returns to a less stressed condition. This might mean suspending background synchronization, pausing analytics collection, or even temporarily disabling certain features entirely.
 
-Why Monitor System Pressure in Extensions
+### Why Monitor System Pressure in Extensions
 
 Implementing system pressure monitoring in your Chrome extensions provides numerous benefits that enhance both user experience and extension performance. Understanding these benefits will help you appreciate why the Compute Pressure API has become such an important tool for extension developers.
 
@@ -48,11 +48,11 @@ Background operation efficiency is enhanced when your extension understands syst
 
 ---
 
-Setting Up Your Extension for Compute Pressure {#manifest-configuration}
+## Setting Up Your Extension for Compute Pressure {#manifest-configuration}
 
 Before you can use the Compute Pressure API in your Chrome extension, you need to properly configure your extension's manifest file. The Compute Pressure API requires specific permissions and is subject to certain restrictions that you must understand and implement correctly.
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 For Chrome extensions using Manifest V3, which is the current standard, you need to declare the `"compute-pressure"` permission in your manifest.json file. This permission allows your extension to access the Compute Pressure API and receive system pressure updates.
 
@@ -76,7 +76,7 @@ For Chrome extensions using Manifest V3, which is the current standard, you need
 
 It's important to note that the Compute Pressure API is currently available in Chrome and other Chromium-based browsers, but may not be available in all browsers. You should implement appropriate feature detection in your extension to handle cases where the API is not available, ensuring graceful degradation rather than complete failure.
 
-Feature Detection
+### Feature Detection
 
 Always implement feature detection before using the Compute Pressure API, as this ensures your extension works correctly across different browser versions and implementations. The API should be available in modern Chromium-based browsers, but users with older versions or alternative browsers may not have access to it.
 
@@ -100,11 +100,11 @@ function initializeExtension() {
 
 ---
 
-Implementing the Compute Pressure Observer {#implementation}
+## Implementing the Compute Pressure Observer {#implementation}
 
 The core of the Compute Pressure API is the `PressureObserver` class, which provides a way to subscribe to system pressure updates. Understanding how to properly implement and use this observer is essential for building effective system monitoring extensions.
 
-Creating a Pressure Observer
+### Creating a Pressure Observer
 
 Creating a PressureObserver instance is straightforward and similar to other observer patterns in JavaScript. You define a callback function that receives pressure updates, and the observer automatically calls this function whenever the system pressure state changes.
 
@@ -143,7 +143,7 @@ const observer = new PressureObserver(handlePressureUpdate, {
 });
 ```
 
-Starting and Stopping Monitoring
+### Starting and Stopping Monitoring
 
 Once you've created your PressureObserver, you need to start monitoring and know when to stop. The observer's `observe()` method begins monitoring the specified hardware source, while `unobserve()` stops monitoring.
 
@@ -166,7 +166,7 @@ function stopPressureMonitoring() {
 }
 ```
 
-Complete Implementation Example
+### Complete Implementation Example
 
 Here's a complete example showing how to implement a CPU monitoring feature in your Chrome extension:
 
@@ -250,17 +250,17 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-Building a CPU Monitor Chrome Extension {#building-cpu-monitor}
+## Building a CPU Monitor Chrome Extension {#building-cpu-monitor}
 
 Now that you understand the fundamentals, let's build a complete CPU monitor chrome extension that displays system pressure information to users. This practical example demonstrates how to combine the Compute Pressure API with Chrome extension UI components to create a useful tool.
 
-Extension Architecture
+### Extension Architecture
 
 Our CPU monitor extension will consist of several components that work together to provide a smooth user experience. The background service worker handles pressure monitoring, while the popup interface displays current system status to users.
 
 The extension will include real-time pressure state display, historical state tracking, visual indicators showing current system load, and automatic adaptation to system conditions. This architecture demonstrates best practices for building responsive, resource-aware extensions.
 
-Popup HTML Structure
+### Popup HTML Structure
 
 Create a popup.html file that displays the CPU pressure information to users:
 
@@ -362,7 +362,7 @@ Create a popup.html file that displays the CPU pressure information to users:
 </html>
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
 The popup script communicates with the background service worker to receive pressure updates:
 
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Background Service Worker Updates
+### Background Service Worker Updates
 
 Update your background service worker to communicate with the popup:
 
@@ -516,11 +516,11 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-Advanced Use Cases and Best Practices {#advanced-uses}
+## Advanced Use Cases and Best Practices {#advanced-uses}
 
 The Compute Pressure API opens up numerous possibilities for building sophisticated extensions that intelligently adapt to system conditions.  some advanced use cases and best practices that will help you create truly professional extensions.
 
-Adaptive Data Synchronization
+### Adaptive Data Synchronization
 
 One of the most powerful applications of the Compute Pressure API is implementing adaptive data synchronization. Instead of rigidly scheduling sync operations, your extension can monitor system pressure and only perform synchronization when the system has available resources.
 
@@ -574,7 +574,7 @@ class AdaptiveSyncManager {
 }
 ```
 
-Performance-Adaptive UI
+### Performance-Adaptive UI
 
 For extensions with rich user interfaces, the Compute Pressure API can be used to adjust UI complexity based on available resources. This might involve reducing animation complexity, disabling certain visual effects, or simplifying data visualizations when the system is under load.
 
@@ -658,7 +658,7 @@ class AdaptiveUIManager {
 }
 ```
 
-Best Practices for Production Extensions
+### Best Practices for Production Extensions
 
 When implementing the Compute Pressure API in production extensions, several best practices will help ensure reliability and a great user experience. Following these guidelines will help you build extensions that users can depend on.
 
@@ -674,7 +674,7 @@ Test under various conditions to ensure your extension behaves correctly under d
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Compute Pressure API represents a significant advancement in Chrome extension development, providing developers with powerful tools to create adaptive, resource-aware applications. Throughout this comprehensive guide, we've explored the fundamentals of the API, examined practical implementation patterns, and discovered advanced use cases that demonstrate its versatility.
 
@@ -686,7 +686,7 @@ Remember to check browser compatibility, implement proper feature detection, and
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 To further enhance your understanding of the Compute Pressure API and Chrome extension development, here are some valuable resources worth exploring. The official Chrome extension documentation provides comprehensive information about APIs available to extensions, including the Compute Pressure API and its specifications. The Web Platform Incubator Community Group maintains the Compute Pressure API specification, which contains detailed technical information about the API's design and implementation. MDN Web Docs offers excellent documentation on the PressureObserver interface and related concepts, providing browser compatibility information and additional examples.
 

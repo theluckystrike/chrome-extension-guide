@@ -16,11 +16,11 @@ In this comprehensive TypeScript tutorial, we'll dive deep into both storage mec
 
 ---
 
-Understanding the Chrome Storage API
+### Understanding the Chrome Storage API
 
 Before we compare sync vs local storage, let's establish why the Chrome Storage API outperforms traditional web storage solutions.
 
-Why Not localStorage?
+### Why Not localStorage?
 
 While `localStorage` works in extension contexts, it comes with significant limitations:
 
@@ -32,9 +32,9 @@ While `localStorage` works in extension contexts, it comes with significant limi
 
 The Chrome Storage API addresses all these problems with an asynchronous, promise-friendly architecture designed specifically for extensions.
 
-Storage Areas Overview
+### Storage Areas Overview
 
-Chrome provides four distinct storage areas:
+### Chrome provides four distinct storage areas:
 
 | Storage Area | Persistence | Sync | Quota | Use Case |
 |-------------|-------------|------|-------|----------|
@@ -45,11 +45,11 @@ Chrome provides four distinct storage areas:
 
 ---
 
-chrome.storage.local: Device-Specific Storage
+### chrome.storage.local: Device-Specific Storage
 
 `chrome.storage.local` is the workhorse for extension data that doesn't need to travel across devices. It's perfect for cached data, device-specific settings, and information that would be meaningless on other machines.
 
-Basic TypeScript Operations
+### Basic TypeScript Operations
 
 ```typescript
 // types/storage.ts
@@ -81,7 +81,7 @@ class LocalStorageManager {
 }
 ```
 
-Real-World Example: Tab Suspender Pro Configuration
+### Real-World Example: Tab Suspender Pro Configuration
 
 Tab Suspender Pro uses `chrome.storage.local` for data that shouldn't sync, primarily cached tab states and analytics:
 
@@ -150,7 +150,7 @@ export class TabStateStorage {
 }
 ```
 
-Quota Management for Local Storage
+### Quota Management for Local Storage
 
 Local storage offers 10MB by default, expandable to unlimited with the `unlimitedStorage` permission:
 
@@ -183,19 +183,19 @@ export class QuotaManager {
 
 ---
 
-chrome.storage.sync: Cross-Device Synchronization
+### chrome.storage.sync: Cross-Device Synchronization
 
 `chrome.storage.sync` automatically synchronizes data across all devices where the user is signed into Chrome. This is ideal for user preferences, settings, and any data that should follow the user.
 
-When to Use Sync Storage
+### When to Use Sync Storage
 
-Choose `chrome.storage.sync` when:
+### Choose `chrome.storage.sync` when:
 
 - Users access your extension from multiple devices
 - Preferences should persist across installations
 - You want zero-configuration cross-device support
 
-TypeScript Implementation
+### TypeScript Implementation
 
 ```typescript
 // types/sync-settings.ts
@@ -267,7 +267,7 @@ class SyncStorageManager {
 }
 ```
 
-Handling Sync Conflicts
+### Handling Sync Conflicts
 
 When multiple devices modify data simultaneously, Chrome handles conflict resolution automatically with a "last write wins" strategy. For more complex scenarios, implement custom conflict resolution:
 
@@ -305,7 +305,7 @@ export class SyncConflictResolver {
 }
 ```
 
-Sync Storage Best Practices
+### Sync Storage Best Practices
 
 ```typescript
 // Best practices for sync storage
@@ -337,7 +337,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-Listening for Storage Changes
+### Listening for Storage Changes
 
 Both storage areas support change listeners, crucial for keeping your extension's UI in sync:
 
@@ -385,7 +385,7 @@ listener.onSyncChange((changes) => {
 
 ---
 
-Hybrid Approach: Best of Both Worlds
+### Hybrid Approach: Best of Both Worlds
 
 Many production extensions, including Tab Suspender Pro, use a hybrid strategy:
 
@@ -446,9 +446,9 @@ export class ExtensionStorage {
 
 ---
 
-Performance Optimization
+### Performance Optimization
 
-Batch Operations
+### Batch Operations
 
 ```typescript
 // Efficient batch operations
@@ -475,7 +475,7 @@ private chunkArray<T>(array: T[], size: number): T[][] {
 }
 ```
 
-Lazy Loading
+### Lazy Loading
 
 ```typescript
 // Only load what you need, when you need it
@@ -505,7 +505,7 @@ class LazyStorageLoader {
 
 ---
 
-Debugging Storage Issues
+### Debugging Storage Issues
 
 ```typescript
 // Debug utilities
@@ -532,9 +532,9 @@ export class StorageDebugger {
 
 ---
 
-Advanced Patterns and Migration Strategies
+### Advanced Patterns and Migration Strategies
 
-Migrating from localStorage to chrome.storage
+### Migrating from localStorage to chrome.storage
 
 If you're updating an older extension, migrating from localStorage is straightforward but requires careful planning:
 
@@ -608,9 +608,9 @@ export class StorageMigrator {
 }
 ```
 
-Type-Safe Storage Wrappers with Generics
+### Type-Safe Storage Wrappers with Generics
 
-Create fully type-safe storage abstractions:
+### Create fully type-safe storage abstractions:
 
 ```typescript
 // typesafe-storage.ts
@@ -678,9 +678,9 @@ await settingsStorage.set('theme', 'dark');
 const theme = await settingsStorage.get('theme', 'light');
 ```
 
-Implementing Undo/Redo for Storage Changes
+### Implementing Undo/Redo for Storage Changes
 
-Build a history system for important storage changes:
+### Build a history system for important storage changes:
 
 ```typescript
 // utils/storage-history.ts
@@ -737,9 +737,9 @@ class StorageHistoryManager {
 }
 ```
 
-Working with Storage in Service Workers
+### Working with Storage in Service Workers
 
-Service workers have unique considerations for storage:
+### Service workers have unique considerations for storage:
 
 ```typescript
 // service-worker-storage.ts
@@ -762,9 +762,9 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-Storage Encryption for Sensitive Data
+### Storage Encryption for Sensitive Data
 
-For sensitive data that needs protection:
+### For sensitive data that needs protection:
 
 ```typescript
 // utils/secure-storage.ts
@@ -808,7 +808,7 @@ class SecureStorage {
 
 ---
 
-Testing Storage Implementations
+### Testing Storage Implementations
 
 ```typescript
 // tests/storage.test.ts
@@ -847,7 +847,7 @@ describe('LocalStorageManager', () => {
 
 ---
 
-Common Pitfalls to Avoid
+### Common Pitfalls to Avoid
 
 1. Don't store large data in sync. The 100KB limit is strict
 2. Always handle missing keys. Use default values
@@ -859,7 +859,7 @@ Common Pitfalls to Avoid
 
 ---
 
-Conclusion: Making the Right Choice
+### Conclusion: Making the Right Choice
 
 For Tab Suspender Pro and similar extensions, the storage strategy breaks down simply:
 

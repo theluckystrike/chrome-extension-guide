@@ -15,11 +15,11 @@ Whether you're building a simple productivity tool or a complex extension like T
 
 ---
 
-Understanding Chrome Extension Architecture
+### Understanding Chrome Extension Architecture
 
 Before diving into optimization techniques, it's essential to understand how Chrome extensions consume resources:
 
-The Extension Process Model
+### The Extension Process Model
 
 Chrome extensions run in isolated processes, but they interact with multiple components:
 
@@ -30,9 +30,9 @@ Chrome extensions run in isolated processes, but they interact with multiple com
 
 Each component has different performance characteristics and memory implications.
 
-Memory Consumption Patterns
+### Memory Consumption Patterns
 
-Extensions typically consume memory in these areas:
+### Extensions typically consume memory in these areas:
 
 - JavaScript Heap: Your code's variables, objects, and functions
 - DOM Nodes: Content script DOM manipulations
@@ -41,11 +41,11 @@ Extensions typically consume memory in these areas:
 
 ---
 
-Service Worker Optimization
+### Service Worker Optimization
 
 The service worker is the heart of your extension. Optimizing it has the biggest impact on performance.
 
-Implement Lazy Initialization
+### Implement Lazy Initialization
 
 Don't initialize everything at startup. Use lazy loading to defer expensive operations:
 
@@ -87,9 +87,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Implement Message Throttling
+### Implement Message Throttling
 
-Prevent message flooding from content scripts:
+### Prevent message flooding from content scripts:
 
 ```javascript
 //  Good: Throttled message handling
@@ -120,7 +120,7 @@ async function processQueue() {
 }
 ```
 
-Use Declarative Net Request for Network Blocking
+### Use Declarative Net Request for Network Blocking
 
 Instead of intercepting every request with webRequest, use declarativeNetRequest:
 
@@ -154,13 +154,13 @@ Instead of intercepting every request with webRequest, use declarativeNetRequest
 
 ---
 
-Content Script Optimization
+### Content Script Optimization
 
 Content scripts run in the context of web pages, so they share memory with the page. This makes optimization critical.
 
-Use Shadow DOM for Style Isolation
+### Use Shadow DOM for Style Isolation
 
-Prevent style conflicts and improve rendering performance:
+### Prevent style conflicts and improve rendering performance:
 
 ```javascript
 //  Good: Shadow DOM encapsulation
@@ -183,7 +183,7 @@ shadowRoot.innerHTML = `
 document.body.appendChild(shadowRoot.firstElementChild);
 ```
 
-Implement MutationObserver Efficiently
+### Implement MutationObserver Efficiently
 
 Don't observe everything. Be specific about what you're watching:
 
@@ -210,9 +210,9 @@ observer.observe(document.body, {
 // This causes excessive callbacks
 ```
 
-Lazy Load Content Scripts
+### Lazy Load Content Scripts
 
-Use dynamic imports and on-demand loading:
+### Use dynamic imports and on-demand loading:
 
 ```javascript
 // manifest.json - Don't load on every page
@@ -240,11 +240,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Memory Management Best Practices
+### Memory Management Best Practices
 
-Clean Up Event Listeners
+### Clean Up Event Listeners
 
-Always remove listeners when they're no longer needed:
+### Always remove listeners when they're no longer needed:
 
 ```javascript
 //  Good: Proper cleanup
@@ -280,9 +280,9 @@ window.addEventListener('unload', () => {
 });
 ```
 
-Use WeakMap for Object References
+### Use WeakMap for Object References
 
-Prevent memory leaks with WeakMap:
+### Prevent memory leaks with WeakMap:
 
 ```javascript
 //  Good: WeakMap for DOM element associations
@@ -299,7 +299,7 @@ function getData(element) {
 // Elements can be garbage collected when removed from DOM
 ```
 
-Implement LRU Cache with Size Limits
+### Implement LRU Cache with Size Limits
 
 ```javascript
 class LRUCache {
@@ -338,7 +338,7 @@ class LRUCache {
 const cache = new LRUCache(50);
 ```
 
-Release Tab References
+### Release Tab References
 
 Tab IDs can become stale. Don't hold onto them:
 
@@ -360,9 +360,9 @@ async function doSomethingWithTab(tabId) {
 
 ---
 
-Storage Optimization
+### Storage Optimization
 
-Use chrome.storage Wisely
+### Use chrome.storage Wisely
 
 storage.local has quota limits. Use storage.session for temporary data:
 
@@ -408,9 +408,9 @@ async function getCachedData(key) {
 }
 ```
 
-Compress Storage Data
+### Compress Storage Data
 
-For large datasets, compress before storing:
+### For large datasets, compress before storing:
 
 ```javascript
 // Using CompressionStream API (Chrome 102+)
@@ -431,9 +431,9 @@ async function decompressData(blob) {
 
 ---
 
-Performance Monitoring
+### Performance Monitoring
 
-Implement Performance Tracking
+### Implement Performance Tracking
 
 ```javascript
 class PerformanceMonitor {
@@ -475,7 +475,7 @@ const memory = monitor.getMemoryUsage();
 console.log(`Memory: ${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)} MB`);
 ```
 
-Monitor Tab Memory Usage
+### Monitor Tab Memory Usage
 
 ```javascript
 async function getTabMemoryUsage(tabId) {
@@ -509,11 +509,11 @@ async function reportExtensionMemory() {
 
 ---
 
-Real-World Example: Tab Suspender Pro
+### Real-World Example: Tab Suspender Pro
 
 Let's see how these practices apply to a real extension. Tab Suspender Pro manages tab suspension to save memory. Here's how it implements these best practices:
 
-Service Worker Lazy Initialization
+### Service Worker Lazy Initialization
 
 ```javascript
 // Tab Suspender Pro - service worker
@@ -545,7 +545,7 @@ const TabSuspender = {
 };
 ```
 
-Efficient Tab Tracking
+### Efficient Tab Tracking
 
 ```javascript
 // Track only active tabs, not all tabs
@@ -559,7 +559,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 ```
 
-Memory-Efficient Storage
+### Memory-Efficient Storage
 
 ```javascript
 // Store only essential data
@@ -579,15 +579,15 @@ async function saveSuspendedTabInfo(tabInfo) {
 
 ---
 
-Testing Performance
+### Testing Performance
 
-Use Chrome DevTools
+### Use Chrome DevTools
 
 1. Memory Profiler: Take heap snapshots to identify leaks
 2. Performance Monitor: Real-time CPU and memory usage
 3. Performance Panel: Record and analyze runtime
 
-Automated Performance Tests
+### Automated Performance Tests
 
 ```javascript
 // performance-test.js
@@ -621,9 +621,9 @@ async function runPerformanceTests() {
 
 ---
 
-Additional Optimization Techniques
+### Additional Optimization Techniques
 
-Use Web Workers for Heavy Computations
+### Use Web Workers for Heavy Computations
 
 Offload CPU-intensive tasks to web workers to keep the main thread responsive:
 
@@ -645,7 +645,7 @@ worker.onmessage = function(e) {
 worker.terminate();
 ```
 
-Implement Virtual Scrolling for Large Lists
+### Implement Virtual Scrolling for Large Lists
 
 When displaying large datasets in your popup or options page, use virtual scrolling to render only visible items:
 
@@ -694,9 +694,9 @@ class VirtualScroller {
 }
 ```
 
-Batch DOM Operations
+### Batch DOM Operations
 
-Minimize reflows by batching DOM changes:
+### Minimize reflows by batching DOM changes:
 
 ```javascript
 //  Bad: Multiple reflows
@@ -718,9 +718,9 @@ for (let i = 0; i < 1000; i++) {
 container.appendChild(fragment); // Single reflow
 ```
 
-Optimize Image Handling in Content Scripts
+### Optimize Image Handling in Content Scripts
 
-Use modern image formats and lazy loading:
+### Use modern image formats and lazy loading:
 
 ```javascript
 // Convert images to WebP on the fly using canvas
@@ -744,7 +744,7 @@ async function convertToWebP(imageUrl) {
 
 ---
 
-Performance Checklist
+### Performance Checklist
 
 Use this checklist when building your Chrome extension:
 
@@ -765,7 +765,7 @@ Use this checklist when building your Chrome extension:
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a high-performance Chrome extension requires attention to detail and consistent optimization. By implementing lazy initialization, efficient memory management, proper storage strategies, and continuous monitoring, you can create an extension that users love, fast, responsive, and resource-efficient.
 

@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-lifecyc
 last_modified_at: 2026-01-15
 ---
 
-Content Script Lifecycle Management
+### Content Script Lifecycle Management
 
 Content scripts in Chrome extensions have a distinct lifecycle that differs from regular web page scripts. Understanding this lifecycle is crucial for building robust, memory-efficient extensions.
 
-Injection Timing {#injection-timing}
+## Injection Timing {#injection-timing}
 
 Content scripts can be injected at different points in the page loading process:
 
@@ -29,9 +29,9 @@ Content scripts can be injected at different points in the page loading process:
 }
 ```
 
-Static vs Dynamic Injection {#static-vs-dynamic-injection}
+## Static vs Dynamic Injection {#static-vs-dynamic-injection}
 
-Static Injection (Manifest) {#static-injection-manifest}
+## Static Injection (Manifest) {#static-injection-manifest}
 ```json
 {
   "content_scripts": [{
@@ -41,7 +41,7 @@ Static Injection (Manifest) {#static-injection-manifest}
 }
 ```
 
-Dynamic Injection (Scripting API) {#dynamic-injection-scripting-api}
+## Dynamic Injection (Scripting API) {#dynamic-injection-scripting-api}
 ```javascript
 chrome.scripting.executeScript({
   target: { tabId: tab.id },
@@ -49,7 +49,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Multiple Injections & Navigation {#multiple-injections-navigation}
+## Multiple Injections & Navigation {#multiple-injections-navigation}
 
 Content scripts inject once per page navigation, not on hash changes. For SPAs, you need additional handling:
 
@@ -68,7 +68,7 @@ observer.observe(document.body, {
 });
 ```
 
-Cleanup on Navigation {#cleanup-on-navigation}
+## Cleanup on Navigation {#cleanup-on-navigation}
 
 Content script globals are garbage collected when the page unloads. Always clean up:
 
@@ -80,7 +80,7 @@ window.addEventListener('unload', () => {
 });
 ```
 
-Extension Updates {#extension-updates}
+## Extension Updates {#extension-updates}
 
 When an extension updates, existing content scripts keep running but lose their connection to the background script:
 
@@ -99,9 +99,9 @@ async function reconnectContentScripts() {
 }
 ```
 
-Cross-Frame Injection {#cross-frame-injection}
+## Cross-Frame Injection {#cross-frame-injection}
 
-Use `all_frames` to inject into iframes:
+### Use `all_frames` to inject into iframes:
 
 ```json
 {
@@ -113,9 +113,9 @@ Use `all_frames` to inject into iframes:
 }
 ```
 
-Memory Leak Prevention {#memory-leak-prevention}
+## Memory Leak Prevention {#memory-leak-prevention}
 
-Always clean up to avoid memory leaks:
+### Always clean up to avoid memory leaks:
 
 ```javascript
 let observer = null;
@@ -131,7 +131,7 @@ function cleanup() {
 window.addEventListener('unload', cleanup);
 ```
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Content Script API Reference](../reference/content-script-api.md)

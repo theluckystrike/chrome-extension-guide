@@ -9,7 +9,7 @@ Chrome Extension User Onboarding. How to Convert Installs into Active Users
 
 User onboarding is the critical bridge between installation and sustained engagement. For Chrome extensions, where users can disable or uninstall with a single click, a well-designed onboarding flow determines whether your extension thrives or becomes another forgotten tool. This guide covers the essential patterns and best practices for converting installs into active, loyal users.
 
-Welcome Page Best Practices
+### Welcome Page Best Practices
 
 The welcome page is often the first interactive experience users have with your extension after installation. It sets the tone for the entire user relationship and should accomplish three things: explain what your extension does, show how to get started quickly, and build trust.
 
@@ -21,7 +21,7 @@ Show, don't just tell. Screenshots, short GIFs, or inline demos help users visua
 
 Consider the timing. Welcome pages can be triggered in several ways: on first extension icon click, via a dedicated "Welcome" tab opened after installation, or as part of the options page. Choose based on complexity, simple extensions might skip a dedicated welcome page entirely, while complex tools benefit from a guided introduction.
 
-Permission Request Timing
+### Permission Request Timing
 
 Asking for permissions at the wrong time is one of the most common causes of extension abandonment. Users are increasingly privacy-conscious, and a permission dialog that appears unexpectedly can trigger immediate uninstallation.
 
@@ -33,7 +33,7 @@ Start with the minimum required permissions. If possible, build your extension t
 
 Handle denial gracefully. Some users will deny permissions. Design your extension to provide useful functionality even with limited access. Show clear indicators when features are unavailable due to missing permissions, and make it easy for users to grant access later from the options page.
 
-Feature Discovery UX
+### Feature Discovery UX
 
 Many extensions suffer from the "feature cliff", users install the extension but never discover its full capabilities. Effective feature discovery ensures users find value beyond their initial use case.
 
@@ -45,7 +45,7 @@ Implement guided tours for complex extensions. If your extension has multiple fe
 
 Leverage badge notifications and animations. Subtle visual cues can draw attention to overlooked features. A small badge indicating "New feature" or a gentle animation when users hover over an unexplored area can prompt discovery without being annoying.
 
-Onboarding Checklists
+### Onboarding Checklists
 
 Onboarding checklists are powerful because they combine guidance with a sense of progress. Users are motivated to complete lists, and checking off items provides positive reinforcement.
 
@@ -57,7 +57,7 @@ Celebrate completion. When users finish the checklist, acknowledge their success
 
 Persist progress across sessions. Store checklist state in `chrome.storage` and allow users to return where they left off. If they close the popup mid-checklist, they should be able to continue later without starting over.
 
-Measuring Onboarding Success
+### Measuring Onboarding Success
 
 You can't improve what you don't measure. Understanding how users interact with your onboarding flow enables iterative improvement.
 
@@ -69,7 +69,7 @@ Monitor uninstall timing. If users uninstall shortly after installation, your on
 
 Collect direct feedback. Include a simple "How was your onboarding?" prompt at the end of the checklist. Even a single rating question provides valuable signal. Make it easy to report specific issues.
 
-Examples from Popular Extensions
+### Examples from Popular Extensions
 
 Learning from successful extensions provides concrete inspiration for your own onboarding flow.
 
@@ -81,7 +81,7 @@ Notion Web Clipper demonstrates excellent permission handling. It requests websi
 
 Todoist implements a well-designed onboarding checklist that guides users through creating their first project and task. The checklist is prominent but not intrusive, and completion triggers a celebratory moment.
 
-Conclusion
+### Conclusion
 
 Effective Chrome extension onboarding balances education with action, giving users immediate value while helping them discover full capabilities. Focus on contextual permission requests, progressive feature introduction, and clear calls to action. Measure your funnel, iterate based on data, and always prioritize the user's time and attention. With a thoughtful onboarding flow, you transform one-time installers into lasting, engaged users.
 

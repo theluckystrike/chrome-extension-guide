@@ -16,7 +16,7 @@ If you have ever built a Chrome extension from scratch, you know the pain: manua
 
 Plasmo is a framework specifically designed for building browser extensions with a focus on developer experience. It handles all the complex configuration, bundling, and deployment intricacies behind the scenes, letting you focus entirely on building your extension's functionality. Whether you are a seasoned web developer looking to expand into extension development or someone building their first browser extension, Plasmo provides the tooling and abstractions that make the process remarkably smooth.
 
-What is Plasmo Framework?
+### What is Plasmo Framework?
 
 Plasmo is an open-source framework created by the team at [Plasmo](https://www.plasmo.com/) that aims to make browser extension development as easy as building a web app. Unlike traditional approaches where you manually configure bundlers like webpack or Vite and figure out the intricacies of Chrome's extension architecture yourself, Plasmo provides a pre-configured, opinionated setup that follows best practices out of the box.
 
@@ -24,31 +24,31 @@ The framework supports multiple browser targets including Chrome, Firefox, Safar
 
 One of Plasmo's standout features is its first-class support for hot module replacement during development. When you make changes to your extension's code, Plasmo automatically reloads the relevant parts without requiring you to manually click the reload button in Chrome's extensions page. This alone can save hours of frustration over the course of an extension development project.
 
-Why Use Plasmo for Chrome Extension Development?
+### Why Use Plasmo for Chrome Extension Development?
 
 The traditional Chrome extension development workflow involves several problems that Plasmo directly addresses. Understanding these benefits helps you appreciate why so many developers are making the switch.
 
-Simplified Configuration
+### Simplified Configuration
 
 When you create a raw Chrome extension, you need to create and maintain a manifest.json file, configure your bundler to output the correct file structure, set up separate entry points for your popup, background service worker, and content scripts, and figure out how to handle cross-context communication. Plasmo abstracts all of this away. You write your code in a structure that feels natural, and Plasmo handles the transformation into a valid Chrome extension behind the scenes.
 
-TypeScript First
+### TypeScript First
 
 Plasmo has excellent TypeScript support built in. Type safety catches bugs early, improves code maintainability, and makes working with Chrome's extension APIs much more pleasant since you get proper autocomplete and type checking. The framework includes type definitions for Chrome's APIs, so you no longer have to guess what parameters a method accepts or what properties an object has.
 
-Built-in Best Practices
+### Built-in Best Practices
 
 The framework incorporates years of collective knowledge about what works and what does not in Chrome extension development. It enforces patterns that lead to better performing, more secure, and more maintainable extensions. For example, Plasmo automatically handles the complexities of service worker lifecycle management and helps you avoid common pitfalls like memory leaks in content scripts.
 
-Multi-Context Support
+### Multi-Context Support
 
 Modern extensions often need to interact with multiple parts of the browser: a popup UI, an options page, a background service worker, content scripts that run on web pages, and possibly a devtools panel. Plasmo makes it straightforward to organize code for each of these contexts while providing clean APIs for communication between them.
 
-Getting Started with Plasmo
+### Getting Started with Plasmo
 
 Setting up a new Plasmo project takes just a few minutes. The framework provides a CLI that handles project creation and development server management. Let us walk through the process of building a simple extension to demonstrate Plasmo's workflow.
 
-Installation
+### Installation
 
 First, ensure you have Node.js version 18 or higher installed. Then create a new Plasmo project using the CLI:
 
@@ -65,7 +65,7 @@ cd my-extension
 npm install
 ```
 
-Project Structure
+### Project Structure
 
 A newly created Plasmo project has a clean, intuitive structure. The main directories you will work with are:
 
@@ -77,9 +77,9 @@ A newly created Plasmo project has a clean, intuitive structure. The main direct
 
 This structure makes it immediately clear where each piece of your extension lives, unlike raw Chrome extension projects where you might struggle to organize files consistently.
 
-Running Development Mode
+### Running Development Mode
 
-Start the development server with:
+### Start the development server with:
 
 ```bash
 npm run dev
@@ -89,11 +89,11 @@ Plasmo will compile your code and start a development server. It will also outpu
 
 The key advantage here is Plasmo's HMR support. Keep the extension loaded in Chrome while your dev server runs. Make a change to your popup code, save the file, and watch it update instantly in your browser without any manual reloading.
 
-Building a Real Extension with Plasmo and React
+### Building a Real Extension with Plasmo and React
 
 Let us build a practical example to demonstrate Plasmo's capabilities. We will create a simple extension that lets users highlight text on any webpage and save it to a local list. This example will touch on content scripts, popup UI, and cross-context communication.
 
-Creating the Content Script
+### Creating the Content Script
 
 First, let us create a content script that will run on web pages and allow users to select text. In Plasmo, content scripts are defined in `src/content.ts`:
 
@@ -111,7 +111,7 @@ export default function ContentScript() {
 
 For our text highlighter, we might want to listen for text selection events and provide a way to save selected text. You would add mouseup or selectionchange event listeners here to capture user selections.
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup is your extension's most visible component. In Plasmo with React, you build it just like any other React component. Edit `src/popup.tsx`:
 
@@ -174,11 +174,11 @@ export default Popup
 
 This popup component uses Chrome's storage API to persist data. Notice how similar this is to building a regular React application. you have state management, effects, event handlers, and JSX rendering.
 
-Adding Messaging Between Contexts
+### Adding Messaging Between Contexts
 
 For more complex extensions, you will need to communicate between your content script, popup, and background worker. Plasmo provides a messaging system that makes this straightforward. The `@plasmohq/messaging` package offers a clean API for sending messages between contexts.
 
-In your content script:
+### In your content script:
 
 ```typescript
 import { sendToBackground } from "@plasmohq/messaging"
@@ -191,7 +191,7 @@ const handleTextSelected = async (text: string) => {
 }
 ```
 
-In your background script:
+### In your background script:
 
 ```typescript
 import { sendToBackground } from "@plasmohq/messaging"
@@ -205,43 +205,43 @@ chrome.runtime.onMessage.addListener((message) => {
 
 This pattern keeps your code organized and makes it easy to understand where different logic lives.
 
-Plasmo Features for Production Extensions
+### Plasmo Features for Production Extensions
 
 Beyond the basics, Plasmo offers several features that become valuable as your extension grows in complexity.
 
-Environment Variables
+### Environment Variables
 
 Plasmo supports environment variables through `.env` files, making it easy to configure different settings for development, staging, and production. This is essential when you need different API keys or configuration values in different environments.
 
-Automatic Manifest Generation
+### Automatic Manifest Generation
 
 You do not manually write your `manifest.json` in Plasmo. Instead, you configure your extension's permissions, content script matches, and other manifest properties through a configuration file. Plasmo then generates the manifest automatically during the build process. This approach reduces errors and ensures your manifest always matches your actual code.
 
-Storage Abstraction
+### Storage Abstraction
 
 Plasmo provides a storage abstraction that simplifies working with Chrome's storage API. It offers a type-safe interface for reading and writing data, with built-in support for synchronization across devices when users are signed into Chrome.
 
-Testing Support
+### Testing Support
 
 The framework integrates with popular testing tools. You can write unit tests for your React components, integration tests for your messaging system, and end-to-end tests that simulate user interactions with your extension.
 
-Performance Considerations with Plasmo
+### Performance Considerations with Plasmo
 
 Chrome extensions face unique performance challenges that Plasmo helps you address. Extensions that consume excessive memory or CPU can be disabled by Chrome or uninstalled by frustrated users, so performance should be a primary concern from the start.
 
-Code Splitting
+### Code Splitting
 
 Plasmo automatically code-splits your extension, ensuring that users only download the JavaScript needed for the context they are using. The popup code does not load when the user is browsing normally, and content script code does not impact the popup's load time.
 
-Service Worker Optimization
+### Service Worker Optimization
 
 Background service workers in Manifest V3 have strict resource limits. Plasmo helps you structure your code to minimize the service worker's memory footprint, using lazy loading patterns and properly cleaning up event listeners when they are no longer needed.
 
-Content Script Efficiency
+### Content Script Efficiency
 
 Content scripts run on every page matching your patterns, making efficiency critical. Plasmo encourages patterns that keep content scripts lightweight, such as using message passing to delegate heavy processing to the background context rather than running it directly on page threads.
 
-Deploying Your Plasmo Extension
+### Deploying Your Plasmo Extension
 
 When you are ready to publish, Plasmo makes the build process straightforward:
 
@@ -253,7 +253,7 @@ This creates a production-ready build in the `build` directory. You can then upl
 
 For teams wanting continuous deployment, you can integrate the build process into CI/CD pipelines that automatically deploy new versions when you push to your repository.
 
-Conclusion
+### Conclusion
 
 Plasmo Framework represents a significant step forward in Chrome extension development. By bringing modern web development practices. React, TypeScript, hot module replacement, and sensible defaults. to the extension ecosystem, it dramatically lowers the barrier to entry while providing the power that professional developers need.
 

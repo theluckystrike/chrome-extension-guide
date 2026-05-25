@@ -18,7 +18,7 @@ Chrome extensions operate in a unique environment where security and functionali
 
 ---
 
-Understanding CryptoJS and Its Role in Chrome Extensions {#understanding-cryptojs}
+## Understanding CryptoJS and Its Role in Chrome Extensions {#understanding-cryptojs}
 
 CryptoJS is a mature, widely-adopted JavaScript cryptography library that provides various encryption algorithms, hash functions, and encoding utilities. Originally inspired by the Python Crypto library, CryptoJS has become the go-to solution for JavaScript-based encryption needs, particularly in browser environments like Chrome extensions. The library supports AES, DES, Triple DES, Rabbit, RC4, and MD5, SHA-1, SHA-256, SHA-512 hash functions, making it comprehensive for most encryption scenarios.
 
@@ -30,11 +30,11 @@ Chrome extensions face unique security challenges that make CryptoJS particularl
 
 ---
 
-Setting Up CryptoJS in Your Chrome Extension Project {#setting-up-cryptojs}
+## Setting Up CryptoJS in Your Chrome Extension Project {#setting-up-cryptojs}
 
 Installing CryptoJS in your Chrome extension project is straightforward, but the method you choose depends on your development workflow. For modern extension development using build tools like Webpack or Rollup, npm installation provides the best experience. For simpler projects or those without build tools, CDN inclusion works adequately, though npm is recommended for production extensions.
 
-Installation via npm
+### Installation via npm
 
 If you are using a modern JavaScript build system, installing CryptoJS through npm offers the cleanest integration. Run the following command in your project directory:
 
@@ -50,7 +50,7 @@ import CryptoJS from 'crypto-js';
 
 For Chrome extensions using Manifest V3, ensure your background service worker or content scripts properly handle the module imports. Some extension developers prefer to bundle CryptoJS with their build process to reduce external dependencies, while others load it dynamically based on their needs.
 
-Manual Installation Alternative
+### Manual Installation Alternative
 
 For simpler projects without npm integration, you can include CryptoJS directly from a CDN. Add the following script tag to your extension's HTML file:
 
@@ -60,7 +60,7 @@ For simpler projects without npm integration, you can include CryptoJS directly 
 
 After inclusion, CryptoJS becomes available through the global `CryptoJS` object. While this approach works, it has drawbacks including potential loading delays, dependency on external servers, and reduced control over the library version. For production extensions, npm installation or bundling the library with your extension is strongly recommended.
 
-Verifying Installation
+### Verifying Installation
 
 Regardless of your installation method, verify that CryptoJS loads correctly before proceeding with implementation. Create a simple test script that logs the library version:
 
@@ -73,11 +73,11 @@ If you see the version number and confirmation that AES is available, your insta
 
 ---
 
-Implementing AES Encryption in Chrome Extensions {#implementing-aes-encryption}
+## Implementing AES Encryption in Chrome Extensions {#implementing-aes-encryption}
 
 AES (Advanced Encryption Standard) represents the gold standard for symmetric encryption, and CryptoJS provides excellent support for AES operations in Chrome extensions. Understanding how to properly implement AES encryption ensures your extension protects user data effectively while maintaining performance.
 
-Basic AES Encryption and Decryption
+### Basic AES Encryption and Decryption
 
 The fundamental AES encryption workflow involves encrypting plaintext with a secret key to produce ciphertext, then decrypting the ciphertext back to plaintext using the same key. CryptoJS simplifies this process through its intuitive API:
 
@@ -97,7 +97,7 @@ console.log('Decrypted:', originalMessage);
 
 This basic example demonstrates the core concept, but production implementations require additional consideration for key management, error handling, and security best practices.
 
-Enhancing Security with Salt and Iterations
+### Enhancing Security with Salt and Iterations
 
 Basic AES encryption using a simple password works but lacks the security margin needed for protecting sensitive data. Implementing salted key derivation significantly strengthens your encryption by preventing rainbow table attacks and dictionary attacks. CryptoJS provides the necessary components:
 
@@ -157,11 +157,11 @@ This implementation addresses several security concerns. The random salt ensures
 
 ---
 
-Secure Data Storage Patterns for Chrome Extensions {#secure-data-storage}
+## Secure Data Storage Patterns for Chrome Extensions {#secure-data-storage}
 
 Chrome extensions have access to multiple storage mechanisms, each with different security characteristics. Understanding how to combine these with CryptoJS creates a comprehensive data protection strategy for your extension.
 
-Using chrome.storage with Encryption
+### Using chrome.storage with Encryption
 
 The chrome.storage API provides convenient persistent storage for extensions, but it stores data in plain text on the user's file system. Encrypting data before storage adds a crucial security layer:
 
@@ -229,7 +229,7 @@ const token = await secureStorage.getItem('userToken');
 
 This SecureStorage class provides a simple interface for encrypted storage operations. The encryption key should be derived from user input (like a master password) or stored securely using the chrome.storage.session API for session-based encryption.
 
-Managing Encryption Keys Securely
+### Managing Encryption Keys Securely
 
 Key management represents the most challenging aspect of encryption implementation. Your encryption is only as secure as your key protection mechanism. Several approaches work well for Chrome extensions:
 
@@ -241,11 +241,11 @@ Hardware-backed keys using the Web Crypto API provide the strongest protection a
 
 ---
 
-Advanced CryptoJS Patterns for Extension Developers {#advanced-patterns}
+## Advanced CryptoJS Patterns for Extension Developers {#advanced-patterns}
 
 Beyond basic encryption, CryptoJS offers capabilities that address complex extension requirements. These advanced patterns enable sophisticated security implementations for demanding use cases.
 
-Hash Functions for Data Integrity
+### Hash Functions for Data Integrity
 
 Hash functions create fixed-length fingerprints of data, enabling integrity verification without storing the original data. CryptoJS supports multiple hash algorithms:
 
@@ -273,7 +273,7 @@ console.log('Data valid:', isValid);
 
 HMAC (Hash-based Message Authentication Code) combines hashing with a secret key, providing both integrity verification and authentication. This proves that data originated from someone possessing the secret key, not just that the data is intact.
 
-Encrypting Configuration and Settings
+### Encrypting Configuration and Settings
 
 Chrome extensions often need to store configuration data that users expect to remain private. Encrypting configuration files protects sensitive settings:
 
@@ -344,11 +344,11 @@ This pattern ensures that configuration data remains encrypted at rest, protecti
 
 ---
 
-Security Best Practices for CryptoJS in Extensions {#security-best-practices}
+## Security Best Practices for CryptoJS in Extensions {#security-best-practices}
 
 Implementing encryption correctly requires attention to security details that can undermine protection if overlooked. These best practices ensure your CryptoJS implementation provides the security you intend.
 
-Key Management Principles
+### Key Management Principles
 
 Never hardcode encryption keys in your extension's source code. Attackers can easily extract hardcoded keys by examining your extension's JavaScript files. Instead, derive keys from user input, generate them securely, or use browser-managed key storage. If your extension requires a default key for first-time setup, require users to change it immediately upon first use.
 
@@ -356,7 +356,7 @@ Use unique salts for each piece of encrypted data. Reusing salts enables attacke
 
 Rotate encryption keys periodically. While CryptoJS itself does not provide key rotation, designing your storage format to support key changes enables future updates. Storing key identification alongside encrypted data allows implementing key rotation without data migration.
 
-Error Handling and Logging
+### Error Handling and Logging
 
 Encryption operations can fail for various reasons, including invalid keys, corrupted data, and algorithm mismatches. Proper error handling prevents these failures from crashing your extension while avoiding information leakage:
 
@@ -385,13 +385,13 @@ function safeDecrypt(encryptedData, key) {
 
 This approach prevents timing attacks that could leak information through error message differences while providing meaningful feedback for debugging.
 
-Performance Considerations
+### Performance Considerations
 
 Encryption operations can impact performance, particularly with large data or frequent operations. Optimize your implementation by encrypting only necessary data rather than entire storage contents. Use streaming encryption for large files, and consider whether real-time encryption is necessary or if you can defer operations to background processes.
 
 ---
 
-Common Pitfalls and How to Avoid Them {#common-pitfalls}
+## Common Pitfalls and How to Avoid Them {#common-pitfalls}
 
 Even experienced developers encounter challenges when implementing encryption. Understanding common pitfalls helps you avoid them in your Chrome extension projects.
 
@@ -414,7 +414,7 @@ Key Length Requirements: AES-256 requires 256-bit keys. If your key is too short
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing CryptoJS encryption in Chrome extensions provides essential protection for user data in an increasingly security-conscious world. This guide covered the fundamentals of setting up CryptoJS, implementing AES encryption with proper key derivation, securing storage with encrypted chrome.storage, and following security best practices.
 

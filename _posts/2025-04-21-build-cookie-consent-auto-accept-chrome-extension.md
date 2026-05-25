@@ -18,7 +18,7 @@ we will walk you through building a production-ready Chrome extension that autom
 
 ---
 
-Understanding Cookie Consent Banners and the Chrome Extension Solution {#understanding-cookie-banners}
+## Understanding Cookie Consent Banners and the Chrome Extension Solution {#understanding-cookie-banners}
 
 Before we dive into the code, it's essential to understand why cookie consent banners exist and how our Chrome extension will handle them. The European Union's General Data Protection Regulation (GDPR) and similar privacy regulations worldwide require websites to obtain explicit consent before setting non-essential cookies. While these regulations aim to protect user privacy, the implementation has led to a fragmented ecosystem of consent management platforms, each with its own unique DOM structure, button labels, and behavior.
 
@@ -28,7 +28,7 @@ Our Chrome extension will need to be intelligent enough to identify cookie conse
 
 ---
 
-Prerequisites and Development Environment Setup {#prerequisites}
+## Prerequisites and Development Environment Setup {#prerequisites}
 
 Before you begin building this Chrome extension, ensure your development environment is properly configured. You will need Google Chrome or a Chromium-based browser for testing, a modern code editor such as Visual Studio Code, and a solid understanding of HTML, CSS, and JavaScript. Familiarity with Chrome's developer tools will be helpful for debugging and understanding the DOM structure of cookie consent banners.
 
@@ -52,7 +52,7 @@ This project structure follows Chrome's Manifest V3 guidelines and separates con
 
 ---
 
-Creating the Manifest Configuration {#manifest-file}
+## Creating the Manifest Configuration {#manifest-file}
 
 The manifest.json file defines your extension's capabilities, permissions, and components. For our cookie consent auto-accept extension, we need specific permissions to access web pages and inject our content scripts. We'll also need host permissions to work across all websites.
 
@@ -100,11 +100,11 @@ This manifest configuration grants our extension the necessary permissions to op
 
 ---
 
-Building the Content Script for Cookie Banner Detection {#content-script}
+## Building the Content Script for Cookie Banner Detection {#content-script}
 
 The content script is the heart of our cookie consent auto-accept extension. This script runs in the context of each web page and is responsible for detecting cookie consent banners, identifying the appropriate buttons to click, and executing the acceptance action. We will use the MutationObserver API to detect dynamically added elements, as many consent banners load asynchronously.
 
-Create the `content.js` file with the following implementation:
+### Create the `content.js` file with the following implementation:
 
 ```javascript
 // Cookie Consent Auto-Accept Content Script
@@ -363,11 +363,11 @@ This content script provides comprehensive cookie consent detection and handling
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup interface allows users to configure how the extension handles cookie consent banners. Users should be able to toggle the extension on and off, choose between accepting all cookies or only necessary ones, and manually trigger banner detection if needed.
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -419,7 +419,7 @@ Create `popup.html`:
 </html>
 ```
 
-Now create `popup.js` to handle user interactions:
+### Now create `popup.js` to handle user interactions:
 
 ```javascript
 // Popup Script for Cookie Consent Auto-Accept Extension
@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Styling the Popup {#popup-styles}
+## Styling the Popup {#popup-styles}
 
 Create `styles.css` to give your popup a clean, modern appearance:
 
@@ -685,7 +685,7 @@ input:checked + .slider:before {
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and can coordinate functionality across tabs. Create `background.js`:
 
@@ -718,7 +718,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that you've created all the necessary files, it's time to test your cookie consent auto-accept extension. Follow these steps to load it into Chrome:
 
@@ -730,7 +730,7 @@ For development and debugging, right-click anywhere on a page and select "Inspec
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Once you have the basic extension working, consider adding these advanced features to make your extension more solid and user-friendly. First, implement whitelisting for sites where users want to see cookie banners, perhaps to manage their cookie preferences manually. Second, add support for more consent providers by expanding the CONSENT_PROVIDERS object with additional patterns.
 
@@ -740,7 +740,7 @@ For the user interface, consider adding a dashboard that shows how many cookies 
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 When your extension is ready for release, you can publish it to the Chrome Web Store. Prepare your store listing with a compelling description that highlights the benefits of automated cookie consent handling. Create promotional screenshots that demonstrate the extension in action, and design a catchy icon that stands out in the store.
 
@@ -748,7 +748,7 @@ Before submitting, ensure your extension doesn't violate any Chrome Web Store po
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a cookie consent auto-accept Chrome extension is an excellent project that teaches valuable skills in DOM manipulation, content script development, and user interface design. The extension solves a genuine problem that millions of users face daily, making it both a practical tool and a potentially popular product for the Chrome Web Store.
 

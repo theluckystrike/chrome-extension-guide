@@ -10,11 +10,11 @@ Chrome Extension Building a YouTube Enhancer Extension. Complete Developer's Gui
 Learn how to build powerful Chrome extensions with this comprehensive guide covering practical implementation and best practices. This guide provides step-by-step instructions for creating professional-grade extensions.
 This tutorial walks you through creating a Chrome extension that enhances YouTube's video player with productivity features.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - Chrome browser (version 88+)
 - Basic knowledge of JavaScript and Chrome extensions
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 ```
 youtube-enhancer/
  manifest.json
@@ -23,7 +23,7 @@ youtube-enhancer/
  styles.css
 ```
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Configure the manifest with content scripts matching YouTube URLs:
 
@@ -43,9 +43,9 @@ Configure the manifest with content scripts matching YouTube URLs:
 }
 ```
 
-Reference: [Content Script Patterns](/docs/guides/content-script-patterns.md)
+### Reference: [Content Script Patterns](/docs/guides/content-script-patterns.md)
 
-Step 2: Detect Video Element {#step-2-detect-video-element}
+## Step 2: Detect Video Element {#step-2-detect-video-element}
 
 YouTube is a SPA, so we need to detect when a video is available:
 
@@ -65,9 +65,9 @@ const observer = new MutationObserver(() => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-Reference: [DOM Observer Patterns](/docs/patterns/dom-observer-patterns.md)
+### Reference: [DOM Observer Patterns](/docs/patterns/dom-observer-patterns.md)
 
-Step 3: Playback Speed Controls {#step-3-playback-speed-controls}
+## Step 3: Playback Speed Controls {#step-3-playback-speed-controls}
 
 Add keyboard shortcuts to adjust playback speed:
 
@@ -85,9 +85,9 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-Step 4: Speed Display Overlay {#step-4-speed-display-overlay}
+## Step 4: Speed Display Overlay {#step-4-speed-display-overlay}
 
-Show current playback rate as an overlay:
+### Show current playback rate as an overlay:
 
 ```javascript
 function createSpeedOverlay() {
@@ -105,9 +105,9 @@ function updateSpeedDisplay(rate) {
 }
 ```
 
-Step 5: Video Stats Overlay {#step-5-video-stats-overlay}
+## Step 5: Video Stats Overlay {#step-5-video-stats-overlay}
 
-Display resolution, codec, and bitrate information:
+### Display resolution, codec, and bitrate information:
 
 ```javascript
 function getVideoStats() {
@@ -129,20 +129,20 @@ function createStatsOverlay() {
 }
 ```
 
-Reference: [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md)
+### Reference: [Dynamic Content Injection](/docs/patterns/dynamic-content-injection.md)
 
-Step 6: Always Show Progress Bar {#step-6-always-show-progress-bar}
+## Step 6: Always Show Progress Bar {#step-6-always-show-progress-bar}
 
-Override YouTube's progress bar visibility:
+### Override YouTube's progress bar visibility:
 
 ```css
 .ytp-chrome-bottom { opacity: 1 !important; }
 .ytp-hover-progress-lightoff .ytp-chrome-bottom { opacity: 1 !important; }
 ```
 
-Step 7: Remember Volume Per Channel {#step-7-remember-volume-per-channel}
+## Step 7: Remember Volume Per Channel {#step-7-remember-volume-per-channel}
 
-Save and restore volume settings:
+### Save and restore volume settings:
 
 ```javascript
 async function getChannelVolume(channelId) {
@@ -155,9 +155,9 @@ async function saveChannelVolume(channelId, volume) {
 }
 ```
 
-Reference: [Storage Patterns](/docs/guides/storage-patterns.md)
+### Reference: [Storage Patterns](/docs/guides/storage-patterns.md)
 
-Step 8: Options Page {#step-8-options-page}
+## Step 8: Options Page {#step-8-options-page}
 
 Create an options page for customizing shortcuts:
 
@@ -172,9 +172,9 @@ document.getElementById('save').addEventListener('click', () => {
 });
 ```
 
-Step 9: SPA Navigation Handling {#step-9-spa-navigation-handling}
+## Step 9: SPA Navigation Handling {#step-9-spa-navigation-handling}
 
-YouTube uses the History API. Listen for navigation:
+### YouTube uses the History API. Listen for navigation:
 
 ```javascript
 window.addEventListener('yt-navigate-finish', () => {
@@ -184,9 +184,9 @@ window.addEventListener('yt-navigate-finish', () => {
 });
 ```
 
-Cleanup Between Videos {#cleanup-between-videos}
+## Cleanup Between Videos {#cleanup-between-videos}
 
-Always clean up when switching videos:
+### Always clean up when switching videos:
 
 ```javascript
 function initializeVideoFeatures(video) {
@@ -205,7 +205,7 @@ function initializeVideoFeatures(video) {
 }
 ```
 
-Summary {#summary}
+## Summary {#summary}
 
 This extension demonstrates key Chrome extension patterns for working with SPAs like YouTube. The DOM observer handles YouTube's dynamic content, keyboard shortcuts provide quick playback control, and storage persists user preferences per channel.
 

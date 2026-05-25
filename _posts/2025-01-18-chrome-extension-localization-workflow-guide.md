@@ -18,7 +18,7 @@ Whether you're launching your first extension or looking to expand an existing o
 
 ---
 
-Understanding the Chrome Extension Localization Ecosystem {#localization-ecosystem}
+## Understanding the Chrome Extension Localization Ecosystem {#localization-ecosystem}
 
 Before diving into the technical implementation, it's crucial to understand what makes Chrome extension localization unique compared to traditional web application internationalization. Chrome extensions operate within a specific runtime environment that offers distinct advantages and constraints for multilingual support.
 
@@ -30,13 +30,13 @@ One of the most significant advantages of Chrome's i18n system is its automatic 
 
 ---
 
-Setting Up Your _locales Directory Structure {#locales-setup}
+## Setting Up Your _locales Directory Structure {#locales-setup}
 
 The foundation of any Chrome extension localization effort begins with proper directory structure setup. The _locales folder serves as the organizational backbone for all translation-related files, and establishing this structure correctly from the start prevents headaches later in the development cycle.
 
 Create a _locales directory in your extension's root folder. Inside this directory, you'll create subdirectories for each language you intend to support, using standard ISO 639-1 two-letter language codes. The English locale uses "en," Spanish uses "es," French uses "fr," German uses "de," Japanese uses "ja," Simplified Chinese uses "zh_CN," and Traditional Chinese uses "zh_TW." Each language subdirectory must contain a messages.json file that holds all translations for that specific locale.
 
-Your complete directory structure should resemble this layout:
+### Your complete directory structure should resemble this layout:
 
 ```
 your-extension/
@@ -65,7 +65,7 @@ The default_locale field in your manifest.json must specify your primary languag
 
 ---
 
-Creating and Formatting chrome i18n messages {#chrome-i18n-messages}
+## Creating and Formatting chrome i18n messages {#chrome-i18n-messages}
 
 The messages.json file format is the cornerstone of Chrome extension internationalization. Understanding how to structure these files properly enables you to create flexible, maintainable translation systems that scale as your extension grows.
 
@@ -132,7 +132,7 @@ The description field, while optional, plays a crucial role in the translation w
 
 ---
 
-Implementing Localization in Your Extension Code {#implementation-code}
+## Implementing Localization in Your Extension Code {#implementation-code}
 
 With your _locales structure and messages.json files properly configured, the next step involves integrating internationalization into your extension's JavaScript and HTML files. The chrome.i18n API provides all the functionality needed to retrieve and display translated strings at runtime.
 
@@ -177,7 +177,7 @@ This declarative approach automatically retrieves the appropriate translation ba
 
 ---
 
-Managing Translation Workflows at Scale {#translation-workflow}
+## Managing Translation Workflows at Scale {#translation-workflow}
 
 As your extension grows to support multiple languages, establishing an efficient translation workflow becomes increasingly important. Whether you handle translations internally or work with external localization services, having clear processes ensures consistency and reduces errors.
 
@@ -191,7 +191,7 @@ Version control best practices involve keeping locale files in your repository a
 
 ---
 
-Optimizing for Chrome Web Store Localization {#web-store-optimization}
+## Optimizing for Chrome Web Store Localization {#web-store-optimization}
 
 Your extension's Chrome Web Store listing represents the first impression for potential users in each market. Beyond the in-extension localization you've implemented, the store listing itself requires dedicated localization effort to maximize discoverability and conversion rates.
 
@@ -203,7 +203,7 @@ Localized screenshots and video demonstrations significantly impact conversion r
 
 ---
 
-Testing and Quality Assurance for Localization {#testing-qa}
+## Testing and Quality Assurance for Localization {#testing-qa}
 
 Comprehensive testing ensures your localization efforts deliver the intended user experience. Automated testing catches obvious issues like missing translations, while manual testing validates that translations display correctly and fit within UI constraints.
 
@@ -235,7 +235,7 @@ Manual testing should verify that translations display correctly across differen
 
 ---
 
-Advanced Localization Patterns {#advanced-patterns}
+## Advanced Localization Patterns {#advanced-patterns}
 
 As your localization needs mature, several advanced patterns can improve user experience and simplify maintenance. User language preferences allow explicit language selection independent of browser settings, valuable for extensions where users frequently work across languages.
 
@@ -265,7 +265,7 @@ Gender-specific translations, while less common in Chrome extensions, may be nec
 
 ---
 
-Conclusion: Building Global Extensions {#conclusion}
+## Conclusion: Building Global Extensions {#conclusion}
 
 A well-executed localization workflow transforms your Chrome extension from a single-market product into a globally viable application. The Chrome platform's built-in i18n support provides excellent foundations, but realizing its full potential requires thoughtful implementation of the _locales structure, proper messages.json configuration, and systematic translation management processes.
 

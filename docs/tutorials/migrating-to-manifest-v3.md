@@ -12,7 +12,7 @@ Google began disabling Manifest V2 extensions in June 2024, with full removal fr
 
 ---
 
-Key Differences Between Manifest V2 and V3
+### Key Differences Between Manifest V2 and V3
 
 Understanding the fundamental changes in MV3 is essential before starting your migration. Here are the most significant differences:
 
@@ -106,11 +106,11 @@ console.log(result.key);
 
 ---
 
-Step-by-Step Migration Checklist
+### Step-by-Step Migration Checklist
 
-Follow this checklist to migrate your extension systematically:
+### Follow this checklist to migrate your extension systematically:
 
-Step 1: Update manifest.json
+### Step 1: Update manifest.json
 
 ```json
 {
@@ -141,7 +141,7 @@ Key changes:
 - Move host permissions from `"permissions"` to `"host_permissions"`
 - `"background": { "scripts": [...] }` → `"background": { "service_worker": "..." }`
 
-Step 2: Migrate Background Script to Service Worker
+### Step 2: Migrate Background Script to Service Worker
 
 1. Remove all DOM references. Service workers don't have DOM access
 2. Replace XHR with fetch. Use `fetch()` instead of `XMLHttpRequest`
@@ -158,7 +158,7 @@ Step 2: Migrate Background Script to Service Worker
    ```
 4. Move state to storage. Use `chrome.storage` instead of global variables
 
-Step 3: Migrate webRequest to declarativeNetRequest
+### Step 3: Migrate webRequest to declarativeNetRequest
 
 1. Create a `rules.json` file:
    ```json
@@ -196,9 +196,9 @@ Step 3: Migrate webRequest to declarativeNetRequest
    });
    ```
 
-Step 4: Update Action API
+### Step 4: Update Action API
 
-Replace all `chrome.browserAction.*` calls with `chrome.action.*`:
+### Replace all `chrome.browserAction.*` calls with `chrome.action.*`:
 
 ```javascript
 // Before (MV2)
@@ -210,7 +210,7 @@ chrome.action.setBadgeText({ text: '5' });
 chrome.action.setPopup({ popup: 'popup.html' });
 ```
 
-Step 5: Handle Offscreen Documents
+### Step 5: Handle Offscreen Documents
 
 If your extension needs DOM access (for canvas, audio, clipboard, etc.), use offscreen documents:
 
@@ -230,7 +230,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-Step 6: Update Permissions
+### Step 6: Update Permissions
 
 1. Move URL patterns to `host_permissions`:
    ```json
@@ -242,7 +242,7 @@ Step 6: Update Permissions
 2. Remove unused permissions
 3. Consider using `optional_permissions` for features that don't need to work immediately
 
-Step 7: Fix Content Security Policy
+### Step 7: Fix Content Security Policy
 
 Remove any CSP that allows `unsafe-eval` or remote scripts:
 
@@ -256,9 +256,9 @@ Remove any CSP that allows `unsafe-eval` or remote scripts:
 
 ---
 
-Common Migration Pitfalls
+### Common Migration Pitfalls
 
-Pitfall 1: Forgetting Service Worker Termination
+### Pitfall 1: Forgetting Service Worker Termination
 
 Service workers can be terminated at any time. Don't rely on in-memory state:
 
@@ -277,7 +277,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-Pitfall 2: Not Registering Event Listeners at Top Level
+### Pitfall 2: Not Registering Event Listeners at Top Level
 
 Event listeners must be registered synchronously at the top level of your service worker:
 
@@ -296,7 +296,7 @@ async function init() {
 }
 ```
 
-Pitfall 3: Using Timers Instead of Alarms
+### Pitfall 3: Using Timers Instead of Alarms
 
 `setTimeout` and `setInterval` don't work reliably in service workers:
 
@@ -311,9 +311,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Pitfall 4: Not Handling Promise-Based APIs Correctly
+### Pitfall 4: Not Handling Promise-Based APIs Correctly
 
-Remember that `chrome.storage` is always async in MV3:
+### Remember that `chrome.storage` is always async in MV3:
 
 ```javascript
 // BAD - Race condition
@@ -328,7 +328,7 @@ console.log(result.value);
 
 ---
 
-Testing After Migration
+### Testing After Migration
 
 1. Test Service Worker Lifecycle
 
@@ -364,7 +364,7 @@ Open `chrome://extensions`, enable your extension, and:
 
 ---
 
-Migration Tools
+### Migration Tools
 
 For automated assistance with your migration, check out the [Chrome Extension Manifest V3 Migrator](https://github.com/GoogleChromeLabs/mv3-migrate) tool. This CLI tool can help automate parts of the migration process, including:
 
@@ -379,7 +379,7 @@ npx @chrome-extension/mv3-migrate --help
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [MV3 Migration Checklist](mv3/migration-checklist.html). Quick reference checklist for all migration steps
 - [Service Workers Guide](mv3/service-workers.html). Detailed look into MV3 service worker architecture

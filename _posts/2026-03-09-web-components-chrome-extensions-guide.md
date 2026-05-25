@@ -16,11 +16,11 @@ Web Components represent one of the most powerful paradigms for building reusabl
 
 ---
 
-Why Web Components for Chrome Extensions? {#why-web-components}
+## Why Web Components for Chrome Extensions? {#why-web-components}
 
 Chrome extensions often suffer from styling conflicts when content scripts inject styles into web pages, or when popup scripts interfere with Chrome's internal styles. Web Components solve these problems through encapsulation, the Shadow DOM provides a boundary that prevents external styles from affecting your components and vice versa.
 
-Key Benefits
+### Key Benefits
 
 1. Style Isolation: Shadow DOM prevents CSS leakage both ways
 2. Reusable Components: Build once, use across multiple extensions
@@ -30,7 +30,7 @@ Key Benefits
 
 ---
 
-Setting Up Your TypeScript Project {#setup}
+## Setting Up Your TypeScript Project {#setup}
 
 First, ensure you have a TypeScript-enabled project. If you are starting fresh:
 
@@ -41,7 +41,7 @@ npm install --save-dev typescript
 npx tsc --init
 ```
 
-Configure your `tsconfig.json` for Web Components:
+### Configure your `tsconfig.json` for Web Components:
 
 ```json
 {
@@ -58,7 +58,7 @@ Configure your `tsconfig.json` for Web Components:
 
 ---
 
-Creating Your First Custom Element {#first-custom-element}
+## Creating Your First Custom Element {#first-custom-element}
 
 Here is a complete example of a custom element for a Chrome extension popup:
 
@@ -135,7 +135,7 @@ export class PopupButton extends HTMLElement {
 
 ---
 
-Using Templates for Better Performance {#html-templates}
+## Using Templates for Better Performance {#html-templates}
 
 The `<template>` element allows you to define reusable markup that is not rendered until needed:
 
@@ -185,7 +185,7 @@ export class ExtensionCard extends HTMLElement {
 
 ---
 
-Integrating with Chrome Extension Popup {#popup-integration}
+## Integrating with Chrome Extension Popup {#popup-integration}
 
 In your `popup.ts` file, import and register your components:
 
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Using Web Components with React in Popup
+### Using Web Components with React in Popup
 
 If your extension uses React alongside Web Components, you'll need to configure React to treat custom elements as custom elements rather than components:
 
@@ -237,7 +237,7 @@ if (container) {
 }
 ```
 
-Complete Popup Implementation Example
+### Complete Popup Implementation Example
 
 Here's a more complete example showing how to build a settings popup using Web Components:
 
@@ -344,7 +344,7 @@ export class SettingsForm extends HTMLElement {
 }
 ```
 
-Handling Form Validation
+### Handling Form Validation
 
 Add solid form validation to your Web Components:
 
@@ -367,7 +367,7 @@ private validateForm(): boolean {
 
 ---
 
-Web Components in Content Scripts {#content-scripts}
+## Web Components in Content Scripts {#content-scripts}
 
 For content scripts that run in webpage context, Web Components must be defined carefully to avoid conflicts:
 
@@ -426,11 +426,11 @@ For content scripts that run in webpage context, Web Components must be defined 
 
 ---
 
-Shadow DOM detailed look {#shadow-dom-deep detailed look}
+### Shadow DOM detailed look {#shadow-dom-deep detailed look}
 
 Understanding Shadow DOM is crucial for building solid Web Components.  advanced patterns:
 
-Event Handling with Shadow DOM
+### Event Handling with Shadow DOM
 
 Events dispatched from within Shadow DOM don't leak outside by default, but you can control this behavior:
 
@@ -482,7 +482,7 @@ document.querySelector('ext-action-button')?.addEventListener('action-triggered'
 });
 ```
 
-Styling from Outside with CSS Custom Properties
+### Styling from Outside with CSS Custom Properties
 
 Expose styling hooks using CSS custom properties (CSS variables):
 
@@ -530,7 +530,7 @@ export class StyledButton extends HTMLElement {
 // </ext-styled-button>
 ```
 
-Constructable Stylesheets
+### Constructable Stylesheets
 
 For better performance with multiple components, use constructable stylesheets:
 
@@ -568,11 +568,11 @@ export class ExtContainer extends HTMLElement {
 
 ---
 
-Communication Patterns Between Components {#communication-patterns}
+## Communication Patterns Between Components {#communication-patterns}
 
-Using Broadcast Channel API
+### Using Broadcast Channel API
 
-For communication between components in different contexts:
+### For communication between components in different contexts:
 
 ```typescript
 // Create a channel for extension-wide messaging
@@ -611,9 +611,9 @@ export class DataDisplay extends HTMLElement {
 }
 ```
 
-Property Change Observation
+### Property Change Observation
 
-Monitor property changes and react accordingly:
+### Monitor property changes and react accordingly:
 
 ```typescript
 @customElement('ext-smart-input')
@@ -676,11 +676,11 @@ export class SmartInput extends HTMLElement {
 
 ---
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
-Lazy Loading Components
+### Lazy Loading Components
 
-Load components only when needed:
+### Load components only when needed:
 
 ```typescript
 // lazy-component-loader.ts
@@ -723,9 +723,9 @@ async function initPopup() {
 }
 ```
 
-Memory Management
+### Memory Management
 
-Properly clean up components to prevent memory leaks:
+### Properly clean up components to prevent memory leaks:
 
 ```typescript
 @customElement('ext-cleanup-example')
@@ -783,7 +783,7 @@ export class CleanupExample extends HTMLElement {
 
 ---
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Use Closed Shadow DOM for Security-Sensitive Components
 
@@ -883,7 +883,7 @@ this.shadow.innerHTML = `...`; // Called frequently = bad
 
 ---
 
-Advanced: Building a Component Library {#component-library}
+## Advanced: Building a Component Library {#component-library}
 
 For larger extensions, consider building a reusable component library. Here's how to structure it:
 
@@ -921,7 +921,7 @@ components/
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Web Components provide a solid foundation for building Chrome extensions that are maintainable, style-safe, and reusable. By leveraging Shadow DOM for encapsulation, TypeScript for type safety, and the native Custom Elements API, you can create extension UIs that are both powerful and clean.
 
@@ -931,11 +931,11 @@ Start incorporating Web Components into your extension workflow today, and enjoy
 
 ---
 
-Debugging Web Components in Chrome DevTools {#debugging}
+## Debugging Web Components in Chrome DevTools {#debugging}
 
 Debugging Web Components requires understanding how Chrome DevTools presents Shadow DOM content. Here's how to effectively debug your components.
 
-Viewing Shadow DOM
+### Viewing Shadow DOM
 
 Chrome DevTools automatically Shadow DOM content. To inspect Shadow DOM:
 
@@ -944,9 +944,9 @@ Chrome DevTools automatically Shadow DOM content. To inspect Shadow DOM:
 3. Expand elements with `#shadow-root` nodes
 4. Inspect styles and DOM structure within the shadow tree
 
-Using the Breakpoint Feature
+### Using the Breakpoint Feature
 
-Set DOM modification breakpoints to catch changes:
+### Set DOM modification breakpoints to catch changes:
 
 ```typescript
 // In your component, add debug logging
@@ -961,7 +961,7 @@ attributeChangedCallback(name: string, oldValue: string, newValue: string) {
 }
 ```
 
-Common Debugging Scenarios
+### Common Debugging Scenarios
 
 Issue: Styles not applying
 - Check if Shadow DOM is properly attached
@@ -974,11 +974,11 @@ Issue: Events not firing
 
 ---
 
-Performance Optimization for Web Components {#performance}
+## Performance Optimization for Web Components {#performance}
 
 Building performant Web Components requires attention to memory management and rendering efficiency.
 
-Lazy Registration
+### Lazy Registration
 
 Register components only when needed to reduce initial load time:
 
@@ -994,9 +994,9 @@ async function loadComponents() {
 document.addEventListener('DOMContentLoaded', loadComponents);
 ```
 
-Template Cloning Optimization
+### Template Cloning Optimization
 
-Use templates efficiently to avoid repeated DOM operations:
+### Use templates efficiently to avoid repeated DOM operations:
 
 ```typescript
 // Create template once, clone multiple times
@@ -1014,9 +1014,9 @@ class EfficientCard extends HTMLElement {
 }
 ```
 
-Memory Management
+### Memory Management
 
-Prevent memory leaks by cleaning up event listeners:
+### Prevent memory leaks by cleaning up event listeners:
 
 ```typescript
 class CleanComponent extends HTMLElement {
@@ -1036,9 +1036,9 @@ class CleanComponent extends HTMLElement {
 }
 ```
 
-Rendering Optimization
+### Rendering Optimization
 
-Use `requestAnimationFrame` for smooth updates:
+### Use `requestAnimationFrame` for smooth updates:
 
 ```typescript
 private pendingUpdate = false;

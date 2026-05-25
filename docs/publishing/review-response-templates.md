@@ -10,7 +10,7 @@ Chrome Extension Review Responses. Templates for Handling User Feedback
 
 Every Chrome extension developer eventually faces negative reviews. How you respond to criticism can define your extension's reputation and even convert dissatisfied users into loyal advocates. This guide provides proven templates and strategies for handling user feedback professionally on the Chrome Web Store.
 
-Why Review Responses Matter {#why-review-responses-matter}
+## Why Review Responses Matter {#why-review-responses-matter}
 
 When a user leaves a negative review, they're not just expressing frustration, they're providing free feedback that other potential users will see. Your response is visible to everyone browsing your extension's listing. A thoughtful, professional reply signals to prospective users that you care about quality and stand behind your product.
 
@@ -20,7 +20,7 @@ Positive engagement with critics often leads to:
 - Valuable insights into actual user problems
 - Opportunities to retain users who might otherwise abandon your extension
 
-Common Complaint Patterns {#common-complaint-patterns}
+## Common Complaint Patterns {#common-complaint-patterns}
 
 Understanding recurring themes in negative reviews helps you prepare targeted responses. Here are the most frequent complaints extension developers encounter:
 
@@ -39,9 +39,9 @@ Confusing interfaces, unclear instructions, or unexpected behaviors frustrate us
 Missing Features
 Sometimes users want capabilities your extension doesn't provide. These aren't bugs but represent feature gap expectations.
 
-Professional Response Templates {#professional-response-templates}
+## Professional Response Templates {#professional-response-templates}
 
-Template 1: Acknowledging the Issue
+### Template 1: Acknowledging the Issue
 
 ```
 Hi [Name],
@@ -60,7 +60,7 @@ Best regards,
 
 When to use: When the issue is valid and you need time to investigate or fix it.
 
-Template 2: Resolving a Bug
+### Template 2: Resolving a Bug
 
 ```
 Hi [Name],
@@ -77,7 +77,7 @@ Best regards,
 
 When to use: When you've fixed a confirmed bug and want users to update.
 
-Template 3: Addressing Permission Concerns
+### Template 3: Addressing Permission Concerns
 
 ```
 Hi [Name],
@@ -96,7 +96,7 @@ Best regards,
 
 When to use: When users express privacy concerns or question why certain permissions are required.
 
-Template 4: Handling Feature Requests Disguised as Complaints
+### Template 4: Handling Feature Requests Disguised as Complaints
 
 ```
 Hi [Name],
@@ -113,7 +113,7 @@ Best regards,
 
 When to use: When users request features they believe should exist but aren't part of your current product.
 
-Template 5: Turning Critics into Fans
+### Template 5: Turning Critics into Fans
 
 ```
 Hi [Name],
@@ -130,7 +130,7 @@ Best regards,
 
 When to use: When a user has had a genuinely poor experience and you want to recover their trust personally.
 
-Best Practices for Review Responses {#best-practices-for-review-responses}
+## Best Practices for Review Responses {#best-practices-for-review-responses}
 
 Respond Quickly
 Aim to reply within 24-48 hours. Prompt responses show you actively maintain your extension and care about user feedback.
@@ -150,7 +150,7 @@ When you resolve an issue, mention the fix in your response. This helps future v
 Learn and Iterate
 Track recurring complaints. If multiple users report the same problem, prioritize fixing it, you've got clear signal about what matters most to your audience.
 
-Converting Critics into Fans {#converting-critics-into-fans}
+## Converting Critics into Fans {#converting-critics-into-fans}
 
 The most powerful review response strategy involves genuine problem-solving. Users who feel heard often become your most loyal supporters. Here's how to maximize this opportunity:
 
@@ -162,6 +162,6 @@ Involve them in development. Power users who care enough to complain often becom
 
 Show genuine appreciation. Thank critics for helping you find blind spots. This positive framing encourages continued feedback and builds community.
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Negative reviews aren't the end, they're an opportunity. With thoughtful, timely responses, you demonstrate professionalism, build trust with potential users, and often convert frustrated critics into loyal fans. Keep these templates handy, personalize them to your voice, and view every review as a chance to strengthen your extension's reputation.

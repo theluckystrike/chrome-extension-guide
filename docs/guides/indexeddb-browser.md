@@ -136,9 +136,9 @@ export const db = new IndexedDBManager();
 
 ---
 
-UI Design Patterns
+### UI Design Patterns
 
-Popup Implementation
+### Popup Implementation
 
 ```typescript
 // popup/popup.ts
@@ -180,7 +180,7 @@ function setupForm(): void {
 }
 ```
 
-Side Panel for Data Management
+### Side Panel for Data Management
 
 ```typescript
 // background.ts
@@ -196,9 +196,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions
+### Required Permissions
 
 ```json
 {
@@ -209,7 +209,7 @@ Required Permissions
 
 IndexedDB operates within your extension origin, no special permission needed. Use chrome.storage for small metadata like sync state.
 
-Storage Comparison
+### Storage Comparison
 
 | Feature | chrome.storage.local | IndexedDB |
 |---------|---------------------|-----------|
@@ -221,9 +221,9 @@ Storage Comparison
 
 ---
 
-State Management Patterns
+### State Management Patterns
 
-Repository Pattern
+### Repository Pattern
 
 ```typescript
 // src/repositories/user-repository.ts
@@ -259,9 +259,9 @@ export const userRepository = new UserRepository();
 
 ---
 
-Error Handling and Edge Cases
+### Error Handling and Edge Cases
 
-Handling Quota Exceeded
+### Handling Quota Exceeded
 
 ```typescript
 async function safePut(storeName: string, value: unknown): Promise<void> {
@@ -280,7 +280,7 @@ async function safePut(storeName: string, value: unknown): Promise<void> {
 }
 ```
 
-Schema Migrations
+### Schema Migrations
 
 ```typescript
 // Handle version upgrades
@@ -298,9 +298,9 @@ private handleUpgrade(event: IDBVersionChangeEvent): void {
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Fake IndexedDB
+### Unit Testing with Fake IndexedDB
 
 ```typescript
 // src/__tests__/db.test.ts
@@ -331,9 +331,9 @@ describe('IndexedDBManager', () => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Batch Operations
+### Batch Operations
 
 ```typescript
 async function bulkInsertUsers(users: User[]): Promise<void> {
@@ -348,7 +348,7 @@ async function bulkInsertUsers(users: User[]): Promise<void> {
 }
 ```
 
-Cursor-Based Iteration
+### Cursor-Based Iteration
 
 ```typescript
 async function* iterateLargeDataset(): AsyncGenerator<User> {
@@ -364,9 +364,9 @@ async function* iterateLargeDataset(): AsyncGenerator<User> {
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Before publishing your IndexedDB-based extension:
+### Before publishing your IndexedDB-based extension:
 
 - [ ] Test in Chrome and Edge browsers
 - [ ] Verify IndexedDB works in incognito mode
@@ -379,6 +379,6 @@ Before publishing your IndexedDB-based extension:
 
 ---
 
-Summary
+### Summary
 
 IndexedDB provides powerful client-side storage enabling complex data management without backend dependencies. Key practices: define clear TypeScript schemas, implement repository pattern for clean data access, handle quota errors gracefully, and test with fake-indexedDB in CI. With proper architecture, IndexedDB enables extensions to handle substantial data workloads efficiently.

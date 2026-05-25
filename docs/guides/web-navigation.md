@@ -7,23 +7,23 @@ last_modified_at: 2026-01-15
 ---
 Web Navigation API Guide
 
-Overview {#overview}
+## Overview {#overview}
 - Requires `"webNavigation"` permission
 - Track page navigation lifecycle across all tabs and frames
 - Powerful URL filtering to listen only to specific sites
 
-Navigation Events (in order) {#navigation-events-in-order}
+## Navigation Events (in order) {#navigation-events-in-order}
 WebNavigation API Guide
 
 The Chrome `webNavigation` API provides comprehensive navigation event tracking for browser extensions. This guide covers all events, methods, filtering, and practical implementation.
 
-Required Permission
+### Required Permission
 
 ```json
 { "permissions": ["webNavigation"] }
 ```
 
-Navigation Events
+### Navigation Events
 
 onBeforeNavigate
 Fires when navigation is about to start, earliest lifecycle event.
@@ -70,7 +70,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
 });
 ```
 
-URL Filtering {#url-filtering}
+## URL Filtering {#url-filtering}
 SPA Navigation Events
 
 onHistoryStateUpdated
@@ -82,7 +82,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 });
 ```
 
-Filter Properties {#filter-properties}
+## Filter Properties {#filter-properties}
 - `hostContains`, `hostEquals`, `hostPrefix`, `hostSuffix`
 - `pathContains`, `pathEquals`, `pathPrefix`, `pathSuffix`
 - `queryContains`, `queryEquals`, `queryPrefix`, `querySuffix`
@@ -90,7 +90,7 @@ Filter Properties {#filter-properties}
 - `schemes` (array of scheme strings)
 - `ports` (array of port numbers or ranges)
 
-Frame Navigation {#frame-navigation}
+## Frame Navigation {#frame-navigation}
 onReferenceFragmentUpdated
 URL fragment (hash) changes.
 
@@ -100,7 +100,7 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
 });
 ```
 
-Tab and Window Events
+### Tab and Window Events
 
 onCreatedNavigationTarget
 New tab/window via `window.open()` or `target="_blank"`.
@@ -120,7 +120,7 @@ chrome.webNavigation.onTabReplaced.addListener((details) => {
 });
 ```
 
-Frame Information Methods
+### Frame Information Methods
 
 getFrame
 Get details about a specific frame.
@@ -140,7 +140,7 @@ chrome.webNavigation.getAllFrames({ tabId: tabId }, (frames) => {
 });
 ```
 
-Transition Types {#transition-types}
+## Transition Types {#transition-types}
 - `"link"`. clicked a link
 - `"typed"`. typed in address bar
 - `"auto_bookmark"`. from bookmark
@@ -153,7 +153,7 @@ Transition Types {#transition-types}
 - `"keyword"`. omnibox keyword
 - `"keyword_generated"`. search keyword result
 
-SPA Navigation Detection {#spa-navigation-detection}
+## SPA Navigation Detection {#spa-navigation-detection}
 Transition Types
 
 | Type | Description |
@@ -167,7 +167,7 @@ Transition Types
 | `reload` | Page reload |
 | `forward_back` | Forward/back button |
 
-Transition Qualifiers
+### Transition Qualifiers
 
 ```javascript
 chrome.webNavigation.onCommitted.addListener((d) => {
@@ -176,7 +176,7 @@ chrome.webNavigation.onCommitted.addListener((d) => {
 });
 ```
 
-Tracking Page Visits {#tracking-page-visits}
+## Tracking Page Visits {#tracking-page-visits}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 URL Filters

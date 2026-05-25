@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/event-driven-messaging
 last_modified_at: 2026-01-15
 ---
 
-Event-Driven Messaging Patterns
+### Event-Driven Messaging Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 While Chrome extensions primarily use request-response messaging via `chrome.runtime.sendMessage`, many extension architectures benefit from event-driven patterns. These patterns decouple producers from consumers, enable one-to-many broadcasts, and support complex message flows. This guide covers pub/sub, event bus, and command patterns that scale beyond simple request-response.
 
-Typed Message Bus with Discriminated Unions {#typed-message-bus-with-discriminated-unions}
+## Typed Message Bus with Discriminated Unions {#typed-message-bus-with-discriminated-unions}
 
 Define message types as discriminated unions for type-safe routing:
 
@@ -57,7 +57,7 @@ router.register('ERROR', async (msg) => {
 });
 ```
 
-Pub/Sub Pattern for Broadcasts {#pubsub-pattern-for-broadcasts}
+## Pub/Sub Pattern for Broadcasts {#pubsub-pattern-for-broadcasts}
 
 Publish-subscribe enables one event to reach multiple listeners across contexts:
 
@@ -100,9 +100,9 @@ async function broadcastConfigUpdate(config: Config) {
 }
 ```
 
-Message Routing: Type-Based Dispatch {#message-routing-type-based-dispatch}
+## Message Routing: Type-Based Dispatch {#message-routing-type-based-dispatch}
 
-Replace verbose if/else chains with a routing registry:
+### Replace verbose if/else chains with a routing registry:
 
 ```typescript
 // lib/message-dispatcher.ts
@@ -163,9 +163,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Middleware Pattern for Cross-Cutting Concerns {#middleware-pattern-for-cross-cutting-concerns}
+## Middleware Pattern for Cross-Cutting Concerns {#middleware-pattern-for-cross-cutting-concerns}
 
-Apply middleware for logging, auth, rate limiting:
+### Apply middleware for logging, auth, rate limiting:
 
 ```typescript
 // lib/middleware.ts
@@ -234,7 +234,7 @@ async function processWithMiddleware(ctx: MessageContext) {
 }
 ```
 
-Port-Based Streaming Channels {#port-based-streaming-channels}
+## Port-Based Streaming Channels {#port-based-streaming-channels}
 
 For continuous data streams, use ports instead of one-time messages:
 
@@ -278,9 +278,9 @@ setInterval(() => {
 }, 1000);
 ```
 
-Error Propagation Across Contexts {#error-propagation-across-contexts}
+## Error Propagation Across Contexts {#error-propagation-across-contexts}
 
-Ensure errors are properly propagated and handled:
+### Ensure errors are properly propagated and handled:
 
 ```typescript
 // lib/error-handling.ts
@@ -316,9 +316,9 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 });
 ```
 
-Cross-Context State Synchronization {#cross-context-state-synchronization}
+## Cross-Context State Synchronization {#cross-context-state-synchronization}
 
-Maintain consistent state across all extension contexts:
+### Maintain consistent state across all extension contexts:
 
 ```typescript
 // lib/state-sync.ts
@@ -351,7 +351,7 @@ class StateSync {
 }
 ```
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Message Passing Patterns Reference](../reference/message-passing-patterns.md)
 - [Advanced Messaging Tutorial](../tutorials/advanced-messaging.md)

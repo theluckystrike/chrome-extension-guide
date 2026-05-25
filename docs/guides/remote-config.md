@@ -6,13 +6,13 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Remote Config. How to Update Settings Without Republishing
 
-Overview
+### Overview
 
 Remote configuration (remote config) is a powerful pattern that allows you to modify your Chrome extension's behavior, settings, and features after it's been published to the Chrome Web Store, without going through the time-consuming review and update process. By fetching configuration values from an external endpoint, you can control feature toggles, set A/B test parameters, adjust UI behavior, roll out changes gradually, and fix critical bugs in real-time.
 
 This guide covers everything you need to implement a solid remote config system in your Chrome extension, from basic setup to advanced patterns like feature flags and A/B testing.
 
-Why Remote Config Matters for Extensions
+### Why Remote Config Matters for Extensions
 
 Chrome extensions have a unique deployment challenge: every update must go through Chrome Web Store review, which can take hours or even days. Unlike web applications where you can deploy instantly, extensions are bound by this review process. Remote config solves this problem by externalizing your configuration.
 
@@ -20,11 +20,11 @@ There are several compelling use cases for remote config. Emergency toggles let 
 
 Without remote config, you'd need to ship a new version for every configuration change, creating friction for both developers and users.
 
-Setting Up a Config Endpoint
+### Setting Up a Config Endpoint
 
 The first step is creating an HTTP endpoint that your extension can query to retrieve configuration values. This endpoint should return JSON and be accessible over HTTPS.
 
-A simple config endpoint might return:
+### A simple config endpoint might return:
 
 ```json
 {
@@ -45,7 +45,7 @@ For production use, consider using established services like Firebase Remote Con
 
 When designing your config structure, organize settings by category and use semantic versioning for the config itself so your extension can detect changes.
 
-Fetching and Caching Config Values
+### Fetching and Caching Config Values
 
 Your extension should fetch remote config during initialization and cache it locally to avoid making network requests on every extension load. Here's a practical implementation pattern:
 
@@ -124,11 +124,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Fallback Defaults for Offline Use
+### Fallback Defaults for Offline Use
 
 Always design your config system with sensible defaults embedded in your extension code. Users may be offline, your API might be down, or network requests might be blocked by corporate firewalls. Your extension should work smoothly in these scenarios.
 
-Define default values as constants in your code:
+### Define default values as constants in your code:
 
 ```typescript
 const DEFAULT_CONFIG = {
@@ -169,7 +169,7 @@ function getFeatureFlag(key: string, defaultValue: boolean): boolean {
 
 This defensive approach ensures your extension never crashes due to missing config values, regardless of network conditions.
 
-Security Considerations
+### Security Considerations
 
 Security is critical when fetching and applying remote configuration. Attackers could potentially compromise your config endpoint to inject malicious values that affect all your users.
 
@@ -200,7 +200,7 @@ Implement request signing for high-security use cases. Include a signature or ha
 
 Be cautious with code execution. Never use `eval()` or `new Function()` with config values, even if they come from your own server. Treat all config as data, not code.
 
-Using with Feature Flags and A/B Testing
+### Using with Feature Flags and A/B Testing
 
 Remote config provides the foundation for sophisticated feature management strategies. Here's how to use it for feature flags and experiments.
 
@@ -254,7 +254,7 @@ function getExperimentVariant(experimentName: string): string {
 
 Track experiment results through your analytics system, then analyze performance to determine winners. Remote config makes it easy to roll out winning variants to everyone while disabling underperforming treatments.
 
-Conclusion
+### Conclusion
 
 Remote configuration is an essential pattern for production Chrome extensions. By externalizing your settings, you gain the flexibility to respond to issues instantly, experiment with features safely, and deliver personalized experiences to your users, all without the delays of the Chrome Web Store review process.
 
@@ -262,7 +262,7 @@ Start with a simple JSON endpoint and basic caching, then evolve toward solution
 
 With remote config in place, your extension becomes truly dynamic, adapting to user needs and business requirements long after the initial publish.
 
-Related Articles
+### Related Articles
 
 - [Feature Flags](../patterns/feature-flags.md) - Toggle features on/off
 - [Extension Feature Flags Implementation](../patterns/extension-feature-flags-impl.md) - Detailed flag patterns

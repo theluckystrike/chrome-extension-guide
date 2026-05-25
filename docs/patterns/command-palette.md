@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/command-palette/"
 last_modified_at: 2026-01-15
 ---
 
-Command Palette Pattern
+### Command Palette Pattern
 
 The command palette pattern brings VS Code-style functionality to Chrome Extensions, combining keyboard shortcuts, fuzzy search, and quick actions into a unified interface that users love.
 
-Overview {#overview}
+## Overview {#overview}
 
 A command palette provides:
 - Quick access to all extension features via keyboard
@@ -20,9 +20,9 @@ A command palette provides:
 
 ---
 
-Architecture {#architecture}
+## Architecture {#architecture}
 
-The command palette consists of three interconnected components:
+### The command palette consists of three interconnected components:
 
 ```
 
@@ -45,7 +45,7 @@ The command palette consists of three interconnected components:
 
 ```
 
-Component Responsibilities {#component-responsibilities}
+## Component Responsibilities {#component-responsibilities}
 
 | Component | Responsibility |
 |-----------|----------------|
@@ -55,7 +55,7 @@ Component Responsibilities {#component-responsibilities}
 
 ---
 
-Pattern 1: Command Registry {#pattern-1-command-registry}
+## Pattern 1: Command Registry {#pattern-1-command-registry}
 
 Define commands as objects with metadata for search and execution:
 
@@ -106,7 +106,7 @@ export function getCommands(): Command[] {
 
 ---
 
-Pattern 2: Keyboard Trigger {#pattern-2-keyboard-trigger}
+## Pattern 2: Keyboard Trigger {#pattern-2-keyboard-trigger}
 
 Use `chrome.commands` to define the palette shortcut in your manifest:
 
@@ -124,7 +124,7 @@ Use `chrome.commands` to define the palette shortcut in your manifest:
 }
 ```
 
-Listen for the command in your content script:
+### Listen for the command in your content script:
 
 ```typescript
 // src/content/command-palette.ts
@@ -147,7 +147,7 @@ function showCommandPalette() {
 
 ---
 
-Pattern 3: Palette UI with Shadow DOM {#pattern-3-palette-ui-with-shadow-dom}
+## Pattern 3: Palette UI with Shadow DOM {#pattern-3-palette-ui-with-shadow-dom}
 
 Inject an isolated modal overlay using Shadow DOM for style encapsulation:
 
@@ -233,7 +233,7 @@ export function createPalette(commands: PaletteItem[]): HTMLElement {
 
 ---
 
-Pattern 4: Fuzzy Search & Keyboard Navigation {#pattern-4-fuzzy-search-keyboard-navigation}
+## Pattern 4: Fuzzy Search & Keyboard Navigation {#pattern-4-fuzzy-search-keyboard-navigation}
 
 Implement fuzzy filtering and keyboard-driven selection:
 
@@ -295,9 +295,9 @@ export function handleKeyboardNavigation(
 
 ---
 
-Pattern 5: Action Execution {#pattern-5-action-execution}
+## Pattern 5: Action Execution {#pattern-5-action-execution}
 
-Send selected command to service worker for execution:
+### Send selected command to service worker for execution:
 
 ```typescript
 // src/content/command-palette.ts
@@ -329,9 +329,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Complete Integration {#complete-integration}
+## Complete Integration {#complete-integration}
 
-Putting it all together in your content script:
+### Putting it all together in your content script:
 
 ```typescript
 // src/content/main.ts
@@ -429,7 +429,7 @@ function closePalette() {
 
 ---
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Shadow DOM isolation. Prevent page styles from affecting your palette
 2. Fuzzy matching. Use fuzzy search for forgiving input matching
@@ -441,7 +441,7 @@ Best Practices {#best-practices}
 
 ---
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Keyboard Shortcuts API](/docs/patterns/keyboard-shortcuts-api). Global shortcut configuration
 - [Commands Keyboard Shortcuts](/docs/guides/commands-keyboard-shortcuts.md). Shortcut best practices

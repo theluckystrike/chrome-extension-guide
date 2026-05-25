@@ -18,7 +18,7 @@ we'll walk you through creating a production-ready CSS Grid Inspector extension 
 
 ---
 
-Why You Need a CSS Grid Inspector Extension
+### Why You Need a CSS Grid Inspector Extension
 
 Modern web development increasingly relies on CSS Grid for building sophisticated layouts. From dashboard interfaces to magazine-style layouts, grids are everywhere. Yet, the browser's native DevTools, while helpful, don't always provide the quick visual feedback developers need when iterating on designs.
 
@@ -33,7 +33,7 @@ Whether you're building responsive layouts, working with named grid areas, or ex
 
 ---
 
-Project Setup and Manifest Configuration
+### Project Setup and Manifest Configuration
 
 Every Chrome extension starts with the manifest file. For our CSS Grid Inspector, we'll use Manifest V3, which provides improved security and performance.
 
@@ -77,7 +77,7 @@ This configuration grants the extension the necessary permissions to analyze and
 
 ---
 
-Core Architecture
+### Core Architecture
 
 Our extension follows a modular architecture with three main components:
 
@@ -85,7 +85,7 @@ Our extension follows a modular architecture with three main components:
 2. Background Service Worker: Handles communication between content scripts and the popup
 3. Popup UI: Provides user controls for toggling visualizations and adjusting settings
 
-Project Structure
+### Project Structure
 
 ```
 css-grid-inspector/
@@ -110,7 +110,7 @@ css-grid-inspector/
 
 ---
 
-Detecting CSS Grid Containers
+### Detecting CSS Grid Containers
 
 The heart of our extension lies in accurately detecting CSS Grid containers on any webpage. We need to query elements with `display: grid` or `display: inline-grid` and gather their computed styles.
 
@@ -182,7 +182,7 @@ This analyzer efficiently scans the DOM for grid containers and extracts all rel
 
 ---
 
-Rendering Grid Overlays
+### Rendering Grid Overlays
 
 Now comes the visual part, rendering colorful overlays that show grid lines, track sizes, and areas. We'll use SVG overlays positioned absolutely over each grid container.
 
@@ -461,7 +461,7 @@ This renderer creates beautiful SVG-based overlays showing grid lines, track bou
 
 ---
 
-Content Script Entry Point
+### Content Script Entry Point
 
 Now we connect everything in the content script:
 
@@ -533,7 +533,7 @@ function disableInspector(): void {
 
 ---
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup provides users with controls to toggle the inspector and customize visualizations:
 
@@ -668,9 +668,9 @@ document.getElementById('overlayOpacity')?.addEventListener('input', updateSetti
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load Unpacked: Open `chrome://extensions/`, enable Developer mode, click "Load unpacked", and select your extension directory
 2. Test on Various Sites: Try the extension on sites with simple and complex grid layouts
@@ -680,7 +680,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Advanced Features to Consider
+### Advanced Features to Consider
 
 Once you have the basic inspector working, consider adding these advanced features:
 
@@ -693,7 +693,7 @@ Once you have the basic inspector working, consider adding these advanced featur
 
 ---
 
-Publishing to Chrome Web Store
+### Publishing to Chrome Web Store
 
 When ready to share your extension:
 
@@ -705,7 +705,7 @@ When ready to share your extension:
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a CSS Grid Inspector Chrome extension is an excellent project that combines DOM manipulation, SVG graphics, and Chrome extension APIs. The extension we built provides instant visual feedback for grid layouts, making it easier to debug and understand CSS Grid implementations.
 

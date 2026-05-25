@@ -18,7 +18,7 @@ This comprehensive guide walks through the complete service worker lifecycle, fr
 
 ---
 
-Manifest V2 Background Pages vs Manifest V3 Service Workers
+### Manifest V2 Background Pages vs Manifest V3 Service Workers
 
 The fundamental difference between Manifest V2 background pages and Manifest V3 service workers lies in their execution model. In Manifest V2, the background script ran as a persistent page in the browser, remaining loaded in memory for the entire browser session. This persistent model meant that global variables maintained their state indefinitely, `setTimeout` and `setInterval` worked reliably, and developers could rely on a continuously running JavaScript context.
 
@@ -62,11 +62,11 @@ The benefits of the service worker model are substantial: reduced memory footpri
 
 ---
 
-Service Worker Lifecycle Events
+### Service Worker Lifecycle Events
 
 Understanding the service worker lifecycle is crucial for proper initialization and cleanup. Chrome dispatches several lifecycle events that your service worker can intercept: `install`, `activate`, `fetch`, and various extension-specific events like `alarm`, `message`, and `runtimeStartup`.
 
-The Install Event
+### The Install Event
 
 The `install` event fires when the extension is first installed or when the service worker script is updated. This is your opportunity to perform one-time initialization tasks, cache resources, and set up the initial state. The install event is synchronous and blocks the service worker from becoming active until it completes.
 
@@ -111,7 +111,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 During the install phase, you should cache any static assets your extension needs, initialize default settings, and set up any alarms or triggers your extension requires. Avoid performing expensive operations that might delay the installation process or cause it to timeout.
 
-The Activate Event
+### The Activate Event
 
 The `activate` event fires when the service worker starts, either for the first time after installation or when Chrome wakes a previously terminated worker. This event is particularly important for cleaning up stale data and managing version migrations. Unlike the install event, activate can fire multiple times throughout the extension's lifecycle.
 
@@ -142,7 +142,7 @@ self.addEventListener('activate', (event) => {
 
 The activate phase is ideal for performing cleanup tasks, clearing outdated data, and ensuring your extension's internal state is consistent. Take advantage of this event to verify data integrity and repair any corruption that might have occurred during unexpected termination.
 
-Fetch and Extension Events
+### Fetch and Extension Events
 
 Beyond the standard service worker events, Chrome extensions respond to a variety of extension-specific events. The `fetch` event intercepts network requests made by your extension, allowing you to implement custom caching strategies or modify requests on the fly. However, in practice, most extension functionality relies on Chrome's extension events rather than the fetch handler.
 
@@ -179,7 +179,7 @@ Understanding when these events fire and how they interact with the service work
 
 ---
 
-The 30-Second Idle Timeout
+### The 30-Second Idle Timeout
 
 Perhaps the most consequential aspect of the Manifest V3 service worker model is Chrome's aggressive idle timeout policy. By default, Chrome terminates service workers after approximately 30 seconds of inactivity. This timeout exists to conserve system resources and applies to all extension service workers regardless of what they're doing when not actively handling an event.
 
@@ -209,7 +209,7 @@ To handle this reality, you need to implement patterns that work correctly regar
 
 ---
 
-Alarm-Based Patterns for Reliable Scheduling
+### Alarm-Based Patterns for Reliable Scheduling
 
 The `chrome.alarms` API is the cornerstone of reliable scheduling in Manifest V3 extensions. Unlike `setTimeout` and `setInterval`, which are destroyed when the service worker terminates, alarms persist in Chrome's internal alarm system and will wake a terminated service worker when they fire.
 
@@ -281,7 +281,7 @@ However, use the keepalive pattern judiciously. While it improves responsiveness
 
 ---
 
-State Persistence with chrome.storage
+### State Persistence with chrome.storage
 
 The `chrome.storage` API is your primary tool for maintaining state across service worker terminations. Unlike the deprecated `localStorage` API, chrome.storage persists independently of the service worker and can store complex JavaScript objects, functions, and large data structures.
 
@@ -402,7 +402,7 @@ self.addEventListener('terminate', async () => {
 
 ---
 
-Offscreen Documents for DOM Operations
+### Offscreen Documents for DOM Operations
 
 One of the limitations of service workers is their inability to work with the DOM directly. Service workers run in a background context without access to window objects, document elements, or any DOM APIs. For extensions that need DOM manipulation, such as generating PDFs, processing images, or running complex DOM-based operations, you must use offscreen documents.
 
@@ -458,7 +458,7 @@ Offscreen documents have their own lifecycle and can be terminated independently
 
 ---
 
-Tab Suspender Pro Service Worker Architecture
+### Tab Suspender Pro Service Worker Architecture
 
 Tab Suspender Pro demonstrates a production-ready service worker architecture that handles the challenges of the Manifest V3 model while delivering sophisticated functionality. Understanding how it manages its service worker provides valuable insights for building your own extensions.
 
@@ -574,7 +574,7 @@ This architecture enables Tab Suspender Pro to reliably manage thousands of tabs
 
 ---
 
-Debugging Service Workers
+### Debugging Service Workers
 
 Debugging service workers requires a different approach than debugging traditional web applications. The ephemeral nature of service workers means you can't rely on persistent console output or breakpoints that survive across executions. Chrome provides several tools and techniques specifically for service worker debugging.
 
@@ -652,7 +652,7 @@ chrome.alarms.getAll((alarms) => {
 });
 ```
 
-Common debugging scenarios and their solutions include:
+### Common debugging scenarios and their solutions include:
 
 - "Extension context invalidated": The service worker was terminated during a long operation. Implement retry logic or checkpointing.
 - Missing state: State hydration failed or wasn't called. Verify `chrome.storage.local.get()` completes before accessing state.
@@ -661,11 +661,11 @@ Common debugging scenarios and their solutions include:
 
 ---
 
-Common Pitfalls and Solutions
+### Common Pitfalls and Solutions
 
 The transition to Manifest V3 service workers introduces several common pitfalls that trip up developers. Understanding these challenges and their solutions before you encounter them will save hours of debugging.
 
-Pitfall 1: Relying on global variables
+### Pitfall 1: Relying on global variables
 
 ```javascript
 //  WRONG: Global variables don't persist
@@ -684,7 +684,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Pitfall 2: Using setTimeout/setInterval for scheduling
+### Pitfall 2: Using setTimeout/setInterval for scheduling
 
 ```javascript
 //  WRONG: Timers are destroyed on termination
@@ -697,7 +697,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Pitfall 3: Not handling async responses
+### Pitfall 3: Not handling async responses
 
 ```javascript
 //  WRONG: Promise resolved after handler returns
@@ -712,7 +712,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Pitfall 4: Forgetting to hydrate state
+### Pitfall 4: Forgetting to hydrate state
 
 ```javascript
 //  WRONG: Assuming state exists
@@ -728,7 +728,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 });
 ```
 
-Pitfall 5: Not handling service worker updates
+### Pitfall 5: Not handling service worker updates
 
 ```javascript
 //  WRONG: Assuming alarms persist perfectly
@@ -744,7 +744,7 @@ chrome.alarms.get('sync', (alarm) => {
 
 ---
 
-Conclusion
+### Conclusion
 
 The Manifest V3 service worker model represents a significant evolution in Chrome extension architecture. While it requires developers to abandon familiar patterns from Manifest V2, it offers substantial benefits in memory efficiency, security, and browser resource utilization. The key to success lies in understanding and embracing the ephemeral nature of service workers.
 

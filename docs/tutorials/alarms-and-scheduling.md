@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Alarms and Scheduling in Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 The `chrome.alarms` API is the foundation of reliable background task scheduling in Manifest V3 extensions. Unlike `setInterval()` and `setTimeout()`, which fail when Chrome terminates your service worker to conserve memory, alarms persist across restarts and wake your extension when needed.
 
 This guide covers everything you need to know about scheduling in Chrome extensions, from basic one-time alarms to complex cron-like patterns.
 
-Why Alarms Replace setInterval in MV3 {#why-alarms}
+## Why Alarms Replace setInterval in MV3 {#why-alarms}
 
 In Manifest V2, developers commonly used JavaScript's `setInterval()` in background pages:
 
@@ -25,13 +25,13 @@ setInterval(() => {
 }, 60000); // Check every minute
 ```
 
-This approach has critical problems in MV3:
+### This approach has critical problems in MV3:
 
 1. Service workers terminate - Chrome unloads idle service workers after ~30 seconds of inactivity
 2. Timers don't survive termination - `setInterval` stops when the worker is killed
 3. No persistence - Timers reset when the browser restarts
 
-The `chrome.alarms` API solves all these issues:
+### The `chrome.alarms` API solves all these issues:
 
 ```javascript
 // MV3 - Reliable scheduling with chrome.alarms
@@ -41,7 +41,7 @@ chrome.alarms.create("checkEmails", {
 });
 ```
 
-Required Permission {#permission}
+## Required Permission {#permission}
 
 Add the `"alarms"` permission to your `manifest.json`:
 
@@ -55,11 +55,11 @@ Add the `"alarms"` permission to your `manifest.json`:
 }
 ```
 
-Creating Alarms {#creating-alarms}
+## Creating Alarms {#creating-alarms}
 
-One-Time Alarms
+### One-Time Alarms
 
-Fire once after a specified delay:
+### Fire once after a specified delay:
 
 ```javascript
 // Fire after 5 minutes
@@ -73,9 +73,9 @@ chrome.alarms.create("scheduledTask", {
 });
 ```
 
-Periodic (Repeating) Alarms
+### Periodic (Repeating) Alarms
 
-Fire repeatedly at a set interval:
+### Fire repeatedly at a set interval:
 
 ```javascript
 // First fires after 1 minute, then every 30 minutes
@@ -87,7 +87,7 @@ chrome.alarms.create("periodicSync", {
 
 The `periodInMinutes` property automatically reschedules the alarm after each firing.
 
-Minimum Alarm Intervals {#minimum-interval}
+## Minimum Alarm Intervals {#minimum-interval}
 
 Chrome enforces a minimum interval of 1 minute for alarms in production extensions:
 
@@ -101,7 +101,7 @@ This restriction exists to prevent battery drain and excessive background activi
 - Chrome's native APIs (notifications, webNavigation)
 - Third-party libraries that work within constraints
 
-Handling Alarm Events {#handling-alarms}
+## Handling Alarm Events {#handling-alarms}
 
 Register a listener in your service worker to respond when alarms fire:
 
@@ -125,9 +125,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 Register the listener at the top level of your service worker, not inside an async function.
 
-Alarm Persistence Across Restarts {#persistence}
+## Alarm Persistence Across Restarts {#persistence}
 
-One of the key advantages of `chrome.alarms`:
+### One of the key advantages of `chrome.alarms`:
 
 - Alarms persist when Chrome terminates the service worker
 - Alarms persist across browser restarts
@@ -154,9 +154,9 @@ if (!alarm) {
 }
 ```
 
-Managing Multiple Alarms {#managing-multiple}
+## Managing Multiple Alarms {#managing-multiple}
 
-Getting Alarm Info
+### Getting Alarm Info
 
 ```javascript
 chrome.alarms.get("syncData", (alarm) => {
@@ -169,7 +169,7 @@ chrome.alarms.get("syncData", (alarm) => {
 });
 ```
 
-Listing All Alarms
+### Listing All Alarms
 
 ```javascript
 chrome.alarms.getAll((alarms) => {
@@ -179,7 +179,7 @@ chrome.alarms.getAll((alarms) => {
 });
 ```
 
-Clearing Alarms
+### Clearing Alarms
 
 ```javascript
 // Clear a specific alarm
@@ -189,7 +189,7 @@ await chrome.alarms.clear("oldTask");
 await chrome.alarms.clearAll();
 ```
 
-Practical Example: Multiple Scheduled Tasks
+### Practical Example: Multiple Scheduled Tasks
 
 ```javascript
 // Initialize all scheduled tasks
@@ -238,11 +238,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Cron-Like Scheduling Patterns {#cron-like}
+## Cron-Like Scheduling Patterns {#cron-like}
 
 For complex schedules (specific days, times), you can implement cron-like logic:
 
-Custom Cron Scheduler
+### Custom Cron Scheduler
 
 ```javascript
 class CronScheduler {
@@ -304,7 +304,7 @@ class CronScheduler {
 }
 ```
 
-Using chrome-alarms-cron Library
+### Using chrome-alarms-cron Library
 
 For a production-ready solution, use the `@theluckystrike/chrome-alarms-cron` library:
 
@@ -336,7 +336,7 @@ await scheduler.cancel("weekdayMorning");
 
 This library handles the complexity of cron parsing while respecting Chrome's minimum interval requirements.
 
-Complete Example: Notification Extension {#complete-example}
+## Complete Example: Notification Extension {#complete-example}
 
 ```javascript
 // background.js - Service Worker
@@ -409,7 +409,7 @@ async function sendDailyDigest() {
 }
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Always check for existing alarms before creating duplicates
 2. Use descriptive alarm names for easier debugging
@@ -419,7 +419,7 @@ Best Practices {#best-practices}
 6. Store state in chrome.storage - service worker memory is ephemeral
 7. Test with dev mode for shorter intervals, but verify production behavior
 
-API Reference Summary {#api-reference}
+## API Reference Summary {#api-reference}
 
 | Method | Description |
 |--------|-------------|
@@ -430,7 +430,7 @@ API Reference Summary {#api-reference}
 | `chrome.alarms.clearAll()` | Clear all alarms |
 | `chrome.alarms.onAlarm` | Event fired when an alarm fires |
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Alarms API](../guides/alarms-api.md) - Complete reference for the chrome.alarms API
 - [Background Service Workers](../guides/service-worker-lifecycle.md) - Understanding service worker lifecycle and persistence

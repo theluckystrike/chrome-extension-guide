@@ -18,11 +18,11 @@ SolidJS has been gaining significant traction in the web development community, 
 
 ---
 
-Why SolidJS for Chrome Extensions? {#why-solidjs}
+## Why SolidJS for Chrome Extensions? {#why-solidjs}
 
 Chrome extensions operate in a unique environment with specific constraints that make SolidJS an attractive choice. Understanding these benefits will help you decide if SolidJS is the right framework for your next extension project.
 
-Exceptional Performance
+### Exceptional Performance
 
 SolidJS stands out for its remarkable performance characteristics. Unlike React, which uses a virtual DOM and re-renders component trees, SolidJS compiles templates to real DOM nodes and uses fine-grained proxies to update only the exact elements that change. This approach eliminates the overhead of diffing algorithms and unnecessary re-renders.
 
@@ -30,7 +30,7 @@ For Chrome extensions, this performance benefit translates to faster popup open 
 
 Consider a popup that displays a list of tabs or bookmarks. With React, changing a single item in the list might trigger re-renders of the entire list component. With SolidJS, only the specific text node that changed gets updated. The difference is especially noticeable on lower-end devices or when handling large datasets.
 
-Minimal Bundle Size
+### Minimal Bundle Size
 
 Bundle size is critical for Chrome extensions. Smaller extensions load faster, use less memory, and provide a better user experience. SolidJS core library is remarkably small, around 7KB gzipped, making it one of the most lightweight reactive frameworks available.
 
@@ -38,7 +38,7 @@ When you pair SolidJS with a build tool like Vite, you can achieve incredibly sm
 
 Compare this to React, which requires react-dom and often additional libraries for state management. A typical React-based extension can easily exceed 100KB, while a SolidJS equivalent might be under 30KB. For extensions distributed through the Chrome Web Store, this size difference matters.
 
-True Reactivity Without Complexity
+### True Reactivity Without Complexity
 
 SolidJS's reactivity system is intuitive and powerful. Unlike some frameworks that require learning complex patterns like reducers, contexts, or memoization to avoid unnecessary re-renders, SolidJS primitives are inherently efficient. When you modify a signal, only the dependent code runs, automatically, without requiring explicit optimization.
 
@@ -46,15 +46,15 @@ This simplicity accelerates development and reduces bugs. You spend less time de
 
 ---
 
-Setting Up Your SolidJS Chrome Extension Project {#project-setup}
+## Setting Up Your SolidJS Chrome Extension Project {#project-setup}
 
 Let's build a practical Chrome extension with SolidJS to demonstrate the development workflow. We'll create a simple extension that helps users manage their reading list directly from the browser toolbar.
 
-Prerequisites
+### Prerequisites
 
 Before starting, ensure you have Node.js (version 16 or higher) installed. You'll also need Chrome or Chromium-based browser for testing. We'll use Vite as our build tool because of its excellent SolidJS support and fast development experience.
 
-Creating the Project
+### Creating the Project
 
 Initialize a new Vite project with the SolidJS template:
 
@@ -66,7 +66,7 @@ npm install
 
 This command creates a TypeScript-based SolidJS project with all the necessary configurations. TypeScript support is particularly valuable for Chrome extension development, where the Chrome APIs have complex type signatures.
 
-Configuring the Build
+### Configuring the Build
 
 Modify your `vite.config.ts` to output a format suitable for Chrome extensions:
 
@@ -92,7 +92,7 @@ export default defineConfig({
 
 The `base: './'` setting is crucial for extensions, as it ensures all asset paths work correctly regardless of the extension's URL.
 
-Creating the Manifest
+### Creating the Manifest
 
 Every Chrome extension needs a `manifest.json` file. Create this file in your project root:
 
@@ -116,13 +116,13 @@ Manifest V3 is the current standard, and it works well with SolidJS. The popup w
 
 ---
 
-Building the Extension UI with SolidJS {#building-ui}
+## Building the Extension UI with SolidJS {#building-ui}
 
 Now let's create the actual extension interface. We'll build a reading list manager that demonstrates SolidJS's reactivity features.
 
-The Main Popup
+### The Main Popup
 
-Modify `src/App.tsx` to create the popup interface:
+### Modify `src/App.tsx` to create the popup interface:
 
 {% raw %}
 ```tsx
@@ -242,7 +242,7 @@ export default App;
 
 This example showcases several SolidJS patterns that make development pleasant and efficient. The `createSignal` hook creates reactive state, `createEffect` handles side effects like loading and saving data, and `For` and `Show` are control flow components that update efficiently.
 
-The Options Page
+### The Options Page
 
 Create an options page for additional settings in `src/Options.tsx`:
 
@@ -297,13 +297,13 @@ export default Options;
 
 ---
 
-Working with Chrome APIs in SolidJS {#chrome-apis}
+## Working with Chrome APIs in SolidJS {#chrome-apis}
 
 Chrome extensions interact with browser APIs extensively. SolidJS works smoothly with these APIs, though there are some patterns worth understanding.
 
-Type Definitions
+### Type Definitions
 
-Install the Chrome types to get TypeScript support:
+### Install the Chrome types to get TypeScript support:
 
 ```bash
 npm install -D @types/chrome
@@ -319,7 +319,7 @@ Add Chrome types to your `tsconfig.json`:
 }
 ```
 
-Handling Asynchronous APIs
+### Handling Asynchronous APIs
 
 Chrome APIs are predominantly asynchronous. SolidJS handles async operations elegantly through effects and resources:
 
@@ -351,7 +351,7 @@ function TabList() {
 
 The `createResource` primitive is particularly useful for data fetching, handling loading states automatically.
 
-Message Passing
+### Message Passing
 
 Communicating between extension components (popup, background script, content scripts) requires message passing:
 
@@ -370,11 +370,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Content Scripts with SolidJS {#content-scripts}
+## Content Scripts with SolidJS {#content-scripts}
 
 Content scripts run in the context of web pages and can be built with SolidJS as well. However, there are additional considerations for this scenario.
 
-Injection Strategy
+### Injection Strategy
 
 Content scripts cannot be loaded the same way as regular web pages due to Chrome's content script isolation. The recommended approach is to build your SolidJS app, then inject it into the page:
 
@@ -398,7 +398,7 @@ if (document.readyState === 'loading') {
 }
 ```
 
-Configure the content script in your manifest:
+### Configure the content script in your manifest:
 
 ```json
 {
@@ -410,7 +410,7 @@ Configure the content script in your manifest:
 }
 ```
 
-Styling Considerations
+### Styling Considerations
 
 Content scripts share the page's CSS, which can cause conflicts. Use Shadow DOM or unique class names to isolate your styles:
 
@@ -433,13 +433,13 @@ function mountApp() {
 
 ---
 
-Performance Optimization Tips {#performance-tips}
+## Performance Optimization Tips {#performance-tips}
 
 While SolidJS is inherently fast, follow these tips to maximize your extension's performance.
 
-Lazy Loading
+### Lazy Loading
 
-Load heavy components only when needed:
+### Load heavy components only when needed:
 
 ```tsx
 import { lazy, Suspense } from 'solid-js';
@@ -455,7 +455,7 @@ function App() {
 }
 ```
 
-Memoization
+### Memoization
 
 While SolidJS handles most dependencies automatically, use `createMemo` for expensive computations:
 
@@ -467,7 +467,7 @@ const processedData = createMemo(() => {
 });
 ```
 
-Minimize Background Activity
+### Minimize Background Activity
 
 Avoid unnecessary background processing. Use Chrome's event-driven APIs instead of polling:
 
@@ -485,26 +485,26 @@ setInterval(() => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Proper testing ensures your extension works correctly across different scenarios.
 
-Loading Unpacked
+### Loading Unpacked
 
-To test your built extension:
+### To test your built extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
 3. Click "Load unpacked"
 4. Select your `dist` folder (or wherever Vite outputs the build)
 
-Debugging
+### Debugging
 
 Access the popup's developer tools by right-clicking your extension icon and selecting "Inspect popup". For background scripts, click "service worker" link in the extension details page.
 
 ---
 
-Building for Production {#production-build}
+## Building for Production {#production-build}
 
 When you're ready to publish, create a production build:
 
@@ -523,7 +523,7 @@ Package your extension using the Chrome Web Store developer dashboard or the `ch
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 SolidJS offers a compelling alternative to traditional frameworks for Chrome extension development. Its fine-grained reactivity delivers exceptional performance with minimal bundle size, while its simple programming model accelerates development. The combination of these factors makes SolidJS an excellent choice for building modern Chrome extensions that users will love.
 

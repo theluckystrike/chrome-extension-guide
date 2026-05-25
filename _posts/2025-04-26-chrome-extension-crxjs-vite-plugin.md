@@ -18,7 +18,7 @@ If you have been struggling with slow build times, complicated configuration, or
 
 ---
 
-What is CRXJS? {#what-is-crxjs}
+## What is CRXJS? {#what-is-crxjs}
 
 CRXJS is a modern build tool specifically designed for Chrome extensions. Unlike traditional bundlers that treat extensions as an afterthought, CRXJS understands the unique requirements of browser extensions. It handles the complicated parts of extension development so you can focus on building features.
 
@@ -28,7 +28,7 @@ One of the most significant advantages of CRXJS is its handling of Manifest V3. 
 
 ---
 
-Why Use Vite for Chrome Extension Development? {#why-vite}
+## Why Use Vite for Chrome Extension Development? {#why-vite}
 
 Vite has become the go-to build tool for modern web development, and for good reason. Its lightning-fast cold start times, instant hot module replacement, and optimized production builds make it an exceptional choice for extension development.
 
@@ -38,11 +38,11 @@ The plugin ecosystem around Vite is extensive, meaning you can easily add suppor
 
 ---
 
-Getting Started with CRXJS Vite Plugin {#getting-started}
+## Getting Started with CRXJS Vite Plugin {#getting-started}
 
 Setting up CRXJS in your project is straightforward. Whether you are starting fresh or migrating an existing extension, the process takes only a few minutes.
 
-Installation
+### Installation
 
 First, ensure you have a Vite project set up. If not, create one using your preferred framework template. Then install the CRXJS Vite plugin:
 
@@ -54,9 +54,9 @@ or
 pnpm add crx- vite-plugin -D
 ```
 
-Basic Configuration
+### Basic Configuration
 
-Configure the plugin in your Vite configuration file:
+### Configure the plugin in your Vite configuration file:
 
 ```javascript
 import { defineConfig } from 'vite';
@@ -74,7 +74,7 @@ export default defineConfig({
 
 The `manifest` option points to your extension's manifest.json file. CRXJS will automatically read your manifest and ensure all build outputs are properly configured. The `output` directory is where your packaged extension will be generated.
 
-Creating Your Manifest
+### Creating Your Manifest
 
 For Manifest V3, your manifest.json might look like this:
 
@@ -107,7 +107,7 @@ For Manifest V3, your manifest.json might look like this:
 
 ---
 
-Hot Reload: The Development Game-Changer {#hot-reload}
+## Hot Reload: The Development Game-Changer {#hot-reload}
 
 Perhaps the most transformative feature of CRXJS is its hot reload capability. In traditional extension development, every code change required manually reloading your extension in Chrome. This breaks your workflow, disrupts your debugging session, and makes iterative development painful.
 
@@ -125,13 +125,13 @@ CRXJS handles the rest automatically. You will see the extension reload notifica
 
 ---
 
-Automatic Packaging for Distribution {#packaging}
+## Automatic Packaging for Distribution {#packaging}
 
 When it is time to share your extension, CRXJS makes packaging effortless. Instead of manually zipping files or using the Chrome Web Store uploader, CRXJS generates a properly formatted CRX file ready for distribution.
 
-Building for Production
+### Building for Production
 
-Run the production build command:
+### Run the production build command:
 
 ```bash
 npm run build
@@ -139,7 +139,7 @@ npm run build
 
 CRXJS will generate your extension package in the output directory. The package includes all your bundled code, assets, and a properly signed CRX file if you have configured your private key.
 
-Configuring Private Keys
+### Configuring Private Keys
 
 To sign your extension for distribution, you need to generate a private key:
 
@@ -165,29 +165,29 @@ If you do not have an existing key, CRXJS can generate one for you automatically
 
 ---
 
-Advanced Features and Configuration {#advanced-features}
+## Advanced Features and Configuration {#advanced-features}
 
 CRXJS offers numerous advanced options to customize your build process.
 
-Multiple Entry Points
+### Multiple Entry Points
 
 Extensions often have multiple entry points: popup, options page, background service worker, and content scripts. CRXJS handles this automatically by reading your manifest and bundling each entry point appropriately.
 
-Code Splitting
+### Code Splitting
 
 Vite's code splitting works smoothly with CRXJS. Your extension loads only the code it needs, when it needs it. This improves initial load time and reduces memory usage, which is particularly important for background scripts and content scripts.
 
-Content Security Policy
+### Content Security Policy
 
 Manifest V3 imposes strict Content Security Policy requirements. CRXJS helps you comply by warning about potentially problematic configurations and providing sensible defaults that work with Chrome's security model.
 
-Automatic Version Management
+### Automatic Version Management
 
 CRXJS can automatically update your extension version based on your git commits or package.json. This ensures your version numbers stay consistent across your project without manual intervention.
 
 ---
 
-Performance Comparison: CRXJS vs Traditional Tools {#performance-comparison}
+## Performance Comparison: CRXJS vs Traditional Tools {#performance-comparison}
 
 The performance benefits of CRXJS are not just incremental, they are transformative. Here is how it compares to traditional build tools:
 
@@ -202,29 +202,29 @@ These numbers vary based on project complexity, but the pattern is consistent. C
 
 ---
 
-Best Practices for CRXJS Projects {#best-practices}
+## Best Practices for CRXJS Projects {#best-practices}
 
 Follow these recommendations to get the most out of CRXJS:
 
-Keep Your Manifest Clean
+### Keep Your Manifest Clean
 
 Only request the permissions you need. Manifest V3 is more restrictive than V2, and for good reason. Review your permissions regularly and remove anything unused.
 
-Use TypeScript
+### Use TypeScript
 
 TypeScript support works out of the box with CRXJS and Vite. The type checking catches errors before they reach your users.
 
-Organize Your Code
+### Organize Your Code
 
 Structure your extension with clear separation between content scripts, background scripts, and UI components. Use Vite's import system to share code between these contexts.
 
-Test Thoroughly
+### Test Thoroughly
 
 Use Chrome's built-in developer tools to test your extension. CRXJS makes it easy to load your unpacked extension for testing.
 
 ---
 
-Migrating Existing Extensions {#migrating}
+## Migrating Existing Extensions {#migrating}
 
 If you have an existing extension built with Webpack, Parcel, or another bundler, migrating to CRXJS is straightforward:
 
@@ -238,29 +238,29 @@ Most migrations complete in under an hour for simple extensions. More complex ex
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Even with excellent tooling, you may encounter occasional issues. Here are solutions to common problems:
 
-Extension Not Loading
+### Extension Not Loading
 
 Check the Chrome extensions page for error messages. Most loading issues stem from manifest errors or missing files. CRXJS validates your manifest and reports issues during build.
 
-Hot Reload Not Working
+### Hot Reload Not Working
 
 Ensure you are using the development server, not a production build. Hot reload only works in development mode. Also check that Chrome's extension reload setting is enabled.
 
-Content Script Updates Not Applying
+### Content Script Updates Not Applying
 
 Content scripts require a full page reload to pick up changes. Open the extension management page and click the reload button, or use Chrome's "Update on reload" developer option.
 
-Private Key Errors
+### Private Key Errors
 
 If you lose your private key, you cannot update your existing extension. You must publish as a new extension. Always back up your keys securely.
 
 ---
 
-Understanding the CRX File Format {#crx-format}
+## Understanding the CRX File Format {#crx-format}
 
 The CRX file format is Chrome's proprietary extension packaging format. Understanding what happens under the hood helps when debugging issues or customizing your build process. A CRX file is essentially a ZIP archive with a custom header containing the extension's public key and signature.
 
@@ -272,7 +272,7 @@ One powerful feature of CRXJS is its ability to generate unsigned packages durin
 
 ---
 
-Development Workflow detailed look {#workflow}
+## Development Workflow detailed look {#workflow}
 
 A typical development session with CRXJS follows a satisfying pattern that maximizes productivity. You start by running the development server, which launches in under a second thanks to Vite's efficient initialization. Chrome automatically loads your unpacked extension, and you are ready to begin building.
 
@@ -284,11 +284,11 @@ For testing in incognito mode, simply enable your extension in incognito through
 
 ---
 
-Integrating with Popular Frameworks {#frameworks}
+## Integrating with Popular Frameworks {#frameworks}
 
 CRXJS works beautifully with popular frontend frameworks. Whether you prefer React, Vue, Svelte, or Angular, the integration process is straightforward.
 
-React Integration
+### React Integration
 
 Create a React-based extension using Vite's React template:
 
@@ -301,9 +301,9 @@ npm install crx- vite-plugin -D
 
 Configure CRXJS in your vite.config.js, then build your React components as you normally would. The React runtime integrates smoothly with Chrome's extension environment.
 
-Vue Integration
+### Vue Integration
 
-Vue developers can similarly use Vite's Vue template:
+### Vue developers can similarly use Vite's Vue template:
 
 ```bash
 npm create vite@latest my-extension -- --template vue
@@ -314,29 +314,29 @@ npm install crx- vite-plugin -D
 
 Vue's reactivity system works within the extension popup and options pages. The same patterns that make Vue great for web apps apply to extensions.
 
-TypeScript by Default
+### TypeScript by Default
 
 Regardless of your framework choice, TypeScript enhances extension development significantly. The type definitions for Chrome APIs are comprehensive and catch common mistakes before runtime. CRXJS preserves these types through the build process, so you get full IDE support throughout your project.
 
 ---
 
-Security Considerations {#security}
+## Security Considerations {#security}
 
 Chrome extensions have significant power over user data, making security a critical consideration. CRXJS helps you follow security best practices by warning about potentially dangerous configurations.
 
-Content Security Policy
+### Content Security Policy
 
 Manifest V3 enforces strict Content Security Policy by default. Your extension cannot load remote code, use inline scripts freely, or make cross-origin requests without explicit permission. CRXJS configures appropriate defaults and helps you understand what permissions your extension needs.
 
 When you need to make API calls from content scripts, use Chrome's messaging system to communicate with your background script, which can then make the cross-origin request. This pattern keeps your extension compliant with CSP while still accessing external data.
 
-Protecting User Data
+### Protecting User Data
 
 If your extension handles sensitive data, follow Chrome's best practices for storage. Use chrome.storage instead of localStorage for extension-specific data, as chrome.storage is encrypted and works across the user's devices when they are signed in to Chrome.
 
 Never store API keys or secrets in your extension code. Use chrome.storage to store sensitive data encrypted, or implement proper authentication flows that do not expose credentials in the client-side code.
 
-Avoiding Common Vulnerabilities
+### Avoiding Common Vulnerabilities
 
 Several common extension vulnerabilities are preventable with proper development practices. Cross-site scripting attacks can be mitigated by using Chrome's content script isolation and avoiding eval() or innerHTML with untrusted data. Prototype pollution in shared code can be avoided with proper JavaScript patterns.
 
@@ -344,7 +344,7 @@ CRXJS does not automatically prevent these issues, but its integration with mode
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 CRXJS Vite Plugin represents a significant leap forward in Chrome extension development. By combining Vite's lightning-fast performance with deep understanding of extension architecture, CRXJS delivers an unparalleled development experience.
 

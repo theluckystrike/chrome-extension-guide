@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Web Requests. How to Intercept and Modify Network Traffic
 
-Overview
+### Overview
 
 Chrome extensions have powerful capabilities to intercept, analyze, and modify network traffic flowing through the browser. This functionality is essential for building ad blockers, developer tools, privacy extensions, API testing utilities, and debugging utilities. Understanding the network request APIs is fundamental to creating extensions that need to interact with web traffic beyond simple content scripts.
 
 Chrome provides two primary APIs for working with network requests: the chrome.webRequest API for observing and analyzing traffic, and the declarativeNetRequest API (Manifest V3) for blocking and modifying requests through declarative rules. Each serves different purposes and has distinct permission requirements that extension developers must understand.
 
-The chrome.webRequest API
+### The chrome.webRequest API
 
 The chrome.webRequest API enables extensions to observe network requests and, in certain configurations, intercept and modify them. This API fires events at various stages of the request lifecycle, allowing developers to hook into almost any aspect of HTTP communication.
 
@@ -34,7 +34,7 @@ This API works through rule sets that you bundle with your extension or load dyn
 
 To use declarativeNetRequest, you need to declare the `"declarativeNetRequest"` permission in your manifest. For static rules bundled with your extension, you also need to specify rule resources in the manifest's `"declarative_net_request"` field, pointing to JSON rule files. Host permissions are still required for the URLs your rules affect, but you can now block or modify requests with a simpler permission model than the old blocking webRequest approach.
 
-Request Blocking Implementation
+### Request Blocking Implementation
 
 Blocking requests is one of the most common use cases for network interception in extensions. Whether you're building an ad blocker, a content filter, or a productivity tool that blocks distracting websites, understanding how to block requests programmatically is essential.
 
@@ -42,7 +42,7 @@ With webRequest in Manifest V2, blocking was straightforward, you'd add a listen
 
 For more complex blocking scenarios, you can combine blocking with other conditions. For example, you might block requests to certain domains only during specific hours, or block resources of type "image" on particular websites. Dynamic rules allow you to update blocking rules at runtime based on user preferences or external configuration, giving flexibility without requiring extension updates.
 
-Header Modification Techniques
+### Header Modification Techniques
 
 Modifying HTTP headers is another powerful capability that enables numerous extension use cases. Common applications include adding authentication tokens to outgoing requests, removing tracking cookies, modifying User-Agent strings for testing, or adding CORS headers to enable cross-origin requests that would otherwise be blocked.
 
@@ -52,7 +52,7 @@ In declarativeNetRequest, header modification uses the "modifyHeaders" action ty
 
 When modifying headers, be aware of certain restrictions. Some headers are considered "unsafe" and cannot be modified by extensions, this includes headers like Host, Content-Length, and cookies in certain contexts. Additionally, modifications to request headers only affect the extension's view of the request; the browser may have its own handling for certain headers that takes precedence.
 
-Redirect Rules and URL Manipulation
+### Redirect Rules and URL Manipulation
 
 Redirecting requests is essential for many extensions, from URL shorteners to ad blockers that redirect tracking domains to neutral pages, to developer tools that point API endpoints to local servers. Both webRequest and declarativeNetRequest support redirect functionality.
 
@@ -62,7 +62,7 @@ DeclarativeNetRequest offers similar functionality through the "redirect" action
 
 Redirects can also be combined with other rule types. An extension might first block certain requests, redirect others, and modify headers on the remaining requests, all using the same declarative rule system. This flexibility makes declarativeNetRequest a powerful foundation for building sophisticated network manipulation tools.
 
-Performance and Best Practices
+### Performance and Best Practices
 
 When working with network request APIs, performance should be a primary consideration. Each event listener that matches "<all_urls>" will fire for every single network request in the browser, which can be thousands per minute during normal browsing. Optimizing your URL filters to match only the requests you actually need to process is crucial.
 
@@ -70,7 +70,7 @@ Use specific URL patterns rather than wildcards whenever possible. If you only n
 
 For declarativeNetRequest rules, the browser performs rule matching natively, which is much more efficient than JavaScript-based interception. However, having too many rules or overly complex regex patterns can still impact performance. Keep your rule sets focused and test the performance impact of your rules in realistic browsing scenarios.
 
-Related Articles
+### Related Articles
 
 - [WebRequest API Patterns](web-request-patterns.md)
 - [Network Interception Patterns](../patterns/network-interception.md)

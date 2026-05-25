@@ -11,14 +11,14 @@ last_modified_at: 2026-01-15
 
 sessions Permission
 
-Overview {#overview}
+## Overview {#overview}
 - Permission string: `"sessions"`
 - Grants access to `chrome.sessions` API
 - Query and restore recently closed tabs/windows, access cross-device tabs
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-chrome.sessions.getRecentlyClosed(filter?) {#chromesessionsgetrecentlyclosedfilter}
+## chrome.sessions.getRecentlyClosed(filter?) {#chromesessionsgetrecentlyclosedfilter}
 Gets a list of recently closed tabs/windows.
 
 ```ts
@@ -36,7 +36,7 @@ interface Session {
 const sessions = await chrome.sessions.getRecentlyClosed({ maxResults: 10 });
 ```
 
-chrome.sessions.restore(sessionId?) {#chromesessionsrestoresessionid}
+## chrome.sessions.restore(sessionId?) {#chromesessionsrestoresessionid}
 Restores a closed tab or window.
 
 ```ts
@@ -49,7 +49,7 @@ const restored = await chrome.sessions.restore(sessionId);
 // Returns the restored Session object
 ```
 
-chrome.sessions.getDevices(filter?) {#chromesessionsgetdevicesfilter}
+## chrome.sessions.getDevices(filter?) {#chromesessionsgetdevicesfilter}
 Gets tabs from other signed-in devices.
 
 ```ts
@@ -66,9 +66,9 @@ interface Device {
 const devices = await chrome.sessions.getDevices({ maxResults: 10 });
 ```
 
-Types {#types}
+## Types {#types}
 
-Session {#session}
+## Session {#session}
 ```ts
 {
   lastModified: number;    // Unix timestamp
@@ -77,7 +77,7 @@ Session {#session}
 }
 ```
 
-Device {#device}
+## Device {#device}
 ```ts
 {
   deviceName: string;     // e.g., "Mike's MacBook Pro"
@@ -85,10 +85,10 @@ Device {#device}
 }
 ```
 
-Constants {#constants}
+## Constants {#constants}
 - `chrome.sessions.MAX_SESSION_RESULTS`. Maximum number of sessions returned (25)
 
-Events {#events}
+## Events {#events}
 - `chrome.sessions.onChanged`. Fires when the recently closed list changes
 ```ts
 chrome.sessions.onChanged.addListener(() => {
@@ -96,7 +96,7 @@ chrome.sessions.onChanged.addListener(() => {
 });
 ```
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -106,9 +106,9 @@ Manifest Declaration {#manifest-declaration}
 
 Also needs `"tabs"` permission to see tab URLs/titles.
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
-Session Restore UI {#session-restore-ui}
+## Session Restore UI {#session-restore-ui}
 Build a "recently closed" dropdown showing tabs the user can reopen:
 ```ts
 async function getRecentlyClosedTabs() {
@@ -123,7 +123,7 @@ async function getRecentlyClosedTabs() {
 }
 ```
 
-"Undo Close Tab" Feature {#undo-close-tab-feature}
+## "Undo Close Tab" Feature {#undo-close-tab-feature}
 Implement keyboard shortcut to restore the most recent tab:
 ```ts
 // Restore most recently closed tab
@@ -135,7 +135,7 @@ async function undoCloseTab() {
 }
 ```
 
-Cross-Device Tab Access {#cross-device-tab-access}
+## Cross-Device Tab Access {#cross-device-tab-access}
 Show tabs from other signed-in devices:
 ```ts
 async function getCrossDeviceTabs() {
@@ -157,7 +157,7 @@ async function getCrossDeviceTabs() {
 }
 ```
 
-Store Session Snapshots with @theluckystrike/webext-storage {#store-session-snapshots-with-theluckystrikewebext-storage}
+## Store Session Snapshots with @theluckystrike/webext-storage {#store-session-snapshots-with-theluckystrikewebext-storage}
 ```ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
 
@@ -186,12 +186,12 @@ async function saveSessionSnapshot() {
 }
 ```
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 - [tabs](tabs.md). Required to access tab URLs/titles
 - [patterns/sessions-api](../patterns/sessions-api.md). Session management patterns
 - [guides/tab-management](../guides/tab-management.md). Tab management guide
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What can I do with the sessions API?
 chrome.sessions allows your extension to query and restore recently closed tabs and windows, useful for session management extensions.

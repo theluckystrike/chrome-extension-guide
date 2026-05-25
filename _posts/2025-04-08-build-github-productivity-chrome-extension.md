@@ -14,7 +14,7 @@ Build a GitHub Productivity Chrome Extension: Enhance Your Developer Workflow
 
 If you are a developer who spends significant time on GitHub, you have probably wished for ways to streamline your workflow, automate repetitive tasks, or gain quick access to information that normally requires multiple clicks. Whether it is quickly checking pull request status, jumping to specific code definitions, or receiving instant notifications about repository activity, a custom Chrome extension can transform your GitHub experience. we will walk through the complete process of building a GitHub productivity Chrome extension from scratch, covering everything from project setup to deployment.
 
-Why Build a GitHub Productivity Extension
+### Why Build a GitHub Productivity Extension
 
 GitHub is the backbone of modern software development, hosting millions of repositories and serving as the collaboration hub for developers worldwide. However, despite its powerful features, there are countless everyday tasks that could be automated or enhanced through browser extensions. The official GitHub Chrome extension provides basic functionality, but there is enormous potential for custom solutions tailored to specific workflows.
 
@@ -22,7 +22,7 @@ Building your own GitHub productivity extension offers several compelling advant
 
 Before diving into the technical details, it is worth considering which features would provide the most value. Common GitHub productivity enhancements include quick repository search across your organizations, inline code documentation viewers, automated PR status dashboards, keyboard shortcut overlays, repository bookmarking systems, and notification aggregators. This guide will focus on building a foundation that can support multiple such features.
 
-Understanding Chrome Extension Architecture
+### Understanding Chrome Extension Architecture
 
 Chrome extensions are essentially web applications that run within the Chrome browser, with access to special APIs that standard web pages do not have. Understanding the different components of a Chrome extension is crucial for building effective functionality.
 
@@ -34,7 +34,7 @@ Background scripts operate independently of any web page, running in the backgro
 
 Popup pages are the small windows that appear when you click the extension icon in the Chrome toolbar. These provide a convenient interface for quick actions and settings, though they are not strictly required for all extensions.
 
-Setting Up Your Development Environment
+### Setting Up Your Development Environment
 
 Before writing any code, you need to set up a proper development environment. This involves creating the directory structure, initializing your manifest file, and configuring your development workflow.
 
@@ -101,7 +101,7 @@ The manifest.json file is the heart of your extension. For a GitHub productivity
 
 This manifest grants your extension access to GitHub.com and the GitHub API, while also requesting the necessary permissions for storage, notifications, and script execution.
 
-Building the Content Script
+### Building the Content Script
 
 The content script is where the magic happens for a GitHub extension. This script runs on every GitHub page, allowing you to detect the current context, modify the DOM, and add custom functionality. Let us build a comprehensive content script that provides several productivity features.
 
@@ -205,7 +205,7 @@ function enhancePullRequestView(context) {
 }
 ```
 
-Creating the Background Service Worker
+### Creating the Background Service Worker
 
 The background service worker handles events that occur in the background, independent of any specific web page. This is essential for maintaining persistent state, handling notifications, and managing API calls. Here is a comprehensive background script:
 
@@ -287,7 +287,7 @@ async function getBookmarks() {
 }
 ```
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup provides a convenient interface for quick actions without navigating away from the current page. Let us create a functional popup with multiple features:
 
@@ -474,7 +474,7 @@ document.getElementById('save-settings').addEventListener('click', async () => {
 });
 ```
 
-Styling Your Extension
+### Styling Your Extension
 
 Proper styling ensures your extension looks professional and integrates well with GitHub's design language. Here are essential styles:
 
@@ -710,16 +710,16 @@ body {
 }
 ```
 
-Testing Your Extension
+### Testing Your Extension
 
 Before deploying, thoroughly test your extension in Chrome. Navigate to chrome://extensions/ and enable Developer Mode in the top right corner. Click "Load unpacked" and select your extension directory. Test all features on various GitHub pages, including repository pages, pull requests, issues, and actions.
 
 Pay special attention to the following testing scenarios: keyboard shortcuts work correctly in different contexts, the popup opens and closes properly, bookmarks persist across browser sessions, search returns accurate results, and the extension does not conflict with GitHub's own functionality.
 
-Deploying to the Chrome Web Store
+### Deploying to the Chrome Web Store
 
 Once testing is complete, you can publish your extension to the Chrome Web Store. First, create a developer account at the Chrome Web Store Developer Dashboard. Package your extension by clicking "Pack extension" in chrome://extensions/ with your extension directory selected. Upload the packaged .zip file to the Chrome Web Store, providing a detailed description and screenshots. After review, your extension will be available for installation by millions of users.
 
-Conclusion
+### Conclusion
 
 Building a GitHub productivity Chrome extension is an excellent project that combines web development skills with practical utility. The architecture we have explored provides a solid foundation that you can extend with additional features like GitHub Actions monitoring, code review enhancements, issue template generators, or integration with third-party services. The key to a successful extension is focusing on features that genuinely improve your workflow, iterating based on usage patterns, and maintaining clean, well-documented code. With the foundation provided in this guide, you are well-equipped to create powerful tools that transform your GitHub experience and potentially help thousands of other developers streamline their work.

@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-update-handl
 last_modified_at: 2026-01-15
 ---
 
-Extension Update Handling
+### Extension Update Handling
 
 Graceful handling of extension updates is critical for maintaining user data integrity and a smooth experience. This pattern covers the complete update lifecycle.
 
-The `onInstalled` Event {#the-oninstalled-event}
+## The `onInstalled` Event {#the-oninstalled-event}
 
-Chrome provides `chrome.runtime.onInstalled` to detect extension lifecycle events:
+### Chrome provides `chrome.runtime.onInstalled` to detect extension lifecycle events:
 
 ```typescript
 chrome.runtime.onInstalled.addListener((details) => {
@@ -33,7 +33,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-Detecting Version Changes {#detecting-version-changes}
+## Detecting Version Changes {#detecting-version-changes}
 
 Compare the current manifest version with the stored previous version:
 
@@ -55,9 +55,9 @@ async function handleUpdate(previousVersion: string): Promise<void> {
 }
 ```
 
-Sequential Version Migrations {#sequential-version-migrations}
+## Sequential Version Migrations {#sequential-version-migrations}
 
-Run migrations in order to handle incremental changes:
+### Run migrations in order to handle incremental changes:
 
 ```typescript
 interface Migration {
@@ -81,7 +81,7 @@ async function runMigrations(fromVersion: string, toVersion: string): Promise<vo
 }
 ```
 
-Storage Schema Upgrades {#storage-schema-upgrades}
+## Storage Schema Upgrades {#storage-schema-upgrades}
 
 Handle storage schema changes safely:
 
@@ -111,7 +111,7 @@ async function migrateV210(): Promise<void> {
 }
 ```
 
-Content Script Reconnection {#content-script-reconnection}
+## Content Script Reconnection {#content-script-reconnection}
 
 After updates, existing content scripts may fail with "Receiving end does not exist":
 
@@ -131,9 +131,9 @@ async function reconnectContentScripts(): Promise<void> {
 }
 ```
 
-Preserving User State {#preserving-user-state}
+## Preserving User State {#preserving-user-state}
 
-Always backup user data before migrations:
+### Always backup user data before migrations:
 
 ```typescript
 async function withRollback(
@@ -163,7 +163,7 @@ async function withRollback(
 }
 ```
 
-Testing Updates Locally {#testing-updates-locally}
+## Testing Updates Locally {#testing-updates-locally}
 
 Use `chrome.management.setEnabled` or reload the extension in developer mode:
 
@@ -176,7 +176,7 @@ async function reloadExtension(): Promise<void> {
 }
 ```
 
-Summary {#summary}
+## Summary {#summary}
 
 - Use `chrome.runtime.onInstalled` to detect update reason
 - Compare manifest version with stored version
@@ -185,7 +185,7 @@ Summary {#summary}
 - Re-inject content scripts after updates
 - Implement rollback strategies for critical migrations
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Update Migration](./update-migration.md) - Detailed migration patterns
 - [Storage Migration](./storage-migration.md) - Storage schema upgrades

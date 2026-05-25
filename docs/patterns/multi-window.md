@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/multi-window/"
 last_modified_at: 2026-01-15
 ---
 
-Multi-Window Management Pattern
+### Multi-Window Management Pattern
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions often need to manage behavior across multiple browser windows. Whether you're building a productivity tool that tracks multiple projects in separate windows, a dashboard that opens in its own window, or an extension that coordinates state between windows, understanding how to work with the Windows API is essential. This pattern covers window awareness, events, per-window state management, coordination, and practical examples.
 
@@ -16,7 +16,7 @@ Extensions can create and manage multiple window types, track which window is fo
 
 ---
 
-Window Awareness {#window-awareness}
+## Window Awareness {#window-awareness}
 
 The Windows API provides several methods to query and inspect browser windows. Each window has a unique `windowId` that remains consistent throughout its lifetime.
 
@@ -41,7 +41,7 @@ The `chrome.windows.getLastFocused()` method is particularly useful for determin
 
 ---
 
-Window Events {#window-events}
+## Window Events {#window-events}
 
 Listen to window lifecycle events to stay in sync with the browser:
 
@@ -74,7 +74,7 @@ The `onFocusChanged` event fires with `chrome.windows.WINDOW_ID_NONE` when the u
 
 ---
 
-Per-Window State {#per-window-state}
+## Per-Window State {#per-window-state}
 
 Store state specific to each window using a Map keyed by `windowId`. This pattern ensures each window maintains its own context:
 
@@ -130,9 +130,9 @@ loadWindowStates();
 
 ---
 
-Window Types {#window-types}
+## Window Types {#window-types}
 
-Chrome supports different window types with distinct behaviors:
+### Chrome supports different window types with distinct behaviors:
 
 | Type | Description |
 |------|-------------|
@@ -142,7 +142,7 @@ Chrome supports different window types with distinct behaviors:
 | `"app"` | App window for Chrome Apps (deprecated) |
 | `"devtools"` | Developer tools window |
 
-Filter windows by type when querying:
+### Filter windows by type when querying:
 
 ```js
 // Only get normal browser windows
@@ -160,7 +160,7 @@ const popupWindows = await chrome.windows.getAll({
 
 ---
 
-Creating Extension Windows {#creating-extension-windows}
+## Creating Extension Windows {#creating-extension-windows}
 
 Create standalone windows for dashboards, settings, or content views:
 
@@ -195,7 +195,7 @@ await chrome.windows.update(window.id!, {
 
 ---
 
-Window Coordination {#window-coordination}
+## Window Coordination {#window-coordination}
 
 Extension badges and icons are global by default, but you can target specific windows using `tabId`:
 
@@ -220,7 +220,7 @@ Use `chrome.storage` as a coordination mechanism between windows, the `onChanged
 
 ---
 
-Complete Example {#complete-example}
+## Complete Example {#complete-example}
 
 Here's a practical example combining all concepts:
 
@@ -276,7 +276,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Windows API Reference](../api-reference/windows-api.md) - Complete API documentation
 - [Window Management Guide](../guides/window-management.md) - General window management

@@ -17,7 +17,7 @@ Chrome extensions have become essential tools for millions of users worldwide, a
 
 ---
 
-Prerequisites and Environment Setup
+### Prerequisites and Environment Setup
 
 Before diving into the implementation, let's ensure you have the necessary tools installed on your development machine. You'll need Node.js (version 18 or higher), npm or yarn package manager, and a modern code editor like Visual Studio Code. Chrome browser itself will be essential for testing your extension during development.
 
@@ -27,7 +27,7 @@ You'll also want to install the Chrome Web Store developer dashboard extension o
 
 ---
 
-Project Initialization and Structure
+### Project Initialization and Structure
 
 Creating a React-based Chrome extension requires careful project setup. While you could manually configure webpack or Vite, using a dedicated scaffolding tool designed for Chrome extensions will save you significant time and potential headaches. The recommended approach in 2025 is to use WXT or create-react-app with modifications, but we'll focus on a clean Vite-based setup for maximum control and modern best practices.
 
@@ -47,7 +47,7 @@ npm install -D vite @vitejs/plugin-react typescript @types/react @types/react-do
 
 Create a proper project structure that separates your React app from Chrome extension configuration. The structure should include directories for your source code, public assets, and extension-specific files. This organization becomes crucial as your extension grows in complexity.
 
-Your directory structure might look like this:
+### Your directory structure might look like this:
 
 ```
 src/
@@ -63,11 +63,11 @@ public/
 
 ---
 
-Understanding Chrome Extension Manifest V3
+### Understanding Chrome Extension Manifest V3
 
 The manifest.json file serves as the backbone of your Chrome extension, defining permissions, entry points, and capabilities. In 2025, Manifest V3 is mandatory for all new extensions, bringing important changes around service workers, declarative rules, and host permissions. Understanding these differences is crucial for building modern extensions.
 
-Create your manifest.json with the essential configuration:
+### Create your manifest.json with the essential configuration:
 
 ```json
 {
@@ -104,7 +104,7 @@ Pay special attention to the permissions you request. Chrome has become stricter
 
 ---
 
-Configuring Vite for Chrome Extension Development
+### Configuring Vite for Chrome Extension Development
 
 Vite provides an excellent development experience for building React applications, and with proper configuration, it can generate Chrome extension-compatible output. The key is to configure Vite to output your build files in the correct location and format for Chrome to recognize.
 
@@ -138,11 +138,11 @@ This configuration ensures that your React app builds into the dist directory, w
 
 ---
 
-Building the Popup Component
+### Building the Popup Component
 
 The popup is what users see when they click your extension icon in the Chrome toolbar. This should be a focused, lightweight React component that provides quick access to your extension's main features. In 2025, keeping your popup lightweight is more important than ever due to Chrome's resource constraints.
 
-Create your main Popup component with React:
+### Create your main Popup component with React:
 
 ```jsx
 import React, { useState, useEffect } from 'react';
@@ -216,7 +216,7 @@ This component demonstrates several key patterns: loading settings from Chrome's
 
 ---
 
-Implementing Content Scripts with React
+### Implementing Content Scripts with React
 
 Content scripts run in the context of web pages and allow your extension to interact with page content. While you can use React for content script UIs, there are important considerations around performance and page isolation. In 2025, the recommended approach is to inject a shadow DOM root for your React components to avoid CSS conflicts with the host page.
 
@@ -261,7 +261,7 @@ The shadow DOM approach prevents the page's CSS from affecting your React compon
 
 ---
 
-State Management and Chrome Storage
+### State Management and Chrome Storage
 
 Managing state in a Chrome extension differs from regular web applications due to the extension's architecture. Your extension has multiple contexts, the popup, background service worker, content scripts, and options page, that may need to share data. Chrome's storage API provides synchronization across these contexts.
 
@@ -299,7 +299,7 @@ This hook provides a clean interface for React components to interact with Chrom
 
 ---
 
-Background Service Worker Implementation
+### Background Service Worker Implementation
 
 The background service worker in Manifest V3 handles events and tasks that don't require a UI. This includes alarms, browser actions, message passing, and more. Since service workers can be terminated by Chrome when inactive, your code must be stateless and handle reinitialization gracefully.
 
@@ -347,7 +347,7 @@ Remember that service workers have a 30-second execution timeout, so any long-ru
 
 ---
 
-Loading and Testing Your Extension
+### Loading and Testing Your Extension
 
 With your React code and extension configuration complete, it's time to build and test. Run your Vite build command to generate the production files:
 
@@ -363,7 +363,7 @@ For development, consider using a hot-reloading setup to speed up iteration. Too
 
 ---
 
-Best Practices for Production
+### Best Practices for Production
 
 When preparing your extension for production deployment, several best practices ensure reliability and user satisfaction. First, implement proper error handling throughout your extension, uncaught errors in the popup or service worker can cause unexpected behavior and poor reviews.
 
@@ -375,7 +375,7 @@ Finally, thoroughly test your extension across different scenarios: fresh instal
 
 ---
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
 Once your extension is thoroughly tested and ready, it's time to publish to the Chrome Web Store. Prepare your store listing with compelling descriptions, screenshots, and a clear icon. The review process typically takes a few days, though complex extensions may take longer.
 
@@ -385,7 +385,7 @@ After publication, monitor user feedback and reviews. Respond professionally to 
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a Chrome extension with React in 2025 combines the best of modern web development with the unique capabilities of the Chrome extension platform. Through this guide, you've learned how to set up a proper development environment, structure your project, implement key extension components, and prepare for production deployment.
 

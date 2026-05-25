@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/side-panel-patterns/"
 last_modified_at: 2026-01-15
 ---
 
-Advanced Side Panel Patterns
+### Advanced Side Panel Patterns
 
 This guide covers advanced patterns for building Chrome Extension side panels using the Side Panel API (Manifest V3).
 
-Setting Up the Side Panel {#setting-up-the-side-panel}
+## Setting Up the Side Panel {#setting-up-the-side-panel}
 
-Configure the side panel in `manifest.json`:
+### Configure the side panel in `manifest.json`:
 
 ```json
 {
@@ -26,7 +26,7 @@ Configure the side panel in `manifest.json`:
 }
 ```
 
-Programmatic configuration:
+### Programmatic configuration:
 
 ```javascript
 chrome.sidePanel.setOptions({
@@ -35,9 +35,9 @@ chrome.sidePanel.setOptions({
 });
 ```
 
-Opening the Side Panel Programmatically {#opening-the-side-panel-programmatically}
+## Opening the Side Panel Programmatically {#opening-the-side-panel-programmatically}
 
-Chrome 116+ supports opening the side panel programmatically:
+### Chrome 116+ supports opening the side panel programmatically:
 
 ```javascript
 // Open side panel for the current window
@@ -47,9 +47,9 @@ await chrome.sidePanel.open({ windowId: chrome.windows.WINDOW_ID_CURRENT });
 await chrome.sidePanel.open({ tabId: currentTab.id });
 ```
 
-Per-Tab Side Panels {#per-tab-side-panels}
+## Per-Tab Side Panels {#per-tab-side-panels}
 
-Display different content per tab using `tabId`:
+### Display different content per tab using `tabId`:
 
 ```javascript
 chrome.sidePanel.setOptions({
@@ -66,7 +66,7 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
 });
 ```
 
-Communication with Page Content {#communication-with-page-content}
+## Communication with Page Content {#communication-with-page-content}
 
 Bridge the side panel with the active page using content scripts:
 
@@ -82,7 +82,7 @@ window.addEventListener('message', (event) => {
 window.postMessage({ type: 'FROM_PANEL', data: 'hello' }, '*');
 ```
 
-Side Panel Lifecycle {#side-panel-lifecycle}
+## Side Panel Lifecycle {#side-panel-lifecycle}
 
 Unlike popups, side panels persist across tab switches:
 
@@ -98,7 +98,7 @@ document.addEventListener('visibilitychange', () => {
 });
 ```
 
-Responsive Design {#responsive-design}
+## Responsive Design {#responsive-design}
 
 Handle variable panel widths:
 
@@ -112,9 +112,9 @@ if (width < 200) {
 }
 ```
 
-Navigation Within Side Panel {#navigation-within-side-panel}
+## Navigation Within Side Panel {#navigation-within-side-panel}
 
-Build SPA-like navigation with hash routing:
+### Build SPA-like navigation with hash routing:
 
 ```javascript
 function navigate(hash) {
@@ -125,7 +125,7 @@ function navigate(hash) {
 window.addEventListener('hashchange', renderContent);
 ```
 
-Side Panel vs Popup {#side-panel-vs-popup}
+## Side Panel vs Popup {#side-panel-vs-popup}
 
 | Feature | Side Panel | Popup |
 |---------|-----------|-------|
@@ -134,7 +134,7 @@ Side Panel vs Popup {#side-panel-vs-popup}
 | Communication | Continuous | Transient |
 | State | Maintained | Reset each open |
 
-Side Panel vs DevTools {#side-panel-vs-devtools}
+## Side Panel vs DevTools {#side-panel-vs-devtools}
 
 Side panels are ideal for:
 - User-facing features
@@ -146,9 +146,9 @@ DevTools are better for:
 - Deep inspection
 - Developer-focused features
 
-Keyboard Shortcuts {#keyboard-shortcuts}
+## Keyboard Shortcuts {#keyboard-shortcuts}
 
-Toggle side panel with keyboard:
+### Toggle side panel with keyboard:
 
 ```json
 {
@@ -172,13 +172,13 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-Limitations {#limitations}
+## Limitations {#limitations}
 
 - Only one side panel per extension
 - Cannot programmatically resize panel width
 - Panel width determined by user settings
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Side Panel API Reference](../api-reference/side-panel-api.md)
 - [Side Panel Basics](../mv3/side-panel.md)

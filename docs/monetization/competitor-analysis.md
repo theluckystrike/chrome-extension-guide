@@ -10,7 +10,7 @@ Competitor Analysis for Chrome Extensions
 
 Understanding your competitive landscape is crucial for building a successful Chrome extension. This guide provides frameworks and templates for systematically analyzing competitors on the Chrome Web Store (CWS), identifying market gaps, and developing differentiation strategies.
 
-Overview
+### Overview
 
 Competitor analysis for Chrome extensions involves:
 - Identifying direct and indirect competitors on CWS
@@ -21,18 +21,18 @@ Competitor analysis for Chrome extensions involves:
 
 ---
 
-Identifying Competitors on CWS
+### Identifying Competitors on CWS
 
-Search Strategy Framework
+### Search Strategy Framework
 
-Use multiple search queries to discover competitors:
+### Use multiple search queries to discover competitors:
 
 1. Primary keyword searches. Search for your core functionality terms
 2. Problem-solution searches. Search for problems your extension solves
 3. Alternative searches. Search for "alternatives to [popular extension]"
 4. Category browsing. Explore relevant CWS categories
 
-Competitor Discovery Template
+### Competitor Discovery Template
 
 ```markdown
 Competitor Discovery Log
@@ -55,7 +55,7 @@ Competitor Categories Identified
 - Adjacent Tools: [Related but different purpose]
 ```
 
-Data Collection Spreadsheet
+### Data Collection Spreadsheet
 
 Create a spreadsheet with these columns:
 
@@ -74,9 +74,9 @@ Create a spreadsheet with these columns:
 
 ---
 
-Analyzing Features and Functionality
+### Analyzing Features and Functionality
 
-Feature Comparison Matrix
+### Feature Comparison Matrix
 
 Create a matrix to compare features across competitors:
 
@@ -94,9 +94,9 @@ Feature Comparison Matrix
 Legend: [] = Has feature, [ ] = Missing feature
 ```
 
-Feature Gaps Analysis
+### Feature Gaps Analysis
 
-After building your matrix, identify:
+### After building your matrix, identify:
 
 1. Over-served features. Features everyone has (commodity)
 2. Under-served features. Features few competitors offer
@@ -120,11 +120,11 @@ Differentiation Opportunities
 
 ---
 
-Analyzing Pricing and Reviews
+### Analyzing Pricing and Reviews
 
-Pricing Model Analysis
+### Pricing Model Analysis
 
-Document competitor pricing strategies:
+### Document competitor pricing strategies:
 
 ```markdown
 Pricing Analysis
@@ -142,9 +142,9 @@ Pricing Insights
 - Opportunities for better pricing: [list]
 ```
 
-Review Analysis Framework
+### Review Analysis Framework
 
-Analyze competitor reviews to find problems and opportunities:
+### Analyze competitor reviews to find problems and opportunities:
 
 1. Gather reviews. Note both positive and negative
 2. Categorize feedback. Group by feature/issue type
@@ -175,9 +175,9 @@ Feature Requests
 
 ---
 
-Finding Market Gaps
+### Finding Market Gaps
 
-Gap Identification Framework
+### Gap Identification Framework
 
 Use this systematic approach to find gaps:
 
@@ -201,9 +201,9 @@ High-Opportunity Gaps
 3. [Gap 3]: [Description] - [Why it matters]
 ```
 
-Underserved Market Indicators
+### Underserved Market Indicators
 
-Look for these signals:
+### Look for these signals:
 
 - Low competition. Few extensions solving a specific problem
 - Poor ratings. Competitors with <3.5 stars
@@ -214,9 +214,9 @@ Look for these signals:
 
 ---
 
-Differentiation Strategies
+### Differentiation Strategies
 
-Strategy Options
+### Strategy Options
 
 1. Feature differentiation. Add unique features competitors lack
 2. Performance differentiation. Faster, more lightweight
@@ -225,7 +225,7 @@ Strategy Options
 5. Integration differentiation. Connect with tools competitors don't
 6. Privacy differentiation. More transparent, less data collection
 
-Differentiation Planning Template
+### Differentiation Planning Template
 
 ```markdown
 Differentiation Strategy
@@ -251,11 +251,11 @@ Moat (Defensibility)
 
 ---
 
-Monitoring Competitor Updates
+### Monitoring Competitor Updates
 
-Tracking System
+### Tracking System
 
-Set up ongoing monitoring:
+### Set up ongoing monitoring:
 
 ```typescript
 // competitor-tracker.ts
@@ -291,7 +291,7 @@ async function checkForUpdates() {
 }
 ```
 
-Monitoring Checklist
+### Monitoring Checklist
 
 - [ ] Check competitor CWS pages weekly
 - [ ] Subscribe to competitor update notifications
@@ -301,7 +301,7 @@ Monitoring Checklist
 - [ ] Follow competitor social media/blogs
 - [ ] Set up Google Alerts for competitor names
 
-Competitive Response Framework
+### Competitive Response Framework
 
 When a competitor updates:
 
@@ -327,7 +327,7 @@ Decision
 
 ---
 
-Actionable Framework: Complete Competitor Analysis
+### Actionable Framework: Complete Competitor Analysis
 
 Use this step-by-step process:
 
@@ -357,9 +357,9 @@ Phase 4: Monitoring (Ongoing)
 
 ---
 
-Code Examples
+### Code Examples
 
-Competitive Feature Detector
+### Competitive Feature Detector
 
 ```typescript
 // detect-competitor-features.ts
@@ -417,7 +417,7 @@ function extractFeatures(description: string): CompetitorFeature[] {
 }
 ```
 
-Automated Monitoring Script
+### Automated Monitoring Script
 
 ```typescript
 // schedule-competitor-check.ts
@@ -477,7 +477,7 @@ async function notifyCompetitorUpdate(competitor: any, newData: any) {
 
 ---
 
-Common Mistakes to Avoid
+### Common Mistakes to Avoid
 
 1. Analyzing too many competitors. Focus on top 5-7, not 20+
 2. Ignoring indirect competitors. They may become direct competitors
@@ -488,7 +488,7 @@ Common Mistakes to Avoid
 
 ---
 
-Cross-references
+### Cross-references
 
 - `docs/guides/extension-monetization.md`. Monetization strategies
 - `docs/publishing/listing-optimization.md`. CWS listing best practices
@@ -496,7 +496,7 @@ Cross-references
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Listing Optimization](../publishing/listing-optimization.md). Optimize your Chrome Web Store listing for discoverability
 - [Extension Monetization](../guides/extension-monetization.md). Strategies for generating revenue from your extension

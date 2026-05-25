@@ -18,7 +18,7 @@ This comprehensive guide covers every field available in Chrome Extension Manife
 
 ---
 
-What is manifest.json? {#what-is-manifest-json}
+## What is manifest.json? {#what-is-manifest-json}
 
 The manifest.json file is a JSON-formatted configuration file that every Chrome extension must include. It serves as the blueprint for your extension, defining metadata, capabilities, and resource files. Chrome reads this file during installation to understand how the extension should behave and what permissions it needs to function.
 
@@ -26,7 +26,7 @@ Without a properly configured manifest.json, your extension cannot be loaded int
 
 ---
 
-Required Fields in manifest.json {#required-fields}
+## Required Fields in manifest.json {#required-fields}
 
 Every valid Chrome extension manifest must include several essential fields. These fields identify your extension and provide the minimum information Chrome needs to install and run it.
 
@@ -68,7 +68,7 @@ Version numbers consist of up to four dot-separated integers, each between 0 and
 
 ---
 
-Description and Metadata Fields {#description-metadata}
+## Description and Metadata Fields {#description-metadata}
 
 These fields provide additional information about your extension beyond the required name and version.
 
@@ -112,7 +112,7 @@ The short_name is limited to 12 characters. If you don't specify a short_name, C
 
 ---
 
-Extension Icons {#extension-icons}
+## Extension Icons {#extension-icons}
 
 Icons are essential for your extension's visual identity. Chrome uses icons in multiple sizes across different contexts, from the extensions manager to the Chrome Web Store.
 
@@ -154,7 +154,7 @@ You can specify different icon sizes for different toolbar densities. The icon s
 
 ---
 
-Extension Actions {#extension-actions}
+## Extension Actions {#extension-actions}
 
 Actions define what happens when users interact with your extension in the Chrome toolbar.
 
@@ -192,7 +192,7 @@ When users type "myext" in the address bar followed by a space, your extension c
 
 ---
 
-Permissions {#permissions}
+## Permissions {#permissions}
 
 Permissions are critical for controlling what your extension can access and do. Understanding permissions is essential for both security and passing Chrome Web Store review.
 
@@ -243,7 +243,7 @@ Users can choose to grant optional permissions through your extension's settings
 
 ---
 
-Background Scripts and Service Workers {#background-scripts}
+## Background Scripts and Service Workers {#background-scripts}
 
 Background scripts run in the background and handle events, manage state, and coordinate between different parts of your extension.
 
@@ -264,7 +264,7 @@ The service_worker property specifies the file that contains your background scr
 
 ---
 
-Content Scripts {#content-scripts}
+## Content Scripts {#content-scripts}
 
 Content scripts are JavaScript files that run in the context of web pages, allowing your extension to interact with page content.
 
@@ -289,13 +289,13 @@ The matches array defines which pages the script applies to using URL patterns. 
 
 ---
 
-Browser Actions vs. Extension Actions {#browser-actions}
+## Browser Actions vs. Extension Actions {#browser-actions}
 
 Note that in Manifest V3, the "browser_action" field has been unified with "action". The "action" field is now used for all extensions, regardless of whether they function as browser actions or page actions.
 
 ---
 
-Options Page and Settings {#options-page}
+## Options Page and Settings {#options-page}
 
 The options_page field defines a settings page where users can configure your extension's behavior.
 
@@ -320,7 +320,7 @@ The open_in_tab option determines whether the options page opens in a new tab or
 
 ---
 
-Web Accessible Resources {#web-accessible-resources}
+## Web Accessible Resources {#web-accessible-resources}
 
 The web_accessible_resources field specifies files within your extension that can be accessed by web pages or other extensions.
 
@@ -339,7 +339,7 @@ This is commonly used for content scripts that need to inject images or other re
 
 ---
 
-Declarative Net Request Rules {#declarative-net-request}
+## Declarative Net Request Rules {#declarative-net-request}
 
 For extensions that need to modify network requests, Manifest V3 uses the declarativeNetRequest API instead of the webRequest API.
 
@@ -361,7 +361,7 @@ This powerful API allows extensions to block or modify network requests declarat
 
 ---
 
-Chrome URL Access {#chrome-url-access}
+## Chrome URL Access {#chrome-url-access}
 
 chrome_url_overrides
 
@@ -379,7 +379,7 @@ You can override "newtab" (the new tab page), "bookmarks" (the bookmarks manager
 
 ---
 
-File Handlers and Protocols {#file-handlers}
+## File Handlers and Protocols {#file-handlers}
 
 file_handlers
 
@@ -401,7 +401,7 @@ This allows users to open files with your extension from Chrome's file manager o
 
 ---
 
-Commands and Keyboard Shortcuts {#commands}
+## Commands and Keyboard Shortcuts {#commands}
 
 The commands API allows users to configure keyboard shortcuts for your extension.
 
@@ -423,7 +423,7 @@ Users can view and customize these shortcuts in the extensions manager. The sugg
 
 ---
 
-Tabs and Windows Management {#tabs-windows}
+## Tabs and Windows Management {#tabs-windows}
 
 tab_groups
 
@@ -439,7 +439,7 @@ This API enables creating, moving, and organizing tabs into color-coded groups, 
 
 ---
 
-Side Panels (Manifest V3) {#side-panels}
+## Side Panels (Manifest V3) {#side-panels}
 
 Manifest V3 introduced side panels, a new UI surface for extensions.
 
@@ -456,7 +456,7 @@ Side panels appear in the right side of the browser window and provide a persist
 
 ---
 
-Cross-Origin Isolation {#cross-origin-isolation}
+## Cross-Origin Isolation {#cross-origin-isolation}
 
 cross_origin_embedder_policy and cross_origin_opener_policy
 
@@ -477,7 +477,7 @@ Most extensions do not need these settings. They are primarily used by extension
 
 ---
 
-Export and Import {#export-import}
+## Export and Import {#export-import}
 
 export and import
 
@@ -500,7 +500,7 @@ This enables enterprise and educational environments to distribute pre-configure
 
 ---
 
-Testing and Development {#testing-development}
+## Testing and Development {#testing-development}
 
 devtools_page
 
@@ -516,7 +516,7 @@ This powerful feature allows you to extend Chrome's developer tools with custom 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The manifest.json file is the foundation of every Chrome extension. Understanding each field and its purpose helps you build more powerful, secure, and user-friendly extensions. Manifest V3 represents a significant evolution in extension development, emphasizing security, performance, and user privacy.
 

@@ -17,7 +17,7 @@ Whether you're launching a new extension or updating an existing one, understand
 
 ---
 
-Why Internationalization Matters for Chrome Extensions
+### Why Internationalization Matters for Chrome Extensions
 
 The internet has no borders, and neither should your Chrome extension. When you implement proper internationalization, you open your product to billions of potential users who prefer interacting with applications in their native language. Studies consistently demonstrate that localized applications achieve higher conversion rates, receive better user reviews, and build stronger brand loyalty across diverse markets.
 
@@ -27,7 +27,7 @@ Chrome's internationalization system is particularly well-designed because it in
 
 ---
 
-Understanding the Chrome i18n Architecture
+### Understanding the Chrome i18n Architecture
 
 Chrome extensions use a dedicated i18n system built around the chrome.i18n API and a structured _locales directory. This architecture provides several advantages over rolling your own solution: it's officially supported, performance-optimized, and handles edge cases like missing translations and pluralization rules automatically.
 
@@ -37,7 +37,7 @@ This approach differs significantly from web application i18n in one crucial asp
 
 ---
 
-Setting Up Your Locale Directory Structure
+### Setting Up Your Locale Directory Structure
 
 The first step in implementing internationalization is creating the proper directory structure. Your _locales folder must be located at the root of your extension directory, with each supported language in its own subfolder containing a messages.json file.
 
@@ -69,7 +69,7 @@ Each subfolder uses the ISO 639-1 two-letter language code, with regional varian
 
 ---
 
-Creating Your Messages.json Files
+### Creating Your Messages.json Files
 
 The messages.json file is the foundation of your translation system. Each file contains key-value pairs where keys are unique identifiers used throughout your code, and values are objects containing the translated text and optional metadata.
 
@@ -131,7 +131,7 @@ The description fields are crucial, they provide context for translators who may
 
 ---
 
-Configuring Your Manifest for i18n
+### Configuring Your Manifest for i18n
 
 Your manifest.json file must reference your default locale and declare supported languages. This configuration tells Chrome which translation files to include and what language to use as the fallback.
 
@@ -167,11 +167,11 @@ The __MSG_keyName__ syntax is special to Chrome extensions, it tells Chrome to r
 
 ---
 
-Using i18n in Your JavaScript Code
+### Using i18n in Your JavaScript Code
 
 The chrome.i18n API provides several methods for retrieving translated strings in your JavaScript code. Understanding these methods allows you to implement translations throughout your extension's functionality.
 
-Basic String Retrieval
+### Basic String Retrieval
 
 The most common method is getMessage(), which retrieves a translated string by its key:
 
@@ -186,7 +186,7 @@ const welcomeMessage = chrome.i18n.getMessage('welcomeMessage', ['John']);
 const itemCount = chrome.i18n.getMessage('itemCount', [5]);
 ```
 
-Detecting User Language
+### Detecting User Language
 
 Sometimes you need to know the user's current language to make decisions in your code:
 
@@ -200,7 +200,7 @@ chrome.i18n.getAcceptLanguages((languages) => {
 });
 ```
 
-Using i18n in Content Scripts
+### Using i18n in Content Scripts
 
 Content scripts require a slightly different approach since they run in the context of web pages, not the extension:
 
@@ -217,11 +217,11 @@ chrome.runtime.sendMessage({ type: 'GET_TRANSLATION', key: 'someKey' },
 
 ---
 
-Implementing i18n in HTML Pages
+### Implementing i18n in HTML Pages
 
 For HTML files in your extension, you have two approaches: using the __MSG__ syntax directly in your HTML or dynamically setting text content with JavaScript.
 
-Direct HTML Integration
+### Direct HTML Integration
 
 For static text elements, use the __MSG__ syntax directly in your HTML:
 
@@ -244,7 +244,7 @@ For static text elements, use the __MSG__ syntax directly in your HTML:
 
 This approach works smoothly for text that doesn't change based on user interaction or dynamic data.
 
-Dynamic HTML Updates
+### Dynamic HTML Updates
 
 For dynamic content, use JavaScript to set translated strings:
 
@@ -282,9 +282,9 @@ function saveSettings() {
 
 ---
 
-Advanced i18n Techniques
+### Advanced i18n Techniques
 
-Pluralization Support
+### Pluralization Support
 
 Different languages have different pluralization rules. Chrome's i18n system handles this complexity automatically:
 
@@ -304,9 +304,9 @@ Different languages have different pluralization rules. Chrome's i18n system han
 
 For languages with complex plural forms (like Russian or Arabic), Chrome automatically selects the correct plural form based on the numeric value.
 
-Gender-Specific Translations
+### Gender-Specific Translations
 
-Some languages require different wording based on gender:
+### Some languages require different wording based on gender:
 
 ```json
 {
@@ -326,7 +326,7 @@ Some languages require different wording based on gender:
 }
 ```
 
-RTL Language Support
+### RTL Language Support
 
 For languages that read right-to-left (RTL) like Arabic and Hebrew, ensure your CSS properly handles text direction:
 
@@ -359,9 +359,9 @@ document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
 
 ---
 
-Best Practices for Translation Management
+### Best Practices for Translation Management
 
-Use Meaningful Message Keys
+### Use Meaningful Message Keys
 
 Avoid cryptic keys like "msg1" or "str2." Instead, use descriptive names that indicate the string's purpose:
 
@@ -377,11 +377,11 @@ Avoid cryptic keys like "msg1" or "str2." Instead, use descriptive names that in
 "n"
 ```
 
-Keep Messages Concise
+### Keep Messages Concise
 
 Translation strings that are too long may not fit in your UI. Aim for concise translations that convey the same meaning in fewer words. Remember that some languages require more space than English, for example, German translations are often 30% longer.
 
-Provide Translator Comments
+### Provide Translator Comments
 
 Include helpful descriptions for translators, especially for ambiguous terms:
 
@@ -394,7 +394,7 @@ Include helpful descriptions for translators, especially for ambiguous terms:
 }
 ```
 
-Test All Languages
+### Test All Languages
 
 Regularly test your extension in all supported languages. Pay special attention to:
 
@@ -405,7 +405,7 @@ Regularly test your extension in all supported languages. Pay special attention 
 
 ---
 
-Publishing Your Multi-Language Extension
+### Publishing Your Multi-Language Extension
 
 When you publish to the Chrome Web Store, your extension's multilingual capabilities are automatically advertised. Users will see your extension listed in their language when available, and your description can be localized to appeal to specific markets.
 
@@ -413,7 +413,7 @@ The Chrome Web Store supports localized descriptions through the developer dashb
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing internationalization in your Chrome extension is a straightforward process that yields significant benefits. By following the patterns and practices outlined in this guide, you can create extensions that smoothly serve users across the globe, regardless of their language or region.
 
@@ -423,35 +423,35 @@ Start implementing i18n in your next Chrome extension project, and watch your po
 
 ---
 
-Common i18n Pitfalls and How to Avoid Them
+### Common i18n Pitfalls and How to Avoid Them
 
 Even experienced developers encounter challenges when implementing internationalization. Understanding these common pitfalls helps you avoid making the same mistakes in your Chrome extension development.
 
-Hardcoded Strings
+### Hardcoded Strings
 
 One of the most frequent issues is leaving hardcoded strings in your JavaScript or HTML files. This happens when developers initially build their extension in a single language and forget to replace static text with translation function calls. To prevent this, establish i18n as a requirement from the very beginning of your development process. Make it a coding standard to never use raw strings, every user-facing text should come from your messages.json files. Using a linter or static analysis tool that checks for hardcoded strings can help catch these issues early in development.
 
 Another common mistake is forgetting to translate error messages. Developers often remember to internationalize buttons, labels, and titles but overlook error messages that appear during exceptional conditions. Since these messages appear when something goes wrong, they're particularly important to localize, users need to understand error messages in their native language to troubleshoot issues effectively.
 
-Ignoring Context in Translations
+### Ignoring Context in Translations
 
 Translation without context leads to inaccurate or confusing translations. When you provide message keys without sufficient context, translators may choose meanings that don't fit your intended use. For example, the word "save" could refer to saving a file, saving a preference, or preserving data for later use. Each context might require a different translation in some languages.
 
 Always include description fields in your messages.json files, and make them as detailed as possible. Explain where the string appears, what it does, and any cultural considerations translators should know. If a string is used in multiple contexts, create separate message keys for each context rather than reusing the same translation.
 
-Incorrect Placeholder Usage
+### Incorrect Placeholder Usage
 
 Placeholders require careful attention to ensure they're used correctly throughout your translation files. When using placeholders like $NAME$ or $COUNT$, ensure that every language file defines these placeholders consistently. Failing to include placeholders in all translation files causes errors when Chrome tries to display translated strings.
 
 Additionally, be mindful of placeholder ordering. Some languagesgrammatically require different word orders, so simply replacing placeholders in the same position doesn't always work. For complex sentences with multiple placeholders, consider using named placeholders instead of positional ones, and test thoroughly with each supported language.
 
-Neglecting Extension Updates
+### Neglecting Extension Updates
 
 When you update your extension with new features, you inevitably add new strings that need translation. Failing to update your translation files causes missing translations in production, leaving users with broken-looking interfaces. Establish a process where every new string added to the code must have corresponding entries in your translation files before the code is merged.
 
 Use build tools that warn you about missing translation keys. Many development frameworks can validate that all message keys referenced in your code exist in your translation files. Implementing these checks in your continuous integration pipeline catches missing translations before they reach production.
 
-Performance Considerations
+### Performance Considerations
 
 While Chrome's i18n system is highly optimized, poor implementation choices can still impact performance. Avoid calling getMessage() inside loops or frequently-called functions when possible. Cache frequently-used translations at the extension startup instead of retrieving them repeatedly. For complex UI elements that display many translated strings, consider loading all required translations once and storing them in memory.
 
@@ -459,29 +459,29 @@ Another performance consideration is the number of supported languages. Each lan
 
 ---
 
-Testing Your Internationalized Extension
+### Testing Your Internationalized Extension
 
 Proper testing ensures your internationalization implementation works correctly across all supported languages and edge cases. Testing internationalized extensions requires attention to both functional correctness and visual presentation.
 
-Functional Testing
+### Functional Testing
 
 Verify that every feature works correctly regardless of the user's language setting. This means testing all user flows with different language configurations, ensuring that translated strings don't break functionality. Pay special attention to forms that accept user input, as validation messages must also be translated and displayed correctly.
 
 Test your extension's behavior when a translation is missing. Chrome's fallback behavior should display the default locale's string, but verify this works as expected. Check console logs for any warnings about missing translations during your testing process.
 
-Visual Testing
+### Visual Testing
 
 Different languages require different amounts of space, and your UI must accommodate these variations. German translations often require 30% more space than their English equivalents, while some Asian languages require less. Test your extension's layout with multiple languages to ensure no text gets truncated or overflows its container.
 
 Pay particular attention to right-to-left languages. Verify that all UI elements are properly mirrored, icons are correctly oriented, and text alignment works in both directions. Test on different screen sizes and resolutions to catch responsive layout issues that may appear only with certain language combinations.
 
-Localization Testing Tools
+### Localization Testing Tools
 
 Chrome provides developer tools that help test internationalization. You can manually set the extension's language in chrome://extensions to override the browser's default language, making it easy to test each supported language without changing your system settings. Use these tools to systematically verify each language before releasing updates.
 
 ---
 
-Conclusion and Next Steps
+### Conclusion and Next Steps
 
 Internationalization is an ongoing process that evolves with your extension. As you add features and expand to new markets, your i18n implementation must grow accordingly. Start with a solid foundation using the techniques in this guide, establish good practices from the beginning, and continuously improve your translation infrastructure as your extension gains international users.
 

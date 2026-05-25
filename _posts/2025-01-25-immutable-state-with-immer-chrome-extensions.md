@@ -18,7 +18,7 @@ Understanding immutable state patterns is crucial for Chrome extension developer
 
 ---
 
-Understanding Immutable State in Chrome Extensions {#understanding-immutable-state}
+## Understanding Immutable State in Chrome Extensions {#understanding-immutable-state}
 
 Chrome extensions are fundamentally different from web applications in how they manage state. A typical extension might maintain user preferences in chrome.storage, cached data from external APIs, UI state in popup components, and runtime state in the background service worker. Without proper state management, these disparate state sources can become inconsistent, leading to bugs that are difficult to diagnose and reproduce.
 
@@ -48,13 +48,13 @@ This approach becomes increasingly complex as state structures grow deeper, lead
 
 ---
 
-Introducing Immer: The Simple Path to Immutability {#introducing-immer}
+## Introducing Immer: The Simple Path to Immutability {#introducing-immer}
 
 Immer (derived from the German word for "always") is a tiny JavaScript package that allows you to work with immutable state using a convenient, mutable-style API. Created by Michel Weststrate, Immer has gained widespread adoption in the React ecosystem and proves equally valuable for Chrome extension development.
 
 The core concept behind Immer is the "draft state" - a proxy object that appears mutable but tracks all changes made to it. When you finish making changes, Immer produces a frozen, immutable final state based on those changes. This approach gives you the best of both worlds: the convenience of mutable code and the guarantees of immutability.
 
-The Produce Function
+### The Produce Function
 
 The heart of Immer is the `produce` function, which takes a base state and a recipe function that describes how to transform it:
 
@@ -72,23 +72,23 @@ The `produce` function returns a new immutable state object with your changes ap
 
 ---
 
-Implementing Immer in Chrome Extensions {#implementing-immer}
+## Implementing Immer in Chrome Extensions {#implementing-immer}
 
 Setting up Immer in your Chrome extension is straightforward. You can install it via npm or include it directly in your extension's background script. For Manifest V3 extensions, Immer works smoothly with both ES modules and traditional script inclusion.
 
-Installation
+### Installation
 
 ```bash
 npm install immer
 ```
 
-Or include via CDN in your HTML files:
+### Or include via CDN in your HTML files:
 
 ```html
 <script src="https://unpkg.com/immer@10.0.0/dist/immer.umd.production.min.js"></script>
 ```
 
-Basic Setup for Extension State
+### Basic Setup for Extension State
 
  how to implement Immer in a Chrome extension's background service worker. This example demonstrates managing extension state with Immer's produce pattern:
 
@@ -161,11 +161,11 @@ This pattern provides a clean, maintainable approach to state management. Each a
 
 ---
 
-The Produce Pattern detailed look {#produce-pattern-deep detailed look}
+### The Produce Pattern detailed look {#produce-pattern-deep detailed look}
 
 Understanding the full capabilities of Immer's produce function unlocks powerful patterns for Chrome extension development. The produce function supports several patterns that simplify complex state transformations.
 
-Simple Produce
+### Simple Produce
 
 The most basic usage involves a single state update:
 
@@ -175,7 +175,7 @@ const newState = produce(state, (draft) => {
 });
 ```
 
-Curried Produce
+### Curried Produce
 
 For reusable update functions, Immer supports curried producers:
 
@@ -192,7 +192,7 @@ const state2 = incrementCounter(state1, 3);
 
 This pattern is particularly useful in Chrome extensions where you might need to update state from multiple places in your code.
 
-Produce with Return Values
+### Produce with Return Values
 
 You can also use produce to filter or transform data:
 
@@ -204,11 +204,11 @@ const completedTasks = produce(tasks, (draft) => {
 
 ---
 
-Practical Examples for Chrome Extensions {#practical-examples}
+## Practical Examples for Chrome Extensions {#practical-examples}
 
  real-world scenarios where Immer simplifies Chrome extension development.
 
-Managing User Preferences
+### Managing User Preferences
 
 Chrome extensions often need to manage complex user preference structures. Immer makes this straightforward:
 
@@ -245,7 +245,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Handling Cached Data
+### Handling Cached Data
 
 Extensions frequently cache API responses. Immer simplifies cache management:
 
@@ -280,7 +280,7 @@ const cacheReducer = produce((draft, action) => {
 });
 ```
 
-Synchronizing State Across Contexts
+### Synchronizing State Across Contexts
 
 One of the most powerful use cases for Immer in Chrome extensions is maintaining state consistency across different extension contexts:
 
@@ -325,7 +325,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Immer with Chrome Storage API {#immer-with-chrome-storage}
+## Immer with Chrome Storage API {#immer-with-chrome-storage}
 
 Persisting Immer-managed state with the Chrome Storage API requires special handling. The key is to ensure you're storing plain objects, not Immer proxies:
 
@@ -361,7 +361,7 @@ This pattern ensures that your state is properly serialized and stored without i
 
 ---
 
-Best Practices for Immer in Chrome Extensions {#best-practices}
+## Best Practices for Immer in Chrome Extensions {#best-practices}
 
 When implementing Immer in your Chrome extension, following these best practices ensures maintainable and performant code.
 
@@ -387,7 +387,7 @@ const goodState = {
 
 2. Use Selector Functions
 
-Create reusable selectors to access state:
+### Create reusable selectors to access state:
 
 ```javascript
 const selectUser = (state, userId) => state.users[userId];
@@ -421,11 +421,11 @@ enableES5(); // Enable for environments without Proxies
 
 ---
 
-Common Pitfalls and Solutions {#common-pitfalls}
+## Common Pitfalls and Solutions {#common-pitfalls}
 
 Even experienced developers encounter challenges when first adopting Immer. Here are solutions to common issues.
 
-Pitfall 1: Forgetting to Return New State
+### Pitfall 1: Forgetting to Return New State
 
 When using produce with a return value, remember that you're replacing the entire state:
 
@@ -446,7 +446,7 @@ produce(state, (draft) => {
 });
 ```
 
-Pitfall 2: Mixing Immutable and Mutable Operations
+### Pitfall 2: Mixing Immutable and Mutable Operations
 
 Immer works best when you fully commit to its pattern:
 
@@ -464,9 +464,9 @@ produce(state, (draft) => {
 });
 ```
 
-Pitfall 3: Not Freezing in Development
+### Pitfall 3: Not Freezing in Development
 
-Enable freezing in development to catch accidental mutations:
+### Enable freezing in development to catch accidental mutations:
 
 ```javascript
 import { enablePatches, enableMapSet, freeze } from 'immer';
@@ -483,11 +483,11 @@ const newState = produce(state, (draft) => {
 
 ---
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
 Immer adds minimal overhead to your state management, but understanding its performance characteristics helps optimize extension performance.
 
-Lazy Creation
+### Lazy Creation
 
 Immer only creates new objects for the modified paths in your state tree. Unchanged portions share references with the original state, making updates efficient:
 
@@ -498,7 +498,7 @@ const newState = produce(state, (draft) => {
 });
 ```
 
-Large Arrays
+### Large Arrays
 
 For very large arrays, consider using Immer's `nothing` special token for efficient modifications:
 
@@ -513,7 +513,7 @@ const newState = produce(state, (draft) => {
 
 ---
 
-Conclusion: Why Immer for Chrome Extensions? {#conclusion}
+## Conclusion: Why Immer for Chrome Extensions? {#conclusion}
 
 Chrome extensions benefit enormously from Immer's approach to immutable state management. The multi-context nature of extensions, with background service workers, content scripts, popup pages, and options pages all requiring state synchronization, makes predictable state updates crucial. Immer's produce pattern simplifies complex state transformations, reduces bugs from accidental mutations, and makes code more readable and maintainable.
 

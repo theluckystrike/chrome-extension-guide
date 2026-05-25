@@ -18,7 +18,7 @@ The demand for browsing time monitors has surged dramatically as more people wor
 
 ---
 
-Understanding the Need for Website Time Monitoring {#understanding-need}
+## Understanding the Need for Website Time Monitoring {#understanding-need}
 
 The modern browser has become the primary workspace for millions of professionals worldwide. We use it for communication, research, document creation, project management, and countless other tasks. However, this convenience comes with a downside: it's easy to lose track of time while browsing. Hours can vanish checking social media, reading news, or falling down YouTube rabbit holes without any awareness of how much time these activities consume.
 
@@ -30,11 +30,11 @@ Building a time tracker extension also represents an excellent learning opportun
 
 ---
 
-Project Architecture and Features {#project-architecture}
+## Project Architecture and Features {#project-architecture}
 
 Before diving into code, let's define the architecture and features for our time tracker extension. A solid website time monitor should capture detailed information about browsing sessions while remaining lightweight and privacy-focused.
 
-Core Features
+### Core Features
 
 Our time tracker extension will include the following essential features:
 
@@ -48,7 +48,7 @@ Our time tracker extension will include the following essential features:
 
 This feature set balances functionality with simplicity, making it achievable within a comprehensive tutorial while still providing real value to users.
 
-Technical Architecture
+### Technical Architecture
 
 The extension will use a clean architecture with separate responsibilities for each component:
 
@@ -61,11 +61,11 @@ This separation of concerns ensures the extension remains maintainable and easy 
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Every Chrome extension begins with the manifest file, which defines the extension's capabilities and permissions. Let's create the foundation of our time tracker extension.
 
-Creating manifest.json
+### Creating manifest.json
 
 The manifest.json file tells Chrome about our extension's configuration, permissions, and components:
 
@@ -102,7 +102,7 @@ The manifest.json file tells Chrome about our extension's configuration, permiss
 
 This manifest requests the minimum permissions necessary for time tracking: tabs for accessing URL information, storage for persisting data, alarms for scheduling, and idle for detecting when the user is away.
 
-Project File Structure
+### Project File Structure
 
 Create a folder structure like this:
 
@@ -126,13 +126,13 @@ Organizing files systematically makes the extension easier to maintain and debug
 
 ---
 
-Implementing the Background Service Worker {#background-worker}
+## Implementing the Background Service Worker {#background-worker}
 
 The service worker serves as the brain of our extension, handling time tracking logic and data storage. It runs continuously in the background, monitoring tab changes and maintaining accurate time records.
 
-Core Tracking Logic
+### Core Tracking Logic
 
-Create background.js with the following implementation:
+### Create background.js with the following implementation:
 
 ```javascript
 // Background service worker for time tracking extension
@@ -285,13 +285,13 @@ This background script handles the core tracking functionality. It monitors tab 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides users with quick access to their time tracking data. It should be clean, informative, and responsive.
 
-HTML Structure
+### HTML Structure
 
-Create popup.html:
+### Create popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -337,9 +337,9 @@ Create popup.html:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
-Create popup.css to make the interface visually appealing:
+### Create popup.css to make the interface visually appealing:
 
 ```css
 * {
@@ -487,9 +487,9 @@ h1 {
 }
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
-Create popup.js to handle user interactions:
+### Create popup.js to handle user interactions:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -577,18 +577,18 @@ function setupEventListeners() {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension to ensure it works correctly. Load it in Chrome's developer mode and verify each feature functions as expected.
 
-Loading the Extension
+### Loading the Extension
 
 1. Open Chrome and navigate to chrome://extensions/
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension folder
 4. The extension icon should appear in your toolbar
 
-Testing Checklist
+### Testing Checklist
 
 - Open various websites and verify time is being tracked
 - Switch between tabs and confirm tracking continues accurately
@@ -598,29 +598,29 @@ Testing Checklist
 
 ---
 
-Enhancing and Extending Your Extension {#enhancing}
+## Enhancing and Extending Your Extension {#enhancing}
 
 Now that you have a working time tracker, consider adding these advanced features to make it even more valuable:
 
-Daily and Weekly Reports
+### Daily and Weekly Reports
 
 Create a dashboard page that visualizes time data over longer periods. Use Chart.js or similar libraries to display bar charts, line graphs, and pie charts showing time distribution across categories.
 
-Category-Based Tracking
+### Category-Based Tracking
 
 Implement automatic categorization of websites (social media, news, productivity tools, entertainment). Use domain matching rules to group sites and provide higher-level insights into your browsing habits.
 
-Productivity Scores
+### Productivity Scores
 
 Develop an algorithm that calculates productivity scores based on time spent on different categories. Award points for productive sites and deduct for distracting ones.
 
-Data Export
+### Data Export
 
 Allow users to export their data as CSV or JSON files for analysis in spreadsheet applications or to back up their information.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you're satisfied with your extension, you can publish it to the Chrome Web Store:
 
@@ -633,7 +633,7 @@ Ensure your extension's privacy policy clearly explains what data you collect an
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a time tracker Chrome extension is an excellent project that teaches valuable skills while creating a genuinely useful tool. You've learned how to work with Chrome's APIs for tab tracking, implement background service workers, create popup interfaces, and store data persistently.
 

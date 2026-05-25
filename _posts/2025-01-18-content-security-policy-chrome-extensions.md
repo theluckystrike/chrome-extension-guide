@@ -18,7 +18,7 @@ This comprehensive guide will walk you through everything you need to know about
 
 ---
 
-Understanding Content Security Policy Basics {#understanding-csp-basics}
+## Understanding Content Security Policy Basics {#understanding-csp-basics}
 
 Content Security Policy is a browser security standard that helps prevent cross-site scripting (XSS), clickjacking, and other code injection attacks by controlling which resources a web page or extension can load. At its core, CSP works by allowing developers to specify exactly which sources of content are trusted and allowed to execute within their application context.
 
@@ -30,7 +30,7 @@ Chrome extensions inherit a restrictive default CSP that significantly limits wh
 
 ---
 
-CSP in Manifest V3: Key Changes and Requirements {#manifest-v3-csp}
+## CSP in Manifest V3: Key Changes and Requirements {#manifest-v3-csp}
 
 Manifest V3 brought significant changes to how CSP is handled in Chrome extensions, fundamentally reshaping the security landscape and introducing new requirements that developers must understand. These changes reflect Google's ongoing commitment to improving extension security and user privacy.
 
@@ -44,7 +44,7 @@ Service workers in Manifest V3 also have unique CSP implications. Since service 
 
 ---
 
-Configuring CSP in Your Extension Manifest {#configuring-csp-manifest}
+## Configuring CSP in Your Extension Manifest {#configuring-csp-manifest}
 
 Properly configuring CSP in your extension manifest requires understanding the available fields and their proper syntax. The manifest.json file serves as the central configuration point for all CSP-related settings in your Chrome extension.
 
@@ -82,7 +82,7 @@ Remember that Manifest V3 has stricter requirements around remote code execution
 
 ---
 
-Common CSP Issues and Troubleshooting {#common-csp-issues}
+## Common CSP Issues and Troubleshooting {#common-csp-issues}
 
 Even experienced developers encounter CSP-related issues when building Chrome extensions. Understanding the most common problems and their solutions will save you significant debugging time and help you avoid frustration during development.
 
@@ -98,7 +98,7 @@ Communication between extension components can also trigger CSP issues. If your 
 
 ---
 
-Security Best Practices for Extension CSP {#security-best-practices}
+## Security Best Practices for Extension CSP {#security-best-practices}
 
 Implementing CSP correctly is about more than just making your extension functional, it's about protecting your users from potential security threats. Following security best practices will help ensure your extension remains secure as the threat landscape evolves.
 
@@ -114,7 +114,7 @@ Regularly audit your CSP configuration as your extension evolves. New features m
 
 ---
 
-CSP and Chrome Web Store Review {#csp-store-review}
+## CSP and Chrome Web Store Review {#csp-store-review}
 
 Understanding how CSP affects Chrome Web Store review is essential for getting your extension published successfully. Google has specific requirements and expectations around CSP that have become stricter with each Manifest V3 update.
 
@@ -128,7 +128,7 @@ Manifest V3 extensions face additional scrutiny around remote code execution. An
 
 ---
 
-Advanced CSP Techniques {#advanced-csp-techniques}
+## Advanced CSP Techniques {#advanced-csp-techniques}
 
 Once you've mastered the basics, several advanced techniques can further enhance your extension's security and functionality.
 
@@ -142,7 +142,7 @@ For extensions with complex architectures, consider using multiple HTML pages wi
 
 ---
 
-Conclusion: Building Secure Extensions with CSP {#conclusion}
+## Conclusion: Building Secure Extensions with CSP {#conclusion}
 
 Content Security Policy is a powerful tool in the Chrome extension developer's security arsenal. By properly understanding and implementing CSP, you protect your users from malicious attacks while also meeting Google's requirements for Chrome Web Store publication.
 

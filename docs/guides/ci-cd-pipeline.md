@@ -9,9 +9,9 @@ Chrome Extension CI/CD Pipeline
 
 A complete guide to automating Chrome extension builds, testing, and publishing using GitHub Actions, Playwright, and the Chrome Web Store API.
 
-GitHub Actions Workflow for Extension Builds {#github-actions-workflow-for-extension-builds}
+## GitHub Actions Workflow for Extension Builds {#github-actions-workflow-for-extension-builds}
 
-Basic Build Workflow {#basic-build-workflow}
+## Basic Build Workflow {#basic-build-workflow}
 
 {% raw %}
 ```yaml
@@ -74,7 +74,7 @@ jobs:
 ```
 {% endraw %}
 
-Multi-Browser Build Matrix {#multi-browser-build-matrix}
+## Multi-Browser Build Matrix {#multi-browser-build-matrix}
 
 Build for Chrome, Firefox, and Edge in parallel:
 
@@ -182,9 +182,9 @@ async function main() {
 main();
 ```
 
-Automated Testing with Playwright {#automated-testing-with-playwright}
+## Automated Testing with Playwright {#automated-testing-with-playwright}
 
-Setting Up Extension Testing {#setting-up-extension-testing}
+## Setting Up Extension Testing {#setting-up-extension-testing}
 
 Playwright can load unpacked Chrome extensions for end-to-end testing:
 
@@ -228,7 +228,7 @@ export async function createExtensionContext(): Promise<{
 }
 ```
 
-Testing the Popup {#testing-the-popup}
+## Testing the Popup {#testing-the-popup}
 
 ```typescript
 // tests/popup.spec.ts
@@ -287,7 +287,7 @@ test('popup displays tab count', async () => {
 });
 ```
 
-Testing Content Scripts {#testing-content-scripts}
+## Testing Content Scripts {#testing-content-scripts}
 
 ```typescript
 // tests/content-script.spec.ts
@@ -328,7 +328,7 @@ test('content script does not inject on non-matching pages', async () => {
 });
 ```
 
-Playwright CI Configuration {#playwright-ci-configuration}
+## Playwright CI Configuration {#playwright-ci-configuration}
 
 ```yaml
 Addition to .github/workflows/build.yml
@@ -390,9 +390,9 @@ export default defineConfig({
 });
 ```
 
-Bundle Size Monitoring {#bundle-size-monitoring}
+## Bundle Size Monitoring {#bundle-size-monitoring}
 
-Track your extension size to prevent bloat:
+### Track your extension size to prevent bloat:
 
 ```typescript
 // size-limit.config.ts
@@ -457,7 +457,7 @@ For PR comments showing size changes, use the size-limit GitHub Action:
 ```
 {% endraw %}
 
-Manifest Validation in CI {#manifest-validation-in-ci}
+## Manifest Validation in CI {#manifest-validation-in-ci}
 
 Catch manifest errors before they reach the Web Store:
 
@@ -559,9 +559,9 @@ if (errors.length > 0) {
 }
 ```
 
-Automated Chrome Web Store Publishing {#automated-chrome-web-store-publishing}
+## Automated Chrome Web Store Publishing {#automated-chrome-web-store-publishing}
 
-Setting Up chrome-webstore-upload {#setting-up-chrome-webstore-upload}
+## Setting Up chrome-webstore-upload {#setting-up-chrome-webstore-upload}
 
 First, obtain Chrome Web Store API credentials:
 
@@ -576,7 +576,7 @@ Store these as GitHub repository secrets:
 - `CWS_REFRESH_TOKEN`
 - `CWS_EXTENSION_ID`
 
-Publish Workflow {#publish-workflow}
+## Publish Workflow {#publish-workflow}
 
 {% raw %}
 ```yaml
@@ -626,7 +626,7 @@ jobs:
 ```
 {% endraw %}
 
-Publishing Script {#publishing-script}
+## Publishing Script {#publishing-script}
 
 ```typescript
 // scripts/publish-cws.ts
@@ -681,11 +681,11 @@ publish().catch((err) => {
 });
 ```
 
-Version Bumping Strategies {#version-bumping-strategies}
+## Version Bumping Strategies {#version-bumping-strategies}
 
-Semantic Versioning from Conventional Commits {#semantic-versioning-from-conventional-commits}
+## Semantic Versioning from Conventional Commits {#semantic-versioning-from-conventional-commits}
 
-Use `standard-version` or `conventional-changelog` to auto-bump versions:
+### Use `standard-version` or `conventional-changelog` to auto-bump versions:
 
 ```json
 {
@@ -738,7 +738,7 @@ const type = (process.argv[2] as 'major' | 'minor' | 'patch') ?? 'patch';
 bumpVersion(type);
 ```
 
-Auto-Version from Git Tags in CI {#auto-version-from-git-tags-in-ci}
+## Auto-Version from Git Tags in CI {#auto-version-from-git-tags-in-ci}
 
 ```yaml
       - name: Set version from tag
@@ -753,9 +753,9 @@ Auto-Version from Git Tags in CI {#auto-version-from-git-tags-in-ci}
           "
 ```
 
-Code Signing and Key Management {#code-signing-and-key-management}
+## Code Signing and Key Management {#code-signing-and-key-management}
 
-Extension Key Management {#extension-key-management}
+## Extension Key Management {#extension-key-management}
 
 Chrome extensions are identified by their public key. Manage it securely:
 
@@ -792,7 +792,7 @@ Store the private key (`.pem` file) as an encrypted GitHub secret and never comm
 ```
 {% endraw %}
 
-.gitignore for Key Files {#gitignore-for-key-files}
+## .gitignore for Key Files {#gitignore-for-key-files}
 
 ```gitignore
 Never commit extension keys
@@ -801,9 +801,9 @@ Never commit extension keys
 key.json
 ```
 
-Release Notes Generation {#release-notes-generation}
+## Release Notes Generation {#release-notes-generation}
 
-Conventional Commits to Changelog {#conventional-commits-to-changelog}
+## Conventional Commits to Changelog {#conventional-commits-to-changelog}
 
 ```typescript
 // scripts/generate-release-notes.ts
@@ -864,7 +864,7 @@ if (!fromTag) {
 console.log(generateReleaseNotes(fromTag));
 ```
 
-Automated GitHub Release with Notes {#automated-github-release-with-notes}
+## Automated GitHub Release with Notes {#automated-github-release-with-notes}
 
 {% raw %}
 ```yaml
@@ -927,9 +927,9 @@ jobs:
 ```
 {% endraw %}
 
-Canary and Beta Channel Deployment {#canary-and-beta-channel-deployment}
+## Canary and Beta Channel Deployment {#canary-and-beta-channel-deployment}
 
-Channel-Based Publishing {#channel-based-publishing}
+## Channel-Based Publishing {#channel-based-publishing}
 
 Chrome Web Store supports publishing to `trustedTesters` before going public:
 
@@ -973,7 +973,7 @@ const channel = (process.argv[2] as Channel) ?? 'trustedTesters';
 publishToChannel(channel);
 ```
 
-Staged Rollout Workflow {#staged-rollout-workflow}
+## Staged Rollout Workflow {#staged-rollout-workflow}
 
 {% raw %}
 ```yaml
@@ -1023,7 +1023,7 @@ jobs:
 ```
 {% endraw %}
 
-Beta Version Numbering {#beta-version-numbering}
+## Beta Version Numbering {#beta-version-numbering}
 
 Use the fourth version segment for beta builds:
 
@@ -1051,7 +1051,7 @@ function setBetaVersion(): void {
 setBetaVersion();
 ```
 
-Complete Pipeline Example {#complete-pipeline-example}
+## Complete Pipeline Example {#complete-pipeline-example}
 
 Here is a full workflow that ties everything together:
 
@@ -1164,9 +1164,9 @@ jobs:
 ```
 {% endraw %}
 
-Summary {#summary}
+## Summary {#summary}
 
-A mature CI/CD pipeline for Chrome extensions includes:
+### A mature CI/CD pipeline for Chrome extensions includes:
 
 1. Build automation. reproducible builds triggered on push and PR
 2. Multi-browser matrix. build for Chrome, Firefox, and Edge in parallel
@@ -1185,9 +1185,9 @@ Cross-references:
 - `docs/guides/extension-updates.md`. update lifecycle and migration
 - `docs/guides/security-hardening.md`. security checks to add to your pipeline
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Release Notes](../guides/extension-release-notes.md)

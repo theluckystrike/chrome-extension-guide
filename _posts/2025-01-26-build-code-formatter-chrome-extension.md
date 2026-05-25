@@ -18,29 +18,29 @@ This tutorial assumes you have basic knowledge of HTML, CSS, and JavaScript. By 
 
 ---
 
-Why Build a Code Formatter Chrome Extension? {#why-build}
+## Why Build a Code Formatter Chrome Extension? {#why-build}
 
 The demand for code formatting tools has never been higher. With the rise of remote collaboration and code review tools like GitHub, GitLab, and Bitbucket, developers constantly read code written by others. A browser-based code formatter offers several unique advantages over IDE-based formatters:
 
-Instant Formatting Everywhere
+### Instant Formatting Everywhere
 
 Unlike IDE extensions that only work within specific editors, a Chrome extension works across all websites. You can format code in GitHub pull requests, Stack Overflow answers, CodePen demos, and any web-based code editor. This universal accessibility makes your extension valuable to a wide audience.
 
-No Configuration Required
+### No Configuration Required
 
 Setting up Prettier in each project can be time-consuming. A Chrome extension provides out-of-the-box formatting without requiring users to configure their development environment. This is especially valuable for quick code reviews or when working on unfamiliar projects.
 
-Learning Opportunity
+### Learning Opportunity
 
 Building a code formatter extension teaches you valuable skills about Chrome extension architecture, content scripts, message passing, and integrating with popular JavaScript libraries. These skills transfer to other extension projects you might build.
 
 ---
 
-Project Architecture {#architecture}
+## Project Architecture {#architecture}
 
 Before writing code, let us understand the architecture of our code formatter extension. We will use the modern Manifest V3 format, which is required for all new Chrome extensions.
 
-Components Overview
+### Components Overview
 
 Our extension will consist of several key components:
 
@@ -53,7 +53,7 @@ Let us start building each component.
 
 ---
 
-Setting Up the Project {#setup}
+## Setting Up the Project {#setup}
 
 Create a new folder for your extension and set up the basic structure:
 
@@ -63,7 +63,7 @@ cd chrome-code-formatter
 mkdir -p icons js css
 ```
 
-The folder structure will look like this:
+### The folder structure will look like this:
 
 ```
 chrome-code-formatter/
@@ -81,7 +81,7 @@ chrome-code-formatter/
 
 ---
 
-Creating the Manifest {#manifest}
+## Creating the Manifest {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. For our code formatter, we need specific permissions to interact with web pages:
 
@@ -114,7 +114,7 @@ The manifest.json file is the heart of every Chrome extension. For our code form
 }
 ```
 
-Key manifest fields explained:
+### Key manifest fields explained:
 
 - manifest_version: 3 - Uses the latest Chrome extension format
 - permissions: We need `activeTab` to access the current tab and `scripting` to execute content scripts
@@ -123,7 +123,7 @@ Key manifest fields explained:
 
 ---
 
-Building the Popup Interface {#popup}
+## Building the Popup Interface {#popup}
 
 The popup is what users see when they click your extension icon. We will create a simple interface with language selection and formatting options:
 
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-The Content Script {#content-script}
+## The Content Script {#content-script}
 
 The content script is the core of our extension. It runs in the context of web pages and handles code detection and formatting. We will integrate Prettier via CDN to avoid bundling complexity:
 
@@ -577,7 +577,7 @@ observer.observe(document.body, {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test the extension:
 
@@ -593,11 +593,11 @@ Now that we have built all the components, let us test the extension:
 
 ---
 
-Improving the Extension {#improvements}
+## Improving the Extension {#improvements}
 
 There are several ways to enhance your code formatter extension:
 
-Add Keyboard Shortcuts
+### Add Keyboard Shortcuts
 
 You can add Chrome commands to allow keyboard-driven formatting:
 
@@ -613,17 +613,17 @@ You can add Chrome commands to allow keyboard-driven formatting:
 }
 ```
 
-Support More Languages
+### Support More Languages
 
 Prettier supports many more languages. Add support for Go, Rust, PHP, and others by loading the appropriate plugins.
 
-Add Copy to Clipboard
+### Add Copy to Clipboard
 
 Implement a copy-to-clipboard feature that automatically copies formatted code after formatting.
 
-Store User Preferences
+### Store User Preferences
 
-Use Chrome's storage API to remember user preferences:
+### Use Chrome's storage API to remember user preferences:
 
 ```javascript
 chrome.storage.sync.set({ 
@@ -634,7 +634,7 @@ chrome.storage.sync.set({
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your extension is working, follow these steps to publish:
 
@@ -648,7 +648,7 @@ Once your extension is working, follow these steps to publish:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You have now built a fully functional code formatter Chrome extension! This extension demonstrates several important concepts in Chrome extension development:
 
@@ -664,7 +664,7 @@ Remember to test thoroughly across different websites and browsers before publis
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Prettier Documentation](https://prettier.io/docs/en/)
 - [Chrome Extension Development Docs](https://developer.chrome.com/docs/extensions/mv3/)

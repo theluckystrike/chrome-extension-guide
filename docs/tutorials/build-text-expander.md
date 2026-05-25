@@ -7,10 +7,10 @@ last_modified_at: 2026-01-15
 ---
 Build a Text Expander Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 A text expander that transforms typed shortcuts into full snippets anywhere on the web. Includes an options page for snippet management, dynamic variables like {date} and {clipboard}, and works across all text inputs including contentEditable elements and shadow DOM.
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 ```
 text-expander/
   manifest.json
@@ -24,7 +24,7 @@ text-expander/
   options/options.js
 ```
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -38,7 +38,7 @@ Manifest {#manifest}
 }
 ```
 
-Step 1: Snippet Storage {#step-1-snippet-storage}
+## Step 1: Snippet Storage {#step-1-snippet-storage}
 Use @theluckystrike/webext-storage for clean async storage with sync support.
 
 ```javascript
@@ -80,7 +80,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Step 2: Content Script Input Monitor {#step-2-content-script-input-monitor}
+## Step 2: Content Script Input Monitor {#step-2-content-script-input-monitor}
 Listen for keyup events and track typed characters to detect triggers.
 
 ```javascript
@@ -122,7 +122,7 @@ document.addEventListener('keyup', (e) => {
 });
 ```
 
-Step 3: Text Replacement {#step-3-text-replacement}
+## Step 3: Text Replacement {#step-3-text-replacement}
 Handle different input types with appropriate replacement methods.
 
 ```javascript
@@ -167,7 +167,7 @@ async function replaceText(inputEl, trigger, expansion) {
 }
 ```
 
-Step 4: Dynamic Variables {#step-4-dynamic-variables}
+## Step 4: Dynamic Variables {#step-4-dynamic-variables}
 Process variables like {date}, {time}, {clipboard}, and {cursor}.
 
 ```javascript
@@ -199,7 +199,7 @@ async function processVariables(text) {
 }
 ```
 
-Step 5: Shadow DOM Support {#step-5-shadow-dom-support}
+## Step 5: Shadow DOM Support {#step-5-shadow-dom-support}
 Extend detection to include shadow DOM inputs.
 
 ```javascript
@@ -242,7 +242,7 @@ document.addEventListener('focusin', (e) => {
 });
 ```
 
-Step 6: Options Page {#step-6-options-page}
+## Step 6: Options Page {#step-6-options-page}
 Full CRUD interface for managing snippets.
 
 ```html
@@ -324,19 +324,19 @@ document.getElementById('add').onclick = () => {
 load();
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 - Unique prefixes: Use consistent prefixes like `/` or `;` to avoid false triggers in regular text
 - Buffer timeout: Clear the character buffer after 2 seconds of inactivity to prevent memory buildup
 - Skip sensitive fields: Never monitor password or email fields to protect user credentials
 - MutationObserver: Watch for dynamically created inputs and shadow DOM changes
 - Debounce processing: Add small delays before trigger checking to ensure complete trigger is typed
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Form Handling](../patterns/form-handling.md)
 - [Options Page](../guides/options-page.md)
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 - Add trigger suggestions in popup
 - Support trigger folders/categories
 - Add usage statistics per snippet

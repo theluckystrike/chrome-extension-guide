@@ -9,7 +9,7 @@ Build a Site Blocker / Focus Mode Extension
 
 Build a Chrome extension that blocks distracting sites during focus sessions, runs a Pomodoro timer, tracks daily statistics, and supports scheduled auto-activation. Uses @theluckystrike/webext-storage for persistent data and @theluckystrike/webext-messaging for popup-to-background communication.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 - Chrome 116+ with Developer Mode enabled
 - Node.js 18+ and npm
@@ -17,7 +17,7 @@ Prerequisites {#prerequisites}
 
 ---
 
-Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
+## Step 1: Manifest and Project Setup {#step-1-manifest-and-project-setup}
 
 ```bash
 mkdir focus-mode-ext && cd focus-mode-ext
@@ -25,7 +25,7 @@ npm init -y
 npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging
 ```
 
-Create `manifest.json`:
+### Create `manifest.json`:
 
 ```json
 {
@@ -51,9 +51,9 @@ Create `manifest.json`:
 
 ---
 
-Step 2: Popup UI with Blocklist Management {#step-2-popup-ui-with-blocklist-management}
+## Step 2: Popup UI with Blocklist Management {#step-2-popup-ui-with-blocklist-management}
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -91,7 +91,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Create `popup/popup.css`:
+### Create `popup/popup.css`:
 
 ```css
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -122,9 +122,9 @@ hr { border: none; border-top: 1px solid #21262d; margin: 12px 0; }
 
 ---
 
-Step 3: Focus Mode Toggle and Popup Logic {#step-3-focus-mode-toggle-and-popup-logic}
+## Step 3: Focus Mode Toggle and Popup Logic {#step-3-focus-mode-toggle-and-popup-logic}
 
-Create `popup/popup.js`:
+### Create `popup/popup.js`:
 
 ```javascript
 import { createStorage } from '@theluckystrike/webext-storage';
@@ -222,7 +222,7 @@ The popup communicates with the background via `sendMessage`. The timer display 
 
 ---
 
-Step 4: declarativeNetRequest Rules and Blocking {#step-4-declarativenetrequest-rules-and-blocking}
+## Step 4: declarativeNetRequest Rules and Blocking {#step-4-declarativenetrequest-rules-and-blocking}
 
 Create `background.js` -- this file handles rules, the Pomodoro timer, stats, schedule, and messaging:
 
@@ -365,9 +365,9 @@ Each blocklist entry becomes a dynamic rule with `urlFilter: "||example.com"` ta
 
 ---
 
-Step 5: "Stay Focused" Blocked Page {#step-5-stay-focused-blocked-page}
+## Step 5: "Stay Focused" Blocked Page {#step-5-stay-focused-blocked-page}
 
-Create `blocked.html`:
+### Create `blocked.html`:
 
 ```html
 <!DOCTYPE html>
@@ -415,7 +415,7 @@ When `declarativeNetRequest` redirects a blocked URL, users see this page with r
 
 ---
 
-Step 6: Pomodoro Timer with Work/Break Cycles {#step-6-pomodoro-timer-with-workbreak-cycles}
+## Step 6: Pomodoro Timer with Work/Break Cycles {#step-6-pomodoro-timer-with-workbreak-cycles}
 
 The Pomodoro logic in `background.js` (Step 4) cycles through phases:
 
@@ -428,9 +428,9 @@ The Pomodoro logic in `background.js` (Step 4) cycles through phases:
 
 ---
 
-Step 7: Daily Usage Statistics {#step-7-daily-usage-statistics}
+## Step 7: Daily Usage Statistics {#step-7-daily-usage-statistics}
 
-Two metrics are tracked per day:
+### Two metrics are tracked per day:
 
 - `focusMinutes` -- incremented every minute during work phases via the `stats-update` alarm.
 - `blocksCount` -- incremented when a blocked domain is detected. Note: `declarativeNetRequest` redirects do not trigger `webNavigation.onErrorOccurred` (since it is a redirect, not a network error). For accurate block counting, use `chrome.declarativeNetRequest.onRuleMatchedDebug` (development only) or track redirects to `blocked.html` via `chrome.webNavigation.onCompleted` checking if the URL matches your blocked page.
@@ -439,21 +439,21 @@ The stats object auto-resets on date change by comparing `data.stats.date` to to
 
 ---
 
-Step 8: Allowlist for Breaks {#step-8-allowlist-for-breaks}
+## Step 8: Allowlist for Breaks {#step-8-allowlist-for-breaks}
 
 The "Take 5-min Break" button calls `sendMessage('take-break')`. The background sets `breakTemporaryEnd` to 5 minutes ahead, clears all block rules, and schedules a `break-end` alarm. When it fires, rules are reinstated. This is independent of the Pomodoro cycle -- blocking lifts but the timer keeps running.
 
 ---
 
-Step 9: Badge Showing Remaining Focus Time {#step-9-badge-showing-remaining-focus-time}
+## Step 9: Badge Showing Remaining Focus Time {#step-9-badge-showing-remaining-focus-time}
 
 `updateBadge()` calculates remaining minutes from `phaseEndTime` and sets badge text (e.g., "23m"). The badge background is green during work phases and blue during breaks. It clears when focus mode stops. The `pomodoro-tick` alarm calls `updateBadge()` regularly.
 
 ---
 
-Step 10: Options Page with Schedule {#step-10-options-page-with-schedule}
+## Step 10: Options Page with Schedule {#step-10-options-page-with-schedule}
 
-Create `options/options.html`:
+### Create `options/options.html`:
 
 ```html
 <!DOCTYPE html>
@@ -492,7 +492,7 @@ Create `options/options.html`:
 </html>
 ```
 
-Create `options/options.css`:
+### Create `options/options.css`:
 
 ```css
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -509,7 +509,7 @@ input[type="number"] { width: 56px; padding: 4px; border: 1px solid #ccc; border
 #status { font-size: 13px; color: #00aa44; margin-bottom: 8px; min-height: 20px; }
 ```
 
-Create `options/options.js`:
+### Create `options/options.js`:
 
 ```javascript
 import { createStorage } from '@theluckystrike/webext-storage';
@@ -547,7 +547,7 @@ The `schedule-check` alarm runs every minute (registered in `onInstalled`). It c
 
 ---
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 ```
 focus-mode-ext/
@@ -560,7 +560,7 @@ focus-mode-ext/
   icons/   (icon16.png, icon48.png, icon128.png)
 ```
 
-Bundling {#bundling}
+## Bundling {#bundling}
 
 ```bash
 npm install -D rollup @rollup/plugin-node-resolve
@@ -576,7 +576,7 @@ export default ['popup/popup.js', 'background.js', 'options/options.js'].map(inp
 
 Run `npx rollup -c`, copy static assets to `dist/`, and load it.
 
-Key Takeaways {#key-takeaways}
+## Key Takeaways {#key-takeaways}
 
 - `declarativeNetRequest` dynamic rules block sites at the network level without broad host permissions. Add/remove them at runtime based on focus state.
 - `[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)` is the correct MV3 timer. Service workers can terminate at any time, making `setTimeout`/`setInterval` unreliable.

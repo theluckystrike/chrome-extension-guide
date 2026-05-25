@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Alarms API. How to Schedule Background Tasks in MV3
 
-Introduction
+### Introduction
 
 Building a Chrome extension that needs to run background tasks periodically? In Manifest V3, the days of using `setInterval()` or `setTimeout()` in your background service worker are over. These native JavaScript timers don't survive service worker termination, which means your scheduled tasks will simply stop running when Chrome decides to unload your service worker to save memory.
 
 This is where the chrome.alarms API comes in. It's the official, recommended way to schedule background tasks in MV3 extensions. The Alarms API is designed specifically for extension service workers, providing reliable scheduling that persists across service worker restarts and system events.
 
-Getting Started with chrome.alarms
+### Getting Started with chrome.alarms
 
 To use the Alarms API, you need to add the `"alarms"` permission to your `manifest.json`:
 
@@ -31,7 +31,7 @@ To use the Alarms API, you need to add the `"alarms"` permission to your `manife
 
 Once permissions are configured, you can create alarms in your service worker using the `chrome.alarms.create()` method. The API supports both one-time alarms and repeating alarms, giving you flexibility in how you schedule background tasks.
 
-Creating One-Time and Repeating Alarms
+### Creating One-Time and Repeating Alarms
 
 A one-time alarm fires once at a specified time:
 
@@ -59,7 +59,7 @@ chrome.alarms.create("periodicSync", {
 
 The `periodInMinutes` property ensures the alarm automatically reschedules itself after each firing, making it ideal for sync operations, periodic data fetching, or scheduled notifications.
 
-Handling Alarm Events
+### Handling Alarm Events
 
 To respond when an alarm fires, register an event listener in your service worker:
 
@@ -74,7 +74,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 The alarm object contains useful properties like `name` (the alarm identifier), `scheduledTime` (when it will fire next), and `periodInMinutes` (for repeating alarms).
 
-Understanding the Service Worker Lifecycle
+### Understanding the Service Worker Lifecycle
 
 One of the biggest challenges in MV3 is that service workers can be terminated at any time by Chrome to conserve memory. This is where understanding the relationship between alarms and service worker lifecycle becomes critical.
 
@@ -82,7 +82,7 @@ When you create an alarm, Chrome stores it internally and will wake up your serv
 
 Alarms are more reliable than `setInterval()` because they persist beyond service worker lifetime. When an alarm triggers, Chrome will wake up your service worker and fire the `onAlarm` event, ensuring your task executes even after extended periods of inactivity.
 
-Keeping Tasks Alive with Offscreen Documents
+### Keeping Tasks Alive with Offscreen Documents
 
 Sometimes alarms alone aren't enough. If your background task requires access to DOM APIs like `window`, `document`, or the Fetch API with certain features, you'll need an offscreen document.
 
@@ -116,7 +116,7 @@ The offscreen document runs independently and can communicate back to your servi
 chrome.offscreen.closeDocument();
 ```
 
-Best Practices for Background Tasks
+### Best Practices for Background Tasks
 
 When implementing scheduled background tasks in your Chrome extension, keep these best practices in mind:
 
@@ -142,7 +142,7 @@ chrome.alarms.get("myAlarm", (alarm) => {
 
 Be mindful of minimum intervals. Chrome enforces a minimum period of approximately 1 minute for repeating alarms. If you need more frequent updates, consider using alternative approaches or accepting that very short intervals may not be precisely maintained.
 
-Conclusion
+### Conclusion
 
 The chrome.alarms API is an essential tool for any Chrome extension developer working with Manifest V3. It provides a reliable mechanism for scheduling background tasks that survives service worker termination and handles the natural lifecycle of browser extensions.
 

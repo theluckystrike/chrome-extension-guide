@@ -18,7 +18,7 @@ we will explore the architecture of Chrome extensions, integrate the Mozilla pdf
 
 ---
 
-Understanding the PDF Viewer Extension Architecture
+### Understanding the PDF Viewer Extension Architecture
 
 Before diving into code, it is essential to understand how PDF viewer extensions work in Chrome. Unlike simple content scripts that modify web pages, a PDF viewer extension requires a sophisticated architecture that handles file loading, rendering, and user interaction. The extension we will build uses a multi-component architecture that separates concerns effectively.
 
@@ -28,7 +28,7 @@ Chrome's extension system provides several APIs specifically useful for PDF view
 
 ---
 
-Setting Up the Extension Project Structure
+### Setting Up the Extension Project Structure
 
 Every Chrome extension begins with a manifest.json file that declares the extension's permissions, files, and capabilities. For our PDF viewer extension, we need to carefully configure the manifest to support file access, downloads, and tab management. The manifest version 3 is the current standard, and we will use it throughout this tutorial.
 
@@ -79,11 +79,11 @@ This manifest declares the necessary permissions for file handling and tab manag
 
 ---
 
-Implementing the Background Service Worker
+### Implementing the Background Service Worker
 
 The background service worker handles extension lifecycle events and manages communication between different extension components. In our PDF viewer extension, the background script will listen for toolbar button clicks, handle extension installation, and manage any background processing tasks.
 
-Create the background.js file with the following implementation:
+### Create the background.js file with the following implementation:
 
 ```javascript
 // Background service worker for PDF Viewer extension
@@ -118,11 +118,11 @@ The background service worker initializes default settings when the extension is
 
 ---
 
-Creating the Popup Interface
+### Creating the Popup Interface
 
 The popup provides quick access to the extension's features without opening a full page. For our PDF viewer extension, the popup allows users to quickly open a PDF file or adjust viewing settings. The popup uses standard HTML, CSS, and JavaScript, making it easy to customize the interface.
 
-Create the popup.html file:
+### Create the popup.html file:
 
 ```html
 <!DOCTYPE html>
@@ -247,13 +247,13 @@ body {
 
 ---
 
-Implementing the Content Script with pdf.js
+### Implementing the Content Script with pdf.js
 
 The content script is where the magic happens. This script integrates Mozilla's pdf.js library to render PDF documents directly in the browser. The content script detects when a PDF link is clicked and opens the built-in viewer instead of the default Chrome PDF viewer, giving us full control over the viewing experience.
 
 First, you need to include the pdf.js library. Download the latest version from Mozilla's GitHub repository and place it in your extension directory. For this tutorial, we will assume the files are named pdf.js and pdf.worker.js.
 
-Create the content.js file:
+### Create the content.js file:
 
 ```javascript
 // PDF Viewer content script using pdf.js
@@ -394,11 +394,11 @@ This content script provides the core PDF rendering functionality using pdf.js. 
 
 ---
 
-Advanced PDF Viewer Features
+### Advanced PDF Viewer Features
 
 Building a basic PDF viewer is just the beginning. To create a truly useful chrome extension pdf viewer, you need to implement additional features that enhance the user experience. Let us explore some advanced features that will make your extension stand out from the competition.
 
-Zoom and Pan Functionality
+### Zoom and Pan Functionality
 
 PDF documents often need to be viewed at different zoom levels. Implementing smooth zoom and pan functionality requires capturing mouse events and updating the canvas scale accordingly. Add these functions to your content script:
 
@@ -437,7 +437,7 @@ canvas.addEventListener('wheel', (e) => {
 });
 ```
 
-Text Selection and Search
+### Text Selection and Search
 
 One of the most useful features in a PDF viewer is the ability to search for text and select content. The pdf.js library provides text layer rendering that enables both features. Implementing text selection requires rendering an invisible text layer over the canvas:
 
@@ -461,7 +461,7 @@ async function renderTextLayer(page, viewport) {
 }
 ```
 
-Bookmark and History Management
+### Bookmark and History Management
 
 For frequently accessed documents, implementing bookmark functionality adds significant value. Store bookmarks using Chrome's storage API:
 
@@ -483,11 +483,11 @@ function getBookmarks(callback) {
 
 ---
 
-Handling Edge Cases and Error Scenarios
+### Handling Edge Cases and Error Scenarios
 
 A solid PDF viewer extension must handle various edge cases gracefully. Large PDF files can consume significant memory, password-protected PDFs require authentication, and corrupted files need appropriate error messages. Let us implement proper error handling and edge case management.
 
-Memory Management for Large PDFs
+### Memory Management for Large PDFs
 
 Large PDF documents can cause memory issues if all pages are rendered simultaneously. Implement lazy loading and canvas recycling to manage memory effectively:
 
@@ -537,7 +537,7 @@ function renderPageWithCache(num) {
 }
 ```
 
-Password-Protected PDF Handling
+### Password-Protected PDF Handling
 
 When opening a password-protected PDF, the library throws an error that you need to catch and handle by prompting for a password:
 
@@ -566,7 +566,7 @@ async function openPDFWithPassword(url, password = null) {
 
 ---
 
-Testing and Debugging Your Extension
+### Testing and Debugging Your Extension
 
 Before publishing your extension, thorough testing is essential. Chrome provides developer tools specifically for extension development that make debugging straightforward. Use the Extension Management page (chrome://extensions) to load your unpacked extension and access developer tools.
 
@@ -574,7 +574,7 @@ When testing your PDF viewer extension, verify the following scenarios: opening 
 
 ---
 
-Publishing Your Extension to the Chrome Web Store
+### Publishing Your Extension to the Chrome Web Store
 
 Once your extension is tested and ready, you can publish it to the Chrome Web Store. The publishing process requires creating a developer account, preparing promotional assets, and submitting your extension for review. Google reviews extensions to ensure they meet security and policy requirements.
 
@@ -582,7 +582,7 @@ Before submitting, double-check that your extension complies with Chrome Web Sto
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a PDF viewer Chrome extension with pdf.js is a rewarding project that teaches you valuable skills in Chrome extension development, PDF handling, and user interface design. The architecture and code patterns we covered in this tutorial provide a solid foundation for creating sophisticated document viewing experiences.
 
@@ -592,6 +592,6 @@ Remember to keep performance in mind when handling large PDF files, implement pr
 
 ---
 
-Additional Resources
+### Additional Resources
 
 To further enhance your PDF viewer extension, consider exploring these advanced topics: integrating annotation APIs for drawing and highlighting, implementing PDF form filling capabilities, adding support for PDF signatures, and exploring WebAssembly-based PDF rendering for improved performance. The Chrome extension documentation and pdf.js documentation provide comprehensive references for diving deeper into these areas.

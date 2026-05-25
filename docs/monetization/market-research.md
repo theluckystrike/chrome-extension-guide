@@ -9,11 +9,11 @@ Market Research for Chrome Extensions
 
 Before investing development time into a Chrome extension, thorough market research helps you validate demand, understand competition, and position your product for success. This guide covers frameworks and tools for conducting comprehensive market research specific to the Chrome extension ecosystem.
 
-Identifying Your Target Audience
+### Identifying Your Target Audience
 
 Understanding who will use your extension is the foundation of successful market research. Without a clear audience, even excellent products fail to gain traction.
 
-Audience Segmentation Framework
+### Audience Segmentation Framework
 
 Define your target users by answering these key questions:
 
@@ -32,7 +32,7 @@ Define your target users by answering these key questions:
 - What triggers them to install an extension?
 - How do they evaluate whether an extension is worth keeping?
 
-Creating Audience Personas
+### Creating Audience Personas
 
 Build 2-3 detailed personas representing your core user segments:
 
@@ -45,17 +45,17 @@ Persona Template:
 - Motivations: [What drives her to try new extensions]
 ```
 
-Validation Techniques
+### Validation Techniques
 
 - Reddit & Communities: Search relevant subreddits (r/productivity, r/Chrome, r/webdev) for recurring complaints
 - Survey Tools: Use Google Forms or Typeform to validate assumptions with potential users
 - Keyword Tools: Google Trends shows search volume over time for problem-related queries
 
-Analyzing Chrome Web Store Trends
+### Analyzing Chrome Web Store Trends
 
 The Chrome Web Store contains valuable data about what's working, what's saturated, and where opportunities exist.
 
-Trend Analysis Framework
+### Trend Analysis Framework
 
 1. Category Performance
 Navigate through Chrome Web Store categories and note:
@@ -73,7 +73,7 @@ Look for extensions with:
 - If top 10 results all have 10,000+ users, the market is likely saturated
 - Check if newer extensions are gaining traction or if the market is stagnant
 
-Tools for Chrome Web Store Analysis
+### Tools for Chrome Web Store Analysis
 
 | Tool | Purpose | Cost |
 |------|---------|------|
@@ -82,18 +82,18 @@ Tools for Chrome Web Store Analysis
 | [Sereal](https://sereal.io) | Chrome Web Store analytics | Free tier |
 | [Google Trends](https://trends.google.com) | Search trend comparison | Free |
 
-Key Metrics to Track
+### Key Metrics to Track
 
 - Weekly Downloads: Indicates current demand
 - Rating Distribution: 4.0+ stars with high volume = strong product-market fit
 - Update Frequency: Active development signals a healthy product
 - Review Sentiment: Read recent reviews for common praise and complaints
 
-Keyword Research
+### Keyword Research
 
 Keyword research helps you understand what users are searching for and how to position your extension for discovery.
 
-Keyword Research Framework
+### Keyword Research Framework
 
 1. Seed Keywords
 Start with broad terms related to your extension's function:
@@ -113,7 +113,7 @@ Identify users ready to convert:
 - "best [category] extension"
 - "[tool] pricing" / "free [tool] alternative"
 
-Keyword Research Tools
+### Keyword Research Tools
 
 | Tool | Best For | Cost |
 |------|----------|------|
@@ -122,18 +122,18 @@ Keyword Research Tools
 | [Google Keyword Planner](https://ads.google.com/home/tools/keyword-planner/) | Search volume data | Free |
 | [AlsoAsked](https://alsoasked.com) | Related questions | Free tier |
 
-Keyword Strategy for Extensions
+### Keyword Strategy for Extensions
 
 - Title Keywords: Include primary keyword in extension name
 - Description Keywords: embed keywords in description (don't keyword stuff)
 - Screenshot Alt Text: Add descriptive text to screenshots
 - Reviews: Encourage users to mention use cases in reviews
 
-Competitor Landscape Analysis
+### Competitor Landscape Analysis
 
 Understanding your competition helps you identify differentiation opportunities and positioning strategy.
 
-Competitor Analysis Framework
+### Competitor Analysis Framework
 
 1. Identify Direct Competitors
 Search for extensions solving the same problem:
@@ -158,7 +158,7 @@ Find underserved needs:
 - Price points not currently served
 - User segments not being targeted
 
-Competitor Analysis Template
+### Competitor Analysis Template
 
 ```
 Competitor: [Extension Name]
@@ -171,18 +171,18 @@ Competitor: [Extension Name]
 - Opportunity for You: [how you can differentiate]
 ```
 
-Finding Competitor Data
+### Finding Competitor Data
 
 - Chrome Web Store Listings: Read description, check screenshots, review all reviews
 - Product Hunt: Search for launched extensions for context
 - Twitter/X: Search for extension names to find discussions
 - G2 / Capterra: Look for user reviews and comparisons
 
-Demand Validation
+### Demand Validation
 
 Before building, validate that actual users will pay for or regularly use your extension.
 
-Validation Frameworks
+### Validation Frameworks
 
 1. The 100 True Fans Test
 Can you find 100 people who would genuinely use and potentially pay for your extension?
@@ -202,7 +202,7 @@ Test market readiness:
 - Post in relevant subreddits for feedback
 - Measure engagement and sign-up conversion
 
-Validation Metrics
+### Validation Metrics
 
 | Signal | Target | Meaning |
 |--------|--------|---------|
@@ -211,16 +211,16 @@ Validation Metrics
 | Community Engagement | Active discussions | Real demand |
 | Direct Outreach Response | 30%+ | Validated problem |
 
-Building an MVP for Validation
+### Building an MVP for Validation
 
 - Create a minimum viable version with core functionality
 - Distribute to your validation audience
 - Track: daily active users, feature usage, retention
 - Iterate based on feedback before full development
 
-Actionable Frameworks Summary
+### Actionable Frameworks Summary
 
-Market Research Checklist
+### Market Research Checklist
 
 - [ ] Define 2-3 detailed audience personas
 - [ ] Analyze top 20 extensions in your category
@@ -230,9 +230,9 @@ Market Research Checklist
 - [ ] Build waitlist and target 500+ signups
 - [ ] Validate problem with potential users
 
-Extension Opportunity Score
+### Extension Opportunity Score
 
-Rate each opportunity (1-5) across:
+### Rate each opportunity (1-5) across:
 
 1. Problem Urgency: How painful is the problem?
 2. Market Size: How many potential users?
@@ -242,9 +242,9 @@ Rate each opportunity (1-5) across:
 
 Score 20+ indicates a strong opportunity.
 
-Tools Summary
+### Tools Summary
 
-Market Research Tools
+### Market Research Tools
 
 - Audience Research: Reddit, Twitter, Google Forms, Typeform
 - Trend Analysis: Google Trends, SimilarWeb, Extension Monitor, Sereal
@@ -252,7 +252,7 @@ Market Research Tools
 - Competitor Analysis: Chrome Web Store, Product Hunt, G2, Capterra
 - Validation: Carrd, Linktree, Product Hunt, waitlist tools
 
-Recommended Research Stack
+### Recommended Research Stack
 
 1. Start with Google Trends for problem validation
 2. Use Chrome Web Store search for competitive landscape
@@ -262,7 +262,7 @@ Recommended Research Stack
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Extension Monetization Guide](../guides/extension-monetization.md). Comprehensive strategies for generating revenue from your Chrome extension
 - [Chrome Web Store Listing Optimization](../publishing/listing-optimization.md). Optimize your extension listing for maximum visibility and conversions

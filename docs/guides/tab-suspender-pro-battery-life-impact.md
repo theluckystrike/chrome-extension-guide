@@ -16,7 +16,7 @@ we'll explore how background tabs drain your battery, the science behind tab sus
 
 ---
 
-Table of Contents
+### Table of Contents
 
 - [The Hidden Battery Drain: CPU Wake-Ups in Background Tabs](#the-hidden-battery-drain-cpu-wake-ups-in-background-tabs)
 - [Understanding Power Profiling Methodology](#understanding-power-profiling-methodology)
@@ -31,11 +31,11 @@ Table of Contents
 
 ---
 
-The Hidden Battery Drain: CPU Wake-Ups in Background Tabs
+### The Hidden Battery Drain: CPU Wake-Ups in Background Tabs
 
 Most users assume that switching away from a tab stops it from consuming resources. This is a dangerous misconception. Modern web pages are essentially miniature applications that continue running even when hidden.
 
-Why Background Tabs Stay Active
+### Why Background Tabs Stay Active
 
 When you open a website in Chrome, you're not just loading a static document. You're launching a complex environment that includes:
 
@@ -45,7 +45,7 @@ When you open a website in Chrome, you're not just loading a static document. Yo
 4. Analytics and Tracking Scripts: Third-party scripts that fire tracking events at regular intervals
 5. Auto-Refresh Mechanisms: Pages that automatically reload content (news sites, dashboards, social media)
 
-The CPU Wake-Up Pattern
+### The CPU Wake-Up Pattern
 
 Each of these activities causes CPU wake-ups. brief moments when the processor must exit low-power idle states to execute code. Modern CPUs have sophisticated power management that drops into sleep states (C-states) when idle. However, every interrupt, timer firing, or network activity forces the CPU back to active states.
 
@@ -60,11 +60,11 @@ Research has shown that a single active background tab can cause 50-200 CPU wake
 
 ---
 
-Understanding Power Profiling Methodology
+### Understanding Power Profiling Methodology
 
 To truly understand battery impact, we need proper measurement techniques.  how power profiling works for browser extensions.
 
-Tools for Measuring Power Consumption
+### Tools for Measuring Power Consumption
 
 1. Chrome's Built-in Task Manager
 
@@ -81,7 +81,7 @@ News Site (idle)      | 1%     | 120 MB  | 0 KB/s
 
 2. Windows Power Monitor
 
-For laptop-specific power measurements, use:
+### For laptop-specific power measurements, use:
 
 ```powershell
 Windows: Measure application power consumption
@@ -99,9 +99,9 @@ macOS: Check energy impact via Activity Monitor
 Or use: pmset -g log
 ```
 
-The Profiling Process
+### The Profiling Process
 
-Accurate battery profiling requires:
+### Accurate battery profiling requires:
 
 1. Baseline Measurement: Measure battery life with no tabs open
 2. Controlled Testing: Open a specific number of tabs with known content
@@ -111,11 +111,11 @@ Accurate battery profiling requires:
 
 ---
 
-The Real Cost of Background Tab Energy Consumption
+### The Real Cost of Background Tab Energy Consumption
 
 Let's quantify exactly how much power different tab scenarios consume.
 
-Energy Consumption by Tab Type
+### Energy Consumption by Tab Type
 
 | Tab Type | Power Draw (approximate) | Hourly Battery Drain |
 |----------|-------------------------|---------------------|
@@ -125,7 +125,7 @@ Energy Consumption by Tab Type
 | Documentation (static) | 0.05-0.15W | 0.3-1% per hour |
 | Suspended tab | ~0W | ~0% |
 
-The Multiplier Effect
+### The Multiplier Effect
 
 Here's where it gets concerning: these numbers multiply with each tab. A user with 40 background tabs might experience:
 
@@ -141,7 +141,7 @@ Tab Suspension vs. Tab Discarding: What's the Difference?
 
 Understanding the technical difference between suspension and discarding is crucial for optimizing battery life.
 
-Tab Discarding (Chrome's Built-in Method)
+### Tab Discarding (Chrome's Built-in Method)
 
 When Chrome detects memory pressure, it may discard tabs. completely unloading them from memory. To view the tab again, Chrome must re-download and re-render the entire page.
 
@@ -154,7 +154,7 @@ When Chrome detects memory pressure, it may discard tabs. completely unloading t
 - Re-downloads content (uses bandwidth, takes time)
 - Aggressive timing (Chrome decides when to discard, not you)
 
-Tab Suspension (Tab Suspender Pro)
+### Tab Suspension (Tab Suspender Pro)
 
 Tab suspension freezes tabs rather than discarding them. The page remains in memory but in a completely paused state.
 
@@ -166,7 +166,7 @@ Tab suspension freezes tabs rather than discarding them. The page remains in mem
 - Uses some memory (but minimal ~5-10MB per suspended tab)
 - Requires extension installation
 
-Comparison Table
+### Comparison Table
 
 | Feature | Tab Discarding | Tab Suspension |
 |---------|---------------|----------------|
@@ -178,11 +178,11 @@ Comparison Table
 
 ---
 
-Real-World Battery Benchmarks: Tab Suspension in Action
+### Real-World Battery Benchmarks: Tab Suspension in Action
 
 Let's look at actual battery life measurements comparing different scenarios.
 
-Test Methodology
+### Test Methodology
 
 - Laptop: Dell XPS 13 (2024), 50Wh battery
 - Browser: Chrome 120
@@ -190,7 +190,7 @@ Test Methodology
 - Screen Brightness: 50%, fixed
 - Workload: Light web browsing (document editing, email)
 
-Benchmark Results
+### Benchmark Results
 
 | Scenario | Battery After 3 Hours | Effective Battery Life |
 |----------|----------------------|----------------------|
@@ -200,7 +200,7 @@ Benchmark Results
 | Chrome + 50 tabs (mixed) | 12% | 3.4 hours |
 | Chrome + 50 tabs + Tab Suspender Pro | 55% | 6.7 hours |
 
-Key Findings
+### Key Findings
 
 With Tab Suspender Pro enabled:
 - +2.3 hours battery life compared to unsuspended tabs (50 tab scenario)
@@ -217,11 +217,11 @@ The savings are even more dramatic with more tabs:
 
 ---
 
-Chrome's Built-in Energy Saver: How It Compares
+### Chrome's Built-in Energy Saver: How It Compares
 
 Chrome includes a built-in "Energy Saver" mode. Let's see how it compares to dedicated tab suspension.
 
-Chrome Energy Saver Features
+### Chrome Energy Saver Features
 
 Chrome's energy saver (introduced in Chrome 108) includes:
 
@@ -242,7 +242,7 @@ Comparison: Chrome Energy Saver vs. Tab Suspender Pro
 | Scheduled activation | No | Yes |
 | Works with 100+ tabs | No (still slow) | Yes (seamless) |
 
-Why Tab Suspender Pro Outperforms
+### Why Tab Suspender Pro Outperforms
 
 Chrome's energy saver still keeps tabs "alive" at reduced capacity. Tab Suspender Pro takes a more aggressive approach:
 
@@ -273,11 +273,11 @@ The result: zero CPU usage compared to Chrome's reduced-but-still-active approac
 
 ---
 
-Implementation: Building Battery-Aware Tab Suspension
+### Implementation: Building Battery-Aware Tab Suspension
 
 For developers interested in implementing tab suspension, here's how Tab Suspender Pro handles battery awareness.
 
-Key Implementation Patterns
+### Key Implementation Patterns
 
 1. Idle Detection
 
@@ -343,7 +343,7 @@ function shouldSuspend(tab) {
 }
 ```
 
-Complete Suspension Workflow
+### Complete Suspension Workflow
 
 ```javascript
 class TabSuspensionManager {
@@ -402,18 +402,18 @@ class TabSuspensionManager {
 
 ---
 
-Optimizing Your Setup for Maximum Battery Savings
+### Optimizing Your Setup for Maximum Battery Savings
 
-Recommended Tab Suspender Pro Settings
+### Recommended Tab Suspender Pro Settings
 
-For maximum battery life on laptops:
+### For maximum battery life on laptops:
 
 1. Set idle time to 2-3 minutes: Aggressive enough to catch idle tabs, not so fast that it interrupts workflow
 2. Enable battery mode: Automatically use shorter idle times when on battery
 3. Whitelist active work: Add your current project domains to prevent interruption
 4. Exclude pinned tabs: Keep frequently-used tabs (email, calendar) always available
 
-Battery Optimization Checklist
+### Battery Optimization Checklist
 
 - [ ] Install Tab Suspender Pro
 - [ ] Configure idle time (2-5 minutes)
@@ -424,21 +424,21 @@ Battery Optimization Checklist
 
 ---
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
-Does tab suspension work when the laptop is closed?
+### Does tab suspension work when the laptop is closed?
 
 Yes. Tab Suspender Pro continues running in the background even when your laptop is closed or in sleep mode. Any open Chrome windows will have their tabs suspended, preserving battery for when you wake the laptop.
 
-Will I lose data if my laptop suddenly loses power?
+### Will I lose data if my laptop suddenly loses power?
 
 No. Tab suspension preserves all tab state in memory. When you restore a suspended tab, everything (scroll position, form data, video progress) is exactly as you left it.
 
-Can I use tab suspension with other Chrome extensions?
+### Can I use tab suspension with other Chrome extensions?
 
 Yes. Tab Suspender Pro is designed to work alongside other extensions. It only affects tab memory and CPU usage, not other extension functionality.
 
-Does tab suspension work on all websites?
+### Does tab suspension work on all websites?
 
 Most websites suspend without issues. Some exceptions include:
 - Sites with active WebRTC connections (video calls)
@@ -447,13 +447,13 @@ Most websites suspend without issues. Some exceptions include:
 
 These can be added to your whitelist to prevent suspension.
 
-How much memory does a suspended tab use?
+### How much memory does a suspended tab use?
 
 Typically 5-10 MB per suspended tab, compared to 50-300 MB for an active tab. This represents a 90-95% memory reduction per suspended tab.
 
 ---
 
-Conclusion: Reclaim Your Battery Life
+### Conclusion: Reclaim Your Battery Life
 
 The numbers don't lie: background tabs are a significant, often overlooked source of battery drain. With the average user keeping 30+ tabs open, the impact is substantial. often consuming 30-50% of your laptop's battery capacity.
 
@@ -466,7 +466,7 @@ Tab suspension technology, particularly as implemented in Tab Suspender Pro, off
 
 Whether you're a road warrior working from coffee shops, a student in back-to-back lectures, or a professional on long flights, tab suspension is one of the most impactful optimizations you can make.
 
-Get Started Today
+### Get Started Today
 
 [Download Tab Suspender Pro from Chrome Web Store](https://chrome.google.com/webstore/detail/tab-suspender-pro/fgmfmglnlkajcjpfclofhkgecjmgbpip)
 

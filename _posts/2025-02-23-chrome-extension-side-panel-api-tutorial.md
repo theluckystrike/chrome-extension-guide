@@ -18,7 +18,7 @@ This comprehensive guide walks you through building a complete Chrome sidebar ex
 
 ---
 
-Understanding the Chrome Side Panel API {#understanding-side-panel-api}
+## Understanding the Chrome Side Panel API {#understanding-side-panel-api}
 
 The Chrome Side Panel API, introduced in Chrome 114 and continuously improved since then, provides a standardized way to create persistent sidebars that appear on the right side of the browser window. Before this API, developers had to rely on workarounds like embedding content scripts in all pages or using browser actions with specific configurations, which often led to inconsistent behavior and poor user experience.
 
@@ -30,11 +30,11 @@ The API also supports multiple side panels from different extensions, and Chrome
 
 ---
 
-Manifest V3 Configuration for Side Panels {#manifest-configuration}
+## Manifest V3 Configuration for Side Panels {#manifest-configuration}
 
 Every Chrome extension begins with the manifest file, and side panel extensions require specific configuration to work correctly. Let us set up a proper Manifest V3 configuration that declares side panel support and defines the necessary permissions.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Create a new directory for your extension and add a manifest.json file with the following configuration:
 
@@ -65,7 +65,7 @@ The critical elements here are the `"side_panel"` key and the `"sidePanel"` perm
 
 Notice that we also include the `"action"` key with a default title. While not strictly required for side panels to function, adding a browser action provides users with a convenient way to open your side panel from the toolbar. You can customize this further by adding a specific icon for the toolbar button.
 
-Understanding Side Panel Permissions
+### Understanding Side Panel Permissions
 
 The Side Panel API requires the `"sidePanel"` permission in your manifest. This permission allows your extension to access the side panel functionality, including the ability to open, close, and control the side panel programmatically.
 
@@ -75,11 +75,11 @@ Additionally, side panel pages have some restrictions compared to regular extens
 
 ---
 
-Building the Side Panel Interface {#building-side-panel-interface}
+## Building the Side Panel Interface {#building-side-panel-interface}
 
 With the manifest configured, let us create the actual side panel interface. This involves creating the HTML structure, styling it with CSS, and adding interactivity with JavaScript.
 
-Creating the HTML Structure
+### Creating the HTML Structure
 
 Create a file named `sidepanel.html` in your extension directory. This file will serve as the entry point for your side panel:
 
@@ -135,7 +135,7 @@ Create a file named `sidepanel.html` in your extension directory. This file will
 
 This HTML structure provides a clean, organized layout for your side panel. The header contains the title and any action buttons, the main content area displays your extension's functionality, and the footer can contain links to additional settings or features.
 
-Styling Your Side Panel
+### Styling Your Side Panel
 
 Create a `sidepanel.css` file to style your interface. Side panels have a fixed width determined by Chrome, but you can control the internal layout and appearance:
 
@@ -293,11 +293,11 @@ This CSS ensures your side panel looks professional and matches Chrome's overall
 
 ---
 
-JavaScript Implementation {#javascript-implementation}
+## JavaScript Implementation {#javascript-implementation}
 
 Now let us add the JavaScript functionality that makes your side panel interactive and able to communicate with the current web page.
 
-Side Panel Script
+### Side Panel Script
 
 Create a `sidepanel.js` file that handles user interactions and page communication:
 
@@ -428,11 +428,11 @@ This JavaScript file handles all the user interactions within your side panel. I
 
 ---
 
-Background Script Configuration {#background-script}
+## Background Script Configuration {#background-script}
 
 To enable communication between your side panel and the web page content, you need a background script. This script acts as a bridge, handling messages from the side panel and executing content script operations.
 
-Creating the Background Script
+### Creating the Background Script
 
 Create a `background.js` file:
 
@@ -510,15 +510,15 @@ You will need to add the `scripting` permission to your manifest for this to wor
 
 ---
 
-Opening the Side Panel Programmatically {#opening-side-panel}
+## Opening the Side Panel Programmatically {#opening-side-panel}
 
 Users can open your side panel through multiple methods. Let us explore the different ways to trigger the side panel.
 
-Using the Browser Action
+### Using the Browser Action
 
 The simplest way is to click the extension icon in the Chrome toolbar. By default, clicking the extension icon will open your side panel if it is configured in the manifest. However, you can also set up more sophisticated behavior using the sidePanel API.
 
-Programmatic Control
+### Programmatic Control
 
 Add this to your background script to provide more control:
 
@@ -540,7 +540,7 @@ chrome.sidePanel.setOptions({
 });
 ```
 
-Setting Default Behavior
+### Setting Default Behavior
 
 In your manifest, you can configure the side panel to automatically open on certain conditions:
 
@@ -557,51 +557,51 @@ In your manifest, you can configure the side panel to automatically open on cert
 
 ---
 
-Best Practices for Side Panel Extensions {#best-practices}
+## Best Practices for Side Panel Extensions {#best-practices}
 
 Building a successful side panel extension requires attention to several important considerations that affect user experience, performance, and compatibility.
 
-Performance Optimization
+### Performance Optimization
 
 Side panels run continuously while open, so it is essential to optimize your extension's performance. Use lazy loading for any heavy resources, implement proper event listener cleanup when the panel closes, and avoid polling or repeated operations that consume CPU. If your extension needs to periodically update data, use the Chrome alarms API rather than setInterval to ensure efficient background processing.
 
-Responsive Design
+### Responsive Design
 
 While side panels have a fixed width, your content should still be designed to work well across different contexts. Test your side panel with different zoom levels, in both light and dark mode, and when Chrome is configured with accessibility settings. Use relative units and flexible layouts to ensure your content remains readable and functional.
 
-User Privacy and Security
+### User Privacy and Security
 
 Always be transparent about what data your extension accesses and how it is used. The side panel API provides access to page content only when you explicitly request it through content scripts, so make sure users understand when and why your extension reads page information. Store sensitive data securely using the chrome.storage API with encryption when appropriate.
 
-Clear User Onboarding
+### Clear User Onboarding
 
 Since side panels are a relatively new feature, some users may not be familiar with how they work. Include clear instructions in your extension's description and, if appropriate, a brief onboarding experience that explains how to use your side panel and what makes it different from traditional popup extensions.
 
 ---
 
-Real-World Use Cases {#use-cases}
+## Real-World Use Cases {#use-cases}
 
 The Chrome Side Panel API enables many powerful extension types. Here are some popular use cases that demonstrate the API's versatility.
 
-Note-Taking and Annotation Tools
+### Note-Taking and Annotation Tools
 
 Side panels excel at providing persistent note-taking functionality. Users can browse the web and take notes without losing context or having to switch between windows. Your extension can capture the current URL, selected text, or page content directly into the user's notes.
 
-Translation and Language Learning
+### Translation and Language Learning
 
 Provide instant translation of selected text or entire page sections. The persistent side panel allows users to read translations while viewing the original content side by side, which is particularly valuable for language learning applications.
 
-Productivity Dashboards
+### Productivity Dashboards
 
 Create task managers, time trackers, or project management tools that remain accessible while users work in their browser. The side panel provides constant visibility into tasks and progress without interrupting the browsing experience.
 
-Developer Tools
+### Developer Tools
 
 Build specialized developer utilities like API testers, JSON formatters, or code snippet managers that developers can access while browsing documentation or working with web applications.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Side Panel API opens up exciting possibilities for extension developers in 2025 and beyond. Its ability to provide persistent, accessible sidebar functionality makes it ideal for a wide range of applications, from productivity tools to developer utilities to reading assistants.
 

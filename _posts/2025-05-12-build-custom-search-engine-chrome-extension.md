@@ -18,17 +18,17 @@ This tutorial uses Chrome's latest Manifest V3 format, ensuring your extension w
 
 ---
 
-Understanding Multi-Search Extensions {#understanding-multi-search}
+## Understanding Multi-Search Extensions {#understanding-multi-search}
 
 Before we dive into the code, let's understand what makes a multi-search extension work and why you might want to build one.
 
-What Is a Multi-Search Chrome Extension?
+### What Is a Multi-Search Chrome Extension?
 
 A multi-search Chrome extension, also known as a search aggregator, is a browser extension that takes a single search query and executes it across multiple websites simultaneously. Instead of manually visiting each site, typing your search term, and waiting for results, you enter your query once in the extension, and it opens multiple search results in new tabs or displays them in a consolidated view.
 
 For example, imagine you want to compare the price of a product across Amazon, eBay, and Walmart. With a custom search extension, you would type the product name once, and the extension would automatically open three tabs, one with Amazon results, one with eBay results, and one with Walmart results. This is incredibly valuable for researchers, shoppers, developers, and anyone who regularly searches multiple sources.
 
-Why Build a Custom Search Engine Extension?
+### Why Build a Custom Search Engine Extension?
 
 The popularity of extensions like "Search All" and "SearchPreview" demonstrates the demand for this type of tool. Building your own gives you several advantages:
 
@@ -40,7 +40,7 @@ Third, building a multi-search extension is an excellent learning project. It to
 
 ---
 
-Project Architecture {#project-architecture}
+## Project Architecture {#project-architecture}
 
 Our multi-search Chrome extension will consist of several key components:
 
@@ -54,7 +54,7 @@ Let's start building each component.
 
 ---
 
-Step 1: Creating the Manifest File {#manifest-file}
+## Step 1: Creating the Manifest File {#manifest-file}
 
 Every Chrome extension begins with a manifest.json file. This tells Chrome about your extension's name, version, permissions, and the files it uses. For Manifest V3, we need to specify the correct version and declare our popup:
 
@@ -85,7 +85,7 @@ The `permissions` array includes `activeTab` and `tabs`, which we'll need to cre
 
 ---
 
-Step 2: Building the Popup Interface {#popup-interface}
+## Step 2: Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. Let's create a clean, functional interface:
 
@@ -180,7 +180,7 @@ This interface provides a clean input field for the search query, checkboxes to 
 
 ---
 
-Step 3: Styling the Popup {#styling-popup}
+## Step 3: Styling the Popup {#styling-popup}
 
 Let's add some modern CSS to make our extension look professional:
 
@@ -330,7 +330,7 @@ footer p {
 
 ---
 
-Step 4: Implementing the Search Logic {#search-logic}
+## Step 4: Implementing the Search Logic {#search-logic}
 
 Now let's create the JavaScript that handles the search functionality:
 
@@ -480,7 +480,7 @@ This JavaScript file handles all the core functionality: reading which search en
 
 ---
 
-Step 5: Creating Extension Icons {#creating-icons}
+## Step 5: Creating Extension Icons {#creating-icons}
 
 Every Chrome extension needs icons. For a production extension, you'd want to create proper icon files. For this tutorial, you can create simple placeholder icons or use any image editing tool to create them. The manifest references three icon sizes: 16x16, 48x48, and 128x128 pixels.
 
@@ -491,7 +491,7 @@ Create an `icons` folder and add your icon files:
 
 ---
 
-Step 6: Loading and Testing the Extension {#loading-testing}
+## Step 6: Loading and Testing the Extension {#loading-testing}
 
 Now let's test our extension in Chrome:
 
@@ -508,33 +508,33 @@ You should be able to:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic multi-search extension working, here are some advanced features you could implement:
 
-Save Custom Search Profiles
+### Save Custom Search Profiles
 
 Allow users to save their preferred combination of search engines under a custom name. This would use Chrome's storage API to persist the profiles.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Add keyboard shortcuts so users can trigger searches without opening the popup. You can implement this using the commands permission in your manifest.
 
-Search History
+### Search History
 
 Implement local search history so users can quickly repeat previous searches. This would also use the storage API.
 
-Custom Search Engines
+### Custom Search Engines
 
 Allow users to add their own custom search engines beyond the defaults. This would require additional UI for adding custom URLs with {QUERY} placeholders.
 
-Open in Current Tab
+### Open in Current Tab
 
 Instead of opening all results in new tabs, give users the option to cycle through results in the current tab.
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Here are some common issues you might encounter when building your multi-search extension:
 
@@ -548,7 +548,7 @@ Popup closing too quickly: When testing, make sure you're not accidentally click
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your extension is working correctly, you can publish it to the Chrome Web Store:
 
@@ -562,7 +562,7 @@ Make sure your extension follows Chrome's policies, particularly around user dat
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've learned how to build a custom search engine Chrome extension that searches multiple sites simultaneously. This multi-search extension demonstrates several important Chrome extension development concepts: popup interfaces, tab management, user interactions, and URL manipulation.
 

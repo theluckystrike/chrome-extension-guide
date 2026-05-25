@@ -17,7 +17,7 @@ The tension between data-driven decision making and user privacy is real, but it
 
 ---
 
-Why Analytics Matter for Chrome Extensions
+### Why Analytics Matter for Chrome Extensions
 
 Analytics provide the foundation for making informed product decisions. Without understanding how users interact with your extension, you're essentially building in the dark, relying on gut feelings rather than evidence. Here's why analytics are critical for extension developers:
 
@@ -33,11 +33,11 @@ The key is implementing analytics in ways that provide these insights while main
 
 ---
 
-Chrome Web Store Privacy Policy Requirements
+### Chrome Web Store Privacy Policy Requirements
 
 Before implementing any analytics solution, you must understand Google's privacy policy requirements for Chrome extensions. The Chrome Web Store has increasingly strict policies regarding user data collection and privacy.
 
-Data Collection Disclosure
+### Data Collection Disclosure
 
 When you publish your extension, you must complete a data disclosure form that details what data your extension collects and how it's used. Google requires you to disclose:
 
@@ -49,9 +49,9 @@ When you publish your extension, you must complete a data disclosure form that d
 
 Failure to accurately disclose data collection can result in your extension being removed from the store, and repeated violations can lead to account termination.
 
-Prohibited Data Practices
+### Prohibited Data Practices
 
-Chrome Web Store policies explicitly prohibit:
+### Chrome Web Store policies explicitly prohibit:
 
 - Collecting sensitive user data without clear justification
 - Using user data for unrelated purposes
@@ -63,33 +63,33 @@ Understanding these requirements shapes your entire analytics architecture. The 
 
 ---
 
-Privacy-First Analytics Architecture
+### Privacy-First Analytics Architecture
 
 A privacy-first analytics architecture minimizes the data collected while maximizing the actionable insights you can derive. "If this data were leaked, would it cause harm to our users?" If the answer is yes, reconsider collecting it.
 
 Instead of tracking individual users across sessions, use anonymous identifiers that can't be traced back to specific individuals. These identifiers should be randomly generated and not based on any personal information.
 
-On-Device Aggregation
+### On-Device Aggregation
 
 Process data on the user's device whenever possible. Calculate aggregates locally and only transmit anonymized summaries. This approach, sometimes called "edge analytics," dramatically reduces privacy risk while still providing useful aggregate insights.
 
 For example, rather than tracking every page view and sending it to a server, your extension could maintain a local counter of feature usages and periodically send a simple count to your analytics endpoint.
 
-Purpose Limitation
+### Purpose Limitation
 
 Define clear purposes for each data point you collect and enforce strict purpose limitations. Data collected for improving product performance should not be used for advertising, and data collected for analytics should not be shared with third parties.
 
-Data Retention Policies
+### Data Retention Policies
 
 Implement automatic data expiration. There's rarely a legitimate reason to keep raw analytics data indefinitely. Define retention periods, typically 30 to 90 days for most analytics use cases, and automatically delete or anonymize older data.
 
 ---
 
-Event Tracking Implementation
+### Event Tracking Implementation
 
 Event tracking forms the foundation of most analytics implementations.  how to implement event tracking in Chrome extensions while maintaining privacy.
 
-Custom Event Tracking System
+### Custom Event Tracking System
 
 Building your own lightweight event tracking system gives you complete control over data collection. Here's a practical implementation:
 
@@ -160,14 +160,14 @@ class PrivacyAnalytics {
 }
 ```
 
-This implementation provides several privacy benefits:
+### This implementation provides several privacy benefits:
 
 - Anonymous user IDs: Uses randomly generated identifiers that can't be traced to specific users
 - Batching: Reduces network requests and enables aggregation before transmission
 - Local processing: Event processing happens on the user's device
 - Error handling: Failed requests are re-queued with size limits to prevent memory issues
 
-Using GA4 in Extensions
+### Using GA4 in Extensions
 
 Google Analytics 4 can be used in Chrome extensions, but requires careful configuration to maintain privacy compliance. Here's how to implement GA4 in a privacy-respecting way:
 
@@ -227,11 +227,11 @@ For privacy-focused extensions, a custom solution often provides better control 
 
 ---
 
-Feature Usage Tracking for Product Decisions
+### Feature Usage Tracking for Product Decisions
 
 Understanding which features users adopt and how they use them is crucial for prioritizing development. Here's how to implement feature usage tracking that informs product decisions without invading privacy.
 
-Feature Adoption Metrics
+### Feature Adoption Metrics
 
 Track the percentage of users who use each feature:
 
@@ -244,7 +244,7 @@ analytics.track('feature_used', {
 });
 ```
 
-Aggregate this data to understand feature adoption:
+### Aggregate this data to understand feature adoption:
 
 ```javascript
 // Server-side: Calculate adoption rates
@@ -263,7 +263,7 @@ function calculateFeatureAdoption(analyticsData) {
 }
 ```
 
-Usage Frequency Analysis
+### Usage Frequency Analysis
 
 Beyond adoption, understand how frequently features are used:
 
@@ -281,11 +281,11 @@ This data helps you identify your "hero features", the ones users rely on most, 
 
 ---
 
-Funnel Analysis: Install → Activate → Convert
+### Funnel Analysis: Install → Activate → Convert
 
 Understanding your conversion funnel helps identify where users drop off and what improvements would have the biggest impact. Let's design a privacy-respecting funnel analysis system.
 
-Defining Your Funnel
+### Defining Your Funnel
 
 A typical extension funnel includes:
 
@@ -296,7 +296,7 @@ A typical extension funnel includes:
 5. Retention: User returns and continues using the extension
 6. Conversion: User purchases premium features (if applicable)
 
-Implementing Funnel Tracking
+### Implementing Funnel Tracking
 
 ```javascript
 // Track funnel progression (anonymized)
@@ -330,9 +330,9 @@ function onPurchase() {
 }
 ```
 
-Analyzing Funnel Data
+### Analyzing Funnel Data
 
-Server-side analysis reveals drop-off points:
+### Server-side analysis reveals drop-off points:
 
 ```javascript
 // Analyze funnel conversion
@@ -355,7 +355,7 @@ function analyzeFunnel(analyticsData) {
 }
 ```
 
-This approach maintains privacy by:
+### This approach maintains privacy by:
 
 - Using anonymous identifiers
 - Storing only step completion, not user-identifiable data
@@ -363,11 +363,11 @@ This approach maintains privacy by:
 
 ---
 
-Crash and Error Reporting with Sentry
+### Crash and Error Reporting with Sentry
 
 Understanding when and why your extension fails is critical for maintaining quality. Sentry provides excellent error tracking, and can be configured for privacy-respecting use in Chrome extensions.
 
-Setting Up Sentry for Extensions
+### Setting Up Sentry for Extensions
 
 ```javascript
 // background/sentry.js
@@ -419,9 +419,9 @@ function trackError(error, context = {}) {
 }
 ```
 
-Privacy-Respecting Sentry Configuration
+### Privacy-Respecting Sentry Configuration
 
-Key privacy configurations for Sentry in Chrome extensions:
+### Key privacy configurations for Sentry in Chrome extensions:
 
 1. Set `defaultIntegrations: false`: Disable automatic browser integrations that might collect excessive data
 2. Implement `beforeSend`: Sanitize all error data before transmission
@@ -431,7 +431,7 @@ Key privacy configurations for Sentry in Chrome extensions:
 
 ---
 
-A/B Testing Framework
+### A/B Testing Framework
 
 Making data-driven decisions requires the ability to test hypotheses. experimentId,
       variant: variant,

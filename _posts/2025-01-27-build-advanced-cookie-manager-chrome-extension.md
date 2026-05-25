@@ -18,11 +18,11 @@ By the end of this tutorial, you'll have a fully functional cookie manager exten
 
 ---
 
-Why Build a Cookie Manager Extension?
+### Why Build a Cookie Manager Extension?
 
 Before diving into the code, let's understand why cookie manager extensions are so valuable. The default Chrome cookie management interface is limited, it doesn't allow easy editing, bulk operations, or convenient filtering. This creates an opportunity for extension developers to provide enhanced functionality.
 
-A cookie manager extension serves multiple use cases:
+### A cookie manager extension serves multiple use cases:
 
 - Privacy-conscious users who want to see and control what data websites store
 - Web developers debugging cookie-based authentication and session handling
@@ -33,7 +33,7 @@ Building a cookie manager extension is also an excellent learning project becaus
 
 ---
 
-Project Setup and Manifest Configuration
+### Project Setup and Manifest Configuration
 
 Every Chrome extension starts with a `manifest.json` file. For our cookie manager extension, we'll use Manifest V3, which is the current standard. Here's our manifest configuration:
 
@@ -70,7 +70,7 @@ The critical permission here is `cookies`, which grants access to the Chrome Coo
 
 ---
 
-The Popup Interface
+### The Popup Interface
 
 The popup is the main user interface for our cookie manager. We'll create an HTML structure that displays cookies in an organized, searchable format:
 
@@ -172,7 +172,7 @@ The popup is the main user interface for our cookie manager. We'll create an HTM
 
 ---
 
-Styling Your Cookie Manager
+### Styling Your Cookie Manager
 
 A cookie manager needs to be clean and functional. Here's the CSS to make your extension look professional:
 
@@ -402,7 +402,7 @@ h1 {
 
 ---
 
-Implementing Cookie Retrieval Logic
+### Implementing Cookie Retrieval Logic
 
 Now let's build the core functionality. The `popup.js` file handles all the cookie operations:
 
@@ -511,7 +511,7 @@ async function deleteCookie(name, domain, url) {
 
 ---
 
-Implementing the Edit Functionality
+### Implementing the Edit Functionality
 
 The edit modal allows users to modify cookie properties. This is one of the most powerful features of a cookie manager extension:
 
@@ -591,7 +591,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
 
 ---
 
-Implementing Search and Filtering
+### Implementing Search and Filtering
 
 A cookie manager extension needs solid search and filtering to manage site cookies effectively:
 
@@ -666,7 +666,7 @@ async function clearAllCookies() {
 
 ---
 
-Export and Import Functionality
+### Export and Import Functionality
 
 The ability to export and import cookies is crucial for many use cases, including moving cookies between browsers or backing up session data:
 
@@ -759,7 +759,7 @@ async function importCookies() {
 
 ---
 
-Security Considerations for Cookie Managers
+### Security Considerations for Cookie Managers
 
 When building a cookie manager extension, security is paramount. Here are essential considerations:
 
@@ -771,9 +771,9 @@ When building a cookie manager extension, security is paramount. Here are essent
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
-Before publishing, thoroughly test your cookie manager:
+### Before publishing, thoroughly test your cookie manager:
 
 1. Load the extension in developer mode
 2. Visit various websites and verify cookies appear correctly
@@ -786,7 +786,7 @@ Before publishing, thoroughly test your cookie manager:
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an advanced cookie manager extension is a rewarding project that teaches you essential Chrome extension development skills while creating a genuinely useful tool. The extension we built today provides:
 

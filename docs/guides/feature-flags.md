@@ -9,7 +9,7 @@ Chrome Extension Feature Flags. How to Roll Out Features Safely
 
 Feature flags (also known as feature toggles) are a powerful engineering practice that allows you to enable or disable functionality in your extension without deploying new code. Instead of shipping a new version every time you want to test a feature or respond to a critical bug, you can toggle behavior dynamically. This guide covers everything you need to implement feature flags in your Chrome extension.
 
-What Are Feature Flags and Why Extensions Need Them
+### What Are Feature Flags and Why Extensions Need Them
 
 Feature flags are configuration values that control which code paths execute in your extension. At their simplest, they're boolean values that your code checks before running certain functionality. When the flag is `true`, the feature runs; when `false`, it's skipped or replaced with alternative behavior.
 
@@ -17,7 +17,7 @@ Chrome extensions particularly benefit from feature flags for several reasons. F
 
 Beyond release management, feature flags enable ops-driven controls like kill switches for emergency situations, percentage-based rollouts for gradual adoption, and user segmentation to target specific audiences.
 
-Implementing Feature Flags with chrome.storage.sync
+### Implementing Feature Flags with chrome.storage.sync
 
 The most solid way to store feature flags in Chrome extensions is using `chrome.storage.sync`. This API synchronizes data across all instances of the extension where the user is signed into Chrome, ensuring consistent behavior across devices.
 
@@ -82,7 +82,7 @@ const FeatureFlags = {
 
 This implementation provides synchronous reads after initialization, automatic sync across devices, and change listeners to update in real-time when flags change.
 
-Server-Side vs Client-Side Flags
+### Server-Side vs Client-Side Flags
 
 Understanding the distinction between server-side and client-side feature flags is crucial for choosing the right approach.
 
@@ -109,7 +109,7 @@ async function fetchServerFlags() {
 
 For most extension use cases, client-side flags are sufficient and preferable due to their reliability and simplicity. Use server-side flags only when you have a specific need for centralized control.
 
-Gradual Rollouts and Percentage-Based Flags
+### Gradual Rollouts and Percentage-Based Flags
 
 Percentage-based rollouts let you enable a feature for a subset of users, gradually increasing the percentage as confidence grows. The key is deterministically assigning users to buckets so they always get the same experience.
 
@@ -139,7 +139,7 @@ async function isFeatureEnabledForUser(flagName, percentage) {
 
 For extensions without user accounts, you can use `chrome.runtime.id` as a pseudo-user identifier. It's consistent per installation but won't provide true user identity across devices.
 
-Kill Switches for Emergency Disabling
+### Kill Switches for Emergency Disabling
 
 Kill switches are critical feature flags that can immediately disable problematic functionality across all users. Design your extension to check kill switch flags early in execution and gracefully degrade when triggered.
 
@@ -180,7 +180,7 @@ const KillSwitches = {
 
 When implementing kill switches, ensure they work even when the extension fails to load properly. Consider storing critical kill switches in `chrome.storage.local` with a very small keyset so it loads fast.
 
-Managing Flag Lifecycle
+### Managing Flag Lifecycle
 
 Feature flags require ongoing maintenance. Without a clear lifecycle, they'll accumulate and become technical debt.
 

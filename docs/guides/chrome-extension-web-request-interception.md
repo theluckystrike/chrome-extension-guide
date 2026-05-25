@@ -10,7 +10,7 @@ Chrome Extension Web Request Interception. Complete Developer Guide
 
 The Chrome Extension webRequest interception API represents one of the most powerful capabilities available to extension developers. This comprehensive guide dives deep into the webRequest API, exploring advanced request modification techniques, building effective ad blocking systems, and creating privacy-focused tools that respect user security while delivering powerful functionality. Whether you're building a developer utility, a content filter, or a privacy extension, understanding request interception is fundamental to creating sophisticated Chrome extensions.
 
-Understanding the webRequest API Architecture
+### Understanding the webRequest API Architecture
 
 The chrome.webRequest API provides a comprehensive interface for observing and analyzing network traffic flowing through the Chrome browser. Unlike content scripts that operate within the context of web pages, the webRequest API operates at the network layer, giving extensions visibility into and control over HTTP and HTTPS requests before they reach their destination servers.
 
@@ -18,7 +18,7 @@ The architecture centers around a powerful event-driven system where Chrome fire
 
 Understanding the permission model is crucial before implementing any webRequest functionality. The basic `"webRequest"` permission grants observation capabilities, your extension can see requests happening without necessarily being able to modify them. For modification capabilities, additional permissions become necessary, and the requirements differ significantly between Manifest V2 and Manifest V3.
 
-Request Lifecycle Events in Detail
+### Request Lifecycle Events in Detail
 
 The webRequest API fires events in a predictable sequence for each network request, giving developers multiple opportunities to intercept and manipulate traffic. The lifecycle begins with `onBeforeRequest`, which fires when a request is about to be initiated, this is the earliest intervention point where you can cancel requests entirely or redirect them to different URLs.
 
@@ -26,7 +26,7 @@ Following the initial request, `onBeforeSendHeaders` fires just before request h
 
 When the server responds, `onHeadersReceived` fires with the complete response headers, enabling you to read or modify headers like Content-Type, Cache-Control, Set-Cookie, or custom response headers. For requests requiring HTTP authentication, the `onAuthRequired` event provides an opportunity to programmatically supply credentials without user intervention. Finally, `onResponseStarted` indicates the first byte of the response body has arrived, while `onCompleted` signals successful completion, and `onErrorOccurred` handles any failures during the request lifecycle.
 
-Setting Up Your Extension for Request Interception
+### Setting Up Your Extension for Request Interception
 
 Proper manifest configuration forms the foundation of any webRequest implementation. The permissions you declare determine what capabilities your extension will have, and understanding these requirements prevents common development frustrations.
 
@@ -52,11 +52,11 @@ The distinction between `"permissions"` and `"host_permissions"` is critical in 
 
 For Manifest V3, it's important to note that the `webRequestBlocking` permission has significant restrictions. While it still works in Manifest V2, public extensions in Manifest V3 cannot use blocking webRequest listeners for modification. Instead, Google recommends the `declarativeNetRequest` API for blocking and modification capabilities. However, for enterprise extensions or development builds, the blocking API remains available.
 
-TypeScript Implementation Patterns
+### TypeScript Implementation Patterns
 
 TypeScript adds significant value to webRequest implementations through type safety and IntelliSense support.  comprehensive TypeScript examples that demonstrate real-world patterns.
 
-Basic Request Monitoring
+### Basic Request Monitoring
 
 The simplest use case involves monitoring requests without modification. This pattern is essential for analytics extensions, developer tools, and debugging utilities.
 
@@ -163,7 +163,7 @@ class RequestMonitor {
 export const requestMonitor = new RequestMonitor();
 ```
 
-Request Modification and Blocking
+### Request Modification and Blocking
 
 Implementing request modification requires careful attention to the blocking API and proper return values. This pattern demonstrates how to modify headers and block specific requests.
 
@@ -299,7 +299,7 @@ class RequestModifier {
 export const requestModifier = new RequestModifier();
 ```
 
-Building an Ad Blocker with Practical Patterns
+### Building an Ad Blocker with Practical Patterns
 
 Ad blocking represents one of the most common use cases for webRequest interception. A well-designed ad blocker combines multiple filtering strategies while maintaining performance and respecting user privacy.
 
@@ -482,7 +482,7 @@ class AdBlocker {
 export const adBlocker = new AdBlocker();
 ```
 
-Creating Privacy Protection Tools
+### Creating Privacy Protection Tools
 
 Privacy extensions benefit greatly from webRequest interception capabilities. These tools can block tracking scripts, remove identifying headers, and provide users with control over their digital footprint.
 
@@ -704,7 +704,7 @@ class PrivacyProtector {
 export const privacyProtector = new PrivacyProtector();
 ```
 
-Best Practices for Production Extensions
+### Best Practices for Production Extensions
 
 When deploying webRequest-based extensions to production, several critical considerations ensure reliability, performance, and user trust. Following these best practices helps avoid common pitfalls and ensures your extension passes Chrome Web Store review.
 
@@ -718,7 +718,7 @@ Error handling within webRequest listeners must be robust. Since these listeners
 
 Testing your extension thoroughly across different scenarios is essential. Test with various network conditions, including slow connections and offline states. Verify that your extension handles redirects, authentication requirements, and error responses correctly. Use Chrome's developer tools to inspect network traffic and ensure your interception is working as expected.
 
-Security Considerations
+### Security Considerations
 
 Security forms a critical foundation for any webRequest-based extension. The ability to intercept and modify network requests carries significant responsibility, and poor security practices can harm users or lead to your extension being removed from the Chrome Web Store.
 
@@ -728,7 +728,7 @@ When modifying headers, avoid removing security-critical headers such as Content
 
 Validate all URL patterns and redirect destinations to prevent open redirect vulnerabilities. Ensure that your extension cannot be tricked into redirecting users to malicious sites through crafted URLs. When implementing redirect functionality, validate that target URLs are properly formatted and belong to expected domains.
 
-Conclusion
+### Conclusion
 
 The webRequest API provides Chrome extension developers with powerful capabilities for observing and manipulating network traffic. From building sophisticated ad blockers to creating privacy protection tools, understanding these APIs enables you to create extensions that meaningfully impact user browsing experiences.
 

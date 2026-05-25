@@ -18,15 +18,15 @@ we'll walk you through building a responsive design tester Chrome extension from
 
 ---
 
-Why Build a Responsive Design Tester Extension? {#why-build-responsive-extension}
+## Why Build a Responsive Design Tester Extension? {#why-build-responsive-extension}
 
 The demand for responsive design testing tools continues to grow as web development becomes more complex. Here's why building a responsive design tester Chrome extension is a valuable project:
 
-Market Demand
+### Market Demand
 
 Developers and designers spend significant time testing responsive layouts. According to industry surveys, up to 30% of development time is dedicated to cross-browser and cross-device compatibility testing. A well-designed responsive tester extension can dramatically reduce this time investment.
 
-Problem with Existing Solutions
+### Problem with Existing Solutions
 
 While Chrome DevTools provides responsive design mode, it has limitations:
 
@@ -42,7 +42,7 @@ A dedicated Chrome extension can solve these problems by offering:
 - Quick-switch capabilities between saved configurations
 - Persistent settings that remember your preferences
 
-Learning Opportunities
+### Learning Opportunities
 
 Building this extension teaches you valuable skills that apply to many other Chrome extension projects:
 
@@ -53,11 +53,11 @@ Building this extension teaches you valuable skills that apply to many other Chr
 
 ---
 
-Project Architecture {#project-architecture}
+## Project Architecture {#project-architecture}
 
 Before writing code, let's understand the architecture of our responsive design tester extension.
 
-Components Overview
+### Components Overview
 
 Our extension will consist of several key files:
 
@@ -68,7 +68,7 @@ Our extension will consist of several key files:
 5. background.js - Service worker for extension lifecycle
 6. content.js - Script that runs on web pages
 
-Key Features
+### Key Features
 
 We'll implement these essential features:
 
@@ -82,7 +82,7 @@ We'll implement these essential features:
 
 ---
 
-Step 1: Setting Up the Manifest {#step-1-manifest}
+## Step 1: Setting Up the Manifest {#step-1-manifest}
 
 Every Chrome extension starts with the manifest file. For our responsive design tester, we need specific permissions to interact with tabs and storage.
 
@@ -119,7 +119,7 @@ Every Chrome extension starts with the manifest file. For our responsive design 
 }
 ```
 
-Key permission explanations:
+### Key permission explanations:
 
 - storage: Allows saving user preferences and custom viewport configurations
 - tabs: Enables reading the current tab's URL and information
@@ -128,7 +128,7 @@ Key permission explanations:
 
 ---
 
-Step 2: Building the Popup Interface {#step-2-popup-interface}
+## Step 2: Building the Popup Interface {#step-2-popup-interface}
 
 The popup is the main interaction point for users. Let's create a clean, intuitive interface.
 
@@ -203,7 +203,7 @@ The interface includes sections for device presets, custom viewport input, optio
 
 ---
 
-Step 3: Styling the Extension {#step-3-styling}
+## Step 3: Styling the Extension {#step-3-styling}
 
 Good design is crucial for developer tools. Let's create a clean, professional look:
 
@@ -392,7 +392,7 @@ This styling creates a modern, clean interface that matches Chrome's Material De
 
 ---
 
-Step 4: Implementing the Popup Logic {#step-4-popup-logic}
+## Step 4: Implementing the Popup Logic {#step-4-popup-logic}
 
 Now let's implement the core functionality in popup.js:
 
@@ -604,7 +604,7 @@ This JavaScript handles all the popup interactions, including preset selection, 
 
 ---
 
-Step 5: Creating the Preview Window {#step-5-preview-window}
+## Step 5: Creating the Preview Window {#step-5-preview-window}
 
 The preview window displays the website in an iframe with the selected viewport:
 
@@ -770,7 +770,7 @@ init();
 
 ---
 
-Step 6: Creating the Multi-View Preview {#step-6-multi-view}
+## Step 6: Creating the Multi-View Preview {#step-6-multi-view}
 
 For developers who want to see multiple viewports at once, we create a multiview page:
 
@@ -850,9 +850,9 @@ This multi-view implementation displays up to four device previews in a grid lay
 
 ---
 
-Step 7: Background Service Worker {#step-7-background-worker}
+## Step 7: Background Service Worker {#step-7-background-worker}
 
-The background service worker handles extension lifecycle events:
+### The background service worker handles extension lifecycle events:
 
 ```javascript
 // background.js
@@ -895,9 +895,9 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load the extension: Open `chrome://extensions/`, enable Developer mode, click "Load unpacked," and select your extension folder.
 
@@ -915,7 +915,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once testing is complete, follow these steps to publish:
 
@@ -933,7 +933,7 @@ Once testing is complete, follow these steps to publish:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a responsive design tester Chrome extension is an excellent project that teaches fundamental Chrome extension development concepts while creating a genuinely useful tool. Throughout this guide, you've learned how to:
 

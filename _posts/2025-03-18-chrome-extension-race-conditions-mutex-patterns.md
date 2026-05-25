@@ -14,7 +14,7 @@ Handling Race Conditions in Chrome Extensions: Mutex and Locking Patterns
 
 Race conditions represent one of the most insidious categories of bugs that Chrome extension developers encounter. Unlike syntax errors or clear logic mistakes, race conditions manifest intermittently, making them notoriously difficult to diagnose and fix. When multiple parts of your extension execute concurrently, whether in background scripts, content scripts, or popup contexts, accessing shared resources without proper synchronization can lead to corrupted data, unexpected behavior, and frustrated users. This comprehensive guide explores the nature of race conditions in Chrome extensions and provides practical mutex and locking patterns to ensure your extensions behave reliably under all circumstances.
 
-Understanding Race Conditions in Extension Contexts
+### Understanding Race Conditions in Extension Contexts
 
 A race condition occurs when the behavior of software depends on the relative timing of events, such as the order in which threads or asynchronous operations execute. In the context of Chrome extensions, this typically manifests when multiple execution contexts attempt to read from or write to shared state simultaneously, with the final outcome depending on which operation completes first.
 
@@ -24,7 +24,7 @@ Consider a scenario where your extension tracks user preferences and applies the
 
 The asynchronous nature of Chrome's APIs exacerbates this problem. Many extension APIs are asynchronous by design: chrome.storage uses callbacks or promises, chrome.runtime.sendMessage is asynchronous, and chrome.tabs.query returns results through callbacks. When you chain multiple asynchronous operations together, the exact sequence of execution becomes difficult to predict, especially under varying network conditions, system loads, or user interaction patterns.
 
-The Mutex Concept Applied to Extensions
+### The Mutex Concept Applied to Extensions
 
 A mutex (mutual exclusion) is a synchronization primitive that ensures only one execution context can access a shared resource at any given time. In traditional programming languages, mutexes are typically implemented at the operating system level or within threading libraries. In JavaScript, which is single-threaded in its execution model, we achieve similar effects through various patterns that serialize access to critical sections of code.
 
@@ -32,7 +32,7 @@ The fundamental principle remains the same regardless of implementation: before 
 
 In Chrome extensions, we can implement mutex-like behavior using several approaches. The choice depends on your specific requirements: whether you need to synchronize within a single context (like the background script), across multiple contexts (between background and content scripts), or even across multiple extension instances (different browser profiles or machines using sync storage).
 
-Implementing Mutex Patterns in Background Scripts
+### Implementing Mutex Patterns in Background Scripts
 
 The background script often serves as the central hub for your extension's logic, making it a common location for race conditions to emerge. When multiple tabs or external events trigger background script handlers simultaneously, you need a way to ensure orderly access to shared resources.
 
@@ -81,7 +81,7 @@ async function safeStorageWrite(key, value) {
 
 This implementation provides basic mutual exclusion, but it has limitations in a distributed system. If your extension runs in multiple browser contexts or if the background script restarts (which happens frequently in Manifest V3 service workers), the mutex state is lost. For more solid synchronization, we need to persist the lock state.
 
-Persistent Locking with chrome.storage
+### Persistent Locking with chrome.storage
 
 To create a mutex that persists across background script restarts and works across different extension contexts, we can use chrome.storage to coordinate the lock state. This approach uses a shared storage key to track whether the resource is currently locked:
 
@@ -143,7 +143,7 @@ This StorageMutex class implements a distributed locking mechanism. When the loc
 
 The lock timeout is crucial for handling crashes. If the context that acquired the lock terminates unexpectedly without releasing it, the lock would persist forever, causing deadlocks. By setting an expiration time, we ensure that stale locks are eventually released, allowing other contexts to proceed.
 
-Coordinating Between Background and Content Scripts
+### Coordinating Between Background and Content Scripts
 
 Race conditions often span multiple execution contexts. Content scripts might need to coordinate with the background script or with each other. While content scripts cannot directly access chrome.storage.sync or local from their isolated world, they can communicate through message passing with the background script acting as a coordinator.
 
@@ -205,7 +205,7 @@ async function safeOperation(data) {
 
 This pattern ensures that even when multiple tabs try to execute the same operation simultaneously, they are serialized through the background script's coordination.
 
-Reader-Writer Lock Patterns
+### Reader-Writer Lock Patterns
 
 In many extension scenarios, you have operations that read data frequently but write data rarely. A standard mutex would serialize all access, forcing readers to wait for each other even when reads are safe to perform concurrently. A reader-writer lock solves this by allowing multiple concurrent readers but exclusive writers.
 
@@ -295,7 +295,7 @@ class ReaderWriterMutex {
 
 This reader-writer lock allows multiple content scripts to read data concurrently, significantly improving performance in read-heavy workloads. When a write operation needs to occur, it waits for all readers to finish, then acquires exclusive access.
 
-Handling Deadlocks and Timeout Strategies
+### Handling Deadlocks and Timeout Strategies
 
 Even with careful implementation, deadlocks can occur in distributed systems. A deadlock happens when two or more operations are each waiting for the other to release a lock, resulting in a standstill. Proper timeout and retry strategies are essential for building solid extension systems.
 
@@ -338,7 +338,7 @@ async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 100) {
 }
 ```
 
-Best Practices for Avoiding Race Conditions
+### Best Practices for Avoiding Race Conditions
 
 Beyond implementing explicit mutexes, several design patterns can help minimize the occurrence of race conditions in your extensions:
 
@@ -352,7 +352,7 @@ Implement proper error handling: Race conditions often manifest as intermittent 
 
 Test with artificial concurrency: Use tools to inject artificial delays and simulate concurrent access during development. This helps expose race conditions before they reach production.
 
-Conclusion
+### Conclusion
 
 Race conditions in Chrome extensions represent a challenging but solvable problem. By understanding the unique concurrency challenges of extension architectures and implementing appropriate mutex and locking patterns, you can build extensions that behave reliably regardless of how users interact with them.
 

@@ -18,25 +18,25 @@ we'll walk through building a fully functional emoji picker Chrome extension fro
 
 ---
 
-Why Build an Emoji Picker Chrome Extension? {#why-build}
+## Why Build an Emoji Picker Chrome Extension? {#why-build}
 
 The demand for emoji tools in browsers continues to grow. Users want quick access to emojis without switching between applications or using complicated keyboard shortcuts. Here's why building your own emoji keyboard chrome extension is an excellent project:
 
-Practical Utility
+### Practical Utility
 
 Every day, millions of people need to insert emojis into text fields across various websites. Whether it's adding a smiley face to a Slack message, including a thumbs up in an email, or using reaction emojis in Google Docs, the need is constant. A well-designed chrome extension emoji picker solves this problem instantly with a single click.
 
-Learning Opportunity
+### Learning Opportunity
 
 Building an emoji picker extension teaches you several important concepts in Chrome extension development. You'll work with popup HTML and CSS, learn how to communicate between different extension components, handle text insertion into web pages, and implement search and filtering functionality. These skills transfer directly to other extension projects you might build.
 
-Monetization Potential
+### Monetization Potential
 
 Emoji-related extensions have proven commercial viability. You can monetize your extension through freemium models, premium emoji packs, or by building a user base that supports other products. The Chrome Web Store provides instant access to billions of potential users.
 
 ---
 
-Project Overview and Architecture {#project-overview}
+## Project Overview and Architecture {#project-overview}
 
 Before writing any code, let's understand what we're building. Our build emoji extension project will include the following components:
 
@@ -50,7 +50,7 @@ This architecture ensures our extension is modular, maintainable, and follows Ch
 
 ---
 
-Step 1: Setting Up the Manifest {#manifest-setup}
+## Step 1: Setting Up the Manifest {#manifest-setup}
 
 Every Chrome extension begins with the manifest.json file. This critical configuration tells Chrome about your extension's capabilities, permissions, and the files it needs to load.
 
@@ -86,11 +86,11 @@ This manifest requests the minimum permissions necessary for our chrome extensio
 
 ---
 
-Step 2: Creating the Popup Interface {#popup-interface}
+## Step 2: Creating the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. It needs to be compact, responsive, and easy to use. We'll create an HTML file with emoji categories, a search bar, and an emoji grid.
 
-Create popup.html:
+### Create popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -131,7 +131,7 @@ The popup structure includes a search input for chrome extension emoji search fu
 
 ---
 
-Step 3: Styling the Popup {#popup-styling}
+## Step 3: Styling the Popup {#popup-styling}
 
 Good design is crucial for user adoption. Our popup needs to look professional and function smoothly across different screen sizes. Let's create a clean, modern interface with popup.css:
 
@@ -231,11 +231,11 @@ This CSS creates a clean, modern interface with proper spacing, hover effects, a
 
 ---
 
-Step 4: Implementing Emoji Data and Logic {#emoji-data}
+## Step 4: Implementing Emoji Data and Logic {#emoji-data}
 
 Now we need to create the JavaScript that powers our chrome extension emoji picker. This includes the emoji database, search functionality, and the code that handles inserting emojis into web pages.
 
-Create popup.js:
+### Create popup.js:
 
 ```javascript
 // Comprehensive emoji database organized by category
@@ -553,11 +553,11 @@ This JavaScript file handles the core functionality of our chrome extension emoj
 
 ---
 
-Step 5: Creating the Content Script {#content-script}
+## Step 5: Creating the Content Script {#content-script}
 
 The content script runs in the context of web pages and is responsible for actually inserting emojis into text fields. This is where the magic happens, users click an emoji in our popup, and the content script handles inserting it at the cursor position.
 
-Create content.js:
+### Create content.js:
 
 ```javascript
 // Listen for messages from the popup
@@ -664,7 +664,7 @@ This content script is the bridge between our popup and web pages. It handles in
 
 ---
 
-Step 6: Testing Your Extension {#testing}
+## Step 6: Testing Your Extension {#testing}
 
 Now that we've created all the necessary files, let's test our chrome extension emoji picker:
 
@@ -677,7 +677,7 @@ Try searching for emojis using the chrome extension emoji search feature, clicki
 
 ---
 
-Step 7: Publishing to the Chrome Web Store {#publishing}
+## Step 7: Publishing to the Chrome Web Store {#publishing}
 
 Once you've tested your extension and ensured it works correctly, you can publish it to the Chrome Web Store:
 
@@ -691,33 +691,33 @@ When writing your listing, use the keywords naturally: chrome extension emoji pi
 
 ---
 
-Enhancements and Future Improvements {#enhancements}
+## Enhancements and Future Improvements {#enhancements}
 
 Your emoji picker is now functional, but there's room for growth. Consider these enhancements:
 
-Recently Used Emojis
+### Recently Used Emojis
 
 Track the emojis users insert most frequently and display them in a "Recently Used" category for quick access.
 
-Skin Tone Selection
+### Skin Tone Selection
 
 Add support for different skin tones following the Fitzpatrick scale, allowing users to customize emoji appearances.
 
-Emoji Shortcuts
+### Emoji Shortcuts
 
 Implement keyboard shortcuts like `:smile:` to quickly search and insert emojis (similar to Slack or Discord).
 
-Custom Themes
+### Custom Themes
 
 Allow users to customize the popup appearance with different color schemes and layouts.
 
-Cloud Sync
+### Cloud Sync
 
 Use Chrome storage sync to save user preferences, recent emojis, and custom emoji sets across devices.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've successfully built a complete chrome extension emoji picker from scratch. This extension demonstrates several key concepts in Chrome extension development: creating popup interfaces, implementing search functionality, communicating between extension components, and manipulating web page content.
 

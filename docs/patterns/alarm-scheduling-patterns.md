@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/alarm-scheduling-patte
 last_modified_at: 2026-01-15
 ---
 
-Alarm Scheduling Patterns
+### Alarm Scheduling Patterns
 
 Advanced patterns for the `chrome.alarms` API in Chrome extensions.
 
-Core API Methods {#core-api-methods}
+## Core API Methods {#core-api-methods}
 
 ```javascript
 // Create an alarm
@@ -34,16 +34,16 @@ await chrome.alarms.clear('my-alarm');
 await chrome.alarms.clearAll();
 ```
 
-Minimum Intervals {#minimum-intervals}
+## Minimum Intervals {#minimum-intervals}
 
 - Production: Minimum 1 minute (`periodInMinutes: 1`)
 - Dev mode: Minimum 30 seconds
 
 Shorter intervals may be throttled or ignored by Chrome.
 
-Named Alarms as Routing Keys {#named-alarms-as-routing-keys}
+## Named Alarms as Routing Keys {#named-alarms-as-routing-keys}
 
-Use descriptive names to route to specific handlers:
+### Use descriptive names to route to specific handlers:
 
 ```javascript
 chrome.alarms.onAlarm.addListener((alarm) => {
@@ -59,9 +59,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Scheduled Tasks {#scheduled-tasks}
+## Scheduled Tasks {#scheduled-tasks}
 
-Calculate `delayInMinutes` from a target time:
+### Calculate `delayInMinutes` from a target time:
 
 ```javascript
 function scheduleAt(targetDate) {
@@ -76,9 +76,9 @@ function scheduleAt(targetDate) {
 }
 ```
 
-Time Zone Handling {#time-zone-handling}
+## Time Zone Handling {#time-zone-handling}
 
-Always store UTC timestamps; convert for display:
+### Always store UTC timestamps; convert for display:
 
 ```javascript
 // Store UTC
@@ -88,13 +88,13 @@ const scheduledUTC = alarm.scheduledTime;
 const localTime = new Date(scheduledUTC).toLocaleString();
 ```
 
-Alarm Persistence {#alarm-persistence}
+## Alarm Persistence {#alarm-persistence}
 
 Alarms survive service worker restart. Chrome automatically restores them.
 
-Alarm Recovery on Startup {#alarm-recovery-on-startup}
+## Alarm Recovery on Startup {#alarm-recovery-on-startup}
 
-Recreate missing alarms after extension updates:
+### Recreate missing alarms after extension updates:
 
 ```javascript
 chrome.runtime.onInstalled.addListener(async () => {
@@ -110,9 +110,9 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-Alarm Cancellation {#alarm-cancellation}
+## Alarm Cancellation {#alarm-cancellation}
 
-Clear specific alarms when tasks are cancelled:
+### Clear specific alarms when tasks are cancelled:
 
 ```javascript
 async function cancelTask(taskId) {
@@ -120,7 +120,7 @@ async function cancelTask(taskId) {
 }
 ```
 
-Alarm vs setTimeout {#alarm-vs-settimeout}
+## Alarm vs setTimeout {#alarm-vs-settimeout}
 
 | Feature | `chrome.alarms` | `setTimeout` |
 |---------|-----------------|--------------|
@@ -128,7 +128,7 @@ Alarm vs setTimeout {#alarm-vs-settimeout}
 | Persists restart |  |  |
 | Precise timing | Limited |  |
 
-Calendar-like Scheduling {#calendar-like-scheduling}
+## Calendar-like Scheduling {#calendar-like-scheduling}
 
 ```javascript
 // Daily at midnight
@@ -144,7 +144,7 @@ chrome.alarms.create('weekly-monday', {
 });
 ```
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [API Reference: alarms API](../api_reference/alarms-api.md)
 - [Guides: Alarms Scheduling](../guides/alarms-scheduling.md)

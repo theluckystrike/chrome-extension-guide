@@ -7,11 +7,11 @@ last_modified_at: 2026-01-15
 ---
 Build a Link Checker Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 
 A Chrome extension that scans pages for broken links, checks HTTP status, highlights results, and generates reports.
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
 ```json
 {
@@ -21,9 +21,9 @@ Manifest Configuration {#manifest-configuration}
 }
 ```
 
-Step 1: Extract Links {#step-1-extract-links}
+## Step 1: Extract Links {#step-1-extract-links}
 
-Content script to get all page links:
+### Content script to get all page links:
 
 ```javascript
 // content.js
@@ -43,9 +43,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 ```
 
-Step 2: Background Link Checking {#step-2-background-link-checking}
+## Step 2: Background Link Checking {#step-2-background-link-checking}
 
-Background script handles HTTP requests (avoids CORS):
+### Background script handles HTTP requests (avoids CORS):
 
 ```javascript
 // background.js
@@ -95,7 +95,7 @@ async function checkBatch(links, onProgress) {
 }
 ```
 
-Step 3: Visual Highlighting {#step-3-visual-highlighting}
+## Step 3: Visual Highlighting {#step-3-visual-highlighting}
 
 ```javascript
 // content.js
@@ -108,7 +108,7 @@ function highlightLinks(results) {
 }
 ```
 
-Step 4: Popup Report {#step-4-popup-report}
+## Step 4: Popup Report {#step-4-popup-report}
 
 ```html
 <style>.broken { color: #ef4444; }</style>
@@ -130,9 +130,9 @@ chrome.runtime.sendMessage({
 });
 ```
 
-Step 5: Badge Action {#step-5-badge-action}
+## Step 5: Badge Action {#step-5-badge-action}
 
-Display broken link count in extension badge:
+### Display broken link count in extension badge:
 
 ```javascript
 // background.js
@@ -144,11 +144,11 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 ```
 
-Summary {#summary}
+## Summary {#summary}
 
 Extension demonstrates link extraction, HTTP checking with rate limiting, visual highlighting, and report generation.
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Content Script Patterns](../guides/content-script-patterns.md)
 - [Rate Limiting Pattern](../patterns/rate-limiting.md)

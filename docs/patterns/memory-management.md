@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/memory-management/"
 last_modified_at: 2026-01-15
 ---
 
-Memory Management in Chrome Extensions
+### Memory Management in Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions share memory with the browser. A leaking content script consumes memory for every tab it runs on. A bloated service worker delays event handling. This guide covers practical patterns for identifying and fixing memory leaks, managing object lifecycles, and keeping your extension's footprint small.
 
 ---
 
-Memory Budgets {#memory-budgets}
+## Memory Budgets {#memory-budgets}
 
 | Context | Typical Allocation | Warning Threshold |
 |---------|-------------------|-------------------|
@@ -27,7 +27,7 @@ Chrome may terminate service workers or content scripts that consume excessive m
 
 ---
 
-Pattern 1: Avoiding Leaks in Event Listeners {#pattern-1-avoiding-leaks-in-event-listeners}
+## Pattern 1: Avoiding Leaks in Event Listeners {#pattern-1-avoiding-leaks-in-event-listeners}
 
 The most common memory leak in extensions. registering listeners without cleanup:
 
@@ -70,9 +70,9 @@ try {
 }
 ```
 
-AbortController Pattern {#abortcontroller-pattern}
+## AbortController Pattern {#abortcontroller-pattern}
 
-A cleaner approach using `AbortController`:
+### A cleaner approach using `AbortController`:
 
 ```ts
 // content.ts
@@ -94,7 +94,7 @@ window.addEventListener("pagehide", cleanup);
 
 ---
 
-Pattern 2: MutationObserver Lifecycle {#pattern-2-mutationobserver-lifecycle}
+## Pattern 2: MutationObserver Lifecycle {#pattern-2-mutationobserver-lifecycle}
 
 MutationObservers are a frequent leak source in content scripts:
 
@@ -145,7 +145,7 @@ window.addEventListener("pagehide", () => observer.disconnect());
 
 ---
 
-Pattern 3: WeakRef and FinalizationRegistry {#pattern-3-weakref-and-finalizationregistry}
+## Pattern 3: WeakRef and FinalizationRegistry {#pattern-3-weakref-and-finalizationregistry}
 
 Use weak references for caches that shouldn't prevent garbage collection:
 
@@ -177,7 +177,7 @@ function getCachedElement(id: string): HTMLElement | undefined {
 }
 ```
 
-WeakMap for Extension Data on DOM Elements {#weakmap-for-extension-data-on-dom-elements}
+## WeakMap for Extension Data on DOM Elements {#weakmap-for-extension-data-on-dom-elements}
 
 ```ts
 // content.ts. Associate data with DOM elements without leaking
@@ -199,9 +199,9 @@ function processElement(el: HTMLElement) {
 
 ---
 
-Pattern 4: Bounded Caches {#pattern-4-bounded-caches}
+## Pattern 4: Bounded Caches {#pattern-4-bounded-caches}
 
-Prevent unbounded growth in memory caches:
+### Prevent unbounded growth in memory caches:
 
 ```ts
 // LRU cache with size limit
@@ -256,7 +256,7 @@ async function fetchWithCache(url: string): Promise<unknown> {
 
 ---
 
-Pattern 5: Service Worker Memory Strategy {#pattern-5-service-worker-memory-strategy}
+## Pattern 5: Service Worker Memory Strategy {#pattern-5-service-worker-memory-strategy}
 
 Service workers terminate when idle, releasing all memory. Work with this lifecycle instead of against it:
 
@@ -290,7 +290,7 @@ async function getIndexFromStorage(): Promise<Map<string, string[]>> {
 }
 ```
 
-Monitoring Service Worker Memory {#monitoring-service-worker-memory}
+## Monitoring Service Worker Memory {#monitoring-service-worker-memory}
 
 ```ts
 // background.ts
@@ -317,7 +317,7 @@ chrome.alarms.create("memory-check", { periodInMinutes: 5 });
 
 ---
 
-Pattern 6: Content Script Cleanup on Navigation {#pattern-6-content-script-cleanup-on-navigation}
+## Pattern 6: Content Script Cleanup on Navigation {#pattern-6-content-script-cleanup-on-navigation}
 
 Content scripts persist during SPA navigations. Clean up when the URL changes:
 
@@ -372,7 +372,7 @@ manager.init();
 
 ---
 
-Pattern 7: Blob and Object URL Cleanup {#pattern-7-blob-and-object-url-cleanup}
+## Pattern 7: Blob and Object URL Cleanup {#pattern-7-blob-and-object-url-cleanup}
 
 Blobs and object URLs are a hidden leak source:
 
@@ -415,9 +415,9 @@ window.addEventListener("unload", revokeAllObjectURLs);
 
 ---
 
-Pattern 8: Profiling Memory in DevTools {#pattern-8-profiling-memory-in-devtools}
+## Pattern 8: Profiling Memory in DevTools {#pattern-8-profiling-memory-in-devtools}
 
-Heap Snapshots {#heap-snapshots}
+## Heap Snapshots {#heap-snapshots}
 
 1. Open your extension's DevTools (service worker or popup)
 2. Go to Memory tab
@@ -426,7 +426,7 @@ Heap Snapshots {#heap-snapshots}
 5. Take another snapshot
 6. Use Comparison view to see objects allocated between snapshots
 
-Allocation Timeline {#allocation-timeline}
+## Allocation Timeline {#allocation-timeline}
 
 1. Memory tab > Allocation instrumentation on timeline
 2. Start recording
@@ -434,13 +434,13 @@ Allocation Timeline {#allocation-timeline}
 4. Stop recording
 5. Blue bars = objects still in memory. Investigate large clusters.
 
-Finding Detached DOM Nodes {#finding-detached-dom-nodes}
+## Finding Detached DOM Nodes {#finding-detached-dom-nodes}
 
 In the heap snapshot, search for `Detached` in the filter. Detached DOM trees are nodes removed from the document but still referenced in JavaScript. a common content script leak.
 
 ---
 
-Memory Leak Checklist {#memory-leak-checklist}
+## Memory Leak Checklist {#memory-leak-checklist}
 
 - [ ] All `addEventListener` calls have corresponding `removeEventListener`
 - [ ] All `MutationObserver` instances are disconnected when no longer needed
@@ -453,7 +453,7 @@ Memory Leak Checklist {#memory-leak-checklist}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Problem It Prevents |
 |---------|-------------------|

@@ -19,33 +19,33 @@ This complete beginner's guide will walk you through everything you need to know
 
 ---
 
-Why Build Chrome Extensions in 2025? {#why-build-chrome-extensions}
+## Why Build Chrome Extensions in 2025? {#why-build-chrome-extensions}
 
 The Chrome extension ecosystem is thriving. Google has fully transitioned to Manifest V3, the latest extension platform, which brings improved security, better performance, and new capabilities. Here is why 2025 is an excellent time to start:
 
-A Growing Market
+### A Growing Market
 
 The Chrome Web Store hosts over 200,000 extensions, and users install billions of extensions every year. Categories like productivity, developer tools, and privacy continue to see explosive growth. Extensions like ad blockers, password managers, and tab management tools. including [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm). have millions of active users.
 
-Low Barrier to Entry
+### Low Barrier to Entry
 
 If you know HTML, CSS, and JavaScript, you already have the skills to build a Chrome extension. There is no need to learn a new programming language or set up complex development environments. You can go from idea to a working prototype in hours, not weeks.
 
-Real-World Impact
+### Real-World Impact
 
 Chrome extensions solve real problems for real users. From [reducing Chrome memory usage by 80%](/docs/tab-suspender-pro-memory-guide/) to automating repetitive tasks, extensions have a direct and measurable impact on people's daily workflows.
 
-Monetization Opportunities
+### Monetization Opportunities
 
 Extensions can be monetized through freemium models, one-time purchases, subscriptions, or even by building a user base that feeds into a larger product. The Chrome Web Store provides a built-in distribution channel with low friction for user acquisition.
 
 ---
 
-Understanding Chrome Extension Architecture {#understanding-architecture}
+## Understanding Chrome Extension Architecture {#understanding-architecture}
 
 Before writing any code, it is essential to understand how Chrome extensions are structured. Every extension consists of several components that work together to deliver functionality.
 
-The Manifest File
+### The Manifest File
 
 The manifest file (`manifest.json`) is the heart of every Chrome extension. It is a JSON file that tells Chrome everything it needs to know about your extension: its name, version, permissions, and which files to load.
 
@@ -80,11 +80,11 @@ Here is a minimal Manifest V3 manifest:
 
 Each field serves a specific purpose, and understanding them is fundamental to building effective extensions. For a deeper dive into manifest configuration, see our [Manifest V3 migration guide](/docs/mv3/migration-guide/).
 
-Service Workers (Background Scripts)
+### Service Workers (Background Scripts)
 
 In Manifest V3, background pages have been replaced by service workers. A service worker is a JavaScript file that runs in the background, separate from any web page. It handles events like extension installation, tab updates, alarms, and messages from other parts of your extension.
 
-Key characteristics of service workers:
+### Key characteristics of service workers:
 
 - Event-driven: They wake up when an event occurs and go back to sleep when idle
 - No DOM access: They cannot directly manipulate web page content
@@ -113,7 +113,7 @@ chrome.action.onClicked.addListener((tab) => {
 
 For advanced service worker patterns, check our [background service worker guide](/docs/guides/background-service-worker/).
 
-Content Scripts
+### Content Scripts
 
 Content scripts are JavaScript files that run in the context of web pages. They can read and modify the DOM of any page that matches their URL patterns, making them essential for extensions that need to interact with web content.
 
@@ -144,7 +144,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 Content scripts operate in an isolated world, meaning they share the DOM with the page but have their own JavaScript execution environment. This prevents conflicts between your extension code and the page's own scripts.
 
-Popup UI
+### Popup UI
 
 The popup is the small window that appears when a user clicks your extension's icon in the toolbar. It is an HTML page that can include CSS and JavaScript, just like any web page. The popup provides a convenient interface for user interaction.
 
@@ -197,17 +197,17 @@ document.getElementById('highlightBtn').addEventListener('click', async () => {
 });
 ```
 
-Options Page
+### Options Page
 
 For extensions that need user-configurable settings, an options page provides a dedicated full-page interface. Users can access it by right-clicking the extension icon and selecting "Options" or through the Chrome extensions management page.
 
 ---
 
-Setting Up Your Development Environment {#setting-up-development-environment}
+## Setting Up Your Development Environment {#setting-up-development-environment}
 
 Getting started with Chrome extension development requires minimal tooling. Here is what you need:
 
-Essential Tools
+### Essential Tools
 
 1. A code editor: Visual Studio Code is the most popular choice, with excellent support for JavaScript, TypeScript, and JSON schema validation for manifest files.
 
@@ -215,7 +215,7 @@ Essential Tools
 
 3. Node.js and npm (optional but recommended): Needed if you plan to use TypeScript, React, Vue, or any build tools. Install the LTS version from [nodejs.org](https://nodejs.org).
 
-Project Structure
+### Project Structure
 
 A well-organized project structure makes development and maintenance significantly easier. Here is a recommended structure for a beginner extension:
 
@@ -239,7 +239,7 @@ my-extension/
 
 For larger projects, you might want to use a build system. Our [project structure guide](/docs/guides/chrome-extension-project-structure/) covers advanced patterns for scaling your extension codebase.
 
-Loading Your Extension in Chrome
+### Loading Your Extension in Chrome
 
 During development, you load your extension in "developer mode" without needing to publish it to the Chrome Web Store:
 
@@ -252,11 +252,11 @@ Every time you make changes to your code, click the refresh icon on your extensi
 
 ---
 
-Building Your First Extension: A Practical Walkthrough {#building-first-extension}
+## Building Your First Extension: A Practical Walkthrough {#building-first-extension}
 
 Let us build a complete, practical extension from scratch: a "Reading Time Estimator" that shows how long it will take to read any article you visit.
 
-Step 1: Create the Manifest
+### Step 1: Create the Manifest
 
 ```json
 {
@@ -282,7 +282,7 @@ Step 1: Create the Manifest
 
 Notice that we only request the `activeTab` permission. Following the principle of least privilege. requesting only the permissions your extension actually needs. is critical for user trust and for passing Chrome Web Store review. Learn more in our [permissions guide](/docs/permissions/).
 
-Step 2: Write the Content Script
+### Step 2: Write the Content Script
 
 ```javascript
 // content.js
@@ -349,7 +349,7 @@ Step 2: Write the Content Script
 })();
 ```
 
-Step 3: Add Styling
+### Step 3: Add Styling
 
 ```css
 /* content.css */
@@ -374,17 +374,17 @@ Step 3: Add Styling
 }
 ```
 
-Step 4: Load and Test
+### Step 4: Load and Test
 
 Load the extension in Chrome using the developer mode instructions above, then navigate to any article or blog post. You should see a reading time badge at the top of the content.
 
 ---
 
-Essential Chrome Extension APIs {#essential-apis}
+## Essential Chrome Extension APIs {#essential-apis}
 
 Chrome provides a rich set of APIs for extension developers. Here are the ones you will use most frequently:
 
-Storage API
+### Storage API
 
 The Storage API lets you persist data across browser sessions. It offers two storage areas: `local` (per-device) and `sync` (synced across devices via the user's Google account).
 
@@ -408,7 +408,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 For advanced storage patterns, see our [Storage API tutorial](/docs/guides/chrome-extension-storage-api-tutorial-sync-vs-local/).
 
-Tabs API
+### Tabs API
 
 The Tabs API provides methods for creating, modifying, and managing browser tabs. This is one of the most commonly used APIs, powering extensions like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) that optimize tab performance and memory usage.
 
@@ -430,7 +430,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-Messaging API
+### Messaging API
 
 Extensions need to communicate between their different components (service worker, content scripts, popup). The Messaging API enables this communication.
 
@@ -452,7 +452,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.tabs.sendMessage(tabId, { action: 'update' });
 ```
 
-Alarms API
+### Alarms API
 
 The Alarms API lets you schedule periodic tasks. essential for extensions that need to perform background operations at regular intervals.
 
@@ -472,25 +472,25 @@ Learn more about alarms in our [alarms and scheduling guide](/docs/guides/alarms
 
 ---
 
-Manifest V3: What You Need to Know {#manifest-v3}
+## Manifest V3: What You Need to Know {#manifest-v3}
 
 Manifest V3 is the current and only supported extension platform for new extensions. If you are starting fresh in 2025, you are building on MV3 from the beginning. Here are the key things to understand:
 
-Service Workers Replace Background Pages
+### Service Workers Replace Background Pages
 
 The biggest change in MV3 is the move from persistent background pages to event-driven service workers. This improves performance and reduces memory usage, but it means you need to think differently about state management.
 
-Key implications:
+### Key implications:
 
 - You cannot store data in global variables between service worker restarts. use `chrome.storage` instead
 - DOM APIs are not available in service workers
 - Timers (`setTimeout`, `setInterval`) are unreliable because the service worker can terminate at any time. use `chrome.alarms` instead
 
-Declarative Net Request Replaces webRequest Blocking
+### Declarative Net Request Replaces webRequest Blocking
 
 For extensions that need to block or modify network requests (like ad blockers), MV3 introduces the `declarativeNetRequest` API as a replacement for the blocking `webRequest` API. This change improves privacy and performance because the browser handles request modification natively rather than routing requests through extension code.
 
-Content Security Policy Changes
+### Content Security Policy Changes
 
 MV3 enforces stricter content security policies. Remote code execution is prohibited. you cannot load and execute JavaScript from external servers. All code must be bundled with your extension.
 
@@ -498,31 +498,31 @@ For detailed migration information, see our [complete MV3 migration guide](/docs
 
 ---
 
-Debugging Your Extension {#debugging}
+## Debugging Your Extension {#debugging}
 
 Effective debugging is critical for productive extension development. Chrome provides excellent developer tools for each component of your extension.
 
-Debugging the Service Worker
+### Debugging the Service Worker
 
 1. Navigate to `chrome://extensions/`
 2. Find your extension and click "service worker" link
 3. This opens a dedicated DevTools window for your service worker
 4. Use the Console, Sources, and Network panels as you would for any web application
 
-Debugging Content Scripts
+### Debugging Content Scripts
 
 1. Open DevTools on the page where your content script runs (F12 or Ctrl+Shift+I)
 2. Go to the Sources panel
 3. In the file navigator, find your extension under "Content scripts"
 4. Set breakpoints and debug as normal
 
-Debugging the Popup
+### Debugging the Popup
 
 1. Right-click your extension's icon in the toolbar
 2. Select "Inspect popup"
 3. DevTools opens for the popup context
 
-Common Debugging Pitfalls
+### Common Debugging Pitfalls
 
 - Service worker not updating: After code changes, click the refresh button on `chrome://extensions/`. If issues persist, unregister the service worker from DevTools.
 - Content script not injecting: Verify your URL match patterns in the manifest. Use `chrome://extensions/` errors section to check for pattern syntax issues.
@@ -532,11 +532,11 @@ For a comprehensive debugging toolkit, see our [debugging tools guide](/docs/gui
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Writing tests for your extension ensures reliability and makes it easier to add features without breaking existing functionality.
 
-Unit Testing with Jest
+### Unit Testing with Jest
 
 You can use Jest to test your extension's business logic. the pure JavaScript functions that do not depend on Chrome APIs.
 
@@ -561,7 +561,7 @@ test('rounds up partial minutes', () => {
 });
 ```
 
-Integration Testing with Puppeteer
+### Integration Testing with Puppeteer
 
 For end-to-end testing that includes Chrome API interactions, Puppeteer can load your extension and simulate user behavior:
 
@@ -581,18 +581,18 @@ Learn more about testing strategies in our [comprehensive testing guide](/docs/g
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is ready, publishing it to the Chrome Web Store makes it available to billions of users.
 
-Preparing for Submission
+### Preparing for Submission
 
 1. Create production icons: You need 16x16, 48x48, and 128x128 pixel icons in PNG format
 2. Write a compelling description: Explain what your extension does, who it is for, and why users should install it
 3. Take screenshots: Capture 1280x800 or 640x400 pixel screenshots showing your extension in action
 4. Create a privacy policy: Required for extensions that handle user data
 
-The Review Process
+### The Review Process
 
 Google reviews every extension submission. The review typically takes 1 to 3 business days but can take longer. Common reasons for rejection include:
 
@@ -603,7 +603,7 @@ Google reviews every extension submission. The review typically takes 1 to 3 bus
 
 For a detailed walkthrough of the publishing process, see our [publishing guide](/docs/publishing/).
 
-Post-Publication
+### Post-Publication
 
 After your extension is live, monitor the Chrome Web Store Developer Dashboard for:
 
@@ -614,11 +614,11 @@ After your extension is live, monitor the Chrome Web Store Developer Dashboard f
 
 ---
 
-Performance Best Practices {#performance-best-practices}
+## Performance Best Practices {#performance-best-practices}
 
 A slow extension creates a poor user experience and can lead to uninstalls. Here are essential performance practices:
 
-Minimize Content Script Impact
+### Minimize Content Script Impact
 
 Content scripts run on every matching page, so they should be as lightweight as possible:
 
@@ -626,13 +626,13 @@ Content scripts run on every matching page, so they should be as lightweight as 
 - Defer non-critical operations using `requestIdleCallback`
 - Avoid blocking the main thread with heavy computations
 
-Optimize Storage Usage
+### Optimize Storage Usage
 
 - Batch storage operations instead of making many small reads and writes
 - Use `chrome.storage.local` for large data sets and `chrome.storage.sync` only for small, user-facing settings (sync storage has a 100KB total limit)
 - Cache frequently accessed data in memory within the service worker's current lifecycle
 
-Keep the Service Worker Lean
+### Keep the Service Worker Lean
 
 - Avoid importing large libraries in the service worker
 - Use dynamic imports to load code only when needed
@@ -642,15 +642,15 @@ For in-depth performance optimization techniques, read our [Chrome extension per
 
 ---
 
-Security Considerations {#security}
+## Security Considerations {#security}
 
 Security is paramount for Chrome extensions because they have privileged access to browser data and web content.
 
-Follow the Principle of Least Privilege
+### Follow the Principle of Least Privilege
 
 Only request the permissions your extension actually needs. Users are more likely to install extensions with fewer permissions, and Google reviews extensions with broad permissions more carefully.
 
-Sanitize User Input
+### Sanitize User Input
 
 Never insert user-provided content into the DOM using `innerHTML`. Use `textContent` or create elements programmatically to prevent XSS attacks.
 
@@ -667,7 +667,7 @@ span.textContent = userInput;
 container.appendChild(span);
 ```
 
-Use Content Security Policy
+### Use Content Security Policy
 
 Define a strict Content Security Policy in your manifest to prevent code injection:
 
@@ -683,7 +683,7 @@ Review our [security hardening checklist](/docs/guides/chrome-extension-security
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 Congratulations! You now have a solid foundation in Chrome extension development. Here is where to go from here:
 
@@ -702,7 +702,7 @@ Congratulations! You now have a solid foundation in Chrome extension development
 The Chrome extension ecosystem continues to evolve, and 2025 brings exciting opportunities for developers at every level. Start building today, and you will be amazed at what you can create.
 
 
-Related Articles
+### Related Articles
 
 - [Best Chrome Extensions for Developers 2025]({% post_url 2025-01-16-best-chrome-extensions-for-developers-2025 %})
 - [Chrome Extension Performance Optimization Guide]({% post_url 2025-01-16-chrome-extension-performance-optimization-guide %})

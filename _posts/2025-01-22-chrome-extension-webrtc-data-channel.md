@@ -18,11 +18,11 @@ Whether you're building a file sharing extension, a real-time collaboration tool
 
 ---
 
-Understanding WebRTC Data Channel Fundamentals {#understanding-webrtc-data-channel}
+## Understanding WebRTC Data Channel Fundamentals {#understanding-webrtc-data-channel}
 
 WebRTC, which stands for Web Real-Time Communication, is a powerful API that enables direct peer-to-peer communication between browsers. While the media streaming capabilities (audio and video) get most of the attention, the Data Channel API is equally important for extension developers. It provides a reliable, bidirectional data transfer mechanism that works directly in the browser environment.
 
-What is WebRTC Data Channel?
+### What is WebRTC Data Channel?
 
 The WebRTC Data Channel is a protocol that allows browsers to exchange arbitrary data directly between peers. Unlike traditional HTTP requests that require a server intermediary, Data Channels establish direct connections between two endpoints. This direct connection model offers several compelling advantages:
 
@@ -34,7 +34,7 @@ Enhanced Privacy: Data never passes through third-party servers during transmiss
 
 Efficient Bandwidth Usage: Direct peer connections can make more efficient use of available bandwidth, especially in scenarios with many participants where server bottlenecks can become problematic.
 
-How Data Channels Work in WebRTC
+### How Data Channels Work in WebRTC
 
 WebRTC Data Channels are built on top of the RTCPeerConnection API. When you establish a peer connection, you can create one or more data channels using the `createDataChannel()` method. Each channel can be configured for different use cases:
 
@@ -46,13 +46,13 @@ The Data Channel API also supports message sizes up to hundreds of megabytes, ma
 
 ---
 
-Chrome Extension Architecture for WebRTC Data Channel {#chrome-extension-architecture}
+## Chrome Extension Architecture for WebRTC Data Channel {#chrome-extension-architecture}
 
 Building WebRTC Data Channel functionality into a Chrome extension requires careful architectural consideration. Chrome extensions have a unique multi-process architecture that affects how WebRTC connections are established and managed.
 
-Understanding Extension Contexts
+### Understanding Extension Contexts
 
-Chrome extensions consist of several execution contexts:
+### Chrome extensions consist of several execution contexts:
 
 Background Scripts: Run in a persistent background page, ideal for managing WebRTC connections that need to persist across tab changes.
 
@@ -64,7 +64,7 @@ Options Pages: Configuration interfaces for extension settings.
 
 For most WebRTC Data Channel implementations, the background script serves as the central hub for managing peer connections. This ensures that connections remain active even when users navigate away from specific tabs.
 
-Manifest V3 Considerations
+### Manifest V3 Considerations
 
 If you're building a new extension, you'll likely be working with Manifest V3. This version introduces some important changes relevant to WebRTC:
 
@@ -90,11 +90,11 @@ Here's a basic Manifest V3 setup for a WebRTC Data Channel extension:
 
 ---
 
-Implementing WebRTC Data Channel in Your Extension {#implementing-data-channel}
+## Implementing WebRTC Data Channel in Your Extension {#implementing-data-channel}
 
 Now let's dive into the practical implementation. We'll build a complete example that demonstrates establishing peer connections and transferring data.
 
-Step 1: Signaling Server Setup
+### Step 1: Signaling Server Setup
 
 Before peers can establish a direct WebRTC connection, they need to exchange connection information. This process, called signaling, typically requires a server. For Chrome extensions, you have several options:
 
@@ -132,7 +132,7 @@ class SignalingClient {
 }
 ```
 
-Step 2: Creating the RTCPeerConnection
+### Step 2: Creating the RTCPeerConnection
 
 With signaling in place, we can now establish the WebRTC peer connection:
 
@@ -256,7 +256,7 @@ class WebRTCDataChannelManager {
 }
 ```
 
-Step 3: Integrating with Extension Background Script
+### Step 3: Integrating with Extension Background Script
 
 Now let's integrate this with a Chrome extension background script:
 
@@ -321,9 +321,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Advanced Patterns and Best Practices {#advanced-patterns}
+## Advanced Patterns and Best Practices {#advanced-patterns}
 
-Managing Multiple Data Channels
+### Managing Multiple Data Channels
 
 For complex applications, you might need multiple data channels with different characteristics:
 
@@ -345,7 +345,7 @@ async function setupMultipleChannels(peerConnection) {
 }
 ```
 
-File Transfer Implementation
+### File Transfer Implementation
 
 The WebRTC Data Channel can handle large files by chunking them:
 
@@ -400,9 +400,9 @@ class FileTransferManager {
 }
 ```
 
-Error Handling and Reconnection
+### Error Handling and Reconnection
 
-Robust error handling is essential for production extensions:
+### Robust error handling is essential for production extensions:
 
 ```javascript
 class RobustWebRTCManager {
@@ -448,13 +448,13 @@ class RobustWebRTCManager {
 
 ---
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 When implementing WebRTC Data Channel in Chrome extensions, security should be a top priority:
 
-Origin Verification
+### Origin Verification
 
-Always verify the origin of incoming connections:
+### Always verify the origin of incoming connections:
 
 ```javascript
 async function verifyPeerConnection(peerConnection, allowedOrigins) {
@@ -466,9 +466,9 @@ async function verifyPeerConnection(peerConnection, allowedOrigins) {
 }
 ```
 
-Data Validation
+### Data Validation
 
-Never trust incoming data without validation:
+### Never trust incoming data without validation:
 
 ```javascript
 function validateIncomingData(data) {
@@ -488,15 +488,15 @@ function validateIncomingData(data) {
 }
 ```
 
-HTTPS Requirement
+### HTTPS Requirement
 
 WebRTC requires HTTPS in production. Chrome extensions are served over `chrome-extension://` protocol, which is secure by default, but ensure any external signaling servers use HTTPS.
 
 ---
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
-Connection Pooling
+### Connection Pooling
 
 For extensions that need to communicate with multiple peers, consider connection pooling:
 
@@ -535,9 +535,9 @@ class PeerConnectionPool {
 }
 ```
 
-Memory Management
+### Memory Management
 
-Proper cleanup prevents memory leaks:
+### Proper cleanup prevents memory leaks:
 
 ```javascript
 function cleanupWebRTCResources(manager) {
@@ -559,29 +559,29 @@ function cleanupWebRTCResources(manager) {
 
 ---
 
-Real-World Use Cases {#use-cases}
+## Real-World Use Cases {#use-cases}
 
-P2P File Sharing Extension
+### P2P File Sharing Extension
 
 WebRTC Data Channel is perfect for building privacy-focused file sharing extensions. Users can share files directly between browsers without uploading to intermediate servers. This is faster for large files and more private since no server sees the file contents.
 
-Collaborative Editing
+### Collaborative Editing
 
 Real-time collaboration tools can use Data Channels to sync document changes between users. The low latency ensures everyone sees changes quickly without overwhelming servers.
 
-Gaming
+### Gaming
 
 Browser-based games can use unreliable Data Channels for real-time game state synchronization, creating multiplayer experiences without dedicated game servers.
 
-Live Streaming
+### Live Streaming
 
 While WebRTC excels at media streaming, combining it with Data Channels allows sending metadata, chat messages, and interactive elements alongside audio/video.
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
-Connection Failures
+### Connection Failures
 
 If peers cannot connect, check these common issues:
 
@@ -591,19 +591,19 @@ Firewall Blocking: Corporate firewalls may block UDP. Have a fallback to TCP tra
 
 Certificate Errors: Ensure all HTTPS resources have valid certificates.
 
-Performance Issues
+### Performance Issues
 
 High Latency: Check network conditions and consider using unreliable mode for non-critical data.
 
 Message Delays: Ensure you're not blocking on message processing. Use asynchronous handlers.
 
-Extension-Specific Issues
+### Extension-Specific Issues
 
 Service Worker Termination: In Manifest V3, background service workers can be terminated. Use persistent connections carefully and implement reconnection logic.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 WebRTC Data Channel in Chrome extensions opens up remarkable possibilities for building peer-to-peer applications. From file sharing to real-time collaboration, the direct browser-to-browser communication model offers benefits that traditional server-relayed approaches cannot match.
 

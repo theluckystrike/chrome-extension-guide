@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Text Highlighter Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - Select text and highlight with color
 - Save highlights per URL
 - Multiple highlight colors
@@ -16,14 +16,14 @@ What You'll Build {#what-youll-build}
 - Export highlights as notes
 - Keyboard shortcut: Alt+Shift+H
 
-Manifest {#manifest}
+## Manifest {#manifest}
 - permissions: activeTab, storage
 - commands with Alt+Shift+H shortcut
 - action with popup
 
 ---
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 manifest.json:
 ```json
@@ -43,7 +43,7 @@ Required permissions: `activeTab` for page access, `storage` for persistence.
 
 ---
 
-Step 2: Content Script - Text Selection Listener {#step-2-content-script-text-selection-listener}
+## Step 2: Content Script - Text Selection Listener {#step-2-content-script-text-selection-listener}
 
 content.js:
 ```javascript
@@ -84,7 +84,7 @@ function getXPath(node) {
 
 ---
 
-Step 3: Wrapping Text in &lt;mark&gt; Elements {#step-3-wrapping-text-in-ltmarkgt-elements}
+## Step 3: Wrapping Text in &lt;mark&gt; Elements {#step-3-wrapping-text-in-ltmarkgt-elements}
 
 ```javascript
 function highlightRange(range, color = '#ffeb3b') {
@@ -115,7 +115,7 @@ function generateId() {
 
 ---
 
-Step 4: Color Picker Popup {#step-4-color-picker-popup}
+## Step 4: Color Picker Popup {#step-4-color-picker-popup}
 
 popup.html:
 ```html
@@ -145,7 +145,7 @@ document.querySelectorAll('.color-btn').forEach(btn => {
 
 ---
 
-Step 5: Saving Highlights to Storage {#step-5-saving-highlights-to-storage}
+## Step 5: Saving Highlights to Storage {#step-5-saving-highlights-to-storage}
 
 ```javascript
 async function saveHighlight(url, highlightData) {
@@ -168,7 +168,7 @@ Storage key uses hostname for per-site grouping. Store XPath for precise restora
 
 ---
 
-Step 6: Restoring Highlights on Page Revisit {#step-6-restoring-highlights-on-page-revisit}
+## Step 6: Restoring Highlights on Page Revisit {#step-6-restoring-highlights-on-page-revisit}
 
 ```javascript
 async function restoreHighlights(tabId) {
@@ -197,7 +197,7 @@ function getNodeByXPath(xpath) {
 
 ---
 
-Step 7: Highlight Sidebar {#step-7-highlight-sidebar}
+## Step 7: Highlight Sidebar {#step-7-highlight-sidebar}
 
 ```javascript
 function renderSidebar(highlights) {
@@ -221,7 +221,7 @@ function renderSidebar(highlights) {
 
 ---
 
-Step 8: Removing Individual Highlights {#step-8-removing-individual-highlights}
+## Step 8: Removing Individual Highlights {#step-8-removing-individual-highlights}
 
 ```javascript
 function removeHighlight(id) {
@@ -238,9 +238,9 @@ Click the × button in sidebar or click highlight directly to remove.
 
 ---
 
-Challenges {#challenges}
+## Challenges {#challenges}
 
-Dynamic Content {#dynamic-content}
+## Dynamic Content {#dynamic-content}
 Use MutationObserver to detect DOM changes and re-apply highlights:
 ```javascript
 const observer = new MutationObserver((mutations) => {
@@ -251,15 +251,15 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 ```
 
-Page Reflows {#page-reflows}
+## Page Reflows {#page-reflows}
 Highlights may shift after layout changes. Re-calculate positions on scroll/resize events.
 
-Cross-Element Boundaries {#cross-element-boundaries}
+## Cross-Element Boundaries {#cross-element-boundaries}
 Selection spanning multiple elements requires splitting into multiple &lt;mark&gt; tags.
 
 ---
 
-Export Highlights as Notes {#export-highlights-as-notes}
+## Export Highlights as Notes {#export-highlights-as-notes}
 
 ```javascript
 function exportAsMarkdown(highlights) {
@@ -275,7 +275,7 @@ Download as .md file or copy to clipboard.
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [DOM Observer Patterns](../patterns/dom-observer-patterns.md). Watching for dynamic content
 - [Storage API detailed look](../api-reference/storage-api-deep detailed look.md). Advanced storage techniques
@@ -283,7 +283,7 @@ Cross-References {#cross-references}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 You built a persistent text highlighter with: Selection API for text capture, XPath serialization for range storage, multiple color options, sidebar UI, removal functionality, and markdown export. Test at chrome://extensions/ with Developer mode enabled. Use Alt+Shift+H shortcut for quick access.
 -e 

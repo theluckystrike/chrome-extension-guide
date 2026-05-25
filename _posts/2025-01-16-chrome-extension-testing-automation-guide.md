@@ -18,7 +18,7 @@ This comprehensive guide covers everything you need to know about testing Chrome
 
 ---
 
-Why Testing Chrome Extensions Is Critical {#why-testing-critical}
+## Why Testing Chrome Extensions Is Critical {#why-testing-critical}
 
 Chrome extensions run in a unique execution environment that combines web technologies with privileged browser APIs. Unlike regular web applications, extensions have access to powerful Chrome APIs that can read and modify browser behavior, interact with web pages, manage tabs, and handle sensitive user data. This power comes with responsibility, bugs in extensions can cause serious issues ranging from annoying popups to security vulnerabilities.
 
@@ -28,21 +28,21 @@ Furthermore, Chrome regularly updates its extension platform, and what works tod
 
 ---
 
-Unit Testing Chrome Extensions {#unit-testing-extensions}
+## Unit Testing Chrome Extensions {#unit-testing-extensions}
 
 Unit testing forms the foundation of any testing strategy. For Chrome extensions, unit tests verify that individual functions, classes, and modules work correctly in isolation. The key challenge is that extension code often depends on Chrome APIs, which are not available in standard Node.js environments.
 
-Setting Up Your Test Environment
+### Setting Up Your Test Environment
 
 To unit test extension code, you need a test runner that supports modern JavaScript and the ability to mock or stub Chrome APIs. Jest remains the most popular choice, combined with tools that provide browser-like globals or mock implementations of Chrome APIs.
 
-Install the necessary dependencies:
+### Install the necessary dependencies:
 
 ```bash
 npm install --save-dev jest @types/jest ts-jest jest-chrome
 ```
 
-Configure Jest in your `jest.config.js`:
+### Configure Jest in your `jest.config.js`:
 
 ```javascript
 module.exports = {
@@ -57,7 +57,7 @@ module.exports = {
 };
 ```
 
-Mocking Chrome APIs
+### Mocking Chrome APIs
 
 Chrome provides dozens of APIs accessible through the `chrome` global object. When running tests in Node.js, this object does not exist. You can create manual mocks or use the `jest-chrome` package, which provides comprehensive mocks for common Chrome APIs.
 
@@ -102,7 +102,7 @@ global.chrome = {
 };
 ```
 
-Writing Unit Tests for Extension Logic
+### Writing Unit Tests for Extension Logic
 
 With mocks in place, you can now write tests for your extension's business logic. Focus on testing pure functions that contain your core logic, keeping the code separate from Chrome-specific dependencies whenever possible.
 
@@ -128,7 +128,7 @@ export function calculateTabScore(tab) {
 }
 ```
 
-Unit tests for these functions would look like:
+### Unit tests for these functions would look like:
 
 ```javascript
 // src/utils/tabManager.test.js
@@ -172,11 +172,11 @@ describe('calculateTabScore', () => {
 
 ---
 
-Integration Testing with Puppeteer {#integration-testing-puppeteer}
+## Integration Testing with Puppeteer {#integration-testing-puppeteer}
 
 While unit tests verify logic in isolation, integration tests ensure that your extension actually works within the Chrome browser environment. Puppeteer is the industry standard for this type of testing, allowing you to programmatically control a Chrome instance and interact with your extension as a real user would.
 
-Setting Up Puppeteer for Extension Testing
+### Setting Up Puppeteer for Extension Testing
 
 Puppeteer can launch Chrome with an unpacked extension loaded, giving you full access to the extension's popup, background service worker, and content scripts. Install Puppeteer and set up your test infrastructure:
 
@@ -184,7 +184,7 @@ Puppeteer can launch Chrome with an unpacked extension loaded, giving you full a
 npm install --save-dev puppeteer jest-puppeteer
 ```
 
-Configure Jest to work with Puppeteer:
+### Configure Jest to work with Puppeteer:
 
 ```javascript
 // jest-puppeteer.config.js
@@ -200,7 +200,7 @@ module.exports = {
 };
 ```
 
-Testing Extension Popups
+### Testing Extension Popups
 
 The popup is often the primary user interface for Chrome extensions. Integration tests can verify that the popup loads correctly, responds to user interactions, and properly communicates with the background service worker.
 
@@ -253,7 +253,7 @@ describe('Extension Popup Tests', () => {
 });
 ```
 
-Testing Content Scripts
+### Testing Content Scripts
 
 Content scripts run within web pages and often handle the most complex interactions between your extension and external websites. Testing these scripts requires loading a test page and verifying that your content script injects correctly.
 
@@ -309,11 +309,11 @@ describe('Content Script Tests', () => {
 
 ---
 
-End-to-End Testing Strategies {#e2e-testing}
+## End-to-End Testing Strategies {#e2e-testing}
 
 End-to-end (E2E) testing takes testing to the highest level, verifying that your entire extension works as users would experience it. This includes the complete flow from installation through all major features to extension removal.
 
-Testing the Full User Journey
+### Testing the Full User Journey
 
 E2E tests simulate real user behavior and verify that all components work together. These tests are typically slower and more complex, so focus on critical user paths.
 
@@ -354,17 +354,17 @@ describe('Full User Journey E2E Tests', () => {
 });
 ```
 
-Cross-Browser Testing Considerations
+### Cross-Browser Testing Considerations
 
 While Chrome is the primary target, consider testing in other Chromium-based browsers like Edge, Brave, and Opera. Each browser may have slight differences in how they handle extensions.
 
 ---
 
-Mocking Chrome APIs for Testing {#mocking-chrome-apis}
+## Mocking Chrome APIs for Testing {#mocking-chrome-apis}
 
 Comprehensive API mocking is essential for thorough testing. Beyond the basic mocks for `chrome.storage` and `chrome.runtime`, you should mock APIs specific to your extension's functionality.
 
-Creating a Mock Factory
+### Creating a Mock Factory
 
 Build a flexible mock factory that can be configured for different test scenarios:
 
@@ -432,9 +432,9 @@ export function setupGlobalChrome(chromeMock) {
 }
 ```
 
-Simulating Error Conditions
+### Simulating Error Conditions
 
-Test how your extension handles API failures:
+### Test how your extension handles API failures:
 
 ```javascript
 it('should handle storage quota exceeded', async () => {
@@ -453,11 +453,11 @@ it('should handle storage quota exceeded', async () => {
 
 ---
 
-CI/CD for Chrome Extensions {#ci-cd-extensions}
+## CI/CD for Chrome Extensions {#ci-cd-extensions}
 
 Automating your test suite through continuous integration ensures that every code change is validated before merging. This catches regressions early and gives confidence that your extension is always in a deployable state.
 
-Setting Up GitHub Actions
+### Setting Up GitHub Actions
 
 GitHub Actions provides free CI/CD for public repositories and works well for extension testing:
 
@@ -512,7 +512,7 @@ jobs:
       - run: npm run lint
 ```
 
-Running Tests in CI
+### Running Tests in CI
 
 Puppeteer requires Chrome to be installed in your CI environment. Add this step to install Chrome:
 
@@ -527,13 +527,13 @@ Puppeteer requires Chrome to be installed in your CI environment. Add this step 
 
 ---
 
-Test Coverage and Quality Metrics {#test-coverage}
+## Test Coverage and Quality Metrics {#test-coverage}
 
 Understanding your test coverage helps identify areas that need more testing attention. Aim for meaningful coverage rather than chasing high percentages.
 
-Collecting Coverage Data
+### Collecting Coverage Data
 
-Configure Jest to collect coverage:
+### Configure Jest to collect coverage:
 
 ```javascript
 // jest.config.js
@@ -558,7 +558,7 @@ module.exports = {
 };
 ```
 
-Coverage Reports for Extensions
+### Coverage Reports for Extensions
 
 Coverage for extensions is measured differently than for regular web apps. Your background service worker, popup, options page, and content scripts all represent different execution contexts. Focus on covering:
 
@@ -570,13 +570,13 @@ Coverage for extensions is measured differently than for regular web apps. Your 
 
 ---
 
-Debugging Tips for Chrome Extensions {#debugging-tips}
+## Debugging Tips for Chrome Extensions {#debugging-tips}
 
 Even with comprehensive tests, bugs will occur. Effective debugging skills are essential for quickly identifying and fixing issues.
 
-Using Chrome DevTools for Extension Debugging
+### Using Chrome DevTools for Extension Debugging
 
-Chrome DevTools provides specialized views for extension debugging:
+### Chrome DevTools provides specialized views for extension debugging:
 
 1. Service Worker Debugging: Navigate to `chrome://extensions` and click "Service Worker" link for your extension. Use the Console to log messages and inspect the Background Page DevTools.
 
@@ -584,7 +584,7 @@ Chrome DevTools provides specialized views for extension debugging:
 
 3. Content Script Debugging: Open DevTools on any page where your content script runs. Use the dropdown in the top-left corner to switch between page and extension contexts.
 
-Common Extension Bugs and Solutions
+### Common Extension Bugs and Solutions
 
 Service Worker Not Starting: Manifest V3 service workers have strict lifecycle rules. They terminate after periods of inactivity. Use `chrome.runtime.getManifest()` to verify the service worker loaded, and add console logs to track execution.
 
@@ -596,7 +596,7 @@ Content Script Not Injecting: Verify that your `matches` patterns in the manifes
 
 ---
 
-Best Practices Summary {#best-practices}
+## Best Practices Summary {#best-practices}
 
 Testing Chrome extensions requires a multi-layered approach that accounts for the unique architecture of browser extensions. Here are the key practices to implement:
 
@@ -616,7 +616,7 @@ By implementing these testing strategies, you will build Chrome extensions that 
 
 ---
 
-Conclusion
+### Conclusion
 
 Chrome extension testing in 2025 requires understanding the unique challenges of the extension platform and applying the right tools for each testing scenario. From unit tests that verify your core logic to integration tests that ensure Chrome API compatibility, and E2E tests that validate complete user journeys, each layer plays a crucial role in delivering a quality extension.
 
@@ -626,7 +626,7 @@ Start implementing these testing practices today, and you will see the differenc
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Development 2025: Complete Beginner's Guide](/2025/01/16/chrome-extension-development-2025-complete-beginners-guide/) - Learn the fundamentals of building Chrome extensions from scratch.
 - [Chrome Extension Performance Optimization Guide](/2025/01/16/chrome-extension-performance-optimization-guide/) - Optimize your extension for better performance and user experience.

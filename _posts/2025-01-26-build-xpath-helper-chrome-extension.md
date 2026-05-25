@@ -20,17 +20,17 @@ This tutorial assumes you have basic familiarity with JavaScript, HTML, and CSS.
 
 ---
 
-Why Build an XPath Helper Extension? {#why-build-xpath-helper}
+## Why Build an XPath Helper Extension? {#why-build-xpath-helper}
 
 Before we dive into the code, let us explore why building an xpath helper extension is both a valuable learning exercise and a practical tool addition to your developer toolkit.
 
-The Problem with Element Selection
+### The Problem with Element Selection
 
 Modern web applications often have complex DOM structures with dynamically generated classes, nested elements, and dynamic attributes. Traditional CSS selectors might fail when dealing with elements that have auto-generated class names like `ember1234` or when you need to select elements based on their relationship to other elements. This is where an xpath selector chrome tool becomes invaluable.
 
 XPath offers several advantages over CSS selectors that make it the preferred choice for advanced element targeting. First, XPath can traverse both forward and backward in the DOM tree, allowing you to select parent elements, preceding siblings, and following siblings. Second, XPath supports powerful predicates that enable complex filtering based on position, text content, and attribute values. Third, XPath functions like `contains()`, `starts-with()`, and `normalize-space()` provide flexibility for handling dynamic content.
 
-What Our Extension Will Do
+### What Our Extension Will Do
 
 Our XPath Helper Chrome Extension will provide the following core features that make it comparable to popular xpath helper extensions available in the Chrome Web Store:
 
@@ -42,7 +42,7 @@ Our XPath Helper Chrome Extension will provide the following core features that 
 
 ---
 
-Project Structure and Manifest Configuration {#project-structure}
+## Project Structure and Manifest Configuration {#project-structure}
 
 Let us start by setting up the project structure. Create a new folder for your extension and add the following files:
 
@@ -98,7 +98,7 @@ This manifest configuration is carefully designed to work with Manifest V3, whic
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon in Chrome's toolbar. This is where users will interact with our XPath generation and testing tools. Let us create a clean, functional interface:
 
@@ -183,7 +183,7 @@ The popup interface provides two distinct modes: Inspect mode for generating XPa
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 A well-designed popup makes the extension pleasant to use. Let us add modern, clean styling:
 
@@ -398,7 +398,7 @@ The styling uses a clean, professional color scheme inspired by Google's design 
 
 ---
 
-Implementing Content Script - The Core XPath Logic {#content-script}
+## Implementing Content Script - The Core XPath Logic {#content-script}
 
 The content script runs in the context of the webpage and is responsible for detecting element hover, generating XPath expressions, and highlighting elements. This is where the real magic happens:
 
@@ -645,7 +645,7 @@ The `testXPath()` function uses the native `document.evaluate()` method to execu
 
 ---
 
-Implementing Popup Logic {#popup-logic}
+## Implementing Popup Logic {#popup-logic}
 
 The popup script connects the user interface with the content script:
 
@@ -786,7 +786,7 @@ The popup logic handles mode switching, clipboard operations, and communication 
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background script handles extension lifecycle events and can be used for additional features:
 
@@ -808,7 +808,7 @@ The background service worker is minimal since most of our functionality lives i
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test our XPath helper extension:
 
@@ -828,29 +828,29 @@ Switch to Test mode to manually enter XPath expressions and see matching element
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Now that you have a working xpath helper extension, consider adding these advanced features:
 
-Relative XPath Support
+### Relative XPath Support
 
 Implement support for relative XPath expressions that select elements based on their relationship to other elements. This is particularly useful for selecting elements in dynamic web applications where absolute paths might break.
 
-XPath Functions
+### XPath Functions
 
 Add support for common XPath functions like `contains()`, `starts-with()`, `ends-with()`, `normalize-space()`, and position predicates like `last()`, `position()`, and numerical indices.
 
-Export and Import
+### Export and Import
 
 Add the ability to export your tested XPath queries for documentation or sharing with team members. This is especially useful in collaborative development environments.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Implement keyboard shortcuts for common actions like toggling inspect mode, copying the current XPath, and clearing highlights. This makes the extension even more efficient for power users.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional XPath Helper Chrome Extension. This extension demonstrates several important concepts in Chrome extension development, including content scripts for page interaction, popup interfaces for user interaction, and message passing between different extension components.
 

@@ -18,15 +18,15 @@ The demand for browser automation tools has never been higher. Professionals acr
 
 ---
 
-Understanding Browser Automation Extensions {#understanding-browser-automation}
+## Understanding Browser Automation Extensions {#understanding-browser-automation}
 
 Before we dive into code, let's explore what browser automation extensions can do and why they are so valuable.
 
-What is a Browser Automation Extension?
+### What is a Browser Automation Extension?
 
 A browser automation extension is a Chrome extension that can interact with web pages programmatically. Unlike traditional automation tools that run outside the browser, browser automation extensions live inside Chrome and can directly access the DOM, interact with page elements, and respond to user actions in real-time.
 
-These extensions fall into several categories:
+### These extensions fall into several categories:
 
 Macro Recording Extensions - These tools record your actions as you browse and can replay them later. Think of it as video recording for your browser activities.
 
@@ -36,7 +36,7 @@ Web Scraping Extensions - These extract data from web pages and organize it into
 
 Workflow Automation Extensions - These orchestrate complex sequences of actions across multiple websites, enabling end-to-end automation of business processes.
 
-Why Build a Custom Browser Automation Extension?
+### Why Build a Custom Browser Automation Extension?
 
 While many automation extensions exist in the Chrome Web Store, building your own offers significant advantages:
 
@@ -50,11 +50,11 @@ Finally, building automation extensions teaches you valuable skills that apply t
 
 ---
 
-Project Setup and Manifest Configuration {#project-setup}
+## Project Setup and Manifest Configuration {#project-setup}
 
 Let's start building our browser automation extension. We'll create a Manifest V3 extension with all the necessary components.
 
-Creating the Project Structure
+### Creating the Project Structure
 
 Create a new folder for your extension and set up the following file structure:
 
@@ -76,7 +76,7 @@ browser-automation-extension/
      icon128.png
 ```
 
-The Manifest File
+### The Manifest File
 
 Every Chrome extension needs a manifest.json file. Here's our configuration for the browser automation extension:
 
@@ -118,9 +118,9 @@ Every Chrome extension needs a manifest.json file. Here's our configuration for 
 
 This manifest declares the permissions we need: storage for saving automation sequences, activeTab and scripting for interacting with pages, and tabs for managing browser tabs.
 
-Understanding Permission Requirements
+### Understanding Permission Requirements
 
-The permissions we chose require careful consideration:
+### The permissions we chose require careful consideration:
 
 - storage: Essential for saving recorded macros and user preferences locally.
 - activeTab: Gives us access to the currently active tab when the user explicitly invokes the extension.
@@ -131,11 +131,11 @@ The host permission `<all_urls>` is necessary because browser automation extensi
 
 ---
 
-Building the Recording System {#recording-system}
+## Building the Recording System {#recording-system}
 
 The core feature of any macro extension is the ability to record user actions. Let's build the content script that captures interactions.
 
-The Content Script Recorder
+### The Content Script Recorder
 
 Create `content/recorder.js`. This script runs in the context of web pages and listens for user interactions:
 
@@ -277,7 +277,7 @@ function generateSelector(element) {
 
 This recorder captures click events, input changes, and scroll actions. It generates CSS selectors for each element so we can replay the actions later.
 
-Adding Visual Recording Indicator
+### Adding Visual Recording Indicator
 
 Add this CSS to your content script or inject it when recording starts:
 
@@ -308,11 +308,11 @@ Add this CSS to your content script or inject it when recording starts:
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides the user interface for controlling the automation. Let's create the HTML and JavaScript.
 
-Popup HTML
+### Popup HTML
 
 ```html
 <!DOCTYPE html>
@@ -479,7 +479,7 @@ Popup HTML
 </html>
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
 ```javascript
 // Popup script for controlling the recorder
@@ -656,11 +656,11 @@ function getActionDescription(action) {
 
 ---
 
-Advanced Automation Features {#advanced-features}
+## Advanced Automation Features {#advanced-features}
 
 Now let's add some advanced features to make our automation extension more powerful.
 
-Adding Wait Conditions
+### Adding Wait Conditions
 
 Real web pages take time to load. Our automation needs to wait for elements to be present before interacting with them:
 
@@ -687,7 +687,7 @@ async function waitForElement(tabId, selector, timeout = 10000) {
 }
 ```
 
-Handling Dynamic Content
+### Handling Dynamic Content
 
 Many modern web apps load content dynamically. Let's add support for waiting for network requests to complete:
 
@@ -722,7 +722,7 @@ async function waitForNetworkIdle(tabId, timeout = 3000) {
 }
 ```
 
-Looping and Conditional Actions
+### Looping and Conditional Actions
 
 For more complex automation, you need loops and conditionals:
 
@@ -758,11 +758,11 @@ const conditionalExample = {
 
 ---
 
-Best Practices and Performance Tips {#best-practices}
+## Best Practices and Performance Tips {#best-practices}
 
 Building a reliable browser automation extension requires attention to several important considerations.
 
-Error Handling
+### Error Handling
 
 Always implement solid error handling:
 
@@ -786,7 +786,7 @@ async function safeExecute(tabId, action) {
 }
 ```
 
-Performance Optimization
+### Performance Optimization
 
 For extensions that handle many actions, optimize performance by:
 
@@ -798,7 +798,7 @@ For extensions that handle many actions, optimize performance by:
 
 4. Implementing debouncing - For events like scroll or input, debounce to avoid recording too many similar actions.
 
-User Experience Considerations
+### User Experience Considerations
 
 1. Provide clear feedback - Users should always know what the extension is doing.
 
@@ -810,9 +810,9 @@ User Experience Considerations
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
-Before publishing, thoroughly test your automation extension:
+### Before publishing, thoroughly test your automation extension:
 
 1. Test on multiple websites - Different sites have different structures and behaviors.
 
@@ -824,7 +824,7 @@ Before publishing, thoroughly test your automation extension:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You now have a complete foundation for building browser automation extensions. The system we've built includes action recording, playback, visual feedback, and storage capabilities. These core features can be extended with more sophisticated capabilities like conditional logic, loops, and integration with external APIs.
 

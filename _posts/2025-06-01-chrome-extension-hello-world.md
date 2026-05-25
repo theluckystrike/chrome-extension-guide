@@ -10,7 +10,7 @@ tags: [beginner, hello-world, manifest-v3, getting-started, first-extension]
 
 Building your first Chrome extension is easier than you think. we'll walk through creating a basic extension from scratch, understanding each component, and getting it running in your browser. This tutorial is designed for complete beginners with no prior extension development experience.
 
-Prerequisites
+### Prerequisites
 
 Before we begin, ensure you have the following:
 
@@ -21,7 +21,7 @@ Before we begin, ensure you have the following:
 
 That's it! No special tools or paid software required.
 
-Understanding Chrome Extensions
+### Understanding Chrome Extensions
 
 Chrome extensions are small software programs that customize the browsing experience. They can enhance productivity, modify web pages, provide utilities, and much more. At their core, extensions are just web technologies, HTML, CSS, and JavaScript, packaged in a special way that gives them access to Chrome's APIs.
 
@@ -32,7 +32,7 @@ Extensions can:
 - Store data locally or in the cloud
 - And much more
 
-Creating Your Project Structure
+### Creating Your Project Structure
 
 Every Chrome extension needs a specific file structure. Create a new folder on your computer (let's call it "my-first-extension") and add the following files:
 
@@ -52,11 +52,11 @@ my-first-extension/
  icon.png
 ```
 
-Setting Up Your Development Environment
+### Setting Up Your Development Environment
 
 Create a dedicated folder for your extension projects. Within that folder, create another folder called "my-first-extension". This keeps your work organized and makes it easier to manage multiple extension projects.
 
-Understanding the Manifest File
+### Understanding the Manifest File
 
 The manifest.json is the heart of your extension. It's the only required file and tells Chrome everything it needs to know about your extension. Here's the minimum required structure:
 
@@ -83,7 +83,7 @@ Let's break down each field:
 
 The manifest_version: 3 refers to Manifest V3, the latest version of Chrome's extension platform. This version includes improved security features, more efficient background processing, and better performance.
 
-Creating Your First Popup
+### Creating Your First Popup
 
 Let's create a simple popup that displays a greeting and responds to user interaction:
 
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Adding Basic Interactivity
+### Adding Basic Interactivity
 
 Create a content script to demonstrate communication between your popup and web pages:
 
@@ -224,7 +224,7 @@ function getRandomColor() {
 }
 ```
 
-Update manifest.json
+### Update manifest.json
 
 ```json
 {
@@ -246,9 +246,9 @@ Update manifest.json
 }
 ```
 
-Loading Your Extension
+### Loading Your Extension
 
-To test your extension:
+### To test your extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right corner
@@ -257,7 +257,7 @@ To test your extension:
 5. Click the icon to see your popup in action!
 6. Try clicking the button to see the interaction
 
-Troubleshooting
+### Troubleshooting
 
 Popup not showing?
 - Verify your manifest.json correctly references the popup file
@@ -274,7 +274,7 @@ Console errors?
 - Check the Console tab for error messages
 - Verify all file paths in your HTML are correct
 
-Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
 Popup not showing? Make sure your manifest.json correctly references the popup file and that the file exists in the correct location. Check the console for errors.
 
@@ -282,7 +282,7 @@ Changes not appearing? Click the reload button on your extension in chrome://ext
 
 Console errors? Right-click your popup and select "Inspect" to open developer tools and debug any issues. This is the same DevTools you use for regular web pages.
 
-Understanding the Extension Lifecycle
+### Understanding the Extension Lifecycle
 
 When you load an extension in developer mode, Chrome monitors your files. Any changes you make to your HTML, CSS, or JavaScript files are reflected immediately when you reload the extension. To reload, simply click the refresh icon on your extension card in chrome://extensions/.
 
@@ -292,7 +292,7 @@ The extension lifecycle includes:
 - Execution: Your JavaScript runs when users interact with the popup
 - Deactivation: Closing the popup terminates JavaScript execution
 
-What's Next?
+### What's Next?
 
 Congratulations on building your first Chrome extension! The journey doesn't end here. Here are exciting topics to explore next:
 
@@ -331,9 +331,9 @@ chrome.storage.sync.get(['theme'], (result) => {
 });
 ```
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
-Ready to share your extension with the world?
+### Ready to share your extension with the world?
 
 1. Create a developer account (one-time $5 fee)
 2. Prepare your extension (add screenshots, description)
@@ -341,7 +341,7 @@ Ready to share your extension with the world?
 4. Submit for review (usually takes 1-3 days)
 5. Publish once approved!
 
-Common Issues and Solutions
+### Common Issues and Solutions
 
 Here's a quick reference for common problems:
 
@@ -353,7 +353,7 @@ Here's a quick reference for common problems:
 | Permission denied | Add required permissions to manifest |
 | Content script not running | Check matches pattern in manifest |
 
-Understanding the Extension Lifecycle
+### Understanding the Extension Lifecycle
 
 When you load an extension in developer mode, Chrome monitors your files. Any changes you make to your HTML, CSS, or JavaScript files are reflected immediately when you reload the extension. To reload:
 
@@ -364,14 +364,14 @@ When you load an extension in developer mode, Chrome monitors your files. Any ch
 
 This iterative development process makes building extensions fast and enjoyable.
 
-Extension States
+### Extension States
 
 Your extension goes through several states:
 - Development: Loading from folder, hot-reloading
 - Packed: As a .crx file for testing
 - Published: Available in Chrome Web Store
 
-Conclusion
+### Conclusion
 
 You've taken your first step into the world of Chrome extensions! This simple foundation opens the door to powerful browser customization. The Chrome extension ecosystem offers endless possibilities for:
 

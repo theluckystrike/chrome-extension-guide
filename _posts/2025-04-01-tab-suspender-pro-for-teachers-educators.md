@@ -16,7 +16,7 @@ Teachers today face an unprecedented challenge in the digital classroom. Between
 
 ---
 
-The Teacher Tab Overload Problem {#teacher-tab-overload}
+## The Teacher Tab Overload Problem {#teacher-tab-overload}
 
 Every educator knows the feeling. You begin your morning researching a science concept for tomorrow's lesson, and suddenly you have fifteen tabs open. Then you switch to preparing that afternoon's history presentation, and another ten tabs appear. By the end of the day, you might have fifty or more tabs consuming your browser's memory, your computer's RAM, and your own cognitive load.
 
@@ -32,7 +32,7 @@ The solution isn't to close tabs and lose valuable resources. Teachers need thos
 
 ---
 
-Managing Research Across Subjects {#managing-research-across-subjects}
+## Managing Research Across Subjects {#managing-research-across-subjects}
 
 One of the most valuable features of Tab Suspender Pro for educators is its ability to handle research across multiple subjects simultaneously. Teachers don't teach one topic in isolation; they juggle mathematics, language arts, science, social studies, and countless other subjects throughout the day and week. Each subject requires its own ecosystem of open tabs, bookmarked resources, and ongoing research.
 
@@ -46,7 +46,7 @@ The beauty of Tab Suspender Pro's approach is that suspended tabs aren't deleted
 
 ---
 
-Keeping Lesson Plan Tabs Active {#keeping-lesson-plan-tabs-active}
+## Keeping Lesson Plan Tabs Active {#keeping-lesson-plan-tabs-active}
 
 Lesson preparation requires certain tabs to remain immediately accessible at all times. Your current lesson plan document, the grade book, the class roster, and any interactive activities you're running need to be ready at a moment's notice. Tab Suspender Pro includes solid whitelisting capabilities that ensure these critical tabs never get suspended automatically.
 
@@ -62,7 +62,7 @@ The net result is a browser environment that supports rather than hinders your t
 
 ---
 
-Suspending Reference Material Between Classes {#suspending-reference-material}
+## Suspending Reference Material Between Classes {#suspending-reference-material}
 
 The classroom environment presents unique tab management challenges. Between classes, you may have reference materials open from the previous lesson that you won't need again for days, or maybe not until next year. Meanwhile, you need immediate access to materials for the incoming class. Tab Suspender Pro's scheduling features and quick-suspend capabilities make this transition smooth.
 
@@ -78,7 +78,7 @@ For teachers who share computers or work in flexible spaces, the suspension feat
 
 ---
 
-Recommended Classroom Setup {#recommended-classroom-setup}
+## Recommended Classroom Setup {#recommended-classroom-setup}
 
 Implementing Tab Suspender Pro effectively in an educational environment requires thoughtful configuration. Here's a recommended setup that balances automation with the control teachers need.
 
@@ -100,7 +100,7 @@ Finally, take advantage of Tab Suspender Pro's restore features. The extension m
 
 ---
 
-Additional Benefits for Educators
+### Additional Benefits for Educators
 
 Beyond the core tab management features, Tab Suspender Pro offers several additional benefits that prove particularly valuable in educational settings.
 
@@ -114,7 +114,7 @@ Reduced Cognitive Load: Perhaps the most significant benefit is psychological. A
 
 ---
 
-Conclusion
+### Conclusion
 
 Tab Suspender Pro represents a simple but powerful tool in the modern teacher's technology toolkit. By automatically managing browser tabs based on your activity patterns, it eliminates the mental overhead of tab organization while preserving access to all your valuable resources. Whether you're managing research across multiple subjects, preparing lessons, or transitioning between classes, Tab Suspender Pro keeps your digital workspace organized and performant.
 

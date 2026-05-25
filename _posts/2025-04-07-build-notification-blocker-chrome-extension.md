@@ -20,7 +20,7 @@ In this tutorial, we will cover everything you need to know to build a fully fun
 
 ---
 
-Understanding Chrome Extension Architecture {#understanding-chrome-extension-architecture}
+## Understanding Chrome Extension Architecture {#understanding-chrome-extension-architecture}
 
 Before we begin building our notification blocker, it is essential to understand how Chrome extensions are structured. Chrome extensions are essentially small web applications that run within the Chrome browser and can interact with web pages you visit. They consist of several components that work together to provide additional functionality beyond what the browser offers by default. Understanding these components will help you build a more effective and maintainable extension.
 
@@ -32,7 +32,7 @@ For our notification blocker, we will primarily work with content scripts becaus
 
 ---
 
-Setting Up Your Development Environment {#setting-up-development-environment}
+## Setting Up Your Development Environment {#setting-up-development-environment}
 
 Before writing any code, you need to set up your development environment properly. This involves creating the necessary project structure and configuring your development tools to work with Chrome extensions. The setup process is straightforward but requires attention to detail to ensure everything works correctly.
 
@@ -44,7 +44,7 @@ It is also helpful to have a good code editor installed. Visual Studio Code is a
 
 ---
 
-Creating the Manifest File {#creating-manifest-file}
+## Creating the Manifest File {#creating-manifest-file}
 
 The manifest.json file is the foundation of your Chrome extension, and creating it correctly is crucial for your extension to function properly. This file defines the extension's metadata, specifies which permissions it needs, and tells Chrome which files to load and how to use them. Let us create a comprehensive manifest for our notification blocker extension.
 
@@ -90,7 +90,7 @@ The permissions array specifies what capabilities your extension needs. We inclu
 
 ---
 
-Building the Content Script {#building-content-script}
+## Building the Content Script {#building-content-script}
 
 The content script is the heart of your notification blocker. This JavaScript file runs in the context of each web page you visit and is responsible for detecting notification permission requests, blocking notification dialogs, and preventing websites from showing push notifications. Writing an effective content script requires understanding how websites implement notification requests and using the appropriate techniques to intercept and block them.
 
@@ -287,7 +287,7 @@ The script also includes functionality to load user settings from Chrome's stora
 
 ---
 
-Creating the Popup Interface {#creating-popup-interface}
+## Creating the Popup Interface {#creating-popup-interface}
 
 Every good Chrome extension needs a user interface that allows users to configure its behavior. For our notification blocker, we will create a simple yet functional popup that appears when users click the extension icon in their browser toolbar. This popup will display statistics about blocked notifications, provide toggles to enable or disable blocking, and allow users to manage their whitelist.
 
@@ -705,7 +705,7 @@ The popup JavaScript handles all user interactions and manages communication bet
 
 ---
 
-Testing Your Extension {#testing-your-extension}
+## Testing Your Extension {#testing-your-extension}
 
 Now that you have created all the necessary files for your notification blocker, it is time to test it in Chrome. Testing is a crucial step in development that ensures your extension works correctly and provides the expected user experience. Let us walk through the process of loading and testing your extension.
 
@@ -717,7 +717,7 @@ To test the popup interface, click the extension icon in your browser toolbar. T
 
 ---
 
-Publishing Your Extension {#publishing-your-extension}
+## Publishing Your Extension {#publishing-your-extension}
 
 After thorough testing and refinement, you may want to publish your notification blocker to the Chrome Web Store so others can benefit from it. Publishing an extension requires a Google Developer account and involves several steps to ensure your extension meets Chrome's policies and guidelines.
 
@@ -727,7 +727,7 @@ Before submitting, review Chrome's policies to ensure your extension complies wi
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete notification blocker Chrome extension from scratch. This extension demonstrates how powerful Chrome extensions can be in enhancing the browsing experience by addressing real user problems. The multi-layered approach to blocking notification requests ensures that users are protected against both native browser prompts and custom website modals, while the whitelist feature provides the flexibility needed for legitimate notification use cases.
 

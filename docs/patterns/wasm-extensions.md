@@ -6,7 +6,7 @@ canonical_url: "https://bestchromeextensions.com/patterns/wasm-extensions/"
 last_modified_at: 2026-01-15
 ---
 
-WebAssembly in Chrome Extensions
+### WebAssembly in Chrome Extensions
 
 WebAssembly (WASM) enables near-native performance for compute-heavy tasks inside Chrome extensions. This guide covers eight practical patterns for integrating WASM modules with Manifest V3, including loading strategies, memory management, caching, and Content Security Policy configuration.
 
@@ -16,7 +16,7 @@ WebAssembly (WASM) enables near-native performance for compute-heavy tasks insid
 
 ---
 
-Pattern 1: Loading WASM in a Service Worker {#pattern-1-loading-wasm-in-a-service-worker}
+## Pattern 1: Loading WASM in a Service Worker {#pattern-1-loading-wasm-in-a-service-worker}
 
 Service workers in MV3 support `WebAssembly.instantiate` but do not support `WebAssembly.instantiateStreaming` in all contexts. The safest approach is to fetch the binary and instantiate from an `ArrayBuffer`.
 
@@ -67,7 +67,7 @@ Gotchas:
 
 ---
 
-Pattern 2: Loading WASM in Content Scripts {#pattern-2-loading-wasm-in-content-scripts}
+## Pattern 2: Loading WASM in Content Scripts {#pattern-2-loading-wasm-in-content-scripts}
 
 Content scripts run in an isolated world but can load WASM modules. The module must be declared in `web_accessible_resources` so the content script can fetch it.
 
@@ -120,7 +120,7 @@ Gotchas:
 
 ---
 
-Pattern 3: WASM Module Caching with chrome.storage {#pattern-3-wasm-module-caching-with-chromestorage}
+## Pattern 3: WASM Module Caching with chrome.storage {#pattern-3-wasm-module-caching-with-chromestorage}
 
 Compiling WASM from bytes is expensive. Cache the compiled module bytes in `chrome.storage.local` to avoid re-fetching on every service worker restart.
 
@@ -189,7 +189,7 @@ Gotchas:
 
 ---
 
-Pattern 4: Memory Management for WASM Modules {#pattern-4-memory-management-for-wasm-modules}
+## Pattern 4: Memory Management for WASM Modules {#pattern-4-memory-management-for-wasm-modules}
 
 WASM linear memory must be managed carefully, especially in long-running extension contexts where leaks accumulate.
 
@@ -276,7 +276,7 @@ Gotchas:
 
 ---
 
-Pattern 5: Passing Data Between JS and WASM {#pattern-5-passing-data-between-js-and-wasm}
+## Pattern 5: Passing Data Between JS and WASM {#pattern-5-passing-data-between-js-and-wasm}
 
 WASM only understands numeric types natively. Strings, objects, and arrays must be serialized into linear memory.
 
@@ -380,7 +380,7 @@ Gotchas:
 
 ---
 
-Pattern 6: WASM for Crypto Operations in Extensions {#pattern-6-wasm-for-crypto-operations-in-extensions}
+## Pattern 6: WASM for Crypto Operations in Extensions {#pattern-6-wasm-for-crypto-operations-in-extensions}
 
 WASM excels at cryptographic operations that would be slow in pure JavaScript. This is useful for extensions that handle encryption, hashing, or signature verification client-side.
 
@@ -494,7 +494,7 @@ Gotchas:
 
 ---
 
-Pattern 7: Performance Comparison -- JS vs WASM in Extensions {#pattern-7-performance-comparison-js-vs-wasm-in-extensions}
+## Pattern 7: Performance Comparison -- JS vs WASM in Extensions {#pattern-7-performance-comparison-js-vs-wasm-in-extensions}
 
 Not everything benefits from WASM. Here is a framework for benchmarking and deciding when WASM is worthwhile.
 
@@ -629,7 +629,7 @@ Gotchas:
 
 ---
 
-Pattern 8: CSP Considerations for WASM in MV3 {#pattern-8-csp-considerations-for-wasm-in-mv3}
+## Pattern 8: CSP Considerations for WASM in MV3 {#pattern-8-csp-considerations-for-wasm-in-mv3}
 
 Manifest V3 enforces a strict Content Security Policy. WASM compilation requires explicitly opting in via CSP configuration.
 
@@ -649,7 +649,7 @@ Manifest V3 enforces a strict Content Security Policy. WASM compilation requires
 // }
 ```
 
-Verifying WASM Loads Under CSP {#verifying-wasm-loads-under-csp}
+## Verifying WASM Loads Under CSP {#verifying-wasm-loads-under-csp}
 
 ```typescript
 // csp-check.ts
@@ -682,7 +682,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 ```
 
-Loading WASM Safely Across Contexts {#loading-wasm-safely-across-contexts}
+## Loading WASM Safely Across Contexts {#loading-wasm-safely-across-contexts}
 
 ```typescript
 // wasm-loader.ts
@@ -758,7 +758,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 ```
 
-CSP Quick Reference for WASM {#csp-quick-reference-for-wasm}
+## CSP Quick Reference for WASM {#csp-quick-reference-for-wasm}
 
 | Directive | MV3 Default | Effect on WASM |
 |---|---|---|
@@ -775,7 +775,7 @@ Gotchas:
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Best For | Key Consideration |
 |---|---|---|

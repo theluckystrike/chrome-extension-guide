@@ -18,7 +18,7 @@ we will explore how to implement jotai chrome extension patterns, use atomic sta
 
 ---
 
-Why State Management Matters in Chrome Extensions {#why-state-management}
+## Why State Management Matters in Chrome Extensions {#why-state-management}
 
 Before diving into Jotai, it is essential to understand why state management is particularly challenging in Chrome extensions. When building a typical web application, you have a single JavaScript runtime with a unified component tree. In contrast, Chrome extensions involve multiple isolated contexts that communicate through message passing.
 
@@ -36,11 +36,11 @@ This is where atomic state extension architecture shines. Jotai provides a primi
 
 ---
 
-What is Jotai? {#what-is-jotai}
+## What is Jotai? {#what-is-jotai}
 
 Jotai is an atomic state management library for React that was created by Poimandres (the team behind React Spring). Unlike Redux, which uses a single global store, Jotai takes a more granular approach by organizing state into independent atoms.
 
-Core Concepts of Jotai
+### Core Concepts of Jotai
 
 At its core, Jotai introduces two fundamental concepts:
 
@@ -63,11 +63,11 @@ This atomic approach translates remarkably well to jotai popup state management 
 
 ---
 
-Setting Up Jotai in Your Chrome Extension {#setting-up-jotai}
+## Setting Up Jotai in Your Chrome Extension {#setting-up-jotai}
 
 Now let us explore how to set up Jotai in a Chrome extension project. We will assume you are using a modern build tool like Vite with React.
 
-Installation
+### Installation
 
 First, install Jotai in your extension project:
 
@@ -79,7 +79,7 @@ yarn add jotai
 
 If you are using TypeScript (recommended for extensions), you will get full type inference out of the box.
 
-Project Structure
+### Project Structure
 
 A well-organized Chrome extension with Jotai might look like this:
 
@@ -106,11 +106,11 @@ The key insight here is the `shared/` directory, which contains atoms that can b
 
 ---
 
-Creating Atoms for Chrome Extension State {#creating-atoms}
+## Creating Atoms for Chrome Extension State {#creating-atoms}
 
 Let us create a comprehensive atom structure for a typical Chrome extension. We will build atoms that represent common extension state: user preferences, UI state, and synchronization status.
 
-User Preferences Atom
+### User Preferences Atom
 
 ```typescript
 // shared/atoms/userAtom.ts
@@ -149,7 +149,7 @@ export const themeAtom = atom((get) => {
 });
 ```
 
-UI State Atoms
+### UI State Atoms
 
 For jotai popup state, you need atoms that track the UI state within the popup:
 
@@ -195,7 +195,7 @@ export const searchQueryAtom = atom(
 );
 ```
 
-Extension-Wide Data Atoms
+### Extension-Wide Data Atoms
 
 For data that needs to be shared across the entire extension:
 
@@ -246,7 +246,7 @@ export const lastSyncTimeAtom = atom(
 
 ---
 
-Using Jotai in the Popup Component {#using-jotai-in-popup}
+## Using Jotai in the Popup Component {#using-jotai-in-popup}
 
 Now let us see how to use these atoms in your popup component:
 
@@ -312,11 +312,11 @@ export const Popup: React.FC = () => {
 
 ---
 
-Cross-Context State Sharing with Jotai {#cross-context-sharing}
+## Cross-Context State Sharing with Jotai {#cross-context-sharing}
 
 One of the most powerful features of Jotai for Chrome extensions is the ability to share atoms across different contexts. However, because Chrome extension contexts are isolated, we need a bridge.
 
-The Storage Atom Pattern
+### The Storage Atom Pattern
 
 The key is using `atomWithStorage` from Jotai utils, which automatically synchronizes with `chrome.storage`:
 
@@ -331,7 +331,7 @@ export const store = createStore();
 // to interact with atoms from there
 ```
 
-Background Script Integration
+### Background Script Integration
 
 In your background service worker, you can interact with the same atoms:
 
@@ -375,7 +375,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
 ---
 
-Best Practices for Jotai in Chrome Extensions {#best-practices}
+## Best Practices for Jotai in Chrome Extensions {#best-practices}
 
 When implementing atomic state extension architecture in Chrome extensions, follow these best practices:
 
@@ -395,7 +395,7 @@ const settingsAtom = atom(defaultSettings);
 
 2. Separate UI State from Data State
 
-Keep your atoms organized by concern:
+### Keep your atoms organized by concern:
 
 ```typescript
 // atoms/uiAtom.ts - UI-only state (doesn't need persistence)
@@ -421,7 +421,7 @@ const TabList: React.FC = () => {
 
 4. Implement Error Boundaries
 
-Chrome extensions should handle errors gracefully:
+### Chrome extensions should handle errors gracefully:
 
 ```typescript
 // atoms/uiAtom.ts
@@ -439,7 +439,7 @@ export const setErrorAtom = atom(
 
 ---
 
-Jotai vs Redux: Which to Choose for Chrome Extensions {#jotai-vs-redux}
+## Jotai vs Redux: Which to Choose for Chrome Extensions {#jotai-vs-redux}
 
 When deciding between Jotai and Redux for your jotai chrome extension, consider these factors:
 
@@ -456,11 +456,11 @@ For most Chrome extensions, Jotai's simplicity and smaller bundle size make it t
 
 ---
 
-Performance Optimization Tips {#performance-optimization}
+## Performance Optimization Tips {#performance-optimization}
 
 1. Split Large Data into Multiple Atoms
 
-Instead of a single large atom:
+### Instead of a single large atom:
 
 ```typescript
 //  Bad - causes re-render on any change
@@ -511,7 +511,7 @@ const TabList: React.FC = () => {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing jotai chrome extension state management with atomic state provides a clean, maintainable architecture for Chrome extensions of any complexity. The atomic model naturally maps to the compartmentalized nature of extension components, popups, background scripts, content scripts, and options pages all benefit from independent, composable state atoms.
 
@@ -529,7 +529,7 @@ Start with simple atoms and progressively add complexity as your extension grows
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Jotai Documentation](https://jotai.org/)
 - [Chrome Extension Development Guide](/)

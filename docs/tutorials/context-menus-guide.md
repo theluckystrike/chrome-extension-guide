@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Building Context Menus in Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 Context menus are a powerful way to extend Chrome's right-click functionality, allowing users to access your extension's features directly from any webpage, link, image, or selection. The `chrome.contextMenus` API enables you to create custom menu items that appear when users right-click on specific elements or areas in the browser.
 
 This guide covers everything you need to build solid context menus: from basic menu creation to advanced patterns like nested hierarchies, dynamic updates, and cross-browser considerations.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Before using the Context Menus API, add the `"contextMenus"` permission to your `manifest.json`:
 
@@ -35,7 +35,7 @@ Important Notes:
 - You cannot use this API from content scripts
 - Menu items persist across browser sessions until explicitly removed
 
-Understanding Context Types {#understanding-context-types}
+## Understanding Context Types {#understanding-context-types}
 
 The `contexts` property determines when your menu item appears. Chrome supports various context types:
 
@@ -53,7 +53,7 @@ The `contexts` property determines when your menu item appears. Chrome supports 
 | `"launcher"` | Browser action click | Quick access items |
 | `"browser_action"` | Extension icon click | Quick actions |
 
-Multiple Contexts
+### Multiple Contexts
 
 You can specify multiple contexts to show your menu item in various situations:
 
@@ -67,9 +67,9 @@ chrome.contextMenus.create({
 
 The `%s` placeholder gets replaced with the selected text or link URL depending on context.
 
-Creating Menu Items {#creating-menu-items}
+## Creating Menu Items {#creating-menu-items}
 
-Basic Menu Item
+### Basic Menu Item
 
 Create a simple context menu item:
 
@@ -90,11 +90,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Menu Item Types
+### Menu Item Types
 
-Chrome supports four menu item types:
+### Chrome supports four menu item types:
 
-Normal Menu Item
+### Normal Menu Item
 
 ```js
 chrome.contextMenus.create({
@@ -105,7 +105,7 @@ chrome.contextMenus.create({
 });
 ```
 
-Checkbox Menu Item
+### Checkbox Menu Item
 
 ```js
 chrome.contextMenus.create({
@@ -117,7 +117,7 @@ chrome.contextMenus.create({
 });
 ```
 
-Checkbox items maintain state and can be toggled:
+### Checkbox items maintain state and can be toggled:
 
 ```js
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -132,7 +132,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Radio Menu Item
+### Radio Menu Item
 
 ```js
 // Create radio group
@@ -160,7 +160,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Separator
+### Separator
 
 ```js
 chrome.contextMenus.create({
@@ -169,9 +169,9 @@ chrome.contextMenus.create({
 });
 ```
 
-Nested Menus {#nested-menus}
+## Nested Menus {#nested-menus}
 
-Create hierarchical menus using parent IDs:
+### Create hierarchical menus using parent IDs:
 
 ```js
 chrome.runtime.onInstalled.addListener(() => {
@@ -214,9 +214,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-Dynamic Context Data
+### Dynamic Context Data
 
-Access context-specific data in your click handlers:
+### Access context-specific data in your click handlers:
 
 ```js
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -236,7 +236,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Dynamic Updates {#dynamic-updates}
+## Dynamic Updates {#dynamic-updates}
 
 Update menu items based on page content or extension state:
 
@@ -273,7 +273,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-Conditional Menu Items
+### Conditional Menu Items
 
 Show or hide menu items based on page conditions:
 
@@ -290,9 +290,9 @@ chrome.contextMenus.onShown.addListener((info, tab) => {
 });
 ```
 
-Handling Clicks {#handling-clicks}
+## Handling Clicks {#handling-clicks}
 
-The primary event for handling context menu clicks:
+### The primary event for handling context menu clicks:
 
 ```js
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -331,7 +331,7 @@ function handleAction3(info, tab) {
 }
 ```
 
-Async Handling
+### Async Handling
 
 Handle async operations properly:
 
@@ -362,7 +362,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-Icons in Menus {#icons-in-menus}
+## Icons in Menus {#icons-in-menus}
 
 Add icons to your context menu items:
 
@@ -385,7 +385,7 @@ Best Practices for Icons:
 - Keep icons simple and recognizable at small sizes
 - Test icons in both light and dark themes
 
-Using Extension Icons
+### Using Extension Icons
 
 ```js
 chrome.contextMenus.create({
@@ -398,7 +398,7 @@ chrome.contextMenus.create({
 });
 ```
 
-Best Practices for UX {#best-practices}
+## Best Practices for UX {#best-practices}
 
 1. Meaningful Titles
 
@@ -483,7 +483,7 @@ chrome.runtime.onUninstalled.addListener(() => {
 });
 ```
 
-Complete Example {#complete-example}
+## Complete Example {#complete-example}
 
 Here's a comprehensive example combining all concepts:
 
@@ -674,21 +674,21 @@ const menuManager = new ContextMenuManager();
 chrome.runtime.onInstalled.addListener(() => menuManager.initialize());
 ```
 
-Troubleshooting {#troubleshooting}
+## Troubleshooting {#troubleshooting}
 
-Menu Not Appearing
+### Menu Not Appearing
 
 1. Check permissions: Ensure `contextMenus` is in permissions
 2. Verify background script: Context menus only work from background/service worker
 3. Check contexts: Make sure you're using valid context types
 
-Click Handler Not Firing
+### Click Handler Not Firing
 
 1. Verify ID matches: Check menuItemId exactly matches
 2. Check tab ID: Ensure tab.id is valid
 3. Add logging: Add console logs to debug
 
-Icons Not Showing
+### Icons Not Showing
 
 1. Check file paths: Verify icons exist at specified paths
 2. Manifest icons: Add icons to manifest if using default
@@ -696,7 +696,7 @@ Icons Not Showing
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Chrome Tabs API Guide](/tutorials/tabs-api-guide/). Learn to query, create, and manage browser tabs, often used together with context menus
 - [Messaging Quickstart](/tutorials/messaging-quickstart/). Communication patterns between background scripts and content scripts for context menu actions

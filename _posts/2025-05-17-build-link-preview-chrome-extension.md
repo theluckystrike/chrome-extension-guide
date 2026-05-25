@@ -18,7 +18,7 @@ This tutorial is designed for developers who want to understand the intricacies 
 
 ---
 
-Why Build a Link Preview Extension? {#why-build-link-preview}
+## Why Build a Link Preview Extension? {#why-build-link-preview}
 
 The demand for link preview functionality continues to grow as users become more conscious of their browsing security and efficiency. Link preview extensions, also known as hover preview chrome extensions, provide several key benefits that make them worth building:
 
@@ -32,7 +32,7 @@ Learning Opportunity: Building this extension teaches you valuable skills includ
 
 ---
 
-Understanding the Core Architecture {#core-architecture}
+## Understanding the Core Architecture {#core-architecture}
 
 Before diving into the code, let's understand how a link preview chrome extension works under the hood. The architecture consists of three main components that work together smoothly:
 
@@ -46,7 +46,7 @@ One of the biggest challenges in building this extension is handling cross-origi
 
 ---
 
-Project Setup and Manifest Configuration {#project-setup}
+## Project Setup and Manifest Configuration {#project-setup}
 
 Every Chrome extension begins with the manifest.json file. For our link preview extension, we'll use Manifest V3, which is the current standard and offers better security and performance compared to the deprecated Manifest V2.
 
@@ -89,7 +89,7 @@ The manifest configuration is critical to understand. The host_permissions field
 
 ---
 
-Creating the Content Script {#content-script}
+## Creating the Content Script {#content-script}
 
 The content script is where the magic happens. This script runs on every webpage and is responsible for detecting link hover events, requesting metadata from the background script, and displaying the preview tooltip.
 
@@ -281,11 +281,11 @@ This content script uses modern JavaScript class syntax and includes several key
 
 ---
 
-Creating the Background Service Worker {#background-service-worker}
+## Creating the Background Service Worker {#background-service-worker}
 
 The background service worker acts as a bridge between the content script and external websites. Since content scripts cannot make cross-origin requests directly, we use the service worker to fetch metadata from remote URLs.
 
-Create background.js with the following implementation:
+### Create background.js with the following implementation:
 
 ```javascript
 // background.js - Service worker for fetching link metadata
@@ -391,7 +391,7 @@ The background service worker implements caching to improve performance and redu
 
 ---
 
-Styling the Preview Tooltip {#styling-preview-tooltip}
+## Styling the Preview Tooltip {#styling-preview-tooltip}
 
 Create a styles.css file to make the preview tooltip look professional and match Chrome's design aesthetic:
 
@@ -521,7 +521,7 @@ Create a styles.css file to make the preview tooltip look professional and match
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Now that we've created all the necessary files, let's test the extension:
 
@@ -535,7 +535,7 @@ If you encounter any issues, use the Chrome DevTools to check for errors in the 
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Once you have the basic link preview working, consider adding these advanced features:
 
@@ -551,7 +551,7 @@ Preview Actions: Add buttons to the preview card for quick actions like opening 
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 When you're ready to share your extension with the world:
 
@@ -564,7 +564,7 @@ Make sure your extension follows Chrome's policies, particularly regarding user 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a link preview Chrome extension is an excellent project that teaches you valuable skills in extension development while creating a genuinely useful tool. The hover preview chrome extension we've built in this guide demonstrates core concepts including content scripts, background service workers, cross-origin fetch requests, dynamic DOM manipulation, and responsive positioning.
 

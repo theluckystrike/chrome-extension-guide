@@ -18,7 +18,7 @@ we will explore how to use Firebase with Chrome extensions to add authentication
 
 ---
 
-Why Use Firebase with Chrome Extensions? {#why-firebase}
+## Why Use Firebase with Chrome Extensions? {#why-firebase}
 
 Firebase offers several advantages that make it an ideal backend choice for Chrome extensions:
 
@@ -44,11 +44,11 @@ Firebase provides SDKs that work well within Chrome extension environments. With
 
 ---
 
-Setting Up Firebase for Your Chrome Extension {#setup-firebase}
+## Setting Up Firebase for Your Chrome Extension {#setup-firebase}
 
 Before integrating Firebase into your Chrome extension, you need to create a Firebase project and configure it for extension use.
 
-Step 1: Create a Firebase Project
+### Step 1: Create a Firebase Project
 
 1. Go to the [Firebase Console](https://console.firebase.google.com/)
 2. Click "Add project" and follow the setup wizard
@@ -56,16 +56,16 @@ Step 1: Create a Firebase Project
 4. Disable Google Analytics (optional, saves resources)
 5. Click "Create project"
 
-Step 2: Register Your Chrome Extension
+### Step 2: Register Your Chrome Extension
 
-After creating your Firebase project:
+### After creating your Firebase project:
 
 1. In the Firebase Console, click the gear icon  next to "Project Overview"
 2. Select "Your apps" → "Add app" → Web (</>)
 3. Register your app with a nickname (e.g., "Chrome Extension")
 4. Important: Do NOT copy the firebaseConfig code yet. we will generate it specifically for extension use
 
-Step 3: Configure Firebase for Chrome Extension
+### Step 3: Configure Firebase for Chrome Extension
 
 Chrome extensions run in a unique environment with specific security requirements. You need to configure Firebase properly:
 
@@ -79,7 +79,7 @@ Chrome extensions run in a unique environment with specific security requirement
    - messagingSenderId
    - appId
 
-Step 4: Update Your Manifest.json
+### Step 4: Update Your Manifest.json
 
 Your Chrome extension needs the correct permissions and host permissions to communicate with Firebase:
 
@@ -105,11 +105,11 @@ The host permissions are critical. without them, your extension cannot make requ
 
 ---
 
-Firebase Authentication in Chrome Extensions {#firebase-auth}
+## Firebase Authentication in Chrome Extensions {#firebase-auth}
 
 Firebase Authentication allows users to sign in to your Chrome extension using various methods. Let's implement email/password authentication as a starting point.
 
-Installing the Firebase SDK
+### Installing the Firebase SDK
 
 First, install Firebase in your extension project:
 
@@ -117,7 +117,7 @@ First, install Firebase in your extension project:
 npm install firebase
 ```
 
-Setting Up Authentication
+### Setting Up Authentication
 
 Create an authentication module in your extension:
 
@@ -144,9 +144,9 @@ const auth = getAuth(app);
 export { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged };
 ```
 
-Creating a Login UI
+### Creating a Login UI
 
-In your extension's popup HTML:
+### In your extension's popup HTML:
 
 ```html
 <!DOCTYPE html>
@@ -175,7 +175,7 @@ In your extension's popup HTML:
 </html>
 ```
 
-Handling Authentication in Popup
+### Handling Authentication in Popup
 
 ```javascript
 // popup.js
@@ -241,7 +241,7 @@ function showLoginForm() {
 }
 ```
 
-Firebase Auth Chrome Extension Best Practices
+### Firebase Auth Chrome Extension Best Practices
 
 When implementing Firebase Authentication in Chrome extensions, consider these best practices:
 
@@ -255,13 +255,13 @@ When implementing Firebase Authentication in Chrome extensions, consider these b
 
 ---
 
-Firestore Database in Chrome Extensions {#firestore-database}
+## Firestore Database in Chrome Extensions {#firestore-database}
 
 Firestore is Firebase's flexible, scalable NoSQL cloud database. It is perfect for storing user data, settings, and application state for your Chrome extension.
 
-Setting Up Firestore
+### Setting Up Firestore
 
-Import and initialize Firestore:
+### Import and initialize Firestore:
 
 ```javascript
 // firebase-firestore.js
@@ -278,7 +278,7 @@ const db = getFirestore(app);
 export { db, collection, doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, query, where, orderBy, onSnapshot };
 ```
 
-Creating and Reading Data
+### Creating and Reading Data
 
 ```javascript
 // example-usage.js
@@ -321,7 +321,7 @@ function subscribeToNotes(userId, callback) {
 }
 ```
 
-Updating and Deleting Data
+### Updating and Deleting Data
 
 ```javascript
 // Update a note
@@ -340,9 +340,9 @@ async function deleteNote(noteId) {
 }
 ```
 
-Firestore Chrome Extension Security Rules
+### Firestore Chrome Extension Security Rules
 
-Secure your Firestore data with proper security rules:
+### Secure your Firestore data with proper security rules:
 
 ```
 rules_version = '2';
@@ -361,7 +361,7 @@ service cloud.firestore {
 }
 ```
 
-Firestore Chrome Extension Best Practices
+### Firestore Chrome Extension Best Practices
 
 1. Use Composite Indexes: Complex queries require Firestore indexes. check the console for index creation links when queries fail.
 
@@ -373,11 +373,11 @@ Firestore Chrome Extension Best Practices
 
 ---
 
-Firebase Hosting for Chrome Extensions {#firebase-hosting}
+## Firebase Hosting for Chrome Extensions {#firebase-hosting}
 
 While Chrome extensions run locally in the browser, Firebase Hosting can serve your extension's web components, documentation, and landing pages.
 
-Setting Up Firebase Hosting
+### Setting Up Firebase Hosting
 
 1. Install Firebase CLI:
 ```bash
@@ -395,7 +395,7 @@ firebase init hosting
 
 5. Configure as a single-page app: Yes (if using SPA routing)
 
-Deploying Your Extension's Website
+### Deploying Your Extension's Website
 
 If your extension includes a website (landing page, documentation, dashboard), deploy it with:
 
@@ -405,9 +405,9 @@ firebase deploy --only hosting
 
 Your site will be available at `https://your-project.web.app`
 
-Using Hosting with Chrome Extension
+### Using Hosting with Chrome Extension
 
-Many extensions use Firebase Hosting to serve:
+### Many extensions use Firebase Hosting to serve:
 
 - Landing pages: Market your extension with a professional website
 - Documentation: Host detailed guides and tutorials
@@ -416,11 +416,11 @@ Many extensions use Firebase Hosting to serve:
 
 ---
 
-Connecting Content Scripts to Firebase {#content-scripts}
+## Connecting Content Scripts to Firebase {#content-scripts}
 
 Content scripts run in the context of web pages, making Firebase integration slightly different. Here is how to connect:
 
-Option 1: Message Passing
+### Option 1: Message Passing
 
 The recommended approach is to communicate between your content script and background/service worker:
 
@@ -443,7 +443,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Option 2: Direct Connection (Advanced)
+### Option 2: Direct Connection (Advanced)
 
 For complex use cases, you can inject Firebase SDK directly into pages, but this requires careful security considerations:
 
@@ -460,9 +460,9 @@ For complex use cases, you can inject Firebase SDK directly into pages, but this
 
 ---
 
-Advanced Patterns and Tips {#advanced-tips}
+## Advanced Patterns and Tips {#advanced-tips}
 
-Using Firebase with Manifest V3 Service Workers
+### Using Firebase with Manifest V3 Service Workers
 
 Service workers in Manifest V3 have some limitations. Here are tips for working with Firebase:
 
@@ -470,9 +470,9 @@ Service workers in Manifest V3 have some limitations. Here are tips for working 
 2. Handle Caching: Service workers may be terminated. save state appropriately
 3. Use Background Context: Initialize Firebase in the background script context
 
-Syncing Extension State
+### Syncing Extension State
 
-Use Firestore to sync state across devices:
+### Use Firestore to sync state across devices:
 
 ```javascript
 // Sync user preferences across devices
@@ -492,9 +492,9 @@ function subscribeToPreferences(userId, callback) {
 }
 ```
 
-Offline Support
+### Offline Support
 
-Enable Firestore offline persistence for better experience:
+### Enable Firestore offline persistence for better experience:
 
 ```javascript
 import { enableIndexedDbPersistence } from 'firebase/firestore';
@@ -511,7 +511,7 @@ enableIndexedDbPersistence(db)
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Firebase provides a powerful, serverless backend solution for Chrome extensions. With Firebase Authentication, you can implement secure user login without building your own identity system. Firestore offers real-time, scalable database capabilities perfect for storing user data, settings, and application state. Firebase Hosting rounds out the package by providing a way to deploy landing pages, documentation, and web dashboards for your extension.
 

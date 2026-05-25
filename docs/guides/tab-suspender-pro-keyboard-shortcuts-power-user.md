@@ -14,7 +14,7 @@ Understanding and utilizing keyboard shortcuts is particularly important for Tab
 
 ---
 
-Table of Contents
+### Table of Contents
 
 - [Default Keyboard Shortcuts](#default-keyboard-shortcuts)
 - [Custom Shortcut Configuration](#custom-shortcut-configuration)
@@ -28,7 +28,7 @@ Table of Contents
 
 ---
 
-Default Keyboard Shortcuts
+### Default Keyboard Shortcuts
 
 Tab Suspender Pro ships with a thoughtfully designed set of default keyboard shortcuts that cover the most common tab management tasks. These shortcuts are designed to be intuitive and follow common Chrome extension conventions, making them easy to learn and remember. Understanding these defaults is the first step toward keyboard-driven productivity.
 
@@ -42,7 +42,7 @@ To wake all suspended tabs in the current window, use Ctrl+Shift+R (Cmd+Shift+R 
 
 ---
 
-Custom Shortcut Configuration
+### Custom Shortcut Configuration
 
 While the default shortcuts work well for most users, Tab Suspender Pro provides full customization capabilities through Chrome's built-in shortcuts management system. Configuring custom shortcuts gives you the flexibility to align the extension with your existing keyboard workflow and avoid conflicts with other extensions or applications you use.
 
@@ -56,7 +56,7 @@ When choosing custom shortcuts, consider the mnemonic value of your choices. Man
 
 ---
 
-Suspend and Unsuspend Current Tab
+### Suspend and Unsuspend Current Tab
 
 The ability to instantly suspend or unsuspend the current tab is the cornerstone of Tab Suspender Pro's keyboard-driven functionality. This single action gives you complete control over individual tab states without needing to interact with the mouse or navigate through menus. Mastering this shortcut alone will dramatically improve your tab management efficiency.
 
@@ -70,7 +70,7 @@ One advanced technique involves the use of the "suspend only" and "unsuspend onl
 
 ---
 
-Suspend All Tabs in Window
+### Suspend All Tabs in Window
 
 The "suspend all tabs in window" functionality represents one of Tab Suspender Pro's most powerful features, and having it bound to a keyboard shortcut makes it even more valuable. This capability is particularly useful in several scenarios: when you're stepping away from your computer, when you need to free up memory for a specific task, or when you're finishing a work session and want to preserve your tabs for later.
 
@@ -84,7 +84,7 @@ Some users create keyboard shortcut "routines" that combine suspend-all with oth
 
 ---
 
-Whitelist Current Site Shortcut
+### Whitelist Current Site Shortcut
 
 The whitelist functionality is essential for customizing Tab Suspender Pro's behavior to match your specific needs, and having a keyboard shortcut for this action makes it incredibly convenient. Whitelisted sites are never automatically suspended, and they're also protected from manual suspension through the main toggle (though you can force-suspend whitelisted sites with a separate command if needed).
 
@@ -98,7 +98,7 @@ The whitelist shortcut is also available as a toggle, if you press it on a site 
 
 ---
 
-Power User Workflows
+### Power User Workflows
 
 Beyond individual shortcuts, Tab Suspender Pro truly shines when you combine multiple shortcuts and techniques into integrated workflows. These power user approaches use the extension's full capabilities while minimizing friction in your daily browsing.  several sophisticated workflows that experienced users employ to maximize their productivity.
 
@@ -112,7 +112,7 @@ For developers and power users who use Chrome DevTools extensively, Tab Suspende
 
 ---
 
-Combining with Chrome Built-in Shortcuts
+### Combining with Chrome Built-in Shortcuts
 
 Tab Suspender Pro's keyboard shortcuts don't exist in isolation, they work best when combined with Chrome's extensive built-in shortcut system. Understanding how these shortcuts interact allows you to create smooth workflows that feel natural and efficient. This section explores the most valuable combinations and explains how to use them effectively.
 
@@ -126,7 +126,7 @@ For users who employ Chrome's "search tabs" feature (accessible by clicking the 
 
 ---
 
-Accessibility Considerations
+### Accessibility Considerations
 
 Keyboard accessibility is a fundamental design principle for Tab Suspender Pro, ensuring that users with motor impairments or those who prefer keyboard-only navigation can fully use the extension's capabilities. Understanding these considerations helps ensure you're using the extension in ways that work for all users, and it may reveal features you hadn't discovered.
 
@@ -140,7 +140,7 @@ The extension also supports users who rely on switch controls or other assistive
 
 ---
 
-Comparison with Other Tab Manager Shortcuts
+### Comparison with Other Tab Manager Shortcuts
 
 Understanding how Tab Suspender Pro's keyboard shortcuts compare to those offered by other popular tab management extensions helps you make informed decisions about your browser setup and potentially migrate from other solutions. This section examines the shortcut ecosystems of several leading alternatives.
 
@@ -156,7 +156,7 @@ Tab Suspender Pro's keyboard shortcut system strikes an excellent balance betwee
 
 ---
 
-Related Guides
+### Related Guides
 
 Deepen your understanding of Tab Suspender Pro and Chrome tab management:
 

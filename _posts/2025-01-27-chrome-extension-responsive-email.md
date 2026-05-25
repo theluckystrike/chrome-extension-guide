@@ -16,7 +16,7 @@ Email development remains one of the most challenging disciplines in web develop
 
 we will walk through the complete process of building an email tester Chrome extension from the ground up. Whether you are a seasoned Chrome extension developer or just getting started with browser extension development, this tutorial will provide you with the knowledge and practical code examples needed to create a professional-grade email preview tool.
 
-Why Build an Email Preview Extension?
+### Why Build an Email Preview Extension?
 
 Before diving into the code, let us understand why building an email preview extension is a valuable project. The email development workflow typically involves switching between multiple tools, manually resizing browser windows, and using external services to test email rendering across different clients. A well-designed responsive email chrome extension can consolidate many of these tasks into a single, smooth experience.
 
@@ -24,7 +24,7 @@ The market demand for email testing tools is substantial. Developers and markete
 
 Additionally, Chrome extensions have unique advantages over standalone web applications. They can access browser context, integrate with developer tools, and be installed with a single click. This makes an email preview extension particularly powerful for developers who spend most of their day in the browser.
 
-Project Planning and Architecture
+### Project Planning and Architecture
 
 Every successful Chrome extension begins with careful planning. For a responsive email preview extension, you need to consider several key features that will make your tool useful:
 
@@ -39,7 +39,7 @@ For this tutorial, we will focus on the core functionality: providing responsive
 
 The architecture of our extension will follow the standard Chrome extension pattern with a popup interface, content scripts for injection, and background scripts for persistent state management. We will use modern JavaScript (ES6+) and avoid heavy dependencies to keep the extension lightweight and fast.
 
-Setting Up the Project Structure
+### Setting Up the Project Structure
 
 Chrome extensions require a specific directory structure and configuration files. Let us set up our project:
 
@@ -94,7 +94,7 @@ The manifest.json file is the heart of any Chrome extension. It defines the exte
 
 This manifest requests the minimum permissions needed for our extension. We use `activeTab` to access the current tab's content, `scripting` to inject our preview code, and `storage` to save user preferences like default viewport sizes.
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup is what users see when they click the extension icon. This is where users will input their email HTML and select preview options. Let us create a clean, functional popup interface:
 
@@ -154,7 +154,7 @@ The popup is what users see when they click the extension icon. This is where us
 
 The popup includes a textarea for pasting email HTML and quick-select buttons for common device sizes. This design keeps the interface clean while providing quick access to the most common testing scenarios.
 
-Implementing the Preview Functionality
+### Implementing the Preview Functionality
 
 The real power of our extension lies in the preview functionality. When users click "Open Preview," we will create a new tab with our preview page that renders the email HTML at the selected viewport size. Here is how we implement this in popup.js:
 
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 This code handles saving and loading user preferences, managing device selection, and opening the preview page. We use Chrome's storage API to persist the email HTML so users do not lose their work if they accidentally close the popup.
 
-Creating the Preview Page
+### Creating the Preview Page
 
 The preview page is where users actually see their email rendered. It receives the email HTML as a URL parameter and renders it inside a container that simulates different device sizes. Here is the preview.html:
 
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 The iframe approach provides realistic rendering while keeping the email contained within our controlled dimensions. Users can rotate between portrait and landscape views and refresh to see their latest changes.
 
-Styling the Extension
+### Styling the Extension
 
 A polished user interface makes your extension more enjoyable to use. Here is the CSS for our popup:
 
@@ -431,7 +431,7 @@ header h1 {
 }
 ```
 
-Adding Content Script Functionality
+### Adding Content Script Functionality
 
 For more advanced features, we can add a content script that allows users to preview emails directly on any webpage. This is particularly useful when viewing email templates in a code repository or email marketing platform. Here is how we can implement this:
 
@@ -477,7 +477,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This content script listens for messages from our popup and creates an overlay preview directly on the current page. It gives users maximum flexibility in how they test their emails.
 
-Best Practices for Email Extension Development
+### Best Practices for Email Extension Development
 
 When building an email preview extension, there are several best practices you should follow to ensure a quality product:
 
@@ -491,7 +491,7 @@ Fourth, optimize your extension's performance. Email HTML can be complex, and re
 
 Finally, gather user feedback and iterate on your extension. The best tools are built by developers who understand the real-world challenges of their users.
 
-Extending Your Email Tester
+### Extending Your Email Tester
 
 The foundation we have built here can be extended with many powerful features:
 
@@ -505,7 +505,7 @@ The foundation we have built here can be extended with many powerful features:
 
 Each of these features would make your extension more valuable to users and differentiate it from existing tools in the market.
 
-Conclusion
+### Conclusion
 
 Building a responsive email preview Chrome extension is a rewarding project that solves real problems for developers and marketers. we have covered the complete development process from project planning to implementation, providing you with working code that you can extend and customize.
 

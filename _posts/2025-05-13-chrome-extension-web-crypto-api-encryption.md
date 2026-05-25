@@ -18,13 +18,13 @@ Understanding client-side encryption in Chrome extensions is crucial for develop
 
 ---
 
-Understanding the Web Crypto API
+### Understanding the Web Crypto API
 
 The Web Crypto API is a standardized interface for performing cryptographic operations in web browsers and browser-based applications, including Chrome extensions. Introduced as part of the Web Security API, this API provides access to cryptographic primitives that were previously only available through native code or external JavaScript libraries.
 
 The Web Crypto API offers several significant advantages for Chrome extension developers. First, it is built into the browser, eliminating dependencies on third-party cryptographic libraries that may contain vulnerabilities or require ongoing maintenance. Second, it performs cryptographic operations with native speed, making it suitable for processing large amounts of data. Third, it follows established cryptographic standards and best practices, reducing the likelihood of implementation errors that could compromise security.
 
-Key Cryptographic Primitives
+### Key Cryptographic Primitives
 
 The Web Crypto API supports two primary categories of cryptographic operations: symmetric key cryptography and asymmetric key cryptography. Understanding when to use each type is fundamental to building secure extensions.
 
@@ -34,7 +34,7 @@ Asymmetric Key Cryptography uses a pair of keys: a public key for encryption and
 
 ---
 
-Setting Up Your Chrome Extension for Cryptography
+### Setting Up Your Chrome Extension for Cryptography
 
 Before implementing cryptographic functions, ensure your extension's manifest is properly configured. While the Web Crypto API does not require special permissions, consider the following best practices for your manifest configuration.
 
@@ -56,11 +56,11 @@ Remember that Manifest V3, the current standard for Chrome extensions, provides 
 
 ---
 
-Generating Cryptographic Keys
+### Generating Cryptographic Keys
 
 Secure key generation forms the foundation of any cryptographic system. The Web Crypto API provides solid methods for generating cryptographic keys that meet security standards suitable for production use.
 
-Generating Symmetric Keys
+### Generating Symmetric Keys
 
 For AES-GCM encryption, generating a secure key is straightforward:
 
@@ -79,7 +79,7 @@ async function generateSymmetricKey(length = 256) {
 
 This function generates an AES key with the specified length (256 bits is the recommended minimum). The second parameter `true` allows the key to be exported, which is useful for backup or transfer purposes but should be handled with appropriate security measures.
 
-Generating Asymmetric Key Pairs
+### Generating Asymmetric Key Pairs
 
 For scenarios requiring asymmetric cryptography, such as key exchange or digital signatures, generate an ECDSA key pair:
 
@@ -100,11 +100,11 @@ ECDSA with the P-256 curve provides a good balance between security and performa
 
 ---
 
-Encrypting Data with AES-GCM
+### Encrypting Data with AES-GCM
 
 AES-GCM (Galois/Counter Mode) represents the gold standard for symmetric encryption in modern web applications. It provides both confidentiality (through encryption) and integrity (through authentication), ensuring that encrypted data has not been tampered with.
 
-The Encryption Process
+### The Encryption Process
 
 Encrypting data with AES-GCM involves several steps: generating or obtaining an encryption key, creating an initialization vector (IV), performing the encryption, and combining the IV with the ciphertext for storage or transmission.
 
@@ -139,7 +139,7 @@ async function encryptData(plaintext, key) {
 
 The initialization vector must be unique for each encryption operation but does not need to be kept secret. Store it alongside the ciphertext, it is required for decryption.
 
-The Decryption Process
+### The Decryption Process
 
 Decryption reverses the encryption process, requiring the same key and the original initialization vector:
 
@@ -172,11 +172,11 @@ async function decryptData(encryptedBase64, key) {
 
 ---
 
-Implementing Key Derivation
+### Implementing Key Derivation
 
 In many applications, you need to derive encryption keys from user-provided passwords or other secrets. The Web Crypto API provides the PBKDF2 (Password-Based Key Derivation Function 2) algorithm for this purpose.
 
-Deriving Keys from Passwords
+### Deriving Keys from Passwords
 
 Key derivation adds computational complexity to make brute-force attacks more difficult:
 
@@ -211,9 +211,9 @@ async function deriveKeyFromPassword(password, salt) {
 
 The salt should be unique for each user and stored alongside the encrypted data. The iteration count (100,000 in this example) represents a balance between security and performance, higher values provide better security but slow down the derivation process.
 
-Generating Secure Salts
+### Generating Secure Salts
 
-Always generate salts using cryptographically secure random values:
+### Always generate salts using cryptographically secure random values:
 
 ```javascript
 function generateSalt() {
@@ -223,11 +223,11 @@ function generateSalt() {
 
 ---
 
-Secure Key Storage in Chrome Extensions
+### Secure Key Storage in Chrome Extensions
 
 Properly storing encryption keys is critical for maintaining security. Chrome extensions have several storage options, each with different security properties.
 
-Using Chrome Storage API
+### Using Chrome Storage API
 
 The Chrome Storage API provides encrypted storage for extension data:
 
@@ -263,7 +263,7 @@ async function retrieveKey(keyName) {
 
 The Chrome Storage API encrypts data at rest when the user enables sync or as a default in some contexts. However, for highly sensitive keys, consider additional encryption layers or session-based storage.
 
-Session Storage for Ephemeral Keys
+### Session Storage for Ephemeral Keys
 
 For keys that should not persist across browser sessions, use `chrome.storage.session`:
 
@@ -280,11 +280,11 @@ async function storeSessionKey(keyName, key) {
 
 ---
 
-Hashing and Digital Signatures
+### Hashing and Digital Signatures
 
 Beyond encryption, the Web Crypto API supports hashing functions and digital signatures for data integrity verification.
 
-Creating Hashes
+### Creating Hashes
 
 Hash functions create fixed-size digests from variable-length input, useful for password verification and data integrity checks:
 
@@ -303,7 +303,7 @@ async function hashData(data) {
 
 SHA-256 provides excellent security for most applications. For password hashing, combine hashing with key derivation (as shown earlier) to protect against brute-force attacks.
 
-Digital Signatures
+### Digital Signatures
 
 Digital signatures verify both the authenticity and integrity of messages:
 
@@ -346,11 +346,11 @@ async function verifySignature(data, signatureBase64, publicKey) {
 
 ---
 
-Best Practices for Chrome Extension Cryptography
+### Best Practices for Chrome Extension Cryptography
 
 Implementing cryptography correctly requires attention to detail and adherence to established security principles.
 
-Key Management Best Practices
+### Key Management Best Practices
 
 Proper key management encompasses key generation, storage, rotation, and destruction. Follow these guidelines:
 
@@ -362,7 +362,7 @@ Proper key management encompasses key generation, storage, rotation, and destruc
 
 4. Never hardcode keys: Avoid embedding encryption keys in your extension's source code. Keys should be generated, derived, or obtained through secure user input.
 
-Operational Security
+### Operational Security
 
 Beyond the cryptographic primitives themselves, consider these operational security aspects:
 
@@ -376,29 +376,29 @@ Beyond the cryptographic primitives themselves, consider these operational secur
 
 ---
 
-Common Pitfalls and How to Avoid Them
+### Common Pitfalls and How to Avoid Them
 
 Even experienced developers can make mistakes when implementing cryptography. Here are common pitfalls and their solutions:
 
-Using Insecure Algorithms
+### Using Insecure Algorithms
 
 Avoid deprecated or broken algorithms such as MD5 for security purposes or ECB mode for encryption. Always use modern, well-reviewed algorithms like AES-GCM, ECDSA, and SHA-256.
 
-Improper IV Handling
+### Improper IV Handling
 
 Never reuse initialization vectors with the same key in AES-GCM mode. This can completely compromise confidentiality. Generate a fresh IV for every encryption operation.
 
-Insufficient Key Length
+### Insufficient Key Length
 
 Use minimum key lengths that provide adequate security for your use case. For AES, use 256-bit keys. For RSA, use at least 2048-bit keys (4096-bit recommended for long-term security).
 
-Storing Keys in LocalStorage
+### Storing Keys in LocalStorage
 
 Avoid using `localStorage` for sensitive data or keys, as it is accessible through JavaScript and vulnerable to XSS attacks. Use `chrome.storage` instead, which provides better isolation.
 
 ---
 
-Practical Example: Secure Notes Extension
+### Practical Example: Secure Notes Extension
 
 Putting all the concepts together, here is a practical implementation of a secure notes feature for a Chrome extension:
 
@@ -447,7 +447,7 @@ This implementation demonstrates proper key derivation, secure storage, and auth
 
 ---
 
-Conclusion
+### Conclusion
 
 The Web Crypto API provides Chrome extension developers with a powerful, standards-based toolkit for implementing client-side encryption. By understanding the fundamentals of symmetric and asymmetric cryptography, proper key management, and security best practices, you can build extensions that protect user data against unauthorized access.
 

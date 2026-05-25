@@ -18,7 +18,7 @@ This project will teach you essential concepts in Chrome extension development, 
 
 ---
 
-Why Build an Image Compressor Extension? {#why-build}
+## Why Build an Image Compressor Extension? {#why-build}
 
 The need for efficient image compression has never been more critical. Modern websites rely heavily on visual content, and unoptimized images often account for the majority of page weight. A well-built image compressor extension provides immediate value by allowing users to compress images without leaving their browser, upload images to websites with reduced file sizes, and convert images to modern formats like WebP for better performance.
 
@@ -28,7 +28,7 @@ The extension we will build supports multiple compression levels, format convers
 
 ---
 
-Project Architecture and Prerequisites {#prerequisites}
+## Project Architecture and Prerequisites {#prerequisites}
 
 Before diving into the code, let us establish the architecture of our image compressor extension. The project consists of several key components that work together to provide a smooth compression experience.
 
@@ -40,7 +40,7 @@ The extension follows Manifest V3 specifications, which is the current standard 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project and set up the following directory structure:
 
@@ -72,7 +72,7 @@ This structure separates concerns between the popup interface, background proces
 
 ---
 
-Creating the Manifest File {#manifest}
+## Creating the Manifest File {#manifest}
 
 The manifest.json file defines the extension's configuration, permissions, and components. For our image compressor, we need permissions for downloads, file system access, and scripting. Here is the complete manifest configuration:
 
@@ -111,11 +111,11 @@ This manifest declares the necessary permissions for file handling and downloads
 
 ---
 
-Implementing the Core Compression Logic {#compression-logic}
+## Implementing the Core Compression Logic {#compression-logic}
 
 The heart of our extension lies in the compression library. We will create a solid JavaScript module that handles image loading, compression, and format conversion. This module uses the Canvas API for image manipulation, which provides excellent compatibility and performance.
 
-Create the file `lib/compressor.js` with the following implementation:
+### Create the file `lib/compressor.js` with the following implementation:
 
 ```javascript
 /
@@ -237,11 +237,11 @@ The ImageCompressor class uses modern JavaScript features including async/await 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides the primary user interface for quick compression tasks. It should be clean, intuitive, and responsive. Let us create a popup that allows users to select files, configure compression settings, and initiate compression with visual feedback.
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -310,7 +310,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Now create `popup/popup.css` for styling:
+### Now create `popup/popup.css` for styling:
 
 ```css
 * {
@@ -555,7 +555,7 @@ footer a:hover {
 }
 ```
 
-Now create `popup/popup.js` to handle user interactions:
+### Now create `popup/popup.js` to handle user interactions:
 
 ```javascript
 import { ImageCompressor } from '../lib/compressor.js';
@@ -716,11 +716,11 @@ The popup interface provides a complete user experience for image compression. U
 
 ---
 
-Implementing the Background Service Worker {#background-worker}
+## Implementing the Background Service Worker {#background-worker}
 
 In Manifest V3, background scripts run as service workers. While our popup handles most functionality directly, we can use the background script for more advanced features like handling file system access or coordinating multiple compression tasks.
 
-Create `background/background.js`:
+### Create `background/background.js`:
 
 ```javascript
 /
@@ -859,7 +859,7 @@ The background service worker handles more complex operations and maintains sett
 
 ---
 
-Creating the Options Page {#options-page}
+## Creating the Options Page {#options-page}
 
 The options page allows users to configure default compression settings and customize their experience. Create `options/options.html`:
 
@@ -947,7 +947,7 @@ The options page allows users to configure default compression settings and cust
 </html>
 ```
 
-Create `options/options.css`:
+### Create `options/options.css`:
 
 ```css
 * {
@@ -1133,7 +1133,7 @@ header p {
 }
 ```
 
-Now create `options/options.js`:
+### Now create `options/options.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -1233,7 +1233,7 @@ The options page provides a comprehensive settings interface that saves preferen
 
 ---
 
-Creating Extension Icons {#icons}
+## Creating Extension Icons {#icons}
 
 Every Chrome extension needs icons in three sizes: 16x16, 48x48, and 128x128 pixels. While you can create custom icons in an image editor, you can also generate simple placeholder icons using a canvas-based approach or download free icon sets.
 
@@ -1247,7 +1247,7 @@ Name your files accordingly and place them in the `icons/` folder.
 
 ---
 
-Adding Localization Support {#localization}
+## Adding Localization Support {#localization}
 
 Chrome extensions support internationalization through the _locales folder. Create `locales/en/messages.json` with the following content:
 
@@ -1268,7 +1268,7 @@ This enables future localization efforts and follows Chrome extension best pract
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, it is time to test the extension. Follow these steps to load your extension in Chrome:
 
@@ -1280,7 +1280,7 @@ If you encounter issues, use the Chrome DevTools to debug. Right-click the exten
 
 ---
 
-Key Features Summary {#summary}
+## Key Features Summary {#summary}
 
 Throughout this comprehensive guide, we have built a fully functional image compressor Chrome extension with the following capabilities:
 
@@ -1296,7 +1296,7 @@ Modern Architecture: Built on Manifest V3, the extension uses service workers fo
 
 ---
 
-Future Enhancements {#future-enhancements}
+## Future Enhancements {#future-enhancements}
 
 While our extension is fully functional, there are numerous ways you could enhance it further. Consider adding drag-and-drop support directly onto web pages using content scripts, implementing advanced compression algorithms like MozJPEG for even better results, adding image preview with zoom functionality before compression, supporting folder processing for batch operations, integrating with cloud storage services for direct uploads, or adding keyboard shortcuts for power users.
 
@@ -1304,7 +1304,7 @@ Each of these enhancements would provide additional value while teaching you mor
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an image compressor Chrome extension is an excellent project that combines practical utility with meaningful technical learning. You have created a tool that solves a real problem, optimizing images for web performance, while mastering concepts that apply to many other extension projects.
 

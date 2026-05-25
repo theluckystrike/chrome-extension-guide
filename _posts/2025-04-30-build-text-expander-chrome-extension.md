@@ -18,29 +18,29 @@ we will walk you through building a fully functional text expander Chrome extens
 
 ---
 
-Why Build a Text Expander Chrome Extension? {#why-build}
+## Why Build a Text Expander Chrome Extension? {#why-build}
 
 The demand for text expander tools continues to grow as more people work remotely, communicate via text-heavy platforms, and seek ways to streamline their digital workflows. Here is why building a text expander Chrome extension is an excellent project:
 
-High Utility and Practical Application
+### High Utility and Practical Application
 
 Text expanders solve real problems for real users. Customer support agents who respond to dozens of tickets daily, developers who repeatedly type code snippets, healthcare professionals who enter patient information, and writers who use standard phrases all benefit from text expansion. This is not a gimmick. it is a genuine productivity tool that saves an average user 30-60 minutes per day.
 
-Relatively Simple Implementation
+### Relatively Simple Implementation
 
 Despite its usefulness, a basic text expander extension is surprisingly straightforward to build. The core functionality requires detecting keyboard input, maintaining a dictionary of shortcuts, and replacing typed shortcuts with their corresponding expansions. You do not need complex backend infrastructure or expensive resources.
 
-Monetization Potential
+### Monetization Potential
 
 Text expander extensions have proven market demand. Popular options like TextExpander (for macOS) and various Chrome extensions command premium prices or offer solid freemium models. Your extension can attract a large user base and potentially generate revenue through premium features, subscriptions, or donations.
 
 ---
 
-Understanding the Core Mechanics {#core-mechanics}
+## Understanding the Core Mechanics {#core-mechanics}
 
 Before diving into code, let us understand how text expansion works in a browser environment. The key challenge is detecting when a user types a shortcut and replacing it with the expanded text at the correct cursor position.
 
-How Text Expansion Works
+### How Text Expansion Works
 
 A text expander operates by monitoring keyboard input across text fields in the browser. When the user types a sequence of characters that matches a defined shortcut, the extension replaces those characters with the full expansion text. This process requires several steps:
 
@@ -49,15 +49,15 @@ A text expander operates by monitoring keyboard input across text fields in the 
 3. Text Replacement: Delete the typed shortcut and insert the expansion text
 4. Cursor Positioning: Place the cursor at the appropriate position after expansion
 
-Technical Approaches
+### Technical Approaches
 
 There are two primary approaches to implementing text expansion in Chrome extensions:
 
-Approach 1: Content Script Input Monitoring
+### Approach 1: Content Script Input Monitoring
 
 The content script attaches event listeners to all text input elements on the page. It monitors keypress events, builds a buffer of typed characters, and when a shortcut match is found, replaces the text programmatically. This approach works on most websites but may conflict with some complex web applications.
 
-Approach 2: Input Method Editor (IME) Integration
+### Approach 2: Input Method Editor (IME) Integration
 
 This approach uses the Chrome IME API to intercept text input at the browser level. It provides more reliable detection but requires additional permissions and is more complex to implement.
 
@@ -65,11 +65,11 @@ For this guide, we will use Approach 1. the content script method. because it is
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us start by setting up the project structure for our text expander extension. Create a new folder for your project and set up the essential files:
 
-Project Directory
+### Project Directory
 
 ```
 text-expander-extension/
@@ -90,7 +90,7 @@ text-expander-extension/
      shortcuts.json
 ```
 
-The Manifest File
+### The Manifest File
 
 Every Chrome extension begins with the manifest.json file. This file defines the extension's name, version, permissions, and the files that make up the extension:
 
@@ -140,7 +140,7 @@ The manifest declares that we need storage permission to save shortcut configura
 
 ---
 
-Building the Content Script {#content-script}
+## Building the Content Script {#content-script}
 
 The content script is the heart of our text expander. It runs on every web page and monitors text input to detect and expand shortcuts:
 
@@ -358,7 +358,7 @@ This content script implements all the core functionality: monitoring keyboard i
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup provides a quick interface for users to manage their shortcuts without opening a separate options page:
 
@@ -574,7 +574,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Building the Options Page {#options-page}
+## Building the Options Page {#options-page}
 
 The options page provides a comprehensive interface for managing shortcuts:
 
@@ -776,7 +776,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-The Background Service Worker {#background-worker}
+## The Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and manages communication between components:
 
@@ -818,9 +818,9 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load the extension: Open Chrome and navigate to `chrome://extensions/`. Enable Developer Mode, click "Load unpacked," and select your project folder.
 
@@ -832,7 +832,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 When your extension is ready:
 
@@ -846,7 +846,7 @@ When your extension is ready:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have built a fully functional text expander Chrome extension. This extension monitors text input across all websites, detects typed shortcuts, and automatically expands them to full text. The project demonstrates key Chrome extension concepts including content scripts, background service workers, the Storage API, and popup interfaces.
 
@@ -861,7 +861,7 @@ Text expanders remain one of the most practical and marketable Chrome extension 
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Chrome Storage API Reference](https://developer.chrome.com/docs/extensions/reference/storage/)

@@ -18,11 +18,11 @@ Whether you're looking to create a commercial product or build an internal tool 
 
 ---
 
-Why Build a GraphQL Debugger Extension? {#why-build-graphql-debugger}
+## Why Build a GraphQL Debugger Extension? {#why-build-graphql-debugger}
 
 The GraphQL ecosystem has grown exponentially, with companies like Facebook, GitHub, and Shopify adopting it for their APIs. Yet, developers still struggle with debugging GraphQL queries compared to REST APIs. Here's why building a GraphQL debugger extension makes sense in 2025:
 
-Growing Demand for GraphQL DevTools
+### Growing Demand for GraphQL DevTools
 
 Developers increasingly need specialized tools to debug GraphQL queries. Unlike REST, where browser DevTools network tabs provide adequate debugging, GraphQL requires understanding the query structure, variables, and response shape. A dedicated query inspector fills this gap by providing:
 
@@ -32,24 +32,24 @@ Developers increasingly need specialized tools to debug GraphQL queries. Unlike 
 - Error highlighting and suggestions
 - Query history and favorites
 
-Market Opportunity
+### Market Opportunity
 
 The Chrome Web Store lacks solid free GraphQL devtools chrome options. Most existing solutions require paid subscriptions or lack essential features. Building an open-source alternative can attract a significant user base while demonstrating your expertise in Chrome extension development.
 
 ---
 
-Project Architecture Overview {#project-architecture}
+## Project Architecture Overview {#project-architecture}
 
 Before diving into code, let's understand the architecture of our GraphQL debugger extension. Chrome extensions using Manifest V3 (the current standard) consist of several components:
 
-Core Components
+### Core Components
 
 1. Background Service Worker: Handles communication between different parts of the extension and manages long-running tasks
 2. Content Scripts: Injected into web pages to intercept and analyze GraphQL requests
 3. DevTools Page: Custom panels within Chrome DevTools for displaying debugging information
 4. Popup: Optional quick-access interface for basic controls
 
-Extension Flow
+### Extension Flow
 
 ```
 User visits GraphQL website
@@ -67,7 +67,7 @@ User analyzes and debugs queries
 
 ---
 
-Setting Up the Development Environment {#development-setup}
+## Setting Up the Development Environment {#development-setup}
 
 Let's start building our GraphQL debugger extension. First, create the project structure:
 
@@ -77,7 +77,7 @@ cd graphql-debugger-extension
 mkdir -p icons devtools-panel background content-scripts
 ```
 
-Creating manifest.json
+### Creating manifest.json
 
 Every Chrome extension requires a manifest file. Here's our Manifest V3 configuration:
 
@@ -116,7 +116,7 @@ Every Chrome extension requires a manifest file. Here's our Manifest V3 configur
 
 ---
 
-Building the Content Script (Request Interception) {#content-script}
+## Building the Content Script (Request Interception) {#content-script}
 
 The content script is the heart of our GraphQL debugger extension. It intercepts network requests and identifies GraphQL operations. Create `content-scripts/inject.js`:
 
@@ -289,7 +289,7 @@ The content script is the heart of our GraphQL debugger extension. It intercepts
 
 ---
 
-Building the Background Service Worker {#background-service-worker}
+## Building the Background Service Worker {#background-service-worker}
 
 The background service worker acts as a bridge between content scripts and the DevTools panel. Create `background/background.js`:
 
@@ -337,7 +337,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Creating the DevTools Panel {#devtools-panel}
+## Creating the DevTools Panel {#devtools-panel}
 
 Now let's create the DevTools panel where developers will inspect their GraphQL queries. First, create `devtools-panel/devtools.html`:
 
@@ -448,7 +448,7 @@ Now let's create the DevTools panel where developers will inspect their GraphQL 
 </html>
 ```
 
-Now create `devtools-panel/devtools.js`:
+### Now create `devtools-panel/devtools.js`:
 
 ```javascript
 // DevTools Panel Logic
@@ -583,7 +583,7 @@ setInterval(loadRequests, 2000);
 
 ---
 
-Testing Your Extension Locally {#testing-extension}
+## Testing Your Extension Locally {#testing-extension}
 
 Now let's test our GraphQL debugger extension:
 
@@ -598,13 +598,13 @@ You should see intercepted GraphQL queries appearing in your extension's panel!
 
 ---
 
-Enhancing Your GraphQL Debugger {#enhancing-extension}
+## Enhancing Your GraphQL Debugger {#enhancing-extension}
 
 Now that you have a working prototype, consider adding these advanced features:
 
-Query Validation
+### Query Validation
 
-Integrate GraphQL validation to highlight errors in queries:
+### Integrate GraphQL validation to highlight errors in queries:
 
 ```javascript
 function validateQuery(query) {
@@ -616,9 +616,9 @@ function validateQuery(query) {
 }
 ```
 
-Performance Analysis
+### Performance Analysis
 
-Track query execution time and identify slow operations:
+### Track query execution time and identify slow operations:
 
 ```javascript
 function analyzePerformance(requests) {
@@ -633,9 +633,9 @@ function analyzePerformance(requests) {
 }
 ```
 
-Query History and Favorites
+### Query History and Favorites
 
-Allow developers to save frequently used queries:
+### Allow developers to save frequently used queries:
 
 ```javascript
 function saveFavorite(query) {
@@ -653,7 +653,7 @@ function saveFavorite(query) {
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your extension is complete, follow these steps to publish:
 
@@ -665,7 +665,7 @@ Once your extension is complete, follow these steps to publish:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a GraphQL debugger Chrome extension is an excellent project that solves real developer problems while showcasing your expertise in Chrome extension development. we've covered:
 
@@ -681,7 +681,7 @@ Remember to follow Chrome Web Store policies and continuously gather user feedba
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Development Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [GraphQL Official Documentation](https://graphql.org/learn/)

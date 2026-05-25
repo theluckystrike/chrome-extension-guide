@@ -18,17 +18,17 @@ we will walk through building a Chrome extension that allows you to view, inspec
 
 ---
 
-Understanding Browser Cache Architecture {#understanding-browser-cache}
+## Understanding Browser Cache Architecture {#understanding-browser-cache}
 
 Before diving into the implementation, it is crucial to understand how Chrome's cache system works. Chrome uses multiple caching mechanisms, each serving different purposes and storing different types of data.
 
-HTTP Cache
+### HTTP Cache
 
 The HTTP cache is the primary mechanism for storing web resources. When your browser makes an HTTP request, the server responds with caching directives through headers like `Cache-Control`, `ETag`, and `Last-Modified`. Based on these headers, Chrome decides whether to serve a cached version or fetch a fresh copy from the server. The HTTP cache stores various resource types including HTML documents, CSS stylesheets, JavaScript files, images, fonts, and API responses.
 
 The HTTP cache is further divided into two components: the memory cache and the disk cache. The memory cache stores recently accessed resources in RAM for extremely fast access, while the disk cache stores larger or less frequently accessed items on the hard drive. Chrome automatically manages the division between memory and disk cache based on available resources and usage patterns.
 
-Cache Storage APIs
+### Cache Storage APIs
 
 For extensions, Chrome provides several APIs to interact with caching mechanisms. The most important ones include the `chrome.cache` API, the `chrome.broadcastChannel` for communication, and the various storage APIs like `chrome.storage`. However, it is important to note that the standard Chrome Extensions API does not provide direct access to the HTTP cache for security and privacy reasons.
 
@@ -36,7 +36,7 @@ Extensions can use the `chrome.webRequest` API to intercept network requests and
 
 ---
 
-Project Setup and Manifest Configuration {#project-setup}
+## Project Setup and Manifest Configuration {#project-setup}
 
 Every Chrome extension begins with a `manifest.json` file that defines the extension's configuration, permissions, and capabilities. For our cache viewer extension, we need to specify permissions for accessing cache storage, browsing data, and network request information.
 
@@ -80,11 +80,11 @@ This manifest requests the necessary permissions to access browsing data and int
 
 ---
 
-Building the Popup Interface {#building-popup-interface}
+## Building the Popup Interface {#building-popup-interface}
 
 The popup is the primary user interface for our extension. It provides a clean, intuitive interface for users to view and manage cached resources. We will create an HTML file with a modern, responsive design that displays cache information in an organized manner.
 
-Create `popup.html` with the following structure:
+### Create `popup.html` with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -137,11 +137,11 @@ The HTML structure provides a clean interface with a header showing cache statis
 
 ---
 
-Styling the Extension {#styling-extension}
+## Styling the Extension {#styling-extension}
 
 A well-designed extension not only looks professional but also provides a better user experience. We will create a modern, clean design using CSS with attention to usability and visual hierarchy.
 
-Create `popup.css` with the following styles:
+### Create `popup.css` with the following styles:
 
 ```css
 * {
@@ -350,7 +350,7 @@ These styles provide a clean, modern interface with proper spacing, hover effect
 
 ---
 
-Implementing the Core Logic {#implementing-core-logic}
+## Implementing the Core Logic {#implementing-core-logic}
 
 Now we need to implement the JavaScript logic that powers our extension. This includes the background service worker that monitors network requests and caches information, and the popup script that displays this information to users.
 
@@ -653,29 +653,29 @@ This JavaScript implementation handles all the user interactions, including load
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 While our basic cache viewer extension is functional, there are several advanced features you can add to make it even more powerful and useful for debugging web applications.
 
-Cache Timing Analysis
+### Cache Timing Analysis
 
 One of the most valuable features for developers is understanding cache timing. You can enhance the extension to show when each resource was cached, how long it remained in the cache, and compare cache lifetimes against the `Cache-Control` headers. This helps identify resources that are being cached longer or shorter than expected.
 
-Export Functionality
+### Export Functionality
 
 Adding the ability to export cache data in various formats (JSON, CSV, HAR) enables developers to share cache information with team members or analyze it using external tools. This is particularly useful for documenting caching issues or sharing findings with backend developers.
 
-Cache Prediction
+### Cache Prediction
 
 Advanced extensions can analyze caching patterns and predict which resources are likely to be cached on future visits. This information helps developers understand the expected performance benefits of their caching strategy and identify opportunities for improvement.
 
-Integration with DevTools
+### Integration with DevTools
 
 Consider creating a DevTools panel version of your cache viewer for deeper integration with Chrome's developer tools. This provides access to more detailed network information and a more familiar interface for developers who regularly use Chrome's built-in debugging tools.
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Before publishing your extension, thorough testing is essential to ensure it works correctly across different scenarios and does not cause any unexpected behavior.
 
@@ -685,7 +685,7 @@ Monitor the extension's performance and ensure it does not significantly impact 
 
 ---
 
-Publishing Your Extension {#publishing-extension}
+## Publishing Your Extension {#publishing-extension}
 
 Once you have thoroughly tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. The publishing process involves creating a developer account, preparing promotional assets, and submitting your extension for review.
 
@@ -695,7 +695,7 @@ The review process typically takes a few days, after which your extension will b
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a cache viewer Chrome extension is an excellent project that combines practical utility with valuable learning opportunities. Throughout this guide, you have learned about Chrome's caching mechanisms, the Chrome Extensions API, modern web development practices, and the process of building and publishing a complete extension.
 

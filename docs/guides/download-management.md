@@ -7,11 +7,11 @@ last_modified_at: 2026-01-15
 ---
 Download Management in Chrome Extensions
 
-chrome.downloads API Overview {#chromedownloads-api-overview}
+## chrome.downloads API Overview {#chromedownloads-api-overview}
 - Requires `"downloads"` permission (cross-ref `docs/permissions/downloads.md`)
 - Full control over browser downloads: create, pause, resume, cancel, search, erase
 
-Starting Downloads {#starting-downloads}
+## Starting Downloads {#starting-downloads}
 ```javascript
 chrome.downloads.download({
   url: 'https://example.com/file.pdf',
@@ -27,7 +27,7 @@ chrome.downloads.download({
 - `filename`: path relative to default download dir, can include subdirs
 - `conflictAction`: what happens if file exists
 
-Monitoring Download Progress {#monitoring-download-progress}
+## Monitoring Download Progress {#monitoring-download-progress}
 ```javascript
 chrome.downloads.onChanged.addListener((delta) => {
   if (delta.state) {
@@ -49,7 +49,7 @@ chrome.downloads.onDeterminingFilename.addListener((downloadItem, suggest) => {
 });
 ```
 
-Searching & Querying Downloads {#searching-querying-downloads}
+## Searching & Querying Downloads {#searching-querying-downloads}
 ```javascript
 // Find downloads by query
 chrome.downloads.search({
@@ -69,7 +69,7 @@ chrome.downloads.search({ id: downloadId }, ([item]) => {
 });
 ```
 
-Controlling Downloads {#controlling-downloads}
+## Controlling Downloads {#controlling-downloads}
 ```javascript
 // Pause, resume, cancel
 chrome.downloads.pause(downloadId);
@@ -87,7 +87,7 @@ chrome.downloads.erase({ id: downloadId });
 chrome.downloads.removeFile(downloadId);
 ```
 
-Download Progress Badge {#download-progress-badge}
+## Download Progress Badge {#download-progress-badge}
 ```javascript
 // Show download progress on extension icon
 chrome.downloads.onChanged.addListener((delta) => {
@@ -103,7 +103,7 @@ async function updateBadge() {
 }
 ```
 
-Storing Download History {#storing-download-history}
+## Storing Download History {#storing-download-history}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -120,21 +120,21 @@ async function trackDownload(item) {
 }
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 - Batch download (queue multiple URLs with rate limiting)
 - Download with authentication headers
 - Export extension data as JSON file using `URL.createObjectURL(blob)`
 - Content script triggering downloads via `@theluckystrike/webext-messaging`
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 - Not handling `interrupted` state (network failures, disk full)
 - Missing `downloads` permission in manifest
 - Using `downloads.open` without `downloads.ui` permission
 - Not cleaning up blob URLs after download (`URL.revokeObjectURL`)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Downloads Management Patterns](../patterns/downloads-management.md)
 - [Downloads API](../api-reference/downloads-api.md)

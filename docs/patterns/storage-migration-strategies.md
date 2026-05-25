@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/storage-migration-stra
 last_modified_at: 2026-01-15
 ---
 
-Storage Migration Strategies
+### Storage Migration Strategies
 
 Strategies for migrating extension storage data between versions.
 
-Overview {#overview}
+## Overview {#overview}
 
 When your extension evolves, the data schema stored in chrome.storage often needs to change. A solid migration system ensures user data is preserved and transformed correctly during updates.
 
-Schema Versioning {#schema-versioning}
+## Schema Versioning {#schema-versioning}
 
 Store a version number in storage and check it on startup:
 
@@ -30,7 +30,7 @@ async function initializeStorage() {
 }
 ```
 
-Sequential Migrations {#sequential-migrations}
+## Sequential Migrations {#sequential-migrations}
 
 Run migration functions in order (v1→v2, v2→v3, etc.):
 
@@ -48,7 +48,7 @@ async function runMigrations(fromVersion, toVersion) {
 }
 ```
 
-Idempotent Migrations {#idempotent-migrations}
+## Idempotent Migrations {#idempotent-migrations}
 
 Design migrations to be safe if interrupted or re-run:
 
@@ -65,9 +65,9 @@ async function migrateV1toV2() {
 }
 ```
 
-Backup Before Migration {#backup-before-migration}
+## Backup Before Migration {#backup-before-migration}
 
-Copy data to a backup key before transforming:
+### Copy data to a backup key before transforming:
 
 ```javascript
 async function backupBeforeMigration() {
@@ -81,7 +81,7 @@ async function backupBeforeMigration() {
 }
 ```
 
-Lazy Migration {#lazy-migration}
+## Lazy Migration {#lazy-migration}
 
 Transform data on read rather than all at once:
 
@@ -96,9 +96,9 @@ async function getSettings() {
 }
 ```
 
-Common Migration Patterns {#common-migration-patterns}
+## Common Migration Patterns {#common-migration-patterns}
 
-Field Additions {#field-additions}
+## Field Additions {#field-additions}
 Merge new defaults with existing data:
 
 ```javascript
@@ -111,7 +111,7 @@ async function addField() {
 }
 ```
 
-Field Renames {#field-renames}
+## Field Renames {#field-renames}
 Copy old key to new key, delete old:
 
 ```javascript
@@ -124,7 +124,7 @@ async function renameField() {
 }
 ```
 
-Type Changes {#type-changes}
+## Type Changes {#type-changes}
 Transform stored values to new format:
 
 ```javascript
@@ -137,7 +137,7 @@ async function changeType() {
 }
 ```
 
-Collection Restructuring {#collection-restructuring}
+## Collection Restructuring {#collection-restructuring}
 Array to map, nested to flat:
 
 ```javascript
@@ -151,9 +151,9 @@ async function restructureArray() {
 }
 ```
 
-Handling Missing Data {#handling-missing-data}
+## Handling Missing Data {#handling-missing-data}
 
-Don't crash on unexpected schema:
+### Don't crash on unexpected schema:
 
 ```javascript
 function safeGet(data, path, defaultValue = null) {
@@ -165,9 +165,9 @@ function safeGet(data, path, defaultValue = null) {
 }
 ```
 
-Migration Testing {#migration-testing}
+## Migration Testing {#migration-testing}
 
-Test with real user data samples:
+### Test with real user data samples:
 
 ```javascript
 // Test migration on sample data
@@ -182,9 +182,9 @@ testCases.forEach(({ input, expected }) => {
 });
 ```
 
-Rollback Support {#rollback-support}
+## Rollback Support {#rollback-support}
 
-Store pre-migration backup for N versions:
+### Store pre-migration backup for N versions:
 
 ```javascript
 async function createRollbackPoint() {
@@ -199,9 +199,9 @@ async function createRollbackPoint() {
 }
 ```
 
-Logging {#logging}
+## Logging {#logging}
 
-Record migration steps for debugging:
+### Record migration steps for debugging:
 
 ```javascript
 async function logMigration(from, to, status) {
@@ -212,7 +212,7 @@ async function logMigration(from, to, status) {
 }
 ```
 
-Async Migrations {#async-migrations}
+## Async Migrations {#async-migrations}
 
 Handle large data sets without blocking:
 
@@ -229,7 +229,7 @@ async function migrateLargeDataset() {
 }
 ```
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Storage Migration](./storage-migration.md)
 - [Update Migration](./update-migration.md)

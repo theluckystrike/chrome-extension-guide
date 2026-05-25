@@ -18,7 +18,7 @@ Chrome extension content blocking has evolved significantly from the early days 
 
 ---
 
-Understanding the declarativeNetRequest API {#understanding-declarativeNetRequest}
+## Understanding the declarativeNetRequest API {#understanding-declarativeNetRequest}
 
 The declarativeNetRequest API enables Chrome extensions to block or modify network requests by declaring a set of rules that the browser evaluates. Instead of your extension actively intercepting every single request, you provide Chrome with a rule set, and Chrome applies these rules efficiently as requests are made. This approach offers several significant advantages over the old blocking webRequest method.
 
@@ -28,7 +28,7 @@ Performance is another major benefit. The declarativeNetRequest API operates wit
 
 The API also provides better reliability. Because rules are declarative and evaluated by Chrome itself, you don't need to worry about timing issues or race conditions that could occur with the asynchronous nature of the old webRequest API. Rules are applied consistently and predictably, ensuring that your content blocking works exactly as intended every time.
 
-Key Components of declarativeNetRequest
+### Key Components of declarativeNetRequest
 
 To effectively use the declarativeNetRequest API, you need to understand its core components: the Rule object, the RuleSet, and the available action types. Each plays a crucial role in creating effective content blocking rules.
 
@@ -40,7 +40,7 @@ The action object defines what happens when a rule matches. The most common acti
 
 ---
 
-Setting Up Your Extension for declarativeNetRequest {#setting-up-extension}
+## Setting Up Your Extension for declarativeNetRequest {#setting-up-extension}
 
 Before you can use the declarativeNetRequest API, proper manifest configuration is essential. The manifest.json file must declare the appropriate permissions and declare the static rules that your extension will use.
 
@@ -71,7 +71,7 @@ Here's an example of how to configure your manifest for declarativeNetRequest:
 
 The "declarative_net_request" key is where you specify static rulesets. Each ruleset points to a JSON file containing your blocking rules. You can have multiple rulesets, which is useful for organizing rules by category (ads, trackers, annoyances) or for enabling/disabling them separately.
 
-Creating Your Rules File
+### Creating Your Rules File
 
 The rules.json file contains your declarativeNetRequest rules in a structured format. This file is where you define the actual blocking and modification logic that Chrome will apply to network requests.
 
@@ -97,7 +97,7 @@ This basic rule blocks all image and script requests. However, you likely want m
 
 ---
 
-Building an Ad Blocker with Manifest V3 {#building-ad-blocker}
+## Building an Ad Blocker with Manifest V3 {#building-ad-blocker}
 
 Creating a functional ad blocker using the declarativeNetRequest API requires careful planning of your rule structure. The key to effective ad blocking is combining multiple rule types to handle different scenarios while minimizing false positives.
 
@@ -126,7 +126,7 @@ The declarativeNetRequest rules for ad blocking typically follow a pattern of ma
 
 This rule redirects doubleclick requests to a tiny transparent image instead of blocking them entirely. Some websites behave unexpectedly when requests are completely blocked, so this approach provides better compatibility while still preventing the actual content from loading.
 
-Advanced Rule Matching Techniques
+### Advanced Rule Matching Techniques
 
 The true power of declarativeNetRequest chrome extensions comes from advanced matching capabilities. Understanding these techniques allows you to create precise rules that handle complex filtering scenarios.
 
@@ -138,7 +138,7 @@ Domain exceptions allow you to create whitelist rules that override blocking rul
 
 ---
 
-Performance Optimization and Best Practices {#performance-optimization}
+## Performance Optimization and Best Practices {#performance-optimization}
 
 Writing effective declarativeNetRequest rules requires understanding performance implications. Chrome evaluates your rules against every network request, so optimization is essential for maintaining browser responsiveness.
 
@@ -148,7 +148,7 @@ Regex patterns in urlFilter can be computationally expensive, especially complex
 
 Limit the number of rules you use. While Chrome can handle thousands of rules efficiently, having too many rules increases memory usage and can slow down rule evaluation. Regularly audit your ruleset to remove duplicates, consolidate similar rules, and eliminate rules that no longer serve a purpose.
 
-Dynamic Rule Management
+### Dynamic Rule Management
 
 While static rulesets are declared in the manifest, the declarativeNetRequest API also supports dynamic rule management. This allows your extension to add, update, or remove rules at runtime based on user preferences or changing conditions.
 
@@ -177,7 +177,7 @@ This code adds a new rule with ID 1001 while removing rule ID 501. The ability t
 
 ---
 
-Testing and Debugging Your Rules {#testing-debugging}
+## Testing and Debugging Your Rules {#testing-debugging}
 
 Developing declarativeNetRequest chrome extension content blocker functionality requires thorough testing. Chrome provides developer tools that help you verify your rules are working correctly and diagnose any issues.
 
@@ -189,7 +189,7 @@ Test your extension across different websites and scenarios. Pay particular atte
 
 ---
 
-Common Pitfalls and How to Avoid Them {#common-pitfalls}
+## Common Pitfalls and How to Avoid Them {#common-pitfalls}
 
 Even experienced developers encounter challenges when working with the declarativeNetRequest API. Understanding common pitfalls helps you avoid frustration and create more effective content blocking extensions.
 
@@ -203,7 +203,7 @@ Finally, remember that static rulesets require extension updates to modify. If y
 
 ---
 
-Conclusion
+### Conclusion
 
 The declarativeNetRequest API represents a significant advancement in Chrome extension content blocking for Manifest V3. By understanding how to create effective rules, configure your manifest properly, and optimize for performance, you can build powerful ad blockers and request modifiers that work efficiently while protecting user privacy.
 

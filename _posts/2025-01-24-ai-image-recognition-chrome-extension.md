@@ -20,7 +20,7 @@ we will explore the complete development workflow: setting up your project struc
 
 ---
 
-Understanding TensorFlow.js and Its Role in Chrome Extensions {#understanding-tensorflow-js}
+## Understanding TensorFlow.js and Its Role in Chrome Extensions {#understanding-tensorflow-js}
 
 TensorFlow.js is an open-source library that brings machine learning capabilities directly to JavaScript environments, including web browsers and Node.js applications. Unlike traditional ML workflows that require Python and powerful GPUs, TensorFlow.js enables you to train and run models using familiar JavaScript APIs, entirely within the client's browser. This approach offers significant advantages for Chrome extension development.
 
@@ -32,7 +32,7 @@ TensorFlow.js supports multiple model architectures optimized for different use 
 
 ---
 
-Setting Up Your Extension Project {#setting-up-project}
+## Setting Up Your Extension Project {#setting-up-project}
 
 Every successful Chrome extension begins with proper project structure and configuration. Let us set up a clean, organized foundation for our AI image recognition extension. The standard Chrome extension architecture provides several components that work together to create a smooth user experience.
 
@@ -60,7 +60,7 @@ Creating an effective project structure helps maintain code organization as your
 
 ---
 
-Integrating TensorFlow.js with MobileNet {#integrating-tensorflow}
+## Integrating TensorFlow.js with MobileNet {#integrating-tensorflow}
 
 Now comes the exciting part: integrating TensorFlow.js and loading our pre-trained model. The MobileNet model has been trained on the massive ImageNet dataset containing millions of labeled images across thousands of categories. By leveraging this pre-trained model, we can achieve impressive classification results without any training data or computational cost.
 
@@ -97,7 +97,7 @@ One important consideration is image preprocessing. The model expects images in 
 
 ---
 
-Building the User Interface {#building-ui}
+## Building the User Interface {#building-ui}
 
 The user interface for your AI image recognition extension should be intuitive and responsive. Since users will often want to analyze images they encounter while browsing, the interface needs to work smoothly with different types of image sources. Let us design a clean, functional popup that provides immediate value.
 
@@ -151,7 +151,7 @@ function displayResults(predictions) {
 
 ---
 
-Implementing Image Capture and Analysis Logic {#image-capture}
+## Implementing Image Capture and Analysis Logic {#image-capture}
 
 The core functionality of our extension involves capturing images from web pages and analyzing them with TensorFlow.js. This requires coordination between the popup script and content scripts that run in the context of web pages. Chrome's message passing system enables this communication.
 
@@ -209,7 +209,7 @@ Handling cross-origin issues is crucial when analyzing images from different dom
 
 ---
 
-Advanced Features and Optimization {#advanced-features}
+## Advanced Features and Optimization {#advanced-features}
 
 With the basic functionality working, you can enhance your extension with advanced features that use TensorFlow.js capabilities. These additions differentiate your extension and provide genuine value to users beyond simple image classification.
 
@@ -237,7 +237,7 @@ This practice prevents memory leaks that could degrade browser performance over 
 
 ---
 
-Testing and Deployment {#testing-deployment}
+## Testing and Deployment {#testing-deployment}
 
 Before releasing your extension to the Chrome Web Store, thorough testing ensures it works reliably across different scenarios. Test with various image types, sizes, and sources. Verify that the extension handles errors gracefully, network failures, unsupported image formats, and low-confidence predictions should all be handled elegantly.
 
@@ -247,7 +247,7 @@ When packaging for distribution, ensure your manifest.json includes all required
 
 ---
 
-Conclusion and Future Directions {#conclusion}
+## Conclusion and Future Directions {#conclusion}
 
 Building an AI image recognition Chrome extension with TensorFlow.js demonstrates the incredible potential of bringing machine learning to browser environments. What once required expensive hardware and specialized knowledge now runs efficiently on any modern browser, opening doors for innovation across countless domains.
 

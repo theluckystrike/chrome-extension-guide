@@ -18,11 +18,11 @@ we will explore everything you need to know to build a VPN-like Chrome extension
 
 ---
 
-Understanding Proxies and Their Role in Web Browsing {#understanding-proxies}
+## Understanding Proxies and Their Role in Web Browsing {#understanding-proxies}
 
 Before diving into the API details, it is essential to understand what proxies are and why they matter in the context of browser extensions.
 
-What Is a Proxy Server?
+### What Is a Proxy Server?
 
 A proxy server acts as an intermediary between your computer and the internet. When you use a proxy, your browser does not connect directly to websites. Instead, it sends requests to the proxy server, which then forwards them to the target website. The response travels back through the proxy before reaching your browser. This process hides your original IP address and allows you to route traffic through different network paths.
 
@@ -36,7 +36,7 @@ Transparent Proxies do not modify client requests or server responses. They are 
 
 Anonymous Proxies hide your IP address but may identify themselves as proxies. They provide basic privacy without complete anonymity.
 
-Why Use Proxies in Chrome Extensions?
+### Why Use Proxies in Chrome Extensions?
 
 Chrome extensions can use proxies for numerous use cases:
 
@@ -52,11 +52,11 @@ Chrome extensions can use proxies for numerous use cases:
 
 ---
 
-The Chrome Proxy Settings API Overview {#api-overview}
+## The Chrome Proxy Settings API Overview {#api-overview}
 
 The Chrome Proxy Settings API, part of the chrome.proxy namespace, provides methods to manage Chrome's proxy settings programmatically. This API is only available to extensions with proper permissions and cannot be used by regular web pages.
 
-Required Permissions
+### Required Permissions
 
 To use the Proxy Settings API, you must declare the appropriate permission in your extension's manifest.json file:
 
@@ -75,7 +75,7 @@ To use the Proxy Settings API, you must declare the appropriate permission in yo
 
 The `proxy` permission grants access to the chrome.proxy API, while `<all_urls>` is often necessary because proxy operations can affect any website.
 
-Key API Methods
+### Key API Methods
 
 The chrome.proxy API provides several essential methods for managing proxy settings:
 
@@ -85,7 +85,7 @@ chrome.proxy.settings.get(function callback): Retrieves the current proxy settin
 
 chrome.proxy.settings.clear(function callback): Removes the extension's proxy configuration and restores Chrome's default settings.
 
-Understanding Proxy Modes
+### Understanding Proxy Modes
 
 The API supports several proxy modes that determine how traffic is routed:
 
@@ -101,13 +101,13 @@ system: Uses Chrome's system proxy settings, which are configured in the operati
 
 ---
 
-Building a Complete Proxy Extension {#building-extension}
+## Building a Complete Proxy Extension {#building-extension}
 
 Now that you understand the fundamentals, let us build a complete proxy extension with practical features. We will create an extension that allows users to configure proxies, toggle proxy on and off, and manage multiple proxy profiles.
 
-Project Structure
+### Project Structure
 
-Create the following file structure:
+### Create the following file structure:
 
 ```
 proxy-extension/
@@ -124,7 +124,7 @@ proxy-extension/
      icon128.png
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
 Here is a comprehensive manifest.json for our proxy extension:
 
@@ -162,7 +162,7 @@ Here is a comprehensive manifest.json for our proxy extension:
 }
 ```
 
-The Background Service Worker
+### The Background Service Worker
 
 The background script manages the core proxy functionality and handles extension lifecycle events:
 
@@ -249,7 +249,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-The Popup Interface
+### The Popup Interface
 
 The popup provides the user interface for quick proxy management:
 
@@ -336,7 +336,7 @@ The popup provides the user interface for quick proxy management:
 </html>
 ```
 
-Popup Styling
+### Popup Styling
 
 Create an attractive and functional popup interface:
 
@@ -535,7 +535,7 @@ footer a:hover {
 }
 ```
 
-Popup Logic
+### Popup Logic
 
 Implement the interactive functionality:
 
@@ -750,11 +750,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Advanced Proxy Features {#advanced-features}
+## Advanced Proxy Features {#advanced-features}
 
 Now that you have a functional proxy extension, let us explore advanced features that can make your extension more powerful.
 
-Proxy Authentication Handling
+### Proxy Authentication Handling
 
 Proxy authentication adds complexity because Chrome handles credentials differently. When a proxy requires authentication, Chrome will prompt the user with an authentication dialog. For a smooth experience, consider storing credentials in the extension's secure storage:
 
@@ -782,7 +782,7 @@ async function setupAuthenticatedProxy(host, port, username, password) {
 }
 ```
 
-PAC Script Configuration
+### PAC Script Configuration
 
 For more complex proxy rules, you can use Proxy Auto-Config (PAC) scripts:
 
@@ -814,7 +814,7 @@ function setupPACScript(proxyHost, proxyPort) {
 }
 ```
 
-Handling Proxy Failures
+### Handling Proxy Failures
 
 Implement solid error handling for proxy connections:
 
@@ -845,13 +845,13 @@ function fallbackToDirect() {
 
 ---
 
-Testing Your Proxy Extension {#testing}
+## Testing Your Proxy Extension {#testing}
 
 Proper testing is crucial for proxy extensions. Here are the key testing strategies:
 
-Unit Testing
+### Unit Testing
 
-Test individual functions in your extension:
+### Test individual functions in your extension:
 
 ```javascript
 // Test the buildProxyConfig function
@@ -873,17 +873,17 @@ function testBuildProxyConfig() {
 }
 ```
 
-Integration Testing
+### Integration Testing
 
 Test the full flow by enabling the extension and verifying network requests go through the proxy. Use browser developer tools to inspect network traffic and confirm proxy routing.
 
-Cross-Browser Testing
+### Cross-Browser Testing
 
 If you plan to support Firefox or other browsers, test the extension with their respective proxy APIs, as they may have different implementations.
 
 ---
 
-Best Practices and Security Considerations {#best-practices}
+## Best Practices and Security Considerations {#best-practices}
 
 When building proxy extensions, security should be your top priority:
 
@@ -901,7 +901,7 @@ When building proxy extensions, security should be your top priority:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Proxy Settings API is a powerful tool for building VPN-like extensions. you have learned how to configure proxy settings, implement user interfaces for proxy management, handle authentication, and build solid error handling.
 

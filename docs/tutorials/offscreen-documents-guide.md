@@ -8,7 +8,7 @@ last_modified_at: 2026-01-15
 
 Offscreen Documents in Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 Manifest V3 introduced service workers as the replacement for background pages, bringing significant benefits in memory efficiency and security. However, this change introduced a fundamental limitation: service workers cannot access the DOM. Many browser APIs that extension developers rely on, such as `AudioContext`, `Clipboard API`, canvas operations, and geolocation, require a DOM environment to function.
 
@@ -16,7 +16,7 @@ The `chrome.offscreen` API solves this problem by allowing extensions to create 
 
 This guide covers everything you need to know about offscreen documents: the API methods, use cases, lifecycle management, messaging patterns, limitations, and practical workarounds.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Before using offscreen documents, you need to declare the `offscreen` permission in your `manifest.json`:
 
@@ -45,11 +45,11 @@ You also need to include the offscreen HTML file in your extension's files:
 }
 ```
 
-Understanding the chrome.offscreen API {#understanding-the-chrome-offscreen-api}
+## Understanding the chrome.offscreen API {#understanding-the-chrome-offscreen-api}
 
 The `chrome.offscreen` API provides methods to create, manage, and close offscreen documents. Here's an overview of the core methods:
 
-Creating an Offscreen Document {#creating-an-offscreen-document}
+## Creating an Offscreen Document {#creating-an-offscreen-document}
 
 ```javascript
 async function createOffscreenDocument() {
@@ -61,7 +61,7 @@ async function createOffscreenDocument() {
 }
 ```
 
-Checking if an Offscreen Document Exists {#checking-if-an-offscreen-document-exists}
+## Checking if an Offscreen Document Exists {#checking-if-an-offscreen-document-exists}
 
 ```javascript
 async function checkOffscreenExists() {
@@ -78,7 +78,7 @@ async function getOffscreenContexts() {
 }
 ```
 
-Closing an Offscreen Document {#closing-an-offscreen-document}
+## Closing an Offscreen Document {#closing-an-offscreen-document}
 
 ```javascript
 async function closeOffscreenDocument() {
@@ -86,11 +86,11 @@ async function closeOffscreenDocument() {
 }
 ```
 
-Reasons for Offscreen Documents {#reasons-for-offscreen-documents}
+## Reasons for Offscreen Documents {#reasons-for-offscreen-documents}
 
 When creating an offscreen document, you must specify at least one reason from the `chrome.offscreen.Reason` enum. These reasons justify why your extension needs DOM access:
 
-Available Reasons
+### Available Reasons
 
 | Reason | Description |
 |--------|-------------|
@@ -102,9 +102,9 @@ Available Reasons
 | `WEB_RTC` | For WebRTC peer connections |
 | `GEOLOCATION` | For accessing the Geolocation API |
 
-Use Case Examples {#use-case-examples}
+## Use Case Examples {#use-case-examples}
 
-DOM Parsing {#dom-parsing}
+## DOM Parsing {#dom-parsing}
 
 ```javascript
 // In service worker
@@ -150,7 +150,7 @@ async function parseHTML(htmlString) {
 </html>
 ```
 
-Audio Playback {#audio-playback}
+## Audio Playback {#audio-playback}
 
 ```javascript
 // In service worker
@@ -193,7 +193,7 @@ async function playAudio(audioUrl) {
 </html>
 ```
 
-Clipboard Operations {#clipboard-operations}
+## Clipboard Operations {#clipboard-operations}
 
 ```javascript
 // In service worker
@@ -253,7 +253,7 @@ async function readFromClipboard() {
 </html>
 ```
 
-Canvas Operations {#canvas-operations}
+## Canvas Operations {#canvas-operations}
 
 ```javascript
 // In service worker
@@ -314,7 +314,7 @@ async function processImage(imageDataUrl, options = {}) {
 </html>
 ```
 
-Geolocation {#geolocation}
+## Geolocation {#geolocation}
 
 ```javascript
 // In service worker
@@ -362,11 +362,11 @@ async function getLocation() {
 </html>
 ```
 
-Messaging Between Offscreen and Service Worker {#messaging-between-offscreen-and-service-worker}
+## Messaging Between Offscreen and Service Worker {#messaging-between-offscreen-and-service-worker}
 
 Communication between your service worker and offscreen document works through `chrome.runtime` message passing. Here are the patterns:
 
-Basic Message Passing {#basic-message-passing}
+## Basic Message Passing {#basic-message-passing}
 
 ```javascript
 // Service worker → Offscreen document
@@ -395,7 +395,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Using Message Channels {#using-message-channels}
+## Using Message Channels {#using-message-channels}
 
 For more efficient communication, you can use message channels:
 
@@ -442,7 +442,7 @@ async function createMessageChannel() {
 </html>
 ```
 
-Bidirectional Communication {#bidirectional-communication}
+## Bidirectional Communication {#bidirectional-communication}
 
 ```javascript
 // Service worker
@@ -481,17 +481,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 </html>
 ```
 
-Lifetime Management {#lifetime-management}
+## Lifetime Management {#lifetime-management}
 
 Managing the lifecycle of offscreen documents is crucial for building solid extensions.
 
-Understanding Lifetime {#understanding-lifetime}
+## Understanding Lifetime {#understanding-lifetime}
 
 - Document lifetime: The offscreen document exists until you call `closeDocument()`, the extension is updated, or Chrome exits.
 - Service worker lifecycle: The document survives service worker termination but not extension updates.
 - One document limit: Only ONE offscreen document can exist at a time per extension.
 
-Automatic Creation on Service Worker Wake {#automatic-creation-on-service-worker-wake}
+## Automatic Creation on Service Worker Wake {#automatic-creation-on-service-worker-wake}
 
 Service workers in MV3 can be terminated after periods of inactivity. When your service worker wakes up, check if an offscreen document exists:
 
@@ -516,7 +516,7 @@ async function ensureOffscreenDocument() {
 }
 ```
 
-Graceful Cleanup {#graceful-cleanup}
+## Graceful Cleanup {#graceful-cleanup}
 
 Always close offscreen documents when they're no longer needed to free resources:
 
@@ -535,7 +535,7 @@ async function processAndClose(html) {
 }
 ```
 
-Handling Service Worker Termination {#handling-service-worker-termination}
+## Handling Service Worker Termination {#handling-service-worker-termination}
 
 The service worker can be terminated at any time. Design your offscreen communication to be resilient:
 
@@ -561,11 +561,11 @@ async function sendWithTimeout(message, timeout = 5000) {
 }
 ```
 
-Single Document Limitation {#single-document-limitation}
+## Single Document Limitation {#single-document-limitation}
 
 Chrome restricts extensions to only one offscreen document at a time. Understanding this limitation is crucial:
 
-The Limitation {#the-limitation}
+## The Limitation {#the-limitation}
 
 ```javascript
 // This will REPLACE the existing document, not create a new one
@@ -583,7 +583,7 @@ await chrome.offscreen.createDocument({
 });
 ```
 
-Workarounds for the Limitation {#workarounds-for-the-limitation}
+## Workarounds for the Limitation {#workarounds-for-the-limitation}
 
 1. Single Page for All Operations
 
@@ -664,7 +664,7 @@ async function ensureOffscreen(reason) {
 
 3. Priority-Based Document Management
 
-For complex extensions, implement a priority system:
+### For complex extensions, implement a priority system:
 
 ```javascript
 class OffscreenManager {
@@ -714,7 +714,7 @@ class OffscreenManager {
 export const offscreenManager = new OffscreenManager();
 ```
 
-Use Cases and Workarounds Summary {#use-cases-and-workarounds-summary}
+## Use Cases and Workarounds Summary {#use-cases-and-workarounds-summary}
 
 | Use Case | Workaround |
 |----------|------------|
@@ -724,7 +724,7 @@ Use Cases and Workarounds Summary {#use-cases-and-workarounds-summary}
 | Memory optimization | Create on-demand, close immediately after use |
 | Race conditions | Use async locks or queue system |
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Create Documents On-Demand
 
@@ -797,7 +797,7 @@ async function processBatch(items) {
 }
 ```
 
-Manifest Configuration Reference {#manifest-configuration-reference}
+## Manifest Configuration Reference {#manifest-configuration-reference}
 
 Here's a complete manifest.json example for an extension using offscreen documents:
 
@@ -835,7 +835,7 @@ Here's a complete manifest.json example for an extension using offscreen documen
 }
 ```
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Offscreen Documents. API Reference](offscreen-api.md). Complete API reference for chrome.offscreen methods and properties
 - [Offscreen Document Patterns](offscreen-documents.md). Production-ready patterns for lifecycle management and typed communication

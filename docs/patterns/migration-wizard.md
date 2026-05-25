@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/migration-wizard/"
 last_modified_at: 2026-01-15
 ---
 
-Migration Wizard Pattern
+### Migration Wizard Pattern
 
-Overview {#overview}
+## Overview {#overview}
 
 Migrate user data between extension versions when storage schema changes. Define ordered migrations that run sequentially from current version to latest.
 
@@ -16,7 +16,7 @@ Migrate user data between extension versions when storage schema changes. Define
 
 ---
 
-When Needed {#when-needed}
+## When Needed {#when-needed}
 
 - Renaming keys or restructuring storage
 - MV2 to MV3 upgrade
@@ -25,7 +25,7 @@ When Needed {#when-needed}
 
 ---
 
-Migration Runner {#migration-runner}
+## Migration Runner {#migration-runner}
 
 ```typescript
 // lib/migration-runner.ts
@@ -71,7 +71,7 @@ export const runner = new Runner();
 
 ---
 
-Defining Migrations {#defining-migrations}
+## Defining Migrations {#defining-migrations}
 
 ```typescript
 // migrations.ts
@@ -94,7 +94,7 @@ runner.register({ version: 2, name: "restructure",
 
 ---
 
-Running on Update {#running-on-update}
+## Running on Update {#running-on-update}
 
 ```typescript
 // background.ts
@@ -112,7 +112,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 ---
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 
 - Backup before each migration (in `__backup`)
 - Rollback on failure from backup

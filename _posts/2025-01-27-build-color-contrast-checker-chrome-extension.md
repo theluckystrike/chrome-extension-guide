@@ -18,7 +18,7 @@ This tutorial is perfect for developers who want to expand their Chrome extensio
 
 ---
 
-Understanding Color Contrast and WCAG Standards {#understanding-wcag}
+## Understanding Color Contrast and WCAG Standards {#understanding-wcag}
 
 Before diving into code, it is essential to understand why color contrast matters and what the WCAG (Web Content Accessibility Guidelines) specify. The WCAG provides two levels of conformance: AA (minimum) and AAA (enhanced). For most websites, meeting WCAG AA standards is the goal, which requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
 
@@ -28,7 +28,7 @@ The WCAG contrast requirements exist to ensure that people with visual impairmen
 
 ---
 
-Project Setup and Extension Structure {#project-setup}
+## Project Setup and Extension Structure {#project-setup}
 
 Every Chrome extension begins with a manifest file and a set of JavaScript, HTML, and CSS files. For our color contrast checker extension, we will create a popup-based extension that allows users to select colors and see instant contrast calculations.
 
@@ -77,11 +77,11 @@ This manifest uses Manifest V3, which is the current standard for Chrome extensi
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup.html file defines the user interface for your contrast checker extension. We need inputs for selecting foreground and background colors, displays for the contrast ratio, and visual indicators showing whether the combination passes WCAG standards.
 
-Create popup.html with the following structure:
+### Create popup.html with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -149,7 +149,7 @@ The interface includes color pickers, text inputs for manual hex code entry, a p
 
 ---
 
-Styling the Extension {#styling}
+## Styling the Extension {#styling}
 
 The popup.css file styles the extension to make it visually appealing and user-friendly. A well-designed extension encourages regular use and makes the contrast checking process more enjoyable.
 
@@ -284,7 +284,7 @@ This CSS creates a clean, modern interface with clear visual feedback for pass/f
 
 ---
 
-Implementing Contrast Calculations {#calculations}
+## Implementing Contrast Calculations {#calculations}
 
 The popup.js file contains the core logic for calculating contrast ratios and determining WCAG compliance. This is where the mathematical formulas for relative luminance and contrast ratio come into play.
 
@@ -399,7 +399,7 @@ This JavaScript implements the WCAG algorithm for calculating contrast ratios. T
 
 ---
 
-Advanced Features for a Production Extension {#advanced-features}
+## Advanced Features for a Production Extension {#advanced-features}
 
 While the basic contrast checker works well, you can enhance it with additional features to make it more useful for developers. Consider adding the ability to analyze colors directly from the active webpage, saving color combinations for future reference, or providing suggestions for achieving compliant color pairs.
 
@@ -409,7 +409,7 @@ Another valuable feature is automatic color suggestions. If a color combination 
 
 ---
 
-Loading and Testing Your Extension {#testing}
+## Loading and Testing Your Extension {#testing}
 
 Before publishing, you need to test your extension locally. Chrome provides a simple way to load unpacked extensions for testing. Open chrome://extensions in your browser, enable "Developer mode" in the top right corner, and click "Load unpacked." Select your extension's folder, and the extension will appear in your toolbar.
 
@@ -419,7 +419,7 @@ You should also test the extension across different websites to ensure the popup
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working correctly, you can publish it to the Chrome Web Store. First, you need to create a developer account if you don't have one. The registration process requires a one-time fee of $5.
 
@@ -431,7 +431,7 @@ After submitting, Google will review your extension. The review process typicall
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a color contrast checker extension is an excellent project that combines practical utility with meaningful impact. The accessibility color tools market continues to grow as more organizations recognize the importance of inclusive web design. By creating a contrast checker extension, you are not only adding a valuable tool to your development portfolio but also contributing to a more accessible internet.
 

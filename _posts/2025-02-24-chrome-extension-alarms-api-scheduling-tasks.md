@@ -18,11 +18,11 @@ This comprehensive guide will walk you through everything you need to know about
 
 ---
 
-Understanding the Chrome Alarms API {#understanding-alarms-api}
+## Understanding the Chrome Alarms API {#understanding-alarms-api}
 
 The Chrome Alarms API, accessible through the `chrome.alarms` namespace, provides a mechanism for scheduling code execution at specific times or at regular intervals. Unlike traditional JavaScript timing functions like `setTimeout` and `setInterval`, which can be throttled by the browser when tabs are inactive, Chrome Alarms are designed to be reliable and persistent.
 
-Why Use the Alarms API?
+### Why Use the Alarms API?
 
 There are several compelling reasons to use the Alarms API in your Chrome extensions:
 
@@ -32,7 +32,7 @@ Persistence is another key benefit. Alarms survive browser restarts and service 
 
 Efficiency comes from Chrome's ability to optimize alarm firing. The browser can batch multiple alarms together and wake up the extension only when needed, rather than having each extension maintain its own timer. This approach improves overall system performance and battery life.
 
-Common Use Cases
+### Common Use Cases
 
 The Chrome Alarms API is perfect for numerous practical applications in extension development:
 
@@ -44,11 +44,11 @@ The Chrome Alarms API is perfect for numerous practical applications in extensio
 
 ---
 
-Setting Up Your Extension for Alarms {#manifest-configuration}
+## Setting Up Your Extension for Alarms {#manifest-configuration}
 
 Before implementing the Alarms API, you need to properly configure your extension's manifest file and understand the permission requirements.
 
-Required Permissions
+### Required Permissions
 
 Open your extension's `manifest.json` file and add the required permissions. The Alarms API requires the `"alarms"` permission to create, manage, and respond to scheduled alarms.
 
@@ -69,17 +69,17 @@ Open your extension's `manifest.json` file and add the required permissions. The
 
 The Alarms API works effectively with service workers in Manifest V3, which is the current standard for Chrome extensions. Unlike some other Chrome APIs, alarms will fire even when the service worker has been terminated, ensuring your scheduled tasks execute reliably.
 
-Understanding Alarm Granularity
+### Understanding Alarm Granularity
 
 Chrome imposes limitations on alarm granularity to balance precision with battery efficiency. The minimum interval for repeating alarms is one minute, and Chrome may clamp very short delays to a minimum of approximately 45 seconds. This means the Alarms API is not suitable for sub-minute precision timing, but it is perfect for most scheduled task use cases.
 
 ---
 
-Core Methods of the Chrome Alarms API {#core-methods}
+## Core Methods of the Chrome Alarms API {#core-methods}
 
 The Chrome Alarms API provides a comprehensive set of methods for creating, managing, and responding to alarms.  each of these methods in detail.
 
-Creating Alarms
+### Creating Alarms
 
 The `chrome.alarms.create()` method schedules new alarms. You can create both one-time alarms and repeating alarms:
 
@@ -101,7 +101,7 @@ chrome.alarms.create('specific-time-alarm', {
 });
 ```
 
-Querying Alarms
+### Querying Alarms
 
 To get information about all active alarms, use the `chrome.alarms.getAll()` method:
 
@@ -115,7 +115,7 @@ chrome.alarms.getAll((alarms) => {
 });
 ```
 
-Getting Specific Alarms
+### Getting Specific Alarms
 
 You can retrieve information about a specific alarm using its name:
 
@@ -130,7 +130,7 @@ chrome.alarms.get('my-alarm', (alarm) => {
 });
 ```
 
-Clearing Alarms
+### Clearing Alarms
 
 To remove alarms, use either `chrome.alarms.clear()` for a specific alarm or `chrome.alarms.clearAll()` to remove all alarms:
 
@@ -144,7 +144,7 @@ chrome.alarms.clearAll();
 
 ---
 
-Listening for Alarm Events {#alarm-listeners}
+## Listening for Alarm Events {#alarm-listeners}
 
 To respond when an alarm fires, you need to set up an alarm listener in your service worker or background script:
 
@@ -173,11 +173,11 @@ function handleOneTimeTask() {
 
 ---
 
-Practical Examples {#practical-examples}
+## Practical Examples {#practical-examples}
 
  some practical examples that demonstrate how to implement common scheduling patterns in your Chrome extensions.
 
-Example 1: Periodic Data Sync
+### Example 1: Periodic Data Sync
 
 Here's how to implement a periodic data synchronization feature:
 
@@ -237,7 +237,7 @@ function notifyUserOfUpdate() {
 }
 ```
 
-Example 2: Daily Reminder System
+### Example 2: Daily Reminder System
 
 Here's how to implement a daily reminder system:
 
@@ -291,7 +291,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Example 3: Cache Expiration Management
+### Example 3: Cache Expiration Management
 
 Here's how to implement automatic cache expiration:
 
@@ -363,11 +363,11 @@ async function cacheWithExpiry(key, value, expiryMinutes) {
 
 ---
 
-Best Practices and Common Pitfalls {#best-practices}
+## Best Practices and Common Pitfalls {#best-practices}
 
 When working with the Chrome Alarms API, following best practices will help you build more reliable and efficient extensions.
 
-Best Practice 1: Handle Service Worker Lifecycle
+### Best Practice 1: Handle Service Worker Lifecycle
 
 Service workers in Manifest V3 can be terminated when inactive. Your alarm listener must be set up to handle this:
 
@@ -386,7 +386,7 @@ function scheduleExactTime(alarmName, targetTime) {
 }
 ```
 
-Best Practice 2: Implement Idempotent Operations
+### Best Practice 2: Implement Idempotent Operations
 
 Since alarms can fire more than once or be missed, make your operations idempotent:
 
@@ -416,9 +416,9 @@ async function saveNotification(message) {
 }
 ```
 
-Best Practice 3: Handle Edge Cases
+### Best Practice 3: Handle Edge Cases
 
-Always handle edge cases in your alarm implementations:
+### Always handle edge cases in your alarm implementations:
 
 ```javascript
 chrome.alarms.onAlarm.addListener((alarm) => {
@@ -437,7 +437,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Common Pitfalls to Avoid
+### Common Pitfalls to Avoid
 
 1. Setting intervals too short: Remember that the minimum is one minute. Don't try to use the Alarms API for sub-minute timing.
 
@@ -449,9 +449,9 @@ Common Pitfalls to Avoid
 
 ---
 
-Advanced Patterns {#advanced-patterns}
+## Advanced Patterns {#advanced-patterns}
 
-Multiple Alarms with Priority
+### Multiple Alarms with Priority
 
 For critical alarms, you can implement a priority system:
 
@@ -471,7 +471,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Adaptive Scheduling
+### Adaptive Scheduling
 
 You can implement adaptive scheduling based on user activity:
 
@@ -500,7 +500,7 @@ async function adaptiveSchedule() {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Extension Alarms API is an essential tool for building powerful and reliable Chrome extensions that require time-based automation. By understanding its capabilities and limitations, you can create extensions that perform scheduled tasks efficiently without draining battery life or impacting browser performance.
 

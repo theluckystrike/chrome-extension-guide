@@ -18,11 +18,11 @@ we will walk through building a production-ready HAR file viewer Chrome extensio
 
 ---
 
-Understanding HAR Files and Their Structure {#understanding-har-files}
+## Understanding HAR Files and Their Structure {#understanding-har-files}
 
 Before diving into the code, it is essential to understand what HAR files are and how they are structured. HAR stands for HTTP Archive, and it is a JSON-based log format that records all HTTP transactions between a browser and web servers.
 
-The HAR File Format
+### The HAR File Format
 
 A HAR file contains a single object with a "log" property that holds an array of entries. Each entry represents a single network request and includes comprehensive information such as:
 
@@ -79,7 +79,7 @@ Here is a simplified example of what a HAR entry looks like:
 
 Understanding this structure is crucial because your har viewer extension will need to parse and display this information in a user-friendly way. The complexity of HAR files is exactly why developers need specialized tools. raw JSON is not easy to read or analyze.
 
-Why Build a HAR Viewer Extension?
+### Why Build a HAR Viewer Extension?
 
 There are several compelling reasons to build a har viewer extension:
 
@@ -92,11 +92,11 @@ Many developers rely on tools like the Chrome DevTools Network panel for network
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us start building our HAR viewer extension. First, we will set up the project structure following Chrome extension best practices.
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 Every Chrome extension needs a manifest.json file. Here is the configuration for our HAR viewer:
 
@@ -135,9 +135,9 @@ Every Chrome extension needs a manifest.json file. Here is the configuration for
 
 This manifest includes the `fileSystem` permission, which allows users to open local HAR files directly. We also define a file handler for .har files, which registers our extension as a handler for HAR files in the operating system.
 
-Project Directory Structure
+### Project Directory Structure
 
-Create the following directory structure for your extension:
+### Create the following directory structure for your extension:
 
 ```
 har-viewer-extension/
@@ -163,13 +163,13 @@ This structure separates the popup interface from the full viewer page, making i
 
 ---
 
-Building the HAR Parser {#har-parser}
+## Building the HAR Parser {#har-parser}
 
 The core of any har viewer extension is the parser. We need to read HAR files, validate their structure, and prepare the data for visualization.
 
-Core Parser Implementation
+### Core Parser Implementation
 
-Create `viewer/har-parser.js`:
+### Create `viewer/har-parser.js`:
 
 ```javascript
 /
@@ -382,13 +382,13 @@ This parser handles the complexity of HAR files and provides filtering and stati
 
 ---
 
-Creating the Viewer Interface {#viewer-interface}
+## Creating the Viewer Interface {#viewer-interface}
 
 Now let us build the main viewer interface where users will analyze their network traces.
 
-The Viewer HTML Structure
+### The Viewer HTML Structure
 
-Create `viewer/viewer.html`:
+### Create `viewer/viewer.html`:
 
 ```html
 <!DOCTYPE html>
@@ -503,9 +503,9 @@ Create `viewer/viewer.html`:
 </html>
 ```
 
-Viewer Styles
+### Viewer Styles
 
-Create `viewer/viewer.css` with comprehensive styling:
+### Create `viewer/viewer.css` with comprehensive styling:
 
 ```css
 * {
@@ -901,9 +901,9 @@ body {
 .json-null { color: #808080; }
 ```
 
-Viewer JavaScript Logic
+### Viewer JavaScript Logic
 
-Create `viewer/viewer.js`:
+### Create `viewer/viewer.js`:
 
 ```javascript
 /
@@ -1179,11 +1179,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Adding Chrome Extension Specific Features {#extension-features}
+## Adding Chrome Extension Specific Features {#extension-features}
 
 Now let us enhance our har viewer extension with Chrome-specific features that make it truly useful for developers.
 
-Background Service Worker
+### Background Service Worker
 
 Create `background.js` to handle file associations and extension lifecycle:
 
@@ -1239,7 +1239,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Popup Interface
+### Popup Interface
 
 Create a simple `popup.html` and `popup.js` for quick access:
 
@@ -1306,18 +1306,18 @@ document.getElementById('captureHar').addEventListener('click', async () => {
 
 ---
 
-Testing Your HAR Viewer Extension {#testing}
+## Testing Your HAR Viewer Extension {#testing}
 
 Testing is crucial for a complex application like a HAR viewer. Here is how to test your extension effectively:
 
-Loading the Extension for Testing
+### Loading the Extension for Testing
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension's root directory
 4. The extension icon should appear in your toolbar
 
-Test HAR Files
+### Test HAR Files
 
 You can generate HAR files using various methods:
 
@@ -1325,7 +1325,7 @@ You can generate HAR files using various methods:
 - Chrome Extensions: Use extensions like "DevTools AutoSave" or similar tools
 - Online Generators: Some online tools can create sample HAR files
 
-Testing Checklist
+### Testing Checklist
 
 - [ ] Load valid HAR files and verify they parse correctly
 - [ ] Test with malformed JSON to ensure error handling works
@@ -1336,18 +1336,18 @@ Testing Checklist
 
 ---
 
-Publishing Your HAR Viewer Extension {#publishing}
+## Publishing Your HAR Viewer Extension {#publishing}
 
 Once your har viewer extension is ready, you can publish it to the Chrome Web Store.
 
-Preparing for Submission
+### Preparing for Submission
 
 1. Create Icons: Prepare 16x16, 48x48, and 128x128 pixel icons
 2. Take Screenshots: Capture screenshots of your viewer in action (1280x800 or 640x400)
 3. Write Description: Include your keywords naturally: "har viewer extension", "network trace chrome", "http archive viewer"
 4. Privacy Policy: Explain what data your extension accesses (for file handling)
 
-Review Process
+### Review Process
 
 Google reviews typically take 1-3 business days. Common issues that cause rejection:
 
@@ -1357,7 +1357,7 @@ Google reviews typically take 1-3 business days. Common issues that cause reject
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic har viewer working, consider adding these advanced features:
 
@@ -1383,7 +1383,7 @@ Allow users to export filtered results or generate reports in various formats.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a har viewer extension is an excellent project that combines file parsing, data visualization, and Chrome extension development. The skills you learn. handling JSON data, creating responsive interfaces, and working with Chrome APIs. are directly applicable to many other extension projects.
 

@@ -16,7 +16,7 @@ If you manage dozens of open tabs daily, you've likely experienced the frustrati
 
 ---
 
-What Is a Tab Suspender and Why You Need One {#what-is-tab-suspender}
+## What Is a Tab Suspender and Why You Need One {#what-is-tab-suspender}
 
 A tab suspender is a Chrome extension that temporarily "sleeps" inactive tabs to free up system resources. When you visit a suspended tab, it automatically reloads, but the memory occupied by that tab is released while you're not using it. This approach allows you to keep hundreds of tabs open without experiencing the performance degradation typically associated with tab overload.
 
@@ -26,7 +26,7 @@ Beyond memory optimization, tab suspenders offer additional benefits including r
 
 ---
 
-Methodology for Ranking {#methodology}
+## Methodology for Ranking {#methodology}
 
 Our evaluation framework for tab suspenders encompasses six core categories, each weighted according to its impact on user experience and practical utility. We tested each extension over a two-week period across multiple Chrome profiles with varying usage patterns.
 
@@ -44,7 +44,7 @@ User Reviews and Community (5%): We considered Chrome Web Store ratings, review 
 
 ---
 
-Comparison Table: 15+ Tab Suspender Extensions {#comparison-table}
+## Comparison Table: 15+ Tab Suspender Extensions {#comparison-table}
 
 | Extension | Auto-Suspend | Whitelist | Audio Detection | Form Protection | Manifest V3 | Rating |
 |-----------|-------------|-----------|------------------|------------------|-------------|--------|
@@ -67,9 +67,9 @@ Comparison Table: 15+ Tab Suspender Extensions {#comparison-table}
 
 ---
 
-Feature Matrix Analysis {#feature-matrix}
+## Feature Matrix Analysis {#feature-matrix}
 
-Auto-Suspend Capabilities
+### Auto-Suspend Capabilities
 
 Auto-suspend functionality varies significantly across extensions. Tab Suspender Pro leads the pack with intelligent activity detection that considers mouse movement, keyboard input, scrolling behavior, and JavaScript execution patterns. It distinguishes between genuinely inactive tabs and those with ongoing background processes.
 
@@ -77,31 +77,31 @@ The Great Suspender and Auto Tab Discard offer solid auto-suspend with configura
 
 OneTab takes a different approach, requiring manual consolidation of tabs rather than automatic suspension. While this demands more user interaction, it provides certainty about which tabs are suspended and gives users complete control.
 
-Whitelist Management
+### Whitelist Management
 
 Robust whitelist capabilities are essential for preventing critical applications from being suspended. Tab Wrangler and Workona excel with advanced wildcard support, domain-based rules, and the ability to create complex rule sets that persist across browser sessions.
 
 Tab Suspender Pro offers intelligent whitelist management that learns from user behavior, automatically suggesting whitelist additions for frequently accessed sites and sites that shouldn't be suspended. This machine learning approach reduces the manual configuration burden while maintaining reliability.
 
-Audio and Video Detection
+### Audio and Video Detection
 
 Audio-playing tabs present a unique challenge for tab suspenders. Users expect music, podcasts, and video calls to continue uninterrupted while other tabs sleep. Tab Suspender Pro, Tab Wrangler, and Tab Snooze accurately detect HTML5 audio and video elements, as well as WebAudio API usage, ensuring media continues playing without interruption.
 
 Extensions lacking audio detection can disrupt your browsing experience by pausing media when suspending tabs. This feature has become increasingly important as web applications rely more heavily on real-time audio communication and streaming content.
 
-Form Protection
+### Form Protection
 
 Perhaps the most overlooked feature is form protection, the ability to detect and preserve unsaved form data before suspending a tab. Tab Suspender Pro and Tab Wrangler implement sophisticated form state detection that warns users before suspending tabs with unsaved input, preventing data loss.
 
 This feature is particularly crucial for researchers, writers, and anyone who spends time filling out lengthy forms or composing content in web-based applications. The difference between extensions with and without form protection can mean losing minutes or hours of work.
 
-User Interface Quality
+### User Interface Quality
 
 The user interface determines how easily you can configure and monitor your tab suspension settings. Tab Suspender Pro offers a modern, intuitive dashboard with real-time memory savings visualization, quick-access controls, and comprehensive statistics.
 
 The Great Suspender provides a functional but dated interface that gets the job done efficiently. OneTab and Workona excel in visual design, offering beautiful workspaces that make tab management feel organized and professional, though they sacrifice some automation capabilities.
 
-Permission Requirements
+### Permission Requirements
 
 Manifest V3 compliance is now standard, but permission breadth varies considerably. Extensions requiring extensive permissions like "read and change all your data on all websites" warrant closer scrutiny. Tab Suspender Pro uses minimal permissions focused specifically on tab management, demonstrating that powerful functionality doesn't require invasive access.
 
@@ -109,7 +109,7 @@ Extensions requesting excessive permissions received lower privacy scores in our
 
 ---
 
-Performance Benchmarks {#performance-benchmarks}
+## Performance Benchmarks {#performance-benchmarks}
 
 We conducted standardized performance testing using Chrome 125 with 50, 100, and 200 tabs open. Memory measurements were taken after a five-minute idle period with all tabs fully loaded before suspension.
 
@@ -127,7 +127,7 @@ Wake time, the delay when returning to a suspended tab, varied from 0.3 seconds 
 
 ---
 
-Privacy Analysis {#privacy-analysis}
+## Privacy Analysis {#privacy-analysis}
 
 Privacy considerations are paramount when choosing browser extensions, as these tools have access to your browsing activity. We evaluated each extension's privacy policy, data collection practices, and permission requirements.
 
@@ -141,7 +141,7 @@ Tier 4 - Privacy Concerns: Several lesser-known extensions in our comparison req
 
 ---
 
-Final Rankings {#final-rankings}
+## Final Rankings {#final-rankings}
 
 1. Tab Suspender Pro - Editor's Choice 
 
@@ -185,7 +185,7 @@ Considerations: Fewer features than competitors, basic whitelist functionality.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The tab suspender landscape in 2025 offers solutions for every use case and preference. Tab Suspender Pro stands out as the most comprehensive option, delivering intelligent automation, excellent performance, and thoughtful privacy practices. However, alternatives like The Great Suspender, Tab Wrangler, and OneTab each excel in specific areas and merit consideration based on your particular needs.
 

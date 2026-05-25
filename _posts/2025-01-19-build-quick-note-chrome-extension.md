@@ -20,7 +20,7 @@ This project is perfect for beginners who want to learn Chrome extension develop
 
 ---
 
-Why Build a Note Taking Extension {#why-build-notes-extension}
+## Why Build a Note Taking Extension {#why-build-notes-extension}
 
 Before we start coding, let us discuss why building a note taking extension is an excellent project choice. Browser notepad extensions are among the most popular categories in the Chrome Web Store for several compelling reasons.
 
@@ -32,7 +32,7 @@ Third, there is significant demand in the market. Quick notes chrome extensions 
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Our quick note Chrome extension will include the following features. A popup interface that appears when clicking the extension icon in the browser toolbar. A text area for entering notes with auto-save functionality that persists data automatically without requiring a save button. Multiple note support allowing users to create, edit, and delete individual notes. Keyboard shortcuts for power users who want to open the extension quickly. A clean, minimalist design that focuses on functionality without visual clutter.
 
@@ -40,7 +40,7 @@ This feature set strikes the right balance between simplicity and usefulness. It
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension needs a specific file structure to function correctly. Let us set up our project directory first. Create a new folder named quick-note-extension in your development workspace. Inside this folder, we will create the following files and directories.
 
@@ -71,7 +71,7 @@ This manifest uses Manifest V3, which is the current standard for Chrome extensi
 
 ---
 
-Building the Popup Interface {#building-popup-interface}
+## Building the Popup Interface {#building-popup-interface}
 
 Now let us create the popup.html file that defines what users see when they click our extension. We will build a clean, functional interface that emphasizes ease of use.
 
@@ -109,7 +109,7 @@ This HTML structure is straightforward. We have a header with the extension titl
 
 ---
 
-Styling the Extension {#styling-extension}
+## Styling the Extension {#styling-extension}
 
 Now we need to make our extension visually appealing. Create the popup.css file with the following styles.
 
@@ -242,7 +242,7 @@ These styles create a modern, clean interface that follows current design trends
 
 ---
 
-Implementing JavaScript Logic {#implementing-javascript}
+## Implementing JavaScript Logic {#implementing-javascript}
 
 Now we come to the core functionality. The popup.js file handles all the interactive logic, including creating notes, saving them to storage, loading them when the popup opens, and deleting notes.
 
@@ -401,7 +401,7 @@ The timestamp formatting function provides human-readable time differences, show
 
 ---
 
-Creating the Extension Icon {#creating-icon}
+## Creating the Extension Icon {#creating-icon}
 
 Every Chrome extension needs an icon. For development purposes, you can create a simple PNG file. The icon should be 48x48 pixels or larger. You can create a basic icon using any image editor or even a simple colored square. For production, you would want a professionally designed icon, but for testing, any 48x48 PNG will work.
 
@@ -409,7 +409,7 @@ Save your icon file as icon.png in the project folder. If you do not have an ico
 
 ---
 
-Testing the Extension {#testing-extension}
+## Testing the Extension {#testing-extension}
 
 Now comes the exciting part, testing our extension in Chrome. Follow these steps to load your extension and see it in action.
 
@@ -427,11 +427,11 @@ Congratulations! Your note taking extension is now working. You have built a fun
 
 ---
 
-Adding Keyboard Shortcuts {#adding-keyboard-shortcuts}
+## Adding Keyboard Shortcuts {#adding-keyboard-shortcuts}
 
 To make the extension even more powerful, let us add a keyboard shortcut so users can open it instantly without reaching for the mouse. We need to update our manifest.json file to include the commands permission and define a keyboard shortcut.
 
-Update your manifest.json to include keyboard commands:
+### Update your manifest.json to include keyboard commands:
 
 ```json
 {
@@ -465,7 +465,7 @@ Now users can press Ctrl+Shift+N (or Command+Shift+N on Mac) to instantly open t
 
 ---
 
-Enhancing User Experience {#enhancing-user-experience}
+## Enhancing User Experience {#enhancing-user-experience}
 
 Now that our core functionality works, let us add some polish to make the extension truly stand out. We will add a few enhancements that improve the user experience significantly.
 
@@ -512,7 +512,7 @@ These small improvements make the extension feel more responsive and professiona
 
 ---
 
-Understanding Chrome Storage API {#understanding-chrome-storage}
+## Understanding Chrome Storage API {#understanding-chrome-storage}
 
 The chrome.storage API is fundamental to building persistent Chrome extensions. Let us explore how it works and why we chose it over other storage options.
 
@@ -531,7 +531,7 @@ Keep in mind that sync storage has a smaller quota (about 100KB) compared to loc
 
 ---
 
-Publishing to Chrome Web Store {#publishing-to-store}
+## Publishing to Chrome Web Store {#publishing-to-store}
 
 Once you have tested your extension thoroughly and added any final touches, you might want to share it with the world by publishing it to the Chrome Web Store. Here is how to do that.
 
@@ -545,7 +545,7 @@ Fourth, submit your extension for review. Google typically reviews new extension
 
 ---
 
-Summary and Next Steps {#summary}
+## Summary and Next Steps {#summary}
 
 Congratulations! You have successfully built a complete quick note Chrome extension from scratch. In this tutorial, we covered the essential concepts of Chrome extension development, including Manifest V3 configuration, popup interfaces with HTML and CSS, JavaScript logic for CRUD operations, the chrome.storage API for data persistence, keyboard shortcuts for power users, and preparation for publishing to the Chrome Web Store.
 
@@ -555,4 +555,4 @@ From here, you could extend this project in many directions. You could add suppo
 
 The skills you have learned in this tutorial apply to all types of Chrome extensions. You can now build productivity tools, developer utilities, social media helpers, and countless other extensions. The Chrome Web Store is waiting for your next creation.
 
-Start building today, and happy coding!
+### Start building today, and happy coding!

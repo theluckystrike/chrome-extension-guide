@@ -18,11 +18,11 @@ This tutorial builds upon the foundational Chrome extension development concepts
 
 ---
 
-Understanding End-to-End Encryption Fundamentals {#e2e-encryption-fundamentals}
+## Understanding End-to-End Encryption Fundamentals {#e2e-encryption-fundamentals}
 
 Before writing any code, you must understand the cryptographic principles that make end-to-end encryption possible. Unlike traditional messaging systems where the server stores and reads messages, E2EE ensures that the encryption and decryption happen exclusively on the client side.
 
-The Encryption Pipeline
+### The Encryption Pipeline
 
 When a user sends a message in an encrypted messaging extension, several cryptographic operations occur:
 
@@ -33,7 +33,7 @@ When a user sends a message in an encrypted messaging extension, several cryptog
 
 This pipeline ensures that even if attackers compromise the server or intercept network traffic, they cannot read the message contents. The mathematics of public-key cryptography makes this possible.
 
-Choosing the Right Cryptographic Library
+### Choosing the Right Cryptographic Library
 
 For Chrome extensions, you need a JavaScript cryptographic library that is both secure and performant. We recommend the Web Crypto API for native browser encryption or TweetNaCl.js for a more approachable implementation. For production applications requiring formal verification, consider Libsodium compiled to WebAssembly.
 
@@ -41,7 +41,7 @@ The Web Crypto API is particularly attractive because it provides hardware-accel
 
 ---
 
-Project Architecture and Setup {#project-architecture}
+## Project Architecture and Setup {#project-architecture}
 
 Let's set up our secure messaging extension project structure:
 
@@ -64,7 +64,7 @@ secure-chat-extension/
      icon128.png
 ```
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 Your manifest.json needs specific permissions for cryptographic operations and message handling:
 
@@ -98,11 +98,11 @@ Your manifest.json needs specific permissions for cryptographic operations and m
 
 ---
 
-Implementing Cryptographic Functions {#implementing-crypto}
+## Implementing Cryptographic Functions {#implementing-crypto}
 
 Create the lib/crypto.js file with all necessary cryptographic operations. We'll use the Web Crypto API for secure key generation, encryption, and decryption.
 
-Key Pair Generation
+### Key Pair Generation
 
 Every user needs a unique key pair for asymmetric encryption:
 
@@ -145,7 +145,7 @@ function arrayBufferToBase64(buffer) {
 }
 ```
 
-Practical Example: Complete Key Management System
+### Practical Example: Complete Key Management System
 
 Here's a complete implementation for managing encryption keys in your extension:
 
@@ -322,7 +322,7 @@ function arrayBufferToBase64(buffer) {
 export default KeyManager;
 ```
 
-Using the Key Manager in Your Extension
+### Using the Key Manager in Your Extension
 
 Here's how to integrate the KeyManager into your extension's background script:
 
@@ -842,7 +842,7 @@ describe('Cryptographic Functions', () => {
       const { publicKey } = await generateKeyPair();
       const message = 'Hello, secure world!';
       
-      const encrypted = await encryptMessage(message, publicKey);
+### const encrypted = await encryptMessage(message, publicKey);
       
       expect(encrypted).toHaveProperty('encryptedContent');
       expect(encrypted).toHaveProperty('encryptedSymmetricKey');

@@ -18,11 +18,11 @@ The demand for study timer extension tools has skyrocketed as more people work a
 
 ---
 
-Why Build a Study Timer Chrome Extension? {#why-build}
+## Why Build a Study Timer Chrome Extension? {#why-build}
 
 Before we dive into the technical details, let us explore why building a study timer extension is an excellent project choice in 2025.
 
-The Market Demand
+### The Market Demand
 
 The productivity app market continues to grow exponentially, with study timers and focus tools leading the charge. Students, remote workers, and professionals are constantly searching for effective ways to manage their time and minimize distractions. A well-crafted focus study extension can fill a significant gap in this market.
 
@@ -32,7 +32,7 @@ Consider these compelling statistics:
 - Pomodoro technique users report up to 25% improvement in productivity
 - Chrome extensions with timer functionality consistently rank among the top downloaded productivity tools
 
-Learning Opportunities
+### Learning Opportunities
 
 Building a study timer extension teaches you valuable skills that extend far beyond this single project:
 
@@ -41,17 +41,17 @@ Building a study timer extension teaches you valuable skills that extend far bey
 - Notifications: Implement browser notifications to alert users when breaks or work sessions end
 - Popup and background scripts: Understand the unique architecture of Chrome extensions and how different components communicate
 
-Portfolio Value
+### Portfolio Value
 
 A completed study timer extension demonstrates your ability to build practical, user-facing applications. It shows potential employers or clients that you can handle real-world development challenges, from UI design to data persistence.
 
 ---
 
-Project Planning and Feature Set {#planning}
+## Project Planning and Feature Set {#planning}
 
 Before writing any code, let us outline the features our study timer extension will include. A minimum viable product (MVP) should include the following core functionality:
 
-Core Features
+### Core Features
 
 1. Pomodoro Timer: The classic 25-minute work session followed by a 5-minute break
 2. Customizable Durations: Allow users to adjust work and break times to their preference
@@ -59,7 +59,7 @@ Core Features
 4. Start/Pause/Reset Controls: Full control over the timer state
 5. Notification Alerts: Sound and visual notifications when sessions end
 
-Advanced Features (For This Guide)
+### Advanced Features (For This Guide)
 
 6. Session Tracking: Count completed pomodoros in the current day
 7. Daily Goals: Set and track daily pomodoro targets
@@ -68,11 +68,11 @@ Advanced Features (For This Guide)
 
 ---
 
-Setting Up the Project Structure {#structure}
+## Setting Up the Project Structure {#structure}
 
 Every Chrome extension follows a specific file structure. Let us set up our project correctly.
 
-Required Files
+### Required Files
 
 ```
 study-timer-extension/
@@ -120,7 +120,7 @@ This manifest uses Manifest V3, which is required for all new Chrome extensions 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It needs to be clean, intuitive, and functional. Let us create the HTML structure:
 
@@ -188,7 +188,7 @@ This HTML structure provides a clean interface with mode switching (Pomodoro, Sh
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 Now let us add CSS to make our extension visually appealing. Good design matters even for functional tools:
 
@@ -362,7 +362,7 @@ This CSS creates a beautiful gradient background, uses a modern color scheme, an
 
 ---
 
-Implementing the Timer Logic {#timer-logic}
+## Implementing the Timer Logic {#timer-logic}
 
 Now comes the core functionality: the timer logic. This is where the magic happens. Let us create the popup.js file:
 
@@ -586,7 +586,7 @@ This JavaScript file handles all the timer logic, including:
 
 ---
 
-Background Service Worker {#background}
+## Background Service Worker {#background}
 
 For the timer to work reliably even when the popup is closed, we need a background service worker. Create background.js:
 
@@ -660,7 +660,7 @@ The background service worker ensures that your timer continues running accurate
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test our extension:
 
@@ -676,13 +676,13 @@ Now that we have built all the components, let us test our extension:
 
 ---
 
-Enhancing Your Extension {#enhancements}
+## Enhancing Your Extension {#enhancements}
 
 Now that you have a working Pomodoro study Chrome extension, consider adding these advanced features:
 
 1. Statistics and History
 
-Track detailed study history including:
+### Track detailed study history including:
 
 - Total focus time per day/week/month
 - Session completion rates
@@ -691,7 +691,7 @@ Track detailed study history including:
 
 2. Customization Options
 
-Allow users to customize:
+### Allow users to customize:
 
 - Work and break durations
 - Number of sessions before long break
@@ -716,7 +716,7 @@ Implement website blocking during focus sessions:
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have tested your extension thoroughly, you can publish it to the Chrome Web Store:
 
@@ -740,7 +740,7 @@ Once you have tested your extension thoroughly, you can publish it to the Chrome
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a study timer Chrome extension is an excellent project that teaches you valuable skills while creating a genuinely useful tool. we have covered:
 

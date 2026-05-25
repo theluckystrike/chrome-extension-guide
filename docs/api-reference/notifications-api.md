@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/api-reference/notifications-api
 last_modified_at: 2026-01-15
 ---
 
-Chrome Notifications API Reference
+### Chrome Notifications API Reference
 
 The `chrome.notifications` API lets you create rich desktop notifications using templates. These are system-level notifications that appear outside the browser window.
 
-Permissions {#permissions}
+## Permissions {#permissions}
 
 ```json
 {
@@ -22,11 +22,11 @@ No user-facing warning for this permission. The OS may prompt users to allow not
 
 See the [notifications permission reference](../permissions/notifications.md) for details.
 
-Notification Templates {#notification-templates}
+## Notification Templates {#notification-templates}
 
-Chrome supports four notification template types:
+### Chrome supports four notification template types:
 
-basic {#basic}
+## basic {#basic}
 
 Simple notification with icon, title, and message.
 
@@ -39,7 +39,7 @@ chrome.notifications.create("basic-example", {
 });
 ```
 
-image {#image}
+## image {#image}
 
 Like `basic`, but with a large image below the message.
 
@@ -53,7 +53,7 @@ chrome.notifications.create("image-example", {
 });
 ```
 
-list {#list}
+## list {#list}
 
 Shows a list of items with titles and messages.
 
@@ -71,9 +71,9 @@ chrome.notifications.create("list-example", {
 });
 ```
 
-progress {#progress}
+## progress {#progress}
 
-Shows a progress bar.
+### Shows a progress bar.
 
 ```ts
 chrome.notifications.create("progress-example", {
@@ -85,7 +85,7 @@ chrome.notifications.create("progress-example", {
 });
 ```
 
-NotificationOptions {#notificationoptions}
+## NotificationOptions {#notificationoptions}
 
 | Property | Type | Required | Description |
 |----------|------|----------|-------------|
@@ -103,9 +103,9 @@ NotificationOptions {#notificationoptions}
 | `requireInteraction` | `boolean` | No | Stay visible until user dismisses |
 | `silent` | `boolean` | No | Suppress sound |
 
-Buttons {#buttons}
+## Buttons {#buttons}
 
-Notifications support up to 2 action buttons:
+### Notifications support up to 2 action buttons:
 
 ```ts
 chrome.notifications.create("with-buttons", {
@@ -121,9 +121,9 @@ chrome.notifications.create("with-buttons", {
 });
 ```
 
-Core Methods {#core-methods}
+## Core Methods {#core-methods}
 
-chrome.notifications.create(notificationId?, options) {#chromenotificationscreatenotificationid-options}
+## chrome.notifications.create(notificationId?, options) {#chromenotificationscreatenotificationid-options}
 
 Create and display a notification.
 
@@ -146,9 +146,9 @@ const id = await chrome.notifications.create({
 console.log("Notification ID:", id);
 ```
 
-chrome.notifications.update(notificationId, options) {#chromenotificationsupdatenotificationid-options}
+## chrome.notifications.update(notificationId, options) {#chromenotificationsupdatenotificationid-options}
 
-Update an existing notification.
+### Update an existing notification.
 
 ```ts
 // Update progress
@@ -165,15 +165,15 @@ await chrome.notifications.update("my-notification", {
 
 Returns `true` if the notification existed and was updated, `false` otherwise.
 
-chrome.notifications.clear(notificationId) {#chromenotificationsclearnotificationid}
+## chrome.notifications.clear(notificationId) {#chromenotificationsclearnotificationid}
 
-Dismiss a notification.
+### Dismiss a notification.
 
 ```ts
 const wasClosed = await chrome.notifications.clear("my-notification");
 ```
 
-chrome.notifications.getAll() {#chromenotificationsgetall}
+## chrome.notifications.getAll() {#chromenotificationsgetall}
 
 Get all currently visible notifications.
 
@@ -184,7 +184,7 @@ const activeIds = Object.keys(notifications);
 console.log(`${activeIds.length} active notifications`);
 ```
 
-chrome.notifications.getPermissionLevel() {#chromenotificationsgetpermissionlevel}
+## chrome.notifications.getPermissionLevel() {#chromenotificationsgetpermissionlevel}
 
 Check if the user has allowed notifications.
 
@@ -196,9 +196,9 @@ if (level === "denied") {
 }
 ```
 
-Events {#events}
+## Events {#events}
 
-chrome.notifications.onClicked {#chromenotificationsonclicked}
+## chrome.notifications.onClicked {#chromenotificationsonclicked}
 
 User clicked the notification body.
 
@@ -212,7 +212,7 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
-chrome.notifications.onButtonClicked {#chromenotificationsonbuttonclicked}
+## chrome.notifications.onButtonClicked {#chromenotificationsonbuttonclicked}
 
 User clicked one of the notification's action buttons.
 
@@ -231,7 +231,7 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 });
 ```
 
-chrome.notifications.onClosed {#chromenotificationsonclosed}
+## chrome.notifications.onClosed {#chromenotificationsonclosed}
 
 User dismissed the notification (or it expired).
 
@@ -242,7 +242,7 @@ chrome.notifications.onClosed.addListener((notificationId, byUser) => {
 });
 ```
 
-chrome.notifications.onPermissionLevelChanged {#chromenotificationsonpermissionlevelchanged}
+## chrome.notifications.onPermissionLevelChanged {#chromenotificationsonpermissionlevelchanged}
 
 User changed notification permissions at the OS level.
 
@@ -252,9 +252,9 @@ chrome.notifications.onPermissionLevelChanged.addListener((level) => {
 });
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
-Notification system controlled from the popup:
+### Notification system controlled from the popup:
 
 ```ts
 // shared/messages.ts
@@ -302,9 +302,9 @@ msg.onMessage({
 });
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Track notification preferences and history:
+### Track notification preferences and history:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -358,9 +358,9 @@ chrome.notifications.onClicked.addListener(async (notificationId) => {
 });
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 
-Notification with click-to-open {#notification-with-click-to-open}
+## Notification with click-to-open {#notification-with-click-to-open}
 
 ```ts
 const urlMap = new Map<string, string>();
@@ -386,7 +386,7 @@ chrome.notifications.onClicked.addListener((id) => {
 });
 ```
 
-Progress notification for long tasks {#progress-notification-for-long-tasks}
+## Progress notification for long tasks {#progress-notification-for-long-tasks}
 
 ```ts
 async function processWithProgress(items: string[]) {
@@ -418,7 +418,7 @@ async function processWithProgress(items: string[]) {
 }
 ```
 
-Auto-dismiss after timeout {#auto-dismiss-after-timeout}
+## Auto-dismiss after timeout {#auto-dismiss-after-timeout}
 
 ```ts
 async function showTemporaryNotification(title: string, message: string, durationMs: number) {
@@ -443,7 +443,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 
 1. `iconUrl` is required and must be a relative path to a file bundled with your extension, or a data URL. Remote URLs are not allowed.
 
@@ -461,7 +461,7 @@ Gotchas {#gotchas}
 
 8. `update()` returns false if the notification has already been dismissed. Don't rely on update succeeding.
 
-Related {#related}
+## Related {#related}
 
 - [notifications permission](../permissions/notifications.md)
 - [Alarms API](alarms-api.md)

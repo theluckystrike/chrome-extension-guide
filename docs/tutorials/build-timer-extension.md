@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Countdown Timer Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - Custom countdown timers with hours, minutes, seconds input
 - Multiple simultaneous timers with list management
 - Badge countdown showing time remaining
@@ -15,7 +15,7 @@ What You'll Build {#what-youll-build}
 - Quick preset buttons (5min, 15min, 30min)
 - Service worker restart recovery
 
-Manifest {#manifest}
+## Manifest {#manifest}
 - permissions: alarms, notifications, storage
 - host_permissions: all_urls (for audio playback)
 - action with popup
@@ -23,9 +23,9 @@ Manifest {#manifest}
 
 ---
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
-Define required permissions in manifest.json:
+### Define required permissions in manifest.json:
 
 ```json
 {
@@ -49,7 +49,7 @@ See [permissions/alarms.md](../permissions/alarms.md) and [permissions/notificat
 
 ---
 
-Step 2: Popup UI with Timer Input {#step-2-popup-ui-with-timer-input}
+## Step 2: Popup UI with Timer Input {#step-2-popup-ui-with-timer-input}
 
 Create the timer interface with input fields and controls:
 
@@ -79,7 +79,7 @@ Create the timer interface with input fields and controls:
 
 ---
 
-Step 3: Timer State with chrome.storage.session {#step-3-timer-state-with-chromestoragesession}
+## Step 3: Timer State with chrome.storage.session {#step-3-timer-state-with-chromestoragesession}
 
 Use session storage for fast, ephemeral timer state:
 
@@ -103,13 +103,13 @@ async function loadTimerState() {
 }
 ```
 
-See [storage-quickstart.md](../tutorials/storage-quickstart.md).
+### See [storage-quickstart.md](../tutorials/storage-quickstart.md).
 
 ---
 
-Step 4: Background Alarms {#step-4-background-alarms}
+## Step 4: Background Alarms {#step-4-background-alarms}
 
-Create one alarm per timer with chrome.alarms API:
+### Create one alarm per timer with chrome.alarms API:
 
 ```javascript
 // background/alarm-manager.js
@@ -131,13 +131,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 Alarms have a 1-minute minimum. For precise countdown display, use storage timestamps and calculate remaining time in the popup.
 
-See [api-reference/alarms-api.md](../api-reference/alarms-api.md).
+### See [api-reference/alarms-api.md](../api-reference/alarms-api.md).
 
 ---
 
-Step 5: Badge Countdown {#step-5-badge-countdown}
+## Step 5: Badge Countdown {#step-5-badge-countdown}
 
-Display remaining time on the extension badge:
+### Display remaining time on the extension badge:
 
 ```javascript
 // background/badge-manager.js
@@ -156,13 +156,13 @@ async function updateBadge() {
 }
 ```
 
-See [patterns/badge-action-ui.md](../patterns/badge-action-ui.md).
+### See [patterns/badge-action-ui.md](../patterns/badge-action-ui.md).
 
 ---
 
-Step 6: Notification on Completion {#step-6-notification-on-completion}
+## Step 6: Notification on Completion {#step-6-notification-on-completion}
 
-Notify users when timers complete with sound:
+### Notify users when timers complete with sound:
 
 ```javascript
 // background/notifications.js
@@ -180,13 +180,13 @@ async function notifyTimerComplete(timerName) {
 }
 ```
 
-See [api-reference/notifications-api.md](../api-reference/notifications-api.md).
+### See [api-reference/notifications-api.md](../api-reference/notifications-api.md).
 
 ---
 
-Step 7: Multiple Timer Management {#step-7-multiple-timer-management}
+## Step 7: Multiple Timer Management {#step-7-multiple-timer-management}
 
-Support multiple simultaneous timers with list view:
+### Support multiple simultaneous timers with list view:
 
 ```javascript
 // background/multi-timer.js
@@ -217,7 +217,7 @@ async function getAllTimers() {
 
 ---
 
-Step 8: Service Worker Restart Recovery {#step-8-service-worker-restart-recovery}
+## Step 8: Service Worker Restart Recovery {#step-8-service-worker-restart-recovery}
 
 Reconstruct timer state from storage and alarms on restart:
 
@@ -246,7 +246,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 Your countdown timer extension now includes:
 - Custom duration input with preset buttons

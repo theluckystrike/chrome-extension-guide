@@ -18,51 +18,51 @@ This comprehensive guide will walk you through building a fully functional crypt
 
 ---
 
-Why Build a Crypto Wallet Extension? {#why-build-crypto-wallet}
+## Why Build a Crypto Wallet Extension? {#why-build-crypto-wallet}
 
 The demand for user-friendly crypto wallets continues to grow as blockchain technology becomes more mainstream. Chrome extensions offer several advantages over other wallet types:
 
-Accessibility and Convenience
+### Accessibility and Convenience
 
 Unlike mobile wallets that require smartphone access or hardware wallets that demand additional purchases, Chrome extensions run directly in the browser users already use daily. This makes them ideal for DeFi enthusiasts who interact with decentralized exchanges, lending platforms, and NFT marketplaces regularly.
 
-Smooth DApp Integration
+### Smooth DApp Integration
 
 A well-built Chrome wallet extension can automatically connect to any Web3 website, enabling one-click authentication and transaction signing. This eliminates the need to import private keys or use separate wallet interfaces for each DApp.
 
-Growing Market Opportunity
+### Growing Market Opportunity
 
 The DeFi ecosystem has grown to over $100 billion in total value locked. Users are actively seeking better wallet experiences, creating opportunities for developers who can build secure, feature-rich extensions that stand out from existing solutions.
 
 ---
 
-Understanding the Architecture {#architecture-overview}
+## Understanding the Architecture {#architecture-overview}
 
 Before writing code, it is essential to understand how crypto wallet extensions differ from standard Chrome extensions. A wallet extension must handle several critical components:
 
-Key Management System
+### Key Management System
 
 The foundation of any cryptocurrency wallet is its key management system. Your extension must securely generate, store, and use cryptographic keys to sign transactions. We will use Hierarchical Deterministic (HD) wallets derived from a 12 or 24-word seed phrase, which is the industry standard for key management.
 
-Blockchain Connectivity
+### Blockchain Connectivity
 
 Wallet extensions need to communicate with blockchain networks. This typically involves connecting to Ethereum nodes via JSON-RPC interfaces. We will integrate with popular RPC providers and implement fallback mechanisms for reliability.
 
-DApp Communication
+### DApp Communication
 
 When users visit decentralized applications, the wallet extension must handle connection requests, display transaction details for approval, and sign transactions on behalf of the user. This requires implementing the Ethereum Provider API that most DApps expect.
 
-User Interface
+### User Interface
 
 The popup interface must display account balances, transaction history, and provide controls for sending tokens, switching networks, and managing connections. The UI needs to be both functional and visually appealing to inspire user confidence.
 
 ---
 
-Setting Up the Project {#project-setup}
+## Setting Up the Project {#project-setup}
 
 Let us start by creating the project structure and configuring the manifest file for our wallet extension.
 
-Project Structure
+### Project Structure
 
 ```
 crypto-wallet-extension/
@@ -84,7 +84,7 @@ crypto-wallet-extension/
      icon128.png
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest must declare the appropriate permissions for network access, storage, and script injection:
 
@@ -129,11 +129,11 @@ Notice we specify host permissions for RPC providers but use content scripts tha
 
 ---
 
-Implementing the Key Management System {#key-management}
+## Implementing the Key Management System {#key-management}
 
 Security is paramount in wallet development. We will implement a solid key management system using industry-standard cryptographic libraries.
 
-Installing Dependencies
+### Installing Dependencies
 
 For this project, we will use the ethers.js library, which provides comprehensive Ethereum functionality:
 
@@ -142,7 +142,7 @@ For this project, we will use the ethers.js library, which provides comprehensiv
 // For development, you would install via npm
 ```
 
-HD Wallet Implementation
+### HD Wallet Implementation
 
 The service worker handles all sensitive operations, keeping cryptographic functions away from the popup UI:
 
@@ -220,7 +220,7 @@ class WalletManager {
 const walletManager = new WalletManager();
 ```
 
-Security Best Practices
+### Security Best Practices
 
 When implementing key management, follow these critical security practices:
 
@@ -232,11 +232,11 @@ When implementing key management, follow these critical security practices:
 
 ---
 
-Network and RPC Integration {#network-integration}
+## Network and RPC Integration {#network-integration}
 
 Your wallet needs to connect to Ethereum networks to fetch balances and broadcast transactions.
 
-RPC Provider Management
+### RPC Provider Management
 
 ```javascript
 // background/service-worker.js (continued)
@@ -294,7 +294,7 @@ const networkManager = new NetworkManager();
 networkManager.setNetwork('mainnet');
 ```
 
-Implementing Fallback Mechanisms
+### Implementing Fallback Mechanisms
 
 Reliability is crucial for wallet extensions. Implement fallback providers:
 
@@ -329,7 +329,7 @@ class MultiProvider {
 
 ---
 
-Building the Ethereum Provider {#ethereum-provider}
+## Building the Ethereum Provider {#ethereum-provider}
 
 The Ethereum Provider is the bridge between DApps and your wallet. It implements the standard Ethereum JavaScript API that libraries like ethers.js and web3.js expect.
 
@@ -402,7 +402,7 @@ window.__injectedProvider = ethereum;
 
 ---
 
-Handling DApp Communication {#dapp-communication}
+## Handling DApp Communication {#dapp-communication}
 
 The background service worker acts as the bridge between injected content scripts and the wallet functionality:
 
@@ -503,7 +503,7 @@ async function handleTransaction(txParams) {
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides the primary user interface for the wallet extension:
 
@@ -580,7 +580,7 @@ The popup provides the primary user interface for the wallet extension:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
 ```css
 /* popup/popup.css */
@@ -773,7 +773,7 @@ body {
 }
 ```
 
-Popup Logic
+### Popup Logic
 
 ```javascript
 // popup/popup.js
@@ -880,7 +880,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Transaction Handling and Signing {#transaction-handling}
+## Transaction Handling and Signing {#transaction-handling}
 
 The transaction flow is critical for user trust. Users must clearly see what they are signing:
 
@@ -919,11 +919,11 @@ async function showTransactionConfirmation(transaction) {
 
 ---
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 Building a crypto wallet requires exceptional attention to security:
 
-Phishing Protection
+### Phishing Protection
 
 ```javascript
 // Implement domain validation
@@ -953,7 +953,7 @@ class PhishingDetector {
 }
 ```
 
-Key Security Measures
+### Key Security Measures
 
 1. Never export private keys: Only allow exporting the seed phrase
 2. Implement rate limiting: Prevent brute force attacks on passwords
@@ -964,11 +964,11 @@ Key Security Measures
 
 ---
 
-Testing Your Wallet Extension {#testing}
+## Testing Your Wallet Extension {#testing}
 
-Comprehensive testing is essential for wallet extensions:
+### Comprehensive testing is essential for wallet extensions:
 
-Unit Tests
+### Unit Tests
 
 ```javascript
 // test/wallet.test.js
@@ -999,9 +999,9 @@ describe('WalletManager', () => {
 });
 ```
 
-Manual Testing Checklist
+### Manual Testing Checklist
 
-Before releasing your wallet extension:
+### Before releasing your wallet extension:
 
 - [ ] Test wallet creation and backup flow
 - [ ] Verify balance display accuracy across networks
@@ -1013,20 +1013,20 @@ Before releasing your wallet extension:
 
 ---
 
-Publishing Considerations {#publishing}
+## Publishing Considerations {#publishing}
 
 When publishing to the Chrome Web Store, wallet extensions face additional scrutiny:
 
-Required Store Assets
+### Required Store Assets
 
 1. Detailed privacy policy: Explain exactly how you handle keys and data
 2. Video demonstration: Show the wallet in action
 3. Comprehensive screenshots: Document all features
 4. Support contact: Provide a way for users to report issues
 
-Review Process
+### Review Process
 
-Google's reviewers pay special attention to:
+### Google's reviewers pay special attention to:
 
 - Key management and storage security
 - Network request patterns
@@ -1037,7 +1037,7 @@ Be prepared for a longer review process than standard extensions.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a cryptocurrency wallet Chrome extension is a complex but rewarding undertaking. You have learned the fundamental components: manifest configuration, key management with HD wallets, RPC provider integration, Ethereum Provider implementation, and the critical security practices that protect user funds.
 
@@ -1047,7 +1047,7 @@ Remember that trust is the foundation of any wallet. Every decision, from the UI
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 Now that you have a functioning wallet foundation, consider expanding with:
 

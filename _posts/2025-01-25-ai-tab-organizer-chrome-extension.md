@@ -18,17 +18,17 @@ we will walk through the complete process of building an AI-powered tab organize
 
 ---
 
-Why You Need an AI Tab Organizer {#why-ai-tab-organizer}
+## Why You Need an AI Tab Organizer {#why-ai-tab-organizer}
 
 Modern web browsing has evolved far beyond simple document viewing. We use browsers as workspaces, research tools, entertainment centers, and communication platforms. With this evolution comes an unprecedented explosion in the number of tabs we keep open simultaneously.
 
-The Problem with Tab Overload
+### The Problem with Tab Overload
 
 When you have dozens or hundreds of tabs open, several problems emerge. First, memory consumption becomes a serious issue, each open tab consumes system resources even when not actively being used. Second, finding a specific tab among hundreds becomes a frustrating scavenger hunt. Third, the cognitive load of maintaining awareness of all open tabs reduces your ability to focus on actual work.
 
 Traditional tab management solutions like manual grouping or simple alphabetical sorting provide limited relief. They require constant manual intervention and don't adapt to your evolving workflow. This is where AI tab organizers change the game.
 
-How AI Transforms Tab Management
+### How AI Transforms Tab Management
 
 An AI tab organizer uses machine learning algorithms to automatically understand what each tab contains, identify patterns in your browsing behavior, and proactively organize tabs into meaningful groups. Unlike rule-based systems, AI continuously learns from your habits and improves its categorization over time.
 
@@ -36,29 +36,29 @@ The key advantages of AI-powered tab organization include automatic content reco
 
 ---
 
-Core Architecture of an AI Tab Organizer Extension {#core-architecture}
+## Core Architecture of an AI Tab Organizer Extension {#core-architecture}
 
 Before diving into code, let's understand the fundamental architecture that powers an AI tab organizer. A well-designed extension consists of several interconnected components that work together to analyze tabs, generate insights, and manage groups.
 
-The Data Collection Layer
+### The Data Collection Layer
 
 The foundation of any AI tab organizer is its ability to collect relevant data about open tabs. Chrome's tabs API provides access to tab metadata including titles, URLs, favicons, and active status. For deeper content analysis, content scripts can extract page text, analyze meta tags, and identify key topics.
 
 The data collection layer operates continuously in the background, monitoring changes to your tab collection. When you open a new tab, switch between tabs, or close existing ones, the system captures these events and updates its understanding of your browsing environment.
 
-The Analysis Engine
+### The Analysis Engine
 
 Once data is collected, the analysis engine processes it to extract meaningful insights. This component uses natural language processing to understand what each tab is about, clustering algorithms to identify related tabs, and pattern recognition to detect your browsing habits.
 
 Modern implementations might run entirely in the browser using TensorFlow.js or similar libraries, or they might communicate with backend services for more intensive processing. For a privacy-focused extension, keeping analysis local offers significant advantages.
 
-The Organization Controller
+### The Organization Controller
 
 The organization controller translates AI insights into action. It creates tab groups using Chrome's tabGroups API, renames groups for clarity, and manages group membership as your browsing session evolves. This component also handles user interactions, allowing manual overrides and providing controls for the AI's behavior.
 
 ---
 
-Implementing the Extension Manifest {#manifest-implementation}
+## Implementing the Extension Manifest {#manifest-implementation}
 
 Every Chrome extension begins with a manifest file that defines its capabilities and permissions. For an AI tab organizer, we need carefully scoped permissions to access tab information while respecting user privacy.
 
@@ -98,7 +98,7 @@ The manifest requests permissions for tabs (to read tab information), tabGroups 
 
 ---
 
-Building the Background Service Worker {#background-worker}
+## Building the Background Service Worker {#background-worker}
 
 The background service worker serves as the extension's central nervous system, coordinating between different components and maintaining state across browsing sessions. In our AI tab organizer, the background worker handles tab change events, triggers analysis cycles, and manages group operations.
 
@@ -158,7 +158,7 @@ The background worker listens for various tab events and triggers reorganization
 
 ---
 
-Content Analysis with Machine Learning {#content-analysis}
+## Content Analysis with Machine Learning {#content-analysis}
 
 The content script runs in the context of each web page, extracting information that helps the AI understand what the page is about. This is crucial for smart tab grouping based on actual content rather than just URLs.
 
@@ -206,11 +206,11 @@ This content script extracts various pieces of information from each page. The c
 
 ---
 
-Implementing Smart Tab Grouping Algorithms {#smart-grouping-algorithms}
+## Implementing Smart Tab Grouping Algorithms {#smart-grouping-algorithms}
 
 The heart of any AI tab organizer lies in its grouping algorithm. There are several approaches to smart tab grouping, each with distinct advantages.
 
-Domain-Based Grouping
+### Domain-Based Grouping
 
 The simplest approach groups tabs by their domain name. This works well for users who tend to open multiple pages from the same website, such as researching a topic across different articles on a news site or working with multiple Google Docs.
 
@@ -241,7 +241,7 @@ function groupByDomain(tabs) {
 }
 ```
 
-Content-Based Grouping
+### Content-Based Grouping
 
 More sophisticated AI tab organizers analyze the actual content of each page to determine topics and group related tabs. This approach can identify that a tab about "machine learning" and another about "artificial intelligence" are related, even if they're from completely different websites.
 
@@ -269,17 +269,17 @@ function buildTFIDFVector(text) {
 }
 ```
 
-Behavioral Grouping
+### Behavioral Grouping
 
 The most advanced AI tab organizers consider not just content but also your behavior. Tabs you frequently switch between, open at similar times, or use together get grouped. This creates groups that adapt to your personal workflow rather than relying solely on content similarity.
 
 ---
 
-The Auto Organize Feature {#auto-organize-feature}
+## The Auto Organize Feature {#auto-organize-feature}
 
 The auto organize tabs chrome functionality is what makes your extension truly intelligent. Rather than requiring manual triggers, the extension should automatically organize tabs based on configurable rules and learned preferences.
 
-Configuring Auto Organization
+### Configuring Auto Organization
 
 Provide users with fine-grained control over when and how auto organization happens:
 
@@ -302,7 +302,7 @@ async function loadSettings() {
 }
 ```
 
-Idle Detection
+### Idle Detection
 
 Auto organization works best when it respects your workflow. By detecting when you've been idle, the extension can organize tabs during natural breaks rather than interrupting your work.
 
@@ -321,7 +321,7 @@ function setupIdleDetection() {
 
 ---
 
-User Interface for Tab Management {#user-interface}
+## User Interface for Tab Management {#user-interface}
 
 A well-designed popup interface allows users to interact with their organized tabs, view group statistics, and control AI behavior.
 
@@ -371,11 +371,11 @@ The popup displays key statistics and provides quick access to organization feat
 
 ---
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
 AI operations can be computationally intensive. Optimizing your extension ensures it doesn't become a burden on browser performance.
 
-Debouncing Analysis
+### Debouncing Analysis
 
 Avoid analyzing tabs on every minor change. Use debouncing to batch updates:
 
@@ -394,7 +394,7 @@ function debouncedAnalyze() {
 }
 ```
 
-Incremental Updates
+### Incremental Updates
 
 Rather than re-analyzing all tabs whenever something changes, implement incremental updates that only process new or modified tabs:
 
@@ -413,7 +413,7 @@ async function incrementalAnalyze(newTab) {
 }
 ```
 
-Background Processing
+### Background Processing
 
 For complex AI operations, consider using Web Workers to keep the main thread responsive:
 
@@ -431,11 +431,11 @@ self.onmessage = async function(e) {
 
 ---
 
-Privacy Considerations {#privacy-considerations}
+## Privacy Considerations {#privacy-considerations}
 
 When building an AI tab organizer that analyzes web content, privacy must be a primary concern.
 
-Local Processing
+### Local Processing
 
 Process all analysis locally within the user's browser. Never send tab content to external servers unless explicitly user-controlled. This approach provides the strongest privacy guarantees.
 
@@ -450,23 +450,23 @@ async function localAnalyze(tabs) {
 }
 ```
 
-Data Minimization
+### Data Minimization
 
 Only collect and store the minimum data necessary for functionality. If domain-based grouping meets most users' needs, make it the default and require explicit opt-in for content analysis.
 
-User Control
+### User Control
 
 Provide clear controls for what data is collected and how it's used. Include options to disable specific features or clear all stored data.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Comprehensive testing ensures your AI tab organizer works reliably across different scenarios.
 
-Unit Testing
+### Unit Testing
 
-Test individual functions in isolation:
+### Test individual functions in isolation:
 
 ```javascript
 describe('groupByDomain', () => {
@@ -485,7 +485,7 @@ describe('groupByDomain', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
 Test the complete flow using Chrome's extension testing APIs:
 
@@ -501,11 +501,11 @@ chrome.test.runTests([
 
 ---
 
-Deployment and Distribution {#deployment}
+## Deployment and Distribution {#deployment}
 
 Once your AI tab organizer is tested and polished, it's time to share it with users.
 
-Chrome Web Store Listing
+### Chrome Web Store Listing
 
 Create a compelling store listing that highlights your AI capabilities:
 
@@ -514,13 +514,13 @@ Create a compelling store listing that highlights your AI capabilities:
 - Highlight privacy features prominently
 - Gather user reviews to build trust
 
-Manifest Version Compliance
+### Manifest Version Compliance
 
 Ensure your extension complies with Manifest V3 requirements, including using service workers, respecting host permissions, and following Chrome's extension policies.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an AI-powered tab organizer Chrome extension represents an exciting opportunity to solve a real problem affecting millions of browser users. By combining Chrome's powerful tabs API with machine learning techniques, you can create a tool that genuinely improves productivity and reduces the cognitive load of tab overload.
 

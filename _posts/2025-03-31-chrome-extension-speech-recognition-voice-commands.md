@@ -18,7 +18,7 @@ This comprehensive guide will walk you through everything you need to know to bu
 
 ---
 
-Understanding the Web Speech API {#understanding-web-speech-api}
+## Understanding the Web Speech API {#understanding-web-speech-api}
 
 The Web Speech API is a browser-native API that provides speech recognition and speech synthesis capabilities directly in Chrome and other modern browsers. For Chrome extension developers, this API offers a powerful way to add voice functionality without requiring external services or complex backend infrastructure.
 
@@ -32,7 +32,7 @@ The Web Speech API consists of two distinct interfaces:
 
 Both interfaces are available in Chrome and can be used together or independently in your extension.
 
-Browser Support and Considerations
+### Browser Support and Considerations
 
 As of 2025, the Web Speech API is primarily supported in Chrome-based browsers, including Google Chrome, Microsoft Edge, and Opera. Firefox has partial support with some experimental flags, and Safari has its own implementation with some limitations.
 
@@ -47,11 +47,11 @@ It is important to note that speech recognition requires an internet connection 
 
 ---
 
-Setting Up Your Extension Project {#setting-up-project}
+## Setting Up Your Extension Project {#setting-up-project}
 
 Before diving into the code, let us set up a basic Chrome extension project that will serve as our foundation for adding speech recognition functionality.
 
-Project Structure
+### Project Structure
 
 Create a new folder for your extension with the following structure:
 
@@ -69,7 +69,7 @@ voice-commands-extension/
      icon128.png
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
 For speech recognition features, we need to configure the manifest file appropriately. Here is a Manifest V3 configuration:
 
@@ -107,11 +107,11 @@ Note that the Web Speech API does not require special permissions in the manifes
 
 ---
 
-Implementing Speech Recognition in Your Extension {#implementing-speech-recognition}
+## Implementing Speech Recognition in Your Extension {#implementing-speech-recognition}
 
 Now let us build the core speech recognition functionality. We will start with a popup-based implementation that demonstrates the fundamentals.
 
-Basic Speech Recognition Setup
+### Basic Speech Recognition Setup
 
 Here is how to initialize and use the Speech Recognition API in your extension:
 
@@ -159,7 +159,7 @@ if (!SpeechRecognition) {
 }
 ```
 
-Building the User Interface
+### Building the User Interface
 
 Create a clean, intuitive popup interface for your voice commands extension:
 
@@ -337,7 +337,7 @@ h1 {
 }
 ```
 
-Implementing Voice Command Processing
+### Implementing Voice Command Processing
 
 The core of your extension is the voice command processing logic:
 
@@ -542,11 +542,11 @@ document.getElementById('toggle-btn').addEventListener('click', () => {
 
 ---
 
-Advanced Speech Recognition Patterns {#advanced-patterns}
+## Advanced Speech Recognition Patterns {#advanced-patterns}
 
 Now that you have the basics working, let us explore more advanced patterns that will make your extension more solid and user-friendly.
 
-Continuous Listening with Hotword Detection
+### Continuous Listening with Hotword Detection
 
 For a more smooth experience, you can implement continuous listening that activates when the user says a specific hotword:
 
@@ -604,7 +604,7 @@ function speak(text) {
 }
 ```
 
-Language Detection and Multi-Language Support
+### Language Detection and Multi-Language Support
 
 For extensions used globally, supporting multiple languages is essential:
 
@@ -639,7 +639,7 @@ async function initWithUserLanguage() {
 }
 ```
 
-Working with Content Scripts
+### Working with Content Scripts
 
 For voice commands that interact with web page content, you need to communicate between your popup and content script:
 
@@ -677,11 +677,11 @@ function executePageCommand(command) {
 
 ---
 
-Best Practices for Voice Extensions {#best-practices}
+## Best Practices for Voice Extensions {#best-practices}
 
 Building a successful voice-powered Chrome extension requires attention to user experience, performance, and reliability.
 
-User Experience Considerations
+### User Experience Considerations
 
 1. Provide Clear Feedback: Always let users know when the extension is listening and when it has processed their voice input. Use visual indicators, sounds, or both.
 
@@ -693,7 +693,7 @@ User Experience Considerations
 
 5. Support Quiet Mode: Some users may want to use voice commands in environments where they cannot speak aloud. Consider adding keyboard activation as an alternative.
 
-Performance Optimization
+### Performance Optimization
 
 1. Minimize Resource Usage: Speech recognition can be resource-intensive. Only activate it when needed and stop it when not in use.
 
@@ -703,7 +703,7 @@ Performance Optimization
 
 4. Optimize for Mobile: If your extension targetsChromebook users, ensure it performs well with limited resources.
 
-Testing and Debugging
+### Testing and Debugging
 
 1. Test with Different Accents: Voice recognition accuracy varies. Test your extension with speakers of different ages, accents, and speech patterns.
 
@@ -728,7 +728,7 @@ function setupDebugLogging(recognition) {
 
 ---
 
-Real-World Use Cases {#use-cases}
+## Real-World Use Cases {#use-cases}
 
 Speech recognition in Chrome extensions can power many practical applications:
 
@@ -771,7 +771,7 @@ async function fillFormByVoice(fieldMappings) {
 
 3. Voice-Controlled Tab Management
 
-Manage browser tabs entirely by voice:
+### Manage browser tabs entirely by voice:
 
 ```javascript
 // Voice tab management
@@ -808,11 +808,11 @@ function voiceNavigationCommands(command) {
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Even well-built voice extensions can encounter issues. Here are solutions to common problems:
 
-Recognition Not Starting
+### Recognition Not Starting
 
 If speech recognition fails to start, check these common causes:
 
@@ -834,9 +834,9 @@ async function checkMicrophonePermission() {
 }
 ```
 
-Poor Recognition Accuracy
+### Poor Recognition Accuracy
 
-To improve recognition accuracy:
+### To improve recognition accuracy:
 
 1. Optimize audio settings: Configure the recognition with appropriate settings for your use case.
 2. Pre-process audio: Use noise reduction techniques.
@@ -857,7 +857,7 @@ recognition.onresult = (event) => {
 };
 ```
 
-Extension Context Issues
+### Extension Context Issues
 
 The Web Speech API behaves differently in various extension contexts:
 
@@ -869,7 +869,7 @@ For background processing, consider using the popup as a communication hub or im
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Voice recognition technology has matured significantly, making it accessible for Chrome extension developers to create powerful, hands-free browsing experiences. The Web Speech API provides a solid foundation for building voice-controlled extensions, from simple command recognition to complex voice-powered applications.
 
@@ -879,9 +879,9 @@ Start with the basic implementations in this guide, then progressively add advan
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
-Take your voice extension development to the better:
+### Take your voice extension development to the better:
 
 1. Explore Speech Synthesis: Add text-to-speech feedback using the SpeechSynthesis API for a complete voice interaction experience.
 

@@ -5,11 +5,11 @@ description: Complete comparison of @theluckystrike webext packages for Chrome e
 last_modified_at: 2026-01-15
 ---
 
-Webext Packages Overview
+### Webext Packages Overview
 
 A comprehensive comparison of the 8 core `@theluckystrike/webext-*` packages for building Chrome extensions. Each package provides typed, Promise-based wrappers for Chrome's extension APIs.
 
-Quick Comparison Table
+### Quick Comparison Table
 
 | Package | Use When... | Install |
 |---------|-------------|---------|
@@ -44,7 +44,7 @@ Key Features
 - Dual storage. Supports both `local` and `sync` storage areas
 - Reactive updates. Watch for storage changes with callbacks
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { defineSchema, createStorage } from '@theluckystrike/webext-storage';
@@ -92,7 +92,7 @@ Key Features
 - Error handling. Custom `MessagingError` class with proper wrapping
 - Promise-based. Modern async/await API
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -142,7 +142,7 @@ Key Features
 - Batch operations. Close, move, highlight multiple tabs
 - Tab group support. Work with Chrome's tab groups
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { 
@@ -194,7 +194,7 @@ Key Features
 - Human-readable. 50+ permission descriptions
 - Batch operations. Check/request multiple permissions
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { 
@@ -242,7 +242,7 @@ Key Features
 - Per-tab config. Different settings per tab
 - Click handling. Unified click event handling
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { 
@@ -293,7 +293,7 @@ Key Features
 - Typed events. Alarm fired event with types
 - Minimum interval. Automatic enforcement of Chrome's 1-minute minimum
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { 
@@ -346,7 +346,7 @@ Key Features
 - Per-tab badges. Different badges for different tabs
 - Clear/reset. Easy cleanup
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { 
@@ -394,7 +394,7 @@ Key Features
 - Updates. Modify existing notifications
 - Full typing. TypeScript support for all options
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import { 
@@ -439,7 +439,7 @@ onNotificationButtonClicked.addListener((notificationId, buttonIndex) => {
 
 ---
 
-Which Package Should You Use?
+### Which Package Should You Use?
 
 | Scenario | Recommended Package |
 |----------|-------------------|
@@ -454,7 +454,7 @@ Which Package Should You Use?
 | Schedule background tasks | `webext-alarms` |
 | Rich user notifications | `webext-notifications` |
 
-Bundle All Eight
+### Bundle All Eight
 
 If you need all eight packages, consider the meta-package:
 
@@ -466,7 +466,7 @@ This installs all core webext packages plus additional utilities in one command.
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Package Catalog](/docs/package-catalog). Full list of all 80+ packages
 - [Getting Started](/docs/getting-started). Set up your first extension

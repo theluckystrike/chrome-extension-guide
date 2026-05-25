@@ -18,7 +18,7 @@ In this comprehensive tutorial, we will build a fully functional URL shortener C
 
 ---
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Before we begin building our URL shortener extension, make sure you have the following:
 
@@ -29,7 +29,7 @@ Before we begin building our URL shortener extension, make sure you have the fol
 
 ---
 
-Understanding the Architecture {#understanding-architecture}
+## Understanding the Architecture {#understanding-architecture}
 
 Our Chrome extension will consist of several key components that work together to provide a smooth URL shortening experience:
 
@@ -43,7 +43,7 @@ We will use the Bitly API v4 to shorten URLs. The API requires an access token f
 
 ---
 
-Step 1: Setting Up the Project Structure {#step-1-setup}
+## Step 1: Setting Up the Project Structure {#step-1-setup}
 
 Create a new folder for your extension project. Inside this folder, create the following file structure:
 
@@ -62,7 +62,7 @@ The icon.png file should be a 128x128 pixel image that represents your extension
 
 ---
 
-Step 2: Creating the Manifest File {#step-2-manifest}
+## Step 2: Creating the Manifest File {#step-2-manifest}
 
 The manifest.json file is the foundation of every Chrome extension. It tells Chrome about your extension's name, version, permissions, and the files that comprise it. For our URL shortener, we will use Manifest V3, which is the latest version of the Chrome extension platform.
 
@@ -111,11 +111,11 @@ Let us break down the key components of this manifest:
 
 ---
 
-Step 3: Building the Popup UI {#step-3-popup-ui}
+## Step 3: Building the Popup UI {#step-3-popup-ui}
 
 The popup is the interface users interact with when they click our extension icon. It should be clean, intuitive, and provide all the functionality users need in a single view.
 
-Create popup.html and add the following:
+### Create popup.html and add the following:
 
 ```html
 <!DOCTYPE html>
@@ -181,7 +181,7 @@ This HTML structure provides:
 
 ---
 
-Step 4: Styling the Extension {#step-4-styling}
+## Step 4: Styling the Extension {#step-4-styling}
 
 Now let us add some CSS to make our extension look professional. Create popup.css:
 
@@ -401,9 +401,9 @@ This CSS provides a clean, modern design with:
 
 ---
 
-Step 5: Implementing the JavaScript Logic {#step-5-javascript}
+## Step 5: Implementing the JavaScript Logic {#step-5-javascript}
 
-Now comes the core functionality. Create popup.js:
+### Now comes the core functionality. Create popup.js:
 
 ```javascript
 // State management
@@ -613,7 +613,7 @@ function hideResult() {
 }
 ```
 
-This JavaScript handles:
+### This JavaScript handles:
 
 1. Initialization - Loading saved API token and getting the current tab URL
 2. API Token Management - Saving and retrieving the Bitly API token from Chrome storage
@@ -624,11 +624,11 @@ This JavaScript handles:
 
 ---
 
-Step 6: Creating the Background Service Worker {#step-6-background}
+## Step 6: Creating the Background Service Worker {#step-6-background}
 
 While our popup handles most of the functionality, adding a background service worker allows for additional capabilities like keyboard shortcuts and context menus.
 
-Create background.js:
+### Create background.js:
 
 ```javascript
 // Background service worker for URL Shortener Extension
@@ -707,7 +707,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
 ---
 
-Step 7: Testing Your Extension {#step-7-testing}
+## Step 7: Testing Your Extension {#step-7-testing}
 
 Now that we have created all the files, it is time to test our extension:
 
@@ -719,7 +719,7 @@ Now that we have created all the files, it is time to test our extension:
 6. Enter a Bitly API token (see below for how to get one)
 7. Click "Shorten URL" to test the functionality
 
-Getting a Bitly API Token
+### Getting a Bitly API Token
 
 To use the extension, you need a Bitly API token:
 
@@ -730,7 +730,7 @@ To use the extension, you need a Bitly API token:
 
 ---
 
-Step 8: Publishing to the Chrome Web Store {#step-8-publishing}
+## Step 8: Publishing to the Chrome Web Store {#step-8-publishing}
 
 Once you have tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store:
 
@@ -755,7 +755,7 @@ The review process typically takes a few hours to a few days. Once approved, you
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic URL shortener working, here are some enhancements you can add:
 
@@ -776,7 +776,7 @@ Add the ability to generate QR codes for shortened URLs, useful for offline mark
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 API Token Not Working
 - Ensure you are using the correct token format (Bearer token)
@@ -799,7 +799,7 @@ Extension Not Loading
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional URL shortener Chrome extension with Bitly API integration. This extension demonstrates key concepts in Chrome extension development including:
 

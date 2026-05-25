@@ -16,7 +16,7 @@ Code autocomplete extensions have revolutionized how developers write code. Tool
 
 ---
 
-Why Build a Code Autocomplete Chrome Extension? {#why-build}
+## Why Build a Code Autocomplete Chrome Extension? {#why-build}
 
 The demand for code autocomplete extension tools has never been higher. Developers are constantly seeking ways to improve their productivity, reduce repetitive coding tasks, and minimize syntax errors. Building an AI code helper Chrome extension allows you to tap into this growing market while learning valuable skills in Chrome extension development, artificial intelligence integration, and modern web APIs.
 
@@ -30,11 +30,11 @@ Third, the extensibility of Chrome means your extension can work across numerous
 
 ---
 
-Understanding the Architecture {#architecture}
+## Understanding the Architecture {#architecture}
 
 Before we dive into coding, it is essential to understand the architecture of a code autocomplete Chrome extension. Modern Chrome extensions follow the Manifest V3 specification, which requires a specific structure and utilizes service workers instead of background pages.
 
-Core Components
+### Core Components
 
 Our code autocomplete extension will consist of four main components:
 
@@ -46,7 +46,7 @@ Our code autocomplete extension will consist of four main components:
 
 4. Popup Interface: A simple user interface for configuring extension settings, API keys, and preferences.
 
-How It Works
+### How It Works
 
 The flow of our code autocomplete extension works as follows:
 
@@ -60,7 +60,7 @@ Finally, the suggestions are returned to the content script, which displays them
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Let us start by creating the project structure for our code autocomplete Chrome extension. Create a new folder called `code-autocomplete-extension` and set up the following file structure:
 
@@ -82,7 +82,7 @@ You can use any basic images for the icons for now, or create simple placeholder
 
 ---
 
-Creating the Manifest File {#manifest}
+## Creating the Manifest File {#manifest}
 
 The manifest.json file is the heart of every Chrome extension. For our code autocomplete extension, we need to declare the appropriate permissions and define the extension's components:
 
@@ -130,7 +130,7 @@ This manifest file grants the extension the necessary permissions to run on all 
 
 ---
 
-Implementing the Content Script {#content-script}
+## Implementing the Content Script {#content-script}
 
 The content script is responsible for detecting code editors, capturing user input, and displaying the autocomplete dropdown. Create a file called `content.js` with the following implementation:
 
@@ -430,7 +430,7 @@ This content script provides the foundation for detecting code elements and disp
 
 ---
 
-Creating the Background Service Worker {#background-service}
+## Creating the Background Service Worker {#background-service}
 
 The background service worker handles communication with AI APIs and manages extension state. Create `background.js`:
 
@@ -563,7 +563,7 @@ This background service worker connects to the OpenAI API for code suggestions. 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup interface allows users to configure their API key and extension settings. Create the following files:
 
@@ -847,7 +847,7 @@ async function saveSettings() {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test our code autocomplete Chrome extension:
 
@@ -856,7 +856,7 @@ Now that we have built all the components, let us test our code autocomplete Chr
 3. Click "Load unpacked" and select your `code-autocomplete-extension` folder
 4. The extension should now appear in your toolbar
 
-To test the extension:
+### To test the extension:
 
 1. Navigate to any website with a text area (such as GitHub, Stack Overflow, or a code editor)
 2. Click on a text area and start typing
@@ -865,33 +865,33 @@ To test the extension:
 
 ---
 
-Enhancing Your Extension {#enhancements}
+## Enhancing Your Extension {#enhancements}
 
 There are many ways to improve your code autocomplete Chrome extension:
 
-Add Support for Multiple AI Providers
+### Add Support for Multiple AI Providers
 
 You can extend the background service worker to support other AI providers such as Anthropic's Claude, Google's Gemini, or even local models. This gives users more options and can reduce costs.
 
-Implement Smart Language Detection
+### Implement Smart Language Detection
 
 Improve the language detection to automatically identify the programming language based on the website URL, file extension, or code patterns. This allows for more accurate suggestions.
 
-Add Context Awareness
+### Add Context Awareness
 
 Enhance the suggestion algorithm to consider the entire file or page context, not just the current line. This can provide more accurate and contextually relevant suggestions.
 
-Implement Caching
+### Implement Caching
 
 Add caching to reduce API calls and improve response times. Store frequently used code patterns and their suggestions locally.
 
-Add Custom Snippets
+### Add Custom Snippets
 
 Allow users to define their own code snippets that can be triggered with shortcuts. This is particularly useful for boilerplate code and common patterns.
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 When you are ready to publish your extension:
 
@@ -905,7 +905,7 @@ Ensure you comply with Chrome Web Store policies, particularly regarding user da
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a code autocomplete Chrome extension is an excellent project that combines web development skills with artificial intelligence integration. we covered the essential components needed to create a functional code autocomplete extension with AI-powered code suggestion capabilities.
 
@@ -917,24 +917,24 @@ Remember to test thoroughly across different websites and code editors, and gath
 
 ---
 
-Frequently Asked Questions {#faq}
+## Frequently Asked Questions {#faq}
 
-Q: Do I need an API key to use this extension?
+### Q: Do I need an API key to use this extension?
 
 A: Yes, to get AI-powered suggestions, you need an OpenAI API key. You can get one from the OpenAI platform. Without an API key, the extension provides basic pattern-based suggestions.
 
-Q: Can this extension work with any code editor?
+### Q: Can this extension work with any code editor?
 
 A: The extension works with most web-based code editors and text areas. It detects standard HTML elements like textareas and inputs, as well as popular code editor frameworks.
 
-Q: Is my code sent to external servers?
+### Q: Is my code sent to external servers?
 
 A: Yes, when you have an API key configured, the code context is sent to the AI provider for processing. No code is stored on external servers beyond what is necessary for generating suggestions.
 
-Q: Can I use a different AI provider?
+### Q: Can I use a different AI provider?
 
 A: Yes, you can modify the background service worker to work with other AI providers such as Claude, Gemini, or custom models.
 
-Q: How do I debug the extension?
+### Q: How do I debug the extension?
 
 A: You can use Chrome's developer tools. Right-click on the extension icon and select "Inspect popup" for the popup, or navigate to `chrome://extensions/` and click "Service worker" under your extension to debug the background script.

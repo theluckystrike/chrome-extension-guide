@@ -18,11 +18,11 @@ This comprehensive checklist covers everything you need to prepare, submit, and 
 
 ---
 
-Pre-Submission Preparation: Set Yourself Up for Success
+### Pre-Submission Preparation: Set Yourself Up for Success
 
 Before you ever click the "Publish" button, your extension needs to meet a set of technical, policy, and quality standards. Chrome's review team has gotten stricter in recent years, and extensions that might have sailed through in 2020 now face careful scrutiny. Here's what you need to do before submission.
 
-Manifest File Requirements
+### Manifest File Requirements
 
 Your `manifest.json` is the foundation of your extension. Get this wrong, and your submission will be rejected before a human reviewer even sees it. In 2025, Chrome requires Manifest V3 for all new extensions and extensions updating from V2. Make sure your manifest follows these guidelines:
 
@@ -32,7 +32,7 @@ Your `manifest.json` is the foundation of your extension. Get this wrong, and yo
 - Host Permissions: Be as specific as possible with host permissions. Instead of `<all_urls>`, use specific patterns like `https://*.example.com/*` if you only need access to certain sites.
 - Service Workers: If your extension uses background scripts, implement them as service workers (the `service_worker` field in Manifest V3) rather than persistent background pages.
 
-Extension Icons
+### Extension Icons
 
 Your icons appear throughout the Chrome Web Store. in search results, on the extension's listing page, and on the user's browser toolbar. Chrome requires specific icon sizes:
 
@@ -44,7 +44,7 @@ Your icons appear throughout the Chrome Web Store. in search results, on the ext
 
 Create a professional, recognizable icon that follows Google's icon guidelines. Avoid using Chrome's logo, copyrighted characters, or generic clip art. Your icon should clearly represent your extension's functionality.
 
-Privacy Policy and Terms of Service
+### Privacy Policy and Terms of Service
 
 Every extension that requests "broad" permissions or accesses user data needs a publicly accessible privacy policy. This includes extensions that:
 
@@ -57,7 +57,7 @@ Your privacy policy must be hosted on a publicly accessible URL (not a local fil
 
 If your extension connects to external services or APIs, also provide a Terms of Service URL.
 
-Screenshot and Video Requirements
+### Screenshot and Video Requirements
 
 Your Chrome Web Store listing needs visual assets to help users understand your extension:
 
@@ -67,11 +67,11 @@ Your Chrome Web Store listing needs visual assets to help users understand your 
 
 ---
 
-Technical Requirements: What Reviewers Check Under the Hood
+### Technical Requirements: What Reviewers Check Under the Hood
 
 Chrome's automated systems and human reviewers will examine your extension's code for technical compliance. Here's what they're looking for:
 
-Code Quality and Security
+### Code Quality and Security
 
 - No Inline Scripts: Manifest V3 prohibits inline JavaScript. All your code must be in external files referenced through the manifest.
 - Content Security Policy: Define a proper CSP in your manifest. Avoid overly permissive policies like `script-src 'self' 'unsafe-eval' 'unsafe-inline'`.
@@ -79,7 +79,7 @@ Code Quality and Security
 - Obfuscated Code: Don't minify or obfuscate your code in ways that hide its functionality. Reviewers need to understand what your extension does.
 - No Deprecated APIs: Ensure you're not using deprecated Chrome APIs. Check the [Chrome API docs](https://developer.chrome.com/docs/extensions/mv3/intro/) for current supported APIs.
 
-Performance Considerations
+### Performance Considerations
 
 Chrome expects extensions to be performant. Extensions that consume excessive memory, cause browser crashes, or slow down the browser may be rejected or flagged:
 
@@ -87,9 +87,9 @@ Chrome expects extensions to be performant. Extensions that consume excessive me
 - Memory Management: Test your extension with many tabs open. Memory leaks are a common cause of negative reviews and potential removal.
 - Lazy Loading: Load features on demand rather than at startup when possible.
 
-Testing Across Scenarios
+### Testing Across Scenarios
 
-Before submitting, thoroughly test your extension:
+### Before submitting, thoroughly test your extension:
 
 - Install it from a packed `.zip` file (not from the developer dashboard in "Draft" mode)
 - Test in a fresh Chrome profile (no other extensions installed)
@@ -99,21 +99,21 @@ Before submitting, thoroughly test your extension:
 
 ---
 
-Policy Compliance: Avoiding Rejection
+### Policy Compliance: Avoiding Rejection
 
 Chrome's [Developer Program Policies](https://developer.chrome.com/docs/webstore/program-policies/) are extensive and get updated regularly. Violating these policies is the most common reason for rejection. Here's what you need to know in 2025:
 
-Single-Purpose Policy
+### Single-Purpose Policy
 
 Chrome requires that each extension have a single, clearly stated purpose. Your extension should do one thing well. If you've built an all-in-one productivity suite, consider splitting functionality into separate extensions or clearly explaining how features relate to a unified purpose.
 
-The single-purpose rule applies to:
+### The single-purpose rule applies to:
 
 - Functionality: Don't bundle unrelated features. A tab manager and a note-taking app should be separate extensions.
 - Permissions: Each permission should relate to your extension's core purpose.
 - UI: Avoid cluttered interfaces with many unrelated features.
 
-User Data and Privacy
+### User Data and Privacy
 
 The Chrome Web Store has gotten particularly strict about user data practices:
 
@@ -123,7 +123,7 @@ The Chrome Web Store has gotten particularly strict about user data practices:
 - Secure Transmission: All data transmission must be over HTTPS.
 - Data Deletion: Provide a way for users to delete their data, and honor deletion requests promptly.
 
-Prohibited Content and Behavior
+### Prohibited Content and Behavior
 
 The following will get your extension rejected or removed:
 
@@ -134,9 +134,9 @@ The following will get your extension rejected or removed:
 - Content Theft: Don't scrape or redistribute copyrighted content without permission.
 - Impersonation: Don't impersonate other extensions, Chrome itself, or other brands.
 
-Trust and Safety
+### Trust and Safety
 
-Google has tightened trust and safety requirements:
+### Google has tightened trust and safety requirements:
 
 - Developer Verification: Complete the Chrome Web Store developer verification process. This involves a small fee and identity verification.
 - Account Age: New developers may face additional review time. Established developer accounts with a history of compliant extensions get faster reviews.
@@ -144,7 +144,7 @@ Google has tightened trust and safety requirements:
 
 ---
 
-The Submission Process
+### The Submission Process
 
 Once your extension is ready, here's how to submit it:
 
@@ -158,7 +158,7 @@ Create a `.zip` file containing your extension. Include:
 - Icons (in an `icons` folder or at the root)
 - Any other required files (images, fonts, etc.)
 
-Do not include:
+### Do not include:
 
 - Source maps (unless needed for debugging, and even then, be cautious)
 - Build artifacts or temporary files
@@ -186,35 +186,35 @@ Click "Publish." Your extension enters the review queue. In 2025, review times v
 
 ---
 
-Common Rejection Reasons and How to Avoid Them
+### Common Rejection Reasons and How to Avoid Them
 
 Understanding why extensions get rejected helps you prevent these issues:
 
-Overbroad Permissions
+### Overbroad Permissions
 
 The number one reason for rejection is requesting more permissions than necessary. If your extension only needs to access one website, don't request host permissions for all sites. If you only need to read storage, don't request full access.
 
 Solution: Audit every permission. Ask yourself: "Does my extension absolutely need this to function?" If not, remove it or make it optional.
 
-Poor Description or Screenshots
+### Poor Description or Screenshots
 
 Extensions get rejected when it's unclear what they do. Vague descriptions like "This extension improves your browsing experience" don't pass muster.
 
 Solution: Write a clear, specific description. Explain exactly what functionality your extension provides. Show screenshots that demonstrate real features.
 
-Privacy Policy Issues
+### Privacy Policy Issues
 
 Missing, incomplete, or hosted improperly privacy policies cause rejections.
 
 Solution: Write a comprehensive privacy policy. Host it on a public URL (GitHub Pages, your own website, etc.). Link it in your extension's manifest and store listing.
 
-Single-Purpose Violations
+### Single-Purpose Violations
 
 Trying to do too much with one extension triggers policy violations.
 
 Solution: Define one clear purpose. If you have multiple features, either narrow your focus or consider multiple extensions.
 
-Technical Issues
+### Technical Issues
 
 Bugs, crashes, or code that doesn't work as described lead to rejection.
 
@@ -222,23 +222,23 @@ Solution: Test thoroughly. Have beta testers try your extension. Make sure every
 
 ---
 
-After Approval: Maintaining Compliance
+### After Approval: Maintaining Compliance
 
 Getting approved is only half the battle. You also need to maintain compliance:
 
-Monitoring Reviews and Feedback
+### Monitoring Reviews and Feedback
 
 Users will report issues. Monitor your reviews and respond professionally to feedback. Address bugs quickly. extensions with many negative reviews may be removed from the store.
 
-Handling Updates
+### Handling Updates
 
 When you update your extension, it goes through review again. Major changes to permissions or functionality may require additional scrutiny. Plan for this review time when rolling out important updates.
 
-Staying Current with Policies
+### Staying Current with Policies
 
 Google updates its policies regularly. Subscribe to the [Chrome Web Store blog](https://developer.chrome.com/blog/) and developer newsletters to stay informed about policy changes that might affect your extension.
 
-Handling Rejection Gracefully
+### Handling Rejection Gracefully
 
 If your extension is rejected, don't panic. Read the rejection reason carefully. Often, you can make the required changes and resubmit. If you believe the rejection was in error, you can appeal through the developer dashboard.
 
@@ -250,7 +250,7 @@ When appealing:
 
 ---
 
-Final Checklist Before You Publish
+### Final Checklist Before You Publish
 
 Before hitting submit, run through this final checklist:
 
@@ -271,7 +271,7 @@ Before hitting submit, run through this final checklist:
 
 ---
 
-Conclusion
+### Conclusion
 
 Publishing a Chrome extension in 2025 requires attention to detail, but the process is manageable when you understand what's expected. Focus on building a quality extension with a clear purpose, minimal permissions, and transparent data practices. Test thoroughly, follow the guidelines, and you'll be rewarded with a smooth review process and an approved extension in the Chrome Web Store.
 

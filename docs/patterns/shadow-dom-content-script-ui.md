@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/shadow-dom-content-scr
 last_modified_at: 2026-01-15
 ---
 
-Shadow DOM UI Patterns for Content Scripts
+### Shadow DOM UI Patterns for Content Scripts
 
 When building Chrome extensions, injecting UI into existing web pages presents a fundamental challenge: page styles will inevitably leak into your extension UI, and your styles will leak out. Shadow DOM provides the cleanest solution by creating a DOM boundary that encapsulates styles completely.
 
-Why Shadow DOM Matters
+### Why Shadow DOM Matters
 
 Content scripts run in the context of the host page, meaning they share the DOM and inherit global styles. A simple button you add to a page might inherit font-family from the page's body rule, pick up unexpected colors from page CSS, or break when the page redesigns. Shadow DOM creates a shadow root that acts as a style firewall. Nothing from the page penetrates your shadow DOM, and nothing you define escapes to affect the page. This isolation is not optional for professional extension UI. It is the foundation.
 
-Basic Injection Pattern
+### Basic Injection Pattern
 
 The simplest approach creates a host element and attaches a shadow root.
 
@@ -33,7 +33,7 @@ function createUI() {
 
 The open mode allows debugging through chrome devtools. The host element lives in the page DOM but acts as a boundary. All child elements exist inside the shadow root.
 
-Loading CSS with Constructable Stylesheets
+### Loading CSS with Constructable Stylesheets
 
 Injecting CSS via style tags works, but constructable stylesheets offer better performance and caching.
 
@@ -59,7 +59,7 @@ async function createUI() {
 
 This pattern loads CSS once and reuses it across multiple shadow roots. Chrome caches the sheet automatically.
 
-Tailwind Inside Shadow DOM
+### Tailwind Inside Shadow DOM
 
 Tailwind works inside shadow DOM, but the setup differs from standard web development. The simplest path uses inline styles or generates atomic classes at runtime. A more solid approach injects the Tailwind output as a constructable stylesheet.
 
@@ -75,7 +75,7 @@ async function loadTailwind() {
 
 Tailwind's reset styles may conflict with host page styles inside shadow DOM. Consider adding a minimal reset that targets only your extension elements.
 
-React Components in Shadow DOM
+### React Components in Shadow DOM
 
 React's createRoot works with any DOM node, including shadow roots.
 
@@ -100,7 +100,7 @@ function mountReactComponent() {
 
 Events bubble normally through the shadow boundary. You do not need special handlers for clicks or form submissions inside the shadow DOM. React's synthetic event system handles everything correctly.
 
-Vue and Svelte Mounting
+### Vue and Svelte Mounting
 
 Vue's mount method accepts any valid CSS selector or DOM element. Pass the shadow root directly.
 
@@ -120,7 +120,7 @@ function mountVue() {
 
 Svelte mounts similarly, using the shadow root as the mount target.
 
-Font and Global Asset Handling
+### Font and Global Asset Handling
 
 Fonts loaded via @font-face inside a constructable stylesheet work normally. For web fonts like Google Fonts, import the stylesheet in your extension's manifest or load it explicitly.
 
@@ -132,7 +132,7 @@ shadow.adoptedStyleSheets = [...shadow.adoptedStyleSheets, fontSheet];
 
 Images and other assets should be loaded through chrome.runtime.getURL to get the correct extension-origin path.
 
-Z-Index and Stacking Context
+### Z-Index and Stacking Context
 
 Shadow DOM does not create a new stacking context by itself. Your overlay may still appear behind page elements with higher z-index. Set an appropriately high z-index on the host element, and consider using chrome.topmostWindow if your extension spans multiple frames.
 
@@ -145,13 +145,13 @@ host.style.right = '0';
 
 Most extensions use z-index values near the maximum safe integer to stay above page content.
 
-Event Handling Across the Boundary
+### Event Handling Across the Boundary
 
 Events from inside shadow DOM bubble to the document normally. The event target remains the element inside shadow DOM, but listeners on the host element or document will still receive the event. To communicate between the shadow DOM and the page, standard event delegation works smoothly.
 
 If you need to forward events from the page into your shadow DOM, add listeners on the host element and manually dispatch events inside.
 
-Theming and Dark Mode
+### Theming and Dark Mode
 
 Detect the page theme by checking computed styles on the document body or using a media query.
 

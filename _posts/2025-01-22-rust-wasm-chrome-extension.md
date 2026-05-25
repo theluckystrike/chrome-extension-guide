@@ -18,7 +18,7 @@ WebAssembly (Wasm) has revolutionized web development by bringing near-native pe
 
 ---
 
-Understanding the Fundamentals of Rust and WebAssembly {#fundamentals}
+## Understanding the Fundamentals of Rust and WebAssembly {#fundamentals}
 
 Before diving into Chrome extension development with Rust, it is essential to understand why this combination has become so popular among developers. Rust is a systems programming language that guarantees memory safety without using a garbage collector, making it incredibly fast and predictable. WebAssembly is a binary instruction format that runs alongside JavaScript in the browser, providing a compilation target for languages like Rust, C++, and Go.
 
@@ -28,7 +28,7 @@ The Chrome extension platform supports WebAssembly natively, meaning you can inc
 
 ---
 
-Setting Up Your Development Environment {#development-environment}
+## Setting Up Your Development Environment {#development-environment}
 
 To build Chrome extensions with Rust and WebAssembly, you need to set up a development environment that supports both Rust compilation to Wasm and Chrome extension development. The process involves installing several tools and configuring your system appropriately.
 
@@ -42,7 +42,7 @@ For Chrome extension development, you need the Chrome browser and a code editor.
 
 ---
 
-Creating Your First Rust-Powered Extension {#first-extension}
+## Creating Your First Rust-Powered Extension {#first-extension}
 
 Now that your development environment is set up, it is time to create your first Rust-powered Chrome extension. We will build a simple extension that uses Rust to perform a computational task, demonstrating the core concepts you need to know for more complex projects.
 
@@ -116,7 +116,7 @@ Compile your Rust code to WebAssembly by running `wasm-pack build --target web` 
 
 ---
 
-Integrating WebAssembly with Your Chrome Extension {#integration}
+## Integrating WebAssembly with Your Chrome Extension {#integration}
 
 With your WebAssembly module compiled, the next step is to integrate it into a Chrome extension. You need to create the standard Chrome extension structure, including the manifest.json file and the HTML and JavaScript files that define your extension's interface.
 
@@ -226,7 +226,7 @@ extension/
 
 ---
 
-Loading and Testing Your Extension {#testing}
+## Loading and Testing Your Extension {#testing}
 
 Now that you have created all the necessary files, it is time to load your extension into Chrome and test it. Open Chrome and navigate to chrome://extensions/. Enable Developer mode by toggling the switch in the upper right corner. Click the "Load unpacked" button and select your extension directory.
 
@@ -236,7 +236,7 @@ The beauty of this setup is that the computation happens in WebAssembly, which i
 
 ---
 
-Performance Advantages of Rust WebAssembly {#performance}
+## Performance Advantages of Rust WebAssembly {#performance}
 
 One of the primary reasons to use Rust and WebAssembly in Chrome extensions is the performance advantage it provides. Understanding when and why Rust outperforms JavaScript helps you make informed decisions about where to invest in Rust development.
 
@@ -250,7 +250,7 @@ The performance benefits are most pronounced for computationally intensive tasks
 
 ---
 
-Advanced Patterns for Rust Chrome Extensions {#advanced-patterns}
+## Advanced Patterns for Rust Chrome Extensions {#advanced-patterns}
 
 As you become more comfortable with Rust and WebAssembly in Chrome extensions, you can explore advanced patterns that enable more sophisticated functionality. These patterns allow you to build extensions that use Rust's strengths while maintaining the flexibility of JavaScript.
 
@@ -262,7 +262,7 @@ You can also use Rust to implement sophisticated algorithms that would be diffic
 
 ---
 
-Best Practices for Production Extensions {#best-practices}
+## Best Practices for Production Extensions {#best-practices}
 
 When moving from demo projects to production Chrome extensions built with Rust and WebAssembly, there are several best practices you should follow to ensure reliability, security, and maintainability.
 
@@ -278,7 +278,7 @@ Finally, keep your JavaScript and Rust code well-organized. Use JavaScript for D
 
 ---
 
-Debugging Rust WebAssembly Extensions {#debugging}
+## Debugging Rust WebAssembly Extensions {#debugging}
 
 Debugging Chrome extensions that use Rust and WebAssembly requires understanding how to troubleshoot both the JavaScript side and the Rust side. Chrome's developer tools provide some support for debugging WebAssembly, but the experience is not as polished as debugging pure JavaScript.
 
@@ -290,7 +290,7 @@ WebAssembly debugging in Chrome is improving but still has limitations. You may 
 
 ---
 
-Conclusion and Future Directions {#conclusion}
+## Conclusion and Future Directions {#conclusion}
 
 Building Chrome extensions with Rust and WebAssembly opens up exciting possibilities for creating high-performance browser extensions. By combining Rust's safety and performance with WebAssembly's browser compatibility, you can create extensions that handle computationally intensive tasks efficiently while maintaining the flexibility of the Chrome extension platform.
 

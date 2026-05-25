@@ -7,10 +7,10 @@ last_modified_at: 2026-01-15
 ---
 Build a Password Manager Extension
 
-Overview {#overview}
+## Overview {#overview}
 Build a Chrome extension that saves credentials, auto-fills login forms, and generates passwords. all with client-side encryption.
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 {
   "manifest_version": 3,
@@ -27,7 +27,7 @@ Manifest {#manifest}
 }
 ```
 
-Encryption Layer {#encryption-layer}
+## Encryption Layer {#encryption-layer}
 ```typescript
 // crypto.ts. client-side encryption with Web Crypto API
 async function deriveKey(masterPassword: string, salt: Uint8Array): Promise<CryptoKey> {
@@ -67,7 +67,7 @@ async function decrypt(key: CryptoKey, encoded: string): Promise<string> {
 }
 ```
 
-Storage with @theluckystrike/webext-storage {#storage-with-theluckystrikewebext-storage}
+## Storage with @theluckystrike/webext-storage {#storage-with-theluckystrikewebext-storage}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 
@@ -81,7 +81,7 @@ const schema = defineSchema({
 const storage = createStorage(schema, 'local');
 ```
 
-Messaging with @theluckystrike/webext-messaging {#messaging-with-theluckystrikewebext-messaging}
+## Messaging with @theluckystrike/webext-messaging {#messaging-with-theluckystrikewebext-messaging}
 ```typescript
 import { createMessenger } from '@theluckystrike/webext-messaging';
 
@@ -97,7 +97,7 @@ type Messages = {
 const m = createMessenger<Messages>();
 ```
 
-Service Worker (background.ts) {#service-worker-backgroundts}
+## Service Worker (background.ts) {#service-worker-backgroundts}
 ```typescript
 let cryptoKey: CryptoKey | null = null;
 
@@ -145,7 +145,7 @@ m.onMessage('GENERATE_PASSWORD', async ({ length, options }) => {
 });
 ```
 
-Content Script (content.ts) {#content-script-contentts}
+## Content Script (content.ts) {#content-script-contentts}
 ```typescript
 // Detect login forms
 function findLoginForm(): { usernameInput: HTMLInputElement | null; passwordInput: HTMLInputElement | null } {
@@ -190,7 +190,7 @@ document.addEventListener('submit', async (e) => {
 });
 ```
 
-Auto-Lock on Idle {#auto-lock-on-idle}
+## Auto-Lock on Idle {#auto-lock-on-idle}
 ```typescript
 // In background.ts
 chrome.idle.setDetectionInterval(300); // 5 minutes
@@ -202,7 +202,7 @@ chrome.idle.onStateChanged.addListener(async (state) => {
 });
 ```
 
-Context Menu for Fill {#context-menu-for-fill}
+## Context Menu for Fill {#context-menu-for-fill}
 ```typescript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -218,7 +218,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-Security Best Practices {#security-best-practices}
+## Security Best Practices {#security-best-practices}
 - Never store master password. only derived key (in memory)
 - PBKDF2 with 600k+ iterations
 - AES-256-GCM for authenticated encryption
@@ -227,7 +227,7 @@ Security Best Practices {#security-best-practices}
 - Never transmit credentials to external servers
 - Salt per vault (stored alongside encrypted data)
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Guide: `docs/guides/security-best-practices.md`
 - Permission: `docs/permissions/storage.md`, `docs/permissions/unlimitedStorage.md`
 - MV3: `docs/mv3/service-workers.md`

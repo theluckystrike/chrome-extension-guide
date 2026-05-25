@@ -18,7 +18,7 @@ Whether you are developing a data analytics extension that processes large volum
 
 ---
 
-Why IndexedDB for Chrome Extensions {#why-indexeddb}
+## Why IndexedDB for Chrome Extensions {#why-indexeddb}
 
 Chrome extensions have access to several storage mechanisms, each with distinct characteristics and use cases. Understanding why IndexedDB should be your go-to choice for large-scale data storage will help you make informed decisions when architecting your extension's data layer.
 
@@ -30,11 +30,11 @@ Another compelling reason to choose IndexedDB is its generous storage quotas. Wh
 
 ---
 
-Setting Up IndexedDB in Your Extension {#setting-up-indexeddb}
+## Setting Up IndexedDB in Your Extension {#setting-up-indexeddb}
 
 The implementation of IndexedDB in Chrome extensions follows the standard web IndexedDB API, but there are specific considerations and patterns that work best in the extension context. Let us walk through the complete setup process with practical code examples.
 
-Database Initialization and Version Management
+### Database Initialization and Version Management
 
 The first step in implementing IndexedDB is properly initializing your database with the correct schema. Unlike traditional databases where schema is defined separately, IndexedDB schemas are created through version upgrades triggered when the version number changes. Here is a solid pattern for initializing your database:
 
@@ -97,7 +97,7 @@ export const dbManager = new DatabaseManager();
 
 This initialization pattern ensures your database schema is properly set up while handling the asynchronous nature of database opening. The version management system allows you to evolve your schema over time as your extension grows, adding new object stores and indexes without losing existing data.
 
-Creating a Reusable CRUD Layer
+### Creating a Reusable CRUD Layer
 
 Building a solid CRUD (Create, Read, Update, Delete) layer abstracts the complexity of IndexedDB transactions and provides a clean interface for your extension's other modules. Here is a comprehensive implementation:
 
@@ -219,11 +219,11 @@ This repository pattern provides a clean, reusable interface that handles all th
 
 ---
 
-Advanced Query Patterns {#advanced-queries}
+## Advanced Query Patterns {#advanced-queries}
 
 IndexedDB's true power emerges when you use its advanced querying capabilities. Beyond simple key lookups, IndexedDB supports complex queries through indexes, making it possible to build sophisticated data retrieval systems in your extension.
 
-Compound Indexes for Complex Queries
+### Compound Indexes for Complex Queries
 
 When your data grows and you need to perform more complex queries, compound indexes become essential. A compound index allows you to query based on multiple fields efficiently:
 
@@ -255,7 +255,7 @@ async function getOrdersByCustomerAndStatus(db, customerId, status) {
 }
 ```
 
-Cursor-Based Iteration for Large Datasets
+### Cursor-Based Iteration for Large Datasets
 
 When dealing with very large datasets, loading all records at once can consume excessive memory. Cursors provide an efficient way to iterate through data one record at a time:
 
@@ -299,11 +299,11 @@ async function processOldDocuments(db, cutoffDate) {
 
 ---
 
-Performance Optimization Strategies {#performance-optimization}
+## Performance Optimization Strategies {#performance-optimization}
 
 As your extension's data grows, performance optimization becomes critical. Here are proven strategies for maintaining excellent performance with IndexedDB in Chrome extensions.
 
-Efficient Bulk Operations
+### Efficient Bulk Operations
 
 Performing operations one at a time can be extremely slow for large datasets. Batch operations significantly improve performance:
 
@@ -341,7 +341,7 @@ async function bulkInsertInChunks(db, documents, chunkSize = 100) {
 }
 ```
 
-Database Maintenance and Cleanup
+### Database Maintenance and Cleanup
 
 Over time, your database can accumulate data that is no longer needed. Regular maintenance keeps performance optimal:
 
@@ -387,7 +387,7 @@ async function getStorageUsage(db) {
 
 ---
 
-Working with Binary Data {#binary-data}
+## Working with Binary Data {#binary-data}
 
 IndexedDB excels at storing binary data, making it perfect for caching images, files, and other media in your extension. Here is how to handle binary data effectively:
 
@@ -441,7 +441,7 @@ function revokeObjectURL(url) {
 
 ---
 
-Data Synchronization Patterns {#data-synchronization}
+## Data Synchronization Patterns {#data-synchronization}
 
 Many Chrome extensions need to synchronize data between the local IndexedDB and a remote server. Here is a solid synchronization pattern:
 
@@ -507,7 +507,7 @@ class SyncManager {
 
 ---
 
-Error Handling and Recovery {#error-handling}
+## Error Handling and Recovery {#error-handling}
 
 Robust error handling is essential for production extensions. Implement comprehensive error handling to ensure data integrity:
 
@@ -563,7 +563,7 @@ window.addEventListener('unhandledrejection', (event) => {
 
 ---
 
-Best Practices Summary {#best-practices}
+## Best Practices Summary {#best-practices}
 
 Implementing IndexedDB in Chrome extensions successfully requires adherence to established best practices that ensure reliability, performance, and maintainability.
 
@@ -579,7 +579,7 @@ Consider using wrapper libraries for complex scenarios. While the raw IndexedDB 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 IndexedDB provides Chrome extension developers with a powerful, scalable solution for storing large amounts of structured data client-side. Its support for complex queries, transactions, binary data, and offline operation makes it the ideal choice for data-intensive extensions that need to deliver excellent performance while maintaining data reliability.
 

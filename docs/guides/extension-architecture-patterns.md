@@ -11,7 +11,7 @@ Building a Chrome extension that scales requires more than just connecting compo
 
 This guide explores three proven architectural patterns for Chrome extensions: Model-View-Controller (MVC), Model-View-ViewModel (MVVM), and Event-Driven Architecture. Each pattern addresses specific challenges in extension development, from managing state across contexts to handling the asynchronous nature of Chrome's APIs.
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 - [Why Architecture Patterns Matter](#why-architecture-patterns-matter)
 - [Model-View-Controller (MVC) for Extensions](#model-view-controller-mvc-for-extensions)
@@ -22,7 +22,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-Why Architecture Patterns Matter {#why-architecture-patterns-matter}
+## Why Architecture Patterns Matter {#why-architecture-patterns-matter}
 
 Chrome extensions present unique architectural challenges that web applications don't face:
 
@@ -40,7 +40,7 @@ A well-chosen architecture pattern addresses these challenges by providing clear
 
 ---
 
-Model-View-Controller (MVC) for Extensions {#model-view-controller-mvc-for-extensions}
+## Model-View-Controller (MVC) for Extensions {#model-view-controller-mvc-for-extensions}
 
 MVC separates an application into three interconnected components, each handling a specific aspect of your extension:
 
@@ -48,7 +48,7 @@ MVC separates an application into three interconnected components, each handling
 - View: UI rendering and user interface
 - Controller: Input handling and coordination
 
-Applying MVC to Chrome Extensions
+### Applying MVC to Chrome Extensions
 
 In an extension context, MVC maps naturally to Chrome's component model:
 
@@ -74,7 +74,7 @@ In an extension context, MVC maps naturally to Chrome's component model:
 
 ```
 
-Implementation Example
+### Implementation Example
 
 Here's how to implement MVC in a Manifest V3 extension:
 
@@ -166,9 +166,9 @@ export class BookmarkController {
 }
 ```
 
-When to Use MVC
+### When to Use MVC
 
-MVC works well when:
+### MVC works well when:
 
 - You have clear separation between data (bookmarks, settings, cached content) and UI
 - Multiple views need to display the same data (popup, options page, side panel)
@@ -177,11 +177,11 @@ MVC works well when:
 
 ---
 
-Model-View-ViewModel (MVVM) for Extensions {#model-view-viewmodel-mvvm-for-extensions}
+## Model-View-ViewModel (MVVM) for Extensions {#model-view-viewmodel-mvvm-for-extensions}
 
 MVVM extends MVC by adding a ViewModel layer that handles view logic and state synchronization. This pattern is particularly powerful for extensions using modern UI frameworks like React, Vue, or Svelte.
 
-Key Concepts
+### Key Concepts
 
 - Model: Same as MVC, data and business logic
 - View: UI components (React components, for example)
@@ -191,7 +191,7 @@ Key Concepts
   - User action handling
   - Two-way data binding
 
-Implementation Example with React
+### Implementation Example with React
 
 ```javascript
 // models/extension-model.js
@@ -348,7 +348,7 @@ export function SettingsPanel({ model }) {
 }
 ```
 
-MVVM Benefits for Extensions
+### MVVM Benefits for Extensions
 
 1. Reactive Data Flow: State changes automatically update the UI
 2. Testability: ViewModels can be tested without DOM manipulation
@@ -357,17 +357,17 @@ MVVM Benefits for Extensions
 
 ---
 
-Event-Driven Architecture {#event-driven-architecture}
+## Event-Driven Architecture {#event-driven-architecture}
 
 Event-driven architecture (EDA) is fundamental to Chrome extensions. Every interaction, from user clicks to tab updates, flows through events. This pattern treats events as first-class citizens, enabling loose coupling between components.
 
-Core Components
+### Core Components
 
 1. Event Emitters: Components that produce events (user actions, Chrome API events)
 2. Event Bus / Message Bus: Central hub for routing events
 3. Event Handlers: Components that react to events
 
-Implementation Example
+### Implementation Example
 
 ```javascript
 // event-bus/EventBus.js
@@ -550,7 +550,7 @@ export class EventDrivenService {
 }
 ```
 
-Cross-Context Event Communication
+### Cross-Context Event Communication
 
 For events that need to span multiple contexts (service worker to content script), use Chrome's message passing:
 
@@ -596,9 +596,9 @@ eventBus.on(ExtensionEvents.SETTINGS_UPDATED, (event) => {
 });
 ```
 
-When to Use Event-Driven Architecture
+### When to Use Event-Driven Architecture
 
-Event-driven architecture is ideal when:
+### Event-driven architecture is ideal when:
 
 - Multiple components need to react to the same action
 - You need loose coupling between extension parts
@@ -608,7 +608,7 @@ Event-driven architecture is ideal when:
 
 ---
 
-Choosing the Right Pattern {#choosing-the-right-pattern}
+## Choosing the Right Pattern {#choosing-the-right-pattern}
 
 | Factor | MVC | MVVM | Event-Driven |
 |--------|-----|------|---------------|
@@ -619,7 +619,7 @@ Choosing the Right Pattern {#choosing-the-right-pattern}
 | Learning Curve | Low | Medium | Medium |
 | Best For | Simple-medium extensions | Complex UI with React | Highly interactive apps |
 
-Decision Guide
+### Decision Guide
 
 Choose MVC if:
 - Your extension is relatively simple
@@ -638,7 +638,7 @@ Choose Event-Driven if:
 
 ---
 
-Hybrid Approaches {#hybrid-approaches}
+## Hybrid Approaches {#hybrid-approaches}
 
 Most real-world extensions combine patterns. A common hybrid approach:
 
@@ -682,7 +682,7 @@ class ContentController {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 - MVC provides clear separation of concerns and works well for medium-sized extensions
 - MVVM excels when using modern UI frameworks and requires reactive data flow
@@ -693,7 +693,7 @@ Choose a pattern based on your extension's complexity, team familiarity, and UI 
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Extension Architecture](../guides/extension-architecture.md)
 - [Project Structure](../guides/chrome-extension-project-structure.md)

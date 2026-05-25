@@ -18,13 +18,13 @@ JSZip is a powerful JavaScript library that enables you to create, read, and ext
 
 ---
 
-Understanding JSZip and Its Role in Chrome Extensions {#understanding-jszip}
+## Understanding JSZip and Its Role in Chrome Extensions {#understanding-jszip}
 
 JSZip is a pure JavaScript library that provides full ZIP file format support without requiring any server-side processing. This makes it идеально suited for Chrome extension development where all operations need to happen client-side. The library can create ZIP archives from files, folders, and data strings, as well as read and extract existing ZIP files.
 
 The beauty of using JSZip in Chrome extensions lies in its ability to work entirely within the browser's sandboxed environment. Users don't need to install additional software or upload their files to external servers for compression. Everything happens locally on their machine, which not only ensures better privacy and security but also provides faster performance since there's no network latency involved.
 
-Why File Compression Matters for Chrome Extensions
+### Why File Compression Matters for Chrome Extensions
 
 File compression capabilities can transform a basic Chrome extension into a powerful productivity tool. Several compelling reasons make incorporating JSZip worthwhile for extension developers.
 
@@ -38,11 +38,11 @@ Storage Optimization helps users manage their browser storage more efficiently. 
 
 ---
 
-Setting Up JSZip in Your Chrome Extension {#setup-jszip}
+## Setting Up JSZip in Your Chrome Extension {#setup-jszip}
 
 Getting started with JSZip in your Chrome extension is straightforward. This section covers the installation process and initial configuration to have you up and running quickly.
 
-Installing JSZip
+### Installing JSZip
 
 The recommended way to add JSZip to your Chrome extension project is through npm. If you're using a build tool like webpack, Parcel, or Rollup in your extension project, you can install JSZip as a dependency.
 
@@ -52,7 +52,7 @@ npm install jszip
 
 If you prefer a simpler approach or aren't using a build tool, you can include JSZip directly from a CDN. However, for production extensions, bundling it with your code is generally better for performance and reliability.
 
-Configuring Manifest V3 for File Operations
+### Configuring Manifest V3 for File Operations
 
 When working with JSZip in Manifest V3 extensions, you need to ensure your manifest properly declares the necessary permissions. While JSZip itself doesn't require special permissions since it operates on data in memory, you might need permissions depending on what your extension does with the compressed files.
 
@@ -76,11 +76,11 @@ For extensions that need to read files from the user's file system, you might al
 
 ---
 
-Creating ZIP Files with JSZip {#creating-zip-files}
+## Creating ZIP Files with JSZip {#creating-zip-files}
 
 Now let's dive into the core functionality: creating ZIP files. JSZip provides an intuitive API that makes adding files to archives straightforward.
 
-Basic ZIP Creation
+### Basic ZIP Creation
 
 Creating a ZIP file with JSZip involves instantiating a new JSZip object, adding files to it, and then generating the archive. Here's a basic example that shows how to create a simple ZIP file containing text content:
 
@@ -105,7 +105,7 @@ async function createBasicZip() {
 
 This basic example demonstrates the fundamental pattern for creating ZIP files. You create a new JSZip instance, use the `.file()` method to add files with their content, optionally use `.folder()` to organize files into directories, and finally call `.generateAsync()` to create the actual ZIP binary data.
 
-Adding Multiple Files from URLs
+### Adding Multiple Files from URLs
 
 A common use case for Chrome extensions is creating ZIP files from content fetched from the web. This could include downloading multiple images, archiving web pages, or bundling resources. Here's how you can fetch content and add it to a ZIP file:
 
@@ -137,7 +137,7 @@ async function createZipFromUrls(urls) {
 
 This pattern is particularly useful for extensions that collect resources from the web. You can let users select multiple items, fetch them all in parallel, and package them into a single convenient download.
 
-Adding Files from Chrome's File System
+### Adding Files from Chrome's File System
 
 Chrome extensions can also work with files stored on the user's system. Using the File System Access API, you can let users select files and add them to a ZIP archive:
 
@@ -168,11 +168,11 @@ This approach gives users full control over which files they want to compress, m
 
 ---
 
-Reading and Extracting ZIP Files {#reading-zip-files}
+## Reading and Extracting ZIP Files {#reading-zip-files}
 
 Just as important as creating ZIP files is the ability to read and extract existing archives. JSZip provides powerful functionality for this as well.
 
-Extracting Files from a ZIP
+### Extracting Files from a ZIP
 
 When your extension receives or loads an existing ZIP file, you can easily read its contents and extract individual files:
 
@@ -211,7 +211,7 @@ async function extractSpecificFile(zipBlob, filename) {
 
 These functions enable your extension to inspect ZIP file contents before extraction, which is useful for building file browsers or implementing selective extraction features.
 
-Reading and Displaying ZIP Contents
+### Reading and Displaying ZIP Contents
 
 For a better user experience, you might want to display the contents of a ZIP file in your extension's UI before extraction. Here's how you can build a file browser:
 
@@ -247,11 +247,11 @@ This function creates a flat list of all files and directories in the ZIP, sorte
 
 ---
 
-Advanced Compression Techniques {#compression-techniques}
+## Advanced Compression Techniques {#compression-techniques}
 
 JSZip offers several options for optimizing your compression. Understanding these options helps you balance file size against compression speed.
 
-Compression Level Options
+### Compression Level Options
 
 JSZip supports different compression levels that affect both the resulting file size and the time required for compression:
 
@@ -284,7 +284,7 @@ async function createOptimizedZip(files) {
 
 The compression level ranges from 0 (no compression) to 9 (maximum compression). Level 6 is the default and offers a good balance for most use cases. Higher levels take significantly more processing time but can yield better compression for repetitive or text-based content.
 
-Progress Tracking for Large Files
+### Progress Tracking for Large Files
 
 When working with large files or many files, providing progress feedback improves the user experience significantly. JSZip supports progress callbacks:
 
@@ -320,7 +320,7 @@ This pattern is essential for extensions that handle large amounts of data, as u
 
 ---
 
-Saving ZIP Files to Downloads {#saving-zip-files}
+## Saving ZIP Files to Downloads {#saving-zip-files}
 
 After creating a ZIP file, you'll typically want to save it to the user's downloads folder. Chrome's Downloads API makes this straightforward:
 
@@ -346,7 +346,7 @@ async function saveZipToDownloads(zipBlob, filename) {
 
 The `saveAs: true` option prompts the user to choose where they want to save the file. The `conflictAction: 'uniquify'` ensures that if a file with the same name already exists, Chrome will create a unique filename rather than overwriting.
 
-Handling Download Events
+### Handling Download Events
 
 For a complete implementation, you might want to monitor download progress and handle completion:
 
@@ -369,7 +369,7 @@ This allows your extension to provide feedback when downloads complete or handle
 
 ---
 
-Complete Example: File Compression Extension {#complete-example}
+## Complete Example: File Compression Extension {#complete-example}
 
 Putting all the pieces together, here's a more complete example that demonstrates a functional file compression feature:
 
@@ -472,29 +472,29 @@ This example shows a complete workflow: selecting files, adding them to a ZIP, g
 
 ---
 
-Best Practices for JSZip in Chrome Extensions {#best-practices}
+## Best Practices for JSZip in Chrome Extensions {#best-practices}
 
 Following best practices ensures your extension provides a smooth, reliable experience for users.
 
-Memory Management
+### Memory Management
 
 ZIP files can be large, and working with them in the browser requires careful memory management. Always clean up blob URLs after use to prevent memory leaks. When processing very large files, consider working with streams or processing files in chunks rather than loading everything into memory at once.
 
-Error Handling
+### Error Handling
 
 Robust error handling is essential. Network requests can fail, files can be corrupted, and users might select files that are too large. Always wrap async operations in try-catch blocks and provide meaningful error messages to users.
 
-User Experience
+### User Experience
 
 Consider the user experience throughout the compression process. Show progress for long operations, provide feedback when files are added or removed, and give users control over compression settings. A well-designed compression feature feels fast and responsive even when processing large amounts of data.
 
-File Naming
+### File Naming
 
 Handle file names carefully when adding files to ZIP archives. Long filenames, special characters, and Unicode characters can cause issues. Sanitize filenames or use library functions that handle these edge cases properly.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 JSZip is an invaluable tool for Chrome extension developers who want to add file compression capabilities to their extensions. Its pure JavaScript implementation means it works smoothly in the browser environment without requiring server-side processing, making it perfect for privacy-conscious and offline-capable extensions.
 

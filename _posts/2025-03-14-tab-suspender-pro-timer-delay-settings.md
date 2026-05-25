@@ -18,7 +18,7 @@ Tab Suspender Pro has emerged as one of the most essential Chrome extensions for
 
 ---
 
-Understanding Suspension Timers in Tab Suspender Pro {#understanding-suspension-timers}
+## Understanding Suspension Timers in Tab Suspender Pro {#understanding-suspension-timers}
 
 Before diving into specific delay recommendations, it is essential to understand how suspension timers actually work within Tab Suspender Pro. The extension monitors user activity across all open tabs, tracking interactions such as mouse movements, keyboard input, scrolling, and clicks. When the extension detects no activity for a specified period, it triggers the suspension process, which unloads the tab's content from memory while preserving its title and favicon in the tab strip.
 
@@ -30,11 +30,11 @@ One critical aspect that many users overlook is the distinction between the glob
 
 ---
 
-Recommended Delay Settings for Different Use Cases {#recommended-delays}
+## Recommended Delay Settings for Different Use Cases {#recommended-delays}
 
 The optimal suspension delay varies significantly depending on how you use your browser. Below, we provide detailed recommendations for three common scenarios: research work, casual browsing, and professional productivity environments.
 
-Research and Academic Work
+### Research and Academic Work
 
 Research workflows typically involve keeping numerous reference materials open simultaneously while actively working in one or two tabs. In this scenario, you need longer delays to accommodate the natural pauses that occur when switching between sources. For research-intensive work, we recommend setting your tab suspender pro timer to approximately 15-20 minutes.
 
@@ -42,7 +42,7 @@ This delay provides ample time to read through articles, extract relevant inform
 
 For research involving interactive elements such as embedded charts, data visualizations, or dynamic content that takes time to load, consider extending the delay to 25-30 minutes. These types of content may require additional loading time when a tab is restored, which can interrupt your flow if suspension happens too quickly.
 
-Casual Browsing and Everyday Use
+### Casual Browsing and Everyday Use
 
 Casual browsing encompasses the type of on-and-off usage most people experience when checking email, social media, news sites, and entertainment content throughout the day. For this common use case, the default delay of 5-10 minutes strikes an excellent balance between responsiveness and resource conservation.
 
@@ -50,7 +50,7 @@ A 5-minute timer ensures that tabs you have finished reading suspend relatively 
 
 For users who primarily browse on mobile devices or tablets with limited memory, shorter delays of 2-5 minutes maximize available resources. This aggressive approach works particularly well on older hardware or when running multiple applications simultaneously.
 
-Professional and Work Environments
+### Professional and Work Environments
 
 Professional users often require more nuanced timer configurations because their needs vary throughout the workday. During intensive focus periods, you may want to disable suspension entirely for specific applications or extend timers to 30 minutes or more. During lighter work phases, shorter delays help maintain performance.
 
@@ -60,7 +60,7 @@ Development professionals and power users who work with web-based IDEs, document
 
 ---
 
-Setting Custom Timers in Tab Suspender Pro {#setting-custom-timers}
+## Setting Custom Timers in Tab Suspender Pro {#setting-custom-timers}
 
 Customizing your timer settings in Tab Suspender Pro is straightforward, but understanding all available options ensures you get the most out of the extension. The extension provides multiple ways to configure suspension behavior, each suited to different levels of customization.
 
@@ -74,7 +74,7 @@ Tab Suspender Pro also supports advanced options such as excluding specific site
 
 ---
 
-Per-Site Timer Overrides {#per-site-overrides}
+## Per-Site Timer Overrides {#per-site-overrides}
 
 Per-site timer overrides represent one of the most powerful features in Tab Suspender Pro, allowing you to customize suspension behavior for individual websites based on their importance and your usage patterns. This granular control ensures that critical sites remain available while less important tabs suspend according to your preferences.
 
@@ -88,7 +88,7 @@ Implementing per-site overrides requires periodic review and adjustment as your 
 
 ---
 
-Battery vs Performance Tradeoffs {#battery-vs-performance}
+## Battery vs Performance Tradeoffs {#battery-vs-performance}
 
 Understanding the relationship between timer settings, battery life, and overall system performance helps you make informed decisions about your Tab Suspender Pro configuration. The extension exists specifically to address the resource demands of keeping numerous tabs active, but the degree of aggressiveness you choose significantly impacts both battery longevity and system responsiveness.
 
@@ -102,7 +102,7 @@ For most users, a balanced approach delivers optimal results. A 5-10 minute glob
 
 ---
 
-Conclusion: Optimizing Your Tab Suspension Strategy
+### Conclusion: Optimizing Your Tab Suspension Strategy
 
 Mastering tab suspender pro timer settings requires understanding how suspension timers work, identifying the delays that suit your specific workflow, leveraging per-site overrides for granular control, and balancing battery life against performance needs. There is no universal perfect setting, your optimal configuration depends entirely on how you use your browser and what resources you have available.
 

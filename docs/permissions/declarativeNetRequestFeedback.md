@@ -11,7 +11,7 @@ last_modified_at: 2026-01-15
 
 declarativeNetRequestFeedback Permission. Chrome Extension Reference
 
-Overview {#overview}
+## Overview {#overview}
 - Permission string: `"declarativeNetRequestFeedback"`
 - What it grants: Access to `chrome.declarativeNetRequest.onRuleMatchedDebug` event for debugging rule matches
 - Risk level: Low. read-only feedback API, does not modify requests
@@ -19,7 +19,7 @@ Overview {#overview}
 - @theluckystrike/webext-permissions description: `describePermission('declarativeNetRequestFeedback')`
 - Cross-ref: `docs/permissions/declarativeNetRequest.md`, `docs/mv3/declarative-net-request.md`
 
-Permission Relationship {#permission-relationship}
+## Permission Relationship {#permission-relationship}
 The `declarativeNetRequestFeedback` permission is an addon to the base `declarativeNetRequest` permission:
 
 | Permission | What it enables |
@@ -28,7 +28,7 @@ The `declarativeNetRequestFeedback` permission is an addon to the base `declarat
 | `declarativeNetRequestWithHostAccess` | Same as above + can redirect to URLs the extension doesn't have host permissions for |
 | `declarativeNetRequestFeedback` | Read-only feedback on which rules matched (requires base DNR permission) |
 
-manifest.json Setup {#manifestjson-setup}
+## manifest.json Setup {#manifestjson-setup}
 ```json
 {
   "permissions": [
@@ -39,11 +39,11 @@ manifest.json Setup {#manifestjson-setup}
 ```
 > Note: You must include `declarativeNetRequest` as well. `declarativeNetRequestFeedback` alone doesn't grant rule capabilities.
 
-API: onRuleMatchedDebug {#api-onrulematcheddebug}
+## API: onRuleMatchedDebug {#api-onrulematcheddebug}
 
 The `onRuleMatchedDebug` event fires whenever a DNR rule matches a network request. This is useful for debugging and analytics.
 
-Basic Usage {#basic-usage}
+## Basic Usage {#basic-usage}
 
 onRuleMatchedDebug Basic Usage
 ```typescript
@@ -61,7 +61,7 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
 });
 ```
 
-MatchedRuleInfo Properties {#matchedruleinfo-properties}
+## MatchedRuleInfo Properties {#matchedruleinfo-properties}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -74,24 +74,24 @@ MatchedRuleInfo Properties {#matchedruleinfo-properties}
 | `request.method` | string | HTTP method (GET, POST, etc.) |
 | `request.type` | string | Resource type (script, image, xmlhttprequest, etc.) |
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
-Debugging Which Rules Fired {#debugging-which-rules-fired}
+## Debugging Which Rules Fired {#debugging-which-rules-fired}
 - Verify that specific rules are matching as expected
 - Test new rule patterns before deploying
 - Troubleshoot why requests aren't being blocked/redirected
 
-Rule Testing {#rule-testing}
+## Rule Testing {#rule-testing}
 - Validate rule conditions during development
 - Check priority interactions between rules
 - Test regex patterns in `urlFilter`
 
-Rule Analytics {#rule-analytics}
+## Rule Analytics {#rule-analytics}
 - Track which blocking rules are most active
 - Build a dashboard showing blocked requests
 - Log patterns for analysis (use sparingly due to performance cost)
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
 > Important: `onRuleMatchedDebug` is intended for development and debugging only. It has significant performance overhead:
 
@@ -100,7 +100,7 @@ Performance Considerations {#performance-considerations}
 - Not suitable for production use in extensions with high traffic
 - Consider using `chrome.declarativeNetRequest.getMatchedRules()` instead for periodic analysis
 
-Best Practice for Production {#best-practice-for-production}
+## Best Practice for Production {#best-practice-for-production}
 ```typescript
 // Instead of always listening, query matched rules periodically
 async function getMatchedRulesAnalysis() {
@@ -115,7 +115,7 @@ async function getMatchedRulesAnalysis() {
 }
 ```
 
-Runtime Permission Check {#runtime-permission-check}
+## Runtime Permission Check {#runtime-permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 
@@ -123,20 +123,20 @@ const result = await checkPermission('declarativeNetRequestFeedback');
 // Returns true if permission is granted
 ```
 
-Common Errors {#common-errors}
+## Common Errors {#common-errors}
 - "Permission 'declarativeNetRequestFeedback' is not supported". Make sure you also declare `declarativeNetRequest` in permissions
 - No events firing. Verify the extension has active rules that could match requests
 
-Related Permissions {#related-permissions}
+## Related Permissions {#related-permissions}
 - [declarativeNetRequest](declarativeNetRequest.md). Base DNR permission for rule definition
 - [webRequest](webRequest.md). Read-only network observation (MV3)
 - [activeTab](activeTab.md). Temporary host access for per-tab rules
 
-API Reference {#api-reference}
+## API Reference {#api-reference}
 - [Chrome declarativeNetRequest API docs](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest)
 - [Chrome onRuleMatchedDebug documentation](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest#event-onRuleMatchedDebug)
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I get feedback on blocked requests?
 Add "declarativeNetRequestFeedback" permission to receive onRuleMatchedDebug events showing which rules matched for each request.

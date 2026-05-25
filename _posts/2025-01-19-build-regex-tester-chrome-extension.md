@@ -18,7 +18,7 @@ we will walk you through building a complete regex tester chrome extension from 
 
 ---
 
-Understanding the Requirements {#understanding-requirements}
+## Understanding the Requirements {#understanding-requirements}
 
 Before diving into code, let us establish what our regex tester chrome extension needs to accomplish. A quality regular expression tool should provide several core features that make pattern development efficient and intuitive.
 
@@ -30,7 +30,7 @@ Modern Chrome extensions must also comply with Manifest V3 specifications. This 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension begins with a manifest file that describes the extension's capabilities and structure. For our regex tester chrome extension, we will create a straightforward project with a popup interface that serves as the entire application.
 
@@ -60,11 +60,11 @@ This manifest declares that our extension uses Manifest V3, has no special permi
 
 ---
 
-Building the User Interface {#building-interface}
+## Building the User Interface {#building-interface}
 
 The popup interface should be intuitive and provide all necessary controls without overwhelming the user. We will create a clean layout with distinct sections for the regex pattern input, flags selection, test string input, and results display.
 
-Open popup.html and add the following structure:
+### Open popup.html and add the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -125,7 +125,7 @@ This HTML structure provides a clean, organized interface with separate sections
 
 ---
 
-Styling Your Extension {#styling-extension}
+## Styling Your Extension {#styling-extension}
 
 The visual design of your regex tester chrome extension should be clean, professional, and easy to read. Good contrast and clear visual feedback help users quickly understand their regex patterns and results.
 
@@ -339,11 +339,11 @@ These styles create a modern, professional appearance consistent with Chrome's o
 
 ---
 
-Implementing the Core Logic {#implementing-logic}
+## Implementing the Core Logic {#implementing-logic}
 
 The JavaScript logic handles pattern compilation, matching, and result display. This is where the actual regex tester functionality comes to life. The code must handle invalid patterns gracefully, provide real-time feedback, and display results clearly.
 
-Create popup.js with the following implementation:
+### Create popup.js with the following implementation:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -483,7 +483,7 @@ The real-time testing approach means users see results as they type, making the 
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Before distributing your regex tester chrome extension, you should thoroughly test it to ensure all functionality works correctly. Load your extension in Chrome and verify each feature operates as expected.
 
@@ -497,7 +497,7 @@ Edge cases to verify include empty patterns, empty test strings, patterns with a
 
 ---
 
-Enhancing Your Extension {#enhancing-extension}
+## Enhancing Your Extension {#enhancing-extension}
 
 Once the core functionality works, consider adding features that distinguish your regex debugger extension from basic alternatives. Pattern explanation helps users understand complex regular expressions by breaking down each component. A library of common regex patterns provides templates for common tasks like email validation, URL matching, and phone number extraction.
 
@@ -509,7 +509,7 @@ Performance optimization is another consideration for enhancing your extension. 
 
 ---
 
-Publishing Your Extension {#publishing-extension}
+## Publishing Your Extension {#publishing-extension}
 
 When your regex tester chrome extension is ready for distribution, you can publish it to the Chrome Web Store. Prepare your extension by creating icon files in the required sizes (16x16, 48x48, and 128x128 pixels). Ensure your manifest.json includes a clear description and appropriate categorizations.
 
@@ -519,7 +519,7 @@ After submission, Google will review your extension for policy compliance. The r
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a regex tester chrome extension is an excellent project that combines practical utility with meaningful development experience. Throughout this guide, you have learned how to create a Manifest V3 compliant extension, build a clean user interface, implement solid regex testing logic, and prepare your extension for distribution.
 

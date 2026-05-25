@@ -18,7 +18,7 @@ This comprehensive guide will walk you through building a fully functional scree
 
 ---
 
-Understanding Screen Recording in Chrome Extensions {#understanding-screen-recording}
+## Understanding Screen Recording in Chrome Extensions {#understanding-screen-recording}
 
 Before diving into the implementation details, it is crucial to understand the technologies that power screen recording in web browsers. The Display Media API, which is part of the broader WebRTC ecosystem, provides the foundation for capturing screen content in Chrome and other modern browsers. This API enables websites and extensions to request access to screen, application window, or browser tab content and stream that content in real-time for recording or sharing purposes.
 
@@ -28,7 +28,7 @@ Chrome extensions benefit from additional capabilities when implementing screen 
 
 ---
 
-Prerequisites and Development Environment Setup {#prerequisites}
+## Prerequisites and Development Environment Setup {#prerequisites}
 
 To build a screen recorder Chrome extension, you need a solid foundation in web development technologies including HTML, CSS, and JavaScript. While prior experience with Chrome extension development is helpful, it is not strictly necessary as we will cover all the essential concepts from scratch. You will also need Google Chrome installed on your development machine and a code editor such as Visual Studio Code that provides good support for JavaScript development and debugging.
 
@@ -38,7 +38,7 @@ Before you begin implementing the extension, create a dedicated project folder o
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file serves as the foundation of every Chrome extension, defining metadata, permissions, and the components that make up your extension. For a screen recorder extension, we need to declare specific permissions that allow the extension to access screen capture capabilities and manage downloads. Let us create a comprehensive manifest that follows Manifest V3, which is the current standard for Chrome extensions.
 
@@ -79,7 +79,7 @@ It is important to note that requesting the desktopCapture permission will trigg
 
 ---
 
-Building the User Interface {#user-interface}
+## Building the User Interface {#user-interface}
 
 The popup interface serves as the primary interaction point between users and your screen recorder extension. It should be clean, intuitive, and provide quick access to all recording functions. The popup needs controls for starting and stopping recordings, selecting the capture source, adjusting quality settings, and viewing recording status. Let us create a well-designed HTML popup that provides an excellent user experience.
 
@@ -155,7 +155,7 @@ The HTML structure separates the interface into logical sections: a header displ
 
 ---
 
-Styling the Popup Interface {#styling}
+## Styling the Popup Interface {#styling}
 
 The CSS styles should create a polished, professional appearance that matches Chrome's design language while ensuring the interface is visually appealing and easy to use. We will use modern CSS techniques including flexbox for layout, CSS variables for consistent theming, and smooth transitions for interactive elements. The styling should be clean and unobtrusive, focusing on usability rather than flashy visual effects.
 
@@ -329,7 +329,7 @@ The styling creates a modern, clean interface with clear visual feedback for dif
 
 ---
 
-Implementing Core Recording Logic {#recording-logic}
+## Implementing Core Recording Logic {#recording-logic}
 
 The JavaScript file handles all the functionality of the screen recorder extension, including managing the recording lifecycle, interacting with the Display Media API and MediaRecorder API, handling user interactions, and saving recorded content. This is where the magic happens, transforming the static interface into a fully functional screen recording tool. Let us implement the complete recording logic.
 
@@ -600,7 +600,7 @@ The JavaScript implementation handles the complete recording lifecycle with prop
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing your extension, thorough testing is essential to ensure it works correctly across different scenarios. Load your extension in Chrome's developer mode and test all features including screen capture, window capture, tab capture, and various audio combinations. Verify that recordings save correctly and that the timer displays accurate durations. Test with different quality settings to ensure the extension performs well across various hardware configurations.
 
@@ -608,7 +608,7 @@ Pay special attention to edge cases and error handling. What happens if the user
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and working correctly, you can publish it to the Chrome Web Store to reach millions of users. Prepare promotional assets including screenshots, a compelling description, and relevant keywords. Ensure your extension follows all Chrome Web Store policies, particularly those related to privacy and data handling. The store review process typically takes a few days, and you will receive feedback if any issues need to be addressed before publication.
 
@@ -616,7 +616,7 @@ Consider creating a website or documentation for your extension to help users ge
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a screen recorder Chrome extension is an excellent project that combines practical utility with valuable learning opportunities. The extension you have created in this guide demonstrates how modern web APIs can be leveraged within Chrome extensions to build powerful tools that rival standalone software. The skills you have developed. working with the Display Media API, implementing MediaRecorder, managing file downloads, and designing intuitive user interfaces. transfer directly to other extension projects you may undertake in the future.
 

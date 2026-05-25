@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Notifications. How to Send Desktop Alerts and Updates
 
-Introduction {#introduction}
+## Introduction {#introduction}
 
 The `chrome.notifications` API enables Chrome extensions to display desktop notifications to users, even when the extension's popup or service worker is not actively running. This API is essential for building user engagement features, alerting users to important events, and providing real-time updates without requiring users to keep your extension's interface open.
 
 Desktop notifications appear in the system's notification center and persist until the user dismisses them or they timeout. This makes them perfect for scenarios like monitoring tasks, message alerts, background synchronization status, and time-sensitive updates.
 
-Adding the Notifications Permission {#adding-the-notifications-permission}
+## Adding the Notifications Permission {#adding-the-notifications-permission}
 
 Before using the notifications API, you must declare the appropriate permissions in your extension's `manifest.json` file:
 
@@ -26,7 +26,7 @@ Before using the notifications API, you must declare the appropriate permissions
 
 For Manifest V3 extensions, the notifications API works within the service worker context. However, note that the notification will be displayed by the Chrome browser itself, not by your extension's running process.
 
-Creating Basic Notifications {#creating-basic-notifications}
+## Creating Basic Notifications {#creating-basic-notifications}
 
 The `chrome.notifications.create()` method is the primary way to display notifications. This method accepts a unique notification ID and a notification options object:
 
@@ -45,11 +45,11 @@ chrome.notifications.create("notification-id-1", {
 
 The notification ID is important, you can use it to update or clear specific notifications later. If you pass an empty string or null as the ID, Chrome will generate a unique ID automatically.
 
-Notification Types {#notification-types}
+## Notification Types {#notification-types}
 
 Chrome supports several notification types that determine how the notification appears:
 
-Basic Notification
+### Basic Notification
 
 The most common type, displaying an icon, title, and message:
 
@@ -62,7 +62,7 @@ The most common type, displaying an icon, title, and message:
 }
 ```
 
-Image Notification
+### Image Notification
 
 Displays a larger image, ideal for visual content:
 
@@ -76,9 +76,9 @@ Displays a larger image, ideal for visual content:
 }
 ```
 
-List Notification
+### List Notification
 
-Shows multiple items in a structured format:
+### Shows multiple items in a structured format:
 
 ```javascript
 {
@@ -94,9 +94,9 @@ Shows multiple items in a structured format:
 }
 ```
 
-Progress Notification
+### Progress Notification
 
-Displays a progress bar for ongoing operations:
+### Displays a progress bar for ongoing operations:
 
 ```javascript
 {
@@ -108,7 +108,7 @@ Displays a progress bar for ongoing operations:
 }
 ```
 
-Adding Buttons to Notifications {#adding-buttons-to-notifications}
+## Adding Buttons to Notifications {#adding-buttons-to-notifications}
 
 Interactive buttons make notifications more powerful by allowing users to take action directly from the notification:
 
@@ -129,13 +129,13 @@ chrome.notifications.create("notification-with-buttons", {
 
 When users click these buttons, your extension receives the event through the `chrome.notifications.onButtonClicked` listener.
 
-Handling Notification Events {#handling-notification-events}
+## Handling Notification Events {#handling-notification-events}
 
 Your extension can respond to user interactions with notifications through several event listeners:
 
-Click Events
+### Click Events
 
-Triggered when users click the notification body:
+### Triggered when users click the notification body:
 
 ```javascript
 chrome.notifications.onClicked.addListener(function(notificationId) {
@@ -146,9 +146,9 @@ chrome.notifications.onClicked.addListener(function(notificationId) {
 });
 ```
 
-Button Click Events
+### Button Click Events
 
-Triggered when users click action buttons:
+### Triggered when users click action buttons:
 
 ```javascript
 chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex) {

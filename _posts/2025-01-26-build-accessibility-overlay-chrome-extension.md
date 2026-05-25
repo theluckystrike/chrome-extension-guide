@@ -18,7 +18,7 @@ Whether you are a developer looking to create tools for accessibility testing or
 
 ---
 
-What is an Accessibility Overlay Extension? {#what-is-accessibility-overlay}
+## What is an Accessibility Overlay Extension? {#what-is-accessibility-overlay}
 
 An accessibility overlay extension is a Chrome extension that overlays visual indicators on web pages to highlight accessibility issues. These tools can scan websites for WCAG (Web Content Accessibility Guidelines) violations, provide real-time feedback, and offer suggestions for fixing problems.
 
@@ -26,7 +26,7 @@ The best accessibility overlay extensions serve multiple purposes. They act as a
 
 Building your own accessibility overlay extension gives you complete control over the features and functionality. You can customize it for specific use cases, integrate with your existing development workflow, or create a product for the accessibility-conscious market.
 
-Why Build an Accessibility Overlay Extension in 2025
+### Why Build an Accessibility Overlay Extension in 2025
 
 The demand for accessibility tools has never been higher. Several factors drive this growth:
 
@@ -40,11 +40,11 @@ The demand for accessibility tools has never been higher. Several factors drive 
 
 ---
 
-Project Setup and Extension Structure {#project-setup}
+## Project Setup and Extension Structure {#project-setup}
 
 Let's start building our accessibility overlay Chrome extension. We'll use Manifest V3, the latest Chrome extension platform.
 
-Creating the Project Directory
+### Creating the Project Directory
 
 First, create a new directory for your project:
 
@@ -53,9 +53,9 @@ mkdir accessibility-overlay-extension
 cd accessibility-overlay-extension
 ```
 
-Manifest File (manifest.json)
+### Manifest File (manifest.json)
 
-Create the manifest.json file with the necessary permissions:
+### Create the manifest.json file with the necessary permissions:
 
 ```json
 {
@@ -87,7 +87,7 @@ Create the manifest.json file with the necessary permissions:
 
 The manifest declares permissions for accessing the active tab, injecting scripts, and storing user preferences. The content scripts will run on all websites to analyze and overlay accessibility information.
 
-Popup Interface (popup.html)
+### Popup Interface (popup.html)
 
 Create a user-friendly popup interface:
 
@@ -158,7 +158,7 @@ Create a user-friendly popup interface:
 </html>
 ```
 
-Popup Logic (popup.js)
+### Popup Logic (popup.js)
 
 Handle user interactions and communicate with the content script:
 
@@ -214,11 +214,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Core Accessibility Checking Logic {#accessibility-checking}
+## Core Accessibility Checking Logic {#accessibility-checking}
 
 Now let's build the core functionality that makes this a true a11y checker chrome tool. Create the content script that analyzes pages for accessibility issues.
 
-Content Script (content.js)
+### Content Script (content.js)
 
 This script runs on every page and performs comprehensive accessibility analysis:
 
@@ -531,9 +531,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 This content script implements comprehensive wcag overlay extension functionality, scanning for multiple accessibility issues and providing visual overlays.
 
-Overlay Styles (styles.css)
+### Overlay Styles (styles.css)
 
-Create styles for the accessibility highlights:
+### Create styles for the accessibility highlights:
 
 ```css
 /* Accessibility overlay indicator styles */
@@ -595,11 +595,11 @@ Create styles for the accessibility highlights:
 
 ---
 
-Advanced WCAG Compliance Features {#advanced-wcag}
+## Advanced WCAG Compliance Features {#advanced-wcag}
 
 To make your accessibility overlay extension truly comprehensive, add support for more advanced WCAG guidelines.
 
-ARIA Validation
+### ARIA Validation
 
 Implement proper ARIA attribute validation:
 
@@ -634,7 +634,7 @@ const ariaRules = {
 };
 ```
 
-Keyboard Navigation Testing
+### Keyboard Navigation Testing
 
 Add keyboard navigation testing capabilities:
 
@@ -681,18 +681,18 @@ function testKeyboardNavigation() {
 
 ---
 
-Testing and Deployment {#testing-deployment}
+## Testing and Deployment {#testing-deployment}
 
-Local Testing
+### Local Testing
 
-To test your extension:
+### To test your extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension directory
 4. Visit any website and test the accessibility scanning features
 
-Building for Distribution
+### Building for Distribution
 
 Create a production build:
 
@@ -707,7 +707,7 @@ Create icons directory if needed
 mkdir -p dist/icons
 ```
 
-Best Practices for Accessibility Extensions
+### Best Practices for Accessibility Extensions
 
 Follow these best practices when building your a11y checker chrome tool:
 
@@ -723,7 +723,7 @@ Follow these best practices when building your a11y checker chrome tool:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an accessibility overlay Chrome extension is a rewarding project that helps make the web more inclusive. This tutorial covered the essential components: manifest configuration, popup interface, content scripts for page analysis, and visual overlay rendering.
 

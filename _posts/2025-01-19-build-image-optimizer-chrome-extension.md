@@ -18,29 +18,29 @@ we will walk through the complete process of building a production-ready image o
 
 ---
 
-Why Build an Image Optimizer Extension? {#why-build}
+## Why Build an Image Optimizer Extension? {#why-build}
 
 The demand for image optimization tools continues to grow exponentially. Website owners, developers, content creators, and everyday internet users all need ways to reduce image file sizes without sacrificing visual quality. Here is why building an image optimizer extension is an excellent project:
 
-Market Demand
+### Market Demand
 
 Every website struggles with image optimization. Large images are the primary cause of slow page loads, which negatively impacts user experience, SEO rankings, and conversion rates. Google Core Web Vitals specifically measures Largest Contentful Paint (LCP), which is heavily influenced by image sizes. An extension that helps users compress images before uploading them to their websites solves a real problem.
 
-Technical Feasibility
+### Technical Feasibility
 
 Modern browsers provide powerful APIs that make client-side image compression entirely feasible. The Canvas API, OffscreenCanvas, and various JavaScript libraries enable efficient image processing without server-side code. This means your extension can process images locally on the user's device, ensuring privacy and speed.
 
-Monetization Potential
+### Monetization Potential
 
 An image optimizer extension can be monetized through various channels. You could offer a freemium model with compression limits, premium format conversions (like HEIC to JPEG), or batch processing capabilities. The Chrome Web Store provides a built-in audience of millions of potential users.
 
 ---
 
-Project Architecture Overview {#architecture}
+## Project Architecture Overview {#architecture}
 
 Before diving into code, let us establish the architecture of our image optimizer extension. A well-structured extension is easier to develop, maintain, and extend.
 
-Core Components
+### Core Components
 
 Our extension will consist of three main components:
 
@@ -50,7 +50,7 @@ Our extension will consist of three main components:
 
 3. Content Script: Injected into web pages to enable drag-and-drop functionality and provide a smooth experience.
 
-Key Features
+### Key Features
 
 We will implement the following features:
 - Drag-and-drop image upload
@@ -63,7 +63,7 @@ We will implement the following features:
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Create a new directory for your extension project and set up the following file structure:
 
@@ -99,7 +99,7 @@ npm install browser-image-compression
 
 ---
 
-Creating the Manifest File {#manifest}
+## Creating the Manifest File {#manifest}
 
 The manifest.json file is the foundation of every Chrome extension. For our image optimizer, we need to declare the appropriate permissions and define the extension's components.
 
@@ -142,11 +142,11 @@ The manifest declares that we need storage permissions to save user preferences,
 
 ---
 
-Building the Popup Interface {#popup}
+## Building the Popup Interface {#popup}
 
 The popup is the primary user interface for our extension. It needs to be clean, intuitive, and responsive. Let us create a popup that provides a great user experience.
 
-HTML Structure
+### HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -223,7 +223,7 @@ HTML Structure
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
 The CSS should be clean and modern, following Chrome's design guidelines:
 
@@ -474,7 +474,7 @@ header h1 {
 
 ---
 
-Implementing the Popup Logic {#popup-javascript}
+## Implementing the Popup Logic {#popup-javascript}
 
 Now let us implement the JavaScript logic for the popup. This includes handling file uploads, managing compression settings, and coordinating with the background script.
 
@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Creating the Background Service Worker {#background}
+## Creating the Background Service Worker {#background}
 
 The background service worker handles extension lifecycle events and can manage more complex operations if needed:
 
@@ -732,7 +732,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Implementing Content Script for Drag and Drop {#content-script}
+## Implementing Content Script for Drag and Drop {#content-script}
 
 The content script enables drag-and-drop functionality directly on web pages, providing a smooth experience:
 
@@ -815,7 +815,7 @@ function createFloatingDropZone() {
 
 ---
 
-Understanding Image Compression Algorithms {#compression-algorithms}
+## Understanding Image Compression Algorithms {#compression-algorithms}
 
 To build a truly effective image optimizer, you need to understand the underlying compression techniques. Let us explore the most important algorithms:
 
@@ -825,13 +825,13 @@ Image compression falls into two categories: lossy and lossless. Lossy compressi
 
 Our extension primarily uses lossy compression for JPEG and WebP formats, which achieve much smaller file sizes. For PNG, we use lossless compression to maintain transparency.
 
-WebP Advantages
+### WebP Advantages
 
 WebP is Google's modern image format that provides superior compression for both lossy and lossless images. WebP images are typically 25-35% smaller than comparable JPEG images at equivalent quality levels. This makes WebP an excellent choice for web optimization.
 
 When users select WebP as their output format, they can expect significant file size reductions while maintaining visually comparable quality to the original images.
 
-Quality-Size Tradeoff
+### Quality-Size Tradeoff
 
 The quality slider in our extension directly controls the compression level. At 100% quality, images retain their original quality but may not see significant size reductions. At lower quality settings, file sizes decrease dramatically but visible artifacts may appear.
 
@@ -839,33 +839,33 @@ For web use, a quality setting between 70-85% typically provides the best balanc
 
 ---
 
-Best Practices for Extension Development {#best-practices}
+## Best Practices for Extension Development {#best-practices}
 
 As you build your image optimizer extension, keep these best practices in mind:
 
-Performance Optimization
+### Performance Optimization
 
 Image compression can be resource-intensive. Use Web Workers to perform compression in the background, preventing the UI from freezing. The browser-image-compression library we are using supports Web Workers out of the box.
 
 Implement lazy loading for image previews to avoid loading all thumbnails simultaneously. Consider using the Intersection Observer API to load previews only when they become visible.
 
-User Experience
+### User Experience
 
 Always show meaningful progress indicators during compression. Large images can take several seconds to compress, and users need feedback that the process is working.
 
 Provide clear before-and-after comparisons so users can see exactly how much space they are saving. This demonstrates the value of your extension and encourages adoption.
 
-Error Handling
+### Error Handling
 
 Handle edge cases gracefully: corrupt image files, unsupported formats, extremely large files, and browser memory limitations. Provide clear error messages that help users understand what went wrong.
 
-Privacy and Security
+### Privacy and Security
 
 Since our extension processes images entirely client-side, user privacy is inherently protected, no images are uploaded to external servers. Make this clear in your extension description to build user trust.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension in various scenarios:
 
@@ -882,7 +882,7 @@ To load your extension in Chrome for testing:
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is tested and ready, follow these steps to publish:
 
@@ -896,7 +896,7 @@ Once your extension is tested and ready, follow these steps to publish:
 
 ---
 
-Future Enhancements {#future-enhancements}
+## Future Enhancements {#future-enhancements}
 
 Once you have a solid foundation, consider adding these advanced features:
 
@@ -908,7 +908,7 @@ Once you have a solid foundation, consider adding these advanced features:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an image optimizer Chrome extension is an excellent project that combines practical utility with meaningful technical challenges. By following this guide, you have learned how to create a fully functional extension that can compress images, convert between formats, and significantly reduce file sizes, all while running entirely in the user's browser.
 

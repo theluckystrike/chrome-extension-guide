@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-isolati
 last_modified_at: 2026-01-15
 ---
 
-Content Script Isolation Patterns
+### Content Script Isolation Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The [content script isolation reference](../guides/content-script-isolation.md) explains how Chrome's isolated worlds work. This guide provides practical patterns for working within. and across. isolation boundaries: safe DOM interaction, cross-world communication, Shadow DOM encapsulation, defending against hostile pages, and managing multiple content scripts.
 
 ---
 
-The Isolation Model {#the-isolation-model}
+## The Isolation Model {#the-isolation-model}
 
 ```
 
@@ -44,7 +44,7 @@ Both worlds see the same DOM, but they have separate JavaScript execution contex
 
 ---
 
-Pattern 1: Safe DOM Access {#pattern-1-safe-dom-access}
+## Pattern 1: Safe DOM Access {#pattern-1-safe-dom-access}
 
 The page can override built-in DOM methods. Protect against tampered prototypes:
 
@@ -111,7 +111,7 @@ Use with `run_at: "document_start"` to capture native references before any page
 
 ---
 
-Pattern 2: Shadow DOM Encapsulation {#pattern-2-shadow-dom-encapsulation}
+## Pattern 2: Shadow DOM Encapsulation {#pattern-2-shadow-dom-encapsulation}
 
 Inject UI that is completely isolated from the page's CSS and JavaScript:
 
@@ -184,7 +184,7 @@ function createIsolatedUI() {
 }
 ```
 
-Why Closed Shadow DOM? {#why-closed-shadow-dom}
+## Why Closed Shadow DOM? {#why-closed-shadow-dom}
 
 ```ts
 // mode: "open". page JS can access your shadow root
@@ -200,11 +200,11 @@ const hostClosed = div.attachShadow({ mode: "closed" });
 
 ---
 
-Pattern 3: Cross-World Communication {#pattern-3-cross-world-communication}
+## Pattern 3: Cross-World Communication {#pattern-3-cross-world-communication}
 
 Content scripts (isolated world) and page scripts (main world) can communicate through the shared DOM:
 
-Using window.postMessage {#using-windowpostmessage}
+## Using window.postMessage {#using-windowpostmessage}
 
 ```ts
 // content.ts. Listen for page messages
@@ -236,7 +236,7 @@ function sendToPage(type: string, payload: unknown) {
 }
 ```
 
-Using Custom DOM Events {#using-custom-dom-events}
+## Using Custom DOM Events {#using-custom-dom-events}
 
 ```ts
 // content.ts. More targeted than postMessage
@@ -265,7 +265,7 @@ listenToPage("request-data", (detail) => {
 });
 ```
 
-Using Shared DOM Elements (Data Channel) {#using-shared-dom-elements-data-channel}
+## Using Shared DOM Elements (Data Channel) {#using-shared-dom-elements-data-channel}
 
 ```ts
 // content.ts. Hidden element as a data channel
@@ -301,7 +301,7 @@ function sendViaChannel(data: unknown) {
 
 ---
 
-Pattern 4: Defending Against Hostile Pages {#pattern-4-defending-against-hostile-pages}
+## Pattern 4: Defending Against Hostile Pages {#pattern-4-defending-against-hostile-pages}
 
 Pages can try to interfere with your content script. Defensive patterns:
 
@@ -351,7 +351,7 @@ function isRateLimited(): boolean {
 
 ---
 
-Pattern 5: Multiple Content Scripts {#pattern-5-multiple-content-scripts}
+## Pattern 5: Multiple Content Scripts {#pattern-5-multiple-content-scripts}
 
 When you have multiple content scripts or need modular organization:
 
@@ -377,7 +377,7 @@ When you have multiple content scripts or need modular organization:
 }
 ```
 
-Coordinate between scripts:
+### Coordinate between scripts:
 
 ```ts
 // content/init.ts. Runs first at document_start
@@ -403,7 +403,7 @@ const el = shared.nativeQuerySelector("#target");
 
 ---
 
-Pattern 6: Programmatic Injection with World Selection {#pattern-6-programmatic-injection-with-world-selection}
+## Pattern 6: Programmatic Injection with World Selection {#pattern-6-programmatic-injection-with-world-selection}
 
 MV3 lets you choose which world to inject into:
 
@@ -451,7 +451,7 @@ async function analyzeTab(tabId: number) {
 
 ---
 
-Pattern 7: CSS Isolation Without Shadow DOM {#pattern-7-css-isolation-without-shadow-dom}
+## Pattern 7: CSS Isolation Without Shadow DOM {#pattern-7-css-isolation-without-shadow-dom}
 
 When Shadow DOM is overkill, use aggressive CSS scoping:
 
@@ -498,7 +498,7 @@ function injectScopedUI() {
 
 ---
 
-Pattern 8: Context Invalidation Handling {#pattern-8-context-invalidation-handling}
+## Pattern 8: Context Invalidation Handling {#pattern-8-context-invalidation-handling}
 
 When an extension updates, existing content scripts lose their connection to the background:
 
@@ -559,7 +559,7 @@ function showBanner(message: string) {
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Problem It Solves |
 |---------|------------------|

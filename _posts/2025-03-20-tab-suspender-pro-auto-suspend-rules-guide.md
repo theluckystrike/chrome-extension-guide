@@ -18,7 +18,7 @@ Understanding how to properly configure auto-suspend rules transforms your brows
 
 ---
 
-How Auto-Suspend Works in Tab Suspender Pro {#how-auto-suspend-works}
+## How Auto-Suspend Works in Tab Suspender Pro {#how-auto-suspend-works}
 
 Before diving into configuration, it is essential to understand the underlying mechanism that makes automatic suspension possible. Tab Suspender Pro monitors user activity across all open tabs, tracking interactions such as clicks, scrolls, keyboard input, and media playback. When a tab remains inactive for a configurable period, the extension triggers the suspension process, which essentially pauses the tab's execution without closing it.
 
@@ -32,7 +32,7 @@ The extension runs quietly in the background, constantly evaluating your open ta
 
 ---
 
-Configuring Time-Based Auto-Suspend Rules {#configuring-time-based-rules}
+## Configuring Time-Based Auto-Suspend Rules {#configuring-time-based-rules}
 
 Time-based rules form the foundation of most Tab Suspender Pro configurations. These rules suspend tabs after a specified period of inactivity, making them perfect for users who frequently leave tabs open while working on other tasks. Setting up time-based rules is straightforward, but mastering the various options allows for highly customized control.
 
@@ -48,7 +48,7 @@ One powerful feature of time-based rules is the ability to set different timeout
 
 ---
 
-URL Pattern Rules for Targeted Suspension {#url-pattern-rules}
+## URL Pattern Rules for Targeted Suspension {#url-pattern-rules}
 
 While time-based rules provide general automation, URL pattern rules allow precise targeting of specific websites or page types. These rules use pattern matching to identify tabs based on their web addresses, enabling granular control over which sites suspend and when. Understanding URL pattern syntax opens up powerful possibilities for customized tab management.
 
@@ -64,7 +64,7 @@ The pattern matching system also supports negative matching, allowing you to cre
 
 ---
 
-Tab Count Threshold Rules for Dynamic Management {#tab-count-threshold-rules}
+## Tab Count Threshold Rules for Dynamic Management {#tab-count-threshold-rules}
 
 Sometimes static rules based on time or URL patterns are not enough. Tab count threshold rules add a dynamic dimension to your automation, triggering suspension based on how many tabs you have open. This approach adapts to your browsing intensity, automatically taking action when tab accumulation threatens performance.
 
@@ -80,7 +80,7 @@ Threshold rules also support "suspend all except active" mode, which suspends ev
 
 ---
 
-Combining Multiple Rules for Complex Scenarios {#combining-multiple-rules}
+## Combining Multiple Rules for Complex Scenarios {#combining-multiple-rules}
 
 Real-world browsing scenarios rarely fit into simple single-rule configurations. Tab Suspender Pro excels at combining multiple rule types into cohesive strategies that handle various situations elegantly. Understanding how rules interact and prioritize creates opportunities for sophisticated automation that feels almost intelligent.
 
@@ -96,7 +96,7 @@ Rule combinations also support time-based activation. You might have aggressive 
 
 ---
 
-Per-Window Settings for Contextual Control {#per-window-settings}
+## Per-Window Settings for Contextual Control {#per-window-settings}
 
 Modern Chrome users often work with multiple windows simultaneously, a work window for professional tasks, a research window for investigations, and a personal window for leisure browsing. Tab Suspender Pro recognizes this reality and provides comprehensive per-window settings that let you tailor suspension behavior to each context independently.
 
@@ -112,7 +112,7 @@ The per-window system also handles new window creation intelligently. You can co
 
 ---
 
-Scheduling Suspension Windows for Time-Based Automation {#scheduling-suspension-windows}
+## Scheduling Suspension Windows for Time-Based Automation {#scheduling-suspension-windows}
 
 Beyond simple inactivity timeouts, Tab Suspender Pro offers comprehensive scheduling capabilities that let you define specific time windows when auto-suspend is active or inactive. This temporal control creates automation that aligns perfectly with your daily routine, suspending tabs during focused work periods while allowing them to remain open during leisure time.
 
@@ -128,7 +128,7 @@ Advanced users can create complex schedule hierarchies with multiple overlapping
 
 ---
 
-Conclusion: Mastering Auto-Suspend for Effortless Tab Management
+### Conclusion: Mastering Auto-Suspend for Effortless Tab Management
 
 Tab Suspender Pro's auto-suspend rules system represents a quantum leap in browser productivity tools. By understanding how each rule type works, time-based rules, URL patterns, tab count thresholds, and scheduling, you can create a personalized automation strategy that handles tab management completely in the background. The key is starting simple and gradually adding complexity as you discover what works best for your specific workflow.
 

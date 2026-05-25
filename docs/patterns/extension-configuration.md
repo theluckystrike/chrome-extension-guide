@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-configuratio
 last_modified_at: 2026-01-15
 ---
 
-Extension Configuration Patterns
+### Extension Configuration Patterns
 
 Configuration management is critical for building flexible, user-customizable Chrome extensions. This guide covers patterns for implementing solid configuration systems.
 
-Default Configuration {#default-configuration}
+## Default Configuration {#default-configuration}
 
 Always provide hardcoded default values merged with user overrides:
 
@@ -28,9 +28,9 @@ async function loadConfig(): Promise<Config> {
 }
 ```
 
-Schema Validation {#schema-validation}
+## Schema Validation {#schema-validation}
 
-Validate configuration on load and reject invalid values:
+### Validate configuration on load and reject invalid values:
 
 ```typescript
 const configSchema = z.object({
@@ -44,9 +44,9 @@ function validateConfig(raw: unknown): Config {
 }
 ```
 
-Configuration Versioning {#configuration-versioning}
+## Configuration Versioning {#configuration-versioning}
 
-Migrate config across extension updates:
+### Migrate config across extension updates:
 
 ```typescript
 const CONFIG_VERSION = 2;
@@ -64,9 +64,9 @@ async function migrateConfig(config: Config): Promise<Config> {
 }
 ```
 
-Layered Configuration {#layered-configuration}
+## Layered Configuration {#layered-configuration}
 
-Priority: defaults < user settings < enterprise policy:
+### Priority: defaults < user settings < enterprise policy:
 
 ```typescript
 async function getEffectiveConfig(): Promise<Config> {
@@ -79,9 +79,9 @@ async function getEffectiveConfig(): Promise<Config> {
 }
 ```
 
-Observing Config Changes {#observing-config-changes}
+## Observing Config Changes {#observing-config-changes}
 
-Use `chrome.storage.onChanged` for reactive updates:
+### Use `chrome.storage.onChanged` for reactive updates:
 
 ```typescript
 chrome.storage.onChanged.addListener((changes, area) => {
@@ -92,9 +92,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-Typed Config with TypeScript {#typed-config-with-typescript}
+## Typed Config with TypeScript {#typed-config-with-typescript}
 
-Use interfaces for type-safe configuration:
+### Use interfaces for type-safe configuration:
 
 ```typescript
 interface ExtensionConfig {
@@ -106,20 +106,20 @@ interface ExtensionConfig {
 }
 ```
 
-Config UI Patterns {#config-ui-patterns}
+## Config UI Patterns {#config-ui-patterns}
 
 - Options page forms: Group settings by category (general, appearance, advanced, experimental)
 - Import/Export: JSON serialization for backup and sharing
 - Reset to defaults: Clear user overrides, restore factory settings
 
-Sync vs Local Storage {#sync-vs-local-storage}
+## Sync vs Local Storage {#sync-vs-local-storage}
 
 - chrome.storage.sync: User preferences that follow the user across devices
 - chrome.storage.local: Machine-specific settings (window size, debug flags)
 
-Feature Toggles {#feature-toggles}
+## Feature Toggles {#feature-toggles}
 
-Enable/disable features via boolean flags:
+### Enable/disable features via boolean flags:
 
 ```typescript
 const FEATURES = {
@@ -128,7 +128,7 @@ const FEATURES = {
 } as const;
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Options Page Guide](../guides/options-page.md)
 - [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)

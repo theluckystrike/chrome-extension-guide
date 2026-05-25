@@ -18,7 +18,7 @@ This comprehensive guide explores every aspect of using Tab Suspender Pro in Inc
 
 ---
 
-Understanding Chrome Incognito Mode and Extensions {#understanding-incognito-mode}
+## Understanding Chrome Incognito Mode and Extensions {#understanding-incognito-mode}
 
 Before diving into Tab Suspender Pro's specific behavior, it's essential to understand what Incognito mode actually does and how it interacts with Chrome extensions. Many users operate under the misconception that Incognito mode provides complete anonymity across the entire internet, but this is not entirely accurate. Incognito mode primarily focuses on local privacy, preventing Chrome from storing your browsing history, cookies, site data, and form autofill information on your device.
 
@@ -26,7 +26,7 @@ When you open an Incognito window, Chrome creates a separate browsing session th
 
 However, Incognito mode does not hide your activity from websites you visit, your internet service provider, or your employer if you're using a managed network. The protection is specifically scoped to your local device, which is an important distinction to understand when evaluating your overall privacy posture. This local-only protection model also has significant implications for how Chrome extensions function in Incognito windows.
 
-How Chrome Handles Extensions in Incognito Mode {#extensions-in-incognito}
+## How Chrome Handles Extensions in Incognito Mode {#extensions-in-incognito}
 
 By default, Chrome disables all extensions when you open an Incognito window. This deliberate design choice stems from privacy concerns, extensions can access a significant amount of data about your browsing activity, including the content of pages you visit, your browsing history, and various browser APIs. Allowing extensions to operate in Incognito mode by default would potentially undermine the privacy protections that Incognito mode provides.
 
@@ -36,7 +36,7 @@ enabling an extension in Incognito mode does not mean the extension will functio
 
 ---
 
-Enabling Tab Suspender Pro in Incognito Mode {#enabling-extension-incognito}
+## Enabling Tab Suspender Pro in Incognito Mode {#enabling-extension-incognito}
 
 Enabling Tab Suspender Pro in Incognito mode follows the standard Chrome process for allowing extensions in private browsing. However, understanding the implications of this enablement is crucial for making an informed decision about whether to activate the extension in your private windows. The process involves several steps that ensure you have complete control over how Tab Suspender Pro interacts with your Incognito browsing sessions.
 
@@ -46,7 +46,7 @@ Within the extension details page, you'll find the "Allow in Incognito" toggle s
 
 Once you enable Tab Suspender Pro in Incognito mode, the extension will begin functioning according to its default settings within your private windows. However, you may want to customize these settings specifically for Incognito use, which Chrome allows you to do through the extension's own configuration options. We'll explore these customization possibilities in detail later in this guide.
 
-Step-by-Step Configuration Guide {#configuration-steps}
+## Step-by-Step Configuration Guide {#configuration-steps}
 
 To configure Tab Suspender Pro specifically for Incognito mode, start by clicking on the Tab Suspender Pro icon in your Chrome toolbar when you have an Incognito window open. This will launch the extension's popup interface, which contains various settings and options. Look for the settings or configuration section where you can adjust suspension behavior.
 
@@ -56,7 +56,7 @@ You can also configure whitelist rules specifically for Incognito mode. The whit
 
 ---
 
-Tab Suspender Pro Incognito Behavior: What to Expect {#incognito-behavior}
+## Tab Suspender Pro Incognito Behavior: What to Expect {#incognito-behavior}
 
 Understanding how Tab Suspender Pro behaves in Incognito mode requires examining several key aspects of its functionality. The extension's core mission, automatically suspending inactive tabs to conserve memory, remains consistent whether you're in regular or Incognito mode. However, there are important differences in how the extension handles data and manages tabs in the private browsing context that every user should understand.
 
@@ -66,7 +66,7 @@ However, there's a critical privacy consideration to keep in mind when using Tab
 
 The extension does not maintain any additional logs or records of your Incognito browsing activity beyond what Chrome itself stores temporarily. This means the privacy protections of Incognito mode remain largely intact when Tab Suspender Pro is active. The extension is simply managing tab states through Chrome's built-in APIs and does not independently track or store your browsing data.
 
-Memory Management in Private Browsing {#memory-management-incognito}
+## Memory Management in Private Browsing {#memory-management-incognito}
 
 One of the primary reasons to use Tab Suspender Pro in Incognito mode is the memory conservation benefits. Even in private browsing sessions, Chrome allocates memory for each open tab, and Incognito windows can quickly consume significant system resources if you tend to keep many tabs open. Tab suspension becomes especially valuable in Incognito mode because the privacy-focused nature of these sessions often leads users to open more tabs than usual, whether researching sensitive topics or managing multiple private accounts.
 
@@ -76,7 +76,7 @@ The reloading behavior when you return to a suspended Incognito tab is also wort
 
 ---
 
-Privacy Implications of Using Tab Suspender Pro in Incognito {#privacy-implications}
+## Privacy Implications of Using Tab Suspender Pro in Incognito {#privacy-implications}
 
 Using any extension in Incognito mode raises legitimate privacy questions that deserve careful consideration. While Tab Suspender Pro is a relatively lightweight extension focused on tab management, understanding its privacy implications helps you make informed decisions about your browsing habits. The key question many users ask is whether enabling Tab Suspender Pro in Incognito mode undermines the privacy protections that Incognito mode provides.
 
@@ -86,7 +86,7 @@ However, there are subtle privacy considerations worth noting. When Tab Suspende
 
 The whitelist functionality deserves special attention from a privacy perspective. If you configure Tab Suspender Pro to whitelist specific websites in Incognito mode, this configuration is stored separately from your Incognito session data. Chrome maintains this settings data in your regular profile, which means your whitelist preferences are not cleared when you close Incognito windows. This is generally not a privacy concern since whitelist entries are simply domain names and don't reveal any specific browsing activity, but it's worth understanding where your configuration data is stored.
 
-What Data Tab Suspender Pro Can and Cannot Access {#data-access}
+## What Data Tab Suspender Pro Can and Cannot Access {#data-access}
 
 Clarifying what data Tab Suspender Pro can access in Incognito mode helps address common misconceptions about extension capabilities in private browsing. The extension operates within Chrome's sandboxed extension API, which provides limited access to browser functionality. Specifically, Tab Suspender Pro can access tab titles, URLs (with certain restrictions), and timing information about when tabs were last active.
 
@@ -98,7 +98,7 @@ The extension also cannot track your browsing patterns across different Incognit
 
 ---
 
-Data Handling in Private Mode {#data-handling-private-mode}
+## Data Handling in Private Mode {#data-handling-private-mode}
 
 Understanding how Tab Suspender Pro handles data in Incognito mode requires examining both what happens during the session and what happens afterward. Chrome's architecture ensures that any data generated or accessed during an Incognito session is handled according to strict privacy guidelines, and extensions must comply with these same rules when operating in private browsing windows.
 
@@ -108,7 +108,7 @@ Any configuration changes you make to Tab Suspender Pro while in Incognito mode 
 
 The extension's statistics and memory savings tracking, which shows how much memory you've recovered through tab suspension, may function differently in Incognito mode. Some versions of Tab Suspender Pro may not track or display statistics for Incognito sessions to maintain stricter privacy boundaries. If you do see statistics for Incognito sessions, these values are typically calculated from the current session only and do not persist after the window closes.
 
-Clearing Extension Data in Incognito {#clearing-data}
+## Clearing Extension Data in Incognito {#clearing-data}
 
 When you close an Incognito window, Chrome performs a comprehensive cleanup of all session data, including any information that extensions may have been using. This cleanup is automatic and comprehensive, there's no way for extensions to retain Incognito session data once the window closes. This behavior is fundamental to how Chrome implements Incognito privacy and applies to all extensions uniformly.
 
@@ -118,7 +118,7 @@ If you're concerned about extension data persisting in your regular profile, you
 
 ---
 
-Configuring Separate Rules for Incognito {#configuring-separate-rules}
+## Configuring Separate Rules for Incognito {#configuring-separate-rules}
 
 One of Tab Suspender Pro's most valuable features for Incognito users is the ability to configure separate rules and preferences specifically for private browsing sessions. While the extension can share settings between regular and Incognito browsing, many users find it beneficial to customize their tab suspension behavior differently depending on their privacy context. Chrome provides mechanisms for managing these separate configurations effectively.
 
@@ -128,7 +128,7 @@ Consider using shorter suspension delays in Incognito mode. Since Incognito sess
 
 The whitelist becomes especially important in Incognito mode. You might want to keep certain sites unsuspended that you actively use during private browsing, such as password managers, secure document repositories, or communication tools. Adding these sites to your Incognito whitelist ensures they remain active and accessible without requiring reloading, which can be important when dealing with sensitive services that have their own session management.
 
-Practical Configuration Strategies {#configuration-strategies}
+## Practical Configuration Strategies {#configuration-strategies}
 
 Implementing effective separate rules for Incognito mode requires a thoughtful approach that balances privacy, productivity, and memory management. Here are practical strategies to consider when configuring Tab Suspender Pro for your Incognito browsing sessions.
 
@@ -142,7 +142,7 @@ Finally, periodically review your Incognito-specific settings to ensure they sti
 
 ---
 
-Best Practices for Using Tab Suspender Pro in Incognito Mode {#best-practices}
+## Best Practices for Using Tab Suspender Pro in Incognito Mode {#best-practices}
 
 Applying best practices for Tab Suspender Pro in Incognito mode helps you get the most value from both the extension and Chrome's private browsing feature. These recommendations synthesize the technical understanding we've explored into actionable guidance that enhances your overall browsing experience.
 
@@ -158,7 +158,7 @@ Finally, remember that Tab Suspender Pro enhances but doesn't replace good priva
 
 ---
 
-Conclusion: Maximizing Privacy and Productivity {#conclusion}
+## Conclusion: Maximizing Privacy and Productivity {#conclusion}
 
 Tab Suspender Pro in Incognito mode represents a powerful combination of tab management efficiency and private browsing privacy. By understanding how the extension functions within Chrome's Incognito architecture, you can make informed decisions about enabling it, configure separate rules that cater to your specific needs, and enjoy the memory benefits of automatic tab suspension without compromising your privacy protections.
 

@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/proxy-settings/"
 last_modified_at: 2026-01-15
 ---
 
-Proxy Settings API Patterns
+### Proxy Settings API Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Proxy Settings API (`chrome.proxy`) allows extensions to manage Chrome's proxy configuration programmatically. This is essential for building extensions that route traffic through specific proxy servers, implement split tunneling, or provide VPN-like functionality. This guide covers practical patterns for configuring proxies, handling authentication, managing multiple profiles, and building user interfaces for proxy control.
 
@@ -20,11 +20,11 @@ Key facts:
 
 ---
 
-Pattern 1: Proxy Configuration Types {#pattern-1-proxy-configuration-types}
+## Pattern 1: Proxy Configuration Types {#pattern-1-proxy-configuration-types}
 
 Chrome supports multiple proxy configuration modes through the `chrome.proxy.settings.set()` API. Understanding each type is essential for choosing the right approach:
 
-Fixed Servers Mode {#fixed-servers-mode}
+## Fixed Servers Mode {#fixed-servers-mode}
 
 The simplest configuration. direct proxy server assignment:
 
@@ -54,7 +54,7 @@ export interface ProxyConfig {
 }
 ```
 
-Configuration Examples {#configuration-examples}
+## Configuration Examples {#configuration-examples}
 
 ```ts
 // background/proxy-config.ts
@@ -108,7 +108,7 @@ const pacConfig: ProxyConfig = {
 };
 ```
 
-Manifest Permission {#manifest-permission}
+## Manifest Permission {#manifest-permission}
 
 ```json
 // manifest.json
@@ -130,9 +130,9 @@ Manifest Permission {#manifest-permission}
 
 ---
 
-Pattern 2: Fixed Proxy Server Setup {#pattern-2-fixed-proxy-server-setup}
+## Pattern 2: Fixed Proxy Server Setup {#pattern-2-fixed-proxy-server-setup}
 
-Single Proxy for All Traffic {#single-proxy-for-all-traffic}
+## Single Proxy for All Traffic {#single-proxy-for-all-traffic}
 
 The most common use case. routing all traffic through one proxy:
 
@@ -215,9 +215,9 @@ export class ProxyManager {
 }
 ```
 
-Per-Scheme Proxy Routing {#per-scheme-proxy-routing}
+## Per-Scheme Proxy Routing {#per-scheme-proxy-routing}
 
-Different proxies for different protocols:
+### Different proxies for different protocols:
 
 ```ts
 // background/scheme-routing.ts
@@ -262,9 +262,9 @@ await setSchemeBasedProxy({
 });
 ```
 
-Fallback Proxy Chain {#fallback-proxy-chain}
+## Fallback Proxy Chain {#fallback-proxy-chain}
 
-Configure fallback when primary proxy fails:
+### Configure fallback when primary proxy fails:
 
 ```ts
 // background/fallback-proxy.ts
@@ -302,11 +302,11 @@ export async function setProxyWithFallback(chain: ProxyChain): Promise<void> {
 
 ---
 
-Pattern 3: PAC Script Proxy {#pattern-3-pac-script-proxy}
+## Pattern 3: PAC Script Proxy {#pattern-3-pac-script-proxy}
 
 Proxy Auto-Configuration (PAC) scripts provide dynamic proxy selection based on URL patterns.
 
-Inline PAC Script Configuration {#inline-pac-script-configuration}
+## Inline PAC Script Configuration {#inline-pac-script-configuration}
 
 ```ts
 // background/pac-generator.ts
@@ -370,7 +370,7 @@ const pac = new PACGenerator()
 await pac.apply();
 ```
 
-Dynamic PAC Generation Based on User Rules {#dynamic-pac-generation-based-on-user-rules}
+## Dynamic PAC Generation Based on User Rules {#dynamic-pac-generation-based-on-user-rules}
 
 ```ts
 // background/dynamic-pac.ts
@@ -442,11 +442,11 @@ chrome.storage.onChanged.addListener(async (changes) => {
 
 ---
 
-Pattern 4: Proxy Bypass Rules {#pattern-4-proxy-bypass-rules}
+## Pattern 4: Proxy Bypass Rules {#pattern-4-proxy-bypass-rules}
 
 Bypass rules allow certain requests to bypass the proxy and connect directly.
 
-Basic Bypass Configuration {#basic-bypass-configuration}
+## Basic Bypass Configuration {#basic-bypass-configuration}
 
 ```ts
 // background/bypass-rules.ts
@@ -488,7 +488,7 @@ const commonBypasses = [
 await setProxyWithBypass("proxy.example.com", 8080, commonBypasses);
 ```
 
-Pattern Syntax Reference {#pattern-syntax-reference}
+## Pattern Syntax Reference {#pattern-syntax-reference}
 
 ```ts
 // Reference: Bypass pattern syntax
@@ -517,7 +517,7 @@ const bypassPatterns = {
 };
 ```
 
-Combining Bypass with Multiple Proxies {#combining-bypass-with-multiple-proxies}
+## Combining Bypass with Multiple Proxies {#combining-bypass-with-multiple-proxies}
 
 ```ts
 // background/multi-proxy-bypass.ts
@@ -560,11 +560,11 @@ export async function applyProfile(profile: ProxyProfile): Promise<void> {
 
 ---
 
-Pattern 5: Dynamic Proxy Switching {#pattern-5-dynamic-proxy-switching}
+## Pattern 5: Dynamic Proxy Switching {#pattern-5-dynamic-proxy-switching}
 
 Toggle and switch between proxy profiles at runtime.
 
-Toggle Proxy On/Off via Action Click {#toggle-proxy-onoff-via-action-click}
+## Toggle Proxy On/Off via Action Click {#toggle-proxy-onoff-via-action-click}
 
 ```ts
 // background/proxy-toggle.ts
@@ -663,7 +663,7 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 ```
 
-Switch Between Proxy Profiles {#switch-between-proxy-profiles}
+## Switch Between Proxy Profiles {#switch-between-proxy-profiles}
 
 ```ts
 // background/profile-manager.ts
@@ -791,11 +791,11 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 ---
 
-Pattern 6: Proxy Authentication {#pattern-6-proxy-authentication}
+## Pattern 6: Proxy Authentication {#pattern-6-proxy-authentication}
 
 Handle proxy authentication challenges securely.
 
-Auth Required Listener {#auth-required-listener}
+## Auth Required Listener {#auth-required-listener}
 
 ```ts
 // background/proxy-auth.ts
@@ -854,7 +854,7 @@ export async function clearProxyCredentials(): Promise<void> {
 }
 ```
 
-Secure Credential Storage {#secure-credential-storage}
+## Secure Credential Storage {#secure-credential-storage}
 
 ```ts
 // background/secure-credentials.ts
@@ -904,11 +904,11 @@ export async function clearCredentials(): Promise<void> {
 
 ---
 
-Pattern 7: Proxy Error Handling {#pattern-7-proxy-error-handling}
+## Pattern 7: Proxy Error Handling {#pattern-7-proxy-error-handling}
 
 Handle proxy failures gracefully with fallbacks and user notifications.
 
-Proxy Error Listener {#proxy-error-listener}
+## Proxy Error Listener {#proxy-error-listener}
 
 ```ts
 // background/proxy-error-handler.ts
@@ -999,7 +999,7 @@ export async function testProxyConnection(
 }
 ```
 
-Auto-Retry After Auth {#auto-retry-after-auth}
+## Auto-Retry After Auth {#auto-retry-after-auth}
 
 ```ts
 // background/proxy-retry.ts
@@ -1048,11 +1048,11 @@ export async function onSuccessfulConnection(): Promise<void> {
 
 ---
 
-Pattern 8: Proxy Status UI {#pattern-8-proxy-status-ui}
+## Pattern 8: Proxy Status UI {#pattern-8-proxy-status-ui}
 
 Build user interfaces to display and control proxy settings.
 
-Badge Indicator for Current State {#badge-indicator-for-current-state}
+## Badge Indicator for Current State {#badge-indicator-for-current-state}
 
 ```ts
 // background/proxy-status-badge.ts
@@ -1102,7 +1102,7 @@ export async function showProxyLatency(latency: number): Promise<void> {
 }
 ```
 
-Popup with Proxy Details {#popup-with-proxy-details}
+## Popup with Proxy Details {#popup-with-proxy-details}
 
 ```ts
 // popup/proxy-popup.ts
@@ -1219,7 +1219,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </html>
 ```
 
-Quick-Switch Dropdown {#quick-switch-dropdown}
+## Quick-Switch Dropdown {#quick-switch-dropdown}
 
 ```ts
 // popup/quick-switch.ts
@@ -1284,7 +1284,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 ---
 
-Summary Table {#summary-table}
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key API | Complexity |
 |---------|----------|---------|------------|
@@ -1297,7 +1297,7 @@ Summary Table {#summary-table}
 | Pattern 7: Error Handling | Fallback on failures | `onProxyError` | Medium |
 | Pattern 8: Status UI | User interface | `action` API + popup | Low |
 
-Quick Reference {#quick-reference}
+## Quick Reference {#quick-reference}
 
 ```ts
 // Essential API calls
@@ -1307,9 +1307,9 @@ chrome.proxy.onProxyError.addListener(callback);
 chrome.webRequest.onAuthRequired.addListener(callback, { urls: ["<all_urls>"] }, ["asyncBlocking"]);
 ```
 
-Storage Integration {#storage-integration}
+## Storage Integration {#storage-integration}
 
-Always use `@theluckystrike/webext-storage` for persisting proxy configurations:
+### Always use `@theluckystrike/webext-storage` for persisting proxy configurations:
 
 ```ts
 import { createStorage, defineSchema } from "@theluckystrike/webext-storage";
@@ -1323,7 +1323,7 @@ const schema = defineSchema({
 const storage = createStorage(schema);
 ```
 
-Common Pitfalls {#common-pitfalls}
+## Common Pitfalls {#common-pitfalls}
 
 1. Missing permissions: Always include `"proxy"` permission in manifest
 2. Scope confusion: Use `"regular"` for normal profiles, `"incognito"` for private windows

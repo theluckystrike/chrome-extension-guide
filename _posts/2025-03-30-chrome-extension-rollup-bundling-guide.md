@@ -18,7 +18,7 @@ we will explore how to configure Rollup specifically for Chrome extensions, use 
 
 ---
 
-Why Use Rollup for Chrome Extensions? {#why-rollup}
+## Why Use Rollup for Chrome Extensions? {#why-rollup}
 
 When building Chrome extensions, developers often face a critical challenge: balancing functionality with performance. Extensions that load slowly or include excessive amounts of unused code frustrate users and can even be rejected from the Chrome Web Store for poor performance metrics. This is where Rollup shines.
 
@@ -30,7 +30,7 @@ Another advantage of Rollup is its native support for ES modules. Modern JavaScr
 
 ---
 
-Setting Up Rollup for Your Chrome Extension {#setting-up-rollup}
+## Setting Up Rollup for Your Chrome Extension {#setting-up-rollup}
 
 Before diving into tree-shaking and code splitting, let's set up a basic Rollup configuration for a Chrome extension. First, you'll need to install Rollup and its plugins:
 
@@ -92,7 +92,7 @@ This configuration creates separate output files for each entry point, making it
 
 ---
 
-Understanding Tree-Shaking in Chrome Extensions {#tree-shaking}
+## Understanding Tree-Shaking in Chrome Extensions {#tree-shaking}
 
 Tree-shaking is perhaps Rollup's most powerful feature for extension development. It works by analyzing your static import statements and eliminating any code that is imported but never actually used. This happens through a process called static analysis, where Rollup examines your code without running it to determine which exports are referenced and which are not.
 
@@ -148,7 +148,7 @@ Use Pure Annotations: You can add comments like `/* @__PURE__ */` or `/* istanbu
 
 ---
 
-Implementing Code Splitting for Extensions {#code-splitting}
+## Implementing Code Splitting for Extensions {#code-splitting}
 
 Code splitting takes the concept of optimization further by breaking your bundle into multiple chunks that can be loaded on demand. For Chrome extensions, this is particularly valuable because it allows you to defer loading code that users don't immediately need.
 
@@ -205,7 +205,7 @@ This pattern significantly reduces the initial load time of your content script,
 
 ---
 
-Handling Manifest V3 with Rollup {#manifest-v3}
+## Handling Manifest V3 with Rollup {#manifest-v3}
 
 Chrome's Manifest V3 introduces specific requirements that affect how you bundle extensions. The most significant change is the transition from background pages to service workers. Service workers are event-driven and cannot maintain state between events, which has implications for how you structure your code.
 
@@ -256,7 +256,7 @@ For Manifest V3, remember that service workers have a maximum runtime of about 3
 
 ---
 
-Optimizing Bundle Size with Advanced Rollup Configuration {#optimizing-bundle}
+## Optimizing Bundle Size with Advanced Rollup Configuration {#optimizing-bundle}
 
 Beyond basic tree-shaking, several advanced techniques can further optimize your Chrome extension bundles:
 
@@ -273,7 +273,7 @@ import filter from 'lodash/filter';
 import { map, filter } from 'lodash-es';
 ```
 
-Configure Terser for Maximum Compression:
+### Configure Terser for Maximum Compression:
 
 ```javascript
 import terser from '@rollup/plugin-terser';
@@ -308,7 +308,7 @@ export default {
 
 ---
 
-Common Pitfalls and How to Avoid Them {#pitfalls}
+## Common Pitfalls and How to Avoid Them {#pitfalls}
 
 When bundling Chrome extensions with Rollup, developers often encounter several common issues. Understanding these pitfalls will save you hours of debugging.
 
@@ -322,7 +322,7 @@ Missing Polyfills: Chrome extensions run in Chromium, which has modern JavaScrip
 
 ---
 
-Building a Production-Ready Extension with Rollup {#production-ready}
+## Building a Production-Ready Extension with Rollup {#production-ready}
 
 Putting it all together, here's a comprehensive configuration for a production-ready Chrome extension:
 
@@ -390,7 +390,7 @@ This configuration handles multiple entry points, separates vendor code into its
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Rollup provides Chrome extension developers with a powerful toolset for creating optimized, production-ready extensions. Through tree-shaking, you can dramatically reduce bundle sizes by eliminating unused code. Code splitting allows you to load functionality on demand, improving initial load times and user experience. Proper configuration for Manifest V3 ensures your extensions meet Google's latest requirements while maintaining excellent performance.
 

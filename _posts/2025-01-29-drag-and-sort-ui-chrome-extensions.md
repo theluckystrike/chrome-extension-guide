@@ -18,7 +18,7 @@ Understanding how to implement reorder list chrome functionality requires knowle
 
 ---
 
-Why Drag and Sort UI Matters in Chrome Extensions {#why-drag-sort-matters}
+## Why Drag and Sort UI Matters in Chrome Extensions {#why-drag-sort-matters}
 
 Chrome extensions often need to present lists of items that users want to organize according to their preferences. A bookmarks extension lets users arrange their saved sites in meaningful orders. A task management extension allows prioritizing items through intuitive reordering. A reading list extension enables organizing articles by topic or importance. In each scenario, drag sort extension functionality transforms the experience from basic data display to personalized organization.
 
@@ -28,23 +28,23 @@ Moreover, sortable interface extension implementations demonstrate attention to 
 
 ---
 
-Understanding the Chrome Extension Context {#extension-context}
+## Understanding the Chrome Extension Context {#extension-context}
 
 Before diving into implementation, understanding where drag-and-drop interfaces appear in Chrome extensions is crucial. Different extension contexts present unique challenges and opportunities for reorder list chrome functionality.
 
-Popup Context
+### Popup Context
 
 Chrome extension popups provide limited screen real estate but offer quick access to extension features. Implementing drag sort extension UI in popups requires careful consideration of space constraints. The interface must remain responsive while fitting within the typically small popup window. Touch-friendly handles and adequate spacing become especially important in this context.
 
 Popup-based drag sort extension implementations work best for extensions that users interact with frequently but briefly. A quick-access bookmark manager or frequently-used items list benefits from popup-based reordering. The tradeoff is limited screen space, so prioritize the most essential sorting features.
 
-Options Page Context
+### Options Page Context
 
 Extension options pages provide full browser tab real estate for implementing complex sortable interface extension components. When building reordering features that users will spend significant time configuring, the options page offers the best canvas. You can implement multi-column layouts, detailed item previews, and comprehensive drag sort extension controls without worrying about space constraints.
 
 Options pages suit extensions where initial setup or occasional reorganization is expected. A complex folder-based bookmark manager or a dashboard-style extension typically implements reorder list chrome functionality in the options page rather than the popup.
 
-Content Script Context
+### Content Script Context
 
 Some extensions inject draggable interfaces directly into web pages. This approach creates sortable interface extension features that integrate with existing web applications. For example, a productivity extension might add drag-and-drop reordering to web-based task managers or project management tools.
 
@@ -52,11 +52,11 @@ Content script implementations face unique challenges including page styles pote
 
 ---
 
-Core Technologies for Drag and Sort Implementation {#core-technologies}
+## Core Technologies for Drag and Sort Implementation {#core-technologies}
 
 Modern web technologies provide solid foundations for building drag sort extension functionality. Understanding these technologies helps you choose the right approach for your specific use case.
 
-HTML5 Drag and Drop API
+### HTML5 Drag and Drop API
 
 The native HTML5 Drag and Drop API provides browser-built-in functionality for implementing reorder list chrome features. This API offers event-driven drag operations with minimal external dependencies. The API supports drag handles, ghost elements, and drop zone detection.
 
@@ -80,13 +80,13 @@ listItems.forEach(item => {
 });
 ```
 
-Sortable Libraries
+### Sortable Libraries
 
 The JavaScript ecosystem includes mature libraries specifically designed for sortable interface extension implementations. SortableJS stands out as one of the most popular choices, offering smooth animations, touch support, and extensive configuration options. Another excellent option is React DnD for React-based extensions, providing a flexible drag-and-drop framework with powerful abstractions.
 
 These libraries handle many edge cases automatically, including animation timing, touch interactions, and cross-list dragging. For production extensions, libraries often provide better user experience than rolling your own implementation from the HTML5 API.
 
-Touch Considerations
+### Touch Considerations
 
 Implementing drag sort extension functionality requires attention to touch interactions, especially for extensions used on touchscreen devices. The HTML5 Drag and Drop API has limited touch support, so libraries like SortableJS that handle touch events become valuable. Always test drag sort extension implementations on touch devices to ensure smooth, responsive interactions.
 
@@ -94,11 +94,11 @@ Touch-friendly sortable interface extension design includes appropriately sized 
 
 ---
 
-Implementing a Basic Sortable List {#basic-implementation}
+## Implementing a Basic Sortable List {#basic-implementation}
 
 Let's build a practical sortable list component suitable for Chrome extension popups. This implementation demonstrates core concepts while remaining lightweight and dependency-free.
 
-HTML Structure
+### HTML Structure
 
 ```html
 <div class="sortable-list" id="bookmarkList">
@@ -117,7 +117,7 @@ HTML Structure
 </div>
 ```
 
-CSS Styling
+### CSS Styling
 
 ```css
 .sortable-list {
@@ -163,7 +163,7 @@ CSS Styling
 }
 ```
 
-JavaScript Implementation
+### JavaScript Implementation
 
 ```javascript
 class SortableList {
@@ -247,11 +247,11 @@ This implementation provides a functional sortable interface extension foundatio
 
 ---
 
-Advanced Patterns for Production Extensions {#advanced-patterns}
+## Advanced Patterns for Production Extensions {#advanced-patterns}
 
 Building production-ready sortable interface extension features requires additional considerations beyond basic functionality.
 
-Persisting Order Changes
+### Persisting Order Changes
 
 A solid drag sort extension implementation must reliably save item order changes. Chrome's storage API provides the recommended mechanism for storing user preferences and extension state.
 
@@ -290,13 +290,13 @@ async loadOrder() {
 }
 ```
 
-Animation and Visual Feedback
+### Animation and Visual Feedback
 
 Smooth animations significantly improve the user experience of reorder list chrome implementations. The previous implementation includes basic CSS transitions, but production extensions benefit from more sophisticated animation handling.
 
 Consider implementing these visual enhancements in your sortable interface extension: placeholder highlighting showing where the item will drop, smooth animations when items snap into new positions, and clear drag handles that indicate the entire element is draggable.
 
-Multi-List Drag and Drop
+### Multi-List Drag and Drop
 
 Extensions often need to support dragging items between multiple lists or categories. Implementing this sortable interface extension pattern requires tracking source and destination lists.
 
@@ -357,11 +357,11 @@ class MultiListSortable {
 
 ---
 
-Accessibility Considerations {#accessibility}
+## Accessibility Considerations {#accessibility}
 
 Building inclusive sortable interface extension components requires attention to accessibility. Users with disabilities must be able to reorder items effectively.
 
-Keyboard Navigation
+### Keyboard Navigation
 
 Implement keyboard support for drag sort extension functionality. Users should be able to select items and move them using arrow keys. The WAI-ARIA drag and drop pattern provides guidance for implementing accessible drag-and-drop.
 
@@ -434,7 +434,7 @@ class AccessibleSortableList {
 }
 ```
 
-Screen Reader Support
+### Screen Reader Support
 
 Ensure screen readers can navigate and understand your drag sort extension interface. Use appropriate ARIA labels and live regions to announce order changes.
 
@@ -457,15 +457,15 @@ announceOrderChange() {
 
 ---
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
 Smooth performance is essential for sortable interface extension implementations, especially when dealing with long lists or frequent reordering.
 
-Virtual Scrolling
+### Virtual Scrolling
 
 For extensions displaying many items, implementing virtual scrolling alongside drag sort extension functionality improves performance significantly. Virtual scrolling renders only visible items, reducing DOM manipulation overhead during reorder operations.
 
-Debouncing Save Operations
+### Debouncing Save Operations
 
 When implementing reorder list chrome functionality, debounce storage operations to avoid excessive writes during rapid dragging.
 
@@ -492,15 +492,15 @@ class DebouncedSortableList {
 
 ---
 
-Testing Your Implementation {#testing}
+## Testing Your Implementation {#testing}
 
 Thorough testing ensures your drag sort extension works correctly across different scenarios and user interactions.
 
-Manual Testing Checklist
+### Manual Testing Checklist
 
 When testing your sortable interface extension implementation, verify these scenarios: items can be dragged and dropped to all valid positions, the order persists after extension restart, drag operations work on both mouse and touch inputs, keyboard navigation functions correctly, and the interface handles empty lists gracefully.
 
-Automated Testing
+### Automated Testing
 
 Consider adding automated tests for critical functionality:
 
@@ -538,7 +538,7 @@ function testReorder() {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing drag and sort UI in Chrome extensions requires understanding the extension context, choosing appropriate technologies, and following best practices for user experience. Whether you're building a simple reorder list chrome feature or a complex multi-list sortable interface extension, the principles covered in this guide provide a solid foundation.
 

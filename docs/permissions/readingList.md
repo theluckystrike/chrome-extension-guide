@@ -11,15 +11,15 @@ last_modified_at: 2026-01-15
 
 readingList Permission
 
-Overview {#overview}
+## Overview {#overview}
 
 - Permission string: `"readingList"`
 - API: `chrome.readingList`. manage Chrome's built-in Reading List
 - Chrome version: Chrome 120+
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-addEntry(entry) {#addentryentry}
+## addEntry(entry) {#addentryentry}
 
 Adds URL to reading list. Throws if URL already exists.
 
@@ -31,15 +31,15 @@ chrome.readingList.addEntry({ url, title, hasBeenRead })
 - `title`: string
 - `hasBeenRead`: boolean
 
-removeEntry(info) {#removeentryinfo}
+## removeEntry(info) {#removeentryinfo}
 
-Removes entry by URL.
+### Removes entry by URL.
 
 ```javascript
 chrome.readingList.removeEntry({ url })
 ```
 
-updateEntry(info) {#updateentryinfo}
+## updateEntry(info) {#updateentryinfo}
 
 Updates an entry. URL is the identifier.
 
@@ -47,7 +47,7 @@ Updates an entry. URL is the identifier.
 chrome.readingList.updateEntry({ url, title?, hasBeenRead? })
 ```
 
-query(info) {#queryinfo}
+## query(info) {#queryinfo}
 
 Search reading list with optional filters.
 
@@ -57,27 +57,27 @@ chrome.readingList.query({ url?, title?, hasBeenRead? })
 
 Returns array of ReadingListEntry objects.
 
-Events {#events}
+## Events {#events}
 
 - `chrome.readingList.onEntryAdded`. fires when entry added
 - `chrome.readingList.onEntryRemoved`. fires when entry removed
 - `chrome.readingList.onEntryUpdated`. fires when entry updated
 
-ReadingListEntry Type {#readinglistentry-type}
+## ReadingListEntry Type {#readinglistentry-type}
 
 ```javascript
 { url, title, hasBeenRead, lastUpdateTime, creationTime }
 ```
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 { "permissions": ["readingList"] }
 ```
 
-Common Use Cases
+### Common Use Cases
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
 Read-Later Functionality
 The primary use case for the Reading List API is enabling users to save articles for later reading. Extensions can add a context menu option or toolbar button that saves the current page to Chrome's built-in Reading List with a single click.
@@ -94,9 +94,9 @@ Track reading progress by marking entries as read or unread. The `hasBeenRead` p
 Bookmark Migration
 Help users migrate from traditional bookmarks to the Reading List, or sync between different bookmarking services and Chrome's Reading List.
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Add page via context menu {#add-page-via-context-menu}
+## Add page via context menu {#add-page-via-context-menu}
 
 ```javascript
 // manifest: { "permissions": ["readingList", "contextMenus"] }
@@ -113,13 +113,13 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Query unread entries {#query-unread-entries}
+## Query unread entries {#query-unread-entries}
 
 ```javascript
 const unread = await chrome.readingList.query({ hasBeenRead: false });
 ```
 
-Mark as read after visiting {#mark-as-read-after-visiting}
+## Mark as read after visiting {#mark-as-read-after-visiting}
 
 ```javascript
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -129,7 +129,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-Batch add from URLs
+### Batch add from URLs
 
 ```javascript
 async function addMultipleUrls(urls) {
@@ -144,7 +144,7 @@ async function addMultipleUrls(urls) {
 }
 ```
 
-Search reading list
+### Search reading list
 
 ```javascript
 // Find entries containing a specific term
@@ -157,7 +157,7 @@ async function searchReadingList(query) {
 }
 ```
 
-Best Practices
+### Best Practices
 
 Handle Duplicate Entries
 The `addEntry` method throws an error if the URL already exists in the Reading List. Always handle this gracefully by catching the error or checking if the entry exists first.
@@ -177,21 +177,21 @@ While Chrome's Reading List has generous storage, be mindful of the volume of en
 Handle Events for Real-Time Updates
 Use the Reading List events to keep your extension's UI in sync with changes made through Chrome's native UI or other extensions.
 
-Use Cases
+### Use Cases
 
 - Read-later: save articles from context menu
 - Content curation: batch add URLs from feeds
 - Research tools: organize research reading
 - Reading tracker: mark as read/unread
 
-Cross-references
+### Cross-references
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 
 - patterns/reading-list-api.md
 - tutorials/build-reading-list.md
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What is the readingList API?
 The chrome.readingList API allows extensions to add, remove, and query items in Chrome's reading list feature.

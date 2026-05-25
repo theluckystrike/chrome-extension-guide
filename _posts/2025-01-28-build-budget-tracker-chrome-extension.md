@@ -18,7 +18,7 @@ Whether you're a developer looking to expand your portfolio or an entrepreneur s
 
 ---
 
-Why Build a Budget Tracker Chrome Extension {#why-build-budget-tracker}
+## Why Build a Budget Tracker Chrome Extension {#why-build-budget-tracker}
 
 The demand for personal finance tools has never been higher. With more people managing their finances online, a budget tracker Chrome extension provides immediate value by integrating smoothly into the user's daily browsing experience. Unlike standalone mobile apps or desktop software, a browser-based expense manager Chrome extension offers several distinct advantages.
 
@@ -30,7 +30,7 @@ Third, the Chrome Web Store provides access to millions of potential users activ
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Our budget tracker Chrome extension will include the following core features:
 
@@ -45,7 +45,7 @@ This project uses vanilla JavaScript and modern Chrome APIs, making it accessibl
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file structure and a manifest file. Let's create the foundation for our budget tracker extension.
 
@@ -84,7 +84,7 @@ This manifest uses Manifest V3, which is the current standard for Chrome extensi
 
 ---
 
-Creating the Popup Interface {#popup-interface}
+## Creating the Popup Interface {#popup-interface}
 
 The popup is the main user interface for our budget tracker extension. It appears when users click the extension icon in Chrome's toolbar.
 
@@ -159,7 +159,7 @@ popup.html
 
 ---
 
-Styling Your Finance Extension {#styling-extension}
+## Styling Your Finance Extension {#styling-extension}
 
 The visual design of your expense manager Chrome extension plays a crucial role in user adoption. Users expect a clean, intuitive interface that works smoothly.
 
@@ -371,7 +371,7 @@ button:active {
 
 ---
 
-Implementing Core Functionality {#implementing-functionality}
+## Implementing Core Functionality {#implementing-functionality}
 
 Now let's build the JavaScript logic that powers our budget tracker extension. This is where the magic happens, managing expenses, storing data, and providing a smooth user experience.
 
@@ -570,7 +570,7 @@ async function clearAllData() {
 
 ---
 
-Adding Icons {#adding-icons}
+## Adding Icons {#adding-icons}
 
 Every Chrome extension needs icons. Create simple icons for your extension or use placeholder images. Place them in an `icons` folder with the names `icon16.png`, `icon48.png`, and `icon128.png`.
 
@@ -578,7 +578,7 @@ For testing purposes, you can create basic colored squares as placeholders. In p
 
 ---
 
-Loading and Testing Your Extension {#testing-extension}
+## Loading and Testing Your Extension {#testing-extension}
 
 Now that we've built all the components, let's test our budget tracker extension in Chrome:
 
@@ -596,7 +596,7 @@ You should see:
 
 ---
 
-Testing Budget Tracker Features {#testing-features}
+## Testing Budget Tracker Features {#testing-features}
 
 Let's verify each feature works correctly:
 
@@ -610,33 +610,33 @@ Export Function: Click the export button. A CSV file should download with all yo
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic budget tracker Chrome extension working, consider adding these advanced features to make your finance extension stand out:
 
-Automatic Category Detection
+### Automatic Category Detection
 
 Use content scripts to analyze webpage URLs and automatically suggest categories. For example, detect Amazon purchases and suggest "Shopping" category.
 
-Budget Alerts
+### Budget Alerts
 
 Implement notifications that alert users when they approach or exceed their budget thresholds.
 
-Multi-Currency Support
+### Multi-Currency Support
 
 Add currency conversion capabilities for users who track expenses in multiple currencies.
 
-Data Synchronization
+### Data Synchronization
 
 Implement cloud sync using Firebase or a similar backend to allow users to access their data across multiple devices.
 
-Charts and Analytics
+### Charts and Analytics
 
 Add visual charts showing spending trends over time, category breakdowns, and budget comparisons.
 
 ---
 
-Best Practices for Finance Extensions {#best-practices}
+## Best Practices for Finance Extensions {#best-practices}
 
 When building any finance extension, security and privacy should be top priorities:
 
@@ -648,7 +648,7 @@ When building any finance extension, security and privacy should be top prioriti
 
 ---
 
-Publishing Your Extension {#publishing-extension}
+## Publishing Your Extension {#publishing-extension}
 
 Once your budget tracker extension is complete and tested, you can publish it to the Chrome Web Store:
 
@@ -662,7 +662,7 @@ Your extension's listing should include relevant keywords like "budget tracker",
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a budget tracker Chrome extension is an excellent project that teaches valuable skills while creating a genuinely useful tool. Throughout this guide, we've covered the essential components: manifest configuration, popup interface design, styling, and JavaScript functionality.
 

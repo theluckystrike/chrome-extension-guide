@@ -18,7 +18,7 @@ Building a chrome extension notepad is one of the most practical projects for an
 
 ---
 
-Why Build a Note-Taking Chrome Extension? {#why-build}
+## Why Build a Note-Taking Chrome Extension? {#why-build}
 
 Before we dive into the code, let's explore why creating a notes chrome extension is an excellent project. First and foremost, note-taking is a universal need. Every developer, researcher, student, and professional needs a way to capture thoughts quickly while working online. Existing solutions often feel clunky or require switching contexts, which breaks your flow.
 
@@ -28,7 +28,7 @@ Moreover, the Chrome Web Store has millions of users actively searching for note
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 For this tutorial, we'll build a chrome extension notepad with the following features:
 
@@ -43,7 +43,7 @@ This feature set strikes the perfect balance between functionality and simplicit
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Every Chrome extension requires a specific file structure and a manifest file that tells Chrome about your extension's capabilities. Let's set up our project:
 
@@ -79,7 +79,7 @@ Notice we're requesting the "storage" permission. This allows our extension to p
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon in the Chrome toolbar. It needs to be simple, fast, and intuitive. Let's create popup.html:
 
@@ -125,7 +125,7 @@ This HTML structure provides a clean layout with an input area for new notes and
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 A well-designed extension feels professional and enjoyable to use. Let's create popup.css to style our note-taking Chrome extension:
 
@@ -287,7 +287,7 @@ This CSS provides a modern, clean design with smooth transitions and hover effec
 
 ---
 
-Implementing the Logic {#implementation}
+## Implementing the Logic {#implementation}
 
 Now comes the exciting part, making our extension functional with popup.js. This file handles saving notes, retrieving them from storage, and managing the user interface:
 
@@ -389,11 +389,11 @@ The delete function allows users to remove individual notes, while the clear all
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing or sharing your extension, you need to test it thoroughly. Chrome provides easy local testing through the Extensions Management page.
 
-To load your extension:
+### To load your extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right corner
@@ -413,7 +413,7 @@ If anything doesn't work, check the console for errors. You can right-click the 
 
 ---
 
-Understanding Chrome Storage API {#storage-api}
+## Understanding Chrome Storage API {#storage-api}
 
 The Chrome Storage API is powerful and deserves deeper exploration. Unlike localStorage in web pages, Chrome's storage API offers several advantages for extensions.
 
@@ -452,7 +452,7 @@ For a production notes chrome extension, you might want to use chrome.storage.sy
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic note-taking Chrome extension working, here are some exciting features you could add:
 
@@ -478,7 +478,7 @@ Each of these features would provide excellent learning opportunities while maki
 
 ---
 
-Best Practices for Chrome Extension Development {#best-practices}
+## Best Practices for Chrome Extension Development {#best-practices}
 
 As you continue developing Chrome extensions, keep these best practices in mind:
 
@@ -496,7 +496,7 @@ Documentation: Clear documentation helps users understand how to use your extens
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your note-taking Chrome extension is polished and tested, you can publish it to the Chrome Web Store. Here's a brief overview of the process:
 
@@ -508,7 +508,7 @@ Once approved, your extension becomes publicly available. You can track installs
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've successfully built a fully functional note-taking Chrome extension from scratch. This project has taught you essential skills including manifest configuration, popup interface design, Chrome Storage API usage, and JavaScript event handling.
 

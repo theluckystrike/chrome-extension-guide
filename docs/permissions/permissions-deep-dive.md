@@ -17,7 +17,7 @@ what users see, and how to request only what you need.
 
 ---
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 1. [How Permissions Work](#how-permissions-work)
 2. [Permission Categories](#permission-categories)
@@ -35,7 +35,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-How Permissions Work {#how-permissions-work}
+## How Permissions Work {#how-permissions-work}
 
 Every Chrome extension declares what it needs in `manifest.json`. The browser
 enforces these declarations at runtime -- an extension cannot access an API or
@@ -68,7 +68,7 @@ There are three places permissions appear in the manifest:
 In Manifest V2, host patterns lived inside `permissions`. Manifest V3 moved
 them to the dedicated `host_permissions` and `optional_host_permissions` keys.
 
-Install-Time vs Runtime Grants {#install-time-vs-runtime-grants}
+## Install-Time vs Runtime Grants {#install-time-vs-runtime-grants}
 
 | Declared in | When granted | User experience |
 |---|---|---|
@@ -83,24 +83,24 @@ permissions matters.
 
 ---
 
-Permission Categories {#permission-categories}
+## Permission Categories {#permission-categories}
 
 Permissions fall into three broad categories.
 
-1. API Permissions {#1-api-permissions}
+## 1. API Permissions {#1-api-permissions}
 
 These unlock specific Chrome APIs. Without the permission, calling the API
 throws an error.
 
-2. Host Permissions {#2-host-permissions}
+## 2. Host Permissions {#2-host-permissions}
 
 These allow the extension to interact with web pages on matching origins:
 inject content scripts, read page content, intercept network requests, and
 modify headers.
 
-3. Implicit Permissions {#3-implicit-permissions}
+## 3. Implicit Permissions {#3-implicit-permissions}
 
-Some APIs require no explicit permission declaration:
+### Some APIs require no explicit permission declaration:
 
 - `chrome.runtime` (messaging, lifecycle)
 - `chrome.storage.session` (session-only storage in MV3)
@@ -110,11 +110,11 @@ Some APIs require no explicit permission declaration:
 
 ---
 
-Complete Permission Reference {#complete-permission-reference}
+## Complete Permission Reference {#complete-permission-reference}
 
 Every permission you can declare in `manifest.json`, grouped by function.
 
-Storage and Data {#storage-and-data}
+## Storage and Data {#storage-and-data}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -122,7 +122,7 @@ Storage and Data {#storage-and-data}
 | `unlimitedStorage` | Lifts the 10 MB quota on `storage.local` and IndexedDB | No |
 | `cookies` | `chrome.cookies` -- read/write cookies for permitted hosts | Yes |
 
-Tabs and Windows {#tabs-and-windows}
+## Tabs and Windows {#tabs-and-windows}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -130,7 +130,7 @@ Tabs and Windows {#tabs-and-windows}
 | `activeTab` | Temporary host access to the active tab on user gesture | No |
 | `tabGroups` | `chrome.tabGroups` -- query and modify tab groups | No |
 
-Navigation and History {#navigation-and-history}
+## Navigation and History {#navigation-and-history}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -140,7 +140,7 @@ Navigation and History {#navigation-and-history}
 | `sessions` | `chrome.sessions` -- query and restore recently closed tabs/windows | Yes |
 | `readingList` | `chrome.readingList` -- CRUD on the reading list | Yes |
 
-Content and Scripting {#content-and-scripting}
+## Content and Scripting {#content-and-scripting}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -149,7 +149,7 @@ Content and Scripting {#content-and-scripting}
 | `declarativeContent` | `chrome.declarativeContent` -- show action icon based on page content | No |
 | `contentSettings` | `chrome.contentSettings` -- modify per-site settings (JS, cookies, images) | Yes |
 
-Network {#network}
+## Network {#network}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -160,7 +160,7 @@ Network {#network}
 | `proxy` | `chrome.proxy` -- manage proxy settings | Yes |
 | `dns` | `chrome.dns` -- resolve hostnames | No |
 
-UI and Browser Integration {#ui-and-browser-integration}
+## UI and Browser Integration {#ui-and-browser-integration}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -173,14 +173,14 @@ UI and Browser Integration {#ui-and-browser-integration}
 | `omnibox` | `chrome.omnibox` -- add keyword suggestions to the address bar | No |
 | `fontSettings` | `chrome.fontSettings` -- read/write font preferences | No |
 
-Identity and Accounts {#identity-and-accounts}
+## Identity and Accounts {#identity-and-accounts}
 
 | Permission | API Access | Warning? |
 |---|---|---|
 | `identity` | `chrome.identity` -- OAuth2 flows, `getAuthToken`, `launchWebAuthFlow` | No |
 | `identity.email` | Access user's email address via `chrome.identity.getProfileUserInfo` | Yes |
 
-Downloads {#downloads}
+## Downloads {#downloads}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -188,7 +188,7 @@ Downloads {#downloads}
 | `downloads.open` | Open downloaded files (requires `downloads` too) | Yes |
 | `downloads.ui` | Modify the downloads UI (shelf visibility) | No |
 
-Developer and Debugging {#developer-and-debugging}
+## Developer and Debugging {#developer-and-debugging}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -200,14 +200,14 @@ Developer and Debugging {#developer-and-debugging}
 | `system.storage` | `chrome.system.storage` -- query attached storage devices | No |
 | `system.display` | `chrome.system.display` -- query display info | No |
 
-Privacy and Security {#privacy-and-security}
+## Privacy and Security {#privacy-and-security}
 
 | Permission | API Access | Warning? |
 |---|---|---|
 | `privacy` | `chrome.privacy` -- control privacy-related browser settings | Yes |
 | `browsingData` | `chrome.browsingData` -- clear browsing data (cache, cookies, history) | No |
 
-Communication {#communication}
+## Communication {#communication}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -216,14 +216,14 @@ Communication {#communication}
 | `gcm` | `chrome.gcm` -- Google Cloud Messaging for push notifications | No |
 | `nativeMessaging` | `chrome.runtime.connectNative`, `sendNativeMessage` -- communicate with native apps | Yes |
 
-Clipboard {#clipboard}
+## Clipboard {#clipboard}
 
 | Permission | API Access | Warning? |
 |---|---|---|
 | `clipboardRead` | Read from clipboard via `document.execCommand('paste')` | Yes |
 | `clipboardWrite` | Write to clipboard via `document.execCommand('copy')` | No |
 
-Platform and Enterprise {#platform-and-enterprise}
+## Platform and Enterprise {#platform-and-enterprise}
 
 | Permission | API Access | Warning? |
 |---|---|---|
@@ -238,7 +238,7 @@ Platform and Enterprise {#platform-and-enterprise}
 
 ---
 
-Host Permissions {#host-permissions}
+## Host Permissions {#host-permissions}
 
 Host permissions control which websites the extension can interact with. They
 use match patterns:
@@ -247,7 +247,7 @@ use match patterns:
 <scheme>://<host>/<path>
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 
 ```jsonc
 {
@@ -261,7 +261,7 @@ Common Patterns {#common-patterns}
 }
 ```
 
-Specific Hosts vs `<all_urls>` {#specific-hosts-vs-all-urls}
+## Specific Hosts vs `<all_urls>` {#specific-hosts-vs-all-urls}
 
 | Approach | Pros | Cons |
 |---|---|---|
@@ -276,7 +276,7 @@ work on arbitrary sites (like an ad blocker), you have no choice but to request
 broad access -- but consider using `optional_host_permissions` and requesting
 at runtime instead.
 
-Host Permissions and Content Scripts {#host-permissions-and-content-scripts}
+## Host Permissions and Content Scripts {#host-permissions-and-content-scripts}
 
 Content scripts declared in the manifest are only injected on pages that match
 both the content script's `matches` pattern and a granted host permission:
@@ -300,20 +300,20 @@ permission for the target tab's URL (or `activeTab`).
 
 ---
 
-activeTab: The Most Important Permission {#activetab-the-most-important-permission}
+## activeTab: The Most Important Permission {#activetab-the-most-important-permission}
 
 `activeTab` is the single most important permission in the Chrome extension
 ecosystem. It grants temporary access to the currently active tab, but only
 when the user explicitly invokes the extension.
 
-What Triggers activeTab {#what-triggers-activetab}
+## What Triggers activeTab {#what-triggers-activetab}
 
 - Clicking the extension's toolbar icon
 - Selecting the extension's context menu item
 - Pressing a keyboard shortcut registered via `commands`
 - Accepting a suggestion from the omnibox
 
-What activeTab Grants {#what-activetab-grants}
+## What activeTab Grants {#what-activetab-grants}
 
 When triggered, the extension receives temporary permission to:
 
@@ -324,7 +324,7 @@ When triggered, the extension receives temporary permission to:
 
 The grant lasts until the tab is navigated or closed.
 
-Why activeTab Matters {#why-activetab-matters}
+## Why activeTab Matters {#why-activetab-matters}
 
 Without `activeTab`, an extension that needs to run on arbitrary pages must
 request `<all_urls>` or `https://*/*` -- triggering the most alarming
@@ -344,7 +344,7 @@ and gets access only when the user takes explicit action.
 }
 ```
 
-activeTab Limitations {#activetab-limitations}
+## activeTab Limitations {#activetab-limitations}
 
 - Only works on user gesture -- you cannot use it from a background timer
 - Only grants access to one tab at a time
@@ -352,7 +352,7 @@ activeTab Limitations {#activetab-limitations}
 - Cannot be used to persistently monitor tabs
 - Does not work with `chrome.webRequest` (you need real host permissions)
 
-When activeTab Is Not Enough {#when-activetab-is-not-enough}
+## When activeTab Is Not Enough {#when-activetab-is-not-enough}
 
 You need real host permissions when:
 
@@ -363,12 +363,12 @@ You need real host permissions when:
 
 ---
 
-Permission Warnings {#permission-warnings}
+## Permission Warnings {#permission-warnings}
 
 Permission warnings are what users see in the install dialog. They are the
 number one reason users abandon installations.
 
-Warning Messages by Permission {#warning-messages-by-permission}
+## Warning Messages by Permission {#warning-messages-by-permission}
 
 | Permission / Pattern | Warning Message |
 |---|---|
@@ -394,16 +394,16 @@ Warning Messages by Permission {#warning-messages-by-permission}
 | `https://*.example.com/*` | "Read and change your data on all example.com sites" |
 | Single host | "Read and change your data on www.example.com" |
 
-How Warnings Affect Install Rates {#how-warnings-affect-install-rates}
+## How Warnings Affect Install Rates {#how-warnings-affect-install-rates}
 
-Research consistently shows:
+### Research consistently shows:
 
 - Each additional warning reduces install conversion by 5-15%
 - "Read and change all your data on all websites" can reduce installs by 30-50%
 - "Read your browsing history" causes about 20% drop
 - Extensions with zero warnings have the highest install rates
 
-Combining Warnings {#combining-warnings}
+## Combining Warnings {#combining-warnings}
 
 Chrome de-duplicates warnings. If two permissions produce the same string,
 users see it only once. For example, both `tabs` and `webNavigation` produce
@@ -411,12 +411,12 @@ users see it only once. For example, both `tabs` and `webNavigation` produce
 
 ---
 
-Optional Permissions {#optional-permissions}
+## Optional Permissions {#optional-permissions}
 
 Optional permissions let you defer scary warnings until the user actually needs
 the feature.
 
-Declaring Optional Permissions {#declaring-optional-permissions}
+## Declaring Optional Permissions {#declaring-optional-permissions}
 
 ```jsonc
 {
@@ -426,7 +426,7 @@ Declaring Optional Permissions {#declaring-optional-permissions}
 }
 ```
 
-Requesting at Runtime {#requesting-at-runtime}
+## Requesting at Runtime {#requesting-at-runtime}
 
 ```typescript
 async function requestBookmarkAccess(): Promise<boolean> {
@@ -446,7 +446,7 @@ Critical rule: `chrome.permissions.request()` must be called from a user
 gesture handler (click, keypress). Calling it from a timer or on page load
 will fail silently or throw.
 
-Checking Granted Permissions {#checking-granted-permissions}
+## Checking Granted Permissions {#checking-granted-permissions}
 
 ```typescript
 async function hasBookmarkPermission(): Promise<boolean> {
@@ -456,7 +456,7 @@ async function hasBookmarkPermission(): Promise<boolean> {
 }
 ```
 
-Removing Permissions {#removing-permissions}
+## Removing Permissions {#removing-permissions}
 
 Users can revoke optional permissions from `chrome://extensions`. You can also
 remove them programmatically:
@@ -469,7 +469,7 @@ async function releaseBookmarkPermission(): Promise<boolean> {
 }
 ```
 
-Listening for Permission Changes {#listening-for-permission-changes}
+## Listening for Permission Changes {#listening-for-permission-changes}
 
 ```typescript
 chrome.permissions.onAdded.addListener((permissions) => {
@@ -482,7 +482,7 @@ chrome.permissions.onRemoved.addListener((permissions) => {
 });
 ```
 
-Best Practices for Optional Permissions {#best-practices-for-optional-permissions}
+## Best Practices for Optional Permissions {#best-practices-for-optional-permissions}
 
 1. Explain before requesting: Show UI explaining why the permission is
    needed before calling `request()`. Users who understand the reason grant
@@ -496,7 +496,7 @@ Best Practices for Optional Permissions {#best-practices-for-optional-permission
 
 ---
 
-Minimum Viable Permissions Strategy {#minimum-viable-permissions-strategy}
+## Minimum Viable Permissions Strategy {#minimum-viable-permissions-strategy}
 
 Follow this decision tree for every permission your extension needs:
 
@@ -517,7 +517,7 @@ Do I need this API?
             +-- No  --> Declare it without worry
 ```
 
-Practical Example {#practical-example}
+## Practical Example {#practical-example}
 
 An extension that highlights text on any page and optionally saves highlights
 to bookmarks:
@@ -542,19 +542,19 @@ opts into the bookmark sync feature.
 
 ---
 
-Permission Escalation in Updates {#permission-escalation-in-updates}
+## Permission Escalation in Updates {#permission-escalation-in-updates}
 
 When you publish an update that adds new required permissions, Chrome disables
 the extension for existing users and shows a re-consent dialog. The user must
 accept the new permissions before the extension re-enables.
 
-What Triggers Re-Consent {#what-triggers-re-consent}
+## What Triggers Re-Consent {#what-triggers-re-consent}
 
 - Adding a new entry to `permissions` that produces a new warning
 - Adding a new entry to `host_permissions` that broadens scope
 - Moving from specific hosts to `<all_urls>`
 
-What Does NOT Trigger Re-Consent {#what-does-not-trigger-re-consent}
+## What Does NOT Trigger Re-Consent {#what-does-not-trigger-re-consent}
 
 - Adding permissions that produce no warnings (e.g., `storage`, `alarms`)
 - Adding `optional_permissions` (they are never auto-granted)
@@ -562,7 +562,7 @@ What Does NOT Trigger Re-Consent {#what-does-not-trigger-re-consent}
 - Adding permissions whose warning string is already covered by an existing
   permission
 
-How to Handle Escalation {#how-to-handle-escalation}
+## How to Handle Escalation {#how-to-handle-escalation}
 
 1. Avoid it if possible. Use optional permissions for new features.
 2. Communicate proactively. Warn users in the previous version's changelog
@@ -590,7 +590,7 @@ How to Handle Escalation {#how-to-handle-escalation}
 
 ---
 
-Withdrawn Permissions {#withdrawn-permissions}
+## Withdrawn Permissions {#withdrawn-permissions}
 
 You can remove permissions in an update. Chrome handles this gracefully:
 
@@ -598,13 +598,13 @@ You can remove permissions in an update. Chrome handles this gracefully:
 - The user sees no prompt (removing access is always safe)
 - Any code that calls the removed API will fail at runtime
 
-Why Remove Permissions {#why-remove-permissions}
+## Why Remove Permissions {#why-remove-permissions}
 
 - You refactored a feature to use a less privileged API
 - You removed a feature entirely
 - You moved a required permission to `optional_permissions`
 
-Moving Required to Optional {#moving-required-to-optional}
+## Moving Required to Optional {#moving-required-to-optional}
 
 This is a two-step process:
 
@@ -620,11 +620,11 @@ future update.
 
 ---
 
-TypeScript Helpers for Permission Checking {#typescript-helpers-for-permission-checking}
+## TypeScript Helpers for Permission Checking {#typescript-helpers-for-permission-checking}
 
 Type-safe utilities for managing permissions in your extension.
 
-Permission Gate Decorator {#permission-gate-decorator}
+## Permission Gate Decorator {#permission-gate-decorator}
 
 ```typescript
 type ChromePermission = chrome.runtime.ManifestPermissions;
@@ -669,7 +669,7 @@ function requiresPermission(options: PermissionGateOptions) {
 }
 ```
 
-Permission Status Checker {#permission-status-checker}
+## Permission Status Checker {#permission-status-checker}
 
 ```typescript
 interface PermissionStatus {
@@ -711,7 +711,7 @@ async function checkPermissions(
 }
 ```
 
-Safe API Caller {#safe-api-caller}
+## Safe API Caller {#safe-api-caller}
 
 ```typescript
 async function safeCallWithPermission<T>(
@@ -746,19 +746,19 @@ const history = await safeCallWithPermission(
 
 ---
 
-Using @theluckystrike/webext-permissions {#using-theluckystrikewebext-permissions}
+## Using @theluckystrike/webext-permissions {#using-theluckystrikewebext-permissions}
 
 The [`@theluckystrike/webext-permissions`](https://www.npmjs.com/package/@theluckystrike/webext-permissions)
 library provides human-readable descriptions and utilities for working with
 browser extension permissions.
 
-Installation {#installation}
+## Installation {#installation}
 
 ```bash
 npm install @theluckystrike/webext-permissions
 ```
 
-Getting Human-Readable Descriptions {#getting-human-readable-descriptions}
+## Getting Human-Readable Descriptions {#getting-human-readable-descriptions}
 
 ```typescript
 import {
@@ -784,7 +784,7 @@ const summary = summariseManifestPermissions({
 });
 ```
 
-Building a Permissions Page {#building-a-permissions-page}
+## Building a Permissions Page {#building-a-permissions-page}
 
 ```typescript
 import {
@@ -831,7 +831,7 @@ async function renderPermissionsUI(container: HTMLElement) {
 }
 ```
 
-Validating Manifest Permissions {#validating-manifest-permissions}
+## Validating Manifest Permissions {#validating-manifest-permissions}
 
 Use the library in your build pipeline to catch mistakes:
 
@@ -855,11 +855,11 @@ if (result.warnings.length > 0) {
 
 ---
 
-Permission Audit Checklist {#permission-audit-checklist}
+## Permission Audit Checklist {#permission-audit-checklist}
 
 Run through this checklist before every Chrome Web Store submission.
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 - [ ] Every entry in `permissions` is actually used in the codebase
 - [ ] `grep -r "chrome\.<api>" src/` confirms each API permission is called
@@ -868,7 +868,7 @@ Required Permissions {#required-permissions}
 - [ ] The `tabs` permission is only declared if you need `url`/`title` in
       background scripts (content scripts get this from `location.href`)
 
-Host Permissions {#host-permissions}
+## Host Permissions {#host-permissions}
 
 - [ ] Host patterns are as narrow as possible
 - [ ] No wildcard hosts unless absolutely required
@@ -876,7 +876,7 @@ Host Permissions {#host-permissions}
 - [ ] Content script `matches` patterns align with `host_permissions`
 - [ ] Consider `optional_host_permissions` for secondary domains
 
-Optional Permissions {#optional-permissions}
+## Optional Permissions {#optional-permissions}
 
 - [ ] Features outside the core flow use optional permissions
 - [ ] Runtime request calls are inside user gesture handlers
@@ -884,21 +884,21 @@ Optional Permissions {#optional-permissions}
 - [ ] The extension degrades gracefully when optional permissions are denied
 - [ ] `permissions.onRemoved` listener disables features when revoked
 
-Warnings and User Experience {#warnings-and-user-experience}
+## Warnings and User Experience {#warnings-and-user-experience}
 
 - [ ] You have counted the total number of install-time warnings
 - [ ] Each warning is justified in your store listing description
 - [ ] You have tested the install flow and read every warning
 - [ ] The data use disclosure in the Web Store matches your actual permissions
 
-Updates and Maintenance {#updates-and-maintenance}
+## Updates and Maintenance {#updates-and-maintenance}
 
 - [ ] New permissions in an update do not trigger unnecessary re-consent
 - [ ] Removed features have had their permissions withdrawn
 - [ ] Migration from required to optional follows the two-step process
 - [ ] Changelog documents any permission changes for users
 
-Security {#security}
+## Security {#security}
 
 - [ ] No unused permissions that increase attack surface
 - [ ] Content Security Policy in the manifest is restrictive
@@ -908,7 +908,7 @@ Security {#security}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 Permissions are the trust contract between your extension and its users. Every
 permission you request is a promise: "I need this, and I will use it
@@ -919,7 +919,7 @@ The extensions with the highest install rates are the ones that request the
 least. Build trust by asking for less, and earn more access through runtime
 prompts that users understand and accept.
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What are optional permissions in Chrome extensions?
 Optional permissions are declared in "optional_permissions" and requested at runtime when needed, giving users more control over what your extension can access.

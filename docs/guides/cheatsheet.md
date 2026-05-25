@@ -11,7 +11,7 @@ A quick-reference cheatsheet covering the most common patterns, APIs, and snippe
 
 ---
 
-Minimal Manifest V3 Template {#minimal-manifest-v3-template}
+## Minimal Manifest V3 Template {#minimal-manifest-v3-template}
 
 ```json
 {
@@ -45,9 +45,9 @@ Minimal Manifest V3 Template {#minimal-manifest-v3-template}
 
 ---
 
-Service Worker Quick Patterns {#service-worker-quick-patterns}
+## Service Worker Quick Patterns {#service-worker-quick-patterns}
 
-Lifecycle Events {#lifecycle-events}
+## Lifecycle Events {#lifecycle-events}
 
 ```typescript
 // Install: runs once when extension is first installed or updated
@@ -66,7 +66,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 ```
 
-Alarms (Persistent Scheduling) {#alarms-persistent-scheduling}
+## Alarms (Persistent Scheduling) {#alarms-persistent-scheduling}
 
 ```typescript
 // Create a repeating alarm
@@ -83,7 +83,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 chrome.alarms.create("reminder", { delayInMinutes: 5 });
 ```
 
-Service Worker Keep-Alive Trick {#service-worker-keep-alive-trick}
+## Service Worker Keep-Alive Trick {#service-worker-keep-alive-trick}
 
 ```typescript
 // Use a long-lived port to keep the SW alive (use sparingly)
@@ -98,9 +98,9 @@ chrome.runtime.onConnect.addListener((port) => {
 
 ---
 
-Content Script Injection Patterns {#content-script-injection-patterns}
+## Content Script Injection Patterns {#content-script-injection-patterns}
 
-Static (manifest.json) {#static-manifestjson}
+## Static (manifest.json) {#static-manifestjson}
 
 ```json
 "content_scripts": [
@@ -114,7 +114,7 @@ Static (manifest.json) {#static-manifestjson}
 ]
 ```
 
-Programmatic Injection {#programmatic-injection}
+## Programmatic Injection {#programmatic-injection}
 
 ```typescript
 // Inject into the active tab
@@ -139,7 +139,7 @@ chrome.scripting.insertCSS({
 
 ---
 
-Storage Quick Patterns {#storage-quick-patterns}
+## Storage Quick Patterns {#storage-quick-patterns}
 
 ```typescript
 // Local storage (per-device, ~10 MB limit)
@@ -166,9 +166,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-Message Passing Patterns {#message-passing-patterns}
+## Message Passing Patterns {#message-passing-patterns}
 
-One-Time Messages {#one-time-messages}
+## One-Time Messages {#one-time-messages}
 
 ```typescript
 // From content script to background
@@ -188,7 +188,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Long-Lived Connections (Ports) {#long-lived-connections-ports}
+## Long-Lived Connections (Ports) {#long-lived-connections-ports}
 
 ```typescript
 // Content script: open a port
@@ -208,7 +208,7 @@ chrome.runtime.onConnect.addListener((port) => {
 
 ---
 
-Permission Declaration Patterns {#permission-declaration-patterns}
+## Permission Declaration Patterns {#permission-declaration-patterns}
 
 ```json
 // Required permissions (granted at install)
@@ -224,7 +224,7 @@ Permission Declaration Patterns {#permission-declaration-patterns}
 "optional_host_permissions": ["https://*/*", "http://*/*"]
 ```
 
-Requesting Optional Permissions at Runtime {#requesting-optional-permissions-at-runtime}
+## Requesting Optional Permissions at Runtime {#requesting-optional-permissions-at-runtime}
 
 ```typescript
 const granted = await chrome.permissions.request({
@@ -238,7 +238,7 @@ if (granted) {
 
 ---
 
-Common chrome.* API One-Liners {#common-chrome-api-one-liners}
+## Common chrome.* API One-Liners {#common-chrome-api-one-liners}
 
 ```typescript
 // Get the current active tab
@@ -278,7 +278,7 @@ await chrome.sidePanel.open({ windowId: tab.windowId });
 
 ---
 
-Debugging Quick Commands {#debugging-quick-commands}
+## Debugging Quick Commands {#debugging-quick-commands}
 
 | Action | URL / Method |
 |---|---|
@@ -294,7 +294,7 @@ Debugging Quick Commands {#debugging-quick-commands}
 
 ---
 
-TypeScript Type Snippets {#typescript-type-snippets}
+## TypeScript Type Snippets {#typescript-type-snippets}
 
 ```typescript
 // Typed message handler
@@ -329,7 +329,7 @@ async function getStorage<K extends keyof StorageSchema>(
 
 ---
 
-@theluckystrike/webext-storage Quick Examples {#theluckystrikewebext-storage-quick-examples}
+## @theluckystrike/webext-storage Quick Examples {#theluckystrikewebext-storage-quick-examples}
 
 ```typescript
 import { createStorage } from "@anthropic/webext-storage";
@@ -352,7 +352,7 @@ store.watch("theme", (newVal, oldVal) => {
 
 ---
 
-@theluckystrike/webext-messaging Quick Examples {#theluckystrikewebext-messaging-quick-examples}
+## @theluckystrike/webext-messaging Quick Examples {#theluckystrikewebext-messaging-quick-examples}
 
 ```typescript
 import { defineMessages, createHandler } from "@anthropic/webext-messaging";
@@ -386,7 +386,7 @@ const user = await protocol.send("getUser", { id: "123" });
 
 ---
 
-Most-Used APIs Summary Table {#most-used-apis-summary-table}
+## Most-Used APIs Summary Table {#most-used-apis-summary-table}
 
 | API | Permission | Use Case |
 |---|---|---|
@@ -405,7 +405,7 @@ Most-Used APIs Summary Table {#most-used-apis-summary-table}
 
 ---
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Manifest V3 Fields Reference](manifest-v3-fields.md)
 - [Service Worker Lifecycle](service-worker-lifecycle.md)
@@ -413,9 +413,9 @@ See Also {#see-also}
 - [Debugging Extensions](debugging-extensions.md)
 - [MV2 to MV3 Migration Cheatsheet](mv3-migration-cheatsheet.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Chrome API Index](../reference/chrome-api-index.md)
 - [Manifest Reference](../guides/manifest-json-reference.md)

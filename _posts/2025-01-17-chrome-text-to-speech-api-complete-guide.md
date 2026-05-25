@@ -18,13 +18,13 @@ Whether you're building an accessibility-focused extension, a language learning 
 
 ---
 
-Understanding the Chrome TTS API {#understanding-chrome-tts-api}
+## Understanding the Chrome TTS API {#understanding-chrome-tts-api}
 
 The Chrome Text-to-Speech API, accessible through the `chrome.tts` namespace, allows extensions to synthesize spoken audio from text. This API leverages the operating system's speech synthesis capabilities, providing a unified interface regardless of the underlying platform. The API is available in all modern Chrome versions and works smoothly across Windows, macOS, Linux, and Chrome OS.
 
 The TTS API is particularly valuable for extensions that need to provide auditory feedback, read web content aloud, assist users with visual impairments, or offer multilingual support. Unlike traditional audio playback, speech synthesis generates audio dynamically from text input, making it flexible for any text-based content.
 
-Key Capabilities of the Chrome TTS API
+### Key Capabilities of the Chrome TTS API
 
 The Chrome TTS API offers a comprehensive set of features that make it suitable for various use cases:
 
@@ -35,17 +35,17 @@ The Chrome TTS API offers a comprehensive set of features that make it suitable 
 - Enqueue Management: Queue multiple utterances for sequential playback
 - Pause and Resume: Control playback with pause and resume functions
 
-Required Permissions
+### Required Permissions
 
 To use the Chrome TTS API in your extension, you don't need to add any special permissions to your `manifest.json` file. The API is available by default to all Chrome extensions. However, you should consider requesting other permissions depending on the specific functionality of your extension, such as "tabs" or "activeTab" if your extension needs to read content from web pages.
 
 ---
 
-Getting Started with Basic TTS Implementation {#getting-started-basic-tts}
+## Getting Started with Basic TTS Implementation {#getting-started-basic-tts}
 
 The simplest way to use the Chrome TTS API is through the `chrome.tts.speak()` method. This method takes the text you want to speak and optionally a callback function to handle completion.
 
-Basic Syntax
+### Basic Syntax
 
 ```javascript
 chrome.tts.speak(
@@ -57,7 +57,7 @@ chrome.tts.speak(
 
 The `textToSpeak` parameter is a string containing the text you want to be spoken. The `options` parameter is an optional object that allows you to configure various aspects of the speech synthesis. The `callback` function is called when the speak operation completes.
 
-A Simple Example
+### A Simple Example
 
 Here's a basic example that speaks a simple message when a user clicks a browser action button:
 
@@ -70,7 +70,7 @@ chrome.action.onClicked.addListener(function(tab) {
 
 This example demonstrates the core functionality, but real-world extensions typically need more control over the speech output.
 
-Understanding the Options Object
+### Understanding the Options Object
 
 The options object provides fine-grained control over how the text is spoken:
 
@@ -95,11 +95,11 @@ Each option serves a specific purpose in customizing the speech output. Understa
 
 ---
 
-Working with Voices {#working-with-voices}
+## Working with Voices {#working-with-voices}
 
 One of the most powerful features of the Chrome TTS API is the ability to choose from multiple voices. Different voices support different languages and have distinct characteristics.
 
-Listing Available Voices
+### Listing Available Voices
 
 To see what voices are available in the user's browser, use the `chrome.tts.getVoices()` method:
 
@@ -121,7 +121,7 @@ getAvailableVoices();
 
 The `getVoices()` method returns an array of `TtsVoice` objects, each containing properties like `name`, `lang`, `gender`, and optionally `extensionId` for voices provided by extensions.
 
-Selecting a Specific Voice
+### Selecting a Specific Voice
 
 Once you know which voices are available, you can select a specific voice by name:
 
@@ -133,7 +133,7 @@ chrome.tts.speak('Speaking with a specific voice', {
 
 It's important to note that voice names vary across platforms and installations. You should always provide fallback options and handle cases where the requested voice isn't available.
 
-Voice Selection Best Practices
+### Voice Selection Best Practices
 
 When implementing voice selection in your extension, consider these best practices:
 
@@ -144,11 +144,11 @@ When implementing voice selection in your extension, consider these best practic
 
 ---
 
-Controlling Speech Parameters {#controlling-speech-parameters}
+## Controlling Speech Parameters {#controlling-speech-parameters}
 
 The Chrome TTS API provides three main parameters for controlling how text is spoken: rate, pitch, and volume. Understanding these parameters allows you to create natural-sounding speech output.
 
-Speech Rate
+### Speech Rate
 
 The `rate` parameter controls how fast the text is spoken. The default rate is 1.0, which represents normal speaking speed. Values can range from 0.1 (very slow) to 10.0 (extremely fast):
 
@@ -166,7 +166,7 @@ chrome.tts.speak('This is spoken quickly', {
 
 Different voices may interpret rate values differently. Some voices might not support extreme rate values, so testing is essential.
 
-Voice Pitch
+### Voice Pitch
 
 The `pitch` parameter adjusts the pitch of the spoken voice. The default pitch is 1.0:
 
@@ -184,7 +184,7 @@ chrome.tts.speak('Speaking with lower pitch', {
 
 Pitch adjustment is useful for creating distinct voices or emphasizing certain types of content. However, extreme pitch values can make speech sound unnatural.
 
-Volume Control
+### Volume Control
 
 The `volume` parameter controls the output volume. The default is 1.0 (maximum volume):
 
@@ -198,13 +198,13 @@ Note that volume control depends on the audio output device and may not work ide
 
 ---
 
-Handling TTS Events {#handling-tts-events}
+## Handling TTS Events {#handling-tts-events}
 
 The Chrome TTS API provides comprehensive event handling that allows you to monitor and respond to speech synthesis events. This is crucial for building responsive extensions that need to coordinate speech with other actions.
 
-Event Types
+### Event Types
 
-The API supports several event types:
+### The API supports several event types:
 
 - `start`: Fired when speech synthesis begins
 - `word`: Fired when a word is spoken (includes character position)
@@ -215,7 +215,7 @@ The API supports several event types:
 - `canceled`: Fired when speech is canceled
 - `error`: Fired when an error occurs
 
-Implementing Event Handlers
+### Implementing Event Handlers
 
 You can handle events through the `onEvent` option:
 
@@ -235,7 +235,7 @@ chrome.tts.speak('This is a longer text that will take some time to speak', {
 });
 ```
 
-Practical Event Handling Example
+### Practical Event Handling Example
 
 Here's a more practical example that uses events to synchronize speech with visual feedback:
 
@@ -267,11 +267,11 @@ speakWithProgress(
 
 ---
 
-Managing Speech Queue {#managing-speech-queue}
+## Managing Speech Queue {#managing-speech-queue}
 
 The Chrome TTS API automatically queues multiple speak requests, allowing you to queue several messages without waiting for each to complete.
 
-Understanding the Queue
+### Understanding the Queue
 
 When you call `speak()` while another utterance is in progress, the new utterance is added to the queue:
 
@@ -283,7 +283,7 @@ chrome.tts.speak('Third message');
 
 These messages will be spoken sequentially in the order they were queued.
 
-Controlling Queue Behavior
+### Controlling Queue Behavior
 
 You can control queue behavior using the `queueName` parameter:
 
@@ -302,13 +302,13 @@ The `enqueue` option (when set to false) clears the queue before speaking the ne
 
 ---
 
-Pausing, Resuming, and Stopping {#pause-resume-stop}
+## Pausing, Resuming, and Stopping {#pause-resume-stop}
 
 The Chrome TTS API provides methods for controlling playback after speech has started.
 
-Stopping Speech
+### Stopping Speech
 
-To stop all speech immediately:
+### To stop all speech immediately:
 
 ```javascript
 chrome.tts.stop();
@@ -316,9 +316,9 @@ chrome.tts.stop();
 
 This clears the queue and stops any current speech immediately.
 
-Pausing and Resuming
+### Pausing and Resuming
 
-Pause and resume functionality allows for temporary interruption:
+### Pause and resume functionality allows for temporary interruption:
 
 ```javascript
 chrome.tts.pause();
@@ -329,7 +329,7 @@ chrome.tts.resume();
 
 Not all platforms support pause and resume. You should check availability and provide alternative controls if needed.
 
-Checking State
+### Checking State
 
 You can check the current TTS state:
 
@@ -345,11 +345,11 @@ chrome.tts.isSpeaking(function(speaking) {
 
 ---
 
-Advanced SSML Support {#advanced-ssml-support}
+## Advanced SSML Support {#advanced-ssml-support}
 
 Chrome's TTS API supports SSML (Speech Synthesis Markup Language), which provides fine-grained control over pronunciation, emphasis, and timing.
 
-Using SSML Tags
+### Using SSML Tags
 
 ```javascript
 const ssmlText = `
@@ -363,7 +363,7 @@ const ssmlText = `
 chrome.tts.speak(ssmlText, { ssmlMode: 'annotate' });
 ```
 
-Common SSML tags include:
+### Common SSML tags include:
 
 - `<speak>`: Root element
 - `<break>`: Insert pauses
@@ -372,9 +372,9 @@ Common SSML tags include:
 - `<phoneme>`: Specify phonetic pronunciation
 - `<prosody>`: Control rate, pitch, and volume
 
-SSML Modes
+### SSML Modes
 
-The `ssmlMode` option controls how SSML is processed:
+### The `ssmlMode` option controls how SSML is processed:
 
 - `none`: No SSML processing (default)
 - `fragment`: Allow SSML fragments
@@ -382,7 +382,7 @@ The `ssmlMode` option controls how SSML is processed:
 
 ---
 
-Building a Complete TTS Extension Example {#complete-example}
+## Building a Complete TTS Extension Example {#complete-example}
 
 Here's a practical example of building a simple text-to-speech extension:
 
@@ -481,30 +481,30 @@ This example demonstrates a functional text-to-speech extension with voice selec
 
 ---
 
-Best Practices and Common Pitfalls {#best-practices}
+## Best Practices and Common Pitfalls {#best-practices}
 
 When implementing the Chrome TTS API in your extensions, keep these best practices in mind:
 
-Performance Considerations
+### Performance Considerations
 
 - Minimize speech synthesis calls: Queue multiple sentences together rather than making separate calls
 - Handle errors gracefully: Always include error handling in your implementation
 - Clean up resources: Use `chrome.tts.stop()` when your extension is closed or no longer needs speech
 
-User Experience
+### User Experience
 
 - Provide visual feedback: Show users when speech is active
 - Respect user preferences: Remember the user's chosen voice and settings
 - Offer controls: Allow users to pause, resume, and stop speech
 - Test with screen readers: Ensure your TTS implementation doesn't conflict with assistive technologies
 
-Cross-Browser Compatibility
+### Cross-Browser Compatibility
 
 - Test across platforms: Voice availability varies significantly
 - Provide fallbacks: Have a default voice if the preferred voice isn't available
 - Handle missing features: Some platforms don't support pause/resume; provide alternatives
 
-Accessibility
+### Accessibility
 
 - Don't rely solely on audio: Always provide visual alternatives
 - Consider cognitive accessibility: Allow users to adjust speed for easier comprehension
@@ -512,11 +512,11 @@ Accessibility
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Here are solutions to common problems you might encounter:
 
-No Voices Available
+### No Voices Available
 
 If `getVoices()` returns an empty array, the voices might not have loaded yet. Try waiting for the `onVoicesChanged` event:
 
@@ -527,9 +527,9 @@ chrome.tts.onVoicesChanged.addListener(function() {
 });
 ```
 
-Speech Not Working
+### Speech Not Working
 
-If speech isn't working, check for errors:
+### If speech isn't working, check for errors:
 
 ```javascript
 chrome.tts.speak(text, function() {
@@ -539,7 +539,7 @@ chrome.tts.speak(text, function() {
 });
 ```
 
-Intermittent Behavior
+### Intermittent Behavior
 
 Some platforms have issues with rapid speak calls. Implement a debounce:
 
@@ -556,7 +556,7 @@ function speakDebounced(text) {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Text-to-Speech API is a powerful tool that enables developers to create accessible, feature-rich extensions with voice capabilities. From simple text reading to complex SSML-based speech synthesis, this API provides the flexibility needed for various use cases.
 
@@ -566,7 +566,7 @@ Start experimenting with the Chrome TTS API today, and discover how voice synthe
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Accessibility (A11y) Guide](/2025/01/18/chrome-extension-accessibility-a11y-guide/) - Build accessible extensions following best practices
 - [Speech Recognition and Voice Commands](/2025/01/21/chrome-extension-speech-recognition-voice-commands/) - Implement voice input in your extensions

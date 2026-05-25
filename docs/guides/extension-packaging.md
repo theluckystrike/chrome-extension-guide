@@ -11,7 +11,7 @@ This guide covers how to package your Chrome extension for distribution, either 
 
 ---
 
-Overview {#overview}
+## Overview {#overview}
 
 Packaging your extension is the final step before distribution. The package format depends on your distribution method:
 
@@ -23,7 +23,7 @@ This guide covers all three approaches plus automation strategies.
 
 ---
 
-Directory Structure for Packaging {#directory-structure-for-packaging}
+## Directory Structure for Packaging {#directory-structure-for-packaging}
 
 Your extension needs a clean, production-ready directory before packaging. A typical structure looks like:
 
@@ -46,9 +46,9 @@ This `dist` folder should contain only the files needed at runtime, no source fi
 
 ---
 
-What to Include {#what-to-include}
+## What to Include {#what-to-include}
 
-Every extension package must include:
+### Every extension package must include:
 
 | File/Directory | Required | Notes |
 |----------------|----------|-------|
@@ -61,9 +61,9 @@ Every extension package must include:
 
 ---
 
-What to Exclude {#what-to-exclude}
+## What to Exclude {#what-to-exclude}
 
-Never include the following in your package:
+### Never include the following in your package:
 
 - Source files: `src/`, `.ts` files, uncompiled code
 - node_modules/: Dependencies should be bundled
@@ -76,7 +76,7 @@ Never include the following in your package:
 
 ---
 
-ZIP for Chrome Web Store {#zip-for-chrome-web-store}
+## ZIP for Chrome Web Store {#zip-for-chrome-web-store}
 
 The Chrome Web Store accepts extensions as ZIP files. Create your package with:
 
@@ -85,7 +85,7 @@ cd dist
 zip -r ../extension.zip . -x ".*" "*.map"
 ```
 
-Important Notes {#important-notes}
+## Important Notes {#important-notes}
 
 - Maximum size: 50MB (compressed), though smaller is better
 - Faster review: Smaller packages review faster
@@ -94,11 +94,11 @@ Important Notes {#important-notes}
 
 ---
 
-CRX for Self-Hosting {#crx-for-self-hosting}
+## CRX for Self-Hosting {#crx-for-self-hosting}
 
 For self-hosted distribution (without the Store), create a CRX file:
 
-Option 1: Using Chrome UI {#option-1-using-chrome-ui}
+## Option 1: Using Chrome UI {#option-1-using-chrome-ui}
 
 1. Open `chrome://extensions`
 2. Enable Developer mode
@@ -106,13 +106,13 @@ Option 1: Using Chrome UI {#option-1-using-chrome-ui}
 4. Select your `dist` directory
 5. Chrome generates `dist.crx` and `dist.pem`
 
-Option 2: Programmatic (crx3 package) {#option-2-programmatic-crx3-package}
+## Option 2: Programmatic (crx3 package) {#option-2-programmatic-crx3-package}
 
 ```bash
 npx crx3 pack ./dist -o extension.crx -p private-key.pem
 ```
 
-Private Key {#important-private-key}
+## Private Key {#important-private-key}
 
 - The `.pem` file is your private key, keep it secure
 - This key signs your CRX and identifies your extension
@@ -121,7 +121,7 @@ Private Key {#important-private-key}
 
 ---
 
-Build Script Example {#build-script-example}
+## Build Script Example {#build-script-example}
 
 A typical npm-based build and package workflow:
 
@@ -136,7 +136,7 @@ A typical npm-based build and package workflow:
 }
 ```
 
-More advanced setups might use:
+### More advanced setups might use:
 
 - Vite or Webpack for bundling
 - TypeScript compilation
@@ -145,9 +145,9 @@ More advanced setups might use:
 
 ---
 
-Automated Packaging in CI {#automated-packaging-in-ci}
+## Automated Packaging in CI {#automated-packaging-in-ci}
 
-Automate your packaging pipeline using GitHub Actions:
+### Automate your packaging pipeline using GitHub Actions:
 
 ```yaml
 name: Build and Package
@@ -170,7 +170,7 @@ jobs:
           path: extension.zip
 ```
 
-Publishing to Chrome Web Store {#publishing-to-chrome-web-store}
+## Publishing to Chrome Web Store {#publishing-to-chrome-web-store}
 
 For automated publishing, use the Chrome Web Store API with a service account:
 
@@ -185,9 +185,9 @@ npx chrome-webstore-upload-cli upload \
 
 ---
 
-Verification Before Packaging {#verification-before-packaging}
+## Verification Before Packaging {#verification-before-packaging}
 
-Always verify your package before distribution:
+### Always verify your package before distribution:
 
 1. Run all tests: Ensure nothing is broken
 2. Validate manifest: Use [Chrome's manifest validator](https://chrome.google.com/webstore/detail/manifest-validator)
@@ -197,15 +197,15 @@ Always verify your package before distribution:
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Publishing Guide](../publishing/publishing-guide.md). Overview of distribution options
 - [Submission Process](../publishing/submission-process.md). Step-by-step Store submission
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md). Automation best practices
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Deployment Strategies](../guides/chrome-extension-deployment-strategies.md)
 - [Extension Updates](../guides/extension-updates.md)

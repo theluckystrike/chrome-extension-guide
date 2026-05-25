@@ -18,13 +18,13 @@ Chrome extensions inherently operate in an asynchronous, event-driven environmen
 
 ---
 
-Understanding Event-Driven Architecture in Chrome Extensions {#understanding-event-driven-architecture}
+## Understanding Event-Driven Architecture in Chrome Extensions {#understanding-event-driven-architecture}
 
 Event-driven architecture in Chrome extensions is a design pattern where the flow of your extension is determined by events, user actions, browser state changes, network responses, or system notifications. Instead of your code actively polling for changes or following a rigid sequential execution path, your extension responds to events as they occur.
 
 The Chrome Events API provides a foundation for this architecture through various event listeners and dispatchers. When you implement extension event handling properly, your extension becomes more efficient because it only consumes resources when relevant events occur. This is particularly important in the context of browser extensions where performance and resource usage directly impact user experience.
 
-Why Event-Driven Architecture Matters
+### Why Event-Driven Architecture Matters
 
 Chrome extensions operate in a unique environment with strict resource constraints and complex communication requirements. The event-driven approach offers several compelling advantages that make it ideal for extension development.
 
@@ -36,11 +36,11 @@ Third, event-driven architecture naturally handles the asynchronous nature of br
 
 ---
 
-The Chrome Events API: Core Concepts {#chrome-events-api}
+## The Chrome Events API: Core Concepts {#chrome-events-api}
 
 The Chrome Events API encompasses a broad range of event types across different extension components. Understanding these event categories is fundamental to building effective event-driven extensions.
 
-Browser Events
+### Browser Events
 
 Browser events represent changes in the Chrome browser itself. These include events related to tabs, windows, downloads, and the extension's lifecycle. The chrome.tabs API, for example, provides numerous events that your extension can listen to:
 
@@ -52,7 +52,7 @@ The chrome.tabs.onActivated event fires when the user switches between tabs. Thi
 
 Window events through chrome.windows.onFocusChanged help your extension track which window the user is currently working in, enabling features that need to maintain state across window focus changes.
 
-Extension Lifecycle Events
+### Extension Lifecycle Events
 
 Extension lifecycle events track the installation, update, and removal of your extension. These events are crucial for performing setup tasks, migrating user data between versions, and cleaning up resources when the extension is removed.
 
@@ -62,7 +62,7 @@ The chrome.runtime.onStartup event fires when Chrome starts up. This is useful f
 
 The chrome.runtime.onMessage event enables communication between different parts of your extension. Content scripts can send messages to background scripts, and background scripts can communicate with popups or side panels. This event-driven message passing is essential for building coordinated extension experiences.
 
-Storage Events
+### Storage Events
 
 The chrome.storage API provides events for tracking changes to extension storage. When using storage.onChanged, your extension can react to modifications in local or sync storage, enabling features like cross-device synchronization or real-time settings updates.
 
@@ -70,11 +70,11 @@ This is particularly powerful when combined with the chrome.storage.sync API. Wh
 
 ---
 
-Implementing Extension Event Handling {#implementing-event-handling}
+## Implementing Extension Event Handling {#implementing-event-handling}
 
 Effective implementation of extension event handling requires understanding best practices and common patterns.  how to implement solid event-driven systems in your Chrome extensions.
 
-Setting Up Event Listeners
+### Setting Up Event Listeners
 
 Event listeners are the foundation of your event-driven extension. When setting up listeners, it's important to understand the difference between persistent background pages and service workers in Manifest V3.
 
@@ -92,7 +92,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 For service workers in Manifest V3, the approach is similar but you need to be aware that the service worker can be terminated when idle. This means you should structure your code to handle the service worker waking up and registering events again.
 
-Handling Events in Content Scripts
+### Handling Events in Content Scripts
 
 Content scripts run in the context of web pages and have access to both Chrome extension events and standard DOM events. This dual access enables powerful interactions between the page and the extension.
 
@@ -118,7 +118,7 @@ document.addEventListener('click', (event) => {
 });
 ```
 
-Debouncing and Throttling Events
+### Debouncing and Throttling Events
 
 Some events can fire very frequently, such as scroll events or tab update events. To prevent performance issues, implement debouncing or throttling:
 
@@ -142,11 +142,11 @@ function handleTabUpdate(tabId, changeInfo, tab) {
 
 ---
 
-Advanced Event Patterns {#advanced-event-patterns}
+## Advanced Event Patterns {#advanced-event-patterns}
 
 Once you master the basics, several advanced patterns can take your event-driven extensions to the better.
 
-Event Routing and Centralized Dispatch
+### Event Routing and Centralized Dispatch
 
 For larger extensions, consider implementing an event router that centralizes event handling. This pattern provides better control over event flow and makes debugging easier:
 
@@ -205,7 +205,7 @@ router.on('message:received', ({ message, sender }) => {
 });
 ```
 
-Event-Driven Communication Between Components
+### Event-Driven Communication Between Components
 
 Modern Chrome extensions often consist of multiple components that need to communicate. The event-driven approach provides clean inter-component communication:
 
@@ -237,7 +237,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Custom Events for Extension Logic
+### Custom Events for Extension Logic
 
 Beyond Chrome's built-in events, you can create custom events that represent domain-specific actions in your extension:
 
@@ -279,11 +279,11 @@ emitter.emit('user:login', { name: 'John', id: 123 });
 
 ---
 
-Manifest V3 Event Handling Changes {#manifest-v3-changes}
+## Manifest V3 Event Handling Changes {#manifest-v3-changes}
 
 Manifest V3 brought significant changes to how Chrome extension events work. Understanding these changes is essential for modern extension development.
 
-Service WorkersBackground Pages
+### Service WorkersBackground Pages
 
 The most significant change is the transition from persistent background pages to service workers. Service workers are event-driven by nature and can be terminated when idle. This has several implications for event handling:
 
@@ -308,7 +308,7 @@ chrome.runtime.onMessage.addListener(handleMessage);
 initialize();
 ```
 
-Declarative Net Request and Event Handling
+### Declarative Net Request and Event Handling
 
 Manifest V3 introduces declarative net request rules as the preferred way to handle network requests. Instead of intercepting requests through events, you define rules declaratively:
 
@@ -328,11 +328,11 @@ This change improves performance and privacy but requires a different mindset wh
 
 ---
 
-Best Practices for Event-Driven Extensions {#best-practices}
+## Best Practices for Event-Driven Extensions {#best-practices}
 
 Following best practices ensures your event-driven extensions are reliable, performant, and maintainable.
 
-Memory Management
+### Memory Management
 
 Event listeners can create memory leaks if not managed properly. Always remove listeners when they're no longer needed, especially in content scripts that are loaded and unloaded with page navigation.
 
@@ -347,7 +347,7 @@ function cleanup() {
 window.addEventListener('unload', cleanup);
 ```
 
-Error Handling in Event Handlers
+### Error Handling in Event Handlers
 
 Always wrap event handler logic in try-catch blocks to prevent one handler from breaking all other handlers:
 
@@ -363,13 +363,13 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-Performance Considerations
+### Performance Considerations
 
 Be mindful of the performance impact of your event handlers. Avoid expensive operations in event listeners, especially for frequently firing events. Use techniques like debouncing, throttling, and lazy loading to maintain good performance.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Event-driven architecture is fundamental to building successful Chrome extensions. By understanding the Chrome Events API, implementing proper extension event handling, and following best practices, you can create extensions that are responsive, efficient, and maintainable.
 

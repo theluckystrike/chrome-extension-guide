@@ -12,7 +12,7 @@ Context menus represent one of the most powerful UX features available to Chrome
 
 The `chrome.contextMenus` API enables you to add custom items to Chrome's context menu, appearing when users right-click on pages, links, images, text selections, or other elements. This guide covers everything from basic menu creation to advanced patterns like dynamic menus that adapt to application state, nested hierarchical structures, and smooth integration with content scripts for complex interactions.
 
-Introduction: When Context Menus Are the Right Choice
+### Introduction: When Context Menus Are the Right Choice
 
 Context menus excel in specific scenarios where they provide superior user experience compared to other extension interaction patterns. Understanding these use cases helps you make informed design decisions for your extension.
 
@@ -22,11 +22,11 @@ Consider alternatives when: The action requires significant user input or config
 
 Many successful extensions combine multiple interaction patterns. For instance, you might use context menus for quick actions on specific elements while providing a full-featured popup for comprehensive functionality. This hybrid approach, detailed in our [Extension Popup Design](/guides/extension-popup-design/) guide, often provides the best user experience.
 
-Context Menu Basics: The chrome.contextMenus API
+### Context Menu Basics: The chrome.contextMenus API
 
 Before diving into advanced patterns, you need to understand the fundamental API surface. The `chrome.contextMenus` API provides everything needed to create, update, and manage context menu items.
 
-Required Permission in manifest.json
+### Required Permission in manifest.json
 
 First, add the `contextMenus` permission to your manifest file. This permission is required regardless of menu complexity:
 
@@ -45,7 +45,7 @@ First, add the `contextMenus` permission to your manifest file. This permission 
 
 Note that context menus must be created in a background service worker. This is because menu click events need to be handled somewhere, and the service worker provides the persistent execution context required for this functionality.
 
-Creating Basic Context Menus with TypeScript
+### Creating Basic Context Menus with TypeScript
 
 The foundation of any context menu implementation is the `chrome.contextMenus.create()` method. Here's a TypeScript implementation with proper typing:
 
@@ -79,7 +79,7 @@ createBasicMenuItem({
 });
 ```
 
-Understanding Context Types
+### Understanding Context Types
 
 The `contexts` array determines when your menu item appears. Chrome supports numerous context types:
 
@@ -107,7 +107,7 @@ const versatileMenuItem = {
 };
 ```
 
-The OnClickData Interface
+### The OnClickData Interface
 
 When a user clicks a context menu item, your handler receives an `OnClickData` object containing rich information about the click context:
 
@@ -152,11 +152,11 @@ const handleMenuClick: ContextMenuClickHandler = (info, tab) => {
 
 This information enables you to build context-aware handlers that perform different actions based on what the user right-clicked.
 
-Dynamic Context Menus: Menus That Adapt
+### Dynamic Context Menus: Menus That Adapt
 
 Static menus work well for simple extensions, but real-world applications often need menus that adapt to changing conditions, user authentication state, page URL, or extension settings. The contextMenus API supports this through dynamic creation, updating, and removal of menu items.
 
-Creating Menus Conditionally Based on Page URL
+### Creating Menus Conditionally Based on Page URL
 
 You can control menu visibility using the `documentUrlPatterns` property, which accepts URL patterns similar to content script matches:
 
@@ -188,7 +188,7 @@ function createDomainSpecificMenus(): void {
 }
 ```
 
-The DynamicMenuManager Class
+### The DynamicMenuManager Class
 
 For complex applications with many menu items that change based on state, a manager class provides clean organization:
 
@@ -325,7 +325,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Updating and Removing Individual Menus
+### Updating and Removing Individual Menus
 
 You can modify existing menus without rebuilding everything:
 
@@ -343,11 +343,11 @@ chrome.contextMenus.remove('menu-id-to-remove');
 chrome.contextMenus.removeAll();
 ```
 
-Nested Menu Items: Hierarchical Structure
+### Nested Menu Items: Hierarchical Structure
 
 Complex extensions often benefit from organizing menu items into nested hierarchies. This improves usability by grouping related actions and reducing visual clutter.
 
-Parent-Child Relationships
+### Parent-Child Relationships
 
 Create nested menus by specifying a `parentId` when creating child items:
 
@@ -407,7 +407,7 @@ function createNestedMenuStructure(): void {
 }
 ```
 
-Building Complex Menus from Configuration
+### Building Complex Menus from Configuration
 
 For maintainable code, define your menu structure in a configuration object and build programmatically:
 
@@ -531,11 +531,11 @@ class MenuBuilder {
 export const menuBuilder = new MenuBuilder();
 ```
 
-Context-Specific Click Handlers
+### Context-Specific Click Handlers
 
 Different context types require different handling. A solid extension uses a router pattern to dispatch to the appropriate handler based on what was clicked.
 
-The ContextMenuRouter Class
+### The ContextMenuRouter Class
 
 ```typescript
 // background/ContextMenuRouter.ts
@@ -656,11 +656,11 @@ router.register('full-page-screenshot', async (info, tab) => {
 export { router };
 ```
 
-Integration with Content Scripts
+### Integration with Content Scripts
 
 Some menu actions require direct DOM access, for example, extracting specific element data or performing actions that only work within page context. This requires message passing between the background service worker and content scripts.
 
-Message Passing Pattern
+### Message Passing Pattern
 
 ```typescript
 // background/extractData.ts
@@ -812,11 +812,11 @@ function extractPageData(): any {
 }
 ```
 
-Context Menus with chrome.action
+### Context Menus with chrome.action
 
 You can also add context menu items to your extension's toolbar button (the action icon). This is useful for adding options, help, or quick actions directly from the icon.
 
-Action Button Context Menu
+### Action Button Context Menu
 
 ```typescript
 // Create menu items specifically for the extension icon
@@ -848,11 +848,11 @@ chrome.contextMenus.create({
 
 Note that this requires `action` in your contexts array and uses the extension's action (toolbar icon) as the trigger point rather than page elements.
 
-Checkbox and Radio Menu Items
+### Checkbox and Radio Menu Items
 
 Stateful menu items allow users to toggle settings directly from the context menu without opening a separate options page.
 
-Settings Menu with Checkboxes and Radio Groups
+### Settings Menu with Checkboxes and Radio Groups
 
 ```typescript
 // background/SettingsMenuManager.ts
@@ -986,15 +986,15 @@ class SettingsMenuManager {
 export const settingsManager = new SettingsMenuManager();
 ```
 
-Performance and Limits
+### Performance and Limits
 
 Chrome imposes certain limits on context menus that you need to consider for large-scale extensions.
 
-Browser Limits and Best Practices
+### Browser Limits and Best Practices
 
 Chrome limits the number of context menu items you can create. While the exact limit varies by version and platform, a safe practice is to keep menu items under 100 total. If you need more items, consider organizing them into nested submenus or using dynamic menus that show only relevant items.
 
-Service Worker Lifecycle Considerations
+### Service Worker Lifecycle Considerations
 
 In Manifest V3, service workers can be terminated after inactivity. This affects context menus:
 
@@ -1035,7 +1035,7 @@ async function rebuildContextMenus(): Promise<void> {
 }
 ```
 
-Avoiding Menu Flicker
+### Avoiding Menu Flicker
 
 When updating menus, use `removeAll()` followed by batch creation to prevent visual flickering:
 
@@ -1054,7 +1054,7 @@ async function updateMenusSmoothly(newConfigs: MenuConfig[]): Promise<void> {
 }
 ```
 
-Complete Example: Text Utility Extension
+### Complete Example: Text Utility Extension
 
 Putting it all together, here's a complete text utility extension that demonstrates all the patterns covered in this guide.
 
@@ -1340,7 +1340,7 @@ This complete example demonstrates:
 - Integration with notifications and clipboard API
 - Proper initialization in service worker lifecycle events
 
-Monetization Considerations
+### Monetization Considerations
 
 Context menus can serve as excellent monetization touchpoints. As detailed in the [extension monetization strategies](/guides/extension-monetization/) guide, premium extensions often gate advanced menu items behind paywalls. The `DynamicMenuManager` pattern shown earlier supports this by conditionally showing menu items based on user subscription status. Consider offering basic text utilities free while reserving advanced features like batch processing, cloud sync, or custom transformations for premium users.
 

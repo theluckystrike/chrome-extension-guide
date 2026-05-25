@@ -18,11 +18,11 @@ Chrome extensions have access to multiple storage APIs, each designed for differ
 
 ---
 
-Understanding chrome.storage: local, sync, and session {#understanding-chrome-storage}
+## Understanding chrome.storage: local, sync, and session {#understanding-chrome-storage}
 
 The Chrome Storage API serves as the primary storage mechanism for most extension data. It provides three distinct storage areas, each with unique characteristics suited to different scenarios.
 
-chrome.storage.local
+### chrome.storage.local
 
 The `chrome.storage.local` area provides persistent storage that remains on the user's machine indefinitely. This is the workhorse for most extension data, from user preferences to cached information. Without additional permissions, you receive a 10MB quota, sufficient for many applications but limiting for data-intensive use cases.
 
@@ -38,7 +38,7 @@ const { settings } = await chrome.storage.local.get('settings');
 
 The local storage area offers no synchronization across devices, making it ideal for machine-specific data, large cached datasets, and information that doesn't need to follow the user across devices. It supports the `unlimitedStorage` permission to remove the quota limit entirely, though Chrome may still enforce internal constraints based on available disk space.
 
-chrome.storage.sync
+### chrome.storage.sync
 
 The `chrome.storage.sync` area synchronizes data across all Chrome instances where the user is signed in with their Google account. This makes it perfect for user preferences, settings, and small amounts of data that should follow the user anywhere they use Chrome.
 
@@ -71,7 +71,7 @@ async function saveUserPreferences(preferences) {
 
 For extensions requiring sync capabilities with larger data volumes, consider storing only metadata in sync while keeping the bulk data in local storage, using a hybrid approach that maintains user preferences in the cloud while keeping large datasets locally.
 
-chrome.storage.session
+### chrome.storage.session
 
 The `chrome.storage.session` area provides ephemeral storage that persists only for the current browser session. Data disappears when Chrome closes, making it perfect for temporary state that shouldn't persist across restarts.
 
@@ -90,11 +90,11 @@ Session storage proves invaluable for coordinating state between different exten
 
 ---
 
-Quota Management and Monitoring {#quota-management}
+## Quota Management and Monitoring {#quota-management}
 
 Large-scale extensions must actively manage storage quotas to prevent failures and ensure reliable operation. Chrome provides tools to monitor usage and plan accordingly.
 
-Checking Quota Usage
+### Checking Quota Usage
 
 ```javascript
 // Monitor storage usage across areas
@@ -124,7 +124,7 @@ async function setupQuotaMonitoring(thresholdPercent = 0.8) {
 }
 ```
 
-Proactive Quota Management
+### Proactive Quota Management
 
 For extensions that approach storage limits, implementing tiered storage strategies helps maintain functionality:
 
@@ -157,11 +157,11 @@ class TieredStorageManager {
 
 ---
 
-IndexedDB in Extensions {#indexeddb-in-extensions}
+## IndexedDB in Extensions {#indexeddb-in-extensions}
 
 For applications requiring structured data storage, complex queries, or storage exceeding chrome.storage limits, IndexedDB provides a powerful alternative. While more complex to implement, IndexedDB offers virtually unlimited storage (subject to user disk space) and supports rich querying capabilities.
 
-Basic IndexedDB Implementation
+### Basic IndexedDB Implementation
 
 ```javascript
 class ExtensionDatabase {
@@ -240,11 +240,11 @@ IndexedDB excels for tab management extensions like Tab Suspender Pro, where you
 
 ---
 
-Cache API for Offline Capabilities {#cache-api-offline}
+## Cache API for Offline Capabilities {#cache-api-offline}
 
 The Cache API, originally designed for service workers, is available to Chrome extensions and provides excellent support for storing network responses, perfect for building offline-capable extensions.
 
-Caching API Responses
+### Caching API Responses
 
 ```javascript
 class ExtensionCache {
@@ -312,7 +312,7 @@ The Cache API complements chrome.storage nicely: use chrome.storage for structur
 
 ---
 
-Origin Private File System (OPFS) {#origin-private-file-system}
+## Origin Private File System (OPFS) {#origin-private-file-system}
 
 OPFS provides file-system-like storage accessible from web workers and extension contexts. While less commonly used, it offers unique capabilities for extensions that need to handle large binary data or require file-like access patterns.
 
@@ -357,11 +357,11 @@ OPFS proves useful for extensions that need to store large datasets, export func
 
 ---
 
-Data Migration Strategies {#data-migration-strategies}
+## Data Migration Strategies {#data-migration-strategies}
 
 As extensions evolve, storage schemas often need to change. Implementing solid migration strategies prevents data loss and ensures smooth upgrades.
 
-Schema Versioning
+### Schema Versioning
 
 ```javascript
 const CURRENT_SCHEMA = 2;
@@ -414,11 +414,11 @@ async function migrateStorage() {
 
 ---
 
-Tab Suspender Pro Storage Architecture {#tab-suspender-pro-architecture}
+## Tab Suspender Pro Storage Architecture {#tab-suspender-pro-architecture}
 
 Tab Suspender Pro demonstrates effective large-scale storage design for production extensions. Understanding its architecture provides valuable patterns for similar applications.
 
-Session State Management
+### Session State Management
 
 Tab Suspender Pro uses `chrome.storage.session` for coordinating suspension state across extension contexts:
 
@@ -448,9 +448,9 @@ const SessionManager = {
 };
 ```
 
-Whitelist Storage
+### Whitelist Storage
 
-Domain whitelists require fast lookups while maintaining persistence:
+### Domain whitelists require fast lookups while maintaining persistence:
 
 ```javascript
 // Whitelist management with IndexedDB
@@ -501,7 +501,7 @@ class WhitelistManager {
 }
 ```
 
-Settings Storage with Sync
+### Settings Storage with Sync
 
 Tab Suspender Pro separates sync-able preferences from local-only settings:
 
@@ -533,7 +533,7 @@ const SettingsManager = {
 
 ---
 
-Chunked Storage Pattern {#chunked-storage-pattern}
+## Chunked Storage Pattern {#chunked-storage-pattern}
 
 When dealing with data exceeding chrome.storage limits, chunking enables reliable storage:
 
@@ -570,7 +570,7 @@ class ChunkedStorage {
 
 ---
 
-Compression Strategies {#compression-strategies}
+## Compression Strategies {#compression-strategies}
 
 For large datasets, compression significantly reduces storage footprint:
 
@@ -600,7 +600,7 @@ Using compression libraries like pako or lz-string can reduce storage requiremen
 
 ---
 
-Sync Conflict Resolution {#sync-conflict-resolution}
+## Sync Conflict Resolution {#sync-conflict-resolution}
 
 When using chrome.storage.sync, conflicts can occur when users modify settings on multiple devices simultaneously:
 
@@ -649,7 +649,7 @@ class SyncConflictResolver {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building Chrome extensions that handle large-scale data requires thoughtful selection and combination of storage mechanisms. For most extensions, `chrome.storage.local` with the `unlimitedStorage` permission provides the right balance of simplicity and capacity. Use `chrome.storage.sync` sparingly, reserving it for truly portable user preferences within the 100KB limit.
 

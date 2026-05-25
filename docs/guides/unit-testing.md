@@ -10,15 +10,15 @@ Chrome Extension Unit Testing. How to Test With Jest and Puppeteer
 
 Unit testing is the foundation of reliable Chrome extension development. Unlike traditional web applications, extensions run across multiple execution contexts, background service workers, popup pages, content scripts, and options pages, each with unique API access patterns and lifecycle behaviors. This guide covers how to test your extension code effectively using Jest, Vitest, and Puppeteer.
 
-Why Unit Testing Matters for Extensions {#why-unit-testing-matters}
+## Why Unit Testing Matters for Extensions {#why-unit-testing-matters}
 
 Chrome extensions present unique testing challenges that you won't encounter in regular web development. Your code interacts with the Chrome Extension APIs, manages state across different contexts, and must handle edge cases like API rate limiting, permission changes, and runtime errors. Without proper unit tests, regressions can slip into production and break functionality for millions of users.
 
 Unit tests catch bugs early, document expected behavior, and give you confidence when refactoring code. For extensions that interact with sensitive user data or modify browser behavior, comprehensive test coverage isn't optional, it's essential for maintaining user trust.
 
-Setting Up Your Testing Environment {#setting-up-your-testing-environment}
+## Setting Up Your Testing Environment {#setting-up-your-testing-environment}
 
-Choosing Your Test Runner {#choosing-your-test-runner}
+## Choosing Your Test Runner {#choosing-your-test-runner}
 
 Two main test runners dominate the Chrome extension testing landscape: Jest and Vitest. Both are excellent choices, but they have distinct characteristics:
 
@@ -32,7 +32,7 @@ Two main test runners dominate the Chrome extension testing landscape: Jest and 
 
 For new projects, Vitest offers superior performance and modern ESM support. However, Jest remains popular with teams familiar with its API and extensive ecosystem.
 
-Installing Dependencies {#installing-dependencies}
+## Installing Dependencies {#installing-dependencies}
 
 ```bash
 For Vitest (recommended for new projects)
@@ -42,7 +42,7 @@ For Jest
 npm install -D jest jest-environment-jsdom ts-jest @types/jest
 ```
 
-Configuring Vitest for Extensions {#configuring-vitest-for-extensions}
+## Configuring Vitest for Extensions {#configuring-vitest-for-extensions}
 
 Create a `vitest.config.ts` file in your project root:
 
@@ -69,11 +69,11 @@ export default defineConfig({
 });
 ```
 
-Mocking Chrome Extension APIs {#mocking-chrome-extension-apis}
+## Mocking Chrome Extension APIs {#mocking-chrome-extension-apis}
 
 The most challenging aspect of testing extensions is mocking Chrome's runtime and storage APIs. These APIs don't exist in Node.js environments, so you must provide mocks that simulate their behavior.
 
-Creating Chrome API Mocks {#creating-chrome-api-mocks}
+## Creating Chrome API Mocks {#creating-chrome-api-mocks}
 
 Create a test setup file that provides mock implementations:
 
@@ -132,7 +132,7 @@ Object.defineProperty(global, "chrome", {
 });
 ```
 
-Mocking with Chrome API Mock Library {#mocking-with-chrome-api-mock-library}
+## Mocking with Chrome API Mock Library {#mocking-with-chrome-api-mock-library}
 
 For more comprehensive mocking, use the `chrome-api-mock` package:
 
@@ -140,7 +140,7 @@ For more comprehensive mocking, use the `chrome-api-mock` package:
 npm install -D @theluckystrike/chrome-api-mock
 ```
 
-Then update your setup:
+### Then update your setup:
 
 ```typescript
 // test/setup.ts
@@ -155,7 +155,7 @@ vi.mock("chrome.storage.local.get", () => ({
 }));
 ```
 
-Writing Your First Unit Test {#writing-your-first-unit-test}
+## Writing Your First Unit Test {#writing-your-first-unit-test}
 
 Now let's write actual tests for extension code. Consider this utility function:
 
@@ -216,11 +216,11 @@ describe("parseMessage", () => {
 });
 ```
 
-Testing Background Service Workers {#testing-background-service-workers}
+## Testing Background Service Workers {#testing-background-service-workers}
 
 Background service workers present unique testing challenges because they handle events from Chrome and communicate with other extension contexts.
 
-Testing Event Handlers {#testing-event-handlers}
+## Testing Event Handlers {#testing-event-handlers}
 
 ```typescript
 // src/background/commands.ts
@@ -238,7 +238,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 ```
 
-Test the command handler:
+### Test the command handler:
 
 ```typescript
 // src/background/commands.test.ts
@@ -270,17 +270,17 @@ describe("Background Commands", () => {
 });
 ```
 
-Integration Testing with Puppeteer {#integration-testing-with-puppeteer}
+## Integration Testing with Puppeteer {#integration-testing-with-puppeteer}
 
 While unit tests verify isolated logic, integration tests verify that your extension works correctly when loaded in a real browser. Puppeteer provides the most reliable way to test extension behavior in Chrome.
 
-Setting Up Puppeteer for Extension Testing {#setting-up-puppeteer-for-extension-testing}
+## Setting Up Puppeteer for Extension Testing {#setting-up-puppeteer-for-extension-testing}
 
 ```bash
 npm install -D puppeteer
 ```
 
-Loading and Testing Your Extension {#loading-and-testing-your-extension}
+## Loading and Testing Your Extension {#loading-and-testing-your-extension}
 
 ```typescript
 // test/e2e/extension-load.test.ts
@@ -321,7 +321,7 @@ describe("Extension Integration Tests", () => {
 });
 ```
 
-Best Practices for Extension Testing {#best-practices-for-extension-testing}
+## Best Practices for Extension Testing {#best-practices-for-extension-testing}
 
 Follow these guidelines to maintain testable, reliable extension code:
 
@@ -335,7 +335,7 @@ Follow these guidelines to maintain testable, reliable extension code:
 
 5. Include edge cases. Test what happens when APIs fail, when storage is full, or when permissions are denied.
 
-Tool Comparison Summary {#tool-comparison-summary}
+## Tool Comparison Summary {#tool-comparison-summary}
 
 | Use Case | Recommended Tool |
 |----------|-------------------|
@@ -346,7 +346,7 @@ Tool Comparison Summary {#tool-comparison-summary}
 | Snapshot testing | Jest or Vitest |
 | Performance testing | Chrome DevTools Protocol |
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Unit testing Chrome extensions requires additional setup compared to web applications, but the investment pays off in code quality and reliability. By properly mocking Chrome APIs, separating concerns in your code, and using the right testing tools, you can achieve comprehensive test coverage that catches bugs before they reach your users.
 

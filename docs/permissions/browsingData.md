@@ -11,7 +11,7 @@ last_modified_at: 2026-01-15
 
 browsingData Permission
 
-Overview {#overview}
+## Overview {#overview}
 
 - Permission string: `"browsingData"`
 - API exposed: `chrome.browsingData`
@@ -19,7 +19,7 @@ Overview {#overview}
 
 This permission allows extensions to clear user browsing data without requiring the user to manually navigate to Chrome's Clear Browsing Data dialog. It only provides removal capabilities. reading data requires separate permissions like `history`, `cookies`, or `downloads`.
 
-Manifest Declaration {#manifest-declaration}
+## Manifest Declaration {#manifest-declaration}
 
 ```json
 {
@@ -29,9 +29,9 @@ Manifest Declaration {#manifest-declaration}
 
 User Warning: None. this permission does not trigger an install-time warning.
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-General Removal {#general-removal}
+## General Removal {#general-removal}
 
 ```typescript
 chrome.browsingData.remove(
@@ -51,7 +51,7 @@ await chrome.browsingData.remove(
 );
 ```
 
-Specific Removal Methods {#specific-removal-methods}
+## Specific Removal Methods {#specific-removal-methods}
 
 ```typescript
 chrome.browsingData.removeCache(options)
@@ -63,7 +63,7 @@ chrome.browsingData.removeLocalStorage(options)
 chrome.browsingData.removePasswords(options)
 ```
 
-Settings {#settings}
+## Settings {#settings}
 
 ```typescript
 chrome.browsingData.settings(): Promise<Settings>
@@ -71,7 +71,7 @@ chrome.browsingData.settings(): Promise<Settings>
 
 Returns `{ options, dataToRemove, dataRemovalPermitted }`. the user's Clear Browsing Data preferences and what the extension is permitted to clear.
 
-Data Types {#data-types}
+## Data Types {#data-types}
 
 | Property | Description |
 |----------|-------------|
@@ -89,7 +89,7 @@ Data Types {#data-types}
 | `serviceWorkers` | Service worker registrations |
 | `webSQL` | WebSQL data |
 
-Options Object {#options-object}
+## Options Object {#options-object}
 
 ```typescript
 interface RemovalOptions {
@@ -102,7 +102,7 @@ interface RemovalOptions {
 }
 ```
 
-Use Cases {#use-cases}
+## Use Cases {#use-cases}
 
 - Privacy/cleanup tools: One-click "clear all" functionality
 - Selective clearing: Clear only cookies and cache for a specific time range
@@ -110,9 +110,9 @@ Use Cases {#use-cases}
 - Development tools: Clear site data during testing
 - "Panic button" features: Quickly erase browsing data with a shortcut
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-Clear All Data from Last Hour {#clear-all-data-from-last-hour}
+## Clear All Data from Last Hour {#clear-all-data-from-last-hour}
 
 ```typescript
 async function clearLastHour() {
@@ -129,7 +129,7 @@ async function clearLastHour() {
 }
 ```
 
-Clear Only Cookies and Cache {#clear-only-cookies-and-cache}
+## Clear Only Cookies and Cache {#clear-only-cookies-and-cache}
 
 ```typescript
 async function clearCookiesAndCache() {
@@ -140,7 +140,7 @@ async function clearCookiesAndCache() {
 }
 ```
 
-Check What User Permits to Clear {#check-what-user-permits-to-clear}
+## Check What User Permits to Clear {#check-what-user-permits-to-clear}
 
 ```typescript
 async function checkPermissions() {
@@ -150,14 +150,14 @@ async function checkPermissions() {
 }
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [cookies.md](./cookies.md). Read/write cookies (browsingData only removes them)
 - [history.md](./history.md). Read browsing history
 - [downloads.md](./downloads.md). Manage download history
 - [patterns/privacy-api.md](../patterns/privacy-api.md). Privacy-focused API patterns
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I clear browsing data from a Chrome extension?
 Use the chrome.browsingData API to clear various types of browsing data including cookies, cache, history, downloads, and local storage. Users must grant permission via the browsingData settings.

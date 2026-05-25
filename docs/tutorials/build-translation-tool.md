@@ -9,7 +9,7 @@ Build a Translation Tool Extension
 
 A Chrome extension that translates selected text instantly, provides a popup interface for manual translation, and maintains translation history.
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 
 By the end of this tutorial, you'll have created a fully functional translation extension with:
 
@@ -19,13 +19,13 @@ By the end of this tutorial, you'll have created a fully functional translation 
 - Translation history: Persistent storage of all translations
 - Language detection: Auto-detect source language
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 - Chrome browser or Chromium-based browser
 - Basic JavaScript and HTML/CSS knowledge
 - Chrome Extensions API familiarity
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 ```
 translation-extension/
@@ -44,9 +44,9 @@ translation-extension/
      icon.png
 ```
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
-Create your `manifest.json` with the required permissions:
+### Create your `manifest.json` with the required permissions:
 
 ```json
 {
@@ -75,7 +75,7 @@ Create your `manifest.json` with the required permissions:
 }
 ```
 
-Step 1: Translation API Integration {#step-1-translation-api-integration}
+## Step 1: Translation API Integration {#step-1-translation-api-integration}
 
 We'll use LibreTranslate as our primary API (free and self-hostable). Create `utils/translator.js`:
 
@@ -134,7 +134,7 @@ async function detectLanguage(text) {
 }
 ```
 
-Step 2: Context Menu Translation {#step-2-context-menu-translation}
+## Step 2: Context Menu Translation {#step-2-context-menu-translation}
 
 Set up the context menu in your service worker:
 
@@ -177,9 +177,9 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-Step 3: Inline Translation Tooltip {#step-3-inline-translation-tooltip}
+## Step 3: Inline Translation Tooltip {#step-3-inline-translation-tooltip}
 
-Create `content/content.js` for the floating tooltip:
+### Create `content/content.js` for the floating tooltip:
 
 ```javascript
 let tooltip = null;
@@ -252,9 +252,9 @@ function removeTooltip() {
 document.addEventListener('mousedown', removeTooltip);
 ```
 
-Step 4: Popup UI {#step-4-popup-ui}
+## Step 4: Popup UI {#step-4-popup-ui}
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -312,7 +312,7 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Style with `popup.css`:
+### Style with `popup.css`:
 
 ```css
 .container {
@@ -397,7 +397,7 @@ button#translateBtn {
 }
 ```
 
-Popup logic in `popup/popup.js`:
+### Popup logic in `popup/popup.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -534,7 +534,7 @@ async function loadHistory() {
 }
 ```
 
-Step 5: Handling API Errors and Rate Limits {#step-5-handling-api-errors-and-rate-limits}
+## Step 5: Handling API Errors and Rate Limits {#step-5-handling-api-errors-and-rate-limits}
 
 Add solid error handling in your service worker:
 
@@ -565,7 +565,7 @@ async function translateWithRetry(text, sourceLang, targetLang, maxRetries = 3) 
 }
 ```
 
-Testing Your Extension {#testing-your-extension}
+## Testing Your Extension {#testing-your-extension}
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
@@ -574,21 +574,21 @@ Testing Your Extension {#testing-your-extension}
 5. Test popup: Click the extension icon, enter text, select languages
 6. Test inline tooltip: Select text and wait for the floating tooltip
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 - Cache translations: Store frequently used translations to reduce API calls
 - Handle offline: Show cached results when network is unavailable
 - Respect rate limits: Implement exponential backoff for API calls
 - User privacy: Only send text when user explicitly requests translation
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 - Add support for multiple translation APIs as fallbacks
 - Implement keyboard shortcuts for quick translation
 - Add synchronization across devices with Chrome sync storage
 - Create a options page for advanced settings
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Internationalization Guide](../guides/internationalization.md)
 - [Content Script Patterns](../guides/content-script-patterns.md)

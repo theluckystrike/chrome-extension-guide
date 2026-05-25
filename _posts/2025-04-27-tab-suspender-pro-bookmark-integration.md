@@ -18,7 +18,7 @@ Understanding how to effectively save suspended tabs as bookmarks transforms you
 
 ---
 
-Understanding Tab Suspender Pro Bookmark Integration {#understanding-bookmark-integration}
+## Understanding Tab Suspender Pro Bookmark Integration {#understanding-bookmark-integration}
 
 Tab Suspender Pro extends beyond simple tab suspension by providing deep integration with Chrome's native bookmark system. This integration allows the extension to capture not just the URL of suspended tabs, but also metadata, titles, and session context that proves invaluable when restoring workflows later. The bookmark functionality serves as a bridge between temporary tab suspension and permanent session preservation.
 
@@ -30,7 +30,7 @@ This system differs fundamentally from simple session saving approaches. Rather 
 
 ---
 
-Saving Suspended Tab Sessions as Bookmark Folders {#saving-suspended-tab-sessions}
+## Saving Suspended Tab Sessions as Bookmark Folders {#saving-suspended-tab-sessions}
 
 The process of saving suspended tabs as bookmark folders begins with the suspension action itself. When Tab Suspender Pro suspends a tab based on your configured rules, you have the option to automatically create a bookmark entry for that tab. For group suspensions, the extension can create a comprehensive folder containing all suspended tabs from that group, preserving the relationship between related tabs.
 
@@ -44,7 +44,7 @@ The bookmark entries created by Tab Suspender Pro remain fully functional as sta
 
 ---
 
-Auto-Bookmark Before Suspension {#auto-bookmark-before-suspension}
+## Auto-Bookmark Before Suspension {#auto-bookmark-before-suspension}
 
 The auto-bookmark feature represents one of Tab Suspender Pro's most powerful capabilities for users who need consistent session preservation. Rather than manually saving tabs before they suspend, you can configure the extension to automatically create bookmarks whenever suspension occurs. This automation ensures that no suspended tab is ever lost, creating a continuous archive of your browsing sessions.
 
@@ -58,7 +58,7 @@ The auto-bookmark feature also supports conditional logic that adapts to your br
 
 ---
 
-Restoring from Bookmarks {#restoring-from-bookmarks}
+## Restoring from Bookmarks {#restoring-from-bookmarks}
 
 Restoring suspended tabs from bookmarks is designed to be as intuitive as the bookmarking process itself. Tab Suspender Pro provides multiple restoration pathways to accommodate different use cases and user preferences. Whether you need to restore an entire bookmark folder or selectively retrieve individual tabs, the extension offers straightforward mechanisms for bringing your saved sessions back to life.
 
@@ -72,7 +72,7 @@ For users who prefer keyboard-driven workflows, the extension provides keyboard 
 
 ---
 
-Organizing Bookmark Folders by Project {#organizing-bookmark-folders-by-project}
+## Organizing Bookmark Folders by Project {#organizing-bookmark-folders-by-project}
 
 Project-based organization transforms your bookmark collection from a simple list into a structured knowledge management system. Tab Suspender Pro's bookmark integration supports this organizational approach by allowing you to create hierarchical folder structures that reflect your work patterns, research projects, or content collections. The key to effective project organization lies in establishing consistent naming conventions and folder hierarchies that scale as your bookmark collection grows.
 
@@ -86,7 +86,7 @@ The project organization system also supports tagging and cross-referencing betw
 
 ---
 
-Syncing Bookmarked Sessions Across Devices {#syncing-bookmarked-sessions-across-devices}
+## Syncing Bookmarked Sessions Across Devices {#syncing-bookmarked-sessions-across-devices}
 
 Chrome's built-in sync functionality provides the foundation for cross-device bookmark synchronization, and Tab Suspender Pro leverages this infrastructure smoothly. When you sign into Chrome with your Google account on multiple devices, your bookmarks, including those created by the extension, automatically synchronize across all signed-in instances. This synchronization occurs through Google's servers, ensuring your bookmarked sessions are available wherever you access Chrome.
 
@@ -100,7 +100,7 @@ For organizations or users with specific sync requirements, Tab Suspender Pro su
 
 ---
 
-Best Practices for Bookmark Integration {#best-practices}
+## Best Practices for Bookmark Integration {#best-practices}
 
 Maximizing the value of Tab Suspender Pro's bookmark integration requires adopting workflows that balance automation with intentional organization. The extension provides powerful capabilities, but effective use depends on configuring settings that match your specific needs and maintaining habits that keep your bookmark collection manageable over time.
 

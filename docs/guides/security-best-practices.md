@@ -7,24 +7,24 @@ last_modified_at: 2026-01-15
 ---
 Security Best Practices for Chrome Extensions
 
-Introduction {#introduction}
+## Introduction {#introduction}
 - Extensions have elevated privileges. security matters more than in regular web apps
 - Common attack vectors: XSS in extension pages, message spoofing, permission over-reach
 
-1. Principle of Least Privilege {#1-principle-of-least-privilege}
+## 1. Principle of Least Privilege {#1-principle-of-least-privilege}
 - Only request permissions you actively use
 - Use `optional_permissions` for features users may not enable
 - Use `@theluckystrike/webext-permissions` `requestPermission()` to request at runtime instead of install time
 - Use `activeTab` instead of `<all_urls>` whenever possible
 - `const result = await requestPermission('tabs'); if (result.granted) { /* proceed */ }`
 
-2. Content Security Policy (CSP) {#2-content-security-policy-csp}
+## 2. Content Security Policy (CSP) {#2-content-security-policy-csp}
 - MV3 default CSP: `script-src 'self'; object-src 'self'`
 - Never use `unsafe-eval` or `unsafe-inline`
 - No remote code loading. bundle everything locally
 - Cross-ref: `docs/mv3/content-security-policy.md`
 
-3. Secure Messaging {#3-secure-messaging}
+## 3. Secure Messaging {#3-secure-messaging}
 - Validate message origins in `onMessage` handlers
 - Never trust data from content scripts blindly. web pages can manipulate the DOM
 - Use `@theluckystrike/webext-messaging` typed messages to enforce request/response contracts:
@@ -38,7 +38,7 @@ Introduction {#introduction}
 - Handle `MessagingError` for failed communications
 - Never pass `eval()`-able strings through messages
 
-4. Storage Security {#4-storage-security}
+## 4. Storage Security {#4-storage-security}
 - `chrome.storage.local` is only accessible to your extension. prefer it for sensitive data
 - `chrome.storage.sync` syncs across devices. don't store secrets there
 - Use `@theluckystrike/webext-storage` schema validation to prevent storing unexpected data types:
@@ -49,31 +49,31 @@ Introduction {#introduction}
   ```
 - Never store plaintext passwords or tokens. use `chrome.identity` for OAuth
 
-5. Content Script Safety {#5-content-script-safety}
+## 5. Content Script Safety {#5-content-script-safety}
 - Sanitize all data from web pages before using it
 - Use `textContent` instead of `innerHTML` when reading page data
 - Never inject user-controlled strings with `innerHTML` or `document.write`
 - Use `DOMPurify` if you must insert HTML from untrusted sources
 
-6. XSS Prevention in Extension Pages {#6-xss-prevention-in-extension-pages}
+## 6. XSS Prevention in Extension Pages {#6-xss-prevention-in-extension-pages}
 - Extension popups, options, and background pages are targets for XSS
 - Never use `innerHTML` with dynamic content. use DOM APIs or a framework
 - Don't use `eval()`, `new Function()`, `setTimeout(string)`. all blocked by MV3 CSP anyway
 - Sanitize any data displayed from `chrome.storage` or messages
 
-7. Network Request Security {#7-network-request-security}
+## 7. Network Request Security {#7-network-request-security}
 - Always use HTTPS for external requests
 - Validate and sanitize API responses before processing
 - Use `fetch()` with proper error handling
 - Set appropriate `Content-Type` headers
 
-8. Update and Supply Chain Security {#8-update-and-supply-chain-security}
+## 8. Update and Supply Chain Security {#8-update-and-supply-chain-security}
 - Pin dependency versions in package.json
 - Audit dependencies with `npm audit`
 - Use a bundler to avoid shipping `node_modules`
 - Chrome Web Store auto-updates. ensure every version is thoroughly tested
 
-Security Checklist {#security-checklist}
+## Security Checklist {#security-checklist}
 Introduction
 
 Chrome extensions operate with elevated privileges compared to regular web applications. They can access sensitive APIs, modify web pages, and store user data. This makes security a paramount concern. Common attack vectors include cross-site scripting (XSS), message spoofing, permission over-reach, and supply chain vulnerabilities.
@@ -344,9 +344,9 @@ npm outdated
 - [ ] HTTPS for all network requests
 - [ ] Dependencies audited
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Security Hardening](../guides/security-hardening.md)
 - [CORS Patterns](../patterns/cors-extension-patterns.md)
@@ -368,7 +368,7 @@ Related Articles
 
 Google looks for: permission justification, user data handling, security practices, potential abuse prevention.
 
-Common Rejection Reasons
+### Common Rejection Reasons
 
 - Excessive permissions without justification
 - Remote code execution capability
@@ -377,7 +377,7 @@ Common Rejection Reasons
 - CSP violations (unsafe-inline, unsafe-eval)
 - Vulnerable dependencies
 
-Preparing for Review
+### Preparing for Review
 
 1. Document all permission justifications
 2. Update privacy policy with data handling
@@ -421,6 +421,6 @@ function displayData(data) {
 - [Content Security Policy](https://developer.chrome.com/docs/extensions/mv3/security/)
 - [Chrome Web Store Program Policies](https://developer.chrome.com/docs/webstore/program-policies)
 
-Conclusion
+### Conclusion
 
 Security requires defense-in-depth: principle of least privilege, strict CSP, input validation, secure storage, and regular audits. Treat all external data as potentially malicious. Keep dependencies updated. Build secure extensions that protect users.

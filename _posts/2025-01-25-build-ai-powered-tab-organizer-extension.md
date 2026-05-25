@@ -18,15 +18,15 @@ we will walk you through building a complete AI-powered tab organizer extension 
 
 ---
 
-Why Build an AI Tab Organizer? {#why-ai-tab-organizer}
+## Why Build an AI Tab Organizer? {#why-ai-tab-organizer}
 
 The Chrome Web Store has numerous tab management extensions, but few use artificial intelligence to truly understand user intent. Here's why building an AI-powered solution is worth your time:
 
-The Problem with Traditional Tab Management
+### The Problem with Traditional Tab Management
 
 Most existing tab organizers rely on rigid rules or manual grouping. Users must manually create groups, drag and drop tabs, or define patterns for categorization. This approach is time-consuming and doesn't adapt to individual browsing habits. An AI-powered solution can analyze page content, understand context, and automatically suggest or create groups based on what you actually do.
 
-The Power of AI for Tab Organization
+### The Power of AI for Tab Organization
 
 Modern AI models can understand text content, extract meaningful keywords, and categorize pages with remarkable accuracy. By integrating AI into your tab organizer, you can:
 
@@ -38,11 +38,11 @@ Modern AI models can understand text content, extract meaningful keywords, and c
 
 ---
 
-Project Architecture Overview {#project-architecture}
+## Project Architecture Overview {#project-architecture}
 
 Before diving into code, let's understand the architecture of our AI-powered tab organizer extension.
 
-Core Components
+### Core Components
 
 Our extension will consist of several key components working together:
 
@@ -52,7 +52,7 @@ Our extension will consist of several key components working together:
 4. AI Integration Module: Connects with external AI APIs for intelligent categorization
 5. Storage System: Persists user preferences and learned patterns
 
-Technology Stack
+### Technology Stack
 
 - Manifest V3: The latest Chrome extension platform
 - Vanilla JavaScript: No framework dependencies for maximum compatibility
@@ -61,7 +61,7 @@ Technology Stack
 
 ---
 
-Step 1: Setting Up the Manifest {#step-1-manifest}
+## Step 1: Setting Up the Manifest {#step-1-manifest}
 
 Every Chrome extension starts with the manifest file. Let's create a Manifest V3 configuration that includes all the permissions we need.
 
@@ -110,7 +110,7 @@ This manifest grants our extension access to the tabs API for reading tab inform
 
 ---
 
-Step 2: Creating the Popup Interface {#step-2-popup}
+## Step 2: Creating the Popup Interface {#step-2-popup}
 
 The popup is the primary user interface for our extension. It needs to show current tab groups, provide organization controls, and display AI suggestions. Let's create a clean, functional popup.
 
@@ -246,7 +246,7 @@ The popup displays key statistics and provides three main actions: auto-organize
 
 ---
 
-Step 3: Implementing the Background Service Worker {#step-3-background}
+## Step 3: Implementing the Background Service Worker {#step-3-background}
 
 The background service worker is the brain of our extension. It handles communication between components, manages the AI integration, and coordinates tab operations. This is where the magic happens.
 
@@ -601,7 +601,7 @@ The background service worker handles all the complex logic: extracting content 
 
 ---
 
-Step 4: Creating the Popup JavaScript {#step-4-popup-js}
+## Step 4: Creating the Popup JavaScript {#step-4-popup-js}
 
 Now let's create the JavaScript that connects our popup UI to the background service worker.
 
@@ -760,7 +760,7 @@ The popup JavaScript handles user interactions and communicates with the backgro
 
 ---
 
-Step 5: Content Script for Advanced Analysis {#step-5-content-script}
+## Step 5: Content Script for Advanced Analysis {#step-5-content-script}
 
 The content script runs on web pages and extracts rich metadata for better AI analysis. This enables our extension to understand page content beyond just the title and URL.
 
@@ -925,7 +925,7 @@ The content script extracts rich metadata from web pages including meta tags, Op
 
 ---
 
-Step 6: Adding Icons {#step-6-icons}
+## Step 6: Adding Icons {#step-6-icons}
 
 Every extension needs icons. For a production extension, you would create proper icon files, but for development, we can use placeholder icons. Chrome requires at least 16x16, 48x48, and 128x128 pixel icons.
 
@@ -933,7 +933,7 @@ Create a simple placeholder icon or use any PNG icon you have. The manifest refe
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let's test our AI Tab Organizer extension:
 
@@ -949,32 +949,32 @@ You should see your tabs automatically organized into color-coded groups based o
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic extension working, here are some advanced features you can add:
 
-Machine Learning Integration
+### Machine Learning Integration
 
 Replace the keyword-based categorization with a proper machine learning model. You could use TensorFlow.js to run a classifier directly in the browser, or integrate with APIs like:
 - Google Cloud Natural Language API
 - AWS Comprehend
 - OpenAI API for zero-shot classification
 
-Tab Suspending
+### Tab Suspending
 
 Integrate with the tabSuspender functionality to automatically suspend tabs in groups that haven't been used recently, saving significant memory.
 
-Sync Across Devices
+### Sync Across Devices
 
 Use Chrome's sync storage to save tab groups and preferences across devices, so your organization scheme follows you everywhere.
 
-Custom Rules
+### Custom Rules
 
 Allow users to define custom rules for categorization, giving them fine-grained control over how tabs are grouped.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an AI-powered tab organizer is a fantastic project that combines practical utility with modern web development techniques. we covered:
 

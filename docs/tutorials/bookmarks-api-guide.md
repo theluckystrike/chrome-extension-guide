@@ -8,11 +8,11 @@ last_modified_at: 2026-01-15
 
 Working with Bookmarks in Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Bookmarks API (`chrome.bookmarks`) is one of the most powerful extension APIs available, allowing you to create, read, update, and delete bookmarks programmatically. Whether you're building a bookmark manager, a bookmark importer, or integrating bookmark functionality into your extension, this guide covers everything you need to know.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 Before using the Bookmarks API, add the `"bookmarks"` permission to your `manifest.json`:
 
@@ -27,7 +27,7 @@ Before using the Bookmarks API, add the `"bookmarks"` permission to your `manife
 
 The bookmarks permission grants access to all bookmarks. You cannot restrict access to specific folders.
 
-Understanding the Bookmark Tree Structure {#bookmark-tree-structure}
+## Understanding the Bookmark Tree Structure {#bookmark-tree-structure}
 
 The Chrome Bookmarks API organizes bookmarks in a hierarchical tree structure. Each node is a `BookmarkTreeNode` with these properties:
 
@@ -47,9 +47,9 @@ The tree root contains three default folders:
 2. Other Bookmarks (typically ID "2")
 3. Mobile Bookmarks (typically ID "3")
 
-Reading Bookmarks {#reading-bookmarks}
+## Reading Bookmarks {#reading-bookmarks}
 
-Get the Entire Tree
+### Get the Entire Tree
 
 ```javascript
 chrome.bookmarks.getTree((tree) => {
@@ -62,7 +62,7 @@ chrome.bookmarks.getTree((tree) => {
 });
 ```
 
-Get Recent Bookmarks
+### Get Recent Bookmarks
 
 ```javascript
 // Get the 10 most recently added bookmarks
@@ -73,7 +73,7 @@ chrome.bookmarks.getRecent(10, (results) => {
 });
 ```
 
-Get a Specific Bookmark
+### Get a Specific Bookmark
 
 ```javascript
 // Get bookmarks by ID
@@ -89,9 +89,9 @@ chrome.bookmarks.get(["12345", "67890"], (results) => {
 });
 ```
 
-Searching Bookmarks {#searching-bookmarks}
+## Searching Bookmarks {#searching-bookmarks}
 
-Simple Text Search
+### Simple Text Search
 
 ```javascript
 // Search by title or URL
@@ -100,7 +100,7 @@ chrome.bookmarks.search("tutorial", (results) => {
 });
 ```
 
-Search with Query Object
+### Search with Query Object
 
 ```javascript
 // Search by URL
@@ -119,7 +119,7 @@ chrome.bookmarks.search({ url: "https://example.com" }, (results) => {
 });
 ```
 
-Practical Search Example
+### Practical Search Example
 
 ```javascript
 function findDuplicates() {
@@ -145,9 +145,9 @@ function findDuplicates() {
 }
 ```
 
-Creating Bookmarks {#creating-bookmarks}
+## Creating Bookmarks {#creating-bookmarks}
 
-Create a Simple Bookmark
+### Create a Simple Bookmark
 
 ```javascript
 // Create a bookmark in the bookmarks bar
@@ -160,7 +160,7 @@ chrome.bookmarks.create({
 });
 ```
 
-Create a Folder
+### Create a Folder
 
 ```javascript
 // Create a new folder
@@ -172,7 +172,7 @@ chrome.bookmarks.create({
 });
 ```
 
-Create Nested Structure
+### Create Nested Structure
 
 ```javascript
 // Create a folder with subfolders
@@ -198,7 +198,7 @@ function createProjectStructure() {
 }
 ```
 
-Create Bookmark with Callbacks Using Promises
+### Create Bookmark with Callbacks Using Promises
 
 ```javascript
 // Wrap callbacks in promises for cleaner async/await
@@ -231,9 +231,9 @@ async function addProjectBookmark() {
 }
 ```
 
-Updating Bookmarks {#updating-bookmarks}
+## Updating Bookmarks {#updating-bookmarks}
 
-Update Bookmark Title and URL
+### Update Bookmark Title and URL
 
 ```javascript
 // Update a bookmark's title
@@ -255,7 +255,7 @@ chrome.bookmarks.update("12345", {
 });
 ```
 
-Move Bookmark to Different Folder
+### Move Bookmark to Different Folder
 
 ```javascript
 // Move a bookmark to a different folder
@@ -269,7 +269,7 @@ chrome.bookmarks.move("12345", { parentId: "2", index: 0 }, (result) => {
 });
 ```
 
-Reorder Bookmarks in a Folder
+### Reorder Bookmarks in a Folder
 
 ```javascript
 // Get current bookmarks and reorder
@@ -280,9 +280,9 @@ function reorderBookmarks(parentId, newOrder) {
 }
 ```
 
-Deleting Bookmarks {#deleting-bookmarks}
+## Deleting Bookmarks {#deleting-bookmarks}
 
-Delete a Single Bookmark
+### Delete a Single Bookmark
 
 ```javascript
 // Delete by ID
@@ -291,7 +291,7 @@ chrome.bookmarks.remove("12345", () => {
 });
 ```
 
-Delete a Folder (and all contents)
+### Delete a Folder (and all contents)
 
 ```javascript
 // Remove a folder and all its children
@@ -300,7 +300,7 @@ chrome.bookmarks.removeTree("67890", () => {
 });
 ```
 
-Delete Multiple Bookmarks
+### Delete Multiple Bookmarks
 
 ```javascript
 // Delete multiple bookmarks
@@ -310,7 +310,7 @@ idsToDelete.forEach(id => {
 });
 ```
 
-Safe Delete with Confirmation
+### Safe Delete with Confirmation
 
 ```javascript
 function safeDeleteBookmark(id) {
@@ -334,11 +334,11 @@ function safeDeleteBookmark(id) {
 }
 ```
 
-Bookmark Events {#bookmark-events}
+## Bookmark Events {#bookmark-events}
 
 Listen for changes to keep your extension in sync.
 
-Listen for Bookmark Creation
+### Listen for Bookmark Creation
 
 ```javascript
 chrome.bookmarks.onCreated.addListener((id, bookmark) => {
@@ -348,7 +348,7 @@ chrome.bookmarks.onCreated.addListener((id, bookmark) => {
 });
 ```
 
-Listen for Bookmark Deletion
+### Listen for Bookmark Deletion
 
 ```javascript
 chrome.bookmarks.onRemoved.addListener((id, removeInfo) => {
@@ -358,7 +358,7 @@ chrome.bookmarks.onRemoved.addListener((id, removeInfo) => {
 });
 ```
 
-Listen for Bookmark Updates
+### Listen for Bookmark Updates
 
 ```javascript
 chrome.bookmarks.onChanged.addListener((id, changeInfo) => {
@@ -368,7 +368,7 @@ chrome.bookmarks.onChanged.addListener((id, changeInfo) => {
 });
 ```
 
-Listen for Bookmark Moves
+### Listen for Bookmark Moves
 
 ```javascript
 chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
@@ -376,7 +376,7 @@ chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
 });
 ```
 
-Listen for Folder Reorganization
+### Listen for Folder Reorganization
 
 ```javascript
 chrome.bookmarks.onChildrenReordered.addListener((id, reorderInfo) => {
@@ -384,7 +384,7 @@ chrome.bookmarks.onChildrenReordered.addListener((id, reorderInfo) => {
 });
 ```
 
-Complete Event Handler Example
+### Complete Event Handler Example
 
 ```javascript
 // background.js - Handle all bookmark events
@@ -414,9 +414,9 @@ chrome.bookmarks.onChildrenReordered.addListener((id, info) => {
 });
 ```
 
-Organizing Folders {#organizing-folders}
+## Organizing Folders {#organizing-folders}
 
-Create Nested Folder Structure
+### Create Nested Folder Structure
 
 ```javascript
 function createNestedFolders(parentId, path) {
@@ -438,7 +438,7 @@ createNestedFolders("1", ["Work", "Projects", "2024", "Q1"])
   .then(folder => console.log("Created nested structure at:", folder.id));
 ```
 
-Flatten Nested Structure
+### Flatten Nested Structure
 
 ```javascript
 function flattenFolder(folderId) {
@@ -458,7 +458,7 @@ function flattenFolder(folderId) {
 }
 ```
 
-Sort Folder Contents
+### Sort Folder Contents
 
 ```javascript
 function sortFolderByTitle(folderId) {
@@ -479,9 +479,9 @@ function sortFolderByTitle(folderId) {
 }
 ```
 
-Import/Export Patterns {#import-export-patterns}
+## Import/Export Patterns {#import-export-patterns}
 
-Export Bookmarks to JSON
+### Export Bookmarks to JSON
 
 ```javascript
 function exportBookmarks() {
@@ -506,7 +506,7 @@ function exportBookmarks() {
 }
 ```
 
-Import Bookmarks from JSON
+### Import Bookmarks from JSON
 
 ```javascript
 function importBookmarks(jsonData) {
@@ -554,7 +554,7 @@ document.getElementById("importFile").addEventListener("change", (e) => {
 });
 ```
 
-Import from HTML Bookmark Export
+### Import from HTML Bookmark Export
 
 ```javascript
 function importFromHTML(htmlContent) {
@@ -583,9 +583,9 @@ function importFromHTML(htmlContent) {
 }
 ```
 
-Bookmark Bar Interaction {#bookmark-bar-interaction}
+## Bookmark Bar Interaction {#bookmark-bar-interaction}
 
-Add Button to Bookmark Bar
+### Add Button to Bookmark Bar
 
 ```javascript
 // In manifest.json
@@ -609,7 +609,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 ```
 
-Context Menu for Bookmarks
+### Context Menu for Bookmarks
 
 ```javascript
 // Create context menu for bookmarks
@@ -631,7 +631,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 ```
 
-Check if Bookmark Exists
+### Check if Bookmark Exists
 
 ```javascript
 function isBookmarked(url) {
@@ -650,7 +650,7 @@ isBookmarked("https://example.com").then(isBookmarked => {
 });
 ```
 
-Get All Bookmarks from Bar
+### Get All Bookmarks from Bar
 
 ```javascript
 function getBookmarksBarBookmarks() {
@@ -663,7 +663,7 @@ function getBookmarksBarBookmarks() {
 }
 ```
 
-Complete Example: Bookmark Manager Service {#complete-example}
+## Complete Example: Bookmark Manager Service {#complete-example}
 
 Here's a complete service class that wraps the Bookmarks API:
 
@@ -789,7 +789,7 @@ bookmarks.create({
 });
 ```
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Build a Bookmark Manager Extension](/tutorials/build-bookmark-manager/). Build a complete bookmark manager with search, folder navigation, and duplicate detection
 - [Build a Bookmark Sorter Extension](/tutorials/build-bookmark-sorter/). Automatically organize bookmarks by domain, date, or custom rules

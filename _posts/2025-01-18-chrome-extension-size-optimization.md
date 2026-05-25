@@ -18,37 +18,37 @@ This comprehensive guide will walk you through proven techniques to optimize you
 
 ---
 
-Why Chrome Extension Size Matters {#why-size-matters}
+## Why Chrome Extension Size Matters {#why-size-matters}
 
 Before diving into optimization techniques, it's important to understand why reducing extension size should be a priority for every extension developer.
 
-User Experience Impact
+### User Experience Impact
 
 Large extensions take longer to download and install, creating friction in the user's onboarding process. According to research, even a few seconds of delay can significantly increase abandonment rates. Users browsing the Chrome Web Store can see the extension size listed, and many actively avoid large extensions, especially on slower connections or limited-data plans.
 
-Storage Constraints
+### Storage Constraints
 
 Chrome extensions live in the user's browser profile, which takes up valuable disk space on their device. Users with SSDs or smaller hard drives appreciate extensions that respect their storage. Some users install dozens of extensions, making size optimization crucial for overall system performance.
 
-Performance Correlation
+### Performance Correlation
 
 There's a direct correlation between extension size and performance. Larger bundles mean more code to parse, compile, and execute at startup. By reducing extension size, you naturally improve load times, reduce memory footprint, and create a more responsive extension.
 
-Web Store Ranking
+### Web Store Ranking
 
 While the Chrome Web Store doesn't explicitly use extension size as a ranking factor, faster, smaller extensions tend to have better review ratings and user retention rates, which indirectly influence visibility.
 
 ---
 
-Analyzing Your Extension's Size {#analyzing-size}
+## Analyzing Your Extension's Size {#analyzing-size}
 
 Before you can optimize, you need to understand what's contributing to your extension's size. Chrome provides several tools to help you analyze your bundle.
 
-Using Chrome Developer Dashboard
+### Using Chrome Developer Dashboard
 
 When you upload your extension to the Chrome Developer Dashboard, you'll receive a detailed breakdown of your CRX file's contents. This includes the size of each JavaScript file, assets, and other resources. Pay close attention to this report, it identifies exactly which files are consuming the most space.
 
-Webpack Bundle Analyzer
+### Webpack Bundle Analyzer
 
 If you're using Webpack (and you should be), the bundle analyzer plugin provides an interactive treemap visualization of your bundle contents. This tool shows you exactly what code is included and how much space each module occupies.
 
@@ -66,7 +66,7 @@ module.exports = {
 };
 ```
 
-Extension Size Analysis with devtools
+### Extension Size Analysis with devtools
 
 You can also analyze your extension size directly in Chrome:
 
@@ -78,11 +78,11 @@ You can also analyze your extension size directly in Chrome:
 
 ---
 
-Code Splitting and Modular Architecture {#code-splitting}
+## Code Splitting and Modular Architecture {#code-splitting}
 
 One of the most effective strategies to reduce extension size is implementing code splitting. Instead of including all your code in the main bundle, you split it into smaller chunks that load on demand.
 
-Dynamic Imports
+### Dynamic Imports
 
 Chrome extensions use ES modules, which support dynamic imports. This allows you to load functionality only when it's needed.
 
@@ -98,7 +98,7 @@ async function handleUserAction() {
 }
 ```
 
-Feature-Based Splitting
+### Feature-Based Splitting
 
 Organize your extension into distinct features, each with its own entry point. Only load the features that are relevant to the user's current context.
 
@@ -115,7 +115,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Lazy Loading for Content Scripts
+### Lazy Loading for Content Scripts
 
 Content scripts don't need to load immediately when a page loads. Use dynamic imports to defer loading until the functionality is actually required.
 
@@ -133,13 +133,13 @@ document.addEventListener('user-interaction', initFeature, { once: true });
 
 ---
 
-Asset Optimization {#asset-optimization}
+## Asset Optimization {#asset-optimization}
 
 Assets, images, fonts, icons, and other static files, often comprise a significant portion of extension size. Optimizing these assets can yield substantial size reductions.
 
-Image Compression
+### Image Compression
 
-Use modern image formats and compression tools:
+### Use modern image formats and compression tools:
 
 - WebP format: Convert PNG and JPEG images to WebP, which typically provides 25-35% smaller file sizes with equivalent quality
 - SVG for icons: Use SVG wherever possible as they're scalable and typically much smaller than bitmap images
@@ -150,7 +150,7 @@ Using ImageMagick to convert to WebP
 convert icon.png -quality 80 icon.webp
 ```
 
-Icon Strategy
+### Icon Strategy
 
 Chrome extensions display icons at various sizes (16, 32, 48, 128 pixels). Instead of including large icons and scaling them down, provide only the sizes you need:
 
@@ -161,7 +161,7 @@ Chrome extensions display icons at various sizes (16, 32, 48, 128 pixels). Inste
 
 Consider using a single SVG icon and generating the required sizes programmatically using a build script.
 
-Font Handling
+### Font Handling
 
 If your extension uses custom fonts, consider these approaches:
 
@@ -171,11 +171,11 @@ If your extension uses custom fonts, consider these approaches:
 
 ---
 
-JavaScript Optimization Techniques {#javascript-optimization}
+## JavaScript Optimization Techniques {#javascript-optimization}
 
 JavaScript is often the largest contributor to extension size. Here are techniques to minimize your JavaScript bundle.
 
-Tree Shaking
+### Tree Shaking
 
 Tree shaking eliminates unused code from your final bundle. Webpack and other modern bundlers perform tree shaking automatically when you use ES modules and the `sideEffects` flag correctly.
 
@@ -188,7 +188,7 @@ Tree shaking eliminates unused code from your final bundle. Webpack and other mo
 
 This tells the bundler that all modules are pure and can be safely removed if unused.
 
-Terser Minification
+### Terser Minification
 
 Always minify your JavaScript in production. Terser (used by Webpack) provides aggressive minification:
 
@@ -212,7 +212,7 @@ module.exports = {
 };
 ```
 
-Removing Development Code
+### Removing Development Code
 
 Use environment variables to exclude development-only code from production builds:
 
@@ -227,7 +227,7 @@ if (!isProduction) {
 }
 ```
 
-Dead Code Elimination
+### Dead Code Elimination
 
 Use a linting tool like ESLint to identify and remove unreachable code:
 
@@ -248,11 +248,11 @@ if (DEBUG) {
 
 ---
 
-Managing Dependencies Wisely {#managing-dependencies}
+## Managing Dependencies Wisely {#managing-dependencies}
 
 Dependencies can quickly bloat your extension. Every package you include adds to the final bundle size.
 
-Audit Your Dependencies
+### Audit Your Dependencies
 
 Regularly review your `package.json` and ask for each dependency:
 
@@ -265,9 +265,9 @@ Use depcheck to find unused dependencies
 npx depcheck
 ```
 
-Use Lighter Alternatives
+### Use Lighter Alternatives
 
-Many popular packages have lighter alternatives:
+### Many popular packages have lighter alternatives:
 
 | Heavy Package | Light Alternative |
 |--------------|-------------------|
@@ -276,7 +276,7 @@ Many popular packages have lighter alternatives:
 | axios | Native fetch API |
 | Bluebird | Native Promises |
 
-Bundle Only What You Need
+### Bundle Only What You Need
 
 When using libraries, import only the functions you need:
 
@@ -291,11 +291,11 @@ import throttle from 'lodash-es/throttle';
 
 ---
 
-Chrome Extension Manifest Considerations {#manifest-optimization}
+## Chrome Extension Manifest Considerations {#manifest-optimization}
 
 Your manifest.json file and how you structure your extension can impact overall size.
 
-Manifest V3 Benefits
+### Manifest V3 Benefits
 
 Manifest V3 introduces several improvements that can help reduce extension size:
 
@@ -303,7 +303,7 @@ Manifest V3 introduces several improvements that can help reduce extension size:
 - Promise-based APIs: Native Promise support reduces the need for polyfills
 - Dynamic import in service workers: Load additional code only when needed
 
-Permissions and Host Permissions
+### Permissions and Host Permissions
 
 Only request the permissions you absolutely need. Each permission can add overhead, and unnecessarily broad permissions may increase user trust concerns.
 
@@ -321,13 +321,13 @@ Only request the permissions you absolutely need. Each permission can add overhe
 
 ---
 
-Build Process Optimization {#build-optimization}
+## Build Process Optimization {#build-optimization}
 
 A well-configured build process is essential for creating optimized extensions.
 
-Production vs Development Builds
+### Production vs Development Builds
 
-Always use production builds for distribution:
+### Always use production builds for distribution:
 
 ```javascript
 // webpack.config.js
@@ -342,7 +342,7 @@ const config = {
 };
 ```
 
-Source Map Strategy
+### Source Map Strategy
 
 While source maps are invaluable for debugging, they add significant size. For production:
 
@@ -354,7 +354,7 @@ module.exports = {
 };
 ```
 
-Compression
+### Compression
 
 Chrome Web Store automatically compresses CRX files, but you can further optimize by:
 
@@ -364,13 +364,13 @@ Chrome Web Store automatically compresses CRX files, but you can further optimiz
 
 ---
 
-Testing Your Optimizations {#testing-optimizations}
+## Testing Your Optimizations {#testing-optimizations}
 
 After implementing optimization techniques, verify that your changes actually reduce size without breaking functionality.
 
-Automated Size Budgets
+### Automated Size Budgets
 
-Set up size budgets in your build configuration:
+### Set up size budgets in your build configuration:
 
 ```javascript
 // webpack.config.js
@@ -389,9 +389,9 @@ class SizeLimitPlugin {
 }
 ```
 
-Functional Testing
+### Functional Testing
 
-After reducing size:
+### After reducing size:
 
 1. Load the extension in Chrome
 2. Test all features work correctly
@@ -399,9 +399,9 @@ After reducing size:
 4. Verify content scripts load when expected
 5. Test across different Chrome versions
 
-Performance Testing
+### Performance Testing
 
-Measure the impact of your optimizations:
+### Measure the impact of your optimizations:
 
 - Extension load time
 - Memory usage at startup
@@ -409,31 +409,31 @@ Measure the impact of your optimizations:
 
 ---
 
-Common Pitfalls to Avoid {#common-pitfalls}
+## Common Pitfalls to Avoid {#common-pitfalls}
 
 When optimizing extension size, watch out for these common mistakes:
 
-Over-Optimization
+### Over-Optimization
 
 Don't sacrifice code readability or maintainability for minor size gains. The goal is reasonable size, not absolute minimum at all costs.
 
-Breaking Functionality
+### Breaking Functionality
 
 Always test thoroughly after each optimization. A 10KB reduction means nothing if it breaks core features.
 
-Ignoring Updates
+### Ignoring Updates
 
 As you add features, size can creep back in. Make size optimization part of your regular development workflow.
 
-Forgetting Build Configuration
+### Forgetting Build Configuration
 
 A common mistake is optimizing source code but forgetting to configure the build process correctly. Ensure your production build is always minified and optimized.
 
 ---
 
-Measuring Success {#measuring-success}
+## Measuring Success {#measuring-success}
 
-Track your optimization efforts over time:
+### Track your optimization efforts over time:
 
 1. Establish a baseline: Record your initial extension size
 2. Set targets: Define reasonable size goals (e.g., under 500KB)
@@ -444,7 +444,7 @@ Most successful Chrome extensions aim for a total size under 500KB, with many po
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Reducing Chrome extension size is both an art and a science. By implementing the techniques in this guide, analyzing your bundle, splitting code intelligently, optimizing assets, managing dependencies, and configuring your build process, you can significantly reduce your extension's footprint while maintaining (or even improving) its functionality.
 
@@ -454,7 +454,7 @@ Start by measuring your current size, implement one or two techniques from this 
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [Webpack Bundle Analysis](https://webpack.js.org/guides/code-splitting/)

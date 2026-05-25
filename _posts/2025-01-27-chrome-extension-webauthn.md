@@ -20,20 +20,20 @@ This guide covers everything you need to know about implementing WebAuthn in Chr
 
 ---
 
-Understanding WebAuthn and FIDO2 Fundamentals
+### Understanding WebAuthn and FIDO2 Fundamentals
 
-What is WebAuthn?
+### What is WebAuthn?
 
 WebAuthn is a W3C standard that defines an API enabling web applications to create and use strong, cryptographic credentials for user authentication. Developed by the FIDO Alliance in collaboration with major browser vendors including Google, WebAuthn provides a standardized way for web applications to use hardware-based authentication without requiring users to manage complex passwords.
 
-The WebAuthn API allows web applications to:
+### The WebAuthn API allows web applications to:
 
 - Register new credentials tied to a user account
 - Authenticate users using existing credentials
 - Use various authenticator types including USB security keys, NFC devices, and platform authenticators like Touch ID or Windows Hello
 - Support passwordless authentication flows that are resistant to phishing and replay attacks
 
-The FIDO2 Protocol Stack
+### The FIDO2 Protocol Stack
 
 WebAuthn is part of the broader FIDO2 protocol stack, which consists of two main components:
 
@@ -43,7 +43,7 @@ CTAP2 (Client to Authenticator Protocol 2): The protocol that enables communicat
 
 Understanding this distinction is important for Chrome extension developers because it helps clarify where your extension's responsibilities lie and how it interacts with the broader authentication ecosystem.
 
-Why Passkeys Matter for Extensions
+### Why Passkeys Matter for Extensions
 
 Passkeys represent the next evolution in authentication technology, and they're particularly relevant for Chrome extensions for several compelling reasons:
 
@@ -57,15 +57,15 @@ Reduced Extension Permissions: With WebAuthn, extensions can implement secure au
 
 ---
 
-Chrome WebAuthn API Implementation
+### Chrome WebAuthn API Implementation
 
-Browser Support and Prerequisites
+### Browser Support and Prerequisites
 
 Chrome has solid WebAuthn support, but implementing it in extensions requires understanding some key differences from regular web pages. Chrome extensions can use the WebAuthn API through the standard `navigator.credentials` interface, but there are specific considerations for extension contexts.
 
 Before implementing WebAuthn in your extension, ensure you've configured the necessary permissions in your manifest file. While WebAuthn itself doesn't typically require special permissions, any extension functionality that interacts with website authentication flows may need host permissions for the relevant domains.
 
-Basic WebAuthn Registration Flow
+### Basic WebAuthn Registration Flow
 
 The registration flow allows users to create new passkey credentials associated with their accounts. Here's how to implement this in your Chrome extension:
 
@@ -112,7 +112,7 @@ async function registerCredential(userId, username) {
 
 This code demonstrates the core registration flow. In a production extension, you'd need to handle the credential response, send it to your server for verification, and store the credential ID for future authentication attempts.
 
-Basic WebAuthn Authentication Flow
+### Basic WebAuthn Authentication Flow
 
 The authentication flow (also called "signing in") allows users to prove their identity using a previously registered credential:
 
@@ -149,9 +149,9 @@ This authentication flow is notably shorter than registration because the user d
 
 ---
 
-Passkey Chrome Extension Development Patterns
+### Passkey Chrome Extension Development Patterns
 
-Extension Context Considerations
+### Extension Context Considerations
 
 When implementing WebAuthn in Chrome extensions, you need to consider how the extension's context affects the authentication flow. Extensions can use WebAuthn in several scenarios:
 
@@ -161,7 +161,7 @@ In injected scripts: Your extension can trigger WebAuthn from content scripts in
 
 In communication with native apps: For extensions that communicate with companion native applications, WebAuthn can provide secure authentication between the extension and native code.
 
-Handling User Verification
+### Handling User Verification
 
 User verification is a critical aspect of WebAuthn that ensures the person attempting to authenticate is indeed the legitimate user. Chrome extensions should handle various verification scenarios:
 
@@ -198,7 +198,7 @@ async function authenticateWithVerification(credentialId) {
 
 The `userVerification` parameter controls whether the authenticator requires explicit user verification (like biometric confirmation or PIN entry) or allows authentication through device presence alone. For high-security applications, `userVerification: 'required'` provides stronger guarantees.
 
-Managing Credential Storage
+### Managing Credential Storage
 
 One of the key decisions in passkey chrome extension development is how to manage credential storage. Unlike traditional passwords, passkey credentials should be stored securely:
 
@@ -210,9 +210,9 @@ Hardware Security Keys: Some use cases benefit from storing credentials directly
 
 ---
 
-FIDO2 Extension Integration Strategies
+### FIDO2 Extension Integration Strategies
 
-Integrating with Existing Authentication Systems
+### Integrating with Existing Authentication Systems
 
 Many Chrome extensions need to integrate with existing authentication systems that weren't designed for WebAuthn. Here are strategies for gradual integration:
 
@@ -222,7 +222,7 @@ Passwordless Primary Authentication: For complete passwordless implementation, y
 
 Credential Migration: Help users migrate from password-based accounts to passkey-based authentication by offering a guided transition process within your extension.
 
-Working with Security Keys
+### Working with Security Keys
 
 Hardware security keys (like YubiKeys or Titan Security Keys) represent the strongest form of WebAuthn authentication. Your extension can use these through the CTAP2 protocol:
 
@@ -258,7 +258,7 @@ async function registerWithSecurityKey(userId) {
 
 When working with security keys, consider that users will need to physically interact with the key (tap it or enter a PIN), which affects your UX expectations.
 
-Platform Authenticator Integration
+### Platform Authenticator Integration
 
 Modern devices often include platform authenticators, built-in biometric systems like Touch ID on Mac, Windows Hello on Windows, or fingerprint sensors on Android. These provide a balance of security and convenience:
 
@@ -293,9 +293,9 @@ The `authenticatorAttachment` parameter allows you to specify whether you prefer
 
 ---
 
-Security Best Practices
+### Security Best Practices
 
-Protecting Against Common Attacks
+### Protecting Against Common Attacks
 
 WebAuthn provides strong security guarantees, but proper implementation is essential to realize these benefits:
 
@@ -305,7 +305,7 @@ Relying Party ID (RP ID) Validation: Ensure your server validates the RP ID matc
 
 Attestation Verification: For high-security applications, verify attestation statements from authenticators. This confirms that credentials were created on genuine hardware from trusted manufacturers.
 
-Extension-Specific Security Considerations
+### Extension-Specific Security Considerations
 
 Chrome extensions face unique security challenges when implementing WebAuthn:
 
@@ -315,7 +315,7 @@ Message Passing Security: If your extension passes authentication data between c
 
 Storage Security: While WebAuthn credentials themselves can't be exfiltrated (private keys never leave the authenticator), credential IDs and authentication assertions should still be handled securely.
 
-Error Handling and User Feedback
+### Error Handling and User Feedback
 
 Proper error handling improves both security and user experience:
 
@@ -340,9 +340,9 @@ async function handleWebAuthnError(error) {
 
 ---
 
-Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
-Debugging WebAuthn Problems
+### Debugging WebAuthn Problems
 
 WebAuthn issues can be challenging to debug. Here are common problems and solutions:
 
@@ -352,9 +352,9 @@ Authenticator not detected: Check that the authenticator is compatible with the 
 
 Timeout errors: These often indicate user verification delays. Increase timeout values for complex authenticators or slow devices.
 
-Testing Strategies
+### Testing Strategies
 
-Comprehensive testing is crucial for WebAuthn implementations:
+### Comprehensive testing is crucial for WebAuthn implementations:
 
 Unit Testing: Test your extension's WebAuthn wrapper code with mocked credential responses to verify handling of success and error cases.
 
@@ -364,7 +364,7 @@ Cross-Device Testing: Test with various authenticator types, different browsers,
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing WebAuthn in Chrome extensions represents a significant opportunity to enhance security and user experience through passwordless authentication. By understanding the WebAuthn API, implementing proper registration and authentication flows, and following security best practices, you can create extensions that protect users while simplifying their authentication experiences.
 

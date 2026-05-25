@@ -10,12 +10,12 @@ Chrome Extension Building a GitHub Notifications Extension. Complete Developer's
 Create desktop notifications with the Chrome Notifications API. Learn how to build engaging notification experiences.
 This tutorial walks you through creating a Chrome extension that monitors GitHub notifications.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - Chrome browser (version 88+)
 - GitHub account
 - [Personal Access Token](https://github.com/settings/tokens) with `notifications` scope
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 ```
 github-notifier/
  manifest.json
@@ -24,7 +24,7 @@ github-notifier/
  options/options.html, options.js
 ```
 
-Step 1: Manifest and Popup UI {#step-1-manifest-and-popup-ui}
+## Step 1: Manifest and Popup UI {#step-1-manifest-and-popup-ui}
 
 ```json
 {
@@ -46,9 +46,9 @@ Step 1: Manifest and Popup UI {#step-1-manifest-and-popup-ui}
 <script src="popup.js"></script></body></html>
 ```
 
-Step 2: Background Worker with Alarm Polling {#step-2-background-worker-with-alarm-polling}
+## Step 2: Background Worker with Alarm Polling {#step-2-background-worker-with-alarm-polling}
 
-Set up periodic polling using the [Alarms API](/docs/api-reference/alarms-api.md):
+### Set up periodic polling using the [Alarms API](/docs/api-reference/alarms-api.md):
 
 ```javascript
 // background/background.js
@@ -72,11 +72,11 @@ async function check() {
 }
 ```
 
-Step 3: GitHub API Integration {#step-3-github-api-integration}
+## Step 3: GitHub API Integration {#step-3-github-api-integration}
 
 Store token in local storage. For production, implement [OAuth](/docs/guides/identity-oauth.md).
 
-Step 4: Badge Count Updates {#step-4-badge-count-updates}
+## Step 4: Badge Count Updates {#step-4-badge-count-updates}
 
 ```javascript
 async function badge(count) {
@@ -85,7 +85,7 @@ async function badge(count) {
 }
 ```
 
-Step 5: Desktop Notifications {#step-5-desktop-notifications}
+## Step 5: Desktop Notifications {#step-5-desktop-notifications}
 
 Implement using the [Notifications API](/docs/api-reference/notifications-api.md):
 
@@ -103,7 +103,7 @@ chrome.notifications.onClicked.addListener((id) => {
 });
 ```
 
-Step 6: Options Page {#step-6-options-page}
+## Step 6: Options Page {#step-6-options-page}
 
 ```html
 <!-- options/options.html -->
@@ -121,7 +121,7 @@ document.getElementById('save').addEventListener('click', async () => {
 });
 ```
 
-Step 7: Click to Mark as Read {#step-7-click-to-mark-as-read}
+## Step 7: Click to Mark as Read {#step-7-click-to-mark-as-read}
 
 ```javascript
 chrome.action.onClicked.addListener(async () => {
@@ -134,14 +134,14 @@ chrome.action.onClicked.addListener(async () => {
 });
 ```
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 | Error | Handling |
 |-------|----------|
 | 401 Unauthorized | Clear token, prompt re-auth |
 | 403 Rate Limited | Increase poll interval |
 | Network Error | Retry with backoff |
 
-Summary {#summary}
+## Summary {#summary}
 
 You've built a GitHub notifications extension with alarm-based polling, badge updates, desktop notifications, and token configuration. For production, upgrade to OAuth as documented in [Identity and OAuth](/docs/guides/identity-oauth.md).
 -e 

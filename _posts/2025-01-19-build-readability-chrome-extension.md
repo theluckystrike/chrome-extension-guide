@@ -18,7 +18,7 @@ This comprehensive guide walks you through the entire process of building a prof
 
 ---
 
-Understanding Readability Extensions {#understanding-readability}
+## Understanding Readability Extensions {#understanding-readability}
 
 Before we dive into the code, let us explore what makes a readability extension truly valuable and how these extensions work under the hood. A readability extension, sometimes called a reader mode extension, is a browser extension that strips away all the clutter from web pages, advertisements, sidebars, navigation menus, social media widgets, and other distracting elements, leaving only the essential content in a clean, easy-to-read format.
 
@@ -26,7 +26,7 @@ The core functionality of any readability extension revolves around content extr
 
 The benefits of using a readability extension extend far beyond mere convenience. Many users struggle with visual processing disorders, eye strain, or attention difficulties that make reading cluttered pages challenging. A clean article view reduces cognitive load, making it easier for these users to consume content. Additionally, readability extensions often include features like adjustable font sizes, line spacing controls, and theme options (light, dark, sepia) that further enhance the reading experience for users with varying visual preferences.
 
-The Market Demand for Readability Extensions
+### The Market Demand for Readability Extensions
 
 The demand for readability extensions has never been higher. With the proliferation of ad-heavy content sites, paywalls, and increasingly complex web layouts, users are actively seeking ways to reclaim their reading experience. Browser developers have taken notice, Safari, Firefox, and even Chrome have built-in reader modes, but these native solutions often lack the customization options and broader website compatibility that dedicated extensions provide.
 
@@ -34,7 +34,7 @@ Creating a readability extension also represents an excellent learning opportuni
 
 ---
 
-Setting Up Your Development Environment {#development-environment}
+## Setting Up Your Development Environment {#development-environment}
 
 Every successful project begins with a solid foundation, and Chrome extension development is no exception. Before writing a single line of code, you need to set up your development environment properly. This section walks you through the essential tools and configurations required for efficient extension development.
 
@@ -46,7 +46,7 @@ Node.js and npm are essential for managing dependencies and build tools. Most mo
 
 Finally, you should familiarize yourself with the Chrome Extensions documentation. Google's official documentation is comprehensive and regularly updated, serving as your primary reference for API usage, manifest specifications, and best practices. Bookmark the Chrome Extensions developer guide and refer to it frequently as you work through this tutorial.
 
-Creating Your Project Structure
+### Creating Your Project Structure
 
 Organized project structure separates professional extensions from amateur attempts. Create a new directory for your extension project and set up the following folder structure:
 
@@ -77,7 +77,7 @@ This structure separates your extension into logical components, making it easie
 
 ---
 
-The Manifest File: Your Extension's Foundation {#manifest-file}
+## The Manifest File: Your Extension's Foundation {#manifest-file}
 
 The manifest.json file serves as the blueprint for your Chrome extension. It tells Chrome important information about your extension, including its name, version, permissions, and the various components that make up your extension. Understanding the manifest file is crucial because even small errors in this file can prevent your extension from loading or cause it to malfunction.
 
@@ -126,7 +126,7 @@ The content_scripts array defines scripts that automatically run on web pages ma
 
 ---
 
-Building the Content Reader Module {#content-reader}
+## Building the Content Reader Module {#content-reader}
 
 The heart of any readability extension lies in its content extraction algorithm. This is the component that analyzes web pages, identifies the main article content, and separates it from the clutter. Several approaches exist for content extraction, ranging from simple HTML parsing to sophisticated machine learning models.
 
@@ -309,11 +309,11 @@ This Readability class provides a solid foundation for content extraction. It re
 
 ---
 
-Creating the Reader View Interface {#reader-view-interface}
+## Creating the Reader View Interface {#reader-view-interface}
 
 Now that we have our content extraction logic, we need to create the interface that displays the cleaned content to users. This involves injecting HTML and CSS into the page when the user activates reader mode.
 
-Create your content.js file with the following implementation:
+### Create your content.js file with the following implementation:
 
 ```javascript
 // content.js - Runs on web pages
@@ -460,7 +460,7 @@ The content script handles the actual reader mode activation. It receives the ex
 
 ---
 
-Styling Your Readability Extension {#styling-extension}
+## Styling Your Readability Extension {#styling-extension}
 
 The visual presentation of your reader view significantly impacts user experience. A well-styled readability extension should feel calm, clean, and comfortable for extended reading sessions. Create your content.css file with these comprehensive styles:
 
@@ -682,7 +682,7 @@ These styles provide three themes (light, dark, and sepia) that users can toggle
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. It serves as the control center for your readability extension, allowing users to activate reader mode and adjust settings. Create your popup.html file:
 
@@ -746,7 +746,7 @@ The popup provides a clean interface for activating reader mode and adjusting ba
 
 ---
 
-Implementing the Background Service Worker {#background-service}
+## Implementing the Background Service Worker {#background-service}
 
 The background service worker handles extension-wide events and coordinates communication between different parts of your extension. It also manages keyboard shortcuts, which provide a quick way for users to activate reader mode without opening the popup.
 
@@ -814,7 +814,7 @@ The background script also needs to be configured in your manifest.json to regis
 
 ---
 
-Testing and Debugging Your Extension {#testing-debugging}
+## Testing and Debugging Your Extension {#testing-debugging}
 
 With all components in place, it is time to test your extension. Chrome provides excellent developer tools for extension debugging. To load your extension, navigate to chrome://extensions in Chrome, enable Developer mode in the top right corner, and click "Load unpacked". Select your extension directory.
 
@@ -824,7 +824,7 @@ Use Chrome DevTools to debug your extension. Right-click on your reader mode con
 
 Pay particular attention to how your extension handles edge cases: pages with no article content, pages with complex layouts, sites with aggressive anti-scripting measures, and pages using frameworks that dynamically load content. These scenarios often reveal bugs that do not appear during basic testing.
 
-Performance Optimization
+### Performance Optimization
 
 A readability extension must be fast, users expect instant activation without noticeable delay. Optimize your extension by minimizing DOM manipulation, using efficient selectors, and deferring non-essential operations. The content extraction should complete in under 100 milliseconds on most pages.
 
@@ -832,7 +832,7 @@ Lazy loading can significantly improve perceived performance. Instead of process
 
 ---
 
-Publishing Your Extension {#publishing-extension}
+## Publishing Your Extension {#publishing-extension}
 
 Once your extension is thoroughly tested and polished, you can publish it to the Chrome Web Store. Create a developer account at the Chrome Web Store developer dashboard, pay the one-time registration fee, and upload your extension.
 
@@ -842,7 +842,7 @@ The review process typically takes a few days. Google checks for policy violatio
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 Building a readability Chrome extension is an excellent project that teaches valuable skills while creating something genuinely useful. You have learned how to extract content from complex web pages, create attractive and functional user interfaces, manage user preferences, and publish a complete extension to the Chrome Web Store.
 

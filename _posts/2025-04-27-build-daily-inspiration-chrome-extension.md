@@ -17,7 +17,7 @@ This project is perfect for developers looking to create their first Chrome exte
 
 ---
 
-Why Build a Daily Inspiration Chrome Extension {#why-build-inspiration-extension}
+## Why Build a Daily Inspiration Chrome Extension {#why-build-inspiration-extension}
 
 The Chrome Web Store is filled with productivity tools, ad blockers, and utility extensions, but there is a growing demand for extensions that improve mental wellness and daily motivation. A daily inspiration extension serves multiple purposes that make it an excellent project choice.
 
@@ -31,7 +31,7 @@ Finally, building a daily inspiration extension teaches you about API integratio
 
 ---
 
-Understanding Chrome Extension Architecture {#extension-architecture}
+## Understanding Chrome Extension Architecture {#extension-architecture}
 
 Before diving into code, let us establish a solid understanding of how Chrome extensions work and specifically how new tab pages function within the extension ecosystem.
 
@@ -45,7 +45,7 @@ Modern Chrome extensions use Manifest V3, which introduced several changes from 
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us begin building our extension by creating the necessary project structure. Create a new folder for your project and add the following files: manifest.json, newtab.html, newtab.css, newtab.js, and quotes.js.
 
@@ -73,7 +73,7 @@ The manifest declares our extension name as "Daily Inspiration," specifies versi
 
 ---
 
-Creating the Quote Data Module {#quote-data-module}
+## Creating the Quote Data Module {#quote-data-module}
 
 Now let us create the quotes.js file that will store our collection of motivational quotes. Having a dedicated data file makes it easy to add, remove, or update quotes without touching the main logic of our extension.
 
@@ -171,7 +171,7 @@ This collection provides a solid starting point with twenty diverse quotes from 
 
 ---
 
-Building the New Tab Interface {#new-tab-interface}
+## Building the New Tab Interface {#new-tab-interface}
 
 Now we create the HTML structure for our new tab page. The newtab.html file defines the visual layout that users will see every time they open a new tab. We want a clean, inspiring design that makes the quote the focal point.
 
@@ -227,7 +227,7 @@ The HTML structure is intentionally simple, consisting of a container with a hea
 
 ---
 
-Styling Your Extension {#styling-the-extension}
+## Styling Your Extension {#styling-the-extension}
 
 The CSS file transforms our simple HTML into a visually appealing experience. Good design in extensions matters, users spend time looking at your new tab page, so it should be pleasant and inspiring.
 
@@ -357,7 +357,7 @@ The styling creates a beautiful gradient background with a modern, readable quot
 
 ---
 
-Implementing the Core Functionality {#javascript-implementation}
+## Implementing the Core Functionality {#javascript-implementation}
 
 Now we bring everything together with the JavaScript logic. The newtab.js file handles displaying quotes, managing the date, and saving user favorites using Chrome's storage API.
 
@@ -456,7 +456,7 @@ The JavaScript handles several important functions. First, it displays the curre
 
 ---
 
-Loading and Testing Your Extension {#testing-the-extension}
+## Loading and Testing Your Extension {#testing-the-extension}
 
 With all files created, you can now load your extension into Chrome for testing. This is an exciting moment, watching your creation come to life in the browser.
 
@@ -470,7 +470,7 @@ If you do not see your extension, check the following common issues. Ensure all 
 
 ---
 
-Enhancing Your Extension {#enhancing-the-extension}
+## Enhancing Your Extension {#enhancing-the-extension}
 
 Once you have the basic extension working, you can add numerous enhancements to make it even more valuable to users. Here are some ideas to take your extension to the better.
 
@@ -486,7 +486,7 @@ Implement quote sharing functionality that allows users to share quotes directly
 
 ---
 
-Publishing Your Extension {#publishing-your-extension}
+## Publishing Your Extension {#publishing-your-extension}
 
 When you are ready to share your extension with the world, you can publish it to the Chrome Web Store. This process requires a Google Developer account and a small one-time registration fee.
 
@@ -500,7 +500,7 @@ After submitting, Google reviews your extension to ensure it meets their policie
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete Daily Inspiration Chrome Extension from scratch. You learned about Chrome extension architecture, manifest configuration, HTML and CSS for the user interface, JavaScript for dynamic functionality, and Chrome storage for persisting user data.
 

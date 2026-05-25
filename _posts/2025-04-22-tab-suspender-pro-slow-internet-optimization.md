@@ -18,7 +18,7 @@ Understanding the relationship between open browser tabs and bandwidth consumpti
 
 ---
 
-How Open Tabs Consume Bandwidth in the Background {#background-bandwidth-consumption}
+## How Open Tabs Consume Bandwidth in the Background {#background-bandwidth-consumption}
 
 The bandwidth consumption of open browser tabs represents one of the most overlooked sources of data waste in modern computing. When you open a website in Chrome, the browser loads not just the visible content but also numerous scripts, tracking mechanisms, and automated processes that continue running indefinitely. These background processes create a constant drain on your available bandwidth, often without providing any immediate benefit to your browsing experience. Understanding exactly how this consumption occurs is the first step toward taking control of your internet usage.
 
@@ -30,7 +30,7 @@ For users on slow internet connections, this hidden bandwidth consumption has im
 
 ---
 
-Social Media Auto-Refresh: The Hidden Bandwidth Drain {#social-media-bandwidth-waste}
+## Social Media Auto-Refresh: The Hidden Bandwidth Drain {#social-media-bandwidth-waste}
 
 Social media platforms represent some of the most aggressive bandwidth consumers among all website types. These platforms are designed to keep users engaged through constant streams of fresh content, and this design philosophy translates directly into intensive background network activity. Understanding how social media tabs drain your bandwidth reveals why Tab Suspender Pro is particularly valuable for users on slow internet connections who also rely on social media for work or personal connections.
 
@@ -44,7 +44,7 @@ Tab Suspender Pro provides an elegant solution to social media bandwidth waste. 
 
 ---
 
-How Tab Suspender Pro Stops Background Data Consumption {#tab-suspender-stopping-background-data}
+## How Tab Suspender Pro Stops Background Data Consumption {#tab-suspender-stopping-background-data}
 
 Tab Suspender Pro implements a sophisticated approach to eliminating background bandwidth consumption that goes far beyond simply hiding tabs or closing them entirely. The extension uses Chrome's native tab discarding API to suspend inactive tabs in a way that completely stops all network activity while preserving your browsing state. This means you can return to suspended tabs exactly as you left them, with scroll positions, form inputs, and page content intact, but without any of the bandwidth consumption that was occurring while the tab was active.
 
@@ -58,7 +58,7 @@ The extension also helps with a common problem specific to slow internet users: 
 
 ---
 
-Optimal Settings for Slow Connections {#optimal-settings-slow-connections}
+## Optimal Settings for Slow Connections {#optimal-settings-slow-connections}
 
 Configuring Tab Suspender Pro correctly for slow internet connections requires understanding both the extension's capabilities and your specific browsing patterns. The optimal settings depend on factors such as your typical number of open tabs, which websites you visit most frequently, and how you transition between different tasks. By fine-tuning these settings, you can maximize bandwidth savings while maintaining a smooth browsing experience that doesn't interrupt your workflow.
 
@@ -72,7 +72,7 @@ Memory management settings also interact with bandwidth optimization on slow con
 
 ---
 
-Combining Tab Suspender Pro with Data Saver Mode {#combining-data-saver-mode}
+## Combining Tab Suspender Pro with Data Saver Mode {#combining-data-saver-mode}
 
 For users seeking maximum bandwidth efficiency, combining Tab Suspender Pro with Chrome's built-in Data Saver mode creates a powerful synergy that addresses multiple aspects of internet data consumption. While Tab Suspender Pro stops unnecessary background network activity, Data Saver compresses the data that does flow through your active connections. Together, these tools provide comprehensive bandwidth optimization that can dramatically improve your browsing experience on slow or limited internet connections.
 
@@ -86,7 +86,7 @@ The combined effect of both tools can transform browsing on severely limited con
 
 ---
 
-Conclusion
+### Conclusion
 
 Optimizing Chrome for slow internet connections doesn't require accepting poor performance or drastically changing your browsing habits. By understanding how background tabs consume bandwidth and leveraging tools like Tab Suspender Pro, you can dramatically improve your browsing experience on limited connections. The extension's ability to completely stop network activity in inactive tabs addresses the root cause of bandwidth waste, while configurable settings allow you to tailor its behavior to your specific needs.
 

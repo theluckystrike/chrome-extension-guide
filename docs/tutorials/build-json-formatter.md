@@ -9,7 +9,7 @@ Build a JSON Formatter Chrome Extension
 
 This tutorial walks through building a Chrome extension that detects, formats, and visualizes JSON in browser tabs.
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
 Create `manifest.json` with `activeTab` permission and content script matching JSON content-type pages:
 
@@ -31,7 +31,7 @@ Create `manifest.json` with `activeTab` permission and content script matching J
 }
 ```
 
-Step 2: Detect Raw JSON {#step-2-detect-raw-json}
+## Step 2: Detect Raw JSON {#step-2-detect-raw-json}
 
 Content script to detect JSON in the page. Check `document.contentType` or analyze body text:
 
@@ -54,7 +54,7 @@ function detectJSON() {
 }
 ```
 
-Step 3: JSON Parser and Tree Builder {#step-3-json-parser-and-tree-builder}
+## Step 3: JSON Parser and Tree Builder {#step-3-json-parser-and-tree-builder}
 
 Build a recursive DOM structure to display JSON as an interactive tree:
 
@@ -109,9 +109,9 @@ function buildJSONTree(data, path = 'root') {
 }
 ```
 
-Step 4: Syntax Highlighting {#step-4-syntax-highlighting}
+## Step 4: Syntax Highlighting {#step-4-syntax-highlighting}
 
-Apply CSS classes for different JSON types:
+### Apply CSS classes for different JSON types:
 
 ```css
 /* styles.css */
@@ -123,9 +123,9 @@ Apply CSS classes for different JSON types:
 .json-tree .bracket { color: #abb2bf; font-weight: bold; }
 ```
 
-Step 5: Collapsible Nodes {#step-5-collapsible-nodes}
+## Step 5: Collapsible Nodes {#step-5-collapsible-nodes}
 
-Toggle collapse/expand with click handlers:
+### Toggle collapse/expand with click handlers:
 
 ```javascript
 function createToggle() {
@@ -141,7 +141,7 @@ function createToggle() {
 }
 ```
 
-Step 6: Copy Value/Path to Clipboard {#step-6-copy-valuepath-to-clipboard}
+## Step 6: Copy Value/Path to Clipboard {#step-6-copy-valuepath-to-clipboard}
 
 Implement clipboard functionality:
 
@@ -167,7 +167,7 @@ function createValue(value, type, path) {
 }
 ```
 
-Step 7: Search/Filter Functionality {#step-7-searchfilter-functionality}
+## Step 7: Search/Filter Functionality {#step-7-searchfilter-functionality}
 
 Add search to filter JSON nodes:
 
@@ -188,9 +188,9 @@ function addSearchBar(container) {
 }
 ```
 
-Step 8: Dark/Light Theme Toggle {#step-8-darklight-theme-toggle}
+## Step 8: Dark/Light Theme Toggle {#step-8-darklight-theme-toggle}
 
-Support theme switching (see also `patterns/theming-dark-mode.md`):
+### Support theme switching (see also `patterns/theming-dark-mode.md`):
 
 ```javascript
 function toggleTheme() {
@@ -201,9 +201,9 @@ function toggleTheme() {
 }
 ```
 
-Edge Cases {#edge-cases}
+## Edge Cases {#edge-cases}
 
-Large JSON (Virtualized Rendering) {#large-json-virtualized-rendering}
+## Large JSON (Virtualized Rendering) {#large-json-virtualized-rendering}
 For documents > 1MB, implement lazy rendering:
 
 ```javascript
@@ -216,7 +216,7 @@ function renderLazy(data, container) {
 }
 ```
 
-Invalid JSON {#invalid-json}
+## Invalid JSON {#invalid-json}
 Display clear error messages:
 
 ```javascript
@@ -227,7 +227,7 @@ try {
 }
 ```
 
-JSONL Format (JSON Lines) {#jsonl-format-json-lines}
+## JSONL Format (JSON Lines) {#jsonl-format-json-lines}
 Parse line-by-line:
 
 ```javascript
@@ -238,7 +238,7 @@ function parseJSONL(text) {
 }
 ```
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - See `patterns/clipboard-patterns.md` for clipboard best practices
 - See `guides/content-script-patterns.md` for content script architecture

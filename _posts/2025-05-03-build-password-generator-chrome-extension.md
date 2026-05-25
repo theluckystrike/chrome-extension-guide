@@ -18,7 +18,7 @@ In this comprehensive tutorial, you will learn how to create an extension that g
 
 ---
 
-Why Build a Password Generator Chrome Extension? {#why-build-password-generator}
+## Why Build a Password Generator Chrome Extension? {#why-build-password-generator}
 
 Before diving into the code, let us explore why building a password generator extension is worthwhile. Password managers have become essential tools in everyone's digital toolkit. According to security research, the average person manages over 100 online accounts, each requiring a unique password. Reusing passwords across multiple sites is extremely dangerous because a single breach can compromise all your accounts.
 
@@ -28,7 +28,7 @@ From a development perspective, this project teaches valuable skills that apply 
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Our password generator extension will include the following features:
 
@@ -43,7 +43,7 @@ The extension will feature a clean, modern popup interface that appears when cli
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project. Inside this folder, you will need to create several files that work together to create the extension functionality. Let us start by creating the directory structure and the essential files.
 
@@ -66,7 +66,7 @@ For this tutorial, we will focus on the core functionality files. You can create
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the configuration file that tells Chrome about your extension. For our password generator, we will use Manifest V3, which is the current standard for Chrome extensions. Create a file named manifest.json in your project folder with the following content:
 
@@ -99,7 +99,7 @@ This manifest file declares the extension name, version, and description. The "p
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup.html file defines the user interface that appears when users click our extension icon. We will create a clean, intuitive interface that displays the generated password and provides controls for customization. Create popup.html with the following content:
 
@@ -179,7 +179,7 @@ This HTML structure provides a clean layout with a password output field, copy b
 
 ---
 
-Styling the Extension {#styling}
+## Styling the Extension {#styling}
 
 The popup.css file styles our extension to look professional and user-friendly. We will use a modern design with a dark theme that is easy on the eyes and provides clear visual feedback. Create popup.css with the following styles:
 
@@ -345,7 +345,7 @@ These styles create a dark, modern interface with vibrant accent colors. The gra
 
 ---
 
-Implementing the Password Generation Logic {#password-generation}
+## Implementing the Password Generation Logic {#password-generation}
 
 The popup.js file contains all the JavaScript logic for our extension. This includes generating passwords, calculating strength, copying to clipboard, and managing user preferences. Create popup.js with the following code:
 
@@ -521,7 +521,7 @@ This JavaScript code implements several key features. The password generation us
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that you have created all the necessary files, it is time to test your extension in Chrome. Follow these steps to load your extension:
 
@@ -537,7 +537,7 @@ If you encounter any issues, check the Chrome developer tools for error messages
 
 ---
 
-Security Best Practices {#security-best-practices}
+## Security Best Practices {#security-best-practices}
 
 When building password-related extensions, security must be your top priority. Our implementation already includes several security best practices that you should maintain in any future enhancements.
 
@@ -549,7 +549,7 @@ Third, we generate passwords entirely on the client side. There is no server com
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once you have tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store. The publishing process requires a Google Developer account and a one-time registration fee. After paying the fee, you can upload your extension, provide store listing details, and submit it for review.
 
@@ -559,7 +559,7 @@ After submission, Google's team will review your extension to ensure it meets th
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a fully functional password generator Chrome extension. This project demonstrates fundamental concepts that apply to many other extension types, including popup interfaces, user preferences storage, clipboard interactions, and secure random number generation.
 

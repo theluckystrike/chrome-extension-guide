@@ -14,11 +14,11 @@ Building Chrome extensions has evolved dramatically in recent years. Gone are th
 
 This comprehensive guide breaks down every aspect of these frameworks to help you make an informed decision for your 2026 projects.
 
-Framework Architecture Comparison {#architecture-comparison}
+## Framework Architecture Comparison {#architecture-comparison}
 
 Understanding the underlying architecture of each framework is crucial for making the right choice. Each framework takes a different approach to solving Chrome extension development challenges.
 
-WXT Architecture
+### WXT Architecture
 
 WXT (Web Extension Tools) represents a modern, opinionated approach built on top of Vite. It leverages Vite's powerful dev server and build system while adding extension-specific optimizations. WXT handles the complexity of manifest generation, multi-page entry points, and content script injection through a declarative configuration system.
 
@@ -55,7 +55,7 @@ WXT abstracts away the differences between Chrome's extension API and other brow
 - HTML entry point handling
 - Asset optimization and hashing
 
-Plasmo Architecture
+### Plasmo Architecture
 
 Plasmo takes a framework-first approach, treating Chrome extension development similar to building a modern web application. It extends Next.js-like patterns to extension development, offering file-based routing, server-side rendering capabilities for extension pages, and a component-based architecture.
 
@@ -89,7 +89,7 @@ Plasmo's key architectural features include:
 - Storage wrapper with TypeScript support
 - Support for both MV2 and MV3 manifests
 
-CRXJS Architecture
+### CRXJS Architecture
 
 CRXJS (Chrome Extension JavaScript) takes a different approach by focusing on being a build tool rather than a full framework. It integrates with existing Vite projects to handle the Chrome extension-specific build requirements while letting you maintain control over your project's architecture.
 
@@ -130,11 +130,11 @@ CRXJS provides:
 - Automatic extension reloading
 - Cross-browser manifest generation
 
-Hot Module Replacement (HMR) Support {#hmr-support}
+## Hot Module Replacement (HMR) Support {#hmr-support}
 
 Fast iteration cycles are essential for productive extension development. Let's examine how each framework handles HMR.
 
-WXT HMR
+### WXT HMR
 
 WXT provides excellent HMR through Vite's native capabilities. Changes to popup pages, options pages, and content scripts trigger instant updates without requiring extension reload. The framework intelligently distinguishes between files that require full page reloads and those that can update in-place.
 
@@ -144,7 +144,7 @@ WXT provides excellent HMR out of the box. Changes to popup, options, and backgr
 
 The framework's watch mode intelligently detects which parts of the extension need rebuilding, making the feedback loop remarkably fast. Development is further enhanced by the built-in Chrome DevTools integration and automatic extension reloading.
 
-Plasmo HMR
+### Plasmo HMR
 
 Plasmo's HMR implementation is particularly sophisticated, offering near-instant updates for most code changes. The framework maintains a persistent connection to the browser, pushing updates as soon as files change. React component updates reflect immediately, while background script changes trigger selective reloads.
 
@@ -154,7 +154,7 @@ Plasmo offers solid HMR support across all extension contexts. The framework use
 
 Plasmo's HMR implementation includes smart cache invalidation, ensuring that stale data doesn't persist between hot reloads. The dev server also provides helpful overlays when errors occur, making debugging significantly easier.
 
-CRXJS HMR
+### CRXJS HMR
 
 CRXJS leverages Vite's HMR system, providing fast updates for most development scenarios. The main limitation involves background service workers, which require extension reload due to browser restrictions. CRXJS addresses this by providing clear reload notifications and minimizing the scope of required reloads.
 
@@ -164,11 +164,11 @@ One notable advantage of CRXJS is its manifest validation during development, ca
 
 Winner: WXT and Plasmo tie for the best HMR experience. Both provide smooth, automatic updates across all extension contexts. CRXJS is slightly behind but still offers a solid experience.
 
-TypeScript Integration {#typescript-integration}
+## TypeScript Integration {#typescript-integration}
 
 TypeScript support varies significantly across frameworks, affecting type safety and developer experience. For a detailed guide on setting up TypeScript in your extension projects, check out our [TypeScript Setup Guide](./typescript-setup.md).
 
-WXT TypeScript Support
+### WXT TypeScript Support
 
 WXT includes first-class TypeScript support with automatic type generation for extension APIs. The framework provides type definitions for:
 - Chrome extension APIs
@@ -192,7 +192,7 @@ export default defineContentScript({
 })
 ```
 
-Plasmo TypeScript Support
+### Plasmo TypeScript Support
 
 Plasmo offers comprehensive TypeScript integration through custom type definitions and integration with TypeScript's language server. The framework provides:
 - Full type coverage for extension APIs
@@ -214,7 +214,7 @@ const response = await sendMessage({
 })
 ```
 
-CRXJS TypeScript Support
+### CRXJS TypeScript Support
 
 CRXJS provides TypeScript support through Vite's TypeScript integration. While not as extension-specific as WXT or Plasmo, CRXJS supports TypeScript configuration and provides extension-related type definitions through community packages.
 
@@ -224,11 +224,11 @@ CRXJS provides TypeScript support through standard Vite configurations. Since CR
 
 Winner: WXT edges ahead due to its auto-import system and smooth TypeScript integration out of the box. Plasmo is a close second with excellent type safety. CRXJS requires more manual setup.
 
-Build Output Analysis {#build-output}
+## Build Output Analysis {#build-output}
 
 Understanding build output helps optimize extension performance and manage bundle sizes.
 
-WXT Build Output
+### WXT Build Output
 
 WXT generates optimized builds with automatic code splitting and tree shaking. The framework produces separate chunks for:
 - Popup and options page bundles
@@ -246,7 +246,7 @@ WXT produces optimized, minified bundles with automatic code splitting. The outp
 
 WXT's build system handles manifest generation automatically, producing valid manifest.json files compliant with Chrome's latest requirements.
 
-Plasmo Build Output
+### Plasmo Build Output
 
 Plasmo's Webpack-based build produces well-organized output with clear separation between entry points. The framework handles dependency deduplication automatically, ensuring shared code appears only once in the final bundle.
 
@@ -260,7 +260,7 @@ Plasmo generates highly optimized builds with focus on minimizing the extension'
 
 Plasmo also supports edge deployment for certain runtime components, though this is primarily useful for web applications.
 
-CRXJS Build Output
+### CRXJS Build Output
 
 CRXJS generates builds using Vite's Rollup-based bundler, producing highly optimized output with automatic code splitting. The framework's build output is particularly clean, with minimal framework overhead.
 
@@ -274,11 +274,11 @@ CRXJS produces clean, predictable output that mirrors your source structure. The
 
 Winner: WXT produces the most optimized output by default. Plasmo is comparable but slightly larger due to framework overhead. CRXJS gives you control but requires more configuration.
 
-Cross-Browser Support {#cross-browser}
+## Cross-Browser Support {#cross-browser}
 
 Modern extensions often target multiple browsers. Here's how each framework handles cross-browser compatibility.
 
-WXT Cross-Browser
+### WXT Cross-Browser
 
 WXT provides excellent cross-browser support through its abstraction layer. The framework generates browser-specific builds targeting:
 - Google Chrome
@@ -304,7 +304,7 @@ export default defineConfig({
 })
 ```
 
-Plasmo Cross-Browser
+### Plasmo Cross-Browser
 
 Plasmo focuses primarily on Chrome extension APIs but provides fallbacks for Firefox compatibility. The framework's configuration system supports defining browser-specific behaviors through conditional logic.
 
@@ -312,7 +312,7 @@ Firefox support requires additional configuration and testing, as some Chrome-sp
 
 Plasmo supports Chrome, Firefox, Edge, and Safari (through native messaging). The framework abstracts browser differences reasonably well, though some advanced APIs may require browser-specific handling.
 
-CRXJS Cross-Browser
+### CRXJS Cross-Browser
 
 CRXJS generates cross-browser manifests through its configuration system. The framework supports Chrome, Firefox, and Edge manifest formats, handling the differences between browser extension platforms.
 
@@ -322,11 +322,11 @@ Since CRXJS is primarily a build tool, cross-browser support depends on your imp
 
 Winner: WXT provides the easiest cross-browser experience with the least configuration overhead.
 
-Community Size and Documentation {#community-docs}
+## Community Size and Documentation {#community-docs}
 
 Community support and documentation quality significantly impact developer success.
 
-WXT Community
+### WXT Community
 
 WXT has grown rapidly since its release, building a supportive community on GitHub and Discord. The framework's documentation is comprehensive, with guides covering common scenarios and API references for all features. Community contributions enhance documentation with real-world examples and tutorials.
 
@@ -337,7 +337,7 @@ WXT has grown rapidly since its initial release, with an active Discord communit
 GitHub Stars: ~8,000+
 npm Weekly Downloads: ~50,000
 
-Plasmo Community
+### Plasmo Community
 
 Plasmo has established the largest community among extension frameworks, with active Discord channels, comprehensive documentation, and numerous community tutorials. The framework's popularity stems from its developer-friendly approach and early market presence.
 
@@ -348,7 +348,7 @@ Plasmo has the largest community among extension frameworks, with extensive docu
 GitHub Stars: ~15,000+
 npm Weekly Downloads: ~120,000
 
-CRXJS Community
+### CRXJS Community
 
 CRXJS has a smaller but dedicated community, with focus on GitHub discussions and documentation. While not as extensive as Plasmo's, the documentation covers all essential features with clear examples.
 
@@ -361,11 +361,11 @@ npm Weekly Downloads: ~25,000
 
 Winner: Plasmo leads in community size and documentation breadth. WXT is growing quickly and has excellent documentation. CRXJS serves a niche but important audience.
 
-Starter Templates {#starter-templates}
+## Starter Templates {#starter-templates}
 
 Quick project setup accelerates development. Each framework offers starter options.
 
-WXT Templates
+### WXT Templates
 
 WXT provides official starter templates through its CLI:
 - Vanilla JavaScript/TypeScript
@@ -384,7 +384,7 @@ WXT offers official templates for:
 
 Community templates extend this with options for Solid, Preact, and specialized configurations.
 
-Plasmo Templates
+### Plasmo Templates
 
 Plasmo offers comprehensive starter templates:
 - React (default)
@@ -400,7 +400,7 @@ Plasmo provides the most extensive template selection:
 - Next.js integration
 - Framework-specific starters
 
-CRXJS Templates
+### CRXJS Templates
 
 CRXJS focuses on integration with existing Vite templates rather than providing extension-specific starters. Developers typically:
 1. Create a Vite project with their preferred framework
@@ -413,11 +413,11 @@ CRXJS doesn't provide official templates, but the ecosystem includes community-m
 
 Winner: Plasmo offers the most template variety, while WXT provides the best balance of quality and selection.
 
-Real Project Migration Stories {#migration-stories}
+## Real Project Migration Stories {#migration-stories}
 
 Understanding real-world migration experiences provides valuable insights.
 
-Migrating to WXT
+### Migrating to WXT
 
 Developers migrating from manual extension setup or older tools report significant productivity improvements. Common migration paths include:
 - Plain JavaScript projects → WXT with React/Vue
@@ -431,9 +431,9 @@ Teams migrating from vanilla webpack setups report significant improvements:
 - Faster development cycles
 - Better TypeScript integration
 
-Common migration path: Webpack → Vite → WXT
+### Common migration path: Webpack → Vite → WXT
 
-Migrating to Plasmo
+### Migrating to Plasmo
 
 Plasmo migrations often involve teams moving from custom build setups or older frameworks like extensionizr. Common patterns include:
 - Plain extensions → Plasmo for component architecture
@@ -447,7 +447,7 @@ Organizations moving from create-react-app or Next.js find Plasmo natural:
 - Reduced manifest management overhead
 - Better storage abstraction
 
-Migrating to CRXJS
+### Migrating to CRXJS
 
 CRXJS appeals to developers wanting modern tooling without framework commitment:
 - Plain extensions → CRXJS for Vite benefits
@@ -461,7 +461,7 @@ Developers choosing CRXJS typically want:
 - Minimal framework overhead
 - Full customization capability
 
-Bundle Size Comparison {#bundle-size}
+## Bundle Size Comparison {#bundle-size}
 
 Bundle size affects extension loading performance and user experience. These comparisons represent typical production builds with similar functionality.
 
@@ -481,9 +481,9 @@ Actual sizes vary based on dependencies, code splitting, and optimization settin
 
 *Actual sizes vary based on dependencies and configuration.*
 
-When to Use Each Framework {#when-to-use}
+## When to Use Each Framework {#when-to-use}
 
-Choose WXT When
+### Choose WXT When
 
 - You want the best balance of features and simplicity
 - Vite ecosystem integration is important to you
@@ -496,7 +496,7 @@ Choose WXT When
 - You need excellent cross-browser support
 - Automated optimization is important to you
 
-Choose Plasmo When
+### Choose Plasmo When
 
 - React is your primary framework
 - You need extensive starter templates
@@ -509,7 +509,7 @@ Choose Plasmo When
 - Storage abstraction is important
 - Community support is a priority
 
-Choose CRXJS When
+### Choose CRXJS When
 
 - You want minimal framework overhead
 - Flexibility in project architecture is crucial
@@ -522,7 +522,7 @@ Choose CRXJS When
 - You're already experienced with extension development
 - You need custom bundling strategies
 
-Recommendation Matrix {#recommendation-matrix}
+## Recommendation Matrix {#recommendation-matrix}
 
 | Criteria | WXT | Plasmo | CRXJS |
 |----------|-----|--------|-------|
@@ -547,7 +547,7 @@ Recommendation Matrix {#recommendation-matrix}
 | Flexibility |  |  |  |
 | Bundle Size |  |  |  |
 
-Conclusion
+### Conclusion
 
 All three frameworks represent excellent choices for Chrome extension development in 2026. Your decision should align with your project requirements, team expertise, and development preferences.
 
@@ -567,7 +567,7 @@ Regardless of your choice, all three frameworks provide significant improvements
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Development with TypeScript Tutorial](./chrome-extension-development-typescript-tutorial.md)
 - [TypeScript Setup for Extensions](./typescript-setup.md)

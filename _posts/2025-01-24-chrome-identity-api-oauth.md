@@ -18,7 +18,7 @@ This guide covers everything you need to implement authentication in your Chrome
 
 ---
 
-Understanding Extension Authentication {#understanding}
+## Understanding Extension Authentication {#understanding}
 
 Before diving into the API, it is important to understand why extension authentication is different from web app authentication.
 
@@ -30,22 +30,22 @@ In a traditional web application, the OAuth flow works like this:
 4. Google redirects back to your app's callback URL with an authorization code
 5. Your server exchanges the code for tokens
 
-Extensions cannot use this flow directly because:
+### Extensions cannot use this flow directly because:
 
 - No server: Most extensions do not have a backend server to exchange authorization codes.
 - No redirect URL: Extensions do not have a traditional URL that OAuth providers can redirect to.
 - Extension context: The authentication flow must work within Chrome's extension architecture.
 
-The Chrome Identity API provides two solutions:
+### The Chrome Identity API provides two solutions:
 
 - `getAuthToken()`: Streamlined authentication with Google accounts, using Chrome's built-in OAuth flow.
 - `launchWebAuthFlow()`: A generic OAuth flow that works with any OAuth2 provider (GitHub, Microsoft, Auth0, etc.).
 
 ---
 
-Permissions and Manifest Setup {#permissions}
+## Permissions and Manifest Setup {#permissions}
 
-For Google Authentication (getAuthToken)
+### For Google Authentication (getAuthToken)
 
 ```json
 {
@@ -63,7 +63,7 @@ For Google Authentication (getAuthToken)
 }
 ```
 
-For Third-Party Providers (launchWebAuthFlow)
+### For Third-Party Providers (launchWebAuthFlow)
 
 ```json
 {
@@ -77,7 +77,7 @@ For Third-Party Providers (launchWebAuthFlow)
 }
 ```
 
-Getting a Google OAuth Client ID
+### Getting a Google OAuth Client ID
 
 To use `getAuthToken()`, you need a Google Cloud OAuth client ID:
 
@@ -93,11 +93,11 @@ The extension ID must match exactly. During development, load your extension as 
 
 ---
 
-getAuthToken(): Google Account Authentication {#get-auth-token}
+## getAuthToken(): Google Account Authentication {#get-auth-token}
 
 The `getAuthToken()` method provides the simplest path to Google authentication. It leverages the Google account that the user is already signed into in Chrome, presenting a clean consent screen and managing tokens automatically.
 
-Basic Usage
+### Basic Usage
 
 ```javascript
 async function signInWithGoogle() {
@@ -130,7 +130,7 @@ async function signInWithGoogle() {
 }
 ```
 
-Interactive vs Non-Interactive
+### Interactive vs Non-Interactive
 
 The `interactive` parameter controls whether Chrome shows a sign-in UI:
 
@@ -151,7 +151,7 @@ try {
 }
 ```
 
-Specifying Scopes Dynamically
+### Specifying Scopes Dynamically
 
 You can request additional scopes beyond what is declared in the manifest:
 
@@ -167,7 +167,7 @@ const token = await chrome.identity.getAuthToken({
 
 If the requested scopes exceed what the user previously granted, Chrome will show a new consent screen.
 
-Selecting a Specific Account
+### Selecting a Specific Account
 
 If the user is signed into multiple Google accounts, you can specify which one to use:
 
@@ -178,7 +178,7 @@ const token = await chrome.identity.getAuthToken({
 });
 ```
 
-Token Caching
+### Token Caching
 
 Chrome caches tokens returned by `getAuthToken()` automatically. Subsequent calls return the cached token without showing the consent screen (as long as it has not expired). This means:
 
@@ -188,9 +188,9 @@ Chrome caches tokens returned by `getAuthToken()` automatically. Subsequent call
 
 ---
 
-Token Lifecycle Management {#token-management}
+## Token Lifecycle Management {#token-management}
 
-Removing Cached Tokens
+### Removing Cached Tokens
 
 If a token becomes invalid (e.g., the user revoked access), you need to remove it from Chrome's cache:
 
@@ -200,7 +200,7 @@ async function removeCachedToken(token) {
 }
 ```
 
-Handling Token Expiration
+### Handling Token Expiration
 
 Google OAuth tokens typically expire after 1 hour. Handle 401 responses by removing the cached token and requesting a new one:
 
@@ -241,9 +241,9 @@ const response = await authenticatedFetch(
 const files = await response.json();
 ```
 
-Clearing All Tokens (Sign Out)
+### Clearing All Tokens (Sign Out)
 
-To sign the user out of your extension:
+### To sign the user out of your extension:
 
 ```javascript
 async function signOut() {
@@ -279,11 +279,11 @@ await chrome.identity.clearAllCachedAuthTokens();
 
 ---
 
-launchWebAuthFlow(): Third-Party OAuth Providers {#launch-web-auth-flow}
+## launchWebAuthFlow(): Third-Party OAuth Providers {#launch-web-auth-flow}
 
 For authentication with non-Google providers (GitHub, Microsoft, Twitter, Auth0, Firebase, etc.), use `launchWebAuthFlow()`. This method opens a browser window for the OAuth flow and returns the redirect URL containing the authorization code or token.
 
-How It Works
+### How It Works
 
 1. Your extension calls `launchWebAuthFlow()` with the provider's authorization URL
 2. Chrome opens a special browser window showing the provider's login page
@@ -292,7 +292,7 @@ How It Works
 5. Chrome intercepts the redirect and returns the URL to your extension
 6. Your extension extracts the token or code from the URL
 
-Getting Your Redirect URL
+### Getting Your Redirect URL
 
 Every extension has a unique redirect URL for `launchWebAuthFlow()`:
 
@@ -304,7 +304,7 @@ console.log(redirectUrl);
 
 Register this URL with your OAuth provider as an authorized redirect URI.
 
-GitHub OAuth Example
+### GitHub OAuth Example
 
 Here is a complete example of authenticating with GitHub:
 
@@ -394,7 +394,7 @@ function generateRandomState() {
 
 Security note: Storing client secrets in extension code is not ideal. extensions are client-side code that can be inspected. For production extensions, consider using a backend proxy server to exchange authorization codes for tokens, or use the PKCE (Proof Key for Code Exchange) flow.
 
-PKCE Flow (Recommended for Extensions)
+### PKCE Flow (Recommended for Extensions)
 
 PKCE eliminates the need for a client secret, making it the recommended approach for extensions:
 
@@ -484,11 +484,11 @@ const microsoftConfig = {
 
 ---
 
-Secure Token Storage {#secure-storage}
+## Secure Token Storage {#secure-storage}
 
 Storing tokens securely is critical. Here are the recommended approaches:
 
-Session Storage for Short-Lived Tokens
+### Session Storage for Short-Lived Tokens
 
 Use `chrome.storage.session` for access tokens that should be cleared when the browser closes:
 
@@ -517,7 +517,7 @@ async function getValidToken() {
 }
 ```
 
-Local Storage for Refresh Tokens
+### Local Storage for Refresh Tokens
 
 Refresh tokens need to persist across browser restarts, so store them in `chrome.storage.local`:
 
@@ -584,7 +584,7 @@ async function refreshToken(auth) {
 
 ---
 
-Building a Complete Auth Module {#complete-module}
+## Building a Complete Auth Module {#complete-module}
 
 Here is a production-ready authentication module that ties together all the concepts:
 
@@ -818,7 +818,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ---
 
-getProfileUserInfo() {#profile-info}
+## getProfileUserInfo() {#profile-info}
 
 For extensions that only need the user's email and basic profile (without full OAuth), use `getProfileUserInfo()`:
 
@@ -843,9 +843,9 @@ This returns the Chrome profile's email, not an OAuth token. The user does not s
 
 ---
 
-Error Handling Best Practices {#error-handling}
+## Error Handling Best Practices {#error-handling}
 
-Common Errors
+### Common Errors
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -854,7 +854,7 @@ Common Errors
 | "Authorization page could not be loaded." | Network issue or wrong auth URL | Check URL and network connectivity |
 | "User interaction required." | `interactive: false` but consent is needed | Switch to `interactive: true` or prompt the user to sign in |
 
-Comprehensive Error Handler
+### Comprehensive Error Handler
 
 ```javascript
 async function handleAuthError(error) {
@@ -898,9 +898,9 @@ async function handleAuthError(error) {
 
 ---
 
-Security Considerations {#security}
+## Security Considerations {#security}
 
-Never Store Tokens in Content Scripts
+### Never Store Tokens in Content Scripts
 
 Content scripts run in the context of web pages and can be accessed by page scripts. Never expose tokens to content scripts directly:
 
@@ -928,7 +928,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Validate State Parameters
+### Validate State Parameters
 
 Always use and validate the `state` parameter to prevent CSRF attacks:
 
@@ -947,17 +947,17 @@ if (returnedState !== oauthState) {
 await chrome.storage.session.remove('oauthState');
 ```
 
-Use PKCE for All Public Clients
+### Use PKCE for All Public Clients
 
 Extensions are public clients (their code can be inspected). Always use PKCE instead of relying on a client secret. PKCE prevents authorization code interception attacks without requiring a secret.
 
-Minimize Scopes
+### Minimize Scopes
 
 Request only the scopes your extension actually needs. Users are more likely to grant limited permissions, and your extension is more secure with a smaller attack surface.
 
 ---
 
-Related Resources {#related}
+## Related Resources {#related}
 
 - [Chrome Storage API Patterns](/2025/01/24/chrome-storage-api-patterns/). Securely store tokens and user data
 - [Chrome Runtime API: Messaging and Lifecycle](/2025/01/24/chrome-runtime-api-messaging/). Route authenticated API calls through the service worker
@@ -966,11 +966,11 @@ Related Resources {#related}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 Authentication in Chrome extensions requires a different approach than traditional web applications, but the Chrome Identity API makes it manageable. Whether you are integrating with Google services via `getAuthToken()` or building custom OAuth flows with `launchWebAuthFlow()`, the API provides the primitives you need.
 
-Key takeaways:
+### Key takeaways:
 
 1. Use `getAuthToken()` for Google account authentication. it handles token caching and refresh automatically.
 2. Use `launchWebAuthFlow()` with PKCE for any third-party OAuth provider. Avoid storing client secrets in extension code.

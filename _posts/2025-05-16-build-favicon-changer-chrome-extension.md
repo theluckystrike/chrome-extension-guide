@@ -18,11 +18,11 @@ In this comprehensive tutorial, you'll learn how to build a fully functional fav
 
 ---
 
-Understanding How Favicons Work in Chrome {#how-favicons-work}
+## Understanding How Favicons Work in Chrome {#how-favicons-work}
 
 Before diving into code, it's essential to understand how Chrome handles favicons and what APIs are available to developers.
 
-The Traditional Favicon System
+### The Traditional Favicon System
 
 Traditionally, websites specify their favicon using a link tag in the HTML head:
 
@@ -33,7 +33,7 @@ Traditionally, websites specify their favicon using a link tag in the HTML head:
 
 Chrome automatically fetches these icons from websites and caches them locally. The browser uses the Chrome Favicon Service to retrieve these icons efficiently across all tabs.
 
-The Chrome Favicon API
+### The Chrome Favicon API
 
 Chrome provides a powerful Favicon API that extension developers can leverage:
 
@@ -43,7 +43,7 @@ chrome.favicon.getFavicon(url, callback)
 
 However, this API is primarily for reading existing favicons. For *changing* favicons dynamically, we need to use a different approach involving the Tab API and declarativeNetRequest or direct DOM manipulation through content scripts.
 
-Key Challenge: Manifest V3 Restrictions
+### Key Challenge: Manifest V3 Restrictions
 
 In Manifest V3, extensions have limited ability to modify page content directly. The approach we used in Manifest V2, injecting scripts to change favicons, is restricted. Instead, we'll explore legitimate methods that work within Chrome's security model:
 
@@ -54,7 +54,7 @@ In Manifest V3, extensions have limited ability to modify page content directly.
 
 ---
 
-Project Setup and Directory Structure {#project-setup}
+## Project Setup and Directory Structure {#project-setup}
 
 Let's start by setting up our project. Create a new folder for your extension and set up the following structure:
 
@@ -79,7 +79,7 @@ favicon-changer/
 
 ---
 
-Creating the Manifest (Manifest V3) {#manifest-file}
+## Creating the Manifest (Manifest V3) {#manifest-file}
 
 The manifest.json file is the heart of every Chrome extension. Here's our configuration for a favicon changer extension:
 
@@ -125,7 +125,7 @@ The manifest.json file is the heart of every Chrome extension. Here's our config
 }
 ```
 
-Key Manifest Components Explained
+### Key Manifest Components Explained
 
 - permissions: We request `activeTab` for accessing the current tab, `storage` for saving user preferences, and `tabs` for tab information.
 - host_permissions: `<all_urls>` allows our extension to work on any website.
@@ -135,7 +135,7 @@ Key Manifest Components Explained
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click our extension icon. Let's create an intuitive interface for selecting custom favicons:
 
@@ -380,7 +380,7 @@ section {
 
 ---
 
-Implementing the Popup Logic {#popup-javascript}
+## Implementing the Popup Logic {#popup-javascript}
 
 Now let's create the JavaScript that powers our popup:
 
@@ -657,7 +657,7 @@ async function loadSavedFavicons() {
 
 ---
 
-Creating the Content Script {#content-script}
+## Creating the Content Script {#content-script}
 
 The content script runs in the context of web pages and handles the actual favicon modification:
 
@@ -784,9 +784,9 @@ new MutationObserver(() => {
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
-The service worker handles extension lifecycle and events:
+### The service worker handles extension lifecycle and events:
 
 background.js
 
@@ -846,11 +846,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we've built all the components, let's test our extension:
 
-Loading the Extension in Chrome
+### Loading the Extension in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable Developer mode using the toggle in the top right
@@ -858,7 +858,7 @@ Loading the Extension in Chrome
 4. Select your `favicon-changer` folder
 5. The extension should now appear in your toolbar
 
-Testing the Functionality
+### Testing the Functionality
 
 1. Navigate to any website (e.g., github.com)
 2. Click the Favicon Changer extension icon
@@ -869,7 +869,7 @@ Testing the Functionality
 7. Refresh the page - the favicon should persist (if saved)
 8. Try the "Reset to Original" button
 
-Debugging Tips
+### Debugging Tips
 
 - Popup not opening? Check the console in `chrome://extensions/`
 - Favicon not changing? Make sure content scripts are injected correctly
@@ -878,18 +878,18 @@ Debugging Tips
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is working, you can publish it:
 
-Prepare for Publishing
+### Prepare for Publishing
 
 1. Create a ZIP file of your extension folder (excluding source files if needed)
 2. Take screenshots of your extension in action (minimum 1280x800, maximum 3840x2160)
 3. Write a detailed description explaining features and functionality
 4. Set a clear privacy practice disclosure
 
-Submit to Chrome Web Store
+### Submit to Chrome Web Store
 
 1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/developer/)
 2. Click New Item and upload your ZIP file
@@ -899,7 +899,7 @@ Submit to Chrome Web Store
    - Category
 4. Submit for review
 
-Review Process
+### Review Process
 
 Google reviews extensions for:
 - Malicious behavior
@@ -911,7 +911,7 @@ Review typically takes 1-3 days. Once approved, your extension will be available
 
 ---
 
-Advanced Features and Improvements {#advanced-features}
+## Advanced Features and Improvements {#advanced-features}
 
 Here are some ideas to enhance your favicon changer extension:
 
@@ -937,21 +937,21 @@ Here are some ideas to enhance your favicon changer extension:
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
-Issue: Favicon Changes Don't Persist on Navigation
+### Issue: Favicon Changes Don't Persist on Navigation
 
 Cause: Single-page applications (SPAs) don't trigger full page loads.
 
 Solution: Use the History API to detect URL changes, or implement a "sticky" mode that re-applies favicons automatically.
 
-Issue: Extension Doesn't Work on Some Sites
+### Issue: Extension Doesn't Work on Some Sites
 
 Cause: Some sites use aggressive CSP (Content Security Policy) or frame-breaking techniques.
 
 Solution: Test across different sites and document compatibility. Some sites may require workarounds.
 
-Issue: Custom Icons Look Pixelated
+### Issue: Custom Icons Look Pixelated
 
 Cause: Using small images or inappropriate formats.
 
@@ -959,7 +959,7 @@ Solution: Use PNG icons at 16x16, 32x32, and 128x128 pixels. Test on high-DPI di
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've built a complete favicon changer Chrome extension from scratch. This extension demonstrates several key concepts in Chrome extension development:
 
@@ -975,7 +975,7 @@ Remember to test thoroughly across different browsers and websites, and always f
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)

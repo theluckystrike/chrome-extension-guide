@@ -17,7 +17,7 @@ This guide covers everything you need to know about how Manifest V3 affects exte
 
 ---
 
-MV3 Changes That Impact Monetization {#mv3-changes-impacting-monetization}
+## MV3 Changes That Impact Monetization {#mv3-changes-impacting-monetization}
 
 Manifest V3 introduced several architectural changes that directly impact how you can build and operate paid extensions. Understanding these changes is essential before redesigning your monetization strategy.
 
@@ -25,31 +25,31 @@ Background Pages vs. Service Workers
 
 The most significant change is the replacement of persistent background pages with ephemeral service workers. In Manifest V2, your background script ran as a continuously loaded HTML page that could maintain state, run timers, and handle events at any time. In Manifest V3, service workers activate only when needed and terminate after a period of inactivity, typically 30 seconds or less.
 
-This change creates immediate challenges for monetization:
+### This change creates immediate challenges for monetization:
 
 - State persistence: Global variables in your service worker are cleared on termination
 - Timers: `setTimeout` and `setInterval` don't work reliably; you must use the `chrome.alarms` API
 - Network connections: Long-lived connections are terminated when the service worker stops
 
-Host Permission Changes
+### Host Permission Changes
 
 Host permissions in Manifest V3 are now granted at runtime rather than installation time. While this improves user privacy, it complicates scenarios where your extension needs to validate licenses across multiple domains or integrate with external payment services.
 
-The Death of Remote Code Execution
+### The Death of Remote Code Execution
 
 Manifest V3 prohibits loading and executing remote code. All JavaScript must be bundled within your extension package. This affects payment processing because you can no longer dynamically load payment SDKs from external CDNs, you must include them in your extension bundle.
 
-The Declarative Revolution
+### The Declarative Revolution
 
 The `webRequest` API that allowed extensions to intercept and analyze network traffic has been replaced by `declarativeNetRequest`. For ad-blocker developers and any extension that modifies network requests, this represents a fundamental shift in architecture. More importantly, this affects how you might have tracked usage or enforced premium features based on network activity.
 
 ---
 
-CWS Payments Deprecation. What Replaces It {#cws-payments-deprecation}
+## CWS Payments Deprecation. What Replaces It {#cws-payments-deprecation}
 
 Google deprecated Chrome Web Store payments in late 2023, and the implications for extension developers are significant. If you were relying on CWS's built-in payment system, you need to migrate to third-party payment processors.
 
-What Changed
+### What Changed
 
 The Chrome Web Store previously offered a built-in payments system that handled:
 
@@ -61,9 +61,9 @@ The Chrome Web Store previously offered a built-in payments system that handled:
 
 All of this is now the developer's responsibility. You must integrate your own payment processor, manage subscriptions, handle failed payments, and comply with regional tax requirements.
 
-What Replaces CWS Payments
+### What Replaces CWS Payments
 
-The most common replacement patterns include:
+### The most common replacement patterns include:
 
 Stripe Checkout. The most popular choice for extension developers. Stripe Checkout provides a hosted payment page that handles cards, Apple Pay, Google Pay, and regional payment methods. It's PCI-compliant out of the box and handles subscription billing.
 
@@ -77,11 +77,11 @@ For a deeper dive into Stripe integration, see our [Stripe Integration Tutorial]
 
 ---
 
-Service Worker and License Validation Timing {#service-worker-license-validation}
+## Service Worker and License Validation Timing {#service-worker-license-validation}
 
 With service workers that terminate after inactivity, you can't rely on in-memory state for license validation. You need a new approach that works within the ephemeral nature of MV3 service workers.
 
-The Validation Challenge
+### The Validation Challenge
 
 In Manifest V2, you might have validated the license once at startup and cached the result in a global variable:
 
@@ -97,7 +97,7 @@ chrome.runtime.onStartup.addListener(() => {
 
 This pattern fails in Manifest V3 because your service worker may not be running when the user activates your extension.
 
-Recommended Validation Pattern
+### Recommended Validation Pattern
 
 Instead, validate on every relevant action using the `chrome.alarms` API for periodic checks:
 
@@ -144,11 +144,11 @@ This pattern ensures license validation happens reliably while respecting servic
 
 ---
 
-Offscreen Documents for Payment Flows {#offscreen-documents}
+## Offscreen Documents for Payment Flows {#offscreen-documents}
 
 Some payment flows require sustained JavaScript execution that service workers can't provide. For these scenarios, Manifest V3 introduces offscreen documents.
 
-When to Use Offscreen Documents
+### When to Use Offscreen Documents
 
 Offscreen documents are hidden web pages that your extension can create to run JavaScript that requires:
 
@@ -164,7 +164,7 @@ For payment flows, you might use an offscreen document when:
 - Handling 3D Secure authentication
 - Running extended license validation sequences
 
-Creating an Offscreen Document
+### Creating an Offscreen Document
 
 ```javascript
 // Create offscreen document for payment processing
@@ -196,11 +196,11 @@ Offscreen documents persist until explicitly closed, making them suitable for pa
 
 ---
 
-declarativeNetRequest and Ad-Blocker Monetization {#declarativenetrequest-ad-blocker}
+## declarativeNetRequest and Ad-Blocker Monetization {#declarativenetrequest-ad-blocker}
 
 If your extension monetizes through ads or network modification, Manifest V3's `declarativeNetRequest` API changes everything.
 
-The Key Difference
+### The Key Difference
 
 In Manifest V2, the `webRequest` API let you:
 
@@ -223,9 +223,9 @@ With `declarativeNetRequest`, you define rules declaratively in your manifest:
 }
 ```
 
-Monetization Implications
+### Monetization Implications
 
-For ad-blocker developers, this means:
+### For ad-blocker developers, this means:
 
 - Revenue model shift: You can no longer selectively show ads based on user premium status by intercepting requests
 - Rule management: Premium rules must be included in the extension package (no remote rule loading)
@@ -235,11 +235,11 @@ If you're building a freemium ad-blocker with premium filter lists, those premiu
 
 ---
 
-storage.session for Auth Tokens {#storage-session-auth-tokens}
+## storage.session for Auth Tokens {#storage-session-auth-tokens}
 
 The new `chrome.storage.session` API provides session-scoped storage that doesn't persist across browser restarts. This is ideal for sensitive data that shouldn't survive a browser crash or restart.
 
-Use Cases for Auth Tokens
+### Use Cases for Auth Tokens
 
 ```javascript
 // Store auth tokens in session storage (cleared on browser restart)
@@ -258,9 +258,9 @@ async function storeRefreshToken(token) {
 }
 ```
 
-Security Benefits
+### Security Benefits
 
-Session storage provides additional security because:
+### Session storage provides additional security because:
 
 - Tokens are cleared when Chrome exits (even abnormally)
 - Data isn't synced across devices via Chrome Sync
@@ -270,11 +270,11 @@ For payment-related authentication, using session storage for access tokens whil
 
 ---
 
-Alarm-Based License Re-Validation {#alarm-based-license-revalidation}
+## Alarm-Based License Re-Validation {#alarm-based-license-revalidation}
 
 Because service workers terminate frequently, you can't rely on in-memory license state. Instead, implement periodic re-validation using alarms.
 
-Setting Up License Re-Validation
+### Setting Up License Re-Validation
 
 ```javascript
 // Initialize license check on extension startup
@@ -310,7 +310,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-Best Practices
+### Best Practices
 
 - Don't check too frequently: Every 15-30 minutes is usually sufficient
 - Cache aggressively: Store validated status in `chrome.storage.local` to avoid network calls on every extension activation
@@ -318,11 +318,11 @@ Best Practices
 
 ---
 
-Tab Suspender Pro MV3 Monetization Migration {#tab-suspender-pro-mv3-monetization}
+## Tab Suspender Pro MV3 Monetization Migration {#tab-suspender-pro-mv3-monetization}
 
 To illustrate these concepts in practice, let's examine how a real extension migrated its monetization to Manifest V3.
 
-The Challenge
+### The Challenge
 
 [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn) is a productivity extension that suspends inactive tabs to save memory and battery. The premium version includes:
 
@@ -331,18 +331,18 @@ The Challenge
 - Advanced tab grouping
 - Priority suspension rules
 
-Previous Architecture (Manifest V2)
+### Previous Architecture (Manifest V2)
 
-The Manifest V2 version used:
+### The Manifest V2 version used:
 
 - A persistent background page with in-memory license state
 - CWS payments for subscription management
 - Remote filter lists loaded from a server
 - Global variables for premium feature flags
 
-New Architecture (Manifest V3)
+### New Architecture (Manifest V3)
 
-The MV3 migration required:
+### The MV3 migration required:
 
 1. Payment Processor Migration: Moved from CWS payments to Stripe Checkout with a hosted payment page
 2. License Validation: Implemented alarm-based validation with caching in `chrome.storage.local`
@@ -354,11 +354,11 @@ The result: A fully functional freemium model that works within MV3 constraints 
 
 ---
 
-Stripe Checkout in MV3 World {#stripe-checkout-mv3}
+## Stripe Checkout in MV3 World {#stripe-checkout-mv3}
 
 Processing payments in Manifest V3 requires understanding how to bridge the gap between your extension and payment providers.
 
-The Recommended Flow
+### The Recommended Flow
 
 ```javascript
 // 1. User clicks "Upgrade" in your extension
@@ -393,7 +393,7 @@ async function openStripeCheckout() {
 }
 ```
 
-Key Considerations
+### Key Considerations
 
 - Redirect vs. Popup: Most payment providers use hosted pages that require redirect. You'll need to open a new tab or use an iframe in an offscreen document
 - State Management: The payment flow spans multiple contexts (extension → payment provider → webhook → extension). Design for this async nature
@@ -401,11 +401,11 @@ Key Considerations
 
 ---
 
-External Website Payment Flow {#external-website-payment}
+## External Website Payment Flow {#external-website-payment}
 
 Many extensions monetize through external websites, SaaS products, web apps, or services that the extension enhances. This pattern has its own MV3 considerations.
 
-The Architecture
+### The Architecture
 
 ```
 Chrome Extension ←→ External Website (your product)
@@ -415,7 +415,7 @@ Chrome Extension ←→ External Website (your product)
                        Webhook → Your API → Extension (via push or polling)
 ```
 
-Implementation Pattern
+### Implementation Pattern
 
 ```javascript
 // In your extension's service worker
@@ -455,7 +455,7 @@ async function checkWebsiteAccess(tabId) {
 }
 ```
 
-Website Integration
+### Website Integration
 
 Your external website needs to communicate with the extension:
 
@@ -481,11 +481,11 @@ window.postMessage({ type: 'getAccessStatus' }, '*');
 
 ---
 
-Handling Service Worker Termination During Purchase {#handling-sw-termination}
+## Handling Service Worker Termination During Purchase {#handling-sw-termination}
 
 One of the trickiest scenarios in MV3 monetization is handling the case where a purchase is in progress and the service worker terminates.
 
-The Problem
+### The Problem
 
 Consider this flow:
 
@@ -494,9 +494,9 @@ Consider this flow:
 3. Payment completes via webhook
 4. Extension never receives the notification because service worker isn't running
 
-Solutions
+### Solutions
 
-Option 1: Polling with Alarms
+### Option 1: Polling with Alarms
 
 ```javascript
 let pendingPaymentSession = null;
@@ -532,7 +532,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-Option 2: Use a Persistent Badge
+### Option 2: Use a Persistent Badge
 
 For critical purchases, consider using the badge API to indicate pending status:
 
@@ -545,7 +545,7 @@ chrome.action.setBadgeBackgroundColor({ color: '#F59E0B' });
 chrome.action.setBadgeText({ text: '' });
 ```
 
-Option 3: Extension-Reloaded Validation
+### Option 3: Extension-Reloaded Validation
 
 When the user next interacts with the extension, validate and apply any completed purchases:
 
@@ -565,7 +565,7 @@ chrome.runtime.onStartup.addListener(async () => {
 
 ---
 
-Related Guides and Next Steps {#next-steps}
+## Related Guides and Next Steps {#next-steps}
 
 Now that you understand the changes, here's how to put this knowledge into practice:
 
@@ -574,7 +574,7 @@ Now that you understand the changes, here's how to put this knowledge into pract
 - [Stripe Integration Tutorial](/2025/03/26/chrome-extension-stripe-payment-integration/). Full implementation guide for Stripe in Chrome extensions
 - [Extension Monetization Playbook](/2025/02/16/chrome-extension-monetization-strategies-that-work-2025/). Comprehensive guide to building sustainable extension businesses
 
-Quick Checklist for MV3 Monetization
+### Quick Checklist for MV3 Monetization
 
 - [ ] Migrate from CWS payments to third-party processor (Stripe recommended)
 - [ ] Implement alarm-based license validation

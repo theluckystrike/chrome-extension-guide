@@ -18,7 +18,7 @@ Chrome Extension Web Accessible Resources. How to Share Files with Web Pages
 
 Web Accessible Resources (WAR) is a critical manifest configuration in Chrome Extensions that determines which extension files can be loaded by web pages. This mechanism bridges the gap between your extension's bundled resources and the broader web ecosystem, enabling powerful use cases while maintaining security boundaries.
 
-Understanding web_accessible_resources in Manifest V3
+### Understanding web_accessible_resources in Manifest V3
 
 The `web_accessible_resources` manifest field declares which files within your extension can be accessed by external web pages. In Manifest V3, this configuration is more structured than ever, requiring explicit declaration of both the resources and the contexts that can access them.
 
@@ -43,16 +43,16 @@ The `web_accessible_resources` manifest field declares which files within your e
 }
 ```
 
-Manifest V2 Differences
+### Manifest V2 Differences
 
 MV2 uses a simpler array format:
 Each entry in the `web_accessible_resources` array contains two key properties: `resources` specifies the file patterns (using glob patterns), and `matches` defines which web pages can access those resources. This granular approach replaces the simpler array format from Manifest V2, giving developers precise control over resource accessibility.
 
-Key Changes from Manifest V2
+### Key Changes from Manifest V2
 
 In Manifest V2, `web_accessible_resources` was a simple array of file paths. Manifest V3 introduces a more sophisticated structure that requires explicit match patterns. This change addresses long-standing security concerns about extensions inadvertently exposing internal resources to malicious websites. When migrating from MV2 to MV3, you must review and update this configuration to ensure your extension continues functioning correctly.
 
-Using extension:// URLs
+### Using extension:// URLs
 
 Once configured, web-accessible resources are accessed through special `extension://` URLs. These URLs follow a predictable pattern that includes your extension's unique ID:
 
@@ -71,7 +71,7 @@ document.body.appendChild(img);
 
 The `chrome.runtime.getURL()` method is the recommended way to generate these URLs, as it automatically handles your extension's ID and ensures correct URL formatting. This method is available in both content scripts and background scripts, making it versatile for various extension components.
 
-The use_dynamic_url Feature
+### The use_dynamic_url Feature
 
 Chrome 120+ introduced the `use_dynamic_url` property, adding another layer of security to web-accessible resources. When enabled, this feature changes the URL format for resources each time the extension updates, preventing websites from hardcoding and relying on specific extension resource URLs.
 
@@ -92,7 +92,7 @@ Chrome 120+ introduced the `use_dynamic_url` property, adding another layer of s
 
 MV2 resources are accessible from any page by default, while MV3 requires explicit `matches` patterns.
 
-Resource Matching: matches and extension_ids
+### Resource Matching: matches and extension_ids
 
 The `matches` array uses URL patterns similar to content scripts:
 
@@ -102,7 +102,7 @@ The `matches` array uses URL patterns similar to content scripts:
 | `https://*.example.com/*` | Any subdomain of example.com |
 | `https://example.com/path/*` | Specific path and below |
 
-The `extension_ids` array restricts access to specific extensions:
+### The `extension_ids` array restricts access to specific extensions:
 
 ```json
 {
@@ -124,7 +124,7 @@ The `use_dynamic_url` property generates unique, non-predictable URLs for each r
 }
 ```
 
-How Dynamic URLs Work
+### How Dynamic URLs Work
 
 Instead of predictable URLs like:
 ```
@@ -138,7 +138,7 @@ chrome-extension://extension-id/12345678/images/logo.png
 
 This prevents websites from detecting your extension by checking for known resource paths.
 
-Accessing Resources from Content Scripts
+### Accessing Resources from Content Scripts
 
 Content scripts can use `chrome.runtime.getURL()` to build resource URLs:
 
@@ -159,7 +159,7 @@ link.href = styleUrl;
 document.head.appendChild(link);
 ```
 
-Accessing Resources from Web Pages
+### Accessing Resources from Web Pages
 
 Web pages can only access resources if they're declared with matching patterns:
 
@@ -171,9 +171,9 @@ img.src = 'chrome-extension://EXTENSION_ID/images/logo.png';
 
 Web pages cannot determine your extension ID or access resources without explicit declaration.
 
-Dynamic Resource Access Patterns
+### Dynamic Resource Access Patterns
 
-Loading Resources on Demand
+### Loading Resources on Demand
 
 ```javascript
 // background.js - Handle dynamic resource requests
@@ -194,7 +194,7 @@ async function getResourceUrl(resourcePath) {
 }
 ```
 
-Caching Behavior
+### Caching Behavior
 
 Resources loaded via `chrome.runtime.getURL()` are cached by the browser:
 
@@ -208,7 +208,7 @@ const url2 = chrome.runtime.getURL('images/logo.png');
 console.log(url1 === url2); // true (same URL, cached)
 ```
 
-To force refresh, append a query parameter:
+### To force refresh, append a query parameter:
 
 ```javascript
 const url = chrome.runtime.getURL('images/logo.png') + '?v=' + Date.now();
@@ -216,7 +216,7 @@ const url = chrome.runtime.getURL('images/logo.png') + '?v=' + Date.now();
 
 Images, Fonts, and Stylesheets as Web Accessible Resources
 
-Images
+### Images
 
 ```json
 {
@@ -231,7 +231,7 @@ img.src = chrome.runtime.getURL('images/extension-logo.png');
 document.body.appendChild(img);
 ```
 
-Fonts
+### Fonts
 
 ```json
 {

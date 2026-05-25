@@ -9,7 +9,7 @@ A/B Testing in Chrome Extensions: Feature Flags, Experiments, and Statistical Si
 
 A/B testing is a critical methodology for making data-driven decisions in Chrome extension development. By comparing different versions of features, UI elements, or user flows, you can understand what resonates with your users and optimize for better engagement, conversion rates, and overall satisfaction. This comprehensive guide covers the complete implementation of A/B testing in Chrome extensions, from foundational architecture to advanced statistical analysis.
 
-Understanding A/B Testing in the Extension Context
+### Understanding A/B Testing in the Extension Context
 
 Chrome extensions present unique opportunities and challenges for experimentation. Unlike traditional web applications, extensions have direct access to user browser behavior, can run in the background, and interact with web pages in powerful ways. This creates richer data sources for understanding user behavior while also requiring careful consideration of privacy and performance implications.
 
@@ -17,7 +17,7 @@ Extensions benefit from A/B testing across several key areas. You can test diffe
 
 The direct relationship with users through extensions provides higher intent signals than typical web properties. Users actively choose to install your extension, indicating genuine interest in your offering. This makes your user base particularly valuable for experimentation, as small improvements in conversion or engagement can translate to significant long-term retention gains.
 
-Feature Flag Architecture for Extensions
+### Feature Flag Architecture for Extensions
 
 Before implementing full A/B tests, you need a solid feature flag system. Feature flags serve as the foundation for any experimentation platform, allowing you to control which features are visible to which users without deploying new code.
 
@@ -108,7 +108,7 @@ export const featureFlags = new FeatureFlagManager();
 
 This implementation provides percentage-based rollouts, real-time updates through chrome.storage listeners, and consistent bucketing using deterministic hashing. The subscription pattern allows your UI components to react to flag changes without polling.
 
-Random Assignment and User Bucketing
+### Random Assignment and User Bucketing
 
 Random assignment is the cornerstone of valid A/B testing. When you randomly assign users to different experiment variants, you ensure that any differences in outcomes between groups are due to the changes you're testing rather than pre-existing differences between users.
 
@@ -164,7 +164,7 @@ export const assignment = new ExperimentAssignment();
 
 The hashAssignment method ensures that the same user always gets the same variant for a given experiment, which is essential for consistent user experience. The hashing function produces a uniform distribution across variants when using a large enough user population.
 
-Managing Experiment State with chrome.storage
+### Managing Experiment State with chrome.storage
 
 Chrome's storage API provides the persistence layer needed to maintain consistent experiment assignments across sessions while allowing centralized configuration updates. Proper experiment state management ensures users see the same variant throughout an experiment and that experiment metadata is available when needed.
 
@@ -258,7 +258,7 @@ export const experimentManager = new ExperimentManager();
 
 This manager handles experiment assignment, persistence, expiration, and analytics tracking. It stores assignments in chrome.storage.local, which persists across browser sessions and is specific to your extension.
 
-Server-Side Bucketing for Advanced Control
+### Server-Side Bucketing for Advanced Control
 
 While client-side bucketing works well for many use cases, server-side bucketing provides additional control and security. With server-side bucketing, your server decides which variant a user receives, and the extension simply fetches that assignment. This approach prevents users from manipulating experiment assignments and allows for more sophisticated targeting.
 
@@ -335,7 +335,7 @@ export const serverBucketing = new ServerBucketing('https://api.yourextension.co
 
 Server-side bucketing is particularly valuable when you need to implement holdout groups, cross-device experiments, or integration with external experimentation platforms like LaunchDarkly or Statsig.
 
-Measuring Conversion and Defining Success Metrics
+### Measuring Conversion and Defining Success Metrics
 
 Defining clear, measurable success metrics is essential for meaningful A/B tests. Without well-defined metrics, you can't determine whether your experiment produced meaningful results or just noise.
 
@@ -426,7 +426,7 @@ class ExperimentTracker {
 export const tracker = new ExperimentTracker();
 ```
 
-Statistical Significance and Sample Size
+### Statistical Significance and Sample Size
 
 Statistical significance ensures that observed differences between variants are real and not due to random chance. Without proper statistical analysis, you risk making decisions based on noise rather than signal.
 
@@ -531,7 +531,7 @@ console.log(`Required sample size per variant: ${sampleSize}`);
 
 Running experiments long enough to reach statistical significance is crucial. Stopping experiments early when results look promising (a phenomenon called "peeking") dramatically increases false positive rates. Always define your sample size and duration before starting an experiment.
 
-Common Pitfalls and How to Avoid Them
+### Common Pitfalls and How to Avoid Them
 
 Several common mistakes can undermine the validity of your A/B tests. Understanding these pitfalls helps you design more solid experiments.
 
@@ -545,7 +545,7 @@ Metric manipulation occurs when users game the system to achieve desired outcome
 
 Segmentation bias happens when your random assignment isn't actually random due to implementation bugs. Always verify that variant distributions match expected ratios.
 
-LaunchDarkly and Statsig Integration
+### LaunchDarkly and Statsig Integration
 
 For teams that need enterprise-grade experimentation capabilities, integrating with LaunchDarkly or Statsig provides powerful feature flags and A/B testing without building everything from scratch.
 
@@ -597,7 +597,7 @@ class LaunchDarklyIntegration {
 export const launchDarkly = new LaunchDarklyIntegration('YOUR_SDK_KEY');
 ```
 
-Statsig integration follows a similar pattern:
+### Statsig integration follows a similar pattern:
 
 ```javascript
 // src/lib/experiments/statsig.js
@@ -641,27 +641,27 @@ export const statsig = new StatsigIntegration('YOUR_SDK_KEY');
 
 Both platforms provide sophisticated targeting, automatic statistical analysis, and integration with downstream tools. Choose based on your team's existing tooling and specific needs.
 
-Real-World Examples
+### Real-World Examples
 
 Here are practical examples of A/B testing in Chrome extensions:
 
-Example 1: Onboarding Flow Optimization
+### Example 1: Onboarding Flow Optimization
 
 Test different onboarding sequences to improve installation-to-activation rates. Variant A might show a quick setup wizard with three screens. Variant B might skip the wizard and show the main interface immediately. Variant C might show a brief video introduction.
 
 Track completion rate as primary metric and time-to-first-action as secondary metric. A successful test might show variant A has 15% higher completion rate but variant C has faster time-to-first-action, suggesting a hybrid approach.
 
-Example 2: Premium Feature Placement
+### Example 2: Premium Feature Placement
 
 Test different positions and presentations for premium features. Place upgrade prompts in the toolbar, in the options page header, or as contextual tooltips. Test different copy and visual treatments.
 
 Track upgrade conversion rate as primary metric and free-tier engagement as guard metric. Ensure that aggressive monetization doesn't reduce long-term retention.
 
-Example 3: New Feature Introduction
+### Example 3: New Feature Introduction
 
 Roll out a new tab management feature to different percentages of users. Start with 5%, then 10%, then 25%, monitoring error rates and support tickets at each stage. This graduated rollout lets you catch issues before affecting all users.
 
-Related Guides
+### Related Guides
 
 For more information on related topics, explore these guides:
 

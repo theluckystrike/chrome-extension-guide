@@ -18,17 +18,17 @@ The shift from Manifest V2 to Manifest V3 brought significant changes to how Chr
 
 ---
 
-Understanding Offline Architecture for Chrome Extensions {#understanding-offline-architecture}
+## Understanding Offline Architecture for Chrome Extensions {#understanding-offline-architecture}
 
 Before diving into implementation details, it's essential to understand the architectural components that enable offline functionality in Chrome extensions. Unlike traditional web applications, Chrome extensions operate in a unique environment with multiple execution contexts, each requiring specific considerations for offline support.
 
-The Service Worker as the Backbone
+### The Service Worker as the Backbone
 
 The service worker serves as the central hub for offline capabilities in Manifest V3 extensions. Unlike the old background pages, service workers are event-driven and can be terminated when idle, which means your extension must handle state persistence carefully. When implementing offline features, you need to think about what data to cache, when to cache it, and how to synchronize data when connectivity returns.
 
 Service workers in Chrome extensions have access to the same caching mechanisms as web applications, including the Cache API and various storage APIs. However, they also have access to extension-specific APIs like chrome.storage and chrome.runtime that provide additional functionality for managing extension state and data.
 
-Storage Options for Offline Data
+### Storage Options for Offline Data
 
 Chrome extensions have multiple storage options, each suited for different use cases. Understanding these options is crucial for building efficient offline-capable extensions:
 
@@ -40,11 +40,11 @@ Cache API excels at storing network requests and responses, making it perfect fo
 
 ---
 
-Implementing the Cache API for Network Resources {#implementing-cache-api}
+## Implementing the Cache API for Network Resources {#implementing-cache-api}
 
 The Cache API provides a powerful mechanism for storing network requests and their responses. This is particularly useful for extensions that fetch data from external APIs or load resources from the web.
 
-Basic Cache Implementation
+### Basic Cache Implementation
 
 Let's start with a practical implementation that demonstrates how to cache network responses in your extension's service worker:
 
@@ -134,7 +134,7 @@ async function updateCache(request) {
 
 This implementation provides a solid caching strategy that serves cached content immediately while updating the cache in the background. It handles both explicit extension resources and network requests, making your extension resilient to network failures.
 
-Advanced Caching Strategies
+### Advanced Caching Strategies
 
 For more complex extensions, you might need different caching strategies depending on the type of content:
 
@@ -194,11 +194,11 @@ async function networkFirst(request, cacheName) {
 
 ---
 
-Using IndexedDB for Structured Data {#using-indexeddb}
+## Using IndexedDB for Structured Data {#using-indexeddb}
 
 While the Cache API handles network requests effectively, you'll often need to store structured data that doesn't come from network requests. IndexedDB provides a full-featured database solution for Chrome extensions.
 
-Setting Up IndexedDB
+### Setting Up IndexedDB
 
 Here's a comprehensive example of implementing IndexedDB in your extension:
 
@@ -311,7 +311,7 @@ class ExtensionDatabase {
 const database = new ExtensionDatabase();
 ```
 
-Handling Offline Data Synchronization
+### Handling Offline Data Synchronization
 
 One of the most challenging aspects of building offline-capable extensions is synchronizing data when connectivity is restored. Here's a solid synchronization approach:
 
@@ -430,11 +430,11 @@ class OfflineSyncManager {
 
 ---
 
-Leveraging chrome.storage for Extension Settings {#chrome-storage}
+## Leveraging chrome.storage for Extension Settings {#chrome-storage}
 
 The chrome.storage API provides a convenient way to store extension settings and small amounts of data. It's particularly well-suited for user preferences and simple state management.
 
-Storage Implementation
+### Storage Implementation
 
 ```javascript
 // background/storage.js
@@ -515,11 +515,11 @@ async function managePreferences() {
 
 ---
 
-Best Practices for Offline Extension Development {#best-practices}
+## Best Practices for Offline Extension Development {#best-practices}
 
 Building successful offline-capable Chrome extensions requires following established best practices that ensure reliability, performance, and user satisfaction.
 
-Handle Service Worker Lifecycle
+### Handle Service Worker Lifecycle
 
 Service workers in extensions behave similarly to web service workers but have some unique characteristics. Your extension must handle service worker termination and restart gracefully:
 
@@ -545,7 +545,7 @@ self.addEventListener('activate', (event) => {
 });
 ```
 
-Implement Graceful Degradation
+### Implement Graceful Degradation
 
 Your extension should provide meaningful feedback when operating offline:
 
@@ -571,9 +571,9 @@ async function fetchWithOfflineSupport(url, options = {}) {
 }
 ```
 
-Test Thoroughly
+### Test Thoroughly
 
-Always test your offline functionality by:
+### Always test your offline functionality by:
 
 - Using Chrome DevTools Application tab to simulate offline mode
 - Testing service worker termination and restart scenarios
@@ -582,7 +582,7 @@ Always test your offline functionality by:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building offline-capable Chrome extensions requires a thoughtful approach combining multiple storage mechanisms, proper service worker management, and solid synchronization logic. By leveraging the Cache API for network resources, IndexedDB for structured data, and chrome.storage for settings, you can create extensions that provide consistent functionality regardless of network connectivity.
 
@@ -594,7 +594,7 @@ Start implementing offline support in your extensions today, and provide your us
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Storage API Patterns: Best Practices](/2025/01/24/chrome-storage-api-patterns/) - Master chrome.storage for efficient settings and data management.
 - [IndexedDB Chrome Extension Data Storage Guide](/2025/01/21/indexeddb-chrome-extension-data-storage/) - Learn how to use IndexedDB for large-scale structured data.

@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-lifecycle-ev
 last_modified_at: 2026-01-15
 ---
 
-Extension Lifecycle Events
+### Extension Lifecycle Events
 
 This guide covers handling Chrome extension lifecycle events comprehensively: installation, updates, startup, and shutdown.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 ```json
 {
@@ -21,7 +21,7 @@ Prerequisites {#prerequisites}
 
 ---
 
-chrome.runtime.onInstalled {#chromeruntimeoninstalled}
+## chrome.runtime.onInstalled {#chromeruntimeoninstalled}
 
 Fires once when the extension is installed or updated. Use for one-time initialization.
 
@@ -63,9 +63,9 @@ async function handleUpdate(previousVersion: string): Promise<void> {
 
 ---
 
-Initialization Best Practices {#initialization-best-practices}
+## Initialization Best Practices {#initialization-best-practices}
 
-Idempotent Storage Initialization {#idempotent-storage-initialization}
+## Idempotent Storage Initialization {#idempotent-storage-initialization}
 
 Always check before setting defaults to support users who have customized settings:
 
@@ -93,7 +93,7 @@ async function initializeDefaultSettings(): Promise<void> {
 }
 ```
 
-Context Menu Recreation {#context-menu-recreation}
+## Context Menu Recreation {#context-menu-recreation}
 
 Always recreate context menus in onInstalled to handle extension updates:
 
@@ -118,7 +118,7 @@ async function setupContextMenus(): Promise<void> {
 
 ---
 
-chrome.runtime.onStartup {#chromeruntimeonstartup}
+## chrome.runtime.onStartup {#chromeruntimeonstartup}
 
 Runs when Chrome starts (profile starts). Use for restoring state:
 
@@ -136,7 +136,7 @@ chrome.runtime.onStartup.addListener(() => {
 
 ---
 
-chrome.runtime.onSuspend {#chromeruntimeonsuspend}
+## chrome.runtime.onSuspend {#chromeruntimeonsuspend}
 
 Fires just before the service worker is terminated. Save critical state:
 
@@ -152,7 +152,7 @@ chrome.runtime.onSuspend.addListener(() => {
 
 ---
 
-Listener Registration: Common Mistake {#listener-registration-common-mistake}
+## Listener Registration: Common Mistake {#listener-registration-common-mistake}
 
 Always register listeners at top level, not inside callbacks:
 
@@ -169,7 +169,7 @@ chrome.runtime.onMessage.addListener(handleMessage);
 
 ---
 
-Complete Lifecycle Handler {#complete-lifecycle-handler}
+## Complete Lifecycle Handler {#complete-lifecycle-handler}
 
 ```typescript
 // background/service-worker.ts
@@ -204,13 +204,13 @@ function handleSuspend(): void {
 
 ---
 
-Event Ordering {#event-ordering}
+## Event Ordering {#event-ordering}
 
 On first install, only `chrome.runtime.onInstalled` fires -- `chrome.runtime.onStartup` does not fire during the initial installation. `onStartup` fires on subsequent browser/profile starts after the extension is already installed. Both events are independent and serve different purposes.
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Lifecycle Events Reference](/docs/reference/lifecycle-events.md)
 - [Runtime API Reference](/docs/api-reference/runtime-api.md)

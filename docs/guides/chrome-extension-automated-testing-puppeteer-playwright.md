@@ -10,7 +10,7 @@ Automated Testing for Chrome Extensions: Puppeteer, Playwright, and CI Integrati
 
 Testing Chrome extensions presents unique challenges that standard web application testing frameworks were not designed to handle. Your extension code runs across multiple isolated contexts. service workers, content scripts, popups, options pages, and side panels. each with its own lifecycle and execution environment. This guide covers the tools, patterns, and CI integration strategies that enable reliable automated testing for Chrome extensions.
 
-Table of Contents
+### Table of Contents
 
 - [Understanding Extension Testing Contexts](#understanding-extension-testing-contexts)
 - [Loading Unpacked Extensions in Puppeteer](#loading-unpacked-extensions-in-puppeteer)
@@ -27,7 +27,7 @@ Table of Contents
 
 ---
 
-Understanding Extension Testing Contexts
+### Understanding Extension Testing Contexts
 
 Before diving into the tools, it is essential to understand the distinct contexts that comprise a Chrome extension:
 
@@ -43,11 +43,11 @@ Each context requires different testing approaches. Puppeteer and Playwright eac
 
 ---
 
-Loading Unpacked Extensions in Puppeteer
+### Loading Unpacked Extensions in Puppeteer
 
 Puppeteer provides direct support for loading Chrome extensions via the `--load-extension` flag. This allows you to launch a headless or headed Chrome browser with your unpacked extension automatically loaded.
 
-Basic Setup
+### Basic Setup
 
 ```javascript
 // puppeteer/setup.js
@@ -86,7 +86,7 @@ async function runTests() {
 runTests().catch(console.error);
 ```
 
-Loading Multiple Extensions
+### Loading Multiple Extensions
 
 If you need to test interactions between multiple extensions or use a helper extension:
 
@@ -103,7 +103,7 @@ const browser = await puppeteer.launch({
 });
 ```
 
-Accessing Extension Background
+### Accessing Extension Background
 
 To interact with the service worker or background page:
 
@@ -122,11 +122,11 @@ const backgroundPage = await getBackgroundPage(browser);
 
 ---
 
-Playwright Extension Fixtures
+### Playwright Extension Fixtures
 
 Playwright offers a more modern approach to extension testing through its experimental extension support. The `chromium.launchPersistentContext` method can load extensions in a persistent browser context.
 
-Basic Playwright Extension Fixture
+### Basic Playwright Extension Fixture
 
 ```javascript
 // playwright.config.js
@@ -154,7 +154,7 @@ module.exports = defineConfig({
 });
 ```
 
-Using Playwright's Experimental Extension API
+### Using Playwright's Experimental Extension API
 
 Playwright 1.42+ introduced experimental support for testing with browser contexts that can load extensions:
 
@@ -180,7 +180,7 @@ test.describe('Chrome Extension Testing', () => {
 });
 ```
 
-Extension Page Testing
+### Extension Page Testing
 
 Playwright excels at testing extension options pages and side panels:
 
@@ -207,11 +207,11 @@ test('options page loads correctly', async ({ page }) => {
 
 ---
 
-Testing Popup Interactions
+### Testing Popup Interactions
 
 Popup testing is challenging because popups close when they lose focus. Both Puppeteer and Playwright require specific strategies to keep popups open during testing.
 
-Keeping Popup Open with Puppeteer
+### Keeping Popup Open with Puppeteer
 
 ```javascript
 async function testPopup() {
@@ -251,7 +251,7 @@ async function testPopup() {
 }
 ```
 
-Popup Testing with Playwright
+### Popup Testing with Playwright
 
 ```javascript
 test('popup interaction works', async ({ page }) => {
@@ -272,11 +272,11 @@ For reliable popup testing, consider testing the underlying logic through the op
 
 ---
 
-Content Script Verification
+### Content Script Verification
 
 Content scripts run in the context of web pages, making them testable alongside regular page interactions.
 
-Testing Content Script Injection
+### Testing Content Script Injection
 
 ```javascript
 async function testContentScript() {
@@ -315,7 +315,7 @@ async function testContentScript() {
 }
 ```
 
-Verifying Content Script Message Passing
+### Verifying Content Script Message Passing
 
 ```javascript
 test('content script sends messages to background', async ({ page }) => {
@@ -336,11 +336,11 @@ test('content script sends messages to background', async ({ page }) => {
 
 ---
 
-Service Worker Event Testing
+### Service Worker Event Testing
 
 Service workers are the most challenging context to test because they are event-driven and can be terminated at any time. Testing requires careful orchestration of events.
 
-Testing Service Worker Lifecycle Events
+### Testing Service Worker Lifecycle Events
 
 ```javascript
 async function testServiceWorkerEvents() {
@@ -379,7 +379,7 @@ async function testServiceWorkerEvents() {
 }
 ```
 
-Testing Alarms and Scheduled Tasks
+### Testing Alarms and Scheduled Tasks
 
 ```javascript
 test('alarm events fire correctly', async ({ browser }) => {
@@ -402,11 +402,11 @@ test('alarm events fire correctly', async ({ browser }) => {
 
 ---
 
-Screenshot Comparison for Visual Regression
+### Screenshot Comparison for Visual Regression
 
 Visual regression testing helps catch unintended UI changes in popups, options pages, and side panels.
 
-Setting Up Screenshot Tests with Playwright
+### Setting Up Screenshot Tests with Playwright
 
 ```javascript
 const { test, expect } = require('@playwright/test');
@@ -434,7 +434,7 @@ test('options page visual regression', async ({ page }) => {
 });
 ```
 
-Baseline Management
+### Baseline Management
 
 Store baseline screenshots in a dedicated directory and update them intentionally:
 
@@ -448,11 +448,11 @@ npx playwright test --grep "visual regression"
 
 ---
 
-End-to-End Test Patterns
+### End-to-End Test Patterns
 
 Comprehensive E2E tests verify the entire extension flow from user interaction through all extension contexts.
 
-Complete E2E Flow Test
+### Complete E2E Flow Test
 
 ```javascript
 test('complete user flow', async ({ browser }) => {
@@ -493,7 +493,7 @@ test('complete user flow', async ({ browser }) => {
 });
 ```
 
-Multi-Tab Testing
+### Multi-Tab Testing
 
 ```javascript
 test('extension works across multiple tabs', async ({ browser }) => {
@@ -527,11 +527,11 @@ test('extension works across multiple tabs', async ({ browser }) => {
 
 ---
 
-Mocking Chrome APIs
+### Mocking Chrome APIs
 
 Testing extension logic often requires mocking Chrome APIs to control their behavior or verify they are called correctly.
 
-Using Puppeteer to Mock APIs
+### Using Puppeteer to Mock APIs
 
 ```javascript
 async function mockChromeAPI(browser) {
@@ -573,7 +573,7 @@ async function mockChromeAPI(browser) {
 }
 ```
 
-Using Playwright's Route Matching
+### Using Playwright's Route Matching
 
 ```javascript
 test('extension API calls intercepted', async ({ page }) => {
@@ -594,11 +594,11 @@ test('extension API calls intercepted', async ({ page }) => {
 
 ---
 
-GitHub Actions CI Setup
+### GitHub Actions CI Setup
 
 Running extension tests in CI requires special configuration since headless Chrome has limitations with extensions.
 
-Basic CI Workflow
+### Basic CI Workflow
 
 ```yaml
 .github/workflows/test.yml
@@ -643,9 +643,9 @@ jobs:
           path: playwright-report/
 ```
 
-Handling Extension Testing in CI
+### Handling Extension Testing in CI
 
-Extensions require a modified approach in CI environments:
+### Extensions require a modified approach in CI environments:
 
 ```yaml
 Use Xvfb for headed testing
@@ -661,7 +661,7 @@ Or use the newer headless mode with extensions
       --browser=chromium
 ```
 
-CI-Specific Test Configuration
+### CI-Specific Test Configuration
 
 ```javascript
 // playwright.config.js
@@ -699,11 +699,11 @@ module.exports = defineConfig({
 
 ---
 
-Test Coverage Reporting
+### Test Coverage Reporting
 
 Measuring test coverage helps identify untested code paths in your extension.
 
-Setting Up Coverage with Istanbul
+### Setting Up Coverage with Istanbul
 
 ```javascript
 // Add to your build process
@@ -721,9 +721,9 @@ module.exports = {
 };
 ```
 
-Coverage for Content Scripts
+### Coverage for Content Scripts
 
-Content script coverage requires injecting instrumented code:
+### Content script coverage requires injecting instrumented code:
 
 ```javascript
 // For content scripts, use chrome.scripting.executeScript with instrumented code
@@ -736,7 +736,7 @@ async function getContentScriptCoverage() {
 }
 ```
 
-Reporting with GitHub Actions
+### Reporting with GitHub Actions
 
 ```yaml
 - name: Generate coverage report
@@ -751,11 +751,11 @@ Reporting with GitHub Actions
 
 ---
 
-Fixture Management
+### Fixture Management
 
 Creating reusable test fixtures improves test maintainability and reduces duplication.
 
-Puppeteer Fixture Factory
+### Puppeteer Fixture Factory
 
 ```javascript
 // fixtures/extension.js
@@ -803,7 +803,7 @@ async function createExtensionFixture(browser, path) {
 module.exports = { createExtensionFixture };
 ```
 
-Playwright Test Fixtures
+### Playwright Test Fixtures
 
 ```javascript
 // fixtures/playwright.js
@@ -843,7 +843,7 @@ module.exports = { extensionTest };
 
 ---
 
-Summary
+### Summary
 
 Automated testing for Chrome extensions requires understanding the unique challenges of multi-context execution environments. Key takeaways from this guide:
 
@@ -859,7 +859,7 @@ Combine these tools and patterns with the [CI/CD pipeline setup](./ci-cd-pipelin
 
 ---
 
-Related Articles
+### Related Articles
 
 - [CI/CD Pipeline for Extensions](./ci-cd-pipeline.md)
 - [Chrome Extension Development Guide](./chrome-extension-development-typescript-2026.md)

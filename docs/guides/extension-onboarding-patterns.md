@@ -53,11 +53,11 @@ The `reason` parameter distinguishes between fresh installs, updates, and browse
 
 ---
 
-Welcome Page Patterns
+### Welcome Page Patterns
 
 Welcome pages provide dedicated space to explain your extension's value proposition, walk through key features, and collect any necessary configuration. Opening a new tab ensures users see the content prominently rather than hiding it in a small popup.
 
-Basic Welcome Page Flow
+### Basic Welcome Page Flow
 
 ```ts
 // welcome.html - Simple welcome page
@@ -99,7 +99,7 @@ function completeOnboarding() {
 }
 ```
 
-Welcome Page with Configuration
+### Welcome Page with Configuration
 
 Many extensions need user input during onboarding. Create a welcome page that collects essential preferences before activating core functionality:
 
@@ -132,11 +132,11 @@ document.getElementById("setup-form").addEventListener("submit", async (e) => {
 
 ---
 
-Feature Tours and Tooltips
+### Feature Tours and Tooltips
 
 Once users reach your extension's main interface (popup, side panel, or options page), feature tours guide them through specific capabilities. Content script-based tooltips can highlight page elements and provide contextual help.
 
-Popup-Based Feature Tour
+### Popup-Based Feature Tour
 
 ```ts
 // tour.ts - Overlay tour system
@@ -223,7 +223,7 @@ const tour = new FeatureTour([
 ]);
 ```
 
-Content Script Tooltips
+### Content Script Tooltips
 
 For extensions that interact with page content, tooltips can guide users through in-page features:
 
@@ -260,11 +260,11 @@ function showTooltip(targetElement: Element, message: string) {
 
 ---
 
-Progressive Disclosure of Features
+### Progressive Disclosure of Features
 
 Rather than overwhelming new users with all features at once, progressive disclosure reveals functionality over time based on usage patterns. This reduces cognitive load and helps users master the extension gradually.
 
-Usage-Based Feature Reveal
+### Usage-Based Feature Reveal
 
 ```ts
 // Track feature usage and unlock progressively
@@ -298,7 +298,7 @@ async function checkAndUnlockFeatures(actionType: string) {
 }
 ```
 
-Contextual Feature Introduction
+### Contextual Feature Introduction
 
 ```ts
 // Introduce features when context suggests relevance
@@ -333,11 +333,11 @@ async function suggestRelevantFeatures(context: string) {
 
 ---
 
-Permission Requests
+### Permission Requests
 
 Asking for permissions at the right time dramatically affects approval rates. Requesting too many permissions immediately creates suspicion, while requesting too late frustrates users who have already invested time in your extension.
 
-On-Demand Permission Pattern
+### On-Demand Permission Pattern
 
 MV3 supports optional permissions that can be requested when needed:
 
@@ -367,7 +367,7 @@ async function requestPageAccess() {
 }
 ```
 
-Permission Timing Best Practices
+### Permission Timing Best Practices
 
 | Timing | Approach | Example |
 |--------|----------|---------|
@@ -413,11 +413,11 @@ async function requestPermissionStage(stageName: string) {
 
 ---
 
-Tracking Onboarding Completion
+### Tracking Onboarding Completion
 
 Reliable tracking ensures you can measure funnel effectiveness and re-engage users who didn't complete onboarding.
 
-Storage-Based Tracking
+### Storage-Based Tracking
 
 ```ts
 // Track onboarding funnel progress
@@ -460,11 +460,11 @@ async function onOnboardingComplete() {
 
 ---
 
-A/B Testing Onboarding Flows
+### A/B Testing Onboarding Flows
 
 Testing different onboarding approaches helps optimize conversion. Use variant assignment stored in extension storage or backend-driven assignment.
 
-Simple A/B Testing Implementation
+### Simple A/B Testing Implementation
 
 ```ts
 // Assign user to variant on install
@@ -497,7 +497,7 @@ async function initializeOnboarding() {
 }
 ```
 
-Server-Side A/B Testing
+### Server-Side A/B Testing
 
 For more sophisticated testing, integrate with a backend:
 
@@ -523,9 +523,9 @@ async function fetchServerVariant(): Promise<string> {
 
 ---
 
-Examples from Popular Extensions
+### Examples from Popular Extensions
 
-Grammarly
+### Grammarly
 
 Grammarly uses a sophisticated multi-stage onboarding:
 1. Install: Minimal welcome, asks to create account
@@ -535,7 +535,7 @@ Grammarly uses a sophisticated multi-stage onboarding:
 
 Their approach emphasizes value demonstration before asking for payment or advanced permissions.
 
-Honey
+### Honey
 
 Honey's onboarding is highly contextual:
 1. Install: Brief welcome explaining coupon finding
@@ -556,7 +556,7 @@ This respects user autonomy and gets to value immediately.
 
 ---
 
-Summary
+### Summary
 
 Effective onboarding balances several competing priorities: demonstrating value quickly, avoiding permission fatigue, respecting user time, and setting the foundation for long-term engagement. Key principles to remember:
 

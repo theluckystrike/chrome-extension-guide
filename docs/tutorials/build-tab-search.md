@@ -9,9 +9,9 @@ Build a Tab Search & Switch Extension
 
 This tutorial guides you through building a Chrome extension that searches and switches between open tabs, with support for recently closed tabs.
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
-Create `manifest.json` with the necessary permissions:
+### Create `manifest.json` with the necessary permissions:
 
 ```json
 {
@@ -28,7 +28,7 @@ Create `manifest.json` with the necessary permissions:
 }
 ```
 
-Step 2: Popup HTML {#step-2-popup-html}
+## Step 2: Popup HTML {#step-2-popup-html}
 
 Create `popup.html` with a search input that auto-focuses when opened:
 
@@ -37,7 +37,7 @@ Create `popup.html` with a search input that auto-focuses when opened:
 <ul id="results"></ul>
 ```
 
-Step 3: List All Open Tabs {#step-3-list-all-open-tabs}
+## Step 3: List All Open Tabs {#step-3-list-all-open-tabs}
 
 Use `chrome.tabs.query({})` to fetch all tabs with their title, URL, and favicon:
 
@@ -54,7 +54,7 @@ async function getAllTabs() {
 }
 ```
 
-Step 4: Fuzzy Search {#step-4-fuzzy-search}
+## Step 4: Fuzzy Search {#step-4-fuzzy-search}
 
 Filter tabs as the user types, matching both title and URL:
 
@@ -68,9 +68,9 @@ function filterTabs(tabs, query) {
 }
 ```
 
-Step 5: Switch to Tab {#step-5-switch-to-tab}
+## Step 5: Switch to Tab {#step-5-switch-to-tab}
 
-Use `chrome.tabs.update()` and `chrome.windows.update()` to activate a tab:
+### Use `chrome.tabs.update()` and `chrome.windows.update()` to activate a tab:
 
 ```javascript
 async function switchToTab(tabId) {
@@ -80,7 +80,7 @@ async function switchToTab(tabId) {
 }
 ```
 
-Step 6: Keyboard Navigation {#step-6-keyboard-navigation}
+## Step 6: Keyboard Navigation {#step-6-keyboard-navigation}
 
 Implement arrow key navigation, Enter to switch, and Escape to close:
 
@@ -93,9 +93,9 @@ document.addEventListener('keydown', (e) => {
 });
 ```
 
-Step 7: Recently Closed Tabs {#step-7-recently-closed-tabs}
+## Step 7: Recently Closed Tabs {#step-7-recently-closed-tabs}
 
-Use `chrome.sessions.getRecentlyClosed()` to retrieve closed tabs:
+### Use `chrome.sessions.getRecentlyClosed()` to retrieve closed tabs:
 
 ```javascript
 async function getRecentlyClosed() {
@@ -104,9 +104,9 @@ async function getRecentlyClosed() {
 }
 ```
 
-Step 8: Reopen Closed Tabs {#step-8-reopen-closed-tabs}
+## Step 8: Reopen Closed Tabs {#step-8-reopen-closed-tabs}
 
-Restore a closed tab using `chrome.sessions.restore()`:
+### Restore a closed tab using `chrome.sessions.restore()`:
 
 ```javascript
 async function restoreTab(sessionId) {
@@ -114,17 +114,17 @@ async function restoreTab(sessionId) {
 }
 ```
 
-Additional Features {#additional-features}
+## Additional Features {#additional-features}
 
 - Tab Deduplication: Highlight duplicate URLs in the list
 - Pin/Unpin: Right-click options to pin/unpin tabs
 - Close Tab: Close tabs directly from search results
 
-Keyboard Shortcut {#keyboard-shortcut}
+## Keyboard Shortcut {#keyboard-shortcut}
 
 The extension uses the `commands` API. Press `Ctrl+Shift+Space` to open the search popup.
 
-Related Documentation {#related-documentation}
+## Related Documentation {#related-documentation}
 
 - [Tabs API Reference](../api-reference/tabs-api.md)
 - [Sessions API Reference](../api-reference/sessions-api.md)

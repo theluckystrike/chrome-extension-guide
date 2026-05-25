@@ -14,7 +14,7 @@ Chrome extension development has evolved significantly with the adoption of Mani
 
 Whether you're building a simple productivity tool or a complex enterprise extension like [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/eahnkhaildghmcagjdckcobbkjhniapn), the principles and patterns you'll learn here apply to any Chrome extension project.
 
-Prerequisites and Environment Setup
+### Prerequisites and Environment Setup
 
 Before diving into Chrome extension development, ensure your development environment meets these requirements:
 
@@ -23,7 +23,7 @@ Before diving into Chrome extension development, ensure your development environ
 - TypeScript 5.3+. Latest TypeScript with decorators and improved type inference
 - VS Code. Recommended editor with excellent TypeScript and Chrome DevTools support
 
-Initialize your project with a modern build system:
+### Initialize your project with a modern build system:
 
 ```bash
 mkdir my-extension && cd my-extension
@@ -32,7 +32,7 @@ npm install -D typescript vite @types/chrome esbuild
 npm install @theluckystrike/webext-storage @theluckystrike/webext-messaging
 ```
 
-Configure TypeScript for Chrome extension development:
+### Configure TypeScript for Chrome extension development:
 
 ```typescript
 // tsconfig.json
@@ -57,11 +57,11 @@ Configure TypeScript for Chrome extension development:
 }
 ```
 
-Understanding Manifest V3 Structure
+### Understanding Manifest V3 Structure
 
 Manifest V3 is the current standard for Chrome extensions, introducing significant changes from the deprecated Manifest V2. The manifest file defines your extension's capabilities, permissions, and entry points.
 
-Create your `manifest.json`:
+### Create your `manifest.json`:
 
 ```json
 {
@@ -117,11 +117,11 @@ Create your `manifest.json`:
 
 The manifest defines three main extension components: the background service worker, content scripts, and the popup page. Each serves a distinct purpose in your extension architecture.
 
-Background Service Worker Development
+### Background Service Worker Development
 
 The background service worker replaces the old background pages in Manifest V3. It runs in an isolated context and handles events when no popup is open. Service workers are event-driven and cannot maintain persistent state between events.
 
-Create your background worker with TypeScript:
+### Create your background worker with TypeScript:
 
 ```typescript
 // src/background/index.ts
@@ -252,7 +252,7 @@ export { defaultState, initializeExtension, ExtensionState };
 
 The background worker demonstrates several critical patterns: message handling, storage abstraction, alarm-based scheduling, and tab lifecycle management. This is the backbone of extensions like Tab Suspender Pro that manage browser resources automatically.
 
-Content Script Development
+### Content Script Development
 
 Content scripts run in the context of web pages, allowing you to interact with page DOM and communicate with the background worker. In Manifest V3, content scripts have limited access to Chrome APIs and must communicate via message passing.
 
@@ -405,7 +405,7 @@ console.log('[Content] TypeScript extension loaded on:', window.location.href);
 
 Content scripts require careful consideration of page isolation, DOM manipulation, and message passing patterns. The example above shows how to inject styles safely, communicate with the background worker, and expose a controlled API to the page.
 
-Popup Page Design Patterns
+### Popup Page Design Patterns
 
 The popup is the user interface users interact with most frequently. In Manifest V3, popups are HTML pages that have access to Chrome APIs but share the service worker's authorization.
 
@@ -544,7 +544,7 @@ export { initialize, saveSettings, PopupState };
 
 The popup demonstrates state management, async messaging, and user interface patterns essential for creating responsive, user-friendly extensions.
 
-Building and Testing Your Extension
+### Building and Testing Your Extension
 
 Configure your build process with Vite for efficient development:
 
@@ -577,7 +577,7 @@ export default defineConfig({
 });
 ```
 
-Build and load your extension:
+### Build and load your extension:
 
 ```bash
 Development build with watch mode
@@ -593,9 +593,9 @@ Load extension in Chrome:
 4. Select the dist folder
 ```
 
-Advanced Patterns and Best Practices
+### Advanced Patterns and Best Practices
 
-Memory Management
+### Memory Management
 
 Extensions like Tab Suspender Pro must manage memory carefully. The background service worker can be terminated by Chrome at any time, so avoid storing critical state in memory:
 
@@ -620,7 +620,7 @@ async function restoreState(): Promise<ExtensionState> {
 }
 ```
 
-Error Handling
+### Error Handling
 
 Implement comprehensive error handling:
 
@@ -641,16 +641,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Performance Optimization
+### Performance Optimization
 
-Follow these performance guidelines:
+### Follow these performance guidelines:
 
 1. Minimize content script execution. Use `run_at` to control when scripts load
 2. Use declarative content scripts. Define in manifest rather than injecting dynamically
 3. Implement lazy loading. Only load features when needed
 4. Monitor memory usage. Use Chrome Task Manager to track extension memory
 
-Publishing Your Extension
+### Publishing Your Extension
 
 When ready to publish, prepare your extension for the Chrome Web Store:
 
@@ -675,7 +675,7 @@ npx chrome-webstore-upload \
   --app-id $APP_ID
 ```
 
-Conclusion
+### Conclusion
 
 Building Chrome extensions with TypeScript in 2026 offers powerful capabilities through Manifest V3, improved APIs, and modern tooling. This tutorial covered the essential components: background service workers for event handling, content scripts for page interaction, and popup interfaces for user control.
 

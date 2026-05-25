@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-feature-dete
 last_modified_at: 2026-01-15
 ---
 
-Extension Feature Detection Patterns
+### Extension Feature Detection Patterns
 
 Feature detection is essential for Chrome extensions because APIs are continuously added in newer Chrome versions, and cross-browser compatibility requires handling missing APIs gracefully.
 
-Checking API Existence {#checking-api-existence}
+## Checking API Existence {#checking-api-existence}
 
 There are two primary approaches for checking if an API exists:
 
-Using Conditional Checks {#using-conditional-checks}
+## Using Conditional Checks {#using-conditional-checks}
 
 The safest approach is using conditional checks before accessing APIs:
 
@@ -24,7 +24,7 @@ if (chrome.sidePanel) {
 }
 ```
 
-Using try/catch {#using-trycatch}
+## Using try/catch {#using-trycatch}
 
 For cases where the API might exist but throw errors when accessed:
 
@@ -38,9 +38,9 @@ try {
 }
 ```
 
-Checking Method Existence {#checking-method-existence}
+## Checking Method Existence {#checking-method-existence}
 
-Use `typeof` to verify specific methods exist:
+### Use `typeof` to verify specific methods exist:
 
 ```javascript
 if (typeof chrome.action?.setBadgeTextColor === 'function') {
@@ -50,9 +50,9 @@ if (typeof chrome.action?.setBadgeTextColor === 'function') {
 
 The optional chaining (`?.`) prevents errors when the parent API doesn't exist.
 
-Version Detection {#version-detection}
+## Version Detection {#version-detection}
 
-Chrome Version from User Agent {#chrome-version-from-user-agent}
+## Chrome Version from User Agent {#chrome-version-from-user-agent}
 
 ```javascript
 function getChromeVersion() {
@@ -63,7 +63,7 @@ function getChromeVersion() {
 
 > Warning: User agent parsing is fragile and should be avoided when feature detection is possible.
 
-When to Use Version Detection {#when-to-use-version-detection}
+## When to Use Version Detection {#when-to-use-version-detection}
 
 Version detection is appropriate when:
 - No reliable feature detection is available
@@ -72,9 +72,9 @@ Version detection is appropriate when:
 
 Otherwise, prefer runtime feature detection.
 
-Graceful Degradation {#graceful-degradation}
+## Graceful Degradation {#graceful-degradation}
 
-Provide fallback behavior when APIs are unavailable:
+### Provide fallback behavior when APIs are unavailable:
 
 ```javascript
 async function setBadgeColor(color) {
@@ -87,7 +87,7 @@ async function setBadgeColor(color) {
 }
 ```
 
-Fallback UI Patterns {#fallback-ui-patterns}
+## Fallback UI Patterns {#fallback-ui-patterns}
 
 ```javascript
 function renderUI() {
@@ -101,7 +101,7 @@ function renderUI() {
 }
 ```
 
-Progressive Enhancement {#progressive-enhancement}
+## Progressive Enhancement {#progressive-enhancement}
 
 Add features when APIs are detected:
 
@@ -129,7 +129,7 @@ class FeatureDetector {
 }
 ```
 
-Common Feature Checks {#common-feature-checks}
+## Common Feature Checks {#common-feature-checks}
 
 | Feature | Chrome Version | Detection Method |
 |---------|----------------|------------------|
@@ -139,7 +139,7 @@ Common Feature Checks {#common-feature-checks}
 | Session Storage | 102+ | `chrome.storage.session` |
 | Badge Text Color | 110+ | `chrome.action.setBadgeTextColor` |
 
-Feature Detector Utility {#feature-detector-utility}
+## Feature Detector Utility {#feature-detector-utility}
 
 ```javascript
 const FeatureDetector = {
@@ -163,9 +163,9 @@ if (FeatureDetector.detect('sidePanel')) {
 }
 ```
 
-Polyfills for Missing APIs {#polyfills-for-missing-apis}
+## Polyfills for Missing APIs {#polyfills-for-missing-apis}
 
-For cross-browser compatibility, use the WebExtension Polyfill:
+### For cross-browser compatibility, use the WebExtension Polyfill:
 
 ```javascript
 import browser from 'webextension-polyfill';
@@ -176,11 +176,11 @@ browser.storage.local.get('key').then(result => {
 });
 ```
 
-Install via: `npm install webextension-polyfill`
+### Install via: `npm install webextension-polyfill`
 
-Feature Matrix {#feature-matrix}
+## Feature Matrix {#feature-matrix}
 
-Track which features work in which browsers:
+### Track which features work in which browsers:
 
 | Feature | Chrome | Firefox | Safari | Edge |
 |---------|--------|---------|--------|------|
@@ -189,7 +189,7 @@ Track which features work in which browsers:
 | User Scripts | 120+ | 102+ |  | 120+ |
 | Session Storage | 102+ | 101+ | 14+ | 102+ |
 
-Testing Across Chrome Versions {#testing-across-chrome-versions}
+## Testing Across Chrome Versions {#testing-across-chrome-versions}
 
 - Stable: Current public release
 - Beta: Next release candidate
@@ -198,7 +198,7 @@ Testing Across Chrome Versions {#testing-across-chrome-versions}
 
 Install multiple channels to test feature availability.
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [API Availability Reference](../reference/api-availability.md)
 - [Browser Compatibility](../reference/browser-compatibility.md)

@@ -18,7 +18,7 @@ In this tutorial, we will cover everything from understanding the Notion API to 
 
 ---
 
-Why Build a Notion Chrome Extension? {#why-build}
+## Why Build a Notion Chrome Extension? {#why-build}
 
 The demand for notion clipper tools has exploded in recent years. Notion, with its flexible database structure and collaborative features, has become the go-to workspace for millions of users worldwide. The ability to quickly save web content directly into Notion eliminates the tedious copy-paste workflow and ensures that your research and references are organized in one centralized location.
 
@@ -28,7 +28,7 @@ The extension we will build today will allow users to select any web page, extra
 
 ---
 
-Prerequisites and Setup {#prerequisites}
+## Prerequisites and Setup {#prerequisites}
 
 Before we begin coding, ensure you have the following tools and accounts set up. You will need Node.js (version 18 or higher) installed on your computer, a Google Chrome browser for testing, a Notion account with access to a workspace, and a Notion integration created through the Notion developers portal.
 
@@ -42,7 +42,7 @@ cd notion-clipper-extension
 npm init -y
 ```
 
-Install the necessary dependencies:
+### Install the necessary dependencies:
 
 ```bash
 npm install dotenv express cors
@@ -52,13 +52,13 @@ For the Chrome extension side, we will use vanilla JavaScript to keep things sim
 
 ---
 
-Understanding Manifest V3 Architecture {#manifest-v3}
+## Understanding Manifest V3 Architecture {#manifest-v3}
 
 Chrome extensions in 2025 must use Manifest V3, which introduces several important changes from the older Manifest V2. The most significant change for our Notion integration is that background scripts are now service workers, which means they cannot execute persistent code and must handle asynchronous operations differently.
 
 Our extension architecture will consist of three main components. The popup (popup.html and popup.js) will provide the user interface where users configure their settings and trigger the clipping action. The service worker (background.js) will handle communication with the Notion API and manage authentication state. The content script (content.js) will extract relevant information from the current web page when triggered.
 
-Create your manifest.json file with the following configuration:
+### Create your manifest.json file with the following configuration:
 
 ```json
 {
@@ -97,7 +97,7 @@ The permissions we have defined include "activeTab" for accessing the current ta
 
 ---
 
-Implementing Authentication with Notion API {#authentication}
+## Implementing Authentication with Notion API {#authentication}
 
 The Notion API uses OAuth 2.0 for authentication, which allows users to authorize your extension to access their Notion workspace without sharing their login credentials. For a production extension, you would implement the full OAuth flow, which requires a backend server to handle the token exchange securely.
 
@@ -204,7 +204,7 @@ This background service worker handles all communication with the Notion API. It
 
 ---
 
-Creating the Popup Interface {#popup}
+## Creating the Popup Interface {#popup}
 
 The popup is what users see when they click the extension icon. It should be clean, intuitive, and provide all the functionality users need to configure and use the extension. Create popup.html:
 
@@ -511,7 +511,7 @@ This script handles all the popup interactions, including loading saved configur
 
 ---
 
-Content Extraction Strategies {#content-extraction}
+## Content Extraction Strategies {#content-extraction}
 
 The quality of your content extraction can make or break a save to notion extension. Users expect their clipped articles to be clean and readable, without ads, navigation elements, or other page clutter. In this section, we will explore advanced content extraction techniques to improve the user experience.
 
@@ -556,7 +556,7 @@ For images, you have several options. You can extract all image URLs from the pa
 
 ---
 
-Handling Edge Cases and Error Recovery {#error-handling}
+## Handling Edge Cases and Error Recovery {#error-handling}
 
 A production-ready notion chrome extension must handle various error scenarios gracefully. Users will encounter network failures, invalid credentials, rate limiting, and unexpected API responses. Your extension should provide clear, actionable error messages that help users resolve issues quickly.
 
@@ -586,7 +586,7 @@ For authentication errors, guide users through the setup process with clear inst
 
 ---
 
-Testing Your Extension Locally {#testing}
+## Testing Your Extension Locally {#testing}
 
 Before publishing to the Chrome Web Store, thoroughly test your extension in development mode. Open Chrome and navigate to chrome://extensions/. Enable "Developer mode" in the top right corner, then click "Load unpacked" and select your extension directory.
 
@@ -596,7 +596,7 @@ Use Chrome's developer tools to debug issues. The service worker logs can be vie
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is working correctly, you can publish it to the Chrome Web Store. First, create a developer account at the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/). The registration fee is $5, which is a one-time payment.
 
@@ -606,7 +606,7 @@ Bundle your extension into a ZIP file and upload it through the developer dashbo
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic clipping functionality working, consider adding these advanced features to make your notion chrome extension stand out from competitors. Tagging and categorization allow users to automatically tag clipped content based on the source website or content type. Custom templates let users define how clipped content should be formatted in Notion, including specific database properties and page layouts.
 
@@ -616,7 +616,7 @@ Integration with other tools can expand your extension's value. Consider adding 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a notion chrome extension is an excellent project that teaches you valuable skills in Chrome extension development, API integration, and user experience design. The extension we built today provides a solid foundation that you can customize and extend based on your specific needs.
 

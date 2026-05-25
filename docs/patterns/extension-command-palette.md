@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-command-pale
 last_modified_at: 2026-01-15
 ---
 
-Command Palette Pattern for Chrome Extensions
+### Command Palette Pattern for Chrome Extensions
 
 A command palette provides a powerful keyboard-driven interface for accessing extension functionality, similar to VS Code's popular Ctrl+Shift+P launcher. This pattern has become essential for power users who want to navigate and control extensions efficiently without reaching for the mouse. By implementing a well-designed command palette, you can significantly improve your extension's usability and user satisfaction.
 
-Why Command Palettes Matter
+### Why Command Palettes Matter
 
 Command palettes have become a standard UI pattern in modern applications because they:
 
@@ -20,7 +20,7 @@ Command palettes have become a standard UI pattern in modern applications becaus
 - Create a consistent, predictable interface
 - Support keyboard-only workflows preferred by power users
 
-Activation {#activation}
+## Activation {#activation}
 
 The first step is registering a global keyboard shortcut in your manifest.json that triggers the command palette:
 
@@ -70,7 +70,7 @@ function createPalette() {
 }
 ```
 
-UI Structure {#ui-structure}
+## UI Structure {#ui-structure}
 
 Design the command palette as a full-width overlay at the top of the page for maximum visibility:
 
@@ -146,9 +146,9 @@ Design the command palette as a full-width overlay at the top of the page for ma
 }
 ```
 
-Fuzzy Search Algorithm
+### Fuzzy Search Algorithm
 
-Fuzzy Search Algorithm {#fuzzy-search-algorithm}
+## Fuzzy Search Algorithm {#fuzzy-search-algorithm}
 
 Implement fuzzy matching to help users find commands even with typos. Consecutive character matches should score higher:
 
@@ -221,7 +221,7 @@ function rankCommands(query, commands) {
 }
 ```
 
-Command Registry {#command-registry}
+## Command Registry {#command-registry}
 
 Create a flexible command registry that supports dynamic registration and categorization:
 
@@ -330,7 +330,7 @@ commands.register({
 });
 ```
 
-Dynamic Commands {#dynamic-commands}
+## Dynamic Commands {#dynamic-commands}
 
 Filter commands based on current context such as page URL or extension permissions:
 
@@ -372,7 +372,7 @@ function isValidUrl(url, pattern) {
 }
 ```
 
-Keyboard Navigation {#keyboard-navigation}
+## Keyboard Navigation {#keyboard-navigation}
 
 Implement comprehensive keyboard navigation for accessibility and efficiency:
 
@@ -482,9 +482,9 @@ Sub-commands {#sub-commands}
 }
 ```
 
-Categories and Sub-commands
+### Categories and Sub-commands
 
-Organize commands hierarchically for easier discovery:
+### Organize commands hierarchically for easier discovery:
 
 ```javascript
 // Category definitions with icons
@@ -518,9 +518,9 @@ commands.register({
 });
 ```
 
-Result Preview {#result-preview}
+## Result Preview {#result-preview}
 
-Show detailed information for the highlighted command:
+### Show detailed information for the highlighted command:
 
 ```javascript
 function renderPreview(command) {
@@ -540,7 +540,7 @@ function renderPreview(command) {
 }
 ```
 
-Common Use Cases
+### Common Use Cases
 
 1. Quick Tab Management
 Users often need to quickly close, pin, or reorder tabs without reaching for the mouse. Command palette provides instant access:
@@ -590,7 +590,7 @@ commands.register({
 });
 ```
 
-Best Practices
+### Best Practices
 
 1. Provide meaningful defaults: Choose shortcuts that don't conflict with common browser shortcuts
 2. Support fuzzy matching: Users shouldn't need to type exact command names
@@ -603,7 +603,7 @@ Best Practices
 9. Persist user preferences: Remember the last selected command
 10. Test thoroughly: Ensure the palette works on various websites
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 
 - [Command Palette Overview](../patterns/command-palette.md)
 - [Keyboard Shortcuts Guide](../guides/keyboard-shortcuts.md)

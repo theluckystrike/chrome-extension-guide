@@ -11,13 +11,13 @@ last_modified_at: 2026-01-15
 
 notifications Permission Reference
 
-What It Does {#what-it-does}
+## What It Does {#what-it-does}
 - Grants access to the `chrome.notifications` API
 - Show rich desktop notifications (basic, image, list, progress types)
 - Handle notification clicks, button clicks, and close events
 - Notifications persist in the system notification center
 
-Notification Types {#notification-types}
+## Notification Types {#notification-types}
 | Type | Description | Fields |
 |------|-------------|--------|
 | `basic` | Simple text notification | title, message, iconUrl |
@@ -25,14 +25,14 @@ Notification Types {#notification-types}
 | `list` | Multiple items in one notification | + items[] |
 | `progress` | Shows a progress bar | + progress (0-100) |
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 ```json
 { "permissions": ["notifications"] }
 ```
 
-Low-warning permission.
+### Low-warning permission.
 
-Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -43,9 +43,9 @@ console.log(result.description); // "Show desktop notifications"
 PERMISSION_DESCRIPTIONS.notifications; // "Show desktop notifications"
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
-Pattern: content script triggers notification via background:
+### Pattern: content script triggers notification via background:
 
 ```ts
 type Messages = {
@@ -93,9 +93,9 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 });
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Store notification preferences and history:
+### Store notification preferences and history:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -129,7 +129,7 @@ storage.watch("notificationsEnabled", (enabled) => {
 });
 ```
 
-Key API Methods {#key-api-methods}
+## Key API Methods {#key-api-methods}
 
 | Method | Description |
 |--------|-------------|
@@ -141,7 +141,7 @@ Key API Methods {#key-api-methods}
 | `notifications.onButtonClicked` | Event. user clicked a notification button |
 | `notifications.onClosed` | Event. notification was dismissed |
 
-Notification with Buttons {#notification-with-buttons}
+## Notification with Buttons {#notification-with-buttons}
 ```ts
 chrome.notifications.create({
   type: "basic",
@@ -160,14 +160,14 @@ chrome.notifications.onButtonClicked.addListener((notifId, buttonIndex) => {
 });
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 1. Alarm-triggered reminders (alarms + notifications)
 2. Download complete alerts
 3. New content alerts (periodic check + notify)
 4. Action notifications with buttons
 5. Progress notifications for long operations
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 - Notifications may be silenced by OS-level Do Not Disturb
 - `iconUrl` is required. must be a valid extension URL or data URL
 - Notification IDs are strings. auto-generated if not provided
@@ -175,16 +175,16 @@ Gotchas {#gotchas}
 - Too many notifications can cause Chrome to throttle them
 - `notifications.create()` returns a Promise in MV3
 
-Related Permissions {#related-permissions}
+## Related Permissions {#related-permissions}
 - [alarms](alarms.md). trigger notifications on schedule
 - [storage](storage.md). store notification preferences
 
-API Reference {#api-reference}
+## API Reference {#api-reference}
 - [Notifications API Reference](../api-reference/notifications-api.md)
 - [Chrome notifications API docs](https://developer.chrome.com/docs/extensions/reference/api/notifications)
 - [Notifications API detailed look](../api-reference/notifications-api.md)
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I show notifications in Chrome extensions?
 Use chrome.notifications.create() to display system notifications. You'll need the "notifications" permission in your manifest.

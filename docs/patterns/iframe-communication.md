@@ -14,7 +14,7 @@ iframes are ubiquitous on the web, and Chrome extensions frequently need to comm
 
 ---
 
-Pattern 1: Content Script to Page iframe Communication {#pattern-1-content-script-to-page-iframe-communication}
+## Pattern 1: Content Script to Page iframe Communication {#pattern-1-content-script-to-page-iframe-communication}
 
 Content scripts can access iframes on the host page, but cross-origin restrictions apply. For same-origin iframes, you can inject directly. For cross-origin iframes, use `window.postMessage`.
 
@@ -90,7 +90,7 @@ Gotchas:
 
 ---
 
-Pattern 2: Extension iframe in Content Script (Shadow DOM) {#pattern-2-extension-iframe-in-content-script-shadow-dom}
+## Pattern 2: Extension iframe in Content Script (Shadow DOM) {#pattern-2-extension-iframe-in-content-script-shadow-dom}
 
 Inject an extension-hosted iframe into a page using Shadow DOM to isolate styles and prevent the host page from interfering with your UI.
 
@@ -195,7 +195,7 @@ Gotchas:
 
 ---
 
-Pattern 3: Cross-Origin iframe Messaging with postMessage {#pattern-3-cross-origin-iframe-messaging-with-postmessage}
+## Pattern 3: Cross-Origin iframe Messaging with postMessage {#pattern-3-cross-origin-iframe-messaging-with-postmessage}
 
 When communicating across origins, a structured protocol with handshake, validation, and typed messages prevents security issues and race conditions.
 
@@ -361,7 +361,7 @@ Gotchas:
 
 ---
 
-Pattern 4: Sandboxed iframe for Untrusted Content {#pattern-4-sandboxed-iframe-for-untrusted-content}
+## Pattern 4: Sandboxed iframe for Untrusted Content {#pattern-4-sandboxed-iframe-for-untrusted-content}
 
 Chrome extensions can use sandboxed pages to run untrusted code (such as user-provided templates or third-party scripts) without access to extension APIs.
 
@@ -467,7 +467,7 @@ Gotchas:
 
 ---
 
-Pattern 5: iframe Permission and CSP Considerations {#pattern-5-iframe-permission-and-csp-considerations}
+## Pattern 5: iframe Permission and CSP Considerations {#pattern-5-iframe-permission-and-csp-considerations}
 
 Chrome extensions enforce a Content Security Policy that affects which iframes can be embedded and what they can do. Understanding these constraints prevents silent failures.
 
@@ -569,7 +569,7 @@ Gotchas:
 
 ---
 
-Pattern 6: Detecting and Interacting with Page iframes {#pattern-6-detecting-and-interacting-with-page-iframes}
+## Pattern 6: Detecting and Interacting with Page iframes {#pattern-6-detecting-and-interacting-with-page-iframes}
 
 Content scripts may need to find, filter, and interact with iframes already present on the host page. This requires careful DOM traversal and timing.
 
@@ -699,7 +699,7 @@ Gotchas:
 
 ---
 
-Pattern 7: Extension Popup with Embedded iframes {#pattern-7-extension-popup-with-embedded-iframes}
+## Pattern 7: Extension Popup with Embedded iframes {#pattern-7-extension-popup-with-embedded-iframes}
 
 Extension popups can embed iframes to load external dashboards, previews, or dynamically generated content. This pattern requires careful CSP and sizing management.
 
@@ -802,7 +802,7 @@ Gotchas:
 
 ---
 
-Pattern 8: iframe-Based UI Injection Patterns {#pattern-8-iframe-based-ui-injection-patterns}
+## Pattern 8: iframe-Based UI Injection Patterns {#pattern-8-iframe-based-ui-injection-patterns}
 
 Instead of directly manipulating the host page DOM, inject a full UI as an iframe. This provides complete style isolation and avoids conflicts with the page's CSS and JavaScript.
 
@@ -1033,7 +1033,7 @@ Gotchas:
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Best For | Key Constraint |
 |---------|----------|----------------|

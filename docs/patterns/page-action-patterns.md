@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/page-action-patterns/"
 last_modified_at: 2026-01-15
 ---
 
-Page Action Patterns in MV3
+### Page Action Patterns in MV3
 
-Overview {#overview}
+## Overview {#overview}
 
 In Manifest V2, extensions had two separate APIs: `chrome.browserAction` for always-visible toolbar buttons and `chrome.pageAction` for buttons that appeared only on specific pages. Chrome  Manifest V3 unifies these into a single `chrome.action` API that can mimic page-action behavior through various patterns.
 
@@ -16,7 +16,7 @@ This guide covers implementing page-action-style functionality in MV3, where the
 
 ---
 
-Declarative Content (Recommended) {#declarative-content-recommended}
+## Declarative Content (Recommended) {#declarative-content-recommended}
 
 The most efficient approach uses `chrome.declarativeContent` with `ShowAction` to automatically show/hide the toolbar icon based on URL patterns:
 
@@ -47,7 +47,7 @@ Manifest required:
 
 ---
 
-URL-Based Toggle (Imperative) {#url-based-toggle-imperative}
+## URL-Based Toggle (Imperative) {#url-based-toggle-imperative}
 
 For more complex logic beyond URL matching, listen to tab updates and manually enable/disable:
 
@@ -74,7 +74,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-Content-Based Activation {#content-based-activation}
+## Content-Based Activation {#content-based-activation}
 
 For conditions beyond URL matching (e.g., page content detection), use a content script that messages the background:
 
@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 
 ---
 
-Icon State Switching {#icon-state-switching}
+## Icon State Switching {#icon-state-switching}
 
 Display different icons for active, inactive, and disabled states:
 
@@ -129,7 +129,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-Dynamic Popup Assignment {#dynamic-popup-assignment}
+## Dynamic Popup Assignment {#dynamic-popup-assignment}
 
 Show different popup pages based on the current site:
 
@@ -152,7 +152,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-Badge as Page Indicator {#badge-as-page-indicator}
+## Badge as Page Indicator {#badge-as-page-indicator}
 
 Show badge only on relevant pages to indicate availability:
 
@@ -176,7 +176,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-Combining with activeTab {#combining-with-activetab}
+## Combining with activeTab {#combining-with-activetab}
 
 Use `activeTab` permission for on-demand access while showing the action only on relevant pages:
 
@@ -210,7 +210,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-Complete Example {#complete-example}
+## Complete Example {#complete-example}
 
 ```ts
 // background.ts - Complete page-action pattern
@@ -245,7 +245,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
 
 ---
 
-When to Use Each Pattern {#when-to-use-each-pattern}
+## When to Use Each Pattern {#when-to-use-each-pattern}
 
 | Pattern | Use Case |
 |---------|----------|
@@ -259,7 +259,7 @@ When to Use Each Pattern {#when-to-use-each-pattern}
 
 ---
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Action API Reference](../../api-reference/action-api.md). Full chrome.action API documentation
 - [Declarative Content](./declarative-content.md). Automatic show/hide based on page conditions

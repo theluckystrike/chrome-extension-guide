@@ -7,14 +7,14 @@ last_modified_at: 2026-01-15
 ---
 Build a Session Manager Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 A browser session manager that saves/restores window tab states, names sessions, and auto-saves.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - [Tabs API](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) (cross-ref `docs/api-reference/tabs-api.md`)
 - [[Storage API](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization) (cross-ref `docs/api-reference/storage-api-deep detailed look.md`)
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 ```
 session-manager/
   manifest.json
@@ -23,7 +23,7 @@ session-manager/
   popup/popup.js
 ```
 
-Step 1: Manifest {#step-1-manifest}
+## Step 1: Manifest {#step-1-manifest}
 ```json
 {
   "manifest_version": 3,
@@ -35,7 +35,7 @@ Step 1: Manifest {#step-1-manifest}
 }
 ```
 
-Step 2: Save Session {#step-2-save-session}
+## Step 2: Save Session {#step-2-save-session}
 ```javascript
 // background.js - capture all tabs in current window
 async function saveSession(name) {
@@ -52,19 +52,19 @@ async function saveSession(name) {
 }
 ```
 
-Step 3: Storage Schema {#step-3-storage-schema}
+## Step 3: Storage Schema {#step-3-storage-schema}
 ```javascript
 // { sessions: [{ id, name, timestamp, tabs: [{ url, title, pinned }] }] }
 ```
 
-Step 4: Popup UI {#step-4-popup-ui}
+## Step 4: Popup UI {#step-4-popup-ui}
 ```html
 <input type="text" id="sessionName" placeholder="Session name">
 <button id="saveBtn">Save</button>
 <div id="sessionList"></div>
 ```
 
-Step 5: Restore Session {#step-5-restore-session}
+## Step 5: Restore Session {#step-5-restore-session}
 ```javascript
 async function restoreSession(sessionId) {
   const { sessions } = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
@@ -78,7 +78,7 @@ async function restoreSession(sessionId) {
 }
 ```
 
-Step 6: Session Naming & Editing {#step-6-session-naming-editing}
+## Step 6: Session Naming & Editing {#step-6-session-naming-editing}
 ```javascript
 async function renameSession(id, newName) {
   const { sessions } = await [[chrome.storage](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).local.get('sessions');
@@ -91,7 +91,7 @@ async function deleteSession(id) {
 }
 ```
 
-Step 7: Auto-Save {#step-7-auto-save}
+## Step 7: Auto-Save {#step-7-auto-save}
 ```javascript
 // background.js
 [[chrome.alarms](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization)](https://bestchromeextensions.com/extension-monetization-playbook/monetization/api-monetization).create('autoSave', { periodInMinutes: 5 });
@@ -106,7 +106,7 @@ Step 7: Auto-Save {#step-7-auto-save}
 });
 ```
 
-Step 8: Merge & Export/Import {#step-8-merge-exportimport}
+## Step 8: Merge & Export/Import {#step-8-merge-exportimport}
 ```javascript
 // Merge: add to current window instead of replacing
 async function restoreMerge(sessionId) {

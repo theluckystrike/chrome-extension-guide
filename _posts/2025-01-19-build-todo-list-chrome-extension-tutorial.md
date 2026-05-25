@@ -16,13 +16,13 @@ Chrome extensions have revolutionized the way we work and manage our digital liv
 
 Whether you're a beginner looking to learn Chrome extension development or an experienced developer wanting to create a productivity extension tutorial, this guide has everything you need to build a professional-grade task manager extension that can compete with popular options in the Chrome Web Store.
 
-Why Build a Todo Chrome Extension?
+### Why Build a Todo Chrome Extension?
 
 Before we dive into the technical details, let's discuss why creating a task manager extension is an excellent project choice. The todo chrome extension category remains one of the most searched and downloaded types of extensions on the Chrome Web Store. Users constantly seek better ways to organize their tasks, manage deadlines, and improve their productivity.
 
 Building a productivity extension tutorial provides you with hands-on experience with essential Chrome APIs including storage, alarms, notifications, and badge updates. These skills are transferable to virtually any other Chrome extension project you might tackle in the future.
 
-Prerequisites and Setup
+### Prerequisites and Setup
 
 Before we begin building our todo list chrome extension, ensure you have the following:
 
@@ -33,7 +33,7 @@ Before we begin building our todo list chrome extension, ensure you have the fol
 
 Let's start by creating the project structure. Create a new folder named `todo-extension` in your workspace. This will be the home for all our extension files.
 
-Project Structure
+### Project Structure
 
 A well-organized Chrome extension follows a specific file structure. For our todo chrome extension, we'll create the following files:
 
@@ -54,11 +54,11 @@ todo-extension/
 
 This structure keeps our files organized and makes maintenance easier as the extension grows in complexity.
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 Every Chrome extension begins with the manifest.json file. This critical configuration file tells Chrome about your extension's capabilities, permissions, and file structure. For our task manager extension, we need specific permissions to access storage, create notifications, and manage alarms for reminders.
 
-Create the manifest.json file in your project directory:
+### Create the manifest.json file in your project directory:
 
 ```json
 {
@@ -99,11 +99,11 @@ Create the manifest.json file in your project directory:
 
 This manifest configuration uses Manifest V3, which is required for all new extensions published to the Chrome Web Store as of January 2023. The permissions we requested are essential for our todo chrome extension functionality.
 
-Creating the Popup Interface
+### Creating the Popup Interface
 
 The popup is what users see when they click on our extension icon in the browser toolbar. This is where users will interact with their tasks, so we need to create an intuitive and visually appealing interface.
 
-Create the popup.html file:
+### Create the popup.html file:
 
 ```html
 <!DOCTYPE html>
@@ -160,7 +160,7 @@ Create the popup.html file:
 
 The popup interface includes several key elements: a text input for adding new tasks, a category selector for organizing tasks, a date picker for setting due dates, filter buttons for viewing different task states, and action buttons for managing completed tasks.
 
-Styling the Popup
+### Styling the Popup
 
 Now let's add CSS to make our task manager extension visually appealing. Create popup.css:
 
@@ -394,7 +394,7 @@ h1 {
 
 This CSS provides a clean, modern interface that follows Google's Material Design guidelines. The styling includes visual feedback for interactions, category color coding, and a responsive layout.
 
-Implementing Core Functionality
+### Implementing Core Functionality
 
 Now comes the heart of our todo chrome extension - the JavaScript that handles all the task management logic. Create popup.js:
 
@@ -654,7 +654,7 @@ function setupEventListeners() {
 
 This JavaScript implementation includes comprehensive task management functionality. It handles adding, deleting, and toggling tasks, filtering by status, persisting data using Chrome's storage API, updating the extension badge with pending task counts, setting reminder alarms for due dates, and exporting tasks to JSON.
 
-Background Service Worker
+### Background Service Worker
 
 The background service worker handles events that occur in the background, such as alarm triggers for task reminders. Create background.js:
 
@@ -703,7 +703,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-Loading and Testing the Extension
+### Loading and Testing the Extension
 
 Now that we've created all the necessary files, let's test our todo chrome extension:
 
@@ -714,7 +714,7 @@ Now that we've created all the necessary files, let's test our todo chrome exten
 
 Click on the extension icon to see your task manager interface. Try adding some tasks, marking them as complete, and exploring the various features.
 
-Publishing Your Extension
+### Publishing Your Extension
 
 Once you've tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store:
 
@@ -726,7 +726,7 @@ Once you've tested your extension and are satisfied with its functionality, you 
 
 When published, users can find your task manager extension by searching for terms like "todo chrome extension" or "task manager extension" in the Chrome Web Store.
 
-Advanced Features to Consider
+### Advanced Features to Consider
 
 This tutorial covers the core functionality of a basic todo chrome extension. However, there's much more you can add to make your task manager extension stand out:
 
@@ -737,7 +737,7 @@ This tutorial covers the core functionality of a basic todo chrome extension. Ho
 - Search functionality: Implement a search feature to quickly find specific tasks
 - Dark mode: Add theme support for users who prefer dark interfaces
 
-Conclusion
+### Conclusion
 
 Congratulations! You've successfully built a complete todo chrome extension from scratch. This productivity extension tutorial has covered essential concepts including Manifest V3 configuration, Chrome storage API, alarms and notifications, badge updates, and modern UI design.
 

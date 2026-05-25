@@ -20,7 +20,7 @@ This guide will walk you through the fundamentals of Web Workers in the context 
 
 ---
 
-Understanding Web Workers in the Chrome Extension Context {#understanding-web-workers}
+## Understanding Web Workers in the Chrome Extension Context {#understanding-web-workers}
 
 Web Workers are essentially JavaScript files that run in the background, completely independent of the main browser thread. They were designed to prevent resource-intensive operations from blocking the user interface, and this same principle applies powerfully to Chrome extensions. In the extension world, where the background service worker serves as the central coordinator, Web Workers can handle computations that would otherwise cause noticeable lag or unresponsiveness.
 
@@ -32,7 +32,7 @@ One of the key advantages of using Web Workers in your extension is that they ma
 
 ---
 
-Setting Up Web Workers in Your Extension {#setting-up-web-workers}
+## Setting Up Web Workers in Your Extension {#setting-up-web-workers}
 
 Implementing Web Workers in a Chrome extension follows patterns familiar to any web developer, but there are some extension-specific considerations to keep in mind. The first decision you need to make is where to place your Worker files within the extension structure. Generally, Workers should be placed in the root of your extension or in a dedicated workers directory, and they must be listed in the extension manifest to be accessible.
 
@@ -55,7 +55,7 @@ This simple pattern forms the foundation for all Worker communication in your ex
 
 ---
 
-Background Processing Extension Patterns {#background-processing-patterns}
+## Background Processing Extension Patterns {#background-processing-patterns}
 
 Effective background processing extension design requires thoughtful architecture that balances performance, reliability, and maintainability. Several patterns have emerged as best practices for implementing Web Workers in Chrome extensions, and understanding these patterns will help you make informed decisions about your implementation.
 
@@ -69,7 +69,7 @@ Error handling in background processing requires special attention because Worke
 
 ---
 
-Practical Implementation: Building a Worker-Based Data Processor {#practical-implementation}
+## Practical Implementation: Building a Worker-Based Data Processor {#practical-implementation}
 
 Let us walk through a practical example of implementing Web Workers in a Chrome extension for background data processing. This example demonstrates a common use case: processing large datasets extracted from web pages. The content script collects data, sends it to the background service worker, which then delegates heavy processing to a Web Worker.
 
@@ -187,7 +187,7 @@ This implementation demonstrates several important patterns. The WorkerManager c
 
 ---
 
-Manifest V3 Considerations and Service Worker Integration {#manifest-v3-considerations}
+## Manifest V3 Considerations and Service Worker Integration {#manifest-v3-considerations}
 
 Manifest V3 brought significant changes to how Chrome extensions handle background processing, and understanding these nuances is essential for building modern extensions. The transition from persistent background pages to ephemeral service workers affects how you design and implement Web Worker integration.
 
@@ -201,7 +201,7 @@ Another important consideration is that Web Workers in extensions cannot access 
 
 ---
 
-Performance Optimization and Best Practices {#performance-optimization}
+## Performance Optimization and Best Practices {#performance-optimization}
 
 Optimizing Web Worker performance in Chrome extensions requires attention to several key areas. The most common performance issues stem from excessive message passing, inefficient data serialization, and poor Worker lifecycle management. Addressing these issues will help you build extensions that perform well under heavy workloads.
 
@@ -225,7 +225,7 @@ Memory management in Workers deserves careful attention because memory leaks in 
 
 ---
 
-Advanced Patterns and Real-World Applications {#advanced-patterns}
+## Advanced Patterns and Real-World Applications {#advanced-patterns}
 
 As you become more comfortable with basic Web Worker implementation, several advanced patterns can help you handle more complex scenarios. These patterns are particularly valuable for extensions that need to process data from multiple sources, coordinate between different extension contexts, or integrate with external services.
 
@@ -239,7 +239,7 @@ For extensions that need to run complex machine learning models or perform heavy
 
 ---
 
-Debugging and Troubleshooting Web Workers {#debugging-troubleshooting}
+## Debugging and Troubleshooting Web Workers {#debugging-troubleshooting}
 
 Debugging Web Workers in Chrome extensions requires specific techniques because Workers run in isolated contexts that are not directly accessible from the main extension context. Chrome provides built-in tools for Worker debugging that can help you identify and resolve issues efficiently.
 
@@ -251,7 +251,7 @@ Memory leaks in Workers often manifest as gradually increasing memory usage over
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Web Workers are an essential tool for building high-performance Chrome extensions that can handle demanding background processing tasks without degrading user experience. By understanding how Workers fit into the Chrome extension architecture, implementing proper communication patterns, and following best practices for performance and reliability, you can create extensions that feel responsive and professional.
 

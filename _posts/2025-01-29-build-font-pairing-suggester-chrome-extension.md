@@ -18,29 +18,29 @@ This extension will integrate with the Google Fonts library, provide real-time p
 
 ---
 
-Why Build a Font Pairing Extension? {#why-build-font-pairing-extension}
+## Why Build a Font Pairing Extension? {#why-build-font-pairing-extension}
 
 The demand for typography tools in the Chrome ecosystem continues to grow. Designers, developers, and content creators constantly search for font pairing extensions that can simplify their workflow. Here is why building this extension makes sense:
 
-Market Demand
+### Market Demand
 
 Every website, blog, and web application requires typography that works. According to industry surveys, nearly 70% of designers struggle with font selection, and over 80% of non-designers feel overwhelmed by typography decisions. A typography helper Chrome extension addresses this problem directly.
 
-Google Fonts Integration
+### Google Fonts Integration
 
 Google Fonts is the largest free font library on the internet, with over 1,500 font families available. Building an extension that leverages this vast resource creates significant value for users. Our extension will make Google Fonts more accessible and user-friendly.
 
-Practical Application
+### Practical Application
 
 Unlike many demo extensions, a font pairing suggester has real-world utility. Designers can use it during client work, developers can use it while building websites, and content creators can use it for social media graphics. The use cases are virtually unlimited.
 
-Monetization Potential
+### Monetization Potential
 
 A font pairing extension can be monetized through premium features, affiliate partnerships with font foundries, or as part of a larger design toolkit. The Chrome Web Store provides excellent distribution infrastructure.
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Before writing code, let us define the core features of our font pairing suggester extension:
 
@@ -53,11 +53,11 @@ Before writing code, let us define the core features of our font pairing suggest
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us start by creating the project structure. Our extension will follow the Manifest V3 specification, which is required for all new Chrome extensions.
 
-Directory Structure
+### Directory Structure
 
 ```
 font-pairing-extension/
@@ -79,7 +79,7 @@ Create this structure in your local development environment.
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file is the heart of every Chrome extension. It defines the extension's name, version, permissions, and components.
 
@@ -120,7 +120,7 @@ This manifest file includes several important configurations. First, we declare 
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is the main user interface of our extension. It needs to be clean, intuitive, and performant.
 
@@ -207,7 +207,7 @@ The popup interface includes several key sections. The search bar allows users t
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 A clean, modern design is essential for a typography tool. Let us create comprehensive CSS styles.
 
@@ -465,7 +465,7 @@ The CSS provides a modern, clean interface with proper spacing, hover effects, a
 
 ---
 
-Implementing Core Functionality {#popup-javascript}
+## Implementing Core Functionality {#popup-javascript}
 
 Now we need to implement the core JavaScript logic that powers our extension. This includes Google Fonts API integration, pairing algorithms, and user interaction handling.
 
@@ -801,7 +801,7 @@ The popup.js file contains all the core functionality. It manages the font libra
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and can perform background tasks.
 
@@ -840,7 +840,7 @@ chrome.action.onClicked.addListener((tab) => {
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Now that we have built all the components, let us test the extension in Chrome:
 
@@ -850,7 +850,7 @@ Now that we have built all the components, let us test the extension in Chrome:
 4. The extension icon should appear in your Chrome toolbar
 5. Click the icon to open the popup and test all features
 
-Testing Checklist
+### Testing Checklist
 
 - Search functionality filters fonts correctly
 - Category dropdown filters by font type
@@ -862,7 +862,7 @@ Testing Checklist
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once testing is complete, follow these steps to publish your extension:
 
@@ -887,33 +887,33 @@ Once testing is complete, follow these steps to publish your extension:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 As you enhance your extension, consider adding these advanced features:
 
-AI-Powered Pairing
+### AI-Powered Pairing
 
 Integrate machine learning to analyze font characteristics and suggest pairings based on harmony principles. Use the font's x-height, stroke width, and serif style to create intelligent recommendations.
 
-Google Fonts API Integration
+### Google Fonts API Integration
 
 Replace the curated font list with live API calls to Google Fonts for access to the complete library. This requires obtaining an API key from Google Cloud Console.
 
-Page Font Analysis
+### Page Font Analysis
 
 Use content scripts to analyze fonts on the current webpage and suggest complementary pairings based on existing typography.
 
-Sync Across Devices
+### Sync Across Devices
 
 Use Chrome's sync storage to save user preferences and favorites across all signed-in devices.
 
-Export Options
+### Export Options
 
 Add support for exporting in various formats including JSON, Tailwind config, and direct integration with design tools like Figma.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a font pairing suggester Chrome extension is an excellent project that combines practical utility with meaningful development experience. You have learned how to create a Manifest V3 extension, build a modern popup interface, implement font loading from Google Fonts, create pairing algorithms, and manage persistent storage.
 

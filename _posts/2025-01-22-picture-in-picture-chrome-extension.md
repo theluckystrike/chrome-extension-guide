@@ -20,7 +20,7 @@ This tutorial will take you through every aspect of building a production-ready 
 
 ---
 
-Understanding the Document Picture-in-Picture API {#understanding-pip-api}
+## Understanding the Document Picture-in-Picture API {#understanding-pip-api}
 
 Before diving into the implementation, it's crucial to understand the technologies we'll be working with. The Document Picture-in-Picture API is a relatively new addition to the web platform that allows web developers to open an arbitrary HTML page in a Picture-in-Picture window. Unlike the traditional HTMLVideoElement.prototype.requestPictureInPicture() method, which only works with video elements and provides a limited, browser-controlled window, the Document Picture-in-Picture API opens up exciting possibilities for creating custom PiP experiences.
 
@@ -32,11 +32,11 @@ The API works by creating a hidden iframe or opening a new window with special s
 
 ---
 
-Setting Up the Chrome Extension Project {#project-setup}
+## Setting Up the Chrome Extension Project {#project-setup}
 
 Every Chrome extension starts with a manifest file, and our Picture-in-Picture extension is no exception. We'll be using Manifest V3, which is the current standard for Chrome extensions and offers improved security and performance compared to the older Manifest V2.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Create a new directory for your extension and add the manifest.json file with the following configuration:
 
@@ -72,9 +72,9 @@ The manifest declares several important permissions that our extension needs. Th
 
 The host permissions are set to "<all_urls>" to allow our extension to work on any website. This is necessary because videos can appear on any platform, and we want our extension to be universally applicable. Restricting this to specific domains would limit the usefulness of our extension significantly.
 
-Directory Structure
+### Directory Structure
 
-Create the following directory structure for your extension:
+### Create the following directory structure for your extension:
 
 ```
 chrome-extension-guide/
@@ -94,7 +94,7 @@ The background.js file will handle the extension's background logic and coordina
 
 ---
 
-Implementing the Background Service Worker {#background-worker}
+## Implementing the Background Service Worker {#background-worker}
 
 The background service worker acts as the central hub for our extension, coordinating communication between the popup, content scripts, and handling various extension events. Let's implement a solid background worker that manages the extension's state and handles user interactions.
 
@@ -187,7 +187,7 @@ The script intelligently selects the best video to use by first checking for a v
 
 ---
 
-Creating the Content Script {#content-script}
+## Creating the Content Script {#content-script}
 
 The content script is where the magic happens. This script runs in the context of web pages and is responsible for detecting videos, managing playback, and implementing the Document Picture-in-Picture functionality. This is the most complex part of our extension, so let's break it down carefully.
 
@@ -483,7 +483,7 @@ The custom player includes several features that go beyond what the browser's na
 
 ---
 
-Creating the Extension Popup {#extension-popup}
+## Creating the Extension Popup {#extension-popup}
 
 While our extension works primarily through the toolbar icon click, adding a popup provides additional configuration options and a fallback when no video is detected on a page.
 
@@ -615,7 +615,7 @@ function checkForVideos() {
 
 ---
 
-Adding User Preferences with Storage API {#user-preferences}
+## Adding User Preferences with Storage API {#user-preferences}
 
 To make our extension truly useful, we should add the ability for users to customize their experience. The Chrome Storage API provides an easy way to persist user preferences.
 
@@ -655,47 +655,47 @@ You can expand this functionality to allow users to choose their preferred defau
 
 ---
 
-Advanced Features and Enhancements {#advanced-features}
+## Advanced Features and Enhancements {#advanced-features}
 
 Now that we have a working Picture-in-Picture extension, let's explore some advanced features that can make your extension even more powerful and user-friendly.
 
-Multiple Video Queue Support
+### Multiple Video Queue Support
 
 For users who want to watch multiple videos sequentially or create a playlist, implementing a queue system can significantly enhance the experience. The content script can be extended to track multiple video elements on a page and allow users to select which video to play in PiP mode.
 
-Video Source Detection and Quality Selection
+### Video Source Detection and Quality Selection
 
 Advanced users often want control over video quality. By analyzing the video element's available sources and the network conditions, you can implement quality selection that automatically adjusts based on the user's bandwidth.
 
-Keyboard Shortcuts
+### Keyboard Shortcuts
 
 Power users love keyboard shortcuts. Chrome extensions can register global keyboard shortcuts that work even when the extension popup isn't open. Implement shortcuts like Ctrl+Shift+P to quickly toggle PiP mode on the current video.
 
-Integration with Video Platforms
+### Integration with Video Platforms
 
 While our extension works with any video element, adding specific support for popular platforms like YouTube, Vimeo, or Twitch can provide enhanced functionality. This might include support for playlist navigation, quality presets specific to each platform, and improved detection of video content.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing your extension to the Chrome Web Store, thorough testing is essential. Here's a comprehensive testing strategy:
 
-Manual Testing
+### Manual Testing
 
 Test your extension on various websites with different video implementations. Pay special attention to websites that use custom video players, iframe-embedded videos, and streaming services that might have additional protection mechanisms. Test across different screen sizes and monitor configurations to ensure the PiP window renders correctly in various scenarios.
 
-Automated Testing
+### Automated Testing
 
 Consider using Chrome's testing framework to create automated tests that verify the extension's functionality across different scenarios. This is particularly useful for catching regressions as you add new features.
 
-Browser Compatibility
+### Browser Compatibility
 
 While the Document Picture-in-Picture API is Chrome-specific, ensure your extension degrades gracefully on other browsers. Provide clear messaging when the API isn't available rather than failing silently.
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your extension is tested and ready, you can publish it to the Chrome Web Store. Here's what you need to do:
 
@@ -705,7 +705,7 @@ When writing your extension's description, focus on the benefits users will expe
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a Picture-in-Picture Chrome extension is an excellent project that teaches you about the Chrome extension platform, the Document Picture-in-Picture API, and modern web development practices. The extension we've built in this guide provides a solid foundation that you can extend and customize to meet specific use cases.
 

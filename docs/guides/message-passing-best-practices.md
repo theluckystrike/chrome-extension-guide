@@ -7,11 +7,11 @@ last_modified_at: 2026-01-15
 ---
 Message Passing Best Practices
 
-Overview {#overview}
+## Overview {#overview}
 
 Effective communication between extension components is critical for building solid Chrome extensions. This guide covers the recommended patterns for message passing, common pitfalls to avoid, and how to build type-safe, reliable messaging systems in your extension.
 
-Chrome Extension Message Flow Architecture
+### Chrome Extension Message Flow Architecture
 
 ```
 

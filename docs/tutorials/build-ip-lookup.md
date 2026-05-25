@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build an IP Lookup Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - Display your public IP address in popup
 - Lookup any IP or domain for geolocation info
 - Country, city, region, ISP, timezone details
@@ -18,15 +18,15 @@ What You'll Build {#what-youll-build}
 - Caching to minimize API calls
 - Badge showing country code
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - ip-api.com account (free, 45 requests/minute)
 - Chrome 88+ or Edge 88+
 
 ---
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
-Create `manifest.json` with storage permission and host permissions:
+### Create `manifest.json` with storage permission and host permissions:
 
 ```json
 {
@@ -44,7 +44,7 @@ Required permissions: `storage` for caching, `alarms` for periodic IP checks, `n
 
 ---
 
-Step 2: Show Your Public IP {#step-2-show-your-public-ip}
+## Step 2: Show Your Public IP {#step-2-show-your-public-ip}
 
 Create `popup.html` and `popup.js`. Fetch your public IP on load:
 
@@ -73,9 +73,9 @@ async function fetchPublicIP() {
 
 ---
 
-Step 3: Display IP Details {#step-3-display-ip-details}
+## Step 3: Display IP Details {#step-3-display-ip-details}
 
-Show geolocation information in the popup:
+### Show geolocation information in the popup:
 
 ```javascript
 function displayIP(data) {
@@ -88,11 +88,11 @@ function displayIP(data) {
 }
 ```
 
-See also: [patterns/cross-origin-requests.md](../patterns/cross-origin-requests.md)
+### See also: [patterns/cross-origin-requests.md](../patterns/cross-origin-requests.md)
 
 ---
 
-Step 4: Lookup Any IP or Domain {#step-4-lookup-any-ip-or-domain}
+## Step 4: Lookup Any IP or Domain {#step-4-lookup-any-ip-or-domain}
 
 Add an input field for custom lookups:
 
@@ -111,7 +111,7 @@ document.getElementById('lookupBtn').addEventListener('click', async () => {
 
 ---
 
-Step 5: Map Integration {#step-5-map-integration}
+## Step 5: Map Integration {#step-5-map-integration}
 
 Add a static map image showing location:
 
@@ -124,7 +124,7 @@ function updateMap(lat, lon) {
 
 ---
 
-Step 6: Copy to Clipboard {#step-6-copy-to-clipboard}
+## Step 6: Copy to Clipboard {#step-6-copy-to-clipboard}
 
 Add copy functionality. See [patterns/clipboard-patterns.md](../patterns/clipboard-patterns.md):
 
@@ -138,9 +138,9 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
 
 ---
 
-Step 7: Background IP Change Detection {#step-7-background-ip-change-detection}
+## Step 7: Background IP Change Detection {#step-7-background-ip-change-detection}
 
-Use alarms to check periodically. See [api-reference/alarms-api.md](../api-reference/alarms-api.md):
+### Use alarms to check periodically. See [api-reference/alarms-api.md](../api-reference/alarms-api.md):
 
 ```javascript
 chrome.alarms.create('ipCheck', { periodInMinutes: 5 });
@@ -166,9 +166,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-Step 8: History Log {#step-8-history-log}
+## Step 8: History Log {#step-8-history-log}
 
-Store IP history with timestamps:
+### Store IP history with timestamps:
 
 ```javascript
 async function addToHistory(ip) {
@@ -180,7 +180,7 @@ async function addToHistory(ip) {
 
 ---
 
-Error Handling {#error-handling}
+## Error Handling {#error-handling}
 
 Handle rate limits and offline scenarios:
 
@@ -197,13 +197,13 @@ async function fetchWithRetry(url, retries = 3) {
 
 ---
 
-Privacy Note {#privacy-note}
+## Privacy Note {#privacy-note}
 
 This extension only looks up your own IP by default. Custom lookups require user action. No data is sent to third parties beyond the ip-api.com service.
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 You've built a complete IP lookup extension with:
 - Public IP display and caching

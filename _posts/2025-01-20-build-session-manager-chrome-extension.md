@@ -18,7 +18,7 @@ This project is perfect for developers who want to learn Chrome extension develo
 
 ---
 
-Why Build a Session Manager Extension? {#why-build-session-manager}
+## Why Build a Session Manager Extension? {#why-build-session-manager}
 
 Before we dive into the code, let us consider why a session manager extension is an excellent project choice. First, it solves a real problem that millions of Chrome users face daily. Whether you are a researcher juggling multiple research projects, a developer working on different feature branches, or just someone who likes to keep their personal and work browsing separate, being able to save and restore tabs sessions is incredibly valuable.
 
@@ -28,7 +28,7 @@ Finally, the Chrome Web Store has a consistent demand for tab management tools. 
 
 ---
 
-Project Overview and Features {#project-overview}
+## Project Overview and Features {#project-overview}
 
 Our session manager extension will include the following core features. First, we need the ability to save the current window session, capturing all open tabs including their URLs and titles. Second, we need a saved sessions list that displays all previously saved sessions with options to restore or delete them. Third, we need session restoration that opens all tabs from a saved session in the current window or a new window. Fourth, we need persistent storage using Chrome storage API to save sessions across browser restarts. Finally, we need a clean, intuitive popup interface that makes managing sessions easy.
 
@@ -36,7 +36,7 @@ Let us start building this extension step by step.
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Create a new folder for your extension project and set up the following file structure:
 
@@ -56,7 +56,7 @@ Let us start with the manifest file, which is the heart of any Chrome extension.
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file tells Chrome everything about your extension. For Manifest V3, we need to declare permissions, define the popup, and specify background service workers.
 
@@ -94,7 +94,7 @@ The permissions array is critical here. We include sessions to access the Sessio
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. Let us create a clean, functional interface in popup.html.
 
@@ -130,7 +130,7 @@ This HTML provides a simple structure with a header containing the extension tit
 
 ---
 
-Styling the Popup {#popup-styling}
+## Styling the Popup {#popup-styling}
 
 Now let us add some CSS to make the popup look professional and user-friendly.
 
@@ -271,7 +271,7 @@ The styling uses a clean, modern design with a white and blue color scheme that 
 
 ---
 
-Implementing the Popup Logic {#popup-logic}
+## Implementing the Popup Logic {#popup-logic}
 
 Now comes the core functionality. The popup.js file handles saving sessions, displaying the saved sessions list, and restoring or deleting sessions.
 
@@ -440,7 +440,7 @@ Note that we attach the restoreSession and deleteSession functions to the window
 
 ---
 
-Adding Background Service Worker {#background-service}
+## Adding Background Service Worker {#background-service}
 
 While our extension primarily works through the popup, having a background service worker is useful for handling extension lifecycle events and can be extended later for features like auto-saving sessions.
 
@@ -471,13 +471,13 @@ This background script initializes storage on first install and logs when the ex
 
 ---
 
-Creating the Extension Icon {#extension-icon}
+## Creating the Extension Icon {#extension-icon}
 
 You need a simple icon for your extension. Create a 128x128 PNG image and save it as icon.png in your project folder. You can use any image editor or create a simple icon programmatically. For development purposes, you can use a placeholder or generate one online.
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Now that we have all the files created, let us test the extension in Chrome:
 
@@ -492,7 +492,7 @@ Try restoring a session to see all your tabs open in a new window. Try deleting 
 
 ---
 
-Understanding Key Chrome APIs {#chrome-apis}
+## Understanding Key Chrome APIs {#chrome-apis}
 
 Throughout this tutorial, we used several important Chrome extension APIs. Understanding these APIs will help you build more advanced extensions in the future.
 
@@ -506,13 +506,13 @@ The chrome.runtime API provides information about the extension and handles life
 
 ---
 
-Extending Your Session Manager {#future-enhancements}
+## Extending Your Session Manager {#future-enhancements}
 
 Now that you have a working session manager extension, here are some ideas for extending its functionality. You could add session naming to let users give custom names to their saved sessions instead of using timestamps. You could implement session exporting to allow users to export sessions as JSON files for backup or sharing. You could add tab previews to show a preview of each tab when hovering over a saved session. You could implement auto-save to automatically save sessions at regular intervals or when Chrome closes. Finally, you could add session syncing to sync sessions across devices using chrome.storage.sync.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You have successfully built a complete session manager Chrome extension. This extension demonstrates fundamental Chrome extension development concepts including Manifest V3 configuration, popup interface design, Chrome storage API usage, and the tabs and windows APIs.
 
@@ -524,7 +524,7 @@ Remember to test thoroughly before publishing to the Chrome Web Store, and consi
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 To continue learning about Chrome extension development, explore the official Chrome Extension Documentation at Google's developer site. The Chrome Sessions API documentation provides detailed information about the APIs we used. The Chrome Web Store publishing guide explains how to distribute your extension to millions of users.
 

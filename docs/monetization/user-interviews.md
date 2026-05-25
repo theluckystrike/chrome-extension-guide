@@ -9,7 +9,7 @@ User Interviews for Chrome Extension Development
 
 User interviews are one of the most powerful tools in your product development arsenal. Unlike surveys or analytics, interviews provide deep, qualitative insights into user needs, problems, and behaviors. This guide walks you through conducting effective user interviews specifically for Chrome extension development, from recruiting the right participants to turning insights into actionable features.
 
-Overview
+### Overview
 
 User interviews help you understand:
 - Why users do what they do (their motivations and goals)
@@ -19,11 +19,11 @@ User interviews help you understand:
 
 For Chrome extensions, this is especially valuable because users often have specific, niche workflows that aren't well-served by general-purpose tools.
 
-Recruiting Users for Interviews
+### Recruiting Users for Interviews
 
-Identifying Your Target Users
+### Identifying Your Target Users
 
-Before recruiting, define your user segments clearly:
+### Before recruiting, define your user segments clearly:
 
 | Segment | Description | Priority |
 |---------|-------------|----------|
@@ -32,9 +32,9 @@ Before recruiting, define your user segments clearly:
 | Former Users | Churned users who uninstalled | High |
 | Potential Users | Non-users who might benefit | Medium |
 
-Recruitment Channels
+### Recruitment Channels
 
-For Chrome extensions, use these channels:
+### For Chrome extensions, use these channels:
 
 1. In-Extension Recruitment
    - Add a "Join our research panel" link in your options page
@@ -69,7 +69,7 @@ For Chrome extensions, use these channels:
    - Post in your extension's support forum
    - Ask on your GitHub repository
 
-Recruitment Incentives
+### Recruitment Incentives
 
 Consider offering incentives appropriate to the interview length:
 
@@ -79,7 +79,7 @@ Consider offering incentives appropriate to the interview length:
 | 30-45 min | $25-50 gift card, feature request priority |
 | 60+ min | $50-100 gift card, co-creation credits |
 
-Screening Questions
+### Screening Questions
 
 Create a brief screening questionnaire:
 
@@ -90,9 +90,9 @@ Create a brief screening questionnaire:
 5. How long have you been using our extension?
 6. Would you be available for a 30-minute video call?
 
-Interview Scripts
+### Interview Scripts
 
-Discovery Interview (45 minutes)
+### Discovery Interview (45 minutes)
 
 This script helps you understand users' broader context and workflows.
 
@@ -124,7 +124,7 @@ Close (5 minutes)
 14. "Is there anything else you'd like to share that I haven't asked about?"
 15. "Would you be open to us following up with you for future research?"
 
-Problem Validation Interview (30 minutes)
+### Problem Validation Interview (30 minutes)
 
 Use this when you have a potential feature idea and want to validate it.
 
@@ -149,7 +149,7 @@ Competitive Context (5 minutes)
 Close
 10. "That's really helpful. We'll take this feedback into consideration."
 
-Usability Test Interview (30 minutes)
+### Usability Test Interview (30 minutes)
 
 Combine observation with interview for maximum insight.
 
@@ -170,16 +170,16 @@ Follow-up Questions (10 minutes)
 Wrap-up
 5. "Any final thoughts?"
 
-Analyzing Feedback
+### Analyzing Feedback
 
-Transcription and Documentation
+### Transcription and Documentation
 
 After each interview:
 1. Record the session (with permission)
 2. Transcribe key sections or use AI transcription tools
 3. Write a summary within 24 hours while memory is fresh
 
-Thematic Analysis
+### Thematic Analysis
 
 Create a shared analysis document and tag feedback by theme:
 
@@ -203,7 +203,7 @@ Observations
 - Technical enough to modify extension settings
 ```
 
-Synthesis Framework
+### Synthesis Framework
 
 Create a synthesis matrix:
 
@@ -213,9 +213,9 @@ Create a synthesis matrix:
 | Casual Users | Can't find feature | 4/10 | Medium | Reinstall |
 | Power Users | No export | 7/10 | High | Manual copy |
 
-Prioritization Matrix
+### Prioritization Matrix
 
-Plot feedback on a 2x2 matrix:
+### Plot feedback on a 2x2 matrix:
 
 ```
                     High Impact
@@ -234,11 +234,11 @@ Optimize (High Impact + Low Frequency): Consider for future roadmap
 Delete (Low Impact + High Frequency): Fix quick wins
 Low Priority (Low Impact + Low Frequency): Deprioritize
 
-Converting Insights to Features
+### Converting Insights to Features
 
-Feature Request Template
+### Feature Request Template
 
-Transform interview insights into actionable feature specs:
+### Transform interview insights into actionable feature specs:
 
 ```markdown
 Feature: [Name]
@@ -270,7 +270,7 @@ Validation Method
 - [ ] Follow-up user interview
 ```
 
-User Story Mapping
+### User Story Mapping
 
 Create a visual map connecting user research to features:
 
@@ -294,9 +294,9 @@ Create a visual map connecting user research to features:
    
 ```
 
-Validation Before Building
+### Validation Before Building
 
-Before full implementation:
+### Before full implementation:
 
 1. Prototype Testing: Show mockups to 3-5 users
 2. Fake Door Test: Add a "coming soon" button and track clicks
@@ -316,11 +316,11 @@ document.getElementById('upcoming-feature-btn').addEventListener('click', () => 
 });
 ```
 
-Continuous Discovery
+### Continuous Discovery
 
-Setting Up Ongoing Research
+### Setting Up Ongoing Research
 
-Don't treat user interviews as a one-time activity:
+### Don't treat user interviews as a one-time activity:
 
 1. Recurring Interview Schedule
    - Quarterly: Deep detailed look interviews with 5-10 users
@@ -337,9 +337,9 @@ Don't treat user interviews as a one-time activity:
    - Create searchable tags
    - Share insights with your team regularly
 
-Building a Research Panel
+### Building a Research Panel
 
-Maintain a list of willing participants:
+### Maintain a list of willing participants:
 
 ```javascript
 // Store in your user database
@@ -375,9 +375,9 @@ const researchPanel = {
 };
 ```
 
-Integrating Analytics with Research
+### Integrating Analytics with Research
 
-Combine quantitative and qualitative data:
+### Combine quantitative and qualitative data:
 
 | Data Source | What It Tells You | Best For |
 |-------------|-------------------|----------|
@@ -386,9 +386,9 @@ Combine quantitative and qualitative data:
 | Surveys | How many feel a certain way | Measuring sentiment |
 | Support tickets | Where users struggle | Prioritizing bug fixes |
 
-Discovery Cadence
+### Discovery Cadence
 
-Build regular research into your development cycle:
+### Build regular research into your development cycle:
 
 ```
 Sprint 1-2:    Build feature
@@ -398,7 +398,7 @@ Sprint 5:      Analyze feedback
 Sprint 6:      Plan next iteration
 ```
 
-Question Templates Quick Reference
+### Question Templates Quick Reference
 
 Opening Questions
 - "Tell me about yourself and what you do."
@@ -425,7 +425,7 @@ Closing Questions
 - "Would you be willing to participate in future research?"
 - "Do you have any questions for me?"
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension User Research](../guides/chrome-extension-user-research.md). Comprehensive strategies for gathering user feedback
 - [Extension Onboarding Patterns](../patterns/extension-onboarding.md). Designing user onboarding flows informed by interview insights

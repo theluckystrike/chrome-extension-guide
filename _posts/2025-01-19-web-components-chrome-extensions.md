@@ -18,13 +18,13 @@ Whether you are building a simple browser utility or a complex enterprise extens
 
 ---
 
-Understanding Web Components in the Chrome Extension Context {#understanding-web-components}
+## Understanding Web Components in the Chrome Extension Context {#understanding-web-components}
 
 Web Components represent a suite of different technologies that work together to create reusable custom HTML elements with encapsulated functionality. The three main pillars of Web Components are Custom Elements, Shadow DOM, and HTML Templates. Each of these technologies brings unique benefits to Chrome extension development that address common challenges faced by extension developers.
 
 Chrome extensions operate in multiple environments: the popup interface, the options page, content scripts running within web pages, and background service workers managing extension logic. Each of these contexts presents different styling and isolation challenges that Web Components can help solve elegantly.
 
-Why Web Components Matter for Chrome Extensions
+### Why Web Components Matter for Chrome Extensions
 
 Traditional Chrome extension development often involves managing complex CSS cascades, dealing with style conflicts from host pages, and maintaining consistent UI across different parts of your extension. Web Components provide a solution to these challenges through their encapsulation capabilities, particularly through Shadow DOM.
 
@@ -34,11 +34,11 @@ Furthermore, Web Components are framework-agnostic, meaning the components you c
 
 ---
 
-Setting Up Web Components in Your Chrome Extension Project {#setting-up}
+## Setting Up Web Components in Your Chrome Extension Project {#setting-up}
 
 Before diving into implementation, let's establish a project structure that supports Web Components alongside your Chrome extension. Whether you are starting fresh or adding Web Components to an existing extension, the setup process is straightforward.
 
-Project Structure for Web Components Chrome Extension
+### Project Structure for Web Components Chrome Extension
 
 Organize your extension to separate your Web Components from other code:
 
@@ -63,17 +63,17 @@ my-extension/
  components.js (imports all Web Components)
 ```
 
-Loading Web Components in Different Contexts
+### Loading Web Components in Different Contexts
 
 Chrome extensions require different approaches for loading components depending on the context. For popup and options pages, you can include your Web Components directly in the HTML. For content scripts, you need to inject the components carefully to ensure they work within the page context while maintaining Shadow DOM isolation.
 
 ---
 
-detailed look: Shadow DOM in Chrome Extensions {#shadow-dom}
+## detailed look: Shadow DOM in Chrome Extensions {#shadow-dom}
 
 Shadow DOM is perhaps the most valuable feature of Web Components for Chrome extension developers. It provides strong encapsulation for DOM subtrees, meaning styles and scripts inside the shadow tree don't affect or get affected by elements outside it.
 
-Understanding Shadow DOM Isolation
+### Understanding Shadow DOM Isolation
 
 When you create a Shadow DOM attached to an element, you create a new rendering context that is separate from the main document. This isolation means:
 
@@ -83,7 +83,7 @@ When you create a Shadow DOM attached to an element, you create a new rendering 
 
 This behavior is particularly valuable for Chrome extension content scripts, where your injected UI elements must coexist with potentially complex page styles.
 
-Implementing Shadow DOM in Your Extension
+### Implementing Shadow DOM in Your Extension
 
 Here's a practical example of creating a Web Component with Shadow DOM for use in your Chrome extension:
 
@@ -148,7 +148,7 @@ customElements.define('my-extension-button', MyExtensionButton);
 
 This example demonstrates several key concepts: using the `attachShadow` method to create shadow DOM, embedding styles within the shadow tree, using slots for content projection, and properly dispatching events that can bubble out of the shadow boundary.
 
-Handling Host Page Styles with Shadow DOM
+### Handling Host Page Styles with Shadow DOM
 
 One common challenge in Chrome extensions is ensuring your UI looks consistent regardless of the host page's CSS. Shadow DOM provides excellent isolation, but you need to be mindful of inherited properties like fonts and colors.
 
@@ -167,11 +167,11 @@ This allows extension users to customize component appearance through CSS variab
 
 ---
 
-Creating Custom Elements for Chrome Extensions {#custom-elements}
+## Creating Custom Elements for Chrome Extensions {#custom-elements}
 
 Custom Elements allow you to define new HTML tags with custom behavior. In the context of Chrome extensions, this enables you to create domain-specific UI components that can be used across all parts of your extension.
 
-Building Reusable Extension Components
+### Building Reusable Extension Components
 
 Let's create a more complex example, a settings toggle component that can be used in both your popup and options page:
 
@@ -312,11 +312,11 @@ This component demonstrates several important patterns for extension development
 
 ---
 
-Using HTML Templates for Efficient Component Rendering {#html-templates}
+## Using HTML Templates for Efficient Component Rendering {#html-templates}
 
 HTML Templates provide a way to define reusable markup structures that aren't rendered until needed. This feature is particularly useful for Chrome extensions where you might have multiple similar UI elements or want to separate markup from JavaScript.
 
-Implementing Templates in Your Components
+### Implementing Templates in Your Components
 
 ```javascript
 const template = document.createElement('template');
@@ -370,11 +370,11 @@ Using templates ensures consistent rendering and improves performance when creat
 
 ---
 
-Best Practices for Web Components in Chrome Extensions {#best-practices}
+## Best Practices for Web Components in Chrome Extensions {#best-practices}
 
 Implementing Web Components in Chrome extensions requires attention to several best practices that ensure compatibility, performance, and maintainability.
 
-Performance Considerations
+### Performance Considerations
 
 Chrome extensions must be mindful of memory usage and load times. Consider the following optimizations:
 
@@ -382,7 +382,7 @@ Chrome extensions must be mindful of memory usage and load times. Consider the f
 - Use Shadow DOM strategically: While Shadow DOM provides isolation, creating many shadow roots can impact performance
 - Minimize reflows: Batch DOM updates and use CSS containment where appropriate
 
-Accessibility in Extension Components
+### Accessibility in Extension Components
 
 Accessibility is crucial for Chrome extensions that may be used by people with disabilities. Ensure your Web Components:
 
@@ -393,7 +393,7 @@ Accessibility is crucial for Chrome extensions that may be used by people with d
 
 The ExtensionToggle component example above demonstrates proper accessibility implementation with role, aria-checked, and keyboard support.
 
-Cross-Browser Compatibility
+### Cross-Browser Compatibility
 
 While modern browsers support Web Components, Chrome extensions may need to work with slightly older browser versions depending on your target audience. Consider using a polyfill for broader compatibility:
 
@@ -406,11 +406,11 @@ However, for Chrome extensions specifically, you can generally rely on native We
 
 ---
 
-Real-World Examples: Using Web Components in Content Scripts {#content-scripts}
+## Real-World Examples: Using Web Components in Content Scripts {#content-scripts}
 
 One of the most powerful use cases for Web Components in Chrome extensions is creating UI overlays in content scripts. These overlays must work reliably across diverse websites while maintaining consistent styling.
 
-Creating a Floating Action Button
+### Creating a Floating Action Button
 
 ```javascript
 class ExtensionFAB extends HTMLElement {
@@ -515,11 +515,11 @@ This floating action button demonstrates the power of Shadow DOM for extension c
 
 ---
 
-Integrating Web Components with Chrome Extension APIs {#integration}
+## Integrating Web Components with Chrome Extension APIs {#integration}
 
 Web Components can smoothly interact with Chrome's extension APIs to create powerful, integrated experiences.
 
-Communicating with Background Scripts
+### Communicating with Background Scripts
 
 ```javascript
 class ExtensionStatus extends HTMLElement {
@@ -598,11 +598,11 @@ This component can be used in your popup or options page to display real-time st
 
 ---
 
-Building a Complete Extension UI with Web Components {#complete-example}
+## Building a Complete Extension UI with Web Components {#complete-example}
 
 Let's put everything together with a practical example that demonstrates a complete extension popup interface built entirely with Web Components.
 
-The Popup Structure
+### The Popup Structure
 
 ```javascript
 // Define all components first
@@ -685,7 +685,7 @@ This example shows how Web Components can create a cohesive, maintainable UI sys
 
 ---
 
-Conclusion: Embracing Web Components in Chrome Extension Development {#conclusion}
+## Conclusion: Embracing Web Components in Chrome Extension Development {#conclusion}
 
 Web Components represent a transformative approach to building Chrome extensions that are more modular, maintainable, and isolated from their host environments. By leveraging Shadow DOM for style encapsulation, Custom Elements for reusable components, and HTML Templates for efficient rendering, you can create extension interfaces that work consistently across different contexts and websites.
 

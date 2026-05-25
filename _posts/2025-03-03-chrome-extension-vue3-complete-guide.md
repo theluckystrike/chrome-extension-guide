@@ -18,11 +18,11 @@ This comprehensive tutorial will walk you through building a production-ready Ch
 
 ---
 
-Why Use Vue 3 for Chrome Extensions? {#why-vue-3}
+## Why Use Vue 3 for Chrome Extensions? {#why-vue-3}
 
 Before diving into the code, let us explore why Vue 3 is an excellent choice for Chrome extension development in 2025.
 
-The Benefits of Vue 3 for Extensions
+### The Benefits of Vue 3 for Extensions
 
 Vue 3 brings several advantages that make it particularly well-suited for Chrome extension development:
 
@@ -45,11 +45,11 @@ While React remains popular, Vue 3 offers several advantages for extension devel
 
 ---
 
-Setting Up Your Vue 3 Chrome Extension Project {#project-setup}
+## Setting Up Your Vue 3 Chrome Extension Project {#project-setup}
 
 We will use Vite as our build tool because it provides lightning-fast hot module replacement during development and produces highly optimized production builds. The Vue.js team officially supports Vite, making it the recommended build tool for Vue 3 projects.
 
-Prerequisites
+### Prerequisites
 
 Before starting, ensure you have the following installed:
 
@@ -57,7 +57,7 @@ Before starting, ensure you have the following installed:
 - Google Chrome: The latest stable version for testing
 - Code Editor: Visual Studio Code with the Vue - Official extension
 
-Creating the Project
+### Creating the Project
 
 Open your terminal and create a new Vue 3 project using Vite:
 
@@ -69,7 +69,7 @@ npm install
 
 This creates a Vue 3 project with TypeScript support. Now we need to configure it for Chrome extension development.
 
-Installing Extension-Specific Dependencies
+### Installing Extension-Specific Dependencies
 
 We need a few additional packages to build Chrome extensions with Vue 3:
 
@@ -79,9 +79,9 @@ npm install -D vite-plugin-chrome-extension typescript@~5.3.0
 
 The `vite-plugin-chrome-extension` plugin handles the complex configuration needed to build extension-compatible output, including handling the manifest.json, service workers, and content scripts.
 
-Configuring Vite for Chrome Extension
+### Configuring Vite for Chrome Extension
 
-Update your `vite.config.ts` to configure the extension build:
+### Update your `vite.config.ts` to configure the extension build:
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -100,7 +100,7 @@ export default defineConfig({
 })
 ```
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Chrome extensions require a `manifest.json` file in the root of your project. Create this file:
 
@@ -142,7 +142,7 @@ Chrome extensions require a `manifest.json` file in the root of your project. Cr
 
 Notice that we set the popup to `index.html`, which Vite will generate from our Vue app. This is the key integration point between Vue and Chrome extensions.
 
-Adjusting the Vue Entry Point
+### Adjusting the Vue Entry Point
 
 Modify your `index.html` to work properly as an extension popup:
 
@@ -165,11 +165,11 @@ The key adjustment here is ensuring the viewport settings work well in the small
 
 ---
 
-Building the Popup UI with Vue 3 {#popup-ui}
+## Building the Popup UI with Vue 3 {#popup-ui}
 
 We will build a simple todo extension popup to demonstrate Vue 3's capabilities in a Chrome extension context. This will showcase reactive data binding, event handling, and component composition.
 
-Creating the Todo Component
+### Creating the Todo Component
 
 Create a new component at `src/components/TodoList.vue`:
 
@@ -402,7 +402,7 @@ h1 {
 ```
 {% endraw %}
 
-Updating the Main App Component
+### Updating the Main App Component
 
 Modify `src/App.vue` to use our TodoList component:
 
@@ -425,17 +425,17 @@ body {
 
 ---
 
-State Management with Pinia in Chrome Extensions {#state-management}
+## State Management with Pinia in Chrome Extensions {#state-management}
 
 For more complex extensions, you need a solid state management solution. Pinia, the official state management library for Vue 3, works exceptionally well in Chrome extensions.
 
-Installing Pinia
+### Installing Pinia
 
 ```bash
 npm install pinia
 ```
 
-Setting Up Pinia in Your Extension
+### Setting Up Pinia in Your Extension
 
 Create a Pinia store for managing extension-wide state:
 
@@ -485,7 +485,7 @@ export const useExtensionStore = defineStore('extension', () => {
 })
 ```
 
-Using the Store in Components
+### Using the Store in Components
 
 {% raw %}
 ```vue
@@ -518,13 +518,13 @@ const toggleTheme = () => {
 
 ---
 
-Service Worker Communication {#service-workers}
+## Service Worker Communication {#service-workers}
 
 Chrome extensions use service workers (background scripts in Manifest V2) for handling events, managing state, and coordinating between different extension components. In Vue 3, we need to handle this communication carefully.
 
-Creating a Background Service Worker
+### Creating a Background Service Worker
 
-Create `src/background.ts`:
+### Create `src/background.ts`:
 
 ```typescript
 // src/background.ts
@@ -575,7 +575,7 @@ chrome.commands.onCommand.addListener((command) => {
 })
 ```
 
-Communicating Between Popup and Service Worker
+### Communicating Between Popup and Service Worker
 
 From your Vue popup, you can communicate with the service worker:
 
@@ -591,11 +591,11 @@ const sendToBackground = async () => {
 
 ---
 
-Content Scripts with Vue {#content-scripts}
+## Content Scripts with Vue {#content-scripts}
 
 Content scripts run in the context of web pages and can modify page content. While they cannot directly use Vue components, you can use Vue for the logic and communicate results to the page.
 
-Creating a Content Script
+### Creating a Content Script
 
 ```typescript
 // src/contentScript.ts
@@ -666,13 +666,13 @@ if (document.readyState === 'loading') {
 
 ---
 
-Building and Loading Your Extension {#building-loading}
+## Building and Loading Your Extension {#building-loading}
 
 Now that we have built our Vue 3 extension, let us compile it and load it into Chrome.
 
-Building the Extension
+### Building the Extension
 
-Run the Vite build command:
+### Run the Vite build command:
 
 ```bash
 npm run build
@@ -680,7 +680,7 @@ npm run build
 
 This generates the production-ready extension in the `dist` folder. The `vite-plugin-chrome-extension` handles converting your Vue app into extension-compatible files.
 
-Loading in Chrome
+### Loading in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top-right corner
@@ -688,7 +688,7 @@ Loading in Chrome
 4. Select the `dist` folder from your project
 5. Your Vue 3 extension should now appear in the toolbar
 
-Development Mode
+### Development Mode
 
 For faster development, you can use Vite's dev server with the extension plugin:
 
@@ -700,13 +700,13 @@ Then in Chrome extensions, use "Load unpacked" but point to your project root (t
 
 ---
 
-Options Page and Multiple Views {#options-page}
+## Options Page and Multiple Views {#options-page}
 
 Larger extensions often need an options page for user configuration. Vue 3 makes this easy.
 
-Creating an Options Page
+### Creating an Options Page
 
-Create `src/options/main.ts` for the options page entry point:
+### Create `src/options/main.ts` for the options page entry point:
 
 ```typescript
 import { createApp } from 'vue'
@@ -718,7 +718,7 @@ app.use(createPinia())
 app.mount('#app')
 ```
 
-Create `index_options.html` in your project root:
+### Create `index_options.html` in your project root:
 
 ```html
 <!DOCTYPE html>
@@ -734,7 +734,7 @@ Create `index_options.html` in your project root:
 </html>
 ```
 
-Update `vite.config.ts` to handle multiple entry points:
+### Update `vite.config.ts` to handle multiple entry points:
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -759,7 +759,7 @@ export default defineConfig({
 })
 ```
 
-Update your `manifest.json` to include the options page:
+### Update your `manifest.json` to include the options page:
 
 ```json
 {
@@ -773,11 +773,11 @@ Update your `manifest.json` to include the options page:
 
 ---
 
-Performance Optimization {#performance}
+## Performance Optimization {#performance}
 
 Vue 3 extensions should be optimized for performance to ensure a snappy user experience.
 
-Lazy Loading Components
+### Lazy Loading Components
 
 Use dynamic imports for components that are not immediately needed:
 
@@ -787,9 +787,9 @@ const HeavyComponent = defineAsyncComponent(() =>
 )
 ```
 
-Code Splitting
+### Code Splitting
 
-Configure Vite to split code into smaller chunks:
+### Configure Vite to split code into smaller chunks:
 
 ```typescript
 export default defineConfig({
@@ -806,7 +806,7 @@ export default defineConfig({
 })
 ```
 
-Minimize Bundle Size
+### Minimize Bundle Size
 
 - Use PurgeCSS to remove unused styles
 - Prefer native browser APIs over libraries
@@ -814,18 +814,18 @@ Minimize Bundle Size
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your Vue 3 extension is ready, follow these steps to publish:
 
-Prepare for Submission
+### Prepare for Submission
 
 1. Create icons: Generate 16x16, 48x48, and 128x128 PNG icons
 2. Write description: Craft a compelling description explaining your extension's value
 3. Take screenshots: Create 1280x800 or 640x400 pixel screenshots
 4. Privacy policy: Write a privacy policy if your extension handles user data
 
-Build for Production
+### Build for Production
 
 ```bash
 npm run build
@@ -833,7 +833,7 @@ npm run build
 
 This creates the final extension files in the `dist` folder.
 
-Upload to Developer Dashboard
+### Upload to Developer Dashboard
 
 1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Create a new item and upload your `dist` folder as a ZIP file
@@ -842,23 +842,23 @@ Upload to Developer Dashboard
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Here are solutions to common problems you may encounter:
 
-Popup Not Loading
+### Popup Not Loading
 
 - Ensure your `manifest.json` points to the correct `index.html`
 - Check the console in `chrome://extensions/` for errors
 - Verify your Vite configuration outputs to the correct directory
 
-Hot Reload Not Working
+### Hot Reload Not Working
 
 - Make sure you are using the dev server, not just building
 - Check that your extension is pointing to the development files
 - Try disabling and re-enabling the extension
 
-State Not Persisting
+### State Not Persisting
 
 - Verify you are using `chrome.storage` correctly
 - Check that the service worker has not been terminated
@@ -866,11 +866,11 @@ State Not Persisting
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building Chrome extensions with Vue 3 in 2025 provides an excellent developer experience while producing performant, maintainable extensions. The combination of Vue 3's Composition API, TypeScript support, and Vite's fast builds makes extension development faster and more enjoyable than ever.
 
-In this tutorial, we covered:
+### In this tutorial, we covered:
 
 - Setting up a Vue 3 project with Vite for Chrome extension development
 - Building an interactive popup interface with reactive components

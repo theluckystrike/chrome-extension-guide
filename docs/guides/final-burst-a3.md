@@ -41,7 +41,7 @@ The popup communicates with the background service worker for secure password ge
 
 ---
 
-Manifest Configuration
+### Manifest Configuration
 
 The `manifest.json` defines the extension's capabilities, permissions, and entry points. This configuration uses Manifest V3, the current standard for Chrome extensions.
 
@@ -89,7 +89,7 @@ The `manifest.json` defines the extension's capabilities, permissions, and entry
 }
 ```
 
-Permission Rationale
+### Permission Rationale
 
 | Permission | Purpose |
 |------------|---------|
@@ -103,7 +103,7 @@ Permission Rationale
 
 ---
 
-Project Structure
+### Project Structure
 
 ```
 password-generator/
@@ -142,9 +142,9 @@ password-generator/
 
 ---
 
-Core TypeScript Implementation
+### Core TypeScript Implementation
 
-Shared Types (`src/shared/types.ts`)
+### Shared Types (`src/shared/types.ts`)
 
 Define TypeScript interfaces for type safety across all extension contexts:
 
@@ -191,7 +191,7 @@ export const DEFAULT_OPTIONS: PasswordOptions = {
 };
 ```
 
-Password Generation Service (`src/background/passwordGenerator.ts`)
+### Password Generation Service (`src/background/passwordGenerator.ts`)
 
 This service handles cryptographically secure password generation in the background service worker:
 
@@ -288,9 +288,9 @@ export const passwordGenerator = new PasswordGenerator();
 
 ---
 
-Password Strength Meter
+### Password Strength Meter
 
-Strength Calculation (`src/shared/strength.ts`)
+### Strength Calculation (`src/shared/strength.ts`)
 
 Implements entropy-based password strength analysis:
 
@@ -354,9 +354,9 @@ export function getStrengthDescription(label: PasswordStrength['label']): string
 
 ---
 
-Clipboard Integration
+### Clipboard Integration
 
-Writing to Clipboard
+### Writing to Clipboard
 
 Modern browsers support the Clipboard API. In Manifest V3, the popup can directly use `navigator.clipboard`, while the background service worker must use an offscreen document:
 
@@ -395,7 +395,7 @@ export async function copyFromBackground(text: string): Promise<boolean> {
 }
 ```
 
-Offscreen Document (`offscreen.html`)
+### Offscreen Document (`offscreen.html`)
 
 ```html
 <!DOCTYPE html>
@@ -421,9 +421,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-Password History
+### Password History
 
-Storage Management
+### Storage Management
 
 Use Chrome's storage API to persist password history with automatic cleanup:
 
@@ -476,9 +476,9 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-Autofill Integration
+### Autofill Integration
 
-Content Script for Form Detection
+### Content Script for Form Detection
 
 The content script detects password fields and provides autofill functionality:
 
@@ -555,7 +555,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 ```
 
-Autofill from Popup
+### Autofill from Popup
 
 ```typescript
 // popup/popup.ts
@@ -579,9 +579,9 @@ async function autofillPassword(password: string): Promise<void> {
 
 ---
 
-UI Design and Styling
+### UI Design and Styling
 
-Popup Layout (`popup/popup.html`)
+### Popup Layout (`popup/popup.html`)
 
 ```html
 <!DOCTYPE html>
@@ -646,7 +646,7 @@ Popup Layout (`popup/popup.html`)
 </html>
 ```
 
-Styling (`popup/popup.css`)
+### Styling (`popup/popup.css`)
 
 ```css
 :root {
@@ -856,9 +856,9 @@ body {
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing Password Generator
+### Unit Testing Password Generator
 
 ```typescript
 // tests/passwordGenerator.test.ts
@@ -921,7 +921,7 @@ describe('PasswordGenerator', () => {
 });
 ```
 
-Testing Strength Calculator
+### Testing Strength Calculator
 
 ```typescript
 // tests/strength.test.ts
@@ -953,7 +953,7 @@ describe('calculateStrength', () => {
 });
 ```
 
-Running Tests
+### Running Tests
 
 ```bash
 Install dependencies
@@ -968,7 +968,7 @@ npx vitest
 
 ---
 
-Chrome APIs Reference
+### Chrome APIs Reference
 
 | API | Usage |
 |-----|-------|
@@ -983,7 +983,7 @@ Chrome APIs Reference
 
 ---
 
-Next Steps
+### Next Steps
 
 1. Add options page: Allow users to customize default settings
 2. Implement sync: Use `chrome.storage.sync` for cross-device history
@@ -994,7 +994,7 @@ Next Steps
 
 ---
 
-Related Guides
+### Related Guides
 
 - [Extension Architecture Patterns](architecture-patterns.md)
 - [Storage Permission](permissions/storage.md)

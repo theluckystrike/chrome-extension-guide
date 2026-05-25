@@ -18,7 +18,7 @@ By the end of this guide, you'll have created an extension that detects when use
 
 ---
 
-Understanding Link Preview Extensions {#understanding-link-previews}
+## Understanding Link Preview Extensions {#understanding-link-previews}
 
 A link preview extension, also known as a hover preview chrome extension, enhances user experience by showing a preview of the linked webpage when users hover their mouse over hyperlinks. This functionality is similar to what you see on platforms like Facebook, LinkedIn, or Slack, where URLs are automatically expanded to show rich previews.
 
@@ -32,7 +32,7 @@ This tutorial will walk you through building each component from scratch using m
 
 ---
 
-Project Setup and Manifest Configuration {#project-setup}
+## Project Setup and Manifest Configuration {#project-setup}
 
 Every Chrome extension begins with the manifest.json file. For our link preview extension, we'll use Manifest V3, which is the current standard and offers better security and performance.
 
@@ -78,7 +78,7 @@ Let's break down the key components of this manifest:
 
 ---
 
-Creating the Content Script {#content-script}
+## Creating the Content Script {#content-script}
 
 The content script is the heart of our link preview extension. It runs in the context of every web page and handles link detection, metadata fetching, and preview display.
 
@@ -373,7 +373,7 @@ This content script handles all the core functionality of our link preview exten
 
 ---
 
-Styling the Preview Card {#styling-preview}
+## Styling the Preview Card {#styling-preview}
 
 Create a file named `styles.css` to style the preview card:
 
@@ -517,7 +517,7 @@ The styles provide a clean, modern look for our preview card with smooth animati
 
 ---
 
-Improving Preview Fetching with a Background Service Worker {#background-service}
+## Improving Preview Fetching with a Background Service Worker {#background-service}
 
 The content script approach has limitations due to CORS policies. For a production-grade url preview extension, we should use a background service worker to fetch metadata. This provides more flexibility and avoids cross-origin restrictions.
 
@@ -532,7 +532,7 @@ Update your `manifest.json` to include a background service worker:
 }
 ```
 
-Create `background.js`:
+### Create `background.js`:
 
 ```javascript
 // LinkPeek - Background Service Worker
@@ -636,7 +636,7 @@ async function fetchAndShowPreview(link) {
 
 ---
 
-Testing Your Extension {#testing-extension}
+## Testing Your Extension {#testing-extension}
 
 Now let's test our link preview extension:
 
@@ -653,7 +653,7 @@ If you don't see previews appearing, check the following:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 Once you have the basic link preview extension working, consider adding these advanced features:
 
@@ -694,7 +694,7 @@ document.addEventListener('keydown', (event) => {
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your link preview extension is complete and tested, you can publish it to the Chrome Web Store:
 
@@ -712,7 +712,7 @@ When writing your store listing, emphasize the key benefits:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've built a complete link preview Chrome extension from scratch. This project demonstrates several important concepts in extension development:
 
@@ -728,7 +728,7 @@ Remember to test thoroughly across different websites and browsers, and consider
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)

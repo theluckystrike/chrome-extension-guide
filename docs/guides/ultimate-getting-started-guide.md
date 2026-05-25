@@ -14,18 +14,18 @@ This guide covers Manifest V3, the current standard for Chrome extensions, along
 
 ---
 
-Prerequisites
+### Prerequisites
 
 Before diving into Chrome extension development, ensure you have the following tools and knowledge:
 
-Essential Tools
+### Essential Tools
 
 1. Google Chrome Browser. Your primary testing environment
 2. Code Editor. VS Code is recommended with the [Chrome Extension Manager](https://marketplace.visualstudio.com/items?itemName=miclo.chrome-extension-manager) extension
 3. Node.js & npm. For package management and build tooling (optional but recommended)
 4. Git. For version control
 
-Knowledge Requirements
+### Knowledge Requirements
 
 - JavaScript fundamentals. Understanding of ES6+ features like arrow functions, async/await, and modules
 - HTML & CSS. Basic knowledge for building popup UIs and options pages
@@ -35,7 +35,7 @@ Knowledge Requirements
 
 If you're new to JavaScript, we recommend completing a [JavaScript basics course](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps) before proceeding.
 
-Development Environment Setup
+### Development Environment Setup
 
 Setting up a proper development environment accelerates your workflow significantly. We recommend using VS Code with these extensions:
 
@@ -48,7 +48,7 @@ Consider using TypeScript for larger projects to benefit from type safety and be
 
 ---
 
-Project Structure
+### Project Structure
 
 A well-organized project structure is crucial for maintainable extensions. Here's the recommended layout:
 
@@ -77,11 +77,11 @@ This structure separates concerns and makes it easy to scale your extension as i
 
 ---
 
-Manifest V3
+### Manifest V3
 
 The [manifest.json](/guides/manifest-v3/) is the heart of every Chrome extension. It defines permissions, entry points, and extension metadata.
 
-Basic Manifest V3 Template
+### Basic Manifest V3 Template
 
 ```json
 {
@@ -122,7 +122,7 @@ Basic Manifest V3 Template
 }
 ```
 
-Key Manifest V3 Changes from V2
+### Key Manifest V3 Changes from V2
 
 - Service Workers replace background pages. they're event-driven and don't persist in memory
 - Promise-based APIs. Most Chrome APIs now return promises
@@ -133,11 +133,11 @@ For a complete migration guide from Manifest V2 to V3, check out our [MV3 Migrat
 
 ---
 
-Content Scripts
+### Content Scripts
 
 [Content scripts](/guides/content-scripts/) are JavaScript files that run in the context of web pages. They can read and modify the DOM, communicate with the extension, and respond to page events.
 
-Injecting a Content Script
+### Injecting a Content Script
 
 Content scripts are declared in the manifest under the `content_scripts` key:
 
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 chrome.runtime.sendMessage({ type: 'PAGE_LOADED' });
 ```
 
-Best Practices for Content Scripts
+### Best Practices for Content Scripts
 
 1. Use `run_at` strategically. Choose `document_start` for early modifications or `document_idle` for guaranteed DOM availability
 2. Avoid memory leaks. Clean up event listeners and intervals when the page unloads
@@ -171,11 +171,11 @@ For advanced content script patterns, see our [Content Scripts detailed look](/g
 
 ---
 
-Background Workers
+### Background Workers
 
 In Manifest V3, [background service workers](/guides/service-workers/) handle events, manage state, and coordinate between different parts of your extension. Unlike the old background pages, service workers are ephemeral and wake up only when events occur.
 
-Setting Up a Service Worker
+### Setting Up a Service Worker
 
 ```javascript
 // background/service-worker.js
@@ -210,7 +210,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Service Worker Lifecycle
+### Service Worker Lifecycle
 
 1. Install. Set up initial state, preload resources
 2. Activate. Clean up old caches, claim tabs
@@ -221,11 +221,11 @@ For more patterns, see our [Background Patterns Guide](/guides/background-patter
 
 ---
 
-Popup UI
+### Popup UI
 
 The [popup](/guides/extension-popup-design/) is the small window that appears when users click your extension icon. It's perfect for quick actions and settings.
 
-Creating a Popup
+### Creating a Popup
 
 ```html
 <!-- popup/popup.html -->
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Popup Design Best Practices
+### Popup Design Best Practices
 
 - Keep it lightweight. Popups should be fast and focused
 - Use CSS Grid/Flexbox. For responsive layouts
@@ -276,11 +276,11 @@ For design patterns and examples, see our [Extension Popup Design Guide](/guides
 
 ---
 
-Storage
+### Storage
 
 Chrome provides solid [storage APIs](/guides/storage-api/) for persisting data across sessions. There are several storage types:
 
-Storage Types
+### Storage Types
 
 | Type | Capacity | Sync | Use Case |
 |------|----------|------|----------|
@@ -289,7 +289,7 @@ Storage Types
 | `managed` | 1MB | No | Admin-controlled settings |
 | `session` | 5MB | No | Tab-scoped data |
 
-Using the Storage API
+### Using the Storage API
 
 ```javascript
 // Save data
@@ -314,11 +314,11 @@ For more advanced caching strategies, see our [Caching Strategies Guide](/guides
 
 ---
 
-Messaging
+### Messaging
 
 [Message passing](/guides/message-passing/) allows communication between different parts of your extension. popup to background, content script to popup, or even between extensions.
 
-Simple Message Passing
+### Simple Message Passing
 
 ```javascript
 // From content script to background
@@ -341,9 +341,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Long-Lived Connections
+### Long-Lived Connections
 
-For ongoing communication, use `MessageChannel`:
+### For ongoing communication, use `MessageChannel`:
 
 ```javascript
 // Create a persistent connection
@@ -358,27 +358,27 @@ port.postMessage({ message: 'Hello from popup!' });
 
 ---
 
-Testing
+### Testing
 
 Proper [testing](/guides/testing-extensions/) is essential for reliable extensions. Here's how to approach it:
 
-Loading Your Extension
+### Loading Your Extension
 
 1. Open `chrome://extensions/`
 2. Enable "Developer mode" (top right)
 3. Click "Load unpacked" and select your extension folder
 4. Test in both development and production modes
 
-Debugging Tips
+### Debugging Tips
 
 - Use Chrome DevTools for popup/options page debugging (right-click → Inspect)
 - Use Service Worker DevTools (chrome://extensions → service worker link)
 - Check the Console for errors in all contexts
 - Use `chrome://extensions/?id=YOUR_EXTENSION_ID` for dedicated views
 
-Automated Testing
+### Automated Testing
 
-For larger extensions, consider:
+### For larger extensions, consider:
 
 - Unit tests with Jest for utility functions
 - Integration tests using Puppeteer or Playwright
@@ -388,11 +388,11 @@ See our [Testing Extensions Guide](/guides/testing-extensions/) for detailed str
 
 ---
 
-Options Page
+### Options Page
 
 While popups are great for quick actions, you'll often need a dedicated settings page for complex configurations. The [options page](/guides/options-page-design/) provides a full-featured interface for user preferences.
 
-Creating an Options Page
+### Creating an Options Page
 
 ```html
 <!-- options/options.html -->
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Registering the Options Page
+### Registering the Options Page
 
 Add this to your manifest.json:
 
@@ -478,11 +478,11 @@ For more design patterns, see our [Options Page Design Guide](/guides/options-pa
 
 ---
 
-Side Panel (New in MV3)
+### Side Panel (New in MV3)
 
 The [side panel API](/guides/side-panel-api/) is a relatively new addition to Chrome that provides a persistent UI alongside the browser's main content area. Unlike popups, side panels remain open, making them ideal for productivity tools, note-taking apps, and reading assistants.
 
-Enabling Side Panel
+### Enabling Side Panel
 
 ```json
 {
@@ -504,11 +504,11 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 ---
 
-Permissions and Security
+### Permissions and Security
 
 Understanding [permissions](/guides/permissions/) is crucial for both functionality and user trust. Manifest V3 has stricter requirements than V2.
 
-Permission Types
+### Permission Types
 
 | Permission | Description | Trust Level |
 |------------|-------------|-------------|
@@ -519,7 +519,7 @@ Permission Types
 | `history` | Browser history access | High |
 | `webRequest` | Network request interception | High |
 
-Best Practices for Permissions
+### Best Practices for Permissions
 
 1. Request the minimum. Only ask for permissions your extension actually needs
 2. Use `activeTab`. Prefer this over `tabs` for most use cases
@@ -530,11 +530,11 @@ See our [Permissions Guide](/guides/permissions/) for detailed information.
 
 ---
 
-Publishing
+### Publishing
 
 Once your extension is ready, it's time to share it with the world through the [Chrome Web Store](/guides/publishing/).
 
-Publishing Checklist
+### Publishing Checklist
 
 1. Complete your manifest. Add a detailed description, screenshots, and icons
 2. Set a clear privacy practice. Answer all privacy questions honestly
@@ -544,7 +544,7 @@ Publishing Checklist
    - Screenshots (1280x800 or 640x400)
 4. Verify your developer account. Requires a $5 one-time fee
 
-Publishing via CLI
+### Publishing via CLI
 
 You can automate publishing with the [Chrome Web Store API](/guides/chrome-extension-automated-publishing/):
 
@@ -557,9 +557,9 @@ Or use the publish npm package
 npx chrome-webstore-upload publish --extension-id YOUR_ID
 ```
 
-Maintaining Your Extension
+### Maintaining Your Extension
 
-After publishing:
+### After publishing:
 
 - Monitor user reviews and ratings
 - Push updates regularly to fix bugs and add features
@@ -568,7 +568,7 @@ After publishing:
 
 ---
 
-Conclusion
+### Conclusion
 
 Building Chrome extensions is an exciting journey that combines web technologies with unique browser capabilities. This guide covered the essential components you need to create professional extensions:
 
@@ -585,7 +585,7 @@ Now you're ready to start building! Explore our detailed guides on each topic to
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)

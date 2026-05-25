@@ -7,11 +7,11 @@ last_modified_at: 2026-01-15
 ---
 Build a Download Manager Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 
 A comprehensive download manager extension with enhanced features including automatic file organization by category, real-time download progress tracking, desktop notifications, and batch download capabilities.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 - Chrome Downloads API (cross-ref `docs/api-reference/downloads-api.md`)
 - Chrome Notifications API (cross-ref `docs/api-reference/notifications-api.md`)
@@ -25,7 +25,7 @@ For permission requirements, see:
 For download management patterns, see:
 - [guides/download-management.md](../guides/download-management.md)
 
-Project Structure {#project-structure}
+## Project Structure {#project-structure}
 
 ```
 download-manager/
@@ -40,9 +40,9 @@ download-manager/
     options.js
 ```
 
-Step 1: Manifest Configuration {#step-1-manifest-configuration}
+## Step 1: Manifest Configuration {#step-1-manifest-configuration}
 
-Define required permissions and background worker:
+### Define required permissions and background worker:
 
 ```json
 {
@@ -69,7 +69,7 @@ Define required permissions and background worker:
 }
 ```
 
-Step 2: Download Monitoring {#step-2-download-monitoring}
+## Step 2: Download Monitoring {#step-2-download-monitoring}
 
 Set up listeners in the background service worker to track all downloads:
 
@@ -136,7 +136,7 @@ function broadcastDownloadUpdate(download) {
 }
 ```
 
-Step 3: Auto-Organization {#step-3-auto-organization}
+## Step 3: Auto-Organization {#step-3-auto-organization}
 
 Implement automatic file organization using `chrome.downloads.onDeterminingFilename`:
 
@@ -186,7 +186,7 @@ chrome.storage.local.get(['customRules'], (result) => {
 });
 ```
 
-Step 4: Progress UI in Popup {#step-4-progress-ui-in-popup}
+## Step 4: Progress UI in Popup {#step-4-progress-ui-in-popup}
 
 Create an interactive popup showing download progress:
 
@@ -311,7 +311,7 @@ document.addEventListener('click', (e) => {
 });
 ```
 
-Step 5: Notifications {#step-5-notifications}
+## Step 5: Notifications {#step-5-notifications}
 
 Add desktop notifications for download events:
 
@@ -358,7 +358,7 @@ function showErrorNotification(download, error) {
 }
 ```
 
-Step 6: Batch Downloads {#step-6-batch-downloads}
+## Step 6: Batch Downloads {#step-6-batch-downloads}
 
 Add context menu for batch downloading links:
 
@@ -430,9 +430,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Step 7: Download History {#step-7-download-history}
+## Step 7: Download History {#step-7-download-history}
 
-Store and search download history using storage:
+### Store and search download history using storage:
 
 ```javascript
 // Add to background.js for history tracking
@@ -488,9 +488,9 @@ chrome.downloads.onChanged.addListener((downloadDelta) => {
 });
 ```
 
-Summary {#summary}
+## Summary {#summary}
 
-This download manager extension provides:
+### This download manager extension provides:
 
 1. Real-time monitoring of all downloads with progress tracking
 2. Auto-organization by file type into categorized folders

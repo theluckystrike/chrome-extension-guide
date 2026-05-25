@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Popup-Background Communication. Patterns for Shared State
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions consist of multiple contexts that must communicate to share state and coordinate actions. The popup and background service worker are two of the most commonly connected contexts, yet their communication presents unique challenges due to Chrome's extension architecture. This guide covers proven patterns for building reliable, performant communication channels between these contexts.
 
 ---
 
-Understanding the Communication Challenge {#understanding-the-communication-challenge}
+## Understanding the Communication Challenge {#understanding-the-communication-challenge}
 
 Chrome extensions run in isolated contexts with different lifetimes. The popup exists only while open, while the service worker (in Manifest V3) can terminate after inactivity. This creates several challenges: the popup may open when the service worker is dormant, messages may arrive before the listener is ready, and state synchronization requires careful coordination.
 
@@ -22,11 +22,11 @@ Before diving into patterns, ensure your manifest declares the necessary permiss
 
 ---
 
-Pattern 1: SendMessage for Request-Response {#pattern-1-sendmessage}
+## Pattern 1: SendMessage for Request-Response {#pattern-1-sendmessage}
 
 The `chrome.runtime.sendMessage` API provides a simple request-response pattern for one-time communications from the popup to the service worker.
 
-From Popup to Background
+### From Popup to Background
 
 ```javascript
 // popup.js
@@ -44,7 +44,7 @@ async function fetchExtensionState() {
 }
 ```
 
-Handling in Service Worker
+### Handling in Service Worker
 
 ```javascript
 // background.js
@@ -63,11 +63,11 @@ The `return true` pattern is critical when handling async operations. Without it
 
 ---
 
-Pattern 2: Long-Lived Port Connections {#pattern-2-port-connections}
+## Pattern 2: Long-Lived Port Connections {#pattern-2-port-connections}
 
 For continuous communication or streaming data, `chrome.runtime.connect` creates a persistent port that survives multiple message exchanges.
 
-Establishing Connection
+### Establishing Connection
 
 ```javascript
 // popup.js
@@ -85,7 +85,7 @@ port.onDisconnect.addListener(() => {
 });
 ```
 
-Bidirectional Communication
+### Bidirectional Communication
 
 ```javascript
 // background.js
@@ -116,11 +116,11 @@ Port connections excel at maintaining stateful communication where multiple mess
 
 ---
 
-Pattern 3: Storage-Based Communication {#pattern-3-storage-communication}
+## Pattern 3: Storage-Based Communication {#pattern-3-storage-communication}
 
 For persistent shared state that survives context restarts, Chrome's storage API provides a reliable communication mechanism.
 
-Writing State
+### Writing State
 
 ```javascript
 // background.js - Service worker updates state
@@ -138,7 +138,7 @@ async function updateSharedState(newData) {
 }
 ```
 
-Reading State in Popup
+### Reading State in Popup
 
 ```javascript
 // popup.js - Popup reads state on open
@@ -161,11 +161,11 @@ Storage-based communication works reliably even when the service worker has term
 
 ---
 
-Pattern 4: Service Worker Wakeup Strategies {#pattern-4-wakeup-strategies}
+## Pattern 4: Service Worker Wakeup Strategies {#pattern-4-wakeup-strategies}
 
 Manifest V3 service workers terminate after periods of inactivity. Your popup must handle waking the service worker.
 
-Immediate Send with Fallback
+### Immediate Send with Fallback
 
 ```javascript
 // popup.js
@@ -186,7 +186,7 @@ async function getServiceWorkerData() {
 }
 ```
 
-Proactive Awakening
+### Proactive Awakening
 
 ```javascript
 // popup.js - Wake service worker on popup open
@@ -201,11 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Pattern 5: Loading States and Error Handling {#pattern-5-loading-states}
+## Pattern 5: Loading States and Error Handling {#pattern-5-loading-states}
 
 Robust extensions handle the full lifecycle of communication, including loading indicators and error recovery.
 
-Complete Implementation
+### Complete Implementation
 
 ```javascript
 // popup.js
@@ -269,7 +269,7 @@ class PopupCommunicator {
 
 ---
 
-Best Practices Summary {#best-practices-summary}
+## Best Practices Summary {#best-practices-summary}
 
 1. Always handle async responses with the `return true` pattern in message listeners
 2. Use ports for continuous communication, messages for one-off requests
@@ -280,6 +280,6 @@ Best Practices Summary {#best-practices-summary}
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Effective popup-background communication requires understanding Chrome's extension lifecycle and implementing appropriate patterns for your use case. For simple requests, `sendMessage` suffices. For continuous updates, port connections provide efficiency. For persistence, storage-based communication ensures reliability. Combine these patterns strategically to build solid extensions that handle service worker lifecycle events gracefully.

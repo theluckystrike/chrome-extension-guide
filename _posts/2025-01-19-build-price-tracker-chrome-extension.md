@@ -18,7 +18,7 @@ we will walk you through building a fully functional price tracker Chrome extens
 
 ---
 
-Why Build a Price Tracker Extension? {#why-build-price-tracker}
+## Why Build a Price Tracker Extension? {#why-build-price-tracker}
 
 The e-commerce market is massive, with billions of transactions occurring daily across platforms like Amazon, eBay, Walmart, and countless online retailers. Consumers have never had more choices, but they also face unprecedented price variability. A well-built price tracker extension addresses several key user needs.
 
@@ -30,7 +30,7 @@ Third, from a development perspective, building a price tracker extension teache
 
 ---
 
-Prerequisites and Setup {#prerequisites}
+## Prerequisites and Setup {#prerequisites}
 
 Before we begin coding, ensure you have the following tools and knowledge.
 
@@ -40,11 +40,11 @@ Let us start by creating the project structure. Create a new folder for your ext
 
 ---
 
-Understanding Manifest V3 for Price Tracking {#manifest-v3}
+## Understanding Manifest V3 for Price Tracking {#manifest-v3}
 
 The manifest file is the backbone of every Chrome extension. In 2025, all extensions must use Manifest V3, which introduced significant changes from V2, particularly around background scripts and network requests.
 
-Create your manifest.json file with the following configuration:
+### Create your manifest.json file with the following configuration:
 
 ```json
 {
@@ -98,11 +98,11 @@ This manifest defines the essential permissions. The storage permission allows u
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. It should display tracked products, allow adding new products, and show current prices.
 
-Create popup.html:
+### Create popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -140,7 +140,7 @@ Create popup.html:
 </html>
 ```
 
-Now create styles.css to make it visually appealing:
+### Now create styles.css to make it visually appealing:
 
 ```css
 * {
@@ -269,11 +269,11 @@ input {
 
 ---
 
-Implementing the Content Script {#content-script}
+## Implementing the Content Script {#content-script}
 
 The content script runs on e-commerce pages and extracts product information. This is where the magic of price tracking begins.
 
-Create content.js:
+### Create content.js:
 
 ```javascript
 // Content script for extracting product information
@@ -355,11 +355,11 @@ This content script detects which e-commerce site the user is visiting and extra
 
 ---
 
-Building the Background Service Worker {#background-worker}
+## Building the Background Service Worker {#background-worker}
 
 The background service worker handles storage, scheduling, and notifications. It is the brain of your extension.
 
-Create background.js:
+### Create background.js:
 
 ```javascript
 // Background service worker for Price Watch extension
@@ -538,9 +538,9 @@ The background script manages all tracked products and their price history. It d
 
 ---
 
-Implementing Popup Logic {#popup-logic}
+## Implementing Popup Logic {#popup-logic}
 
-Now create popup.js to handle user interactions:
+### Now create popup.js to handle user interactions:
 
 ```javascript
 // Popup script for Price Watch extension
@@ -638,7 +638,7 @@ function setupEventListeners() {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now it is time to test your extension. Open Chrome and navigate to chrome://extensions/. Enable Developer mode in the top right corner. Click Load unpacked and select your extension folder.
 
@@ -648,7 +648,7 @@ Test the notification system by manually modifying the target price to be lower 
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 When your extension is ready, you need to package it for the Chrome Web Store. Create a ZIP file containing all your extension files, excluding any test files or unnecessary directories.
 
@@ -660,7 +660,7 @@ After submission, Google reviews your extension. This typically takes a few hour
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 There are many ways to enhance your price tracker extension. Consider adding support for more e-commerce platforms like Best Buy, Newegg, or AliExpress. Implement price history charts so users can visualize price trends over time. Add a wishlist feature that allows users to organize products into categories.
 
@@ -670,7 +670,7 @@ Another valuable feature is price prediction using machine learning. By analyzin
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a price tracker Chrome extension is an excellent project that teaches you fundamental extension development concepts while creating a genuinely useful tool. we covered Manifest V3 configuration, content scripts for data extraction, background service workers for storage and notifications, and the popup interface for user interaction.
 

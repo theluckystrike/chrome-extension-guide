@@ -11,10 +11,10 @@ last_modified_at: 2026-01-15
 
 System.* Permissions (Chrome Extension API)
 
-Overview {#overview}
+## Overview {#overview}
 The `system.*` permissions provide access to hardware and system information. Each is a separate permission.
 
-system.cpu {#systemcpu}
+## system.cpu {#systemcpu}
 ```json
 { "permissions": ["system.cpu"] }
 ```
@@ -33,7 +33,7 @@ cpuInfo.processors.forEach((p, i) => {
 });
 ```
 
-system.memory {#systemmemory}
+## system.memory {#systemmemory}
 ```json
 { "permissions": ["system.memory"] }
 ```
@@ -44,7 +44,7 @@ console.log(`Total: ${(memInfo.capacity / 1024 / 1024 / 1024).toFixed(1)} GB`);
 console.log(`Available: ${(memInfo.availableCapacity / 1024 / 1024 / 1024).toFixed(1)} GB`);
 ```
 
-system.storage {#systemstorage}
+## system.storage {#systemstorage}
 ```json
 { "permissions": ["system.storage"] }
 ```
@@ -68,7 +68,7 @@ chrome.system.storage.onDetached.addListener((id) => {
 });
 ```
 
-system.display {#systemdisplay}
+## system.display {#systemdisplay}
 ```json
 { "permissions": ["system.display"] }
 ```
@@ -90,7 +90,7 @@ chrome.system.display.onDisplayChanged.addListener(async () => {
 });
 ```
 
-System Monitor Pattern {#system-monitor-pattern}
+## System Monitor Pattern {#system-monitor-pattern}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 import { createMessenger } from '@theluckystrike/webext-messaging';
@@ -117,25 +117,25 @@ m.onMessage('GET_SYSTEM_INFO', async () => {
 });
 ```
 
-When to Use {#when-to-use}
+## When to Use {#when-to-use}
 - System monitoring/dashboard extensions
 - Hardware information display
 - Storage management tools
 - Multi-monitor aware extensions
 - Performance diagnostics
 
-Permission Check {#permission-check}
+## Permission Check {#permission-check}
 ```typescript
 import { checkPermission } from '@theluckystrike/webext-permissions';
 const hasCpu = await checkPermission('system.cpu');
 const hasMem = await checkPermission('system.memory');
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Guide: `docs/guides/memory-management.md`
 - Guide: `docs/guides/performance.md`
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What system information can extensions access?
 Use chrome.system to access CPU, memory, display, and storage information. The specific APIs vary by capability.

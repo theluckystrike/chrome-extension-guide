@@ -18,7 +18,7 @@ The Web Speech API has reached a level of maturity that makes building a speech 
 
 ---
 
-Understanding Speech Recognition Technology in Chrome {#understanding-speech-recognition}
+## Understanding Speech Recognition Technology in Chrome {#understanding-speech-recognition}
 
 Before diving into code, it's essential to understand the underlying technologies that power speech recognition in Chrome. The Web Speech API, specifically the SpeechRecognition interface, provides the foundation for all browser-based voice recognition capabilities. This API enables web applications to convert spoken language into written text in real-time, opening doors to innovative user experiences that were previously impossible without native applications.
 
@@ -26,7 +26,7 @@ The SpeechRecognition API works by capturing audio input from the user's microph
 
 Chrome's implementation of the Web Speech API offers several key advantages. First, it provides continuous recognition capabilities, meaning users can speak naturally without pausing between sentences. Second, it supports interim results, showing you text as it's being recognized rather than waiting for complete sentences. Third, it includes solid error handling for common scenarios like no speech detected or poor microphone input. These features combine to create a smooth voice to text experience that feels professional and reliable.
 
-How the SpeechRecognition Interface Works
+### How the SpeechRecognition Interface Works
 
 The SpeechRecognition interface serves as the core of any speech recognition extension. To use it, you create an instance of the SpeechRecognition constructor, configure its properties, and attach event listeners for handling recognition results. The API follows an event-driven architecture, firing events when speech is detected, when partial results become available, and when recognition completes.
 
@@ -36,11 +36,11 @@ One critical aspect of the SpeechRecognition API is its configuration through th
 
 ---
 
-Setting Up Your Chrome Extension Project {#project-setup}
+## Setting Up Your Chrome Extension Project {#project-setup}
 
 Now that you understand the technology, let's set up the project structure for your speech recognition extension. Every Chrome extension requires a manifest file, and for extensions built in 2025, you'll use Manifest V3, the latest version of Chrome's extension platform.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 The manifest.json file defines your extension's capabilities, permissions, and structure. For a speech recognition extension, you'll need to request microphone permission, which is considered a sensitive permission in Chrome. This means users will see a clear prompt explaining why your extension needs microphone access when they install it.
 
@@ -76,13 +76,13 @@ Create a file named manifest.json in your project directory with the following c
 
 The microphone permission is the key requirement for your speech recognition extension. The host_permissions field allows the extension to work across all websites, which is necessary if you want users to be able to insert transcribed text into any web page. You can restrict this to specific domains if your use case only requires functionality on particular sites.
 
-Creating the Extension Icons
+### Creating the Extension Icons
 
 Every extension needs icons to display in the Chrome toolbar and the extension management page. Create a simple icons folder in your project directory and add three PNG images at the specified sizes (16x16, 48x48, and 128x128 pixels). For development purposes, you can use placeholder images or create simple colored squares. In production, you should invest in properly designed icons that represent your extension's voice functionality.
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is the interface users see when they click your extension icon in the Chrome toolbar. For a voice to text Chrome extension, this popup should provide clear controls for starting and stopping recognition, displaying the transcribed text, and allowing users to copy or use the results.
 
@@ -279,7 +279,7 @@ This popup provides a modern, dark-themed interface with clear visual feedback f
 
 ---
 
-Implementing the Speech Recognition Logic {#implementation-logic}
+## Implementing the Speech Recognition Logic {#implementation-logic}
 
 The JavaScript logic connects the popup interface with the Web Speech API. Create a popup.js file that handles all speech recognition functionality:
 
@@ -427,7 +427,7 @@ This JavaScript implementation handles all aspects of the speech recognition exp
 
 ---
 
-Testing Your Extension Locally {#testing-extension}
+## Testing Your Extension Locally {#testing-extension}
 
 Before publishing your extension, you need to test it locally to ensure everything works correctly. Chrome provides a straightforward way to load unpacked extensions for testing.
 
@@ -439,7 +439,7 @@ Test various scenarios including switching languages mid-recognition, copying te
 
 ---
 
-Enhancing Your Extension {#enhancing-extension}
+## Enhancing Your Extension {#enhancing-extension}
 
 With the basic functionality working, you can enhance your speech recognition extension with additional features that improve the user experience and make it more useful for real-world applications.
 
@@ -451,7 +451,7 @@ Voice commands represent another powerful enhancement. Beyond simple dictation, 
 
 ---
 
-Publishing Your Extension {#publishing-extension}
+## Publishing Your Extension {#publishing-extension}
 
 Once you've thoroughly tested your extension and added any desired enhancements, you're ready to publish it to the Chrome Web Store. The publishing process requires a Google Developer account and a one-time registration fee.
 
@@ -461,7 +461,7 @@ Create a zip file of your extension directory, excluding any development-only fi
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a speech recognition Chrome extension is an excellent project that combines web technologies with powerful browser APIs. The Web Speech API provides solid functionality for converting speech to text, and Chrome's extension platform makes it easy to package this functionality as a distributable extension.
 

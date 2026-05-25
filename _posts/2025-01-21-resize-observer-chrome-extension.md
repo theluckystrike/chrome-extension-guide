@@ -18,7 +18,7 @@ ResizeObserver is a browser API that allows you to observe changes to an element
 
 ---
 
-Understanding ResizeObserver Fundamentals {#understanding-resize-observer}
+## Understanding ResizeObserver Fundamentals {#understanding-resize-observer}
 
 Before diving into extension-specific implementations, it is essential to grasp the core concepts of the ResizeObserver API. ResizeObserver provides a mechanism for observing changes to element dimensions without relying on polling or window resize events. This makes it far more efficient than traditional approaches that often resulted in performance issues and inaccurate measurements.
 
@@ -42,7 +42,7 @@ What makes ResizeObserver particularly powerful for extension development is its
 
 ---
 
-Why ResizeObserver Matters for Chrome Extensions {#why-resize-observer-matters}
+## Why ResizeObserver Matters for Chrome Extensions {#why-resize-observer-matters}
 
 Chrome extensions face unique sizing challenges that make traditional responsive design approaches insufficient. When a user opens your extension's popup, it has a fixed or constrained size. Side panels have their own sizing rules that may change based on user preferences or browser settings. Options pages might be opened in regular tabs with variable dimensions. Each of these contexts requires a different approach to responsive design.
 
@@ -54,7 +54,7 @@ Another critical consideration is performance. Polling element dimensions using 
 
 ---
 
-Implementing ResizeObserver in Extension Popups {#implementing-in-popups}
+## Implementing ResizeObserver in Extension Popups {#implementing-in-popups}
 
  how to implement ResizeObserver in a Chrome extension popup. The most common use case is creating a popup that adapts its layout based on available space, providing the best possible user experience regardless of how much space the user has allocated to your extension.
 
@@ -99,7 +99,7 @@ Your popup HTML should contain a container element that will be observed:
 </html>
 ```
 
-Now for the JavaScript implementation in popup.js:
+### Now for the JavaScript implementation in popup.js:
 
 ```javascript
 class ResponsivePopup {
@@ -208,7 +208,7 @@ The corresponding CSS uses these layout classes to create adaptive styles:
 
 ---
 
-Advanced Techniques for Dynamic Sizing {#advanced-techniques}
+## Advanced Techniques for Dynamic Sizing {#advanced-techniques}
 
 Beyond basic layout changes, ResizeObserver enables sophisticated dynamic sizing patterns that can significantly enhance your extension's functionality. One powerful technique is implementing virtualized lists that only render visible items based on available container height.
 
@@ -315,7 +315,7 @@ class ResponsiveChart {
 
 ---
 
-Using ResizeObserver in Content Scripts {#content-scripts}
+## Using ResizeObserver in Content Scripts {#content-scripts}
 
 Content scripts present another valuable opportunity for ResizeObserver implementation. When your extension injects UI components into web pages, you often need those components to adapt to the surrounding page layout. ResizeObserver enables this by letting you observe the container element your extension creates.
 
@@ -395,7 +395,7 @@ if (document.body) {
 
 ---
 
-Best Practices and Performance Considerations {#best-practices}
+## Best Practices and Performance Considerations {#best-practices}
 
 While ResizeObserver is powerful and efficient, following best practices ensures your extension remains performant and does not negatively impact the user's browsing experience. One critical practice is to always disconnect the observer when it is no longer needed. In Chrome extensions, this is particularly important because the popup or side panel might be opened and closed frequently.
 
@@ -454,7 +454,7 @@ handleResize(entries) {
 
 ---
 
-Common Pitfalls and How to Avoid Them {#common-pitfalls}
+## Common Pitfalls and How to Avoid Them {#common-pitfalls}
 
 Several common mistakes can undermine the effectiveness of ResizeObserver in Chrome extensions. Understanding these pitfalls helps you avoid them in your own implementations.
 
@@ -480,7 +480,7 @@ A third pitfall is memory leaks from failing to disconnect observers. In single-
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 ResizeObserver is an essential tool for building responsive, dynamic Chrome extensions. By understanding how to observe and respond to container dimension changes, you can create extensions that provide excellent user experiences across all contexts, popups, side panels, options pages, and injected content scripts.
 

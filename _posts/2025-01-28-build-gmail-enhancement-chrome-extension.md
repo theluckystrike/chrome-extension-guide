@@ -18,35 +18,35 @@ we will walk you through the entire process of building a Gmail enhancement Chro
 
 ---
 
-Why Build a Gmail Enhancement Chrome Extension? {#why-build-gmail-extension}
+## Why Build a Gmail Enhancement Chrome Extension? {#why-build-gmail-extension}
 
 The demand for Gmail productivity tools continues to grow exponentially. Professionals across industries are constantly seeking ways to streamline their email workflows, reduce time spent on repetitive tasks, and gain better control over their inbox. Building a Gmail enhancement extension puts you in a position to solve real problems for millions of users.
 
-The Market Opportunity
+### The Market Opportunity
 
 Gmail's massive user base represents a significant opportunity for developers. Users consistently seek third-party enhancements because Gmail's default features, while solid, cannot possibly address every use case. Categories like email scheduling, template management, advanced filtering, email tracking, and productivity analytics remain underserved by Gmail's native tools. A well-crafted Gmail enhancer extension can fill these gaps and attract a dedicated user base.
 
-Technical Accessibility
+### Technical Accessibility
 
 Building an email tools Chrome extension is surprisingly accessible. If you are comfortable with HTML, CSS, and JavaScript, you already possess the core skills needed. The Gmail API is well-documented, and Chrome's extension platform provides solid mechanisms for interacting with web pages. Unlike native mobile app development, there are no complex compilation processes or platform-specific requirements. You can develop, test, and iterate quickly using familiar web technologies.
 
-Monetization Potential
+### Monetization Potential
 
 Gmail enhancement extensions can generate revenue through various models. Freemium subscriptions, where basic features are free and premium features require payment, work particularly well for productivity tools. Users quickly recognize the value of features that save them hours each week, making them willing to pay for advanced capabilities. Additionally, successful extensions can attract acquisition offers from larger companies looking to expand their productivity suite.
 
 ---
 
-Understanding the Gmail API and Chrome Extension Architecture {#gmail-api-overview}
+## Understanding the Gmail API and Chrome Extension Architecture {#gmail-api-overview}
 
 Before writing any code, it is essential to understand how your extension will interact with Gmail. There are two primary approaches: using the Gmail API directly or using content scripts to interact with Gmail's web interface. Each approach has distinct advantages and limitations.
 
-The Gmail API Approach
+### The Gmail API Approach
 
 The Gmail API provides programmatic access to Gmail mailboxes, allowing your extension to read, send, modify, and delete emails. This approach requires OAuth authentication and offers the most powerful capabilities. Your extension can perform actions even when the user is not actively viewing Gmail, and you have access to comprehensive email data including labels, threads, and metadata.
 
 To use the Gmail API, you will need to set up a Google Cloud project, enable the Gmail API, and implement OAuth 2.0 authentication flow. This involves creating credentials, managing tokens, and handling token refresh. While more complex to implement than content scripts, the Gmail API enables features that are impossible to achieve otherwise.
 
-The Content Script Approach
+### The Content Script Approach
 
 Content scripts run directly within Gmail's web interface, giving your extension access to the DOM and the ability to manipulate the user interface in real-time. This approach is ideal for features like adding custom buttons, highlighting emails, or providing inline enhancements. Content scripts can detect user actions, inject UI elements, and respond to page changes in real-time.
 
@@ -54,11 +54,11 @@ The content script approach is simpler to implement and does not require OAuth a
 
 ---
 
-Setting Up Your Chrome Extension Project {#project-setup}
+## Setting Up Your Chrome Extension Project {#project-setup}
 
 Let us start building your Gmail enhancement Chrome extension. We will create a well-structured project following Manifest V3 requirements.
 
-Creating the Project Structure
+### Creating the Project Structure
 
 Create a new folder for your extension and set up the following file structure:
 
@@ -77,7 +77,7 @@ gmail-enhancer/
  styles.css
 ```
 
-Writing the Manifest File
+### Writing the Manifest File
 
 The manifest.json file defines your extension's configuration and permissions. For a Gmail enhancement extension, you will need specific permissions to interact with Gmail's tabs and potentially access the Gmail API.
 
@@ -122,11 +122,11 @@ This manifest grants your extension the necessary permissions to interact with G
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click your extension icon. For a Gmail enhancer extension, this should provide quick access to core features and display relevant information.
 
-The Popup HTML
+### The Popup HTML
 
 ```html
 <!DOCTYPE html>
@@ -199,7 +199,7 @@ The Popup HTML
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
 The popup CSS should match Gmail's design language while providing a clean, professional appearance:
 
@@ -343,11 +343,11 @@ body {
 
 ---
 
-Implementing Content Scripts for Gmail Interaction {#content-scripts}
+## Implementing Content Scripts for Gmail Interaction {#content-scripts}
 
 Content scripts are the heart of your Gmail enhancement extension. They run within Gmail's pages and can interact with the DOM to add features, buttons, and enhancements.
 
-Detecting the Active View
+### Detecting the Active View
 
 Your content script needs to understand what the user is doing in Gmail. Is they viewing their inbox, reading an email, or composing a new message? Use this detection logic:
 
@@ -568,7 +568,7 @@ Best regards`
 })();
 ```
 
-Styling Content Script Injections
+### Styling Content Script Injections
 
 ```css
 /* styles.css */
@@ -654,7 +654,7 @@ Styling Content Script Injections
 
 ---
 
-Background Service Worker Implementation {#background-worker}
+## Background Service Worker Implementation {#background-worker}
 
 The background service worker handles extension-wide state, manages storage, and coordinates communication between different parts of your extension.
 
@@ -738,7 +738,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 ---
 
-Popup JavaScript Implementation {#popup-javascript}
+## Popup JavaScript Implementation {#popup-javascript}
 
 The popup JavaScript connects the UI to the extension's functionality:
 
@@ -848,18 +848,18 @@ function openGmailCompose() {
 
 ---
 
-Testing Your Gmail Enhancement Extension {#testing}
+## Testing Your Gmail Enhancement Extension {#testing}
 
 Testing is crucial for Gmail extensions because of the complexity of Gmail's interface and the potential for breaking changes.
 
-Local Testing
+### Local Testing
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension folder
 4. Navigate to Gmail and verify your enhancements appear correctly
 
-Test Checklist
+### Test Checklist
 
 - [ ] Extension icon appears in the Chrome toolbar
 - [ ] Popup opens when clicking the extension icon
@@ -870,7 +870,7 @@ Test Checklist
 - [ ] Settings persist across browser restarts
 - [ ] Stats are tracked and displayed correctly
 
-Handling Gmail Updates
+### Handling Gmail Updates
 
 Gmail frequently updates its interface, which can break content script functionality. Implement solid error handling:
 
@@ -902,26 +902,26 @@ async function waitForElement(selector, timeout = 5000) {
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your Gmail enhancement extension is tested and polished, you can publish it to the Chrome Web Store.
 
-Preparation
+### Preparation
 
 1. Create a developer account at the Chrome Web Store
 2. Prepare promotional assets: screenshots, icon, and description
 3. Verify your extension meets all Chrome Web Store policies
 4. Zip your extension folder (excluding unnecessary files)
 
-Store Listing Optimization
+### Store Listing Optimization
 
-Your store listing should highlight the productivity benefits:
+### Your store listing should highlight the productivity benefits:
 
 - Title: Gmail Productivity Enhancer - Quick Templates & More
 - Short description: Speed up your Gmail workflow with powerful email tools
 - Long description: Include keywords naturally (gmail enhancer extension, email tools chrome, gmail productivity) while describing features
 
-Pricing and Distribution
+### Pricing and Distribution
 
 Consider your monetization strategy:
 
@@ -931,7 +931,7 @@ Consider your monetization strategy:
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 Building a Gmail enhancement Chrome extension is an excellent project that combines practical utility with marketable skills. The fundamentals we have covered, Manifest V3 configuration, content script development, background service workers, and Gmail API integration, apply broadly to other Chrome extension projects.
 

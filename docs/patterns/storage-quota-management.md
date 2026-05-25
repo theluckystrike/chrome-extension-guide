@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/storage-quota-manageme
 last_modified_at: 2026-01-15
 ---
 
-Storage Quota Management
+### Storage Quota Management
 
 Chrome extension storage has strict quota limits that require careful management. This guide covers patterns for effectively managing storage quotas in your extension.
 
-Quota Overview {#quota-overview}
+## Quota Overview {#quota-overview}
 
 | Storage Type | Quota Limit | Notes |
 |--------------|--------------|-------|
@@ -18,7 +18,7 @@ Quota Overview {#quota-overview}
 | `sync` | 100 KB total, 8 KB/item | Synced across user's devices |
 | `session` | 10 MB | Cleared on browser restart |
 
-Monitoring Usage {#monitoring-usage}
+## Monitoring Usage {#monitoring-usage}
 
 ```javascript
 // Monitor storage usage
@@ -29,9 +29,9 @@ async function getStorageUsage() {
 }
 ```
 
-Data Compression {#data-compression}
+## Data Compression {#data-compression}
 
-Use LZ-string to compress JSON data before storing:
+### Use LZ-string to compress JSON data before storing:
 
 ```javascript
 import LZString from 'lz-string';
@@ -40,9 +40,9 @@ const compress = (data) => LZString.compressToUTF16(JSON.stringify(data));
 const decompress = (compressed) => JSON.parse(LZString.decompressFromUTF16(compressed));
 ```
 
-Data Eviction Strategies {#data-eviction-strategies}
+## Data Eviction Strategies {#data-eviction-strategies}
 
-LRU Cache Implementation {#lru-cache-implementation}
+## LRU Cache Implementation {#lru-cache-implementation}
 
 ```javascript
 class LRUStorage {
@@ -75,7 +75,7 @@ class LRUStorage {
 }
 ```
 
-TTL-Based Expiry {#ttl-based-expiry}
+## TTL-Based Expiry {#ttl-based-expiry}
 
 ```javascript
 async function setWithTTL(key, value, ttlMs) {
@@ -85,7 +85,7 @@ async function setWithTTL(key, value, ttlMs) {
 }
 ```
 
-Splitting Large Data {#splitting-large-data}
+## Splitting Large Data {#splitting-large-data}
 
 For data exceeding single-key limits, chunk across multiple keys:
 
@@ -105,9 +105,9 @@ async function storeLargeData(key, data) {
 }
 ```
 
-IndexedDB as Overflow {#indexeddb-as-overflow}
+## IndexedDB as Overflow {#indexeddb-as-overflow}
 
-For data exceeding `local` storage, use IndexedDB:
+### For data exceeding `local` storage, use IndexedDB:
 
 ```javascript
 const DB_NAME = 'ExtensionDB';
@@ -125,9 +125,9 @@ async function initDB() {
 }
 ```
 
-Permission Considerations {#permission-considerations}
+## Permission Considerations {#permission-considerations}
 
-Request `unlimitedStorage` in manifest to bypass quotas:
+### Request `unlimitedStorage` in manifest to bypass quotas:
 
 ```json
 {
@@ -137,9 +137,9 @@ Request `unlimitedStorage` in manifest to bypass quotas:
 
 This still doesn't guarantee infinite storage; browsers may still enforce limits.
 
-Sync Storage Optimization {#sync-storage-optimization}
+## Sync Storage Optimization {#sync-storage-optimization}
 
-Minimize sync storage usage:
+### Minimize sync storage usage:
 
 ```javascript
 // Only sync critical small data
@@ -149,9 +149,9 @@ async function syncSettings(settings) {
 }
 ```
 
-Batch Operations {#batch-operations}
+## Batch Operations {#batch-operations}
 
-Group writes to avoid write limits:
+### Group writes to avoid write limits:
 
 ```javascript
 async function batchSet(items) {
@@ -161,7 +161,7 @@ async function batchSet(items) {
 }
 ```
 
-Cleaning Orphaned Data {#cleaning-orphaned-data}
+## Cleaning Orphaned Data {#cleaning-orphaned-data}
 
 ```javascript
 async function cleanup() {
@@ -175,9 +175,9 @@ async function cleanup() {
 }
 ```
 
-User-Facing Storage UI {#user-facing-storage-ui}
+## User-Facing Storage UI {#user-facing-storage-ui}
 
-Display usage to users for transparency:
+### Display usage to users for transparency:
 
 ```javascript
 function renderStorageUI(container) {
@@ -192,7 +192,7 @@ function renderStorageUI(container) {
 }
 ```
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Storage API detailed look](../api-reference/storage-api-deep detailed look.md)
 - [IndexedDB for Extensions](../patterns/indexeddb-extensions.md)

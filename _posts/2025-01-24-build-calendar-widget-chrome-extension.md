@@ -20,11 +20,11 @@ In this tutorial, we'll build a Manifest V3 compliant calendar chrome extension 
 
 ---
 
-Understanding the Architecture of a Calendar Chrome Extension {#architecture}
+## Understanding the Architecture of a Calendar Chrome Extension {#architecture}
 
 Before diving into code, let's discuss the fundamental architecture of a calendar chrome extension. Chrome extensions following Manifest V3 consist of several key components that work together to deliver a cohesive user experience. Understanding these components will help you make informed decisions throughout the development process.
 
-Core Components
+### Core Components
 
 The popup window serves as the primary interface for your schedule widget. This is what users see when they click your extension icon in the Chrome toolbar. The popup contains the calendar grid, event list, and controls for adding new events. Unlike traditional web applications that load every time you visit a page, Chrome extensions load their popup instantly because they're bundled with the extension package.
 
@@ -36,7 +36,7 @@ The manifest.json file defines your extension's configuration, permissions, and 
 
 ---
 
-Setting Up Your Development Environment {#setup}
+## Setting Up Your Development Environment {#setup}
 
 Every successful chrome extension project starts with proper organization. Create a dedicated folder for your calendar widget project and organize your files in a logical structure. This organization will make development smoother and future updates easier to manage.
 
@@ -75,11 +75,11 @@ This manifest declares that we're building a schedule widget that uses storage f
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The user interface of your calendar chrome extension needs to be intuitive, visually appealing, and functional within the limited space of a browser popup. Let's create a clean, modern design that provides all the functionality users expect from a daily planner extension.
 
-Open popup.html and add the following structure:
+### Open popup.html and add the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -133,11 +133,11 @@ This HTML structure provides the foundation for our calendar chrome extension. T
 
 ---
 
-Styling Your Schedule Widget {#styling}
+## Styling Your Schedule Widget {#styling}
 
 The visual design of your daily planner extension plays a crucial role in user adoption. A polished, professional appearance builds trust and makes the extension pleasant to use daily. Let's create styles that match Chrome's Material Design aesthetic while remaining unique to your brand.
 
-Open popup.css and add these styles:
+### Open popup.css and add these styles:
 
 ```css
 * {
@@ -374,11 +374,11 @@ These styles create a clean, modern calendar chrome extension interface. The des
 
 ---
 
-Implementing Calendar Logic {#calendar-logic}
+## Implementing Calendar Logic {#calendar-logic}
 
 Now comes the most important part of your schedule widget, the JavaScript logic that makes everything work. We'll implement month navigation, day selection, event storage, and display functionality. This is where your daily planner extension truly comes to life.
 
-Open popup.js and add the following code:
+### Open popup.js and add the following code:
 
 ```javascript
 // Calendar State
@@ -588,7 +588,7 @@ This JavaScript implementation provides all the core functionality for your cale
 
 ---
 
-Testing Your Chrome Extension {#testing}
+## Testing Your Chrome Extension {#testing}
 
 Before publishing your calendar chrome extension, thorough testing ensures everything works correctly. Chrome provides built-in tools for loading unpacked extensions, making the testing process straightforward and efficient.
 
@@ -600,7 +600,7 @@ The Chrome Developer Tools extension inspector provides valuable debugging capab
 
 ---
 
-Enhancing Your Calendar Widget {#enhancements}
+## Enhancing Your Calendar Widget {#enhancements}
 
 Once your basic daily planner extension is working, consider adding features that will make it stand out in the Chrome Web Store. Notification reminders ensure users never miss important events, while data export and import functionality provides backup and restore capabilities.
 
@@ -610,7 +610,7 @@ Consider adding a dark mode that automatically matches Chrome's system theme pre
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 When your calendar chrome extension is ready for the world, the Chrome Web Store provides global distribution. Create a developer account at the Chrome Web Store developer dashboard, pay the one-time registration fee, and prepare your store listing with compelling descriptions and screenshots.
 
@@ -620,7 +620,7 @@ After submitting your extension, Google reviews it for policy compliance. The re
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a calendar chrome extension is an excellent project that teaches fundamental concepts of Chrome extension development while creating something genuinely useful. Your schedule widget demonstrates proficiency with Manifest V3, Chrome's storage API, popup development, and JavaScript calendar logic.
 

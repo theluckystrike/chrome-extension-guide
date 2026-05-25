@@ -16,7 +16,7 @@ This comprehensive guide explores how browser tabs drain your battery, how Tab S
 
 ---
 
-Table of Contents
+### Table of Contents
 
 - [How Browser Tabs Drain Battery](#how-browser-tabs-drain-battery)
 - [CPU Wake-Ups from Background Tabs](#cpu-wake-ups-from-background-tabs)
@@ -30,11 +30,11 @@ Table of Contents
 
 ---
 
-How Browser Tabs Drain Battery
+### How Browser Tabs Drain Battery
 
 Understanding why tabs consume battery requires understanding how modern web pages work. Unlike the static documents of the early web, today's websites are dynamic applications that continue running even when hidden in background tabs.
 
-The Architecture of a Modern Web Page
+### The Architecture of a Modern Web Page
 
 When you open a tab in Chrome, you're not just loading text and images, you're launching a complex software environment that includes:
 
@@ -46,7 +46,7 @@ When you open a tab in Chrome, you're not just loading text and images, you're l
 
 This architecture is designed for desktop users with unlimited power, but it creates significant challenges for laptop users who need to maximize every watt-hour of battery capacity.
 
-Quantifying the Battery Impact
+### Quantifying the Battery Impact
 
 The impact of background tabs on battery life is substantial and often underestimated. Our testing reveals that:
 
@@ -60,17 +60,17 @@ These figures represent the additional battery consumption compared to having Ch
 
 ---
 
-CPU Wake-Ups from Background Tabs
+### CPU Wake-Ups from Background Tabs
 
 The technical mechanism behind battery drain involves CPU power states and interrupt-driven wake-ups. Understanding this process helps explain why tab suspension is so effective at preserving battery life.
 
-Understanding CPU Power States
+### Understanding CPU Power States
 
 Modern processors have multiple power states, from fully active (C0) to deep sleep (C6/C7/C8). When idle with no work to do, the CPU drops into these low-power states, reducing consumption to mere milliwatts. However, any interrupt, timer, or execution request forces the CPU back to active states, consuming significantly more power.
 
 The time required to exit deep sleep and return to full performance, plus the energy cost of that transition, means frequent wake-ups are particularly expensive in terms of battery life.
 
-The Wake-Up Problem in Background Tabs
+### The Wake-Up Problem in Background Tabs
 
 A typical web page contains numerous sources of wake-up events:
 
@@ -93,24 +93,24 @@ This table clearly shows why tab suspension is so effective, by freezing tabs, w
 
 ---
 
-Tab Suspender Pro Suspend-on-Battery Mode
+### Tab Suspender Pro Suspend-on-Battery Mode
 
 Tab Suspender Pro includes a powerful battery-aware mode designed specifically for laptop users. When enabled, this feature automatically increases suspension aggressiveness when running on battery power.
 
-How Suspend-on-Battery Works
+### How Suspend-on-Battery Works
 
 The suspend-on-battery mode operates on a simple but effective principle: when your laptop is plugged in, you have plenty of power available, so tabs can remain active longer. When running on battery, every unnecessary wake-up counts against your remaining runtime.
 
-Key Features:
+### Key Features:
 
 - Automatic Detection: Tab Suspender Pro detects power source changes in real-time
 - Configurable Sensitivity: Choose from conservative, balanced, or aggressive modes
 - Whitelist Override: Critical tabs (video calls, downloads) can be excluded
 - Smooth Transitions: No jarring tab suspensions when plugging/unplugging
 
-Configuration Options
+### Configuration Options
 
-The extension provides granular control over battery-mode behavior:
+### The extension provides granular control over battery-mode behavior:
 
 1. Conservative Mode: 60-second idle timer on battery (vs. 30 seconds plugged in)
 2. Balanced Mode: 30-second idle timer on battery (vs. 15 seconds plugged in)
@@ -118,7 +118,7 @@ The extension provides granular control over battery-mode behavior:
 
 For most users, Balanced Mode provides the best tradeoff between battery savings and usability. The 30-second timer is short enough to capture significant savings while allowing for normal tab-switching behavior.
 
-Advanced Battery Settings
+### Advanced Battery Settings
 
 Beyond simple timer adjustments, Tab Suspender Pro offers advanced options for power users:
 
@@ -131,13 +131,13 @@ These advanced features allow you to create a highly personalized power manageme
 
 ---
 
-Real-World Battery Tests: MacBook and Windows Laptop
+### Real-World Battery Tests: MacBook and Windows Laptop
 
 Theory is useful, but real-world testing reveals the actual impact of tab suspension on battery life. We conducted comprehensive tests on both macOS and Windows laptops to measure the effectiveness of Tab Suspender Pro.
 
-Test Methodology
+### Test Methodology
 
-All tests followed consistent procedures:
+### All tests followed consistent procedures:
 
 1. Hardware: Fresh OS installations with no other battery-intensive applications
 2. Software: Chrome 131 with Tab Suspender Pro 4.2.1; no other extensions
@@ -145,7 +145,7 @@ All tests followed consistent procedures:
 4. Measurement: System battery reporting with Activity Monitor/Task Manager verification
 5. Workload: Mix of research (tabs for articles), communication (email, Slack), and reference materials
 
-MacBook Pro 14-inch (M3 Pro) Results
+### MacBook Pro 14-inch (M3 Pro) Results
 
 Test Configuration:
 - MacBook Pro 14-inch (M3 Pro, 18GB RAM)
@@ -163,7 +163,7 @@ Test Configuration:
 
 Key Finding: Tab Suspender Pro's battery mode recovered 70% of the battery time lost to background tabs, an extra 1.8 hours compared to default settings.
 
-Dell XPS 15 (Intel Core i7) Results
+### Dell XPS 15 (Intel Core i7) Results
 
 Test Configuration:
 - Dell XPS 15 9530 (Intel Core i7-13700H, 32GB RAM)
@@ -181,9 +181,9 @@ Test Configuration:
 
 Key Finding: On Windows, where Chrome's built-in power management is less aggressive, Tab Suspender Pro provided even more dramatic improvements, recovering 80% of the lost battery time.
 
-Cross-Platform Comparison
+### Cross-Platform Comparison
 
-The tests reveal interesting differences between platforms:
+### The tests reveal interesting differences between platforms:
 
 - macOS: Benefits from aggressive built-in tab freezing but Tab Suspender Pro adds significant value
 - Windows: Much larger gains from Tab Suspender Pro due to weaker built-in tab management
@@ -193,11 +193,11 @@ For the best battery experience, we recommend Tab Suspender Pro with battery mod
 
 ---
 
-Comparing with Chrome Built-in Tab Freezing
+### Comparing with Chrome Built-in Tab Freezing
 
 Chrome includes its own tab management features, so it's worth understanding how they compare with Tab Suspender Pro's approach.
 
-Chrome's Built-in Tab Discarding
+### Chrome's Built-in Tab Discarding
 
 Chrome automatically "discards" tabs when system memory pressure increases. Discarded tabs are removed from memory entirely and reload when accessed. This is similar to Tab Suspender Pro's suspension but with key differences:
 
@@ -210,7 +210,7 @@ Chrome automatically "discards" tabs when system memory pressure increases. Disc
 | Battery impact | Good | Excellent |
 | CPU impact | Good | Excellent |
 
-Chrome's Energy Saver Mode
+### Chrome's Energy Saver Mode
 
 Chrome 131+ includes an "Energy Saver" mode that attempts to reduce background tab activity. However, this feature:
 
@@ -219,7 +219,7 @@ Chrome 131+ includes an "Energy Saver" mode that attempts to reduce background t
 - Provides less aggressive suspension than Tab Suspender Pro
 - Offers no per-tab customization
 
-Why Tab Suspender Pro Outperforms
+### Why Tab Suspender Pro Outperforms
 
 Tab Suspender Pro provides several advantages over Chrome's built-in features:
 
@@ -233,11 +233,11 @@ For users who want maximum battery life, Tab Suspender Pro provides significantl
 
 ---
 
-Optimal Suspend Timers for Battery Life
+### Optimal Suspend Timers for Battery Life
 
 Finding the right suspension timer is crucial, too aggressive, and tabs will suspend while you're still using them; too conservative, and you'll miss battery savings.
 
-Recommended Timer Settings by Use Case
+### Recommended Timer Settings by Use Case
 
 | Use Case | Battery Mode Timer | Plugged-In Timer | Notes |
 |----------|-------------------|------------------|-------|
@@ -260,7 +260,7 @@ Our testing shows the relationship between timer settings and battery savings:
 
 The diminishing returns at longer timers mean that 15-30 seconds provides the best efficiency. Going below 15 seconds rarely provides meaningful additional savings and significantly impacts usability.
 
-Activity-Based Timers
+### Activity-Based Timers
 
 Tab Suspender Pro's activity-based timers offer a smarter approach. Instead of pure idle time, these timers consider:
 
@@ -273,18 +273,18 @@ This results in more intelligent suspension that identifies truly idle tabs even
 
 ---
 
-Combining with Other Battery Extensions
+### Combining with Other Battery Extensions
 
 Tab Suspender Pro works well with other battery-saving tools, creating a multiplicative effect on battery life.
 
-Recommended Extension Combinations
+### Recommended Extension Combinations
 
 1. Tab Suspender Pro + OneTab: OneTab provides manual tab consolidation while Tab Suspender Pro handles automatic suspension
 2. Tab Suspender Pro + The Great Suspender: Redundant for most users; pick one
 3. Tab Suspender Pro + uBlock Origin: Blocks battery-draining ads and trackers before they load
 4. Tab Suspender Pro + Dark Reader: Reduces screen power consumption on supported displays
 
-Energy-Aware Browsing Stack
+### Energy-Aware Browsing Stack
 
 For maximum battery efficiency, we recommend a complete "energy-aware" extension stack:
 
@@ -295,9 +295,9 @@ For maximum battery efficiency, we recommend a complete "energy-aware" extension
 
 This combination addresses battery drain from multiple angles, suspended tabs, blocked content, and eliminated trackers.
 
-What NOT to Combine
+### What NOT to Combine
 
-Avoid extensions that conflict with Tab Suspender Pro:
+### Avoid extensions that conflict with Tab Suspender Pro:
 
 - Other tab suspenders (choose one)
 - Tab manager extensions that prevent suspension
@@ -305,11 +305,11 @@ Avoid extensions that conflict with Tab Suspender Pro:
 
 ---
 
-Power User Workflow Tips
+### Power User Workflow Tips
 
 Beyond basic configuration, power users can employ advanced strategies to maximize battery savings while maintaining productivity.
 
-Workflow Optimization Strategies
+### Workflow Optimization Strategies
 
 1. Create Dedicated Whitelists
    - Email and calendar: Always keep active
@@ -330,9 +330,9 @@ Workflow Optimization Strategies
    - Create separate profiles for different use cases
    - Use automation tools to switch profiles based on location/time
 
-Battery Monitoring Integration
+### Battery Monitoring Integration
 
-Tab Suspender Pro integrates with system battery monitoring:
+### Tab Suspender Pro integrates with system battery monitoring:
 
 - macOS: Reads battery status via Chrome's power API
 - Windows: Uses Windows Battery API for accurate status
@@ -340,7 +340,7 @@ Tab Suspender Pro integrates with system battery monitoring:
 
 For the most accurate behavior, ensure Chrome has battery reporting permissions enabled in your operating system.
 
-Mobile Hotspot Considerations
+### Mobile Hotspot Considerations
 
 When using mobile hotspots, battery savings become even more critical:
 
@@ -350,7 +350,7 @@ When using mobile hotspots, battery savings become even more critical:
 
 ---
 
-Conclusion
+### Conclusion
 
 Battery life remains one of the most valuable resources for laptop users, and browser tabs are often the biggest unseen drain on that resource. Tab Suspender Pro provides comprehensive tools to combat this drain through intelligent, configurable tab suspension that adapts to your power source and usage patterns.
 
@@ -358,7 +358,7 @@ Our testing demonstrates that Tab Suspender Pro can recover 70-80% of the batter
 
 For users deciding between Tab Suspender Pro and alternatives, our [comprehensive comparison guide](/docs/guides/tab-suspender-pro-vs-great-suspender-comparison/) provides detailed analysis of the major options available.
 
-Key Takeaways:
+### Key Takeaways:
 
 - Background tabs cause 40-50% battery loss with 30-50 tabs open
 - Tab Suspender Pro's battery mode recovers 70-80% of that loss

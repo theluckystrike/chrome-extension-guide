@@ -46,11 +46,11 @@ vpn-extension/
 
 ---
 
-Chrome Proxy API Fundamentals
+### Chrome Proxy API Fundamentals
 
 The `chrome.proxy` API is the core of any VPN extension. It allows you to configure Chrome's proxy settings programmatically.
 
-Manifest Configuration
+### Manifest Configuration
 
 ```json
 {
@@ -77,7 +77,7 @@ Manifest Configuration
 }
 ```
 
-Basic Proxy Configuration
+### Basic Proxy Configuration
 
 ```typescript
 // shared/types.ts
@@ -108,7 +108,7 @@ export interface VPNState {
 
 ---
 
-Service Worker Implementation
+### Service Worker Implementation
 
 The service worker handles all proxy-related operations and maintains the extension's state.
 
@@ -313,7 +313,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Connection Management Patterns
+### Connection Management Patterns
 
 For a production VPN extension, you need solid connection management that handles network changes, automatic reconnection, and server switching.
 
@@ -417,7 +417,7 @@ export class ConnectionManager {
 
 ---
 
-UI State Management
+### UI State Management
 
 The popup UI needs to reflect the current VPN state and provide smooth user interaction.
 
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Error Handling and Fallback
+### Error Handling and Fallback
 
 Robust error handling is critical for VPN extensions, as network conditions can change unexpectedly.
 
@@ -636,11 +636,11 @@ export class VPNErrorHandler {
 
 ---
 
-Security Considerations
+### Security Considerations
 
 When building VPN extensions, security must be a top priority.
 
-Key Security Practices
+### Key Security Practices
 
 1. Credential Storage: Never store credentials in plain text. Use `chrome.storage.encrypted` or server-side token management.
 
@@ -690,7 +690,7 @@ export class SecurityManager {
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a VPN extension requires careful consideration of Chrome's proxy API, service worker lifecycle management, and network error handling. The patterns outlined in this guide provide a solid foundation for creating reliable, secure VPN extensions.
 

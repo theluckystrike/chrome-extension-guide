@@ -18,11 +18,11 @@ This project is perfect for developers who want to add a practical tool to their
 
 ---
 
-Why Build a Regex Tester Chrome Extension? {#why-build-regex-tester}
+## Why Build a Regex Tester Chrome Extension? {#why-build-regex-tester}
 
 Before diving into the code, let's explore why building a regex tester extension is worthwhile and what features we want to include.
 
-The Problem with Regex Development
+### The Problem with Regex Development
 
 Regular expressions have a notoriously steep learning curve. The syntax is cryptic, and a small mistake can cause the entire pattern to fail or match unintended text. Developers often struggle with:
 
@@ -31,7 +31,7 @@ Regular expressions have a notoriously steep learning curve. The syntax is crypt
 - Handling edge cases: Ensuring the pattern works with various input formats
 - Managing flags: Understanding the difference between global, case-insensitive, and multiline modes
 
-Our Solution: Regex Tester Extension
+### Our Solution: Regex Tester Extension
 
 By building a dedicated Chrome extension, we solve these problems with:
 
@@ -45,11 +45,11 @@ This extension will be useful for both beginners learning regex and experienced 
 
 ---
 
-Project Structure and Setup {#project-structure}
+## Project Structure and Setup {#project-structure}
 
 Let's start by setting up the project structure for our Chrome extension. We'll use Manifest V3, which is the current standard for Chrome extensions.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Every Chrome extension needs a `manifest.json` file that describes its configuration. Create a new file called `manifest.json` in your project directory:
 
@@ -78,9 +78,9 @@ Every Chrome extension needs a `manifest.json` file that describes its configura
 
 The manifest defines our extension's name, version, and specifies that we'll use a popup interface. The `permissions` array includes `activeTab` and `scripting` which we'll use to inject content scripts for match highlighting.
 
-Directory Structure
+### Directory Structure
 
-Create the following directory structure:
+### Create the following directory structure:
 
 ```
 regex-tester-extension/
@@ -98,13 +98,13 @@ regex-tester-extension/
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup is what users see when they click the extension icon. We'll create a clean, intuitive interface with input fields for the regex pattern, test string, and various controls.
 
-HTML Structure
+### HTML Structure
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -188,9 +188,9 @@ The HTML provides a clean interface with pattern input, flag toggles, test strin
 
 ---
 
-Styling the Extension {#styling}
+## Styling the Extension {#styling}
 
-Create `popup.css` to style our extension:
+### Create `popup.css` to style our extension:
 
 ```css
 * {
@@ -450,7 +450,7 @@ This CSS provides a modern, clean design with proper spacing, colors, and intera
 
 ---
 
-Implementing the Core Logic {#core-logic}
+## Implementing the Core Logic {#core-logic}
 
 Now let's create the JavaScript that powers our regex tester. Create `popup.js`:
 
@@ -672,7 +672,7 @@ This JavaScript implements all the core functionality including real-time patter
 
 ---
 
-Adding Advanced Features with Content Scripts {#content-scripts}
+## Adding Advanced Features with Content Scripts {#content-scripts}
 
 To make our regex tester even more powerful, we can add the ability to test regex patterns against content on the current webpage. Create `content.js`:
 
@@ -749,7 +749,7 @@ This content script allows users to highlight regex matches on any webpage, maki
 
 ---
 
-Adding a Background Service Worker {#background-worker}
+## Adding a Background Service Worker {#background-worker}
 
 For advanced functionality like keyboard shortcuts or notifications, we need a background service worker. Create `background.js`:
 
@@ -812,7 +812,7 @@ The background worker handles pattern saving, keyboard shortcuts, and installati
 
 ---
 
-Creating Extension Icons {#icons}
+## Creating Extension Icons {#icons}
 
 Every Chrome extension needs icons. For this guide, we'll use simple placeholder icons. In a production extension, you would create professionally designed icons. Create simple SVG-based PNG icons or use a tool to generate them.
 
@@ -820,9 +820,9 @@ For now, create placeholder icon files. You can generate simple icons using onli
 
 ---
 
-Testing the Extension Locally {#testing}
+## Testing the Extension Locally {#testing}
 
-Before publishing, let's test our extension:
+### Before publishing, let's test our extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right
@@ -838,7 +838,7 @@ Try these test cases:
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you've tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store:
 
@@ -854,7 +854,7 @@ Once you've tested your extension and are satisfied with its functionality, you 
 
 ---
 
-Advanced Enhancements {#advanced-enhancements}
+## Advanced Enhancements {#advanced-enhancements}
 
 Here are some ideas to further improve your regex tester extension:
 
@@ -878,7 +878,7 @@ Add a dark mode option for users who prefer darker interfaces.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've built a fully functional Regex Tester Chrome Extension from scratch. This extension provides:
 
@@ -897,7 +897,7 @@ Happy coding, and enjoy your new regex testing tool!
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Regex Reference on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)

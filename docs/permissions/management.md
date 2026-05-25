@@ -11,20 +11,20 @@ last_modified_at: 2026-01-15
 
 management Permission
 
-What It Grants {#what-it-grants}
+## What It Grants {#what-it-grants}
 Access to `chrome.management` API. manage other installed extensions, apps, and themes.
 
-Manifest {#manifest}
+## Manifest {#manifest}
 ```json
 { "permissions": ["management"] }
 ```
 
-User Warning {#user-warning}
+## User Warning {#user-warning}
 "Manage your apps, extensions, and themes"
 
-API Access {#api-access}
+## API Access {#api-access}
 
-Querying Extensions {#querying-extensions}
+## Querying Extensions {#querying-extensions}
 ```javascript
 // Get all installed extensions
 const extensions = await chrome.management.getAll();
@@ -43,7 +43,7 @@ console.log(self.name, self.installType); // "normal" | "development" | "sideloa
 const warnings = await chrome.management.getPermissionWarningsById('ext-id');
 ```
 
-Managing Extensions {#managing-extensions}
+## Managing Extensions {#managing-extensions}
 ```javascript
 // Enable/disable
 await chrome.management.setEnabled('ext-id', false); // Disable
@@ -56,7 +56,7 @@ chrome.management.uninstall('ext-id', { showConfirmDialog: true });
 chrome.management.launchApp('app-id');
 ```
 
-Events {#events}
+## Events {#events}
 ```javascript
 chrome.management.onInstalled.addListener((info) => {
   console.log('Installed:', info.name, info.id);
@@ -72,7 +72,7 @@ chrome.management.onDisabled.addListener((info) => {
 });
 ```
 
-ExtensionInfo Properties {#extensioninfo-properties}
+## ExtensionInfo Properties {#extensioninfo-properties}
 - `id`, `name`, `shortName`, `description`, `version`, `versionName`
 - `enabled`, `disabledReason` ("unknown" | "permissions_increase")
 - `type` ("extension" | "hosted_app" | "packaged_app" | "legacy_packaged_app" | "theme")
@@ -81,7 +81,7 @@ ExtensionInfo Properties {#extensioninfo-properties}
 - `icons` array with `size` and `url`
 - `homepageUrl`, `updateUrl`, `optionsUrl`
 
-Common Use Cases
+### Common Use Cases
 
 Extension Manager Tools
 Build comprehensive extension management dashboards that allow users to view, organize, and control all their installed extensions in one place. This is particularly useful for enterprise environments where IT administrators need to manage multiple extensions across many users.
@@ -98,7 +98,7 @@ Build reporting tools that analyze the extensions in a user's browser. This help
 Auto-Disable Conflicting Extensions
 When a user installs your extension, you can check for known conflicting extensions and prompt the user to disable them. This ensures a smoother user experience and prevents unexpected behavior.
 
-Best Practices
+### Best Practices
 
 Always Use getSelf() for Self-Management
 Don't hardcode your extension's ID. Use `chrome.management.getSelf()` to get information about your own extension. This makes your code more maintainable and works across different installation contexts (development, normal, sideload).
@@ -115,20 +115,20 @@ Before prompting users to enable or disable extensions, use `getPermissionWarnin
 Respect User Privacy
 When building analytics tools, always be transparent about what data you collect and never transmit extension information to external servers without explicit user consent.
 
-When to Use
+### When to Use
 
-When to Use {#when-to-use}
+## When to Use {#when-to-use}
 - Extension manager tools
 - Enterprise extension management
 - Conflict detection between extensions
 - Extension analytics/inventory
 - Auto-disable conflicting extensions
 
-When NOT to Use {#when-not-to-use}
+## When NOT to Use {#when-not-to-use}
 - Don't use for self-management. use `chrome.management.getSelf()` only
 - Don't disable user's extensions without clear consent
 
-Runtime Check {#runtime-check}
+## Runtime Check {#runtime-check}
 ```typescript
 import { checkPermission, describePermission } from '@theluckystrike/webext-permissions';
 const granted = await checkPermission('management');
@@ -136,10 +136,10 @@ const desc = describePermission('management');
 // "Manage your apps, extensions, and themes"
 ```
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - Related: `docs/reference/lifecycle-events.md` (management events)
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 What can I do with the management API?
 The chrome.management API allows extensions to get info about other installed extensions, enable/disable them, and manage apps.

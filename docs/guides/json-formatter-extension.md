@@ -47,7 +47,7 @@ A JSON Formatter extension typically consists of three main components:
 
 ---
 
-Manifest V3 Setup
+### Manifest V3 Setup
 
 Create your `manifest.json` with the necessary permissions and configuration:
 
@@ -94,7 +94,7 @@ Create your `manifest.json` with the necessary permissions and configuration:
 }
 ```
 
-Permission Strategy
+### Permission Strategy
 
 | Permission | Purpose | Required |
 |------------|---------|----------|
@@ -106,9 +106,9 @@ Permission Strategy
 
 ---
 
-Core TypeScript Implementation
+### Core TypeScript Implementation
 
-Project Structure
+### Project Structure
 
 ```
 src/
@@ -130,7 +130,7 @@ src/
      logger.ts
 ```
 
-Shared Types (src/shared/types.ts)
+### Shared Types (src/shared/types.ts)
 
 ```typescript
 // Type definitions for the JSON Formatter extension
@@ -183,7 +183,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
 };
 ```
 
-Core Formatter (src/shared/json-formatter.ts)
+### Core Formatter (src/shared/json-formatter.ts)
 
 ```typescript
 import type { FormatterOptions, FormatResult } from './types';
@@ -361,9 +361,9 @@ export const createFormatter = (options?: FormatterOptions): JsonFormatter =>
 
 ---
 
-UI Design Patterns
+### UI Design Patterns
 
-Popup Implementation (src/popup/popup.ts)
+### Popup Implementation (src/popup/popup.ts)
 
 ```typescript
 import { createFormatter, DEFAULT_SETTINGS, type UserSettings } from '../shared/types';
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-Content Script Overlay (src/content/content.ts)
+### Content Script Overlay (src/content/content.ts)
 
 ```typescript
 // Content script for in-page JSON formatting
@@ -535,9 +535,9 @@ document.addEventListener('mouseup', (event) => {
 
 ---
 
-State Management
+### State Management
 
-Storage Service (src/shared/storage.ts)
+### Storage Service (src/shared/storage.ts)
 
 ```typescript
 import type { UserSettings } from './types';
@@ -599,9 +599,9 @@ function getDefaultSettings(): UserSettings {
 
 ---
 
-Error Handling
+### Error Handling
 
-Best Practices for Error Handling
+### Best Practices for Error Handling
 
 1. Always wrap async Chrome API calls in try-catch
 2. Provide meaningful error messages to users
@@ -642,7 +642,7 @@ async function safeFormat(input: string): Promise<FormatResult> {
 }
 ```
 
-Edge Cases to Handle
+### Edge Cases to Handle
 
 | Edge Case | Handling |
 |-----------|----------|
@@ -655,9 +655,9 @@ Edge Cases to Handle
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Vitest
+### Unit Testing with Vitest
 
 ```typescript
 // __tests__/json-formatter.test.ts
@@ -708,7 +708,7 @@ describe('JsonFormatter', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
 Use Playwright for testing the popup and content script interactions:
 
@@ -734,9 +734,9 @@ test('popup formats JSON correctly', async ({ page }) => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Optimization Strategies
+### Optimization Strategies
 
 1. Lazy Load Heavy Libraries - Only load syntax highlighters when needed
 2. Debounce Input Handling - Prevent excessive re-formatting while typing
@@ -771,11 +771,11 @@ inputArea.addEventListener('input', () => {
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Before publishing to Chrome Web Store:
+### Before publishing to Chrome Web Store:
 
-Pre-Submission
+### Pre-Submission
 
 - [ ] Update version in manifest.json
 - [ ] Run production build with minification
@@ -786,7 +786,7 @@ Pre-Submission
 - [ ] Verify keyboard accessibility
 - [ ] Test dark/light theme support
 
-Store Listing
+### Store Listing
 
 - [ ] Write compelling title and description
 - [ ] Create promotional screenshots (1280x800)
@@ -794,7 +794,7 @@ Store Listing
 - [ ] Set up privacy policy if needed
 - [ ] Choose appropriate categories
 
-Post-Submission
+### Post-Submission
 
 - [ ] Monitor review feedback
 - [ ] Set up crash reporting
@@ -803,7 +803,7 @@ Post-Submission
 
 ---
 
-Conclusion
+### Conclusion
 
 This guide covered the essential components for building a production-ready JSON Formatter Chrome extension. Key takeaways:
 

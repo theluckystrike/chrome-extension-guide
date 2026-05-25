@@ -11,13 +11,13 @@ last_modified_at: 2026-01-15
 
 contextMenus Permission Reference
 
-What It Does {#what-it-does}
+## What It Does {#what-it-does}
 - Grants access to the `chrome.contextMenus` API
 - Add custom items to the browser's right-click context menu
 - Items can appear on pages, links, images, selections, and more
 - Supports nested menus, checkboxes, radio buttons, and separators
 
-Context Types {#context-types}
+## Context Types {#context-types}
 | Context | When It Appears |
 |---------|----------------|
 | `page` | Right-click on page background |
@@ -34,20 +34,20 @@ Context Types {#context-types}
 | `launcher` | ChromeOS app launcher context menu |
 | `all` | All of the above |
 
-Menu Item Types {#menu-item-types}
+## Menu Item Types {#menu-item-types}
 - `normal`. standard clickable item
 - `checkbox`. toggleable item
 - `radio`. radio button group
 - `separator`. visual divider
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 ```json
 { "permissions": ["contextMenus"] }
 ```
 
-Low-warning permission.
+### Low-warning permission.
 
-Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
+## Using with @theluckystrike/webext-permissions {#using-with-theluckystrikewebext-permissions}
 
 ```ts
 import { checkPermission, PERMISSION_DESCRIPTIONS } from "@theluckystrike/webext-permissions";
@@ -58,7 +58,7 @@ console.log(result.description); // "Add items to the right-click context menu"
 PERMISSION_DESCRIPTIONS.contextMenus; // "Add items to the right-click context menu"
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Pattern: context menu action triggers background handler, sends result to content script:
 
@@ -106,9 +106,9 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Store context menu state and preferences:
+### Store context menu state and preferences:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -146,7 +146,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 });
 ```
 
-Key API Methods {#key-api-methods}
+## Key API Methods {#key-api-methods}
 
 | Method | Description |
 |--------|-------------|
@@ -156,7 +156,7 @@ Key API Methods {#key-api-methods}
 | `contextMenus.removeAll()` | Remove all items |
 | `contextMenus.onClicked` | Event. menu item clicked |
 
-Nested Menus {#nested-menus}
+## Nested Menus {#nested-menus}
 ```ts
 const parentId = chrome.contextMenus.create({
   id: "parent",
@@ -179,31 +179,31 @@ chrome.contextMenus.create({
 });
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 1. "Look up" selected text (dictionary, translator)
 2. Save/bookmark selections or links
 3. Quick actions on images (download, reverse search)
 4. Developer tools (inspect element info)
 5. Toggle extension features via checkbox items
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 - Must create menus in `chrome.runtime.onInstalled` listener (persists across restarts)
 - `%s` in title is replaced with selected text (selection context only)
 - Maximum 6 top-level items before Chrome collapses into a submenu
 - `onClicked` only fires in the background service worker
 - Dynamic menus: call `removeAll()` then recreate (no bulk update API)
 
-Related Permissions {#related-permissions}
+## Related Permissions {#related-permissions}
 - [activeTab](activeTab.md). context menu click grants activeTab access
 - [scripting](scripting.md). inject scripts after context menu action
 - [storage](storage.md). store menu preferences and saved data
 
-API Reference {#api-reference}
+## API Reference {#api-reference}
 - [Context Menus API Reference](../api-reference/context-menus-api.md)
 - [Chrome contextMenus API docs](https://developer.chrome.com/docs/extensions/reference/api/contextMenus)
 - [Context Menus API detailed look](../api-reference/context-menus-api.md)
 
-Frequently Asked Questions
+### Frequently Asked Questions
 
 How do I add a context menu item in Chrome extension?
 Use chrome.contextMenus.create() in your background script to add items to the right-click context menu. You can specify contexts like "page", "selection", or "link".

@@ -12,11 +12,11 @@ Chrome Extension Background Service Worker Guide
 
 The background service worker is the backbone of any modern Chrome extension built with Manifest V3. Unlike the persistent background pages of Manifest V2, service workers are event-driven, ephemeral processes that Chrome manages automatically. This guide walks you through everything you need to build robust, production-ready extensions using TypeScript.
 
-What Changed from Manifest V2?
+### What Changed from Manifest V2?
 
 If you're migrating from Manifest V2, the most significant change is that your background script no longer runs continuously. In MV2, your background page stayed alive as long as the browser was open. In MV3, Chrome activates your service worker when needed and terminates it after a period of inactivity.
 
-This architectural shift offers several benefits:
+### This architectural shift offers several benefits:
 
 - Reduced memory footprint: Extensions don't consume resources when idle
 - Improved security: Shorter attack surface with ephemeral execution
@@ -24,7 +24,7 @@ This architectural shift offers several benefits:
 
 However, this requires you to rethink how you handle state, timers, and long-running operations.
 
-Setting Up Your Service Worker
+### Setting Up Your Service Worker
 
 First, configure your `manifest.json` to declare the service worker:
 
@@ -42,9 +42,9 @@ First, configure your `manifest.json` to declare the service worker:
 
 The `"type": "module"` setting allows you to use ES modules in your service worker, which is essential for organizing TypeScript code.
 
-TypeScript Project Setup
+### TypeScript Project Setup
 
-Set up your `tsconfig.json` for the background script:
+### Set up your `tsconfig.json` for the background script:
 
 ```json
 {
@@ -63,9 +63,9 @@ Set up your `tsconfig.json` for the background script:
 }
 ```
 
-Core Service Worker Patterns
+### Core Service Worker Patterns
 
-Event Listeners Must Be Top-Level
+### Event Listeners Must Be Top-Level
 
 In a service worker, all event listeners must be registered at the top level. Chrome scans these listeners to determine when to wake up your service worker:
 
@@ -95,7 +95,7 @@ function init() {
 }
 ```
 
-Persisting State Across Service Worker Lifecycles
+### Persisting State Across Service Worker Lifecycles
 
 Since service workers can terminate at any time, never rely on in-memory state:
 
@@ -124,11 +124,11 @@ class BackgroundState {
 }
 ```
 
-Working with Chrome Events
+### Working with Chrome Events
 
 Chrome provides numerous events that can wake your service worker. Understanding these is crucial for building responsive extensions.
 
-Tab Events
+### Tab Events
 
 ```typescript
 // Listen for tab updates (URL changes, page load complete)
@@ -152,7 +152,7 @@ chrome.tabs.onRemoved.addListener((tabId: number, removeInfo: chrome.tabs.TabRem
 });
 ```
 
-Message Passing
+### Message Passing
 
 Communicate between your service worker, content scripts, and popup:
 
@@ -188,7 +188,7 @@ interface Message {
 }
 ```
 
-Alarms and Scheduling
+### Alarms and Scheduling
 
 For periodic tasks, use the Chrome Alarms API instead of `setInterval`:
 
@@ -219,11 +219,11 @@ chrome.alarms.clearAll();
 
 This is particularly useful for extensions like Tab Suspender Pro, which needs to periodically check tab activity and suspend idle tabs.
 
-Building a Real-World Example
+### Building a Real-World Example
 
 Let's build a practical extension that demonstrates these concepts: a tab session manager that saves and restores tabs.
 
-Complete Service Worker Implementation
+### Complete Service Worker Implementation
 
 ```typescript
 // src/background/service-worker.ts
@@ -411,7 +411,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 export {};
 ```
 
-Content Script for Communication
+### Content Script for Communication
 
 ```typescript
 // src/content-scripts/session-ui.ts
@@ -445,7 +445,7 @@ async function quickSaveSession(name: string): Promise<void> {
 }
 ```
 
-Best Practices for Production Extensions
+### Best Practices for Production Extensions
 
 1. Handle Service Worker Lifecycle
 
@@ -534,9 +534,9 @@ Access service worker logs in Chrome DevTools:
 3. Click "Service Worker" link in background section
 4. Use Console for logs, Sources for debugging
 
-Common Pitfalls to Avoid
+### Common Pitfalls to Avoid
 
-Don't Use setTimeout/setInterval
+### Don't Use setTimeout/setInterval
 
 ```typescript
 //  WRONG - These won't work reliably in service workers
@@ -548,7 +548,7 @@ setTimeout(() => {
 chrome.alarms.create('delayedTask', { delayInMinutes: 1 });
 ```
 
-Don't Rely on Global State
+### Don't Rely on Global State
 
 ```typescript
 //  WRONG - State will be lost when SW terminates
@@ -564,7 +564,7 @@ chrome.runtime.onMessage.addListener((message) => {
 chrome.storage.local.set({ cachedData: message.payload });
 ```
 
-Don't Forget to Handle Errors
+### Don't Forget to Handle Errors
 
 ```typescript
 // Always wrap async operations in try-catch
@@ -583,7 +583,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Conclusion
+### Conclusion
 
 The background service worker is the heart of any Manifest V3 Chrome extension. By understanding its lifecycle, event-driven architecture, and persistence patterns, you can build extensions that are efficient, reliable, and production-ready.
 
@@ -600,11 +600,11 @@ For more advanced patterns and the complete reference, explore our [API Document
 
 *This guide is part of the Chrome Extension Guide by theluckystrike. For more tutorials and patterns, visit [zovo.one](https://zovo.one).*
 
-Troubleshooting Common Service Worker Issues
+### Troubleshooting Common Service Worker Issues
 
 When building Chrome extensions with service workers, you'll inevitably encounter some common issues. Understanding these problems and their solutions will save you hours of debugging.
 
-Service Worker Not Starting
+### Service Worker Not Starting
 
 One of the most common issues is that your service worker doesn't seem to start at all. This usually happens when:
 
@@ -618,7 +618,7 @@ To debug, open Chrome DevTools for your extension:
 3. Check the Console for any errors
 4. Use the Sources panel to set breakpoints
 
-Memory Leaks in Service Workers
+### Memory Leaks in Service Workers
 
 Memory leaks can cause your extension to perform poorly and may lead to Chrome terminating your service worker prematurely. Common causes include:
 
@@ -664,7 +664,7 @@ function removeTabListener(id: string): void {
 }
 ```
 
-Extension Context Invalidated Error
+### Extension Context Invalidated Error
 
 This error occurs when your service worker is terminated while a message is being processed. Handle it gracefully:
 
@@ -697,7 +697,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Debugging Tips for Production
+### Debugging Tips for Production
 
 When your extension is in production, debugging becomes more challenging. Here are some strategies:
 
@@ -788,9 +788,9 @@ async function performHealthCheck(): Promise<HealthStatus> {
 }
 ```
 
-Performance Optimization Strategies
+### Performance Optimization Strategies
 
-Minimize Service Worker Wake-ups
+### Minimize Service Worker Wake-ups
 
 Every time Chrome needs to wake your service worker, it consumes resources. Optimize by:
 
@@ -832,7 +832,7 @@ function processTabUpdateBatch(updates: PendingTabUpdate[]): void {
 }
 ```
 
-Efficient Data Transfer
+### Efficient Data Transfer
 
 When sending data between components, minimize the payload:
 
@@ -854,7 +854,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-Conclusion
+### Conclusion
 
 The background service worker is the heart of any Manifest V3 Chrome extension. By understanding its lifecycle, event-driven architecture, and persistence patterns, you can build extensions that are efficient, reliable, and production-ready.
 

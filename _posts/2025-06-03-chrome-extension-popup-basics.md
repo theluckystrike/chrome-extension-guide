@@ -10,17 +10,17 @@ tags: [popup, ui, basics, manifest-v3, html, javascript]
 
 The popup is the small window that appears when users click your extension icon in the Chrome toolbar. It's often the primary way users interact with your extension, making good popup design essential for user experience. A well-designed popup can significantly impact your extension's adoption and user satisfaction.
 
-Why Popups Matter
+### Why Popups Matter
 
 Your extension's popup serves as the main interface between your application and its users. When someone clicks your extension icon, they expect immediate, responsive feedback. The popup should load quickly, display relevant information clearly, and provide intuitive controls for your extension's functionality.
 
 A poorly designed popup can lead to confusion, frustration, and ultimately, users uninstalling your extension. Conversely, a well-crafted popup enhances productivity and makes your extension feel professional and reliable.
 
-Creating a Basic Popup
+### Creating a Basic Popup
 
 Your popup needs an HTML file and must be declared in the manifest. The popup appears when users click your extension's icon in the toolbar. Let's build a complete popup from scratch.
 
-Step 1: Define the Popup in Manifest V3
+### Step 1: Define the Popup in Manifest V3
 
 ```json
 {
@@ -37,7 +37,7 @@ Step 1: Define the Popup in Manifest V3
 
 The action key in Manifest V3 replaces the browser_action from older versions. Make sure your icon files exist in the specified directories, or Chrome will show a generic icon.
 
-Step 2: Create the HTML Structure
+### Step 2: Create the HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ Step 2: Create the HTML Structure
 </html>
 ```
 
-Step 3: Style Your Popup
+### Step 3: Style Your Popup
 
 ```css
 * {
@@ -130,7 +130,7 @@ body {
 }
 ```
 
-Handling User Interactions
+### Handling User Interactions
 
 Create a popup.js file to handle button clicks and communicate with other extension components:
 
@@ -179,9 +179,9 @@ async function saveState(state) {
 }
 ```
 
-Advanced Popup Patterns
+### Advanced Popup Patterns
 
-Opening Full Pages
+### Opening Full Pages
 
 Sometimes you need more space than a popup allows. You can open a full page instead:
 
@@ -192,7 +192,7 @@ document.getElementById('openFullPage').addEventListener('click', () => {
 });
 ```
 
-Communicating with Background Scripts
+### Communicating with Background Scripts
 
 ```javascript
 // Send message to background service worker
@@ -212,7 +212,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Managing Popup State
+### Managing Popup State
 
 Popups in Manifest V3 can close unexpectedly. Save state before the popup closes:
 
@@ -224,16 +224,16 @@ window.addEventListener('beforeunload', () => {
 });
 ```
 
-Popup Best Practices
+### Popup Best Practices
 
-Keep It Lightweight
+### Keep It Lightweight
 
 Popups should load instantly. Avoid:
 - Large external libraries (lodash, moment.js, etc.)
 - Heavy CSS frameworks
 - Multiple images or complex graphics
 
-Handle Errors Gracefully
+### Handle Errors Gracefully
 
 ```javascript
 async function safeOperation() {
@@ -247,7 +247,7 @@ async function safeOperation() {
 }
 ```
 
-Test Without Popup
+### Test Without Popup
 
 Some functionality should work even when the popup is closed:
 
@@ -262,9 +262,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-Loading Your Extension
+### Loading Your Extension
 
-To test your extension:
+### To test your extension:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right
@@ -272,7 +272,7 @@ To test your extension:
 4. Your extension icon should appear in the Chrome toolbar
 5. Click the icon to see your popup in action!
 
-Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
 Popup not showing?
 - Verify manifest.json correctly references the popup file
@@ -289,7 +289,7 @@ Console errors?
 - Check for missing files or incorrect paths
 - Verify Chrome API permissions in manifest
 
-What's Next?
+### What's Next?
 
 Congratulations on building your first Chrome extension popup! From here, you can explore:
 
@@ -299,11 +299,11 @@ Congratulations on building your first Chrome extension popup! From here, you ca
 - Storage API - Persist user preferences across sessions
 - Side panels - Provide a more spacious alternative to popups
 
-Understanding Extension Lifecycle
+### Understanding Extension Lifecycle
 
 When you load an extension in developer mode, Chrome monitors your files. Any changes you make to your HTML, CSS, or JavaScript files are reflected immediately when you reload the extension. To reload, simply click the refresh icon on your extension card in chrome://extensions/.
 
-Deploying Your Extension
+### Deploying Your Extension
 
 Once you've tested your extension thoroughly, you can publish it to the Chrome Web Store. This requires:
 
@@ -317,7 +317,7 @@ The review process ensures quality and security for Chrome users. Make sure your
 This simple foundation opens the door to powerful browser customization. The Chrome extension ecosystem offers endless possibilities for enhancing productivity, automating tasks, and creating unique browsing experiences.
 =======
 
-Popup Lifecycle Events
+### Popup Lifecycle Events
 
 Understanding the popup lifecycle helps you manage resources effectively. The popup fires standard DOM events like DOMContentLoaded and load, but also has Chrome-specific events worth knowing about.
 
@@ -325,7 +325,7 @@ When the popup opens, Chrome creates a new instance of your popup HTML. This mea
 
 The popup lifecycle follows this sequence: Chrome renders the popup → DOMContentLoaded fires → scripts execute → load event fires → popup is visible → user closes popup → JavaScript execution stops. This quick cycle means avoid heavy initialization that delays visibility.
 
-State Management Patterns
+### State Management Patterns
 
 Managing state effectively in popups requires different patterns than regular web apps. Since popups can close at any time, always persist important state immediately rather than waiting for explicit save actions.
 
@@ -333,7 +333,7 @@ The chrome.storage API provides the recommended storage solution. It offers sync
 
 For complex state, consider using a state machine pattern. Define clear states (loading, ready, error), transitions between states, and handle each state appropriately in your UI. This makes your popup predictable and easier to debug.
 
-Building Forms in Popups
+### Building Forms in Popups
 
 Forms in popups require special consideration due to the limited space and potential for quick closure. Keep forms simple and focused on a single task. If you need complex forms, consider opening a full page instead.
 
@@ -341,7 +341,7 @@ Implement autocomplete where appropriate - users appreciate not retyping informa
 
 Validate input both client-side and server-side when applicable. Show validation errors inline rather than in alert boxes. Consider using the constraint validation API for built-in browser validation support.
 
-Performance Monitoring
+### Performance Monitoring
 
 Monitor your popup's performance to ensure it remains responsive. Chrome provides the ability to track various metrics through the chrome.metricsPrivate API if you need detailed performance data.
 

@@ -60,9 +60,9 @@ Manifest Configuration
 
 ---
 
-Core Implementation with TypeScript
+### Core Implementation with TypeScript
 
-Shared Types
+### Shared Types
 
 ```typescript
 export interface ChromeManifest {
@@ -106,7 +106,7 @@ export interface ManifestInfo {
 }
 ```
 
-Manifest Parser
+### Manifest Parser
 
 ```typescript
 import { ChromeManifest, ManifestInfo } from "./types";
@@ -186,7 +186,7 @@ export class ManifestParser {
 }
 ```
 
-Manifest Validator
+### Manifest Validator
 
 ```typescript
 import { ChromeManifest, ValidationError } from "./types";
@@ -252,9 +252,9 @@ export class ManifestValidator {
 
 ---
 
-UI Design
+### UI Design
 
-Popup HTML
+### Popup HTML
 
 ```html
 <!DOCTYPE html>
@@ -306,7 +306,7 @@ Popup HTML
 </html>
 ```
 
-Popup CSS
+### Popup CSS
 
 ```css
 :root { --primary: #4285f4; --success: #34a853; --warning: #fbbc04; --error: #ea4335; --bg: #ffffff; --surface: #f8f9fa; --border: #e8eaed; --text: #202124; --text-secondary: #5f6368; }
@@ -347,7 +347,7 @@ textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 
 .warning { color: var(--warning); }
 ```
 
-Popup Logic
+### Popup Logic
 
 ```typescript
 import { ManifestParser } from "../lib/manifest-parser";
@@ -494,9 +494,9 @@ document.addEventListener('DOMContentLoaded', () => new PopupApp());
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions
+### Required Permissions
 
 ```json
 {
@@ -505,7 +505,7 @@ Required Permissions
 }
 ```
 
-API Usage Patterns
+### API Usage Patterns
 
 ```typescript
 // Storage - Persist analysis history
@@ -533,9 +533,9 @@ async function getCurrentTab(): Promise<chrome.tabs.Tab | null> {
 
 ---
 
-State Management
+### State Management
 
-State Store Implementation
+### State Store Implementation
 
 ```typescript
 import { ManifestInfo } from "./types";
@@ -604,9 +604,9 @@ class StateManager {
 
 ---
 
-Error Handling
+### Error Handling
 
-Error Types and Handling
+### Error Types and Handling
 
 ```typescript
 class ManifestAnalyzerError extends Error {
@@ -658,9 +658,9 @@ function handleEdgeCases(manifest: ChromeManifest): ValidationError[] {
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Tests with Vitest
+### Unit Tests with Vitest
 
 ```typescript
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -716,7 +716,7 @@ describe('ManifestValidator', () => {
 });
 ```
 
-Integration Tests with Playwright
+### Integration Tests with Playwright
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -759,9 +759,9 @@ test.describe('Manifest Analyzer Popup', () => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Optimizations
+### Optimizations
 
 ```typescript
 class PerformanceOptimizer {
@@ -801,9 +801,9 @@ class PerformanceOptimizer {
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Pre-Submission Requirements
+### Pre-Submission Requirements
 
 ```markdown
 Publishing Checklist
@@ -843,7 +843,7 @@ Chrome Web Store Submission
 5. Submit for review
 ```
 
-Build Configuration (vite.config.ts)
+### Build Configuration (vite.config.ts)
 
 ```typescript
 import { defineConfig } from 'vite';
@@ -866,7 +866,7 @@ export default defineConfig({
 
 ---
 
-Summary
+### Summary
 
 Building a Manifest Analyzer Chrome extension requires attention to:
 

@@ -19,7 +19,7 @@ we explore the patterns, strategies, and metrics that define successful Chrome e
 
 ---
 
-Why Onboarding Determines Retention {#why-onboarding-matters}
+## Why Onboarding Determines Retention {#why-onboarding-matters}
 
 The Chrome Web Store makes it dangerously easy to install extensions. A single click, and your code is running in their browser. But this convenience cuts both ways, users can just as easily remove your extension when it does not immediately deliver value.
 
@@ -27,7 +27,7 @@ Consider the typical user journey: they discover your extension through a blog p
 
 The 5-minute rule is well-documented in product literature. Users form an opinion about your extension within the first five minutes of use. If they do not experience your core value proposition during this window, churn is nearly guaranteed. This is not about impatience, it is about the psychological contract users have with browser extensions. They are protective of their browser's performance and privacy, and they will not tolerate an extension that feels confusing, intrusive, or pointless.
 
-Onboarding serves three critical functions:
+### Onboarding serves three critical functions:
 
 1. Value realization. Showing users what your extension does and why they need it
 2. Trust building. Demonstrating that your extension respects their privacy and performs reliably
@@ -37,7 +37,7 @@ Successful onboarding is not about showing everything your extension can do. It 
 
 ---
 
-The Welcome Page: chrome.runtime.onInstalled {#welcome-page}
+## The Welcome Page: chrome.runtime.onInstalled {#welcome-page}
 
 The first technical piece of onboarding is the welcome page, triggered by the `chrome.runtime.onInstalled` event. This event fires when your extension is first installed, updated, or when Chrome itself is updated. It is your opportunity to show a welcome screen before the user interacts with your extension for the first time.
 
@@ -53,7 +53,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 A well-designed welcome page accomplishes several goals. It introduces your extension's core value proposition in plain language. It provides clear next steps that users can follow. It sets appropriate expectations about permissions and functionality. And it creates a positive first impression that builds trust.
 
-Best practices for welcome pages:
+### Best practices for welcome pages:
 
 - Keep it focused. Resist the temptation to explain every feature. Focus on the primary value proposition.
 - Use visual demonstrations. Screenshots, GIFs, or short videos showing your extension in action are far more effective than text alone.
@@ -65,7 +65,7 @@ Tab Suspender Pro, for example, uses a clean welcome page that immediately demon
 
 ---
 
-Progressive Permission Requests {#progressive-permissions}
+## Progressive Permission Requests {#progressive-permissions}
 
 One of the most common onboarding mistakes is asking for all permissions upfront. When a user installs your extension and is immediately greeted by a scary permission dialog, trust erodes. They wonder: why does this simple extension need access to all my data?
 
@@ -98,11 +98,11 @@ Research from the Chrome Extensions team shows that extensions using progressive
 
 ---
 
-Feature Tour Patterns {#feature-tour-patterns}
+## Feature Tour Patterns {#feature-tour-patterns}
 
 Once past the welcome page, some users benefit from a guided tour of your extension's features. Feature tours come in several patterns, each with distinct trade-offs.
 
-Tooltip Tours
+### Tooltip Tours
 
 Tooltip tours highlight individual UI elements with small floating text boxes that explain what each element does. They are non-intrusive and allow users to explore at their own pace.
 
@@ -130,7 +130,7 @@ function showTooltipTour() {
 }
 ```
 
-Overlay Tours
+### Overlay Tours
 
 Overlay tours darken the background and focus attention on specific elements, creating a more immersive experience. They are harder to ignore but can feel aggressive if not implemented carefully.
 
@@ -138,7 +138,7 @@ Best for: Extensions with complex workflows that require guided completion.
 
 Implementation tip: Always provide a clear "Skip" or "Exit" option, and remember that users who want to explore independently will find overlay tours frustrating.
 
-Stepper Tours
+### Stepper Tours
 
 Stepper tours present a multi-step wizard that guides users through a sequence of actions. They are the most structured option and work well for extensions that require configuration before use.
 
@@ -150,7 +150,7 @@ Tab Suspender Pro uses a hybrid approach: a tooltip tour that highlights the key
 
 ---
 
-Activation Metrics: What Defines an Activated User {#activation-metrics}
+## Activation Metrics: What Defines an Activated User {#activation-metrics}
 
 You cannot improve what you do not measure. Defining and tracking activation metrics is essential for understanding whether your onboarding flow is working.
 
@@ -163,7 +163,7 @@ An activated user is one who has taken the action that demonstrates they have ex
 
 For Tab Suspender Pro, activation is measured by the first automatic tab suspension event. When the extension successfully suspends an inactive tab and the user continues browsing without issues, activation is confirmed.
 
-Tracking activation:
+### Tracking activation:
 
 ```javascript
 // Track activation in your analytics
@@ -182,13 +182,13 @@ Track activation rate as a percentage of total installs. Industry benchmarks var
 
 ---
 
-Onboarding for Freemium: Show Value Before the Paywall {#freemium-onboarding}
+## Onboarding for Freemium: Show Value Before the Paywall {#freemium-onboarding}
 
 If your extension uses a freemium model, onboarding becomes even more critical. You must demonstrate enough value to convert free users to paid customers, without making the free tier feel crippled or the paid tier feel like a ransom demand.
 
 The golden rule of freemium onboarding: show value before you ask for payment. Users who have experienced genuine transformation are far more likely to pay than those who have only glimpsed your extension's potential.
 
-Strategies for freemium onboarding:
+### Strategies for freemium onboarding:
 
 1. Lead with the free features. Do not hide your free tier's best features behind a paywall. Let users experience real value.
 2. Create a natural upgrade moment. Identify the point in the user journey where they will most want premium features, and make that the upsell moment.
@@ -199,7 +199,7 @@ For detailed implementation strategies, see our guide on [Extension Monetization
 
 ---
 
-Tab Suspender Pro Onboarding Flow: A Real-World Example {#tab-suspender-pro-example}
+## Tab Suspender Pro Onboarding Flow: A Real-World Example {#tab-suspender-pro-example}
 
 To ground these concepts in reality, let us examine how Tab Suspender Pro approaches onboarding:
 
@@ -219,11 +219,11 @@ This flow demonstrates the principles we have discussed: immediate value deliver
 
 ---
 
-A/B Testing Onboarding Variants {#ab-testing-onboarding}
+## A/B Testing Onboarding Variants {#ab-testing-onboarding}
 
 The best onboarding flow is the one that works for your specific audience. The only way to find it is through systematic experimentation.
 
-Variables to test:
+### Variables to test:
 
 - Welcome page design and copy
 - Tour type (tooltip vs. overlay vs. stepper)
@@ -257,11 +257,11 @@ Run tests for at least two weeks to account for different user behaviors across 
 
 ---
 
-Measuring Onboarding Completion Rate {#measuring-onboarding}
+## Measuring Onboarding Completion Rate {#measuring-onboarding}
 
 Beyond activation, you should track onboarding completion rate, the percentage of users who finish the entire onboarding flow.
 
-Metrics to track:
+### Metrics to track:
 
 - Welcome page visit rate (should be close to 100% of new installs)
 - Tour completion rate (if applicable)
@@ -283,11 +283,11 @@ Analyze funnel data to identify where users drop off. If 80% of users complete t
 
 ---
 
-Re-engagement for Users Who Skip Onboarding {#re-engagement}
+## Re-engagement for Users Who Skip Onboarding {#re-engagement}
 
 Some users will skip your onboarding flow entirely. They may be power users who know what they want, or they may simply be in a hurry. Do not abandon them, implement re-engagement strategies to bring them back.
 
-Approaches:
+### Approaches:
 
 1. In-extension notifications: After a week of inactivity, show a gentle notification in the popup reminding users of your extension's value.
 
@@ -301,11 +301,11 @@ The key is to be helpful without being annoying. Re-engagement should feel like 
 
 ---
 
-Localized Onboarding {#localized-onboarding}
+## Localized Onboarding {#localized-onboarding}
 
 If your extension serves an international audience, localization is essential for effective onboarding. Users are far more likely to engage with onboarding content in their native language.
 
-Localization best practices:
+### Localization best practices:
 
 1. Translate all onboarding content. This includes welcome pages, tour text, notifications, and any in-extension messaging.
 2. Adapt to cultural expectations. Onboarding patterns that work in Western markets may not resonate in Asian or Middle Eastern markets. Research cultural differences in user expectations.
@@ -327,7 +327,7 @@ Localized onboarding demonstrates that you care about your international users a
 
 ---
 
-Conclusion: Onboarding as a Continuous Process
+### Conclusion: Onboarding as a Continuous Process
 
 Chrome extension onboarding is not a one-time event, it is a continuous process of helping users discover and maximize value. The strategies in this guide provide a foundation, but the best onboarding is one that evolves based on data and user feedback.
 

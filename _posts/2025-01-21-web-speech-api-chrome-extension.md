@@ -18,13 +18,13 @@ we'll explore everything you need to know to implement speech recognition in you
 
 ---
 
-Understanding the Web Speech API {#understanding-web-speech-api}
+## Understanding the Web Speech API {#understanding-web-speech-api}
 
 The Web Speech API is a web platform API that provides two distinct capabilities: speech synthesis (text-to-speech) and speech recognition (speech-to-text). This guide focuses on the speech recognition portion, which is what powers voice commands and dictation features in Chrome extensions. The Web Speech API is distinct from the Chrome-specific `chrome.tts` API, which handles text-to-speech output.
 
 The speech recognition portion of the Web Speech API is accessed through the `SpeechRecognition` interface (or `webkitSpeechRecognition` for browser compatibility). This interface enables browsers to capture audio input from the user's microphone and convert it into text in real-time. The API supports continuous recognition, interim results, grammar matching, and comprehensive event handling that makes it suitable for complex voice applications.
 
-Key Capabilities of the Web Speech API
+### Key Capabilities of the Web Speech API
 
 The Web Speech API offers a comprehensive set of features that make it ideal for Chrome extension development:
 
@@ -36,7 +36,7 @@ The Web Speech API offers a comprehensive set of features that make it ideal for
 - Event-Driven Architecture: Comprehensive events for result, error, and state changes
 - Confidence Scores: Evaluate the reliability of recognition results
 
-Browser Support and Compatibility
+### Browser Support and Compatibility
 
 The Web Speech API has different levels of support across browsers, and understanding this compatibility landscape is crucial for extension developers. Google Chrome provides the most complete implementation of the speech recognition API, accessible through the `webkitSpeechRecognition` prefix. Mozilla Firefox and Safari have more limited support, focusing primarily on speech synthesis rather than recognition.
 
@@ -56,11 +56,11 @@ if (SpeechRecognition) {
 
 ---
 
-Setting Up Your Extension for Speech Recognition {#setting-up-extension}
+## Setting Up Your Extension for Speech Recognition {#setting-up-extension}
 
 Before implementing speech recognition in your Chrome extension, you need to properly configure your extension's permissions and manifest. The most critical requirement is microphone access, which requires explicit user permission and proper manifest configuration.
 
-Required Permissions in manifest.json
+### Required Permissions in manifest.json
 
 Your extension's `manifest.json` file must declare the microphone permission to access the user's microphone for speech recognition:
 
@@ -83,7 +83,7 @@ Your extension's `manifest.json` file must declare the microphone permission to 
 
 Note that the `microphone` permission alone isn't sufficient in Manifest V3. Users must also grant explicit permission when your extension attempts to use the microphone. This is a security measure that prevents extensions from silently recording audio.
 
-Handling Microphone Permissions
+### Handling Microphone Permissions
 
 When you first attempt to start speech recognition, Chrome will prompt the user to allow microphone access. The permission prompt appears as a browser-level dialog, and users can revoke access at any time through Chrome's settings. Your extension should handle both the granted and denied cases gracefully:
 
@@ -112,11 +112,11 @@ function initializeRecognition() {
 
 ---
 
-Implementing Basic Speech Recognition {#implementing-basic-recognition}
+## Implementing Basic Speech Recognition {#implementing-basic-recognition}
 
 Now let's dive into the practical implementation of speech recognition in your Chrome extension. We'll start with the simplest implementation and progressively add complexity to create feature-rich voice capabilities.
 
-Creating a Speech Recognition Instance
+### Creating a Speech Recognition Instance
 
 The foundation of any speech-enabled extension is creating and configuring the SpeechRecognition object:
 
@@ -133,7 +133,7 @@ recognition.lang = 'en-US';          // Set language to US English
 
 These three properties control fundamental behavior. The `continuous` flag determines whether recognition continues across pauses or stops after each utterance. Setting it to `true` is essential for dictation use cases where users speak lengthy passages. The `interimResults` property enables real-time feedback by displaying results before the user finishes speaking.
 
-Handling Recognition Results
+### Handling Recognition Results
 
 The core of any speech recognition implementation is handling the results as they come in. The API fires the `onresult` event each time it recognizes speech:
 
@@ -172,11 +172,11 @@ The `confidence` property provides a value between 0 and 1 indicating how confid
 
 ---
 
-Building Voice Command Systems {#building-voice-commands}
+## Building Voice Command Systems {#building-voice-commands}
 
 Voice commands represent one of the most powerful applications of speech recognition in Chrome extensions. By implementing a command recognition system, you can allow users to control your extension and perform actions using natural speech.
 
-Command Pattern Implementation
+### Command Pattern Implementation
 
 A solid voice command system requires parsing recognized text and matching it against defined commands:
 
@@ -228,7 +228,7 @@ commandManager.registerCommand('go to', (transcript) => {
 });
 ```
 
-Implementing Command Modes
+### Implementing Command Modes
 
 For more sophisticated command systems, consider implementing command modes that change how the extension interprets speech:
 
@@ -325,11 +325,11 @@ class ModeBasedCommandSystem {
 
 ---
 
-Building a Dictation Feature {#building-dictation-feature}
+## Building a Dictation Feature {#building-dictation-feature}
 
 Dictation represents another major use case for speech recognition in Chrome extensions. Unlike command systems that interpret speech as instructions, dictation captures speech and inserts it as text into web forms, text areas, or content editing interfaces.
 
-Content Script Integration
+### Content Script Integration
 
 To implement dictation that works across web pages, your extension needs to inject a content script that can interact with page elements:
 
@@ -512,7 +512,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Connecting Popup Controls
+### Connecting Popup Controls
 
 Your extension's popup can provide a user interface for starting and stopping dictation:
 
@@ -550,11 +550,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ---
 
-Advanced Recognition Features {#advanced-features}
+## Advanced Recognition Features {#advanced-features}
 
 The Web Speech API provides several advanced features that enable more sophisticated voice applications. Understanding these features will help you build more capable extensions.
 
-Grammar-Based Recognition
+### Grammar-Based Recognition
 
 For applications that need to recognize a limited vocabulary, custom grammars can improve accuracy significantly. The API uses the Speech Recognition Grammar Specification (SRGS) format:
 
@@ -581,7 +581,7 @@ recognition.start();
 
 Custom grammars tell the recognition engine to focus on specific phrases, which can dramatically improve accuracy for command-and-control applications. This is particularly useful when your extension has a limited set of commands.
 
-Multiple Language Support
+### Multiple Language Support
 
 Extensions that serve international users need to support multiple languages. The API makes this straightforward through the `lang` property:
 
@@ -609,11 +609,11 @@ function setRecognitionLanguage(langCode) {
 
 ---
 
-Handling Errors and Edge Cases {#error-handling}
+## Handling Errors and Edge Cases {#error-handling}
 
 Robust error handling is essential for any production-ready extension that uses speech recognition. Users will encounter various issues, and your extension should handle them gracefully.
 
-Comprehensive Error Handling
+### Comprehensive Error Handling
 
 ```javascript
 recognition.onerror = function(event) {
@@ -655,7 +655,7 @@ function showError(message) {
 }
 ```
 
-Handling Permission Changes
+### Handling Permission Changes
 
 Users can revoke microphone permissions at any time through Chrome settings. Your extension should detect this and respond appropriately:
 
@@ -698,11 +698,11 @@ function handlePermissionDenied() {
 
 ---
 
-Performance Optimization and Best Practices {#performance-optimization}
+## Performance Optimization and Best Practices {#performance-optimization}
 
 Creating efficient speech recognition features requires attention to performance and resource management.
 
-Managing Recognition Resources
+### Managing Recognition Resources
 
 ```javascript
 class OptimizedSpeechRecognition {
@@ -771,11 +771,11 @@ class OptimizedSpeechRecognition {
 
 ---
 
-Security and Privacy Considerations {#security-privacy}
+## Security and Privacy Considerations {#security-privacy}
 
 When implementing speech recognition, you must address important security and privacy concerns.
 
-Best Practices for Privacy
+### Best Practices for Privacy
 
 ```javascript
 class PrivacyAwareSpeechRecognition {
@@ -833,7 +833,7 @@ class PrivacyAwareSpeechRecognition {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Web Speech API opens remarkable possibilities for Chrome extension developers. From building sophisticated voice command systems to implementing hands-free dictation, this API provides the foundation for creating truly innovative extensions that transform how users interact with their browsers.
 

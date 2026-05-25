@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/theme-sync/"
 last_modified_at: 2026-01-15
 ---
 
-Theme Sync Pattern
+### Theme Sync Pattern
 
-Overview {#overview}
+## Overview {#overview}
 
 - Sync extension theme with system/browser dark mode
 - Consistent theming across popup, options, side panel, content script UI
@@ -16,7 +16,7 @@ Overview {#overview}
 
 ---
 
-Detecting System Theme {#detecting-system-theme}
+## Detecting System Theme {#detecting-system-theme}
 
 Use `window.matchMedia` to detect the system's color scheme preference in popup, options, and side panel contexts:
 
@@ -42,7 +42,7 @@ function watchSystemTheme(callback: (theme: "light" | "dark") => void): () => vo
 
 ---
 
-Theme Storage {#theme-storage}
+## Theme Storage {#theme-storage}
 
 Store the user's theme preference using `chrome.storage.sync` for cross-device synchronization:
 
@@ -66,7 +66,7 @@ Three modes: "light" (forced light), "dark" (forced dark), "system" (auto-detect
 
 ---
 
-CSS Implementation {#css-implementation}
+## CSS Implementation {#css-implementation}
 
 Use CSS custom properties with a `data-theme` attribute for clean theming:
 
@@ -102,9 +102,9 @@ Apply the theme attribute to `document.documentElement` in each UI context.
 
 ---
 
-Cross-Context Consistency {#cross-context-consistency}
+## Cross-Context Consistency {#cross-context-consistency}
 
-Sync theme across all extension contexts using `chrome.storage.onChanged`:
+### Sync theme across all extension contexts using `chrome.storage.onChanged`:
 
 ```typescript
 // theme-bridge.ts
@@ -141,7 +141,7 @@ chrome.runtime.sendMessage({ type: "GET_THEME" }, (response) => {
 
 ---
 
-Service Worker Theme Awareness {#service-worker-theme-awareness}
+## Service Worker Theme Awareness {#service-worker-theme-awareness}
 
 The service worker cannot access `matchMedia`. Rely on stored preference and broadcast changes:
 
@@ -167,9 +167,9 @@ Forward theme changes to all open contexts using message passing.
 
 ---
 
-Transition Animation {#transition-animation}
+## Transition Animation {#transition-animation}
 
-Smooth theme transitions prevent jarring visual changes:
+### Smooth theme transitions prevent jarring visual changes:
 
 ```css
 :root {
@@ -186,7 +186,7 @@ Smooth theme transitions prevent jarring visual changes:
 
 ---
 
-Code Examples Summary {#code-examples-summary}
+## Code Examples Summary {#code-examples-summary}
 
 | Component | Purpose |
 |-----------|---------|
@@ -197,7 +197,7 @@ Code Examples Summary {#code-examples-summary}
 
 ---
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 
 - [Theming Dark Mode](./theming-dark-mode.md) - Extended dark mode patterns
 - [State Management](./state-management.md) - Centralized state patterns

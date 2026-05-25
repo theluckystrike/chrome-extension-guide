@@ -9,7 +9,7 @@ Environment Variables in Chrome Extensions
 
 Chrome extensions run in a browser context where Node.js APIs like `process.env` are unavailable. Unlike traditional web applications, extensions cannot read `.env` files at runtime. This guide covers the patterns for managing configuration and environment variables throughout the extension development lifecycle.
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 - [The Core Challenge](#the-core-challenge)
 - [Build-Time Injection](#build-time-injection)
@@ -24,7 +24,7 @@ Table of Contents {#table-of-contents}
 
 ---
 
-The Core Challenge {#the-core-challenge}
+## The Core Challenge {#the-core-challenge}
 
 Extensions load in the browser with no access to Node.js runtime:
 
@@ -37,9 +37,9 @@ You must inject environment variables at build time, or read them from storage a
 
 ---
 
-Build-Time Injection {#build-time-injection}
+## Build-Time Injection {#build-time-injection}
 
-Vite: Using define {#vite-using-define}
+## Vite: Using define {#vite-using-define}
 
 Vite provides the `define` option to replace strings at build time:
 
@@ -58,7 +58,7 @@ export default defineConfig({
 });
 ```
 
-Vite: Using .env Files {#vite-using-env-files}
+## Vite: Using .env Files {#vite-using-env-files}
 
 Vite automatically loads variables from `.env` files prefixed with `VITE_`:
 
@@ -75,9 +75,9 @@ if (import.meta.env.VITE_DEBUG) {
 }
 ```
 
-Webpack: DefinePlugin {#webpack-defineplugin}
+## Webpack: DefinePlugin {#webpack-defineplugin}
 
-Webpack's DefinePlugin replaces global constants:
+### Webpack's DefinePlugin replaces global constants:
 
 ```javascript
 // webpack.config.js
@@ -94,7 +94,7 @@ module.exports = {
 };
 ```
 
-Rollup: @rollup/plugin-replace {#rollup-rollupplugin-replace}
+## Rollup: @rollup/plugin-replace {#rollup-rollupplugin-replace}
 
 ```javascript
 // rollup.config.js
@@ -112,7 +112,7 @@ export default {
 
 ---
 
-Conditional Code Paths {#conditional-code-paths}
+## Conditional Code Paths {#conditional-code-paths}
 
 Use environment flags to include or exclude code based on the build:
 
@@ -132,7 +132,7 @@ if (FEATURE_PREMIUM) {
 
 ---
 
-Multiple Environments {#multiple-environments}
+## Multiple Environments {#multiple-environments}
 
 Create separate `.env` files for each environment:
 
@@ -150,7 +150,7 @@ VITE_API_URL=https://staging.api.com vite build
 
 ---
 
-API Key Management {#api-key-management}
+## API Key Management {#api-key-management}
 
 Never commit API keys to version control.
 
@@ -174,7 +174,7 @@ VITE_API_URL=https://api.example.com
 
 ---
 
-Runtime Configuration {#runtime-configuration}
+## Runtime Configuration {#runtime-configuration}
 
 For user-specific or sensitive values, use the options page:
 
@@ -196,7 +196,7 @@ async function getApiKey() {
 
 ---
 
-Extension ID Differences {#extension-id-differences}
+## Extension ID Differences {#extension-id-differences}
 
 The extension ID changes between development (unpacked) and production (Chrome Web Store):
 
@@ -219,9 +219,9 @@ const redirectUri = isDev
 
 ---
 
-CI/CD Integration {#cicd-integration}
+## CI/CD Integration {#cicd-integration}
 
-Inject secrets from CI environment variables:
+### Inject secrets from CI environment variables:
 
 {% raw %}
 ```yaml
@@ -242,15 +242,15 @@ Netlify example
 
 ---
 
-See Also {#see-also}
+## See Also {#see-also}
 
 - [Vite Extension Setup Guide](./vite-extension-setup.md)
 - [Webpack Extension Setup Guide](./webpack-extension-setup.md)
 - [CI/CD Pipeline Guide](./ci-cd-pipeline.md)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Monorepo Setup](../guides/chrome-extension-monorepo.md)
 - [Linting & Code Quality](../guides/linting-code-quality.md)

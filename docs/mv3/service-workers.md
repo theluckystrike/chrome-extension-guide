@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/mv3/service-workers/"
 last_modified_at: 2026-01-15
 ---
 
-MV3 Service Workers: A Complete Migration Guide
+### MV3 Service Workers: A Complete Migration Guide
 
 In Manifest V3, the persistent background page from Manifest V2 is replaced by ephemeral service workers. This fundamental architectural change impacts how you manage state, handle events, and structure your extension's background logic. This guide covers everything you need to know to migrate successfully.
 
 ---
 
-Overview {#overview}
+## Overview {#overview}
 
 In MV2, background pages were persistent, they loaded once when the browser started and stayed alive indefinitely. This allowed developers to rely on global variables, maintain DOM references, and use `setTimeout`/`setInterval` without concern.
 
@@ -26,7 +26,7 @@ This is the single biggest change in MV3 and affects virtually every aspect of b
 
 ---
 
-Key Differences: MV2 vs MV3 {#key-differences-mv2-vs-mv3}
+## Key Differences: MV2 vs MV3 {#key-differences-mv2-vs-mv3}
 
 | Feature | MV2 Background Page | MV3 Service Worker |
 |---------|---------------------|-------------------|
@@ -40,11 +40,11 @@ Key Differences: MV2 vs MV3 {#key-differences-mv2-vs-mv3}
 
 ---
 
-Manifest Change {#manifest-change}
+## Manifest Change {#manifest-change}
 
-The manifest.json configuration changes significantly:
+### The manifest.json configuration changes significantly:
 
-MV2 (Background Scripts) {#mv2-background-scripts}
+## MV2 (Background Scripts) {#mv2-background-scripts}
 
 ```json
 {
@@ -55,7 +55,7 @@ MV2 (Background Scripts) {#mv2-background-scripts}
 }
 ```
 
-MV3 (Service Worker) {#mv3-service-worker}
+## MV3 (Service Worker) {#mv3-service-worker}
 
 ```json
 {
@@ -73,7 +73,7 @@ Key changes:
 
 ---
 
-Problem 1: State Loss {#problem-1-state-loss}
+## Problem 1: State Loss {#problem-1-state-loss}
 
 The most critical issue with service workers is that global variables are not preserved between terminations. If your extension relies on:
 
@@ -91,9 +91,9 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 This will fail because when the service worker terminates (after ~30 seconds of inactivity), `counter` resets to `0`.
 
-Solution: Use @theluckystrike/webext-storage {#solution-use-theluckystrikewebext-storage}
+## Solution: Use @theluckystrike/webext-storage {#solution-use-theluckystrikewebext-storage}
 
-The `@theluckystrike/webext-storage` library provides a type-safe storage abstraction:
+### The `@theluckystrike/webext-storage` library provides a type-safe storage abstraction:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -127,7 +127,7 @@ Why this works:
 
 ---
 
-Problem 2: setTimeout/setInterval {#problem-2-settimeoutsetinterval}
+## Problem 2: setTimeout/setInterval {#problem-2-settimeoutsetinterval}
 
 In MV2, you could set timers that would reliably fire:
 
@@ -140,7 +140,7 @@ setInterval(() => {
 
 In MV3, the service worker will be terminated before the timer fires, causing missed executions.
 
-Solution: Use chrome.alarms {#solution-use-chromealarms}
+## Solution: Use chrome.alarms {#solution-use-chromealarms}
 
 Chrome provides the `chrome.alarms` API specifically for this purpose:
 
@@ -176,7 +176,7 @@ Benefits of chrome.alarms:
 
 ---
 
-Problem 3: Event Listeners Must Be Synchronous {#problem-3-event-listeners-must-be-synchronous}
+## Problem 3: Event Listeners Must Be Synchronous {#problem-3-event-listeners-must-be-synchronous}
 
 In MV2, you could register event listeners inside async functions:
 
@@ -193,9 +193,9 @@ setupListeners();
 
 In MV3, service workers wake up briefly to handle events. If your listener isn't registered at the top level of the script, it won't be there when the event fires.
 
-Solution: Use @theluckystrike/webext-messaging {#solution-use-theluckystrikewebext-messaging}
+## Solution: Use @theluckystrike/webext-messaging {#solution-use-theluckystrikewebext-messaging}
 
-The `@theluckystrike/webext-messaging` library handles this correctly:
+### The `@theluckystrike/webext-messaging` library handles this correctly:
 
 ```ts
 import { createMessenger } from "@theluckystrike/webext-messaging";
@@ -233,7 +233,7 @@ Why this works:
 
 ---
 
-Problem 4: No DOM Access {#problem-4-no-dom-access}
+## Problem 4: No DOM Access {#problem-4-no-dom-access}
 
 Service workers cannot access the DOM directly. If your background script contained:
 
@@ -245,9 +245,9 @@ document.body.appendChild(div);
 
 This will fail in MV3.
 
-Solutions {#solutions}
+## Solutions {#solutions}
 
-Option A: Use chrome.offscreen {#option-a-use-chromeoffscreen}
+## Option A: Use chrome.offscreen {#option-a-use-chromeoffscreen}
 
 For operations requiring DOM (like playing audio, WebRTC, etc.), use the Offscreen API:
 
@@ -266,7 +266,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-Option B: Move Logic to Popup or Content Scripts {#option-b-move-logic-to-popup-or-content-scripts}
+## Option B: Move Logic to Popup or Content Scripts {#option-b-move-logic-to-popup-or-content-scripts}
 
 For most use cases, move DOM-dependent logic to:
 - Popup: When user clicks the extension icon
@@ -274,7 +274,7 @@ For most use cases, move DOM-dependent logic to:
 
 ---
 
-Problem 5: No XMLHttpRequest {#problem-5-no-xmlhttprequest}
+## Problem 5: No XMLHttpRequest {#problem-5-no-xmlhttprequest}
 
 The `XMLHttpRequest` API is not available in service workers:
 
@@ -285,9 +285,9 @@ xhr.open('GET', 'https://api.example.com/data');
 xhr.send();
 ```
 
-Solution: Use fetch() {#solution-use-fetch}
+## Solution: Use fetch() {#solution-use-fetch}
 
-The Fetch API works in service workers:
+### The Fetch API works in service workers:
 
 ```ts
 //  MV3 compatible
@@ -300,7 +300,7 @@ async function fetchData() {
 
 ---
 
-Service Worker Lifecycle {#service-worker-lifecycle}
+## Service Worker Lifecycle {#service-worker-lifecycle}
 
 Understanding the lifecycle is crucial for debugging and optimization:
 
@@ -334,7 +334,7 @@ Understanding the lifecycle is crucial for debugging and optimization:
    - Register all listeners at top level
 ```
 
-Lifecycle Events {#lifecycle-events}
+## Lifecycle Events {#lifecycle-events}
 
 1. Install: Fires once when the service worker first loads
    - Good for one-time setup
@@ -350,7 +350,7 @@ Lifecycle Events {#lifecycle-events}
 
 ---
 
-Migration Checklist {#migration-checklist}
+## Migration Checklist {#migration-checklist}
 
 Use this checklist to ensure complete migration:
 
@@ -368,9 +368,9 @@ Use this checklist to ensure complete migration:
 
 ---
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 
- Registering Listeners in Async Functions {#registering-listeners-in-async-functions}
+## Registering Listeners in Async Functions {#registering-listeners-in-async-functions}
 
 ```ts
 // WRONG
@@ -385,7 +385,7 @@ init();
 chrome.runtime.onMessage.addListener(handler);
 ```
 
- Relying on Memory for State {#relying-on-memory-for-state}
+## Relying on Memory for State {#relying-on-memory-for-state}
 
 ```ts
 // WRONG - State lost on termination
@@ -400,7 +400,7 @@ const storage = createStorage({ schema });
 // State persists across terminations
 ```
 
- Using setTimeout for Delayed Tasks {#using-settimeout-for-delayed-tasks}
+## Using setTimeout for Delayed Tasks {#using-settimeout-for-delayed-tasks}
 
 ```ts
 // WRONG - May not fire after termination
@@ -415,7 +415,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
- Using XMLHttpRequest {#using-xmlhttprequest}
+## Using XMLHttpRequest {#using-xmlhttprequest}
 
 ```ts
 // WRONG - Not available in service worker
@@ -430,7 +430,7 @@ const data = await response.json();
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 Migrating from MV2 background pages to MV3 service workers requires rethinking your architecture:
 
@@ -444,7 +444,7 @@ The `@theluckystrike/webext-storage` and `@theluckystrike/webext-messaging` libr
 
 ---
 
-Next Steps {#next-steps}
+## Next Steps {#next-steps}
 
 - Review the [Runtime API](../api-reference/runtime-api.md) for cross-context communication
 - See [Storage Changes in MV3](storage-changes.md) for advanced storage patterns

@@ -20,7 +20,7 @@ In this tutorial, you'll learn how to create a fully functional font changer ext
 
 ---
 
-Understanding the Font Changer Extension Architecture {#architecture}
+## Understanding the Font Changer Extension Architecture {#architecture}
 
 Before diving into code, it's essential to understand how a font changer extension works at a fundamental level. The core concept involves injecting custom CSS into web pages to override existing font styles. This process requires careful consideration of CSS specificity, font loading, and user preferences persistence.
 
@@ -30,7 +30,7 @@ The key challenge in building a font changer is ensuring that our custom fonts o
 
 ---
 
-Project Setup and Manifest Configuration {#manifest}
+## Project Setup and Manifest Configuration {#manifest}
 
 Every Chrome extension begins with a manifest.json file. For our font changer extension, we'll use Manifest V3, which is Google's current standard. Let's create the project structure and manifest file.
 
@@ -81,7 +81,7 @@ The manifest configuration includes several critical elements worth explaining. 
 
 ---
 
-Creating the Popup Interface {#popup}
+## Creating the Popup Interface {#popup}
 
 The popup is what users see when they click the extension icon in their browser toolbar. We'll create an intuitive interface that allows users to select fonts, adjust sizes, and apply their choices. Let's build the popup HTML and JavaScript.
 
@@ -339,7 +339,7 @@ The popup interface includes several controls for customizing typography. Users 
 
 ---
 
-Implementing Popup JavaScript Logic {#popup-js}
+## Implementing Popup JavaScript Logic {#popup-js}
 
 Now let's create the popup.js file that handles user interactions and communicates with the rest of the extension:
 
@@ -470,7 +470,7 @@ This JavaScript handles loading and saving user preferences using the Chrome Sto
 
 ---
 
-Creating the Content Script {#content-script}
+## Creating the Content Script {#content-script}
 
 The content script is the component that actually modifies page fonts. It runs in the context of web pages and applies the CSS changes. Let's create content.js:
 
@@ -586,7 +586,7 @@ The content script applies font changes by injecting a style element with high-s
 
 ---
 
-Creating the Background Service Worker {#background}
+## Creating the Background Service Worker {#background}
 
 The background service worker handles extension lifecycle events and can be used for more advanced features. For this basic implementation, we'll create a minimal background.js:
 
@@ -618,13 +618,13 @@ chrome.action.onClicked.addListener((tab) => {
 
 ---
 
-Adding Extension Icons {#icons}
+## Adding Extension Icons {#icons}
 
 Every extension needs icons. Create an icons folder and add placeholder icons. For development, you can create simple colored squares using any image editor. The manifest references three icon sizes: 16x16, 48x48, and 128x128 pixels.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we've created all the components, let's test the extension in Chrome:
 
@@ -640,7 +640,7 @@ If the fonts don't appear correctly, check the extension's console for errors. Y
 
 ---
 
-Advanced Features to Consider {#advanced}
+## Advanced Features to Consider {#advanced}
 
 Once you have the basic font changer working, consider adding these advanced features:
 
@@ -661,7 +661,7 @@ Automatically adjust font colors or backgrounds when users enable dark mode on w
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 When you're ready to share your extension with the world, follow these steps to publish to the Chrome Web Store:
 
@@ -676,7 +676,7 @@ Make sure your extension follows Google's policies, including proper disclosure 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Congratulations! You've successfully built a complete font changer Chrome extension. This project demonstrates several important concepts in extension development, including Manifest V3 configuration, content script injection, popup UI design, storage API usage, and cross-component communication.
 

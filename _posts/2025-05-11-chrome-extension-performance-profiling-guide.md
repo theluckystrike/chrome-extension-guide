@@ -18,7 +18,7 @@ This comprehensive guide walks you through the entire process of performance pro
 
 ---
 
-Understanding Chrome Extension Performance Architecture {#understanding-performance-architecture}
+## Understanding Chrome Extension Performance Architecture {#understanding-performance-architecture}
 
 Before diving into profiling techniques, it's crucial to understand how Chrome extensions consume resources and where performance bottlenecks typically occur. Chrome extensions run in a multi-process environment similar to regular web pages, but they have unique characteristics that affect performance.
 
@@ -28,7 +28,7 @@ Extensions consume memory through several mechanisms. JavaScript heap allocation
 
 ---
 
-Setting Up Your Profiling Environment {#setting-up-profiling}
+## Setting Up Your Profiling Environment {#setting-up-profiling}
 
 Chrome DevTools provides comprehensive profiling capabilities specifically designed for extension development. Accessing these tools requires understanding how extensions run in the browser and which DevTools panels apply to each extension component.
 
@@ -40,7 +40,7 @@ Consider adding performance logging to your extension during development. Strate
 
 ---
 
-Identifying Memory Leaks in Chrome Extensions {#identifying-memory-leaks}
+## Identifying Memory Leaks in Chrome Extensions {#identifying-memory-leaks}
 
 Memory leaks occur when your extension retains references to objects that are no longer needed, preventing the JavaScript garbage collector from reclaiming that memory. Over time, these leaks cause increasing memory consumption, eventually degrading browser performance and user experience. Detecting and fixing leaks requires systematic approaches and careful analysis.
 
@@ -52,7 +52,7 @@ The Memory panel's allocation timeline provides valuable insights into memory gr
 
 ---
 
-Using Chrome DevTools Memory Panel Effectively {#using-devtools-memory-panel}
+## Using Chrome DevTools Memory Panel Effectively {#using-devtools-memory-panel}
 
 Chrome DevTools Memory panel offers three primary profiling techniques: heap snapshots, allocation instrumentation, and allocation sampling. Each technique serves different purposes and reveals different aspects of your extension's memory behavior.
 
@@ -66,7 +66,7 @@ When analyzing heap snapshots, pay attention to retained size versus shallow siz
 
 ---
 
-Profiling CPU Performance and Responsiveness {#profiling-cpu-performance}
+## Profiling CPU Performance and Responsiveness {#profiling-cpu-performance}
 
 Memory issues are only part of the performance equation. Extensions that consume excessive CPU resources cause slow page loads, unresponsive popups, and general browser sluggishness. The Performance panel helps you identify and resolve CPU-related performance problems.
 
@@ -78,7 +78,7 @@ The Performance panel's JS profile shows CPU time spent in each function. Sort b
 
 ---
 
-Common Chrome Extension Performance Pitfalls {#common-pitfalls}
+## Common Chrome Extension Performance Pitfalls {#common-pitfalls}
 
 Experienced extension developers recognize common patterns that consistently cause performance problems. Avoiding these pitfalls prevents many performance issues before they manifest.
 
@@ -92,7 +92,7 @@ Background script architecture significantly impacts performance. Persistent bac
 
 ---
 
-Optimizing Memory Usage in Your Extension {#optimizing-memory-usage}
+## Optimizing Memory Usage in Your Extension {#optimizing-memory-usage}
 
 Once you've identified performance issues through profiling, applying effective optimizations requires understanding the specific techniques that address different problem types.
 
@@ -106,7 +106,7 @@ Manage event listener lifecycle carefully. Remove listeners when pages unload or
 
 ---
 
-Implementing Performance Monitoring in Production {#production-monitoring}
+## Implementing Performance Monitoring in Production {#production-monitoring}
 
 Performance optimization isn't a one-time effort, ongoing monitoring helps you catch regressions and identify issues that only appear under specific usage conditions. Implementing lightweight monitoring in your extension provides valuable production telemetry.
 
@@ -118,7 +118,7 @@ Establish performance budgets and automated testing. Define maximum acceptable m
 
 ---
 
-Best Practices for Ongoing Performance Maintenance {#ongoing-maintenance}
+## Best Practices for Ongoing Performance Maintenance {#ongoing-maintenance}
 
 Maintaining optimal performance requires ongoing attention as your extension evolves and as Chrome itself changes. Establishing good practices early prevents technical debt from accumulating.
 
@@ -130,7 +130,7 @@ Stay current with Chrome's best practices and API changes. Chrome regularly upda
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Performance profiling Chrome extensions requires understanding both general web performance principles and the unique characteristics of extension architecture. By mastering Chrome DevTools, recognizing common memory leak patterns, and implementing systematic optimization practices, you can build extensions that perform excellently and maintain that performance over time.
 

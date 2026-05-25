@@ -18,11 +18,11 @@ This comprehensive guide walks you through creating a complete Site Performance 
 
 ---
 
-Understanding Core Web Vitals {#understanding-core-web-vitals}
+## Understanding Core Web Vitals {#understanding-core-web-vitals}
 
 Before diving into the code, let's establish a solid foundation by understanding what Core Web Vitals are and why they matter for your extension.
 
-The Three Core Metrics
+### The Three Core Metrics
 
 Largest Contentful Paint (LCP) measures loading performance. It marks the point when the largest content element in the viewport becomes visible. For a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading. Elements that typically contribute to LCP include hero images, large text blocks, and featured videos.
 
@@ -30,17 +30,17 @@ First Input Delay (FID) measures interactivity. It quantifies the time from when
 
 Cumulative Layout Shift (CLS) measures visual stability. It quantifies how much the page's content shifts unexpectedly during loading. A good CLS score is less than 0.1. Layout shifts typically occur when resources load asynchronously, dimensions are not reserved for dynamic content, or animations trigger reflows.
 
-Why Build a Dedicated Extension
+### Why Build a Dedicated Extension
 
 While Chrome DevTools provides performance information, a dedicated Chrome extension offers several advantages. You get one-click access without opening DevTools, the ability to store and compare historical measurements, visual dashboards that make trends easy to spot, and custom alerts when metrics exceed thresholds. These benefits make performance monitoring accessible to team members who may not be familiar with DevTools.
 
 ---
 
-Project Setup and Structure {#project-setup}
+## Project Setup and Structure {#project-setup}
 
 Let's create the extension project with a clean, organized structure that follows Manifest V3 best practices.
 
-Directory Structure
+### Directory Structure
 
 Create a new folder for your extension and set up the following structure:
 
@@ -60,7 +60,7 @@ site-performance-monitor/
      web-vitals.js
 ```
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest.json file defines your extension's capabilities and permissions:
 
@@ -103,11 +103,11 @@ This configuration grants the extension access to measure performance on any web
 
 ---
 
-Core Web Vitals Measurement {#core-measurement}
+## Core Web Vitals Measurement {#core-measurement}
 
 The heart of your extension is the code that captures performance metrics. We'll use the web-vitals library, maintained by the Chrome team, which provides reliable, standardized measurements.
 
-Getting the Web Vitals Library
+### Getting the Web Vitals Library
 
 Download the web-vitals.js library from the official repository or install it via npm:
 
@@ -117,9 +117,9 @@ npm install web-vitals
 
 Place the resulting web-vitals.js file in the lib directory of your extension.
 
-Content Script for Metrics Collection
+### Content Script for Metrics Collection
 
-Create content.js to capture metrics on each page:
+### Create content.js to capture metrics on each page:
 
 ```javascript
 // content.js - Runs on every page to collect performance metrics
@@ -177,11 +177,11 @@ This script captures all major performance metrics as they become available. The
 
 ---
 
-Building the Popup Dashboard {#popup-dashboard}
+## Building the Popup Dashboard {#popup-dashboard}
 
 The popup is what users see when they click your extension icon. We'll create an informative dashboard that displays the current page's metrics with color-coded ratings.
 
-Popup HTML Structure
+### Popup HTML Structure
 
 ```html
 <!DOCTYPE html>
@@ -257,7 +257,7 @@ Popup HTML Structure
 </html>
 ```
 
-Styling the Dashboard
+### Styling the Dashboard
 
 Create popup.css to make the dashboard visually appealing and easy to read:
 
@@ -441,9 +441,9 @@ h1 {
 }
 ```
 
-Popup JavaScript Logic
+### Popup JavaScript Logic
 
-Create popup.js to handle the dashboard interactivity:
+### Create popup.js to handle the dashboard interactivity:
 
 ```javascript
 // popup.js - Handles popup UI and interactions
@@ -640,7 +640,7 @@ function getScoreClass(score) {
 
 ---
 
-Background Service Worker {#background-worker}
+## Background Service Worker {#background-worker}
 
 The background service worker handles extension lifecycle events and can perform periodic measurements:
 
@@ -686,18 +686,18 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension to ensure it works correctly across different scenarios.
 
-Loading Unpacked Extension
+### Loading Unpacked Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right
 3. Click "Load unpacked" and select your extension's folder
 4. Visit various websites and click the extension icon to see metrics
 
-Testing Different Page Types
+### Testing Different Page Types
 
 Test your extension on different types of websites:
 - Simple static HTML pages
@@ -710,7 +710,7 @@ Each will produce different metric values and help you verify your extension han
 
 ---
 
-Extension Icons {#icons}
+## Extension Icons {#icons}
 
 Create simple icons for your extension. Even basic icons improve professionalism:
 
@@ -722,9 +722,9 @@ You can create these using any image editor or generate them programmatically. P
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
-Once testing is complete, prepare for distribution:
+### Once testing is complete, prepare for distribution:
 
 1. Create a developer account at the Chrome Web Store
 2. Zip your extension files (excluding development-only files)
@@ -736,7 +736,7 @@ Your extension will be reviewed for policy compliance before publication.
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 Consider these enhancements to make your extension more powerful:
 
@@ -750,7 +750,7 @@ Multi-page Testing: Automatically visit and measure multiple pages of a site to 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a Site Performance Monitor Chrome extension is a rewarding project that combines practical utility with technical depth. By leveraging the web-vitals library and Chrome's extension APIs, you create a tool that helps developers and site owners understand and improve their websites' performance.
 
@@ -762,7 +762,7 @@ Start with this core implementation, test thoroughly, and iterate based on user 
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Web Vitals Library Documentation](https://web.dev/articles/vitals)
 - [Chrome Extension Development Overview](/guides/overview/)

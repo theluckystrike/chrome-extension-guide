@@ -10,7 +10,7 @@ Chrome Extension Bookmarks API. How to Create, Search, and Organize Bookmarks
 
 The Chrome Bookmarks API (`chrome.bookmarks`) is a powerful extension API that enables your Chrome extension to create, read, update, and delete bookmarks, as well as organize them into folders. This guide covers everything you need to build bookmark management features into your extension.
 
-Prerequisites and Permissions
+### Prerequisites and Permissions
 
 Before using the Bookmarks API, you need to declare the `"bookmarks"` permission in your `manifest.json`:
 
@@ -22,7 +22,7 @@ Before using the Bookmarks API, you need to declare the `"bookmarks"` permission
 
 This permission grants read and write access to all bookmarks in the user's browser. Note that you cannot restrict access to specific folders, a request for any bookmark returns all available data.
 
-Understanding the Bookmark Tree Structure
+### Understanding the Bookmark Tree Structure
 
 The Chrome Bookmarks API organizes bookmarks in a hierarchical tree structure known as the BookmarkTreeNode. Each node represents either a bookmark or a folder and contains properties like:
 
@@ -40,11 +40,11 @@ The tree root contains three default folders:
 2. Other Bookmarks (usually ID "2")
 3. Mobile Bookmarks (usually ID "3")
 
-CRUD Operations
+### CRUD Operations
 
-Reading Bookmarks
+### Reading Bookmarks
 
-Retrieve bookmarks using several methods:
+### Retrieve bookmarks using several methods:
 
 ```javascript
 // Get the entire bookmark tree
@@ -70,9 +70,9 @@ chrome.bookmarks.search({ url: "https://example.com" }, (results) => {
 });
 ```
 
-Creating Bookmarks and Folders
+### Creating Bookmarks and Folders
 
-Create bookmarks with the `create()` method:
+### Create bookmarks with the `create()` method:
 
 ```javascript
 // Create a new bookmark
@@ -93,9 +93,9 @@ chrome.bookmarks.create({
 });
 ```
 
-Updating Bookmarks
+### Updating Bookmarks
 
-Modify existing bookmarks or folders:
+### Modify existing bookmarks or folders:
 
 ```javascript
 // Update bookmark title and URL
@@ -113,9 +113,9 @@ chrome.bookmarks.move("123", {
 });
 ```
 
-Deleting Bookmarks
+### Deleting Bookmarks
 
-Remove bookmarks or entire folders:
+### Remove bookmarks or entire folders:
 
 ```javascript
 // Delete a single bookmark
@@ -351,7 +351,7 @@ chrome.bookmarks.onImportBegan.addListener(() => console.log("Import started"));
 chrome.bookmarks.onImportEnded.addListener(() => console.log("Import finished"));
 ```
 
-Building a Bookmark Manager Extension
+### Building a Bookmark Manager Extension
 
 background.js
 ```javascript
@@ -411,7 +411,7 @@ async function organizeByDomain() {
 }
 ```
 
-Best Practices
+### Best Practices
 
 When implementing bookmark functionality in your extension:
 
@@ -425,7 +425,7 @@ When implementing bookmark functionality in your extension:
 
 5. Provide undo functionality: Before deleting bookmarks, store the bookmark data so users can restore accidentally deleted items.
 
-Conclusion
+### Conclusion
 
 The Chrome Bookmarks API provides a complete solution for building bookmark management features in your Chrome extension. From simple bookmark creation to complex hierarchical organization and import/export functionality, this API enables rich bookmark-related experiences. Remember to test thoroughly with real user data and handle edge cases like deleted bookmarks gracefully.
 - Handle async operations properly (callbacks/promises)

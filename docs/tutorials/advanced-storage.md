@@ -7,11 +7,11 @@ last_modified_at: 2026-01-15
 ---
 Advanced Storage Patterns with @theluckystrike/webext-storage
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 - Read `docs/tutorials/storage-quickstart.md` first
 - `npm install @theluckystrike/webext-storage`
 
-1. Schema Design {#1-schema-design}
+## 1. Schema Design {#1-schema-design}
 - `defineSchema()` creates a type-safe schema. the identity function provides TypeScript inference:
   ```typescript
   import { defineSchema, createStorage } from '@theluckystrike/webext-storage';
@@ -26,7 +26,7 @@ Prerequisites {#prerequisites}
   ```
 - Schema keys map to `chrome.storage` keys. keep them short and descriptive
 
-2. Local vs Sync Storage {#2-local-vs-sync-storage}
+## 2. Local vs Sync Storage {#2-local-vs-sync-storage}
 - `createStorage(schema, 'local')`. stored on this device, 10MB limit
 - `createStorage(schema, 'sync')`. synced across signed-in Chrome instances, 100KB total / 8KB per item
 - When to use local: large data, device-specific settings, sensitive data
@@ -37,7 +37,7 @@ Prerequisites {#prerequisites}
   const syncStore = createStorage(defineSchema({ theme: 'string' }), 'sync');
   ```
 
-3. Batch Operations with getMany/setMany {#3-batch-operations-with-getmanysetmany}
+## 3. Batch Operations with getMany/setMany {#3-batch-operations-with-getmanysetmany}
 - Read multiple keys in one call (single `chrome.storage` API call under the hood):
   ```typescript
   const { theme, fontSize } = await storage.getMany(['theme', 'fontSize']);
@@ -48,7 +48,7 @@ Prerequisites {#prerequisites}
   ```
 - More efficient than multiple individual `get`/`set` calls
 
-4. Using getAll for Settings Pages {#4-using-getall-for-settings-pages}
+## 4. Using getAll for Settings Pages {#4-using-getall-for-settings-pages}
 - `getAll()` returns every key in the schema:
   ```typescript
   const allSettings = await storage.getAll();
@@ -57,7 +57,7 @@ Prerequisites {#prerequisites}
   ```
 - Perfect for options pages that display all settings at once
 
-5. Reactive Updates with watch() {#5-reactive-updates-with-watch}
+## 5. Reactive Updates with watch() {#5-reactive-updates-with-watch}
 - `watch()` listens for changes to a specific key. works across ALL extension contexts:
   ```typescript
   storage.watch('theme', (newValue, oldValue) => {
@@ -69,13 +69,13 @@ Prerequisites {#prerequisites}
 - Use case: background updates a counter, popup displays it in real-time
 - The watcher fires for changes from ANY context (popup, background, content, options)
 
-6. Bulk Cleanup with remove/removeMany/clear {#6-bulk-cleanup-with-removeremovemanyclear}
+## 6. Bulk Cleanup with remove/removeMany/clear {#6-bulk-cleanup-with-removeremovemanyclear}
 - Remove a single key: `await storage.remove('cache')`
 - Remove multiple keys: `await storage.removeMany(['cache', 'lastSync'])`
 - Remove ALL keys in schema: `await storage.clear()`
 - Use `clear()` for "Reset to defaults" buttons in options pages
 
-7. Schema Validation {#7-schema-validation}
+## 7. Schema Validation {#7-schema-validation}
 - `TypedStorage` validates keys at runtime. accessing a key not in the schema throws an error
 - TypeScript provides compile-time safety:
   ```typescript
@@ -85,18 +85,18 @@ Prerequisites {#prerequisites}
   ```
 - Internal `validateKey()` and `validateType()` methods enforce this at runtime too
 
-8. Real-World Example: User Preferences System {#8-real-world-example-user-preferences-system}
+## 8. Real-World Example: User Preferences System {#8-real-world-example-user-preferences-system}
 - Full working example: options page saves settings, popup reads them, content script applies them
 - Schema with 5+ keys covering different types
 - Shows `setMany` on options save, `getAll` on popup load, `watch` in content script
 - Demonstrates local + sync storage used together
 
-9. Migration Patterns {#9-migration-patterns}
+## 9. Migration Patterns {#9-migration-patterns}
 - Adding new keys: just add to schema. `get` returns `undefined` for unset keys
 - Renaming keys: read old key with raw `chrome.storage`, write to new key, remove old
 - Changing types: version your schema, migrate on extension update via `chrome.runtime.onInstalled`
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 - Storing large objects as JSON strings in sync storage (8KB per-item limit)
 - Not handling `undefined` returns for keys that haven't been set yet
 - Creating multiple `TypedStorage` instances for the same area with overlapping keys

@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Sessions API Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Sessions API (`chrome.sessions`) enables tracking, retrieving, and restoring browser sessions. This guide covers eight production-ready patterns.
 
 ---
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 ```json
 { "permissions": ["sessions", "tabs"], "optional_permissions": ["tabGroups", "storage"] }
@@ -22,7 +22,7 @@ Required Permissions {#required-permissions}
 
 ---
 
-Pattern 1: Retrieving Recently Closed Tabs {#pattern-1-retrieving-recently-closed-tabs}
+## Pattern 1: Retrieving Recently Closed Tabs {#pattern-1-retrieving-recently-closed-tabs}
 
 Use `chrome.sessions.getRecentlyClosed()` to fetch recently closed tabs and windows:
 
@@ -56,9 +56,9 @@ export async function getRecentlyClosedWindows(maxResults = 25): Promise<Session
 
 ---
 
-Pattern 2: Restoring Individual Tabs and Windows {#pattern-2-restoring-individual-tabs-and-windows}
+## Pattern 2: Restoring Individual Tabs and Windows {#pattern-2-restoring-individual-tabs-and-windows}
 
-Use `chrome.sessions.restore()` to bring back closed sessions:
+### Use `chrome.sessions.restore()` to bring back closed sessions:
 
 ```typescript
 // services/session-restore.ts
@@ -93,7 +93,7 @@ export async function restoreWindow(sessionId: string): Promise<chrome.windows.W
 
 ---
 
-Pattern 3: Filtering Sessions by Time Range and Type {#pattern-3-filtering-sessions-by-time-range-and-type}
+## Pattern 3: Filtering Sessions by Time Range and Type {#pattern-3-filtering-sessions-by-time-range-and-type}
 
 ```typescript
 // services/session-filter.ts
@@ -125,7 +125,7 @@ export async function filterSessions(options: {
 
 ---
 
-Pattern 4: Building a "Recently Closed" Popup UI {#pattern-4-building-a-recently-closed-popup-ui}
+## Pattern 4: Building a "Recently Closed" Popup UI {#pattern-4-building-a-recently-closed-popup-ui}
 
 ```html
 <!-- popup.html -->
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', loadSessions);
 
 ---
 
-Pattern 5: Session Search and Filtering {#pattern-5-session-search-and-filtering}
+## Pattern 5: Session Search and Filtering {#pattern-5-session-search-and-filtering}
 
 ```typescript
 // services/session-search.ts
@@ -211,9 +211,9 @@ export async function searchSessions(options: SearchOptions, maxResults = 50): P
 
 ---
 
-Pattern 6: Batch Restore {#pattern-6-batch-restore}
+## Pattern 6: Batch Restore {#pattern-6-batch-restore}
 
-Restore all tabs from a closed window:
+### Restore all tabs from a closed window:
 
 ```typescript
 // services/batch-restore.ts
@@ -253,9 +253,9 @@ export async function restoreTabsToCurrentWindow(sessionId: string): Promise<num
 
 ---
 
-Pattern 7: Persisting Session Snapshots {#pattern-7-persisting-session-snapshots}
+## Pattern 7: Persisting Session Snapshots {#pattern-7-persisting-session-snapshots}
 
-Using `@theluckystrike/webext-storage` for cross-restart recovery:
+### Using `@theluckystrike/webext-storage` for cross-restart recovery:
 
 ```typescript
 // storage/session-storage.ts
@@ -301,9 +301,9 @@ export async function deleteSnapshot(id: string): Promise<void> {
 
 ---
 
-Pattern 8: Combining Sessions API with Tab Groups {#pattern-8-combining-sessions-api-with-tab-groups}
+## Pattern 8: Combining Sessions API with Tab Groups {#pattern-8-combining-sessions-api-with-tab-groups}
 
-Workspace restoration using tab groups (Chrome 120+):
+### Workspace restoration using tab groups (Chrome 120+):
 
 ```typescript
 // storage/workspace-storage.ts
@@ -353,7 +353,7 @@ export async function deleteWorkspace(workspaceId: string): Promise<void> {
 
 ---
 
-Summary Table {#summary-table}
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key APIs | Storage |
 |---------|----------|----------|---------|
@@ -366,7 +366,7 @@ Summary Table {#summary-table}
 | 7: Storage Snapshots | Cross-restart persistence | `@theluckystrike/webext-storage` | `chrome.storage.local` |
 | 8: Tab Groups + Sessions | Workspace restoration | `chrome.tabGroups` | `chrome.storage.local` |
 
-Key Takeaways {#key-takeaways}
+## Key Takeaways {#key-takeaways}
 
 1. Session IDs are temporary: They expire after a short period. For permanent storage, save URLs to `chrome.storage` (Pattern 7).
 2. Window vs Tab: `getRecentlyClosed()` returns `Session` objects with either a `tab` or `window` property set. Access `session.tab.url` for tab sessions or `session.window.tabs` for window sessions.

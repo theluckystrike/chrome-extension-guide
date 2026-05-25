@@ -8,13 +8,13 @@ last_modified_at: 2026-01-15
 
 State Management Patterns for Chrome Extensions
 
-Overview {#overview}
+## Overview {#overview}
 
 State management in Chrome extensions presents unique challenges. Your extension runs across multiple isolated contexts, background service workers, content scripts, popups, options pages, and side panels, each with its own memory space and lifecycle. A popup closing destroys its in-memory state. A service worker can terminate and restart at any time. Nothing is shared by default.
 
 This tutorial covers the patterns and APIs you need to build reliable, reactive state management in your extension.
 
-Prerequisites {#prerequisites}
+## Prerequisites {#prerequisites}
 
 - Read `docs/tutorials/storage-quickstart.md` first
 - `npm install @theluckystrike/webext-storage`
@@ -22,11 +22,11 @@ Prerequisites {#prerequisites}
 
 ---
 
-1. Understanding chrome.storage API {#1-understanding-chromestorage-api}
+## 1. Understanding chrome.storage API {#1-understanding-chromestorage-api}
 
 The `chrome.storage` API is the backbone of extension state management. It provides three storage areas with different characteristics:
 
-1.1 Storage Areas Comparison {#11-storage-areas-comparison}
+## 1.1 Storage Areas Comparison {#11-storage-areas-comparison}
 
 | Area | Capacity | Sync Support | Persistence |
 |------|----------|--------------|-------------|
@@ -34,7 +34,7 @@ The `chrome.storage` API is the backbone of extension state management. It provi
 | `sync` | 100KB total, 8KB per item | Yes, across devices | Until cleared |
 | `session` | 1MB per extension | No | Until browser closes |
 
-1.2 Using chrome.storage.local {#12-using-chromestoragelocal}
+## 1.2 Using chrome.storage.local {#12-using-chromestoragelocal}
 
 Local storage is best for large, device-specific data:
 
@@ -56,7 +56,7 @@ const allData = await chrome.storage.local.get(null);
 // allData: { key1: value1, key2: value2, ... }
 ```
 
-1.3 Using chrome.storage.sync {#13-using-chromestoragesync}
+## 1.3 Using chrome.storage.sync {#13-using-chromestoragesync}
 
 Sync storage automatically syncs across devices when the user signs into Chrome:
 
@@ -79,7 +79,7 @@ Important quota limits for sync storage:
 - Per-item: 8KB maximum per key
 - Exceeding limits throws an error
 
-1.4 Using chrome.storage.session {#14-using-chromestoragesession}
+## 1.4 Using chrome.storage.session {#14-using-chromestoragesession}
 
 Session storage persists only until the browser closes, useful for temporary data:
 
@@ -95,17 +95,17 @@ const { authToken } = await chrome.storage.session.get('authToken');
 
 ---
 
-2. Reactive State with webext-reactive-store {#2-reactive-state-with-webext-reactive-store}
+## 2. Reactive State with webext-reactive-store {#2-reactive-state-with-webext-reactive-store}
 
 The `@theluckystrike/webext-reactive-store` package provides a reactive state management solution that automatically propagates changes across all extension contexts.
 
-2.1 Installation and Setup {#21-installation-and-setup}
+## 2.1 Installation and Setup {#21-installation-and-setup}
 
 ```bash
 npm install @theluckystrike/webext-reactive-store
 ```
 
-2.2 Creating a Reactive Store {#22-creating-a-reactive-store}
+## 2.2 Creating a Reactive Store {#22-creating-a-reactive-store}
 
 ```typescript
 // lib/store.ts
@@ -131,7 +131,7 @@ export const store = createReactiveStore(initialState, {
 });
 ```
 
-2.3 Reading and Writing State {#23-reading-and-writing-state}
+## 2.3 Reading and Writing State {#23-reading-and-writing-state}
 
 ```typescript
 // Read current state
@@ -148,9 +148,9 @@ store.setState(prev => ({
 }));
 ```
 
-2.4 Subscribing to Changes {#24-subscribing-to-changes}
+## 2.4 Subscribing to Changes {#24-subscribing-to-changes}
 
-The reactive store automatically handles cross-context updates:
+### The reactive store automatically handles cross-context updates:
 
 ```typescript
 // In popup.js - Subscribe to theme changes
@@ -174,7 +174,7 @@ store.subscribe((state) => {
 });
 ```
 
-2.5 Using Middleware {#25-using-middleware}
+## 2.5 Using Middleware {#25-using-middleware}
 
 Add middleware for logging, persistence, or custom behavior:
 
@@ -197,11 +197,11 @@ store.setState({ theme: 'dark' });
 
 ---
 
-3. Sharing State Between Extension Contexts {#3-sharing-state-between-extension-contexts}
+## 3. Sharing State Between Extension Contexts {#3-sharing-state-between-extension-contexts}
 
 Chrome extensions have multiple isolated contexts. Here's how to share state between them:
 
-3.1 The Storage-Backed Pattern {#31-the-storage-backed-pattern}
+## 3.1 The Storage-Backed Pattern {#31-the-storage-backed-pattern}
 
 Use `chrome.storage` as the single source of truth with change listeners:
 
@@ -260,9 +260,9 @@ export class SharedStateManager {
 export const sharedState = new SharedStateManager();
 ```
 
-3.2 Using the Pattern in Different Contexts {#32-using-the-pattern-in-different-contexts}
+## 3.2 Using the Pattern in Different Contexts {#32-using-the-pattern-in-different-contexts}
 
-In the background service worker:
+### In the background service worker:
 
 ```typescript
 // background.js
@@ -280,7 +280,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-In the popup:
+### In the popup:
 
 ```typescript
 // popup.js
@@ -297,7 +297,7 @@ sharedState.subscribe((state) => {
 });
 ```
 
-In content scripts:
+### In content scripts:
 
 ```typescript
 // content.js
@@ -313,9 +313,9 @@ sharedState.subscribe((state) => {
 });
 ```
 
-3.3 Direct Storage Access with Typed Wrapper {#33-direct-storage-access-with-typed-wrapper}
+## 3.3 Direct Storage Access with Typed Wrapper {#33-direct-storage-access-with-typed-wrapper}
 
-Using `@theluckystrike/webext-storage` for type-safe storage:
+### Using `@theluckystrike/webext-storage` for type-safe storage:
 
 ```typescript
 // lib/storage.ts
@@ -340,11 +340,11 @@ const { theme, user } = await storage.getMany(['theme', 'user']);
 
 ---
 
-4. Persistence Strategies {#4-persistence-strategies}
+## 4. Persistence Strategies {#4-persistence-strategies}
 
-4.1 Automatic Persistence with webext-reactive-store {#41-automatic-persistence-with-webext-reactive-store}
+## 4.1 Automatic Persistence with webext-reactive-store {#41-automatic-persistence-with-webext-reactive-store}
 
-The reactive store automatically persists to chrome.storage:
+### The reactive store automatically persists to chrome.storage:
 
 ```typescript
 import { createReactiveStore } from '@theluckystrike/webext-reactive-store';
@@ -363,9 +363,9 @@ store.setState({ count: 1 });
 // → Saved to chrome.storage.local.counter
 ```
 
-4.2 Manual Persistence Pattern {#42-manual-persistence-pattern}
+## 4.2 Manual Persistence Pattern {#42-manual-persistence-pattern}
 
-For more control, implement manual persistence:
+### For more control, implement manual persistence:
 
 ```typescript
 // lib/persistent-store.ts
@@ -404,9 +404,9 @@ await settingsStore.init();
 settingsStore.save({ theme: 'dark', enabled: false });
 ```
 
-4.3 Lazy Initialization Pattern {#43-lazy-initialization-pattern}
+## 4.3 Lazy Initialization Pattern {#43-lazy-initialization-pattern}
 
-Defer expensive initialization until needed:
+### Defer expensive initialization until needed:
 
 ```typescript
 // lib/lazy-store.ts
@@ -441,9 +441,9 @@ class LazyStore<T> {
 
 ---
 
-5. Sync vs Local Storage Tradeoffs {#5-sync-vs-local-storage-tradeoffs}
+## 5. Sync vs Local Storage Tradeoffs {#5-sync-vs-local-storage-tradeoffs}
 
-5.1 When to Use storage.sync {#51-when-to-use-storagesync}
+## 5.1 When to Use storage.sync {#51-when-to-use-storagesync}
 
 Best for:
 - User preferences that should follow across devices
@@ -464,7 +464,7 @@ Quota considerations:
 - 8KB per individual key
 - Large arrays/objects will fail
 
-5.2 When to Use storage.local {#52-when-to-use-storagelocal}
+## 5.2 When to Use storage.local {#52-when-to-use-storagelocal}
 
 Best for:
 - Large data sets (up to 10MB)
@@ -481,9 +481,9 @@ await chrome.storage.local.set({
 });
 ```
 
-5.3 Hybrid Approach {#53-hybrid-approach}
+## 5.3 Hybrid Approach {#53-hybrid-approach}
 
-Combine both for optimal results:
+### Combine both for optimal results:
 
 ```typescript
 // lib/hybrid-storage.ts
@@ -511,13 +511,13 @@ await localStorage.set('cache', largeData);  // Stays local, larger capacity
 
 ---
 
-6. Migration Patterns {#6-migration-patterns}
+## 6. Migration Patterns {#6-migration-patterns}
 
 When your data schema changes, you need migration strategies.
 
-6.1 Schema Version Migration {#61-schema-version-migration}
+## 6.1 Schema Version Migration {#61-schema-version-migration}
 
-Track schema versions and migrate on update:
+### Track schema versions and migrate on update:
 
 ```typescript
 // background.js
@@ -560,9 +560,9 @@ async function migrateFromPreviousVersion(previousVersion: string): Promise<void
 }
 ```
 
-6.2 Local to Sync Migration {#62-local-to-sync-migration}
+## 6.2 Local to Sync Migration {#62-local-to-sync-migration}
 
-Move data between storage areas with quota handling:
+### Move data between storage areas with quota handling:
 
 ```typescript
 // lib/migrate-local-to-sync.ts
@@ -601,9 +601,9 @@ async function migrateToSync(): Promise<void> {
 }
 ```
 
-6.3 Data Transformation Migration {#63-data-transformation-migration}
+## 6.3 Data Transformation Migration {#63-data-transformation-migration}
 
-Transform data structure during migration:
+### Transform data structure during migration:
 
 ```typescript
 // Migrate from old format to new format
@@ -626,7 +626,7 @@ async function migrateUserData(): Promise<void> {
 
 ---
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 
 - Storing large objects in sync storage - Exceeds 8KB per item or 100KB total limits
 - Not initializing storage before reading - First read returns empty, not defaults
@@ -637,7 +637,7 @@ Common Mistakes {#common-mistakes}
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Storage Quickstart](storage-quickstart.md) - Getting started with chrome.storage fundamentals
 - [Advanced Storage Patterns](advanced-storage.md) - Detailed look into schema design and batch operations

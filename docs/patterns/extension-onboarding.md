@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/extension-onboarding/"
 last_modified_at: 2026-01-15
 ---
 
-Extension Onboarding Patterns
+### Extension Onboarding Patterns
 
 User onboarding is critical for Chrome extensions to ensure users understand and adopt key features. This document covers proven onboarding patterns that improve user engagement and reduce early churn.
 
-First Install Detection {#first-install-detection}
+## First Install Detection {#first-install-detection}
 
-Use `chrome.runtime.onInstalled` to detect first-time installation:
+### Use `chrome.runtime.onInstalled` to detect first-time installation:
 
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
@@ -31,7 +31,7 @@ function openOnboardingPage() {
 }
 ```
 
-Welcome Page {#welcome-page}
+## Welcome Page {#welcome-page}
 
 Open an onboarding tab immediately after first install. The welcome page should:
 
@@ -46,7 +46,7 @@ document.getElementById('getStarted').addEventListener('click', () => {
 });
 ```
 
-Step-by-Step Setup Wizard {#step-by-step-setup-wizard}
+## Step-by-Step Setup Wizard {#step-by-step-setup-wizard}
 
 Guide users through key features with a multi-step wizard:
 
@@ -56,7 +56,7 @@ Guide users through key features with a multi-step wizard:
 4. Tutorial - Quick walkthrough of main features
 5. Completion - Confirmation and tips
 
-Permission Requests During Onboarding {#permission-requests-during-onboarding}
+## Permission Requests During Onboarding {#permission-requests-during-onboarding}
 
 Always explain why each permission is needed before requesting:
 
@@ -74,9 +74,9 @@ function requestPermissionWithExplanation(permission, rationale) {
 }
 ```
 
-Feature Highlights & Tooltips {#feature-highlights-tooltips}
+## Feature Highlights & Tooltips {#feature-highlights-tooltips}
 
-Use tooltip-style overlays to highlight new features:
+### Use tooltip-style overlays to highlight new features:
 
 ```javascript
 function showFeatureTour(steps) {
@@ -96,18 +96,18 @@ function showFeatureTour(steps) {
 }
 ```
 
-Interactive Tutorials {#interactive-tutorials}
+## Interactive Tutorials {#interactive-tutorials}
 
-In-extension guided tours help users learn by doing:
+### In-extension guided tours help users learn by doing:
 
 - Highlight UI elements sequentially
 - Provide contextual instructions
 - Allow users to practice each step
 - Include "Next" and "Skip" buttons
 
-Settings Initialization {#settings-initialization}
+## Settings Initialization {#settings-initialization}
 
-Set sensible defaults, then allow customization:
+### Set sensible defaults, then allow customization:
 
 ```javascript
 const defaultSettings = {
@@ -127,7 +127,7 @@ function initializeSettings() {
 }
 ```
 
-Pin Extension Prompt {#pin-extension-prompt}
+## Pin Extension Prompt {#pin-extension-prompt}
 
 Remind users to pin the extension for easy access:
 
@@ -143,9 +143,9 @@ function showPinPrompt() {
 }
 ```
 
-Keyboard Shortcut Setup {#keyboard-shortcut-setup}
+## Keyboard Shortcut Setup {#keyboard-shortcut-setup}
 
-Display current shortcuts and link to shortcut settings:
+### Display current shortcuts and link to shortcut settings:
 
 ```javascript
 function displayShortcuts() {
@@ -162,9 +162,9 @@ document.getElementById('shortcutSettings').href =
   'chrome://extensions/shortcuts';
 ```
 
-Skip Option {#skip-option}
+## Skip Option {#skip-option}
 
-Always allow users to skip onboarding:
+### Always allow users to skip onboarding:
 
 ```javascript
 function skipOnboarding() {
@@ -176,9 +176,9 @@ function skipOnboarding() {
 }
 ```
 
-Progress Tracking {#progress-tracking}
+## Progress Tracking {#progress-tracking}
 
-Store completion status in storage:
+### Store completion status in storage:
 
 ```javascript
 function completeOnboarding() {
@@ -196,9 +196,9 @@ function checkOnboardingStatus(callback) {
 }
 ```
 
-Returning User Detection {#returning-user-detection}
+## Returning User Detection {#returning-user-detection}
 
-Distinguish between new installs and updates:
+### Distinguish between new installs and updates:
 
 ```javascript
 chrome.runtime.onInstalled.addListener((details) => {
@@ -216,9 +216,9 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-A/B Testing Onboarding Flows {#ab-testing-onboarding-flows}
+## A/B Testing Onboarding Flows {#ab-testing-onboarding-flows}
 
-Test different onboarding approaches:
+### Test different onboarding approaches:
 
 ```javascript
 function assignOnboardingVariant() {
@@ -229,7 +229,7 @@ function assignOnboardingVariant() {
 }
 ```
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [User Onboarding Guide](../guides/user-onboarding.md) - Detailed onboarding strategies
 - [Permission Gating](../patterns/permission-gating.md) - Best practices for requesting permissions

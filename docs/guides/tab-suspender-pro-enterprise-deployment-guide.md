@@ -12,7 +12,7 @@ This comprehensive guide provides IT administrators with the knowledge and tools
 
 Tab Suspender Pro is an enterprise-ready extension designed specifically for large-scale deployments, offering centralized configuration management, solid security controls, and comprehensive telemetry for IT operations teams.
 
-Table of Contents
+### Table of Contents
 
 1. [Chrome Enterprise Policy Setup](#chrome-enterprise-policy-setup)
 2. [Force-Installing via Admin Console](#force-installing-via-admin-console)
@@ -26,11 +26,11 @@ Table of Contents
 
 ---
 
-Chrome Enterprise Policy Setup
+### Chrome Enterprise Policy Setup
 
 Chrome Enterprise policies provide the foundation for managing Tab Suspender Pro across your organization. These policies allow IT administrators to control extension behavior without requiring end-user configuration, ensuring consistent settings across all managed devices.
 
-Understanding Chrome Enterprise Policies
+### Understanding Chrome Enterprise Policies
 
 Chrome Enterprise policies are stored in the Windows Registry (for Windows devices) or via plist files (for macOS devices). Chrome reads these policies on startup and applies them to all managed browser instances. The policies that control Tab Suspender Pro fall into several categories:
 
@@ -44,7 +44,7 @@ For Tab Suspender Pro specifically, the following enterprise policies are availa
 
 To configure these policies, you'll need access to the Google Admin Console (for Chrome Browser Cloud Management) or your organization's Group Policy management tools. The Google Admin Console provides the most comprehensive and user-friendly interface for managing Chrome extensions across your fleet.
 
-Policy Configuration Through Google Admin Console
+### Policy Configuration Through Google Admin Console
 
 Navigate to Devices > Chrome > Apps & Extensions > Tab Suspender Pro in your Google Admin Console. Here you can configure installation settings, permissions, and extension-specific policies. The console allows you to set policies for specific organizational units, enabling different configurations for different departments if needed.
 
@@ -52,11 +52,11 @@ For organizations without Google Admin Console, you can configure policies manua
 
 ---
 
-Force-Installing via Admin Console
+### Force-Installing via Admin Console
 
 Force-installation ensures that Tab Suspender Pro is automatically installed on all managed Chrome browsers without requiring user action. This is critical for organizations that need consistent tab management across all employee devices.
 
-Configuring Force-Installation
+### Configuring Force-Installation
 
 In the Google Admin Console, navigate to the Tab Suspender Pro extension settings and select "Force install" under the installation setting. This setting has three options:
 
@@ -66,7 +66,7 @@ In the Google Admin Console, navigate to the Tab Suspender Pro extension setting
 
 For Tab Suspender Pro deployment, we recommend using "Allow only approved apps and extensions" combined with force-installation. This prevents users from installing potentially unwanted extensions while ensuring Tab Suspender Pro is available on all devices.
 
-Installation Verification
+### Installation Verification
 
 After configuring force-installation, verify that the extension is properly deployed by checking the Chrome managed browser on a test device. Open chrome://extensions and look for the "Managed by your organization" indicator next to Tab Suspender Pro. This confirms that the extension was installed via enterprise policy rather than manually by the user.
 
@@ -74,11 +74,11 @@ You can also verify installation programmatically using the Chrome Management AP
 
 ---
 
-Pre-Configuring Whitelist Domains
+### Pre-Configuring Whitelist Domains
 
 Tab Suspender Pro's whitelist functionality allows IT administrators to specify domains that should never be suspended, ensuring critical business applications remain active even when tab suspension is triggered.
 
-Whitelist Configuration Methods
+### Whitelist Configuration Methods
 
 There are three primary methods for configuring domain whitelists in Tab Suspender Pro for enterprise environments:
 
@@ -88,7 +88,7 @@ Method 2: Admin Console Policy Settings - If using Chrome Enterprise Plus or Chr
 
 Method 3: Extension Settings Policy - Use the ExtensionSettings policy to configure Tab Suspender Pro with a JSON-formatted configuration string that includes your whitelist domains.
 
-Recommended Whitelist Domains
+### Recommended Whitelist Domains
 
 For most enterprise deployments, we recommend whitelisting the following domain categories:
 
@@ -102,11 +102,11 @@ Configure these domains using the managed storage schema detailed later in this 
 
 ---
 
-Group Policy and MDM Configuration
+### Group Policy and MDM Configuration
 
 For organizations not using Chrome Browser Cloud Management, Group Policy (Windows) and Mobile Device Management (macOS) provide alternative deployment mechanisms.
 
-Windows Group Policy Configuration
+### Windows Group Policy Configuration
 
 On Windows systems, Chrome Enterprise policies are configured through Group Policy Objects (GPOs). You'll need to download and install the Chrome ADMX template from the Chrome Enterprise publishing page.
 
@@ -120,17 +120,17 @@ For macOS devices managed through MDM (Mobile Device Management), Chrome policie
 
 The plist should include the ExtensionInstallForcelist key with the extension ID and update URL. Many MDM solutions (Jamf, Microsoft Intune, VMware Workspace ONE) have built-in support for Chrome policy configuration, simplifying the deployment process.
 
-Linux Chrome Policy Configuration
+### Linux Chrome Policy Configuration
 
 Linux systems using Chrome can be configured through JSON policy files in specific system directories. Place policy JSON files in `/etc/opt/chrome/policies/managed/` to apply organization-wide settings. The JSON format follows the same structure as Windows registry policies but uses a file-based approach.
 
 ---
 
-Managed Storage Schema
+### Managed Storage Schema
 
 Tab Suspender Pro supports enterprise configuration through Chrome's managed storage API, allowing IT administrators to push read-only configuration to the extension.
 
-Manifest Configuration
+### Manifest Configuration
 
 To enable managed storage, include the `managed_storage_schema` field in your extension's manifest.json. This defines the structure of configuration data that can be pushed through enterprise policies:
 
@@ -183,13 +183,13 @@ To enable managed storage, include the `managed_storage_schema` field in your ex
 }
 ```
 
-Pushing Configuration Through Admin Console
+### Pushing Configuration Through Admin Console
 
 In the Google Admin Console, navigate to the Tab Suspender Pro settings and locate the "Managed storage" section. Here you can enter JSON configuration that matches your schema. The console validates the JSON against the schema before saving, ensuring configuration correctness.
 
 For organizations using Group Policy, configuration is pushed through the ExtensionSettings policy. The configuration is embedded as a JSON string within the policy value.
 
-Reading Managed Storage in Extension Code
+### Reading Managed Storage in Extension Code
 
 Tab Suspender Pro reads managed storage using the chrome.storage.managed API:
 
@@ -213,11 +213,11 @@ The extension should include fallback defaults in case managed storage is not co
 
 ---
 
-Monitoring Extension Health at Scale
+### Monitoring Extension Health at Scale
 
 Enterprise deployments require solid monitoring capabilities to ensure extension health across the fleet. Tab Suspender Pro includes several features designed for large-scale monitoring.
 
-Chrome Management API
+### Chrome Management API
 
 The Chrome Management API provides programmatic access to extension information across your managed devices. You can use this API to:
 
@@ -228,7 +228,7 @@ The Chrome Management API provides programmatic access to extension information 
 
 To use the Chrome Management API, you'll need to enable the API in your Google Cloud console and grant appropriate permissions to service accounts used for monitoring.
 
-Extension Event Logging
+### Extension Event Logging
 
 Tab Suspender Pro can be configured to log events to Chrome's management API, providing visibility into extension behavior across your fleet. Events logged include:
 
@@ -239,17 +239,17 @@ Tab Suspender Pro can be configured to log events to Chrome's management API, pr
 
 These logs can be aggregated using Chrome Browser Cloud Management reporting or exported to your SIEM (Security Information and Event Management) system for analysis.
 
-Third-Party Monitoring Integration
+### Third-Party Monitoring Integration
 
 For organizations with existing endpoint management solutions, Tab Suspender Pro supports integration through standard Chrome extension management APIs. Many enterprise monitoring platforms (SentinelOne, CrowdStrike, Microsoft Defender for Endpoint) can monitor Chrome extension health as part of their device compliance checks.
 
 ---
 
-Memory Savings Across Fleet
+### Memory Savings Across Fleet
 
 One of the primary benefits of Tab Suspender Pro in enterprise environments is the measurable memory savings achieved through intelligent tab suspension.
 
-Fleet-Wide Memory Impact
+### Fleet-Wide Memory Impact
 
 On average, Tab Suspender Pro achieves the following memory savings across enterprise deployments:
 
@@ -261,7 +261,7 @@ On average, Tab Suspender Pro achieves the following memory savings across enter
 
 These savings translate directly to reduced hardware costs, as employees can work productively with machines that have less RAM than would otherwise be required. Many organizations report being able to extend laptop replacement cycles by one to two years after deploying tab suspension solutions.
 
-Calculating Fleet Savings
+### Calculating Fleet Savings
 
 To calculate your organization's potential savings, use the following formula:
 
@@ -271,51 +271,51 @@ Annual Savings = (Average Memory Saved per User) × (Number of Users) × (Memory
 
 The usage factor accounts for the percentage of time users have multiple tabs open. For typical knowledge workers, we recommend using 0.7 as a conservative estimate.
 
-Reporting Memory Optimization Results
+### Reporting Memory Optimization Results
 
 Tab Suspender Pro includes reporting capabilities that allow IT administrators to generate fleet-wide memory optimization reports. These reports can be used to demonstrate ROI to leadership and identify departments or users who would benefit from additional optimization settings.
 
 ---
 
-IT Admin FAQ
+### IT Admin FAQ
 
 This section addresses the most common questions IT administrators have when deploying Tab Suspender Pro in enterprise environments.
 
-How do I deploy Tab Suspender Pro to specific user groups?
+### How do I deploy Tab Suspender Pro to specific user groups?
 
 Use organizational units (OUs) in Google Admin Console to create targeted deployment policies. Create separate policies for each group and assign users to the appropriate OU. This allows different departments to have different whitelist configurations based on their specific needs.
 
-Can users uninstall Tab Suspender Pro when force-installed?
+### Can users uninstall Tab Suspender Pro when force-installed?
 
 When force-installed through enterprise policy, users cannot uninstall the extension through the standard Chrome extensions UI. However, users with sufficient permissions can still disable the extension. To prevent this, configure the ExtensionSettings policy to block users from disabling the extension.
 
-What happens if the extension needs to be updated?
+### What happens if the extension needs to be updated?
 
 Tab Suspender Pro updates automatically through the Chrome Web Store or your private update URL. Enterprise deployments can control update timing through the ExtensionSettings policy, including the ability to pin to specific versions for testing purposes before rolling out updates fleet-wide.
 
-Does Tab Suspender Pro work with Chrome browser on Linux?
+### Does Tab Suspender Pro work with Chrome browser on Linux?
 
 Yes, Tab Suspender Pro supports Chrome on Linux through JSON policy files in `/etc/opt/chrome/policies/managed/`. The same managed storage schema and configuration options are available on all platforms.
 
-How do I troubleshoot deployment issues?
+### How do I troubleshoot deployment issues?
 
 First, verify the extension is showing as "Managed by your organization" in chrome://extensions on a test device. Check the Chrome policy applied using chrome://policy to confirm settings are being pushed correctly. Review Chrome's log files for extension-related errors, and use the Chrome Management API to query the status across your fleet.
 
-Can Tab Suspender Pro be deployed alongside other tab management extensions?
+### Can Tab Suspender Pro be deployed alongside other tab management extensions?
 
 We recommend deploying only one tab suspension extension at a time to avoid conflicts. If multiple extensions attempt to manage tab lifecycle, users may experience unexpected behavior. Review your existing extension portfolio before deploying Tab Suspender Pro.
 
 ---
 
-Compliance and Security Review
+### Compliance and Security Review
 
 Enterprise deployments must meet stringent compliance and security requirements. Tab Suspender Pro is designed with these requirements in mind.
 
-Data Privacy
+### Data Privacy
 
 Tab Suspender Pro processes all data locally on the user's device. No tab content, browsing history, or personal information is transmitted to external servers unless explicitly configured for telemetry. The extension does not require access to website content for its core functionality,  it only needs to know tab URLs and titles to manage suspension.
 
-Extension Permissions
+### Extension Permissions
 
 The extension requests only the permissions necessary for its functionality:
 
@@ -327,7 +327,7 @@ The extension requests only the permissions necessary for its functionality:
 
 No permissions are requested for accessing website content, cookies, or network requests, minimizing the extension's security footprint.
 
-Security Best Practices
+### Security Best Practices
 
 When deploying Tab Suspender Pro in your organization, follow these security best practices:
 
@@ -337,7 +337,7 @@ When deploying Tab Suspender Pro in your organization, follow these security bes
 - Enable telemetry only if your organization's data handling policies permit
 - Regularly audit extension deployment status using the Chrome Management API
 
-Compliance Certifications
+### Compliance Certifications
 
 Tab Suspender Pro is designed to meet common enterprise compliance requirements including SOC 2, ISO 27001, and GDPR. The extension's local-only data processing model simplifies compliance with data residency requirements, as no user data leaves the device except when explicitly configured for anonymous telemetry.
 
@@ -345,7 +345,7 @@ For organizations requiring additional compliance documentation, contact your Ta
 
 ---
 
-Conclusion
+### Conclusion
 
 Deploying Tab Suspender Pro across an enterprise organization requires careful planning and execution, but the benefits, significant memory savings, improved device performance, and reduced IT costs, make it a worthwhile investment for organizations of all sizes.
 

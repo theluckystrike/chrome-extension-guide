@@ -15,7 +15,7 @@ Managing browser tabs efficiently has become a critical skill for anyone who spe
 
 Chrome's pinned tabs feature serves a unique purpose in the browser ecosystem. When you pin a tab, it locks to the left side of your tab bar, remains visible at all times, and takes on a smaller, streamlined appearance. These tabs are designed to represent websites you need constant access to throughout your browsing session, email clients, music streaming services, project management tools, or communication platforms like Slack or Discord. The pinned tab functionality was intentionally designed to keep these essential sites readily available without the hassle of searching through dozens of open tabs. Understanding this fundamental purpose becomes crucial when configuring Tab Suspender Pro, as the extension needs to respect your workflow while still optimizing memory usage across your other tabs.
 
-What Are Pinned Tabs in Chrome?
+### What Are Pinned Tabs in Chrome?
 
 Pinned tabs represent one of Chrome's most practical features for power users who work with multiple web applications throughout their day. When you right-click on any tab and select "Pin tab" from the context menu, that tab transforms in several important ways. First, its visual appearance changes dramatically, it shrinks to show only the favicon (the small icon that represents the website) without any text or title. This compact representation allows you to fit many more pinned tabs in the limited space available at the top of your browser window. Second, pinned tabs always appear to the left of all your unpinned tabs, creating a dedicated space for your most essential websites. Third, pinned tabs cannot be accidentally closed with a simple click; you must unpin them first before closing, which prevents the frustrating loss of an important tab.
 
@@ -23,7 +23,7 @@ The practical applications for pinned tabs span virtually every professional and
 
 From a technical perspective, pinned tabs behave slightly differently from regular tabs in Chrome's internal architecture. Chrome maintains pinned tabs in a special state that prevents them from being unloaded even when memory pressure becomes severe. This design decision reflects the understanding that pinned tabs represent critical workflow dependencies, users pin tabs specifically because they need instant access, and Chrome respects this choice even when the system needs to reclaim memory from other areas. This technical nuance becomes particularly relevant when understanding how Tab Suspender Pro interacts with pinned tabs, as both Chrome itself and the extension need to coordinate their memory management approaches.
 
-Default Behavior of Tab Suspender Pro with Pinned Tabs
+### Default Behavior of Tab Suspender Pro with Pinned Tabs
 
 The default behavior of Tab Suspender Pro regarding pinned tabs reflects a thoughtful balance between automation and user control. Out of the box, Tab Suspender Pro is configured to never suspend pinned tabs automatically. This decision makes logical sense when you consider the primary use case for pinning: these are websites you need accessible at all times. If the extension were to suspend your pinned email client or music player, you'd experience frustrating delays when trying to access them, undermining the very purpose of pinning them in the first place. The developers recognized this use case and built the extension with pinned tab protection as a default setting. However, understanding exactly how this protection works and knowing how to customize it if needed gives you greater control over your browser's performance.
 
@@ -33,7 +33,7 @@ The suspension mechanism itself deserves explanation to fully understand how Tab
 
 Tab Suspender Pro typically runs its suspension checks on a configurable schedule, often every few minutes or whenever you switch tabs. During each check, the extension evaluates all open tabs against your configured rules and suspends any that meet the criteria for suspension (typically based on inactivity time). Pinned tabs are specifically exempted from this evaluation process, ensuring they remain active and responsive at all times. This automatic detection happens silently in the background, requiring no manual intervention from you unless you decide to modify the default behavior.
 
-Configuring Pinned Tab Exclusions in Tab Suspender Pro
+### Configuring Pinned Tab Exclusions in Tab Suspender Pro
 
 Configuring pinned tab exclusions in Tab Suspender Pro gives you granular control over which tabs should never be suspended. While the default behavior protects all pinned tabs, you might find situations where you want more specific control. Perhaps you want to pin certain tabs while still allowing them to suspend after a specific period, or maybe you want to ensure certain unpinned tabs also remain active. The extension provides several configuration options to handle these scenarios. You can access these settings by clicking the Tab Suspender Pro icon in your Chrome toolbar and selecting the options or settings menu. Within the settings, you'll find checkboxes and toggles that control how the extension handles various tab states, including pinned tabs, tab groups, and specific URLs or domains.
 
@@ -43,7 +43,7 @@ Beyond basic pinned tab handling, Tab Suspender Pro typically offers several add
 
 For advanced users, Tab Suspender Pro often includes keyboard shortcuts and context menu options that provide quick access to suspension controls. You can manually suspend any tab instantly regardless of its pinned status, force-suspend all tabs except those you explicitly exclude, or create custom suspension profiles that apply different rules in different scenarios. Some versions of the extension also support automation based on battery status, if your laptop is running on battery, you might want more aggressive suspension to extend battery life, while charging scenarios might allow more tabs to remain active. These advanced features make Tab Suspender Pro a versatile tool for managing your browser's resource consumption according to your specific needs.
 
-Memory Impact of Unsuspended Pinned Tabs
+### Memory Impact of Unsuspended Pinned Tabs
 
 Understanding the memory impact of unsuspended pinned tabs helps you make informed decisions about your tab management strategy. Each pinned tab that remains active continues consuming system RAM, just like any other Chrome tab. The amount of memory varies significantly depending on the website, simple text-based pages might use only 50-100MB, while complex web applications with real-time features, videos, or interactive elements can consume 200-500MB or more. If you maintain several pinned tabs for essential services, these can add up to a substantial portion of your total browser memory usage. For users with limited RAM or those running many applications simultaneously, this memory consumption might become noticeable.
 
@@ -53,7 +53,7 @@ Certain types of pinned tabs tend to consume more memory than others, and unders
 
 For users concerned about memory usage, several strategies can help mitigate the impact of pinned tabs without sacrificing accessibility. First, be selective about which tabs you pin, reserve pinning for truly essential services rather than every website you visit frequently. Second, close pinned tabs when you're not using your computer for extended periods, such as overnight or during weekends. Third, consider using desktop applications for particularly resource-intensive services when available, freeing your browser from maintaining those persistent connections. Fourth, periodically restart Chrome to clear accumulated memory from long-running tabs, which can become fragmented over time. Fifth, monitor your actual memory usage using Chrome's Task Manager to identify any unexpectedly heavy pinned tabs that might warrant different handling.
 
-Best Practices for Pinned Tab Management Strategy
+### Best Practices for Pinned Tab Management Strategy
 
 Despite the memory considerations, pinned tabs remain a valuable feature for productivity-focused users. The key lies in developing a thoughtful pinning strategy that balances accessibility with resource management. Rather than pinning every website you visit frequently, reserve pinning for truly essential services that require instant access throughout your workday. Email clients, calendar applications, project management tools, and communication platforms typically qualify for this treatment. For frequently visited but less critical websites, consider using bookmarks or the tab group feature instead of pinning, allowing Tab Suspender Pro to manage their suspension automatically.
 

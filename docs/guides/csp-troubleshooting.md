@@ -10,15 +10,15 @@ Chrome Extension Content Security Policy Errors. Troubleshooting Guide
 
 Content Security Policy (CSP) errors are among the most frustrating issues you'll encounter when developing Chrome extensions. These errors occur when your extension attempts to execute code or load resources that violate Chrome's security policies. This guide covers the most common CSP violations and proven solutions.
 
-Understanding CSP in Chrome Extensions
+### Understanding CSP in Chrome Extensions
 
 Chrome extensions operate under a strict Content Security Policy that's more restrictive than regular web pages. By default, extensions can only load scripts and styles from their own package, no external scripts unless explicitly permitted. This policy prevents malicious extensions from executing injected code but can block legitimate extension functionality.
 
 The extension CSP differs from webpage CSP in several important ways. Extensions can declare their own CSP through the manifest.json file, but certain restrictions remain regardless of your configuration. Understanding these limitations is key to building compliant extensions.
 
-Common CSP Error Messages
+### Common CSP Error Messages
 
-"Refused to execute inline script"
+### "Refused to execute inline script"
 
 This error appears when your extension contains inline JavaScript, either in `<script>` tags within HTML files or as inline event handlers like `onclick="handleClick()"`.
 
@@ -43,7 +43,7 @@ Solution: Move all JavaScript to external files. Instead of inline scripts, use 
 document.getElementById('my-button').addEventListener('click', handleClick);
 ```
 
-"Refused to load the script 'eval()'"
+### "Refused to load the script 'eval()'"
 
 The use of `eval()` and similar functions that execute string as code is restricted.
 
@@ -65,7 +65,7 @@ const data = JSON.parse('{"value": 1}'); // Good
 const handler = new Function('a', 'b', 'return a + b');
 ```
 
-"Refused to load the script from 'http://example.com/script.js'"
+### "Refused to load the script from 'http://example.com/script.js'"
 
 Loading scripts from HTTP sources violates CSP. Extensions must use HTTPS or same-origin resources.
 
@@ -74,7 +74,7 @@ Error message example:
 Refused to load the script 'http://example.com/script.js' because it violates the following Content Security Policy directive: "script-src 'self' https://example.com".
 ```
 
-Solution: Use HTTPS for all external resources:
+### Solution: Use HTTPS for all external resources:
 
 ```javascript
 // Use HTTPS
@@ -83,7 +83,7 @@ script.src = 'https://example.com/script.js'; // Not http://
 document.head.appendChild(script);
 ```
 
-Also ensure your manifest.json declares the permission:
+### Also ensure your manifest.json declares the permission:
 
 ```json
 {
@@ -121,7 +121,7 @@ Error message example:
 Refused to connect to 'https://api.example.com' because it violates the following Content Security Policy directive: "connect-src 'self' https://api.example.com".
 ```
 
-Solution: Declare host permissions in manifest.json:
+### Solution: Declare host permissions in manifest.json:
 
 ```json
 {
@@ -156,15 +156,15 @@ Solution: Add the URL to host permissions and use appropriate framing:
 }
 ```
 
-Then in your extension HTML:
+### Then in your extension HTML:
 
 ```html
 <iframe src="https://example.com/page" allow="cross-origin-isolated"></iframe>
 ```
 
-Manifest Configuration for CSP
+### Manifest Configuration for CSP
 
-Declaring Custom CSP
+### Declaring Custom CSP
 
 You can override the default CSP in your manifest:
 
@@ -179,7 +179,7 @@ You can override the default CSP in your manifest:
 
 However, 'unsafe-eval' and certain other directives are never allowed regardless of your CSP declaration.
 
-Manifest V3 CSP Restrictions
+### Manifest V3 CSP Restrictions
 
 Manifest V3 enforces stricter CSP than V2. Key differences include:
 
@@ -195,9 +195,9 @@ Manifest V3 enforces stricter CSP than V2. Key differences include:
 }
 ```
 
-Handling Dynamic Content
+### Handling Dynamic Content
 
-User Scripts and eval()
+### User Scripts and eval()
 
 If your extension needs to execute user-provided scripts, use the scripting API:
 
@@ -211,7 +211,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Dynamic Code Loading
+### Dynamic Code Loading
 
 For extensions that must load code dynamically, use these approaches:
 
@@ -228,11 +228,11 @@ chrome.scripting.executeScript({
 });
 ```
 
-Content Script CSP Considerations
+### Content Script CSP Considerations
 
 Content scripts face unique CSP challenges because they run in the context of web pages, which have their own CSP.
 
-Page CSP vs Extension CSP
+### Page CSP vs Extension CSP
 
 Content scripts must comply with both the extension CSP and the page's CSP. If a page has a restrictive CSP blocking external scripts, your content script cannot inject external scripts even with proper permissions.
 
@@ -255,7 +255,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Injecting Styles Safely
+### Injecting Styles Safely
 
 CSS injection through content scripts must follow CSP rules:
 
@@ -273,7 +273,7 @@ shadow.innerHTML = '<style>.local-style { color: red; }</style>';
 document.body.appendChild(host);
 ```
 
-Troubleshooting Checklist
+### Troubleshooting Checklist
 
 When facing CSP errors, systematically work through these steps:
 
@@ -286,9 +286,9 @@ When facing CSP errors, systematically work through these steps:
 7. If using eval() or new Function(), refactor to avoid dynamic code execution
 8. For content scripts, consider whether the page CSP is blocking your code
 
-Advanced Workarounds
+### Advanced Workarounds
 
-Web Accessible Resources
+### Web Accessible Resources
 
 When content scripts need to load extension resources that must be accessible from web pages:
 
@@ -303,14 +303,14 @@ When content scripts need to load extension resources that must be accessible fr
 }
 ```
 
-Then load resources using chrome.runtime.getURL:
+### Then load resources using chrome.runtime.getURL:
 
 ```javascript
 const img = document.createElement('img');
 img.src = chrome.runtime.getURL('images/icon.png');
 ```
 
-Using Declarative Net Request
+### Using Declarative Net Request
 
 For modifications that require circumventing page CSP, use declarativeNetRequest:
 
@@ -323,7 +323,7 @@ For modifications that require circumventing page CSP, use declarativeNetRequest
 
 This allows header modifications without direct script execution in page context.
 
-Best Practices for Avoiding CSP Issues
+### Best Practices for Avoiding CSP Issues
 
 - Design with CSP restrictions in mind from the start
 - Keep all code in external files

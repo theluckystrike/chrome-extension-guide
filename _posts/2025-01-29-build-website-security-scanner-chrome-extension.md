@@ -18,7 +18,7 @@ we'll walk you through the process of building a fully functional website securi
 
 ---
 
-Why Build a Security Scanner Extension?
+### Why Build a Security Scanner Extension?
 
 The demand for vulnerability checker chrome tools has never been higher. With over 4.5 billion internet users worldwide and cybercriminals becoming more sophisticated, there's a growing need for accessible security tools that everyday users can use without technical expertise.
 
@@ -31,11 +31,11 @@ A site security extension offers several unique advantages over traditional secu
 
 ---
 
-Project Architecture and Prerequisites
+### Project Architecture and Prerequisites
 
 Before diving into code, let's establish the architecture for our security scanner extension. We'll use Manifest V3, which is the current standard for Chrome extensions and offers improved security and performance.
 
-Required Files Structure
+### Required Files Structure
 
 ```
 security-scanner/
@@ -51,7 +51,7 @@ security-scanner/
      icon128.png
 ```
 
-Key Features We'll Implement
+### Key Features We'll Implement
 
 Our security scanner extension will include:
 
@@ -64,7 +64,7 @@ Our security scanner extension will include:
 
 ---
 
-Setting Up the Manifest (manifest.json)
+### Setting Up the Manifest (manifest.json)
 
 The manifest.json file is the backbone of any Chrome extension. Let's create a comprehensive manifest for our vulnerability checker chrome extension:
 
@@ -109,7 +109,7 @@ The manifest.json file is the backbone of any Chrome extension. Let's create a c
 
 ---
 
-Building the Content Script (content.js)
+### Building the Content Script (content.js)
 
 The content script runs in the context of web pages and collects security-relevant information. This is where the core site security analysis happens:
 
@@ -234,7 +234,7 @@ The content script runs in the context of web pages and collects security-releva
 
 ---
 
-Creating the Background Service Worker (background.js)
+### Creating the Background Service Worker (background.js)
 
 The background script handles extension lifecycle events and coordinates communication between the popup and content scripts:
 
@@ -264,7 +264,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 ---
 
-Building the Popup Interface (popup.html)
+### Building the Popup Interface (popup.html)
 
 The popup provides the user interface for our vulnerability checker chrome extension:
 
@@ -331,7 +331,7 @@ The popup provides the user interface for our vulnerability checker chrome exten
 
 ---
 
-Implementing Popup Logic (popup.js)
+### Implementing Popup Logic (popup.js)
 
 The popup script handles user interactions and displays security results:
 
@@ -466,7 +466,7 @@ function showError() {
 
 ---
 
-Styling the Popup (popup.css)
+### Styling the Popup (popup.css)
 
 Create an attractive, user-friendly interface for your site security extension:
 
@@ -606,7 +606,7 @@ header h1 {
 
 ---
 
-Best Practices for Security Extensions
+### Best Practices for Security Extensions
 
 When building a vulnerability checker chrome extension, follow these essential best practices:
 
@@ -632,7 +632,7 @@ Conduct regular security audits of your extension code. Look for common vulnerab
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
 Before publishing your security scanner extension, thoroughly test it across different scenarios:
 
@@ -649,7 +649,7 @@ To load your extension in Chrome:
 
 ---
 
-Publishing Your Extension
+### Publishing Your Extension
 
 Once tested, publish your site security extension to the Chrome Web Store:
 
@@ -660,7 +660,7 @@ Once tested, publish your site security extension to the Chrome Web Store:
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a security scanner extension is an excellent project that combines practical utility with technical complexity. By following this guide, you've learned how to create a fully functional vulnerability checker that can analyze SSL certificates, detect mixed content, monitor third-party scripts, assess form security, and evaluate cookie attributes.
 

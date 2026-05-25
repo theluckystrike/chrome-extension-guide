@@ -6,14 +6,14 @@ canonical_url: "https://bestchromeextensions.com/publishing/publishing-guide/"
 last_modified_at: 2026-01-15
 ---
 
-Chrome Web Store Publishing Guide
+### Chrome Web Store Publishing Guide
 
 Complete guide from zero to published extension. Covers developer registration,
 store listing preparation, review process, updates, analytics, and monetization.
 
 ---
 
-Table of Contents {#table-of-contents}
+## Table of Contents {#table-of-contents}
 
 1. [Developer Account Registration](#developer-account-registration)
 2. [Preparing Your Extension for Submission](#preparing-your-extension-for-submission)
@@ -32,17 +32,17 @@ Table of Contents {#table-of-contents}
 
 ---
 
-Developer Account Registration {#developer-account-registration}
+## Developer Account Registration {#developer-account-registration}
 
 Before you can publish anything, you need a Chrome Web Store developer account.
 
-Requirements {#requirements}
+## Requirements {#requirements}
 
 - A Google account (personal or Google Workspace)
 - A one-time registration fee of $5 USD
 - A verified email address
 
-Registration Steps {#registration-steps}
+## Registration Steps {#registration-steps}
 
 1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Sign in with your Google account
@@ -50,7 +50,7 @@ Registration Steps {#registration-steps}
 4. Pay the $5 registration fee via Google Payments
 5. Complete identity verification (required since 2023)
 
-Identity Verification {#identity-verification}
+## Identity Verification {#identity-verification}
 
 Google now requires identity verification for all new developer accounts:
 
@@ -62,7 +62,7 @@ Google now requires identity verification for all new developer accounts:
 Verification typically takes 1-3 business days. You cannot upload extensions
 until verification is complete.
 
-Account Limits {#account-limits}
+## Account Limits {#account-limits}
 
 - New accounts are limited to publishing 20 extensions
 - Accounts with a good track record can request limit increases
@@ -71,13 +71,13 @@ Account Limits {#account-limits}
 
 ---
 
-Preparing Your Extension for Submission {#preparing-your-extension-for-submission}
+## Preparing Your Extension for Submission {#preparing-your-extension-for-submission}
 
 Before uploading, make sure your extension is ready.
 
-Manifest Requirements {#manifest-requirements}
+## Manifest Requirements {#manifest-requirements}
 
-Your `manifest.json` must include:
+### Your `manifest.json` must include:
 
 ```jsonc
 {
@@ -94,7 +94,7 @@ Your `manifest.json` must include:
 }
 ```
 
-Icon Requirements {#icon-requirements}
+## Icon Requirements {#icon-requirements}
 
 | Size | Where it appears |
 |---|---|
@@ -106,7 +106,7 @@ Icon Requirements {#icon-requirements}
 All icons must be PNG format with no transparency issues. The 128x128 icon is
 the most visible -- invest in making it look professional.
 
-Building the ZIP Package {#building-the-zip-package}
+## Building the ZIP Package {#building-the-zip-package}
 
 The Chrome Web Store accepts a `.zip` file containing your extension files.
 Do not include:
@@ -137,7 +137,7 @@ cd ..
 echo "Created ${FILENAME}"
 ```
 
-Pre-Submission Checklist {#pre-submission-checklist}
+## Pre-Submission Checklist {#pre-submission-checklist}
 
 - [ ] Extension works in Chrome stable (not just Canary/Dev)
 - [ ] All declared permissions are actually used
@@ -149,12 +149,12 @@ Pre-Submission Checklist {#pre-submission-checklist}
 
 ---
 
-Screenshot and Promotional Image Requirements {#screenshot-and-promotional-image-requirements}
+## Screenshot and Promotional Image Requirements {#screenshot-and-promotional-image-requirements}
 
 Visual assets are critical for conversion. Users decide whether to install
 based on screenshots before reading the description.
 
-Screenshots {#screenshots}
+## Screenshots {#screenshots}
 
 | Requirement | Value |
 |---|---|
@@ -173,7 +173,7 @@ Tips for effective screenshots:
 - Do not include the Chrome browser frame (just the content area)
 - Avoid text-heavy screenshots that are unreadable at small sizes
 
-Promotional Images {#promotional-images}
+## Promotional Images {#promotional-images}
 
 | Type | Size | Required? |
 |---|---|---|
@@ -183,7 +183,7 @@ Promotional Images {#promotional-images}
 The marquee tile is only used if Chrome editors choose to feature your
 extension. Include it anyway -- you never know when they might pick yours.
 
-Store Icon {#store-icon}
+## Store Icon {#store-icon}
 
 Your 128x128 icon from the manifest is used as the store listing icon. It
 should be:
@@ -195,11 +195,11 @@ should be:
 
 ---
 
-Writing the Store Listing {#writing-the-store-listing}
+## Writing the Store Listing {#writing-the-store-listing}
 
 The store listing is your sales page. Every field matters.
 
-Name (Maximum 75 Characters) {#name-maximum-75-characters}
+## Name (Maximum 75 Characters) {#name-maximum-75-characters}
 
 - Be descriptive but concise
 - Include a primary keyword (e.g., "Tab Manager" not "Tabify")
@@ -207,7 +207,7 @@ Name (Maximum 75 Characters) {#name-maximum-75-characters}
 - Do not use ALL CAPS
 - Avoid special characters and emoji
 
-Short Description (Maximum 132 Characters) {#short-description-maximum-132-characters}
+## Short Description (Maximum 132 Characters) {#short-description-maximum-132-characters}
 
 This appears in search results. Make every character count:
 
@@ -216,7 +216,7 @@ Good: "Block distracting websites during work hours with customizable schedules"
 Bad:  "A really cool and awesome extension that helps you be more productive!!!"
 ```
 
-Detailed Description (Maximum 16,384 Characters) {#detailed-description-maximum-16384-characters}
+## Detailed Description (Maximum 16,384 Characters) {#detailed-description-maximum-16384-characters}
 
 Structure it for scanning:
 
@@ -243,7 +243,7 @@ SUPPORT:
 [How to get help -- email, GitHub issues, etc.]
 ```
 
-Category Selection {#category-selection}
+## Category Selection {#category-selection}
 
 Choose the most specific category that applies:
 
@@ -262,7 +262,7 @@ Choose the most specific category that applies:
 
 Picking the wrong category can lead to rejection or poor discoverability.
 
-Language and Localisation {#language-and-localisation}
+## Language and Localisation {#language-and-localisation}
 
 - Set a primary language for your listing
 - Provide localised descriptions for target markets
@@ -271,12 +271,12 @@ Language and Localisation {#language-and-localisation}
 
 ---
 
-Privacy Policy Requirements {#privacy-policy-requirements}
+## Privacy Policy Requirements {#privacy-policy-requirements}
 
 A privacy policy is required if your extension collects or transmits any user
 data.
 
-When a Privacy Policy is Required {#when-a-privacy-policy-is-required}
+## When a Privacy Policy is Required {#when-a-privacy-policy-is-required}
 
 You must provide a privacy policy URL if your extension:
 
@@ -291,7 +291,7 @@ In practice, almost every extension needs a privacy policy. If your extension
 only uses `storage` for local preferences and has no host permissions, you
 might be exempt -- but providing one anyway is safer.
 
-What the Privacy Policy Must Include {#what-the-privacy-policy-must-include}
+## What the Privacy Policy Must Include {#what-the-privacy-policy-must-include}
 
 - What data you collect
 - How you collect it
@@ -302,7 +302,7 @@ What the Privacy Policy Must Include {#what-the-privacy-policy-must-include}
 - How you notify users of policy changes
 - Your contact information
 
-Hosting Your Privacy Policy {#hosting-your-privacy-policy}
+## Hosting Your Privacy Policy {#hosting-your-privacy-policy}
 
 Options for hosting:
 
@@ -315,13 +315,13 @@ The URL must be publicly accessible. Do not link to a page that requires login.
 
 ---
 
-Data Use Disclosure {#data-use-disclosure}
+## Data Use Disclosure {#data-use-disclosure}
 
 The Chrome Web Store requires a detailed data use disclosure that explains
 every type of data your extension handles. This appears on your listing page
 and is reviewed carefully.
 
-Data Types {#data-types}
+## Data Types {#data-types}
 
 You must declare which of these data types you collect:
 
@@ -337,7 +337,7 @@ You must declare which of these data types you collect:
 | User activity | Clicks, mouse movements, scroll behaviour |
 | Website content | Page text, images, DOM content |
 
-Justifying Permissions in the Disclosure {#justifying-permissions-in-the-disclosure}
+## Justifying Permissions in the Disclosure {#justifying-permissions-in-the-disclosure}
 
 For each permission that accesses user data, explain the purpose:
 
@@ -349,7 +349,7 @@ For each permission that accesses user data, explain the purpose:
 | `bookmarks` | "Reads and writes bookmarks to sync saved articles across devices" |
 | Host permissions | "Injects a content script on matching pages to highlight search terms" |
 
-Certification {#certification}
+## Certification {#certification}
 
 You must certify that your extension:
 
@@ -364,11 +364,11 @@ account suspension.
 
 ---
 
-Review Process {#review-process}
+## Review Process {#review-process}
 
 Every submission goes through a review by Google's team (automated and manual).
 
-Timeline {#timeline}
+## Timeline {#timeline}
 
 | Submission Type | Typical Review Time |
 |---|---|
@@ -380,7 +380,7 @@ Timeline {#timeline}
 Review times can spike during holidays or after policy changes. Plan your
 releases accordingly.
 
-What Reviewers Check {#what-reviewers-check}
+## What Reviewers Check {#what-reviewers-check}
 
 1. Policy compliance: Does the extension follow Chrome Web Store policies?
 2. Permission justification: Does each permission have a legitimate use?
@@ -389,7 +389,7 @@ What Reviewers Check {#what-reviewers-check}
 5. Privacy: Is the data use disclosure accurate?
 6. Quality: Does it meet minimum quality standards?
 
-Common Rejection Reasons {#common-rejection-reasons}
+## Common Rejection Reasons {#common-rejection-reasons}
 
 | Reason | What Went Wrong | Fix |
 |---|---|---|
@@ -404,7 +404,7 @@ Common Rejection Reasons {#common-rejection-reasons}
 | Deceptive install | Install flow misleads users about what it does | Make the purpose clear |
 | Insufficient description | Description is too vague or too short | Write a detailed description |
 
-Remote Code Restrictions (MV3) {#remote-code-restrictions-mv3}
+## Remote Code Restrictions (MV3) {#remote-code-restrictions-mv3}
 
 Manifest V3 strictly prohibits executing remotely hosted code. All JavaScript
 must be bundled in the extension package. You can still:
@@ -422,11 +422,11 @@ You cannot:
 
 ---
 
-Responding to Reviewer Feedback {#responding-to-reviewer-feedback}
+## Responding to Reviewer Feedback {#responding-to-reviewer-feedback}
 
 If your extension is rejected, you will receive an email with the reason.
 
-How to Respond {#how-to-respond}
+## How to Respond {#how-to-respond}
 
 1. Read the rejection email carefully. Identify the specific policy or
    requirement that was violated.
@@ -442,9 +442,9 @@ How to Respond {#how-to-respond}
 
 5. Be patient. Re-reviews often take longer than initial reviews.
 
-Appealing a Rejection {#appealing-a-rejection}
+## Appealing a Rejection {#appealing-a-rejection}
 
-If you believe the rejection was incorrect:
+### If you believe the rejection was incorrect:
 
 1. Reply to the rejection email with a clear, factual explanation
 2. Reference specific Chrome Web Store policies
@@ -454,7 +454,7 @@ If you believe the rejection was incorrect:
 Appeals are reviewed by a different team member. Response time is typically
 5-10 business days.
 
-Common Mistakes in Re-Submissions {#common-mistakes-in-re-submissions}
+## Common Mistakes in Re-Submissions {#common-mistakes-in-re-submissions}
 
 - Submitting without actually fixing the issue
 - Changing the extension name to evade a trademark rejection
@@ -464,13 +464,13 @@ Common Mistakes in Re-Submissions {#common-mistakes-in-re-submissions}
 
 ---
 
-Update Workflow {#update-workflow}
+## Update Workflow {#update-workflow}
 
 Publishing updates follows a similar flow to the initial submission.
 
-Version Bump {#version-bump}
+## Version Bump {#version-bump}
 
-Always increment the version in `manifest.json`:
+### Always increment the version in `manifest.json`:
 
 ```jsonc
 // Semantic versioning recommended
@@ -482,7 +482,7 @@ Always increment the version in `manifest.json`:
 Chrome also supports a four-part version: `1.2.3.4`. The version must be
 higher than the currently published version.
 
-Upload and Publish Steps {#upload-and-publish-steps}
+## Upload and Publish Steps {#upload-and-publish-steps}
 
 1. Build your extension ZIP (same process as initial submission)
 2. Go to the Developer Dashboard
@@ -493,7 +493,7 @@ Upload and Publish Steps {#upload-and-publish-steps}
 7. Update any store listing fields if needed
 8. Click "Submit for review"
 
-Staged Rollout {#staged-rollout}
+## Staged Rollout {#staged-rollout}
 
 For updates, you can use a staged rollout:
 
@@ -505,7 +505,7 @@ For updates, you can use a staged rollout:
 
 This is invaluable for catching issues that only appear at scale.
 
-Automating Uploads {#automating-uploads}
+## Automating Uploads {#automating-uploads}
 
 Use the Chrome Web Store API for CI/CD:
 
@@ -534,7 +534,7 @@ chrome-webstore-upload publish \
   --refresh-token $REFRESH_TOKEN
 ```
 
-Getting API Credentials {#getting-api-credentials}
+## Getting API Credentials {#getting-api-credentials}
 
 1. Create a project in the Google Cloud Console
 2. Enable the Chrome Web Store API
@@ -544,11 +544,11 @@ Getting API Credentials {#getting-api-credentials}
 
 ---
 
-Managing Multiple Versions {#managing-multiple-versions}
+## Managing Multiple Versions {#managing-multiple-versions}
 
 You can maintain separate release channels for testing and stability.
 
-Release Channels {#release-channels}
+## Release Channels {#release-channels}
 
 | Channel | Audience | Purpose |
 |---|---|---|
@@ -556,7 +556,7 @@ Release Channels {#release-channels}
 | Beta | Opted-in testers | Pre-release validation |
 | Dev | Internal team | Early development testing |
 
-Setting Up Beta and Dev Channels {#setting-up-beta-and-dev-channels}
+## Setting Up Beta and Dev Channels {#setting-up-beta-and-dev-channels}
 
 Each channel is a separate listing in the Chrome Web Store:
 
@@ -565,16 +565,16 @@ Each channel is a separate listing in the Chrome Web Store:
 3. Set the visibility to "Unlisted" or "Trusted testers"
 4. Use the `update_url` in the manifest to point to the correct channel
 
-Trusted Testers {#trusted-testers}
+## Trusted Testers {#trusted-testers}
 
-For beta testing with a controlled group:
+### For beta testing with a controlled group:
 
 1. In the Developer Dashboard, go to "Distribution"
 2. Select "Trusted testers"
 3. Add tester email addresses (they must have Google accounts)
 4. Only these users can see and install the extension
 
-Version Numbering Across Channels {#version-numbering-across-channels}
+## Version Numbering Across Channels {#version-numbering-across-channels}
 
 ```
 Stable:  1.2.0
@@ -587,11 +587,11 @@ suffixes are for your internal tracking -- they do not appear in the manifest.
 
 ---
 
-Analytics Dashboard and User Metrics {#analytics-dashboard-and-user-metrics}
+## Analytics Dashboard and User Metrics {#analytics-dashboard-and-user-metrics}
 
 The Developer Dashboard provides analytics for each published extension.
 
-Available Metrics {#available-metrics}
+## Available Metrics {#available-metrics}
 
 | Metric | What It Shows |
 |---|---|
@@ -606,7 +606,7 @@ Available Metrics {#available-metrics}
 | OS distribution | Windows, macOS, Linux, ChromeOS breakdown |
 | Region | Geographic distribution of users |
 
-Interpreting Key Metrics {#interpreting-key-metrics}
+## Interpreting Key Metrics {#interpreting-key-metrics}
 
 Install rate (installs / impressions) is your most actionable metric:
 
@@ -623,9 +623,9 @@ investigate:
 - Are permission warnings scaring users after install?
 - Are there performance issues?
 
-External Analytics {#external-analytics}
+## External Analytics {#external-analytics}
 
-For deeper insights, integrate your own analytics:
+### For deeper insights, integrate your own analytics:
 
 ```typescript
 // Minimal, privacy-respecting analytics
@@ -652,11 +652,11 @@ policy.
 
 ---
 
-Handling User Reviews and Support {#handling-user-reviews-and-support}
+## Handling User Reviews and Support {#handling-user-reviews-and-support}
 
 User reviews directly affect your store ranking and install rate.
 
-Responding to Reviews {#responding-to-reviews}
+## Responding to Reviews {#responding-to-reviews}
 
 You can reply to reviews from the Developer Dashboard:
 
@@ -670,9 +670,9 @@ You can reply to reviews from the Developer Dashboard:
 - Spam or abusive reviews: Report them through the Dashboard. Do not
   engage.
 
-Support Channels {#support-channels}
+## Support Channels {#support-channels}
 
-Provide clear support channels in your store listing:
+### Provide clear support channels in your store listing:
 
 1. Email: Simple and universal. Include a dedicated support email.
 2. GitHub Issues: Good for developer-oriented extensions. Users can search
@@ -682,9 +682,9 @@ Provide clear support channels in your store listing:
 4. In-extension help: Add a help section or link in the extension's popup
    or options page.
 
-Managing Expectations {#managing-expectations}
+## Managing Expectations {#managing-expectations}
 
-Set expectations about response time in your listing:
+### Set expectations about response time in your listing:
 
 ```
 SUPPORT:
@@ -700,13 +700,13 @@ For bug reports, please include:
 
 ---
 
-Monetization Options {#monetization-options}
+## Monetization Options {#monetization-options}
 
 The Chrome Web Store supports several monetization models.
 
-Freemium {#freemium}
+## Freemium {#freemium}
 
-The most common model for Chrome extensions:
+### The most common model for Chrome extensions:
 
 - Free core features available to all users
 - Premium features gated behind a subscription or one-time purchase
@@ -740,18 +740,18 @@ function isFeatureAvailable(license: License, feature: string): boolean {
 }
 ```
 
-One-Time Payment {#one-time-payment}
+## One-Time Payment {#one-time-payment}
 
-Charge once for lifetime access:
+### Charge once for lifetime access:
 
 - Simpler for users to understand
 - No recurring revenue (limits long-term development funding)
 - Use a payment provider (Stripe, Gumroad, LemonSqueezy) for licensing
 - Deliver a license key after purchase
 
-Subscriptions {#subscriptions}
+## Subscriptions {#subscriptions}
 
-Recurring revenue model:
+### Recurring revenue model:
 
 - Monthly or annual billing
 - Requires a backend to manage subscriptions
@@ -759,7 +759,7 @@ Recurring revenue model:
 - Handle grace periods for failed payments
 - Provide clear cancellation instructions
 
-Implementation Considerations {#implementation-considerations}
+## Implementation Considerations {#implementation-considerations}
 
 - License validation: Check server-side, cache locally, re-validate
   periodically
@@ -768,25 +768,25 @@ Implementation Considerations {#implementation-considerations}
 - Refund policy: State it clearly in your listing
 - Trial periods: Allow users to try premium features before paying
 
-Chrome Web Store Payments (Deprecated) {#chrome-web-store-payments-deprecated}
+## Chrome Web Store Payments (Deprecated) {#chrome-web-store-payments-deprecated}
 
 The Chrome Web Store's built-in payment system (Chrome Web Store Payments)
 has been deprecated. Use third-party payment providers instead.
 
 ---
 
-Transferring Extension Ownership {#transferring-extension-ownership}
+## Transferring Extension Ownership {#transferring-extension-ownership}
 
 Extensions can be transferred between developer accounts.
 
-When to Transfer {#when-to-transfer}
+## When to Transfer {#when-to-transfer}
 
 - Selling an extension to another developer or company
 - Moving from a personal account to a company account
 - Team member leaving who owns the developer account
 - Merging multiple developer accounts
 
-Transfer Process {#transfer-process}
+## Transfer Process {#transfer-process}
 
 1. Contact Chrome Web Store support: There is no self-service transfer.
    Email [chromewebstore-dev-support@google.com](mailto:chromewebstore-dev-support@google.com)
@@ -812,7 +812,7 @@ Transfer Process {#transfer-process}
    - OAuth credentials and API keys (you must set up new ones)
    - Support email settings (update these in the listing)
 
-Group Publishing {#group-publishing}
+## Group Publishing {#group-publishing}
 
 To avoid the need for transfers when team members change, use group
 publishing:
@@ -824,7 +824,7 @@ publishing:
 
 This is the recommended approach for any organization or team.
 
-Before You Transfer {#before-you-transfer}
+## Before You Transfer {#before-you-transfer}
 
 - Back up all source code (the Chrome Web Store does not let you download
   previously uploaded ZIPs)
@@ -835,7 +835,7 @@ Before You Transfer {#before-you-transfer}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 Publishing to the Chrome Web Store is a multi-step process that rewards
 preparation. Register your developer account early, invest in your store

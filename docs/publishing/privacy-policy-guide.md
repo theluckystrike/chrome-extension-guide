@@ -12,13 +12,13 @@ A privacy policy is your transparency contract with users. The Chrome Web Store 
 
 ---
 
-Understanding CWS Privacy Policy Requirements {#cws-requirements}
+## Understanding CWS Privacy Policy Requirements {#cws-requirements}
 
 The Chrome Web Store's [Developer Program Policies](https://developer.chrome.com/docs/webstore/program-policies) mandate that extensions collecting user data must provide a privacy policy. This requirement exists regardless of whether you operate in the EU or California.
 
 Google reviewers check your privacy policy during the review process. If your policy is missing, vague, or contradicts your extension's actual behavior, your extension will be rejected. The policy must be accessible at a URL you provide in the CWS developer dashboard.
 
-When Is a Privacy Policy Required?
+### When Is a Privacy Policy Required?
 
 | Data Activity | Policy Required? |
 |---------------|------------------|
@@ -32,7 +32,7 @@ When Is a Privacy Policy Required?
 
 ---
 
-Required Disclosures {#required-disclosures}
+## Required Disclosures {#required-disclosures}
 
 Your privacy policy must clearly address these elements to pass CWS review:
 
@@ -60,24 +60,24 @@ Explain how users can access, export, or delete their data. This is a CWS requir
 
 ---
 
-Data Collection Types to Consider {#data-types}
+## Data Collection Types to Consider {#data-types}
 
 Chrome extensions can access various data types depending on their permissions. Document each one honestly:
 
-Extension-Generated Data
+### Extension-Generated Data
 
 - User preferences stored in `chrome.storage`
 - Extension-specific settings or notes
 - Authentication tokens or session data
 
-Browsing-Related Data
+### Browsing-Related Data
 
 - Current tab URL (accessed via `tabs` API)
 - Page content (via content scripts)
 - Cookies for specific domains
 - Browsing history (via `history` API)
 
-Third-Party Data
+### Third-Party Data
 
 - Analytics events and metrics
 - Remote server logs
@@ -86,11 +86,11 @@ Third-Party Data
 
 ---
 
-GDPR and CCPA Compliance {#legal-compliance}
+## GDPR and CCPA Compliance {#legal-compliance}
 
 If your extension has users in the European Union or California, your privacy policy must address specific legal requirements.
 
-GDPR Requirements for Chrome Extensions
+### GDPR Requirements for Chrome Extensions
 
 The General Data Protection Regulation applies to any EU user, regardless of where your business is located:
 
@@ -100,7 +100,7 @@ The General Data Protection Regulation applies to any EU user, regardless of whe
 - DPO contact: Provide contact information for data protection inquiries
 - Right to complain: Inform users they can complain to their local data protection authority
 
-CCPA Requirements for California Residents
+### CCPA Requirements for California Residents
 
 The California Consumer Privacy Act requires specific disclosures for California residents:
 
@@ -112,7 +112,7 @@ The California Consumer Privacy Act requires specific disclosures for California
 
 ---
 
-Privacy Policy Template {#template}
+## Privacy Policy Template {#template}
 
 Below is a template you can adapt for your extension. Replace placeholders with your specific information.
 
@@ -189,11 +189,11 @@ Contact Us
 
 ---
 
-Hosting Options for Your Privacy Policy {#hosting-options}
+## Hosting Options for Your Privacy Policy {#hosting-options}
 
 CWS requires your privacy policy to be hosted at a publicly accessible URL. Here are common options:
 
-Option 1: GitHub Pages (Free)
+### Option 1: GitHub Pages (Free)
 
 If your extension has a website or documentation, host the privacy policy there:
 
@@ -201,7 +201,7 @@ If your extension has a website or documentation, host the privacy policy there:
 https://yourusername.github.io/your-repo/privacy-policy.html
 ```
 
-Option 2: Standalone GitHub Gist
+### Option 2: Standalone GitHub Gist
 
 Create a Gist and use a service like Githack or Bl.ocks for a raw URL:
 
@@ -209,17 +209,17 @@ Create a Gist and use a service like Githack or Bl.ocks for a raw URL:
 https://gist.github.com/yourusername/your-gist-id
 ```
 
-Option 3: Your Own Domain
+### Option 3: Your Own Domain
 
 Host on your extension's website or company domain. This is the most professional option.
 
-Option 4: Notion (Free)
+### Option 4: Notion (Free)
 
 Publish a Notion page and use a service like Notion2HTML for a clean URL. Note: Ensure the page is truly public.
 
 ---
 
-Tips for Passing CWS Review {#passing-review}
+## Tips for Passing CWS Review {#passing-review}
 
 1. Be specific, not generic: Avoid copy-pasting generic privacy policies. Customize for your extension's actual data practices.
 
@@ -233,7 +233,7 @@ Tips for Passing CWS Review {#passing-review}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 A compliant privacy policy for your Chrome extension requires:
 

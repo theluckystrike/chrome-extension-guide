@@ -18,7 +18,7 @@ we will walk you through building a request blocker Chrome extension from scratc
 
 ---
 
-Why Build a Request Blocker Extension?
+### Why Build a Request Blocker Extension?
 
 Before we dive into the code, let's discuss why building a request blocker extension is valuable. The primary benefits include:
 
@@ -32,7 +32,7 @@ Many popular ad blockers use similar techniques to what we will implement here. 
 
 ---
 
-Prerequisites
+### Prerequisites
 
 To follow along with this tutorial, you will need:
 
@@ -45,7 +45,7 @@ Let's start by setting up the project structure.
 
 ---
 
-Project Structure
+### Project Structure
 
 Every Chrome extension requires a manifest file and the appropriate directory structure. For our request blocker, we will need:
 
@@ -67,7 +67,7 @@ Create a new folder named `request-blocker` and set up these files. We will buil
 
 ---
 
-Step 1: Creating the Manifest
+### Step 1: Creating the Manifest
 
 The manifest.json file is the backbone of any Chrome extension. It tells Chrome about the extension's permissions, background scripts, and user interface. Here is the manifest for our request blocker:
 
@@ -106,7 +106,7 @@ The manifest.json file is the backbone of any Chrome extension. It tells Chrome 
 }
 ```
 
-Key permissions explained:
+### Key permissions explained:
 
 - webRequest: Allows us to observe and analyze network requests
 - webRequestBlocking: Enables us to block or modify requests before they complete
@@ -115,7 +115,7 @@ Key permissions explained:
 
 ---
 
-Step 2: The Background Service Worker
+### Step 2: The Background Service Worker
 
 The background script is where the magic happens. This service worker listens for network requests and decides which ones to block based on our rules. Create a file named `background.js`:
 
@@ -265,7 +265,7 @@ This background script handles the core blocking logic. It maintains a list of b
 
 ---
 
-Step 3: Building the Popup Interface
+### Step 3: Building the Popup Interface
 
 The popup is what users see when they click the extension icon. It should provide an interface to enable/disable blocking and view statistics. Create `popup.html`:
 
@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Step 4: Creating Placeholder Icons
+### Step 4: Creating Placeholder Icons
 
 For the extension to work properly, you need icon files. You can create simple placeholder icons using any image editor, or generate them programmatically. For now, create empty placeholder files:
 
@@ -707,7 +707,7 @@ In a production extension, you would create proper 16x16, 48x48, and 128x128 PNG
 
 ---
 
-Step 5: Loading the Extension
+### Step 5: Loading the Extension
 
 Now that we have all the files in place, let's load the extension into Chrome:
 
@@ -720,9 +720,9 @@ The extension should now appear in your toolbar. Click the icon to see the popup
 
 ---
 
-Testing Your Request Blocker
+### Testing Your Request Blocker
 
-To verify that the extension is working:
+### To verify that the extension is working:
 
 1. Visit a website with known trackers (news sites often have many)
 2. Open Chrome's Developer Tools (F12)
@@ -738,7 +738,7 @@ You can also test by adding custom rules:
 
 ---
 
-Advanced Features to Consider
+### Advanced Features to Consider
 
 This basic implementation provides a solid foundation, but there are many ways to enhance it:
 
@@ -751,7 +751,7 @@ This basic implementation provides a solid foundation, but there are many ways t
 
 ---
 
-Understanding the webRequest API
+### Understanding the webRequest API
 
 The webRequest API is incredibly powerful and forms the backbone of most Chrome ad blockers. Key concepts include:
 
@@ -764,7 +764,7 @@ Chrome has implemented new restrictions in Manifest V3 to prevent abuse. The `we
 
 ---
 
-Conclusion
+### Conclusion
 
 You now have a fully functional request blocker Chrome extension. This project demonstrates the core concepts of network request interception and blocking in Chrome extensions. The extension can:
 
@@ -780,7 +780,7 @@ The knowledge you have gained here applies to many other Chrome extension projec
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [Chrome webRequest API Documentation](https://developer.chrome.com/docs/extensions/reference/webRequest/)
 - [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)

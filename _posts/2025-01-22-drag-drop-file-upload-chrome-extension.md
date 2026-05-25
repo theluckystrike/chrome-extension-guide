@@ -18,13 +18,13 @@ This comprehensive guide walks you through implementing solid drag and drop file
 
 ---
 
-Understanding Drag and Drop in Chrome Extensions {#understanding-drag-drop}
+## Understanding Drag and Drop in Chrome Extensions {#understanding-drag-drop}
 
 Before diving into implementation details, it is essential to understand how drag and drop interactions work within the Chrome extension environment. Chrome extensions operate across multiple contexts, popup windows, options pages, content scripts, and background service workers, each with slightly different capabilities and restrictions.
 
 The HTML5 Drag and Drop API provides the foundation for implementing drag and drop functionality in your extension. This API allows web applications to define custom drag operations, specify which elements are draggable, and handle the data transfer between the source and target. When working within Chrome extensions, you need to consider how this API interacts with the extension's security model and different execution contexts.
 
-The Extension Contexts and Their Implications
+### The Extension Contexts and Their Implications
 
 Chrome extensions can display content in several different contexts, each with unique considerations for file handling:
 
@@ -38,11 +38,11 @@ Background service workers handle long-running tasks and cannot directly access 
 
 ---
 
-Setting Up Your Extension Manifest {#manifest-configuration}
+## Setting Up Your Extension Manifest {#manifest-configuration}
 
 Proper manifest configuration is the foundation of any Chrome extension with file handling capabilities. In Manifest V3, you must declare specific permissions and host permissions to enable file operations.
 
-Required Permissions
+### Required Permissions
 
 For drag and drop file upload functionality, your manifest needs the following configuration:
 
@@ -66,7 +66,7 @@ For drag and drop file upload functionality, your manifest needs the following c
 
 The key insight here is that you typically do not need special permissions for basic file drag and drop operations within your own extension pages. The drag and drop API works natively within HTML pages loaded by your extension. However, if you need to process files from web pages or send files to external servers, you will need additional permissions.
 
-File Handling Declaration
+### File Handling Declaration
 
 For extensions that need to register as file handlers, appearing in Chrome's "Open with" menu for specific file types, you must declare the file handler in your manifest:
 
@@ -90,11 +90,11 @@ This configuration enables your extension to appear in Chrome's context menu whe
 
 ---
 
-Implementing the Drag and Drop Zone {#implementing-drop-zone}
+## Implementing the Drag and Drop Zone {#implementing-drop-zone}
 
 The core of any drag and drop file upload implementation is the drop zone, an interactive area that detects when users drag files over it and initiates the file transfer process.
 
-Basic HTML Structure
+### Basic HTML Structure
 
 Create a dedicated HTML element to serve as your drop zone:
 
@@ -111,7 +111,7 @@ Create a dedicated HTML element to serve as your drop zone:
 </div>
 ```
 
-CSS Styling for Visual Feedback
+### CSS Styling for Visual Feedback
 
 Visual feedback is crucial for drag and drop interactions. Users need clear indication when they are dragging files over the drop zone:
 
@@ -160,7 +160,7 @@ Visual feedback is crucial for drag and drop interactions. Users need clear indi
 }
 ```
 
-JavaScript Event Handling
+### JavaScript Event Handling
 
 The JavaScript implementation connects the drag and drop events to your file handling logic:
 
@@ -231,11 +231,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Handling Multiple Files and File Types {#handling-multiple-files}
+## Handling Multiple Files and File Types {#handling-multiple-files}
 
 A solid drag and drop file upload implementation must handle various scenarios including multiple files, different file types, and size constraints.
 
-Processing Multiple Files
+### Processing Multiple Files
 
 The File API provides access to all files dropped onto your zone. You can iterate through them and process each one:
 
@@ -274,7 +274,7 @@ validateFile(file) {
 }
 ```
 
-Reading File Contents
+### Reading File Contents
 
 Different file operations require different reading methods. The FileReader API provides several options:
 
@@ -310,11 +310,11 @@ readFile(file) {
 
 ---
 
-File Handler Chrome Extension Patterns {#file-handler-patterns}
+## File Handler Chrome Extension Patterns {#file-handler-patterns}
 
 Beyond simple drag and drop, Chrome extensions can implement sophisticated file handling patterns that integrate deeply with the browser and operating system.
 
-Registering as a File Handler
+### Registering as a File Handler
 
 To make your extension appear as an option for opening specific file types, declare file handlers in your manifest:
 
@@ -336,7 +336,7 @@ To make your extension appear as an option for opening specific file types, decl
 
 When users right-click on files of these types in Chrome, they will see your extension listed in the "Open with" context menu.
 
-Handling File Launch Events
+### Handling File Launch Events
 
 In your background service worker, handle the file launch event:
 
@@ -362,7 +362,7 @@ chrome.fileHandler.onLaunched.addListener((launchData) => {
 });
 ```
 
-Communicating with Other Contexts
+### Communicating with Other Contexts
 
 For complex file handling workflows, you often need to pass file data between extension contexts:
 
@@ -388,13 +388,13 @@ function processAndNotify(fileData) {
 
 ---
 
-Advanced Features and Best Practices {#advanced-features}
+## Advanced Features and Best Practices {#advanced-features}
 
 Building a professional-grade drag and drop file upload experience requires attention to detail and consideration of edge cases.
 
-Progress Indication for Large Files
+### Progress Indication for Large Files
 
-Large files require asynchronous processing with progress feedback:
+### Large files require asynchronous processing with progress feedback:
 
 ```javascript
 uploadWithProgress(file) {
@@ -427,7 +427,7 @@ uploadWithProgress(file) {
 }
 ```
 
-Drag and Drop from External Sources
+### Drag and Drop from External Sources
 
 Chrome extensions can receive files dragged from external applications, including the desktop:
 
@@ -453,7 +453,7 @@ handleExternalDrop(e) {
 }
 ```
 
-Accessibility Considerations
+### Accessibility Considerations
 
 Ensure your drag and drop implementation is accessible to all users:
 
@@ -476,11 +476,11 @@ Ensure your drag and drop implementation is accessible to all users:
 
 ---
 
-Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 File handling in extensions requires careful attention to security to protect users from malicious files and unauthorized access.
 
-Validating File Types
+### Validating File Types
 
 Always validate file types on the client side, but remember this is easily bypassed. For critical applications, validate on the server side as well:
 
@@ -513,7 +513,7 @@ validateFileSecurity(file) {
 }
 ```
 
-Sanitizing File Names
+### Sanitizing File Names
 
 File names from user input can contain path traversal attempts or other malicious content:
 
@@ -532,7 +532,7 @@ sanitizeFileName(fileName) {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing drag and drop file upload in Chrome extensions requires understanding the extension architecture, properly configuring your manifest, creating intuitive user interfaces, and handling various edge cases and security concerns. The techniques covered in this guide provide a solid foundation for building professional file handling features in your extensions.
 

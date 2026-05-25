@@ -20,7 +20,7 @@ This guide assumes you have basic knowledge of HTML, CSS, and JavaScript. We wil
 
 ---
 
-Understanding the Architecture of a Whiteboard Extension {#architecture}
+## Understanding the Architecture of a Whiteboard Extension {#architecture}
 
 Before we dive into code, it is essential to understand how Chrome extensions are structured and how our whiteboard extension will work. A Chrome extension is essentially a collection of web files, HTML, CSS, and JavaScript, that run in the context of the Chrome browser. Our whiteboard extension will need several components working together.
 
@@ -32,7 +32,7 @@ The architecture follows the Manifest V3 format, which is the current standard f
 
 ---
 
-Setting Up the Project Structure {#project-setup}
+## Setting Up the Project Structure {#project-setup}
 
 Let us start by creating the project structure for our whiteboard Chrome extension. Create a new folder for your extension project, and inside it, create the following files and directories.
 
@@ -107,7 +107,7 @@ The HTML structure includes three main sections: a color picker with preset colo
 
 ---
 
-Styling the Whiteboard Extension {#styling}
+## Styling the Whiteboard Extension {#styling}
 
 Now let us create the CSS file to style our whiteboard extension. We want a clean, intuitive interface that does not distract from the drawing experience.
 
@@ -180,7 +180,7 @@ The styling creates a modern, clean interface with clear visual feedback for act
 
 ---
 
-Implementing Drawing Functionality {#drawing-functionality}
+## Implementing Drawing Functionality {#drawing-functionality}
 
 The JavaScript file is where the magic happens. We will implement the canvas drawing logic, tool switching, color selection, and export functionality. This is the core of our whiteboard Chrome extension.
 
@@ -331,7 +331,7 @@ This JavaScript implementation provides a complete drawing experience. The code 
 
 ---
 
-Testing Your Whiteboard Extension {#testing}
+## Testing Your Whiteboard Extension {#testing}
 
 Before publishing your extension, you need to test it thoroughly to ensure it works correctly. Chrome provides a simple way to load unpacked extensions for testing.
 
@@ -345,7 +345,7 @@ If you encounter issues, right-click anywhere on your extension's files in the C
 
 ---
 
-Enhancing Your Whiteboard Extension {#enhancements}
+## Enhancing Your Whiteboard Extension {#enhancements}
 
 While our basic whiteboard extension is fully functional, there are many ways you can enhance it to make it more powerful and user-friendly. Consider implementing some of these features to differentiate your extension in the Chrome Web Store.
 
@@ -361,7 +361,7 @@ You might also want to add keyboard shortcuts for common actions. For example, C
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension and are satisfied with its functionality, you can publish it to the Chrome Web Store to reach millions of users. The publishing process involves preparing your extension, creating developer account, and submitting your extension for review.
 
@@ -377,7 +377,7 @@ Submit your extension for review. Google typically reviews submissions within a 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a whiteboard Chrome extension is an excellent project that teaches you valuable skills while creating a genuinely useful tool. we covered the complete development process from setting up the project structure to publishing on the Chrome Web Store. You now have a fully functional whiteboard extension with drawing tools, color selection, eraser functionality, canvas clearing, and image export.
 

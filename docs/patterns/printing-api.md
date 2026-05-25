@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/printing-api/"
 last_modified_at: 2026-01-15
 ---
 
-Printing API Patterns
+### Printing API Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 Chrome extensions can use the Printing API to enable powerful document printing capabilities. This guide covers eight practical patterns for triggering prints, generating print-friendly content, injecting print functionality into web pages, creating PDFs, applying custom print styles, printing selections, batch printing, and implementing custom print previews.
 
 ---
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 ```jsonc
 // manifest.json
@@ -33,11 +33,11 @@ Required Permissions {#required-permissions}
 
 ---
 
-Pattern 1: Basic Print Trigger {#pattern-1-basic-print-trigger}
+## Pattern 1: Basic Print Trigger {#pattern-1-basic-print-trigger}
 
 Different extension contexts require different approaches to trigger printing.
 
-Extension Popup, Options, or Side Panel {#extension-popup-options-or-side-panel}
+## Extension Popup, Options, or Side Panel {#extension-popup-options-or-side-panel}
 
 ```ts
 // popup.ts
@@ -68,7 +68,7 @@ function openPrintableVersion(): void {
 document.getElementById("print-btn")!.addEventListener("click", openPrintableVersion);
 ```
 
-Background Printing (ChromeOS) {#background-printing-chromeos}
+## Background Printing (ChromeOS) {#background-printing-chromeos}
 
 ```ts
 // background.ts
@@ -101,7 +101,7 @@ async function submitPrintJob(pdfBase64: string, printerId: string): Promise<{ j
 }
 ```
 
-Print-Specific CSS {#print-specific-css}
+## Print-Specific CSS {#print-specific-css}
 
 ```css
 /* styles/print.css */
@@ -116,7 +116,7 @@ Print-Specific CSS {#print-specific-css}
 
 ---
 
-Pattern 2: Print-Friendly Page Generation {#pattern-2-print-friendly-page-generation}
+## Pattern 2: Print-Friendly Page Generation {#pattern-2-print-friendly-page-generation}
 
 Create clean, print-optimized HTML documents by stripping navigation, ads, and interactive elements.
 
@@ -171,7 +171,7 @@ async function openPrintPreview(content: string, options: PrintOptions): Promise
 
 ---
 
-Pattern 3: Content Script Print Injection {#pattern-3-content-script-print-injection}
+## Pattern 3: Content Script Print Injection {#pattern-3-content-script-print-injection}
 
 Inject a "Print this page" button into web pages and generate clean printable versions.
 
@@ -219,9 +219,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-Pattern 4: PDF Generation Patterns {#pattern-4-pdf-generation-patterns}
+## Pattern 4: PDF Generation Patterns {#pattern-4-pdf-generation-patterns}
 
-Using chrome.pageCapture.saveAsMHTML {#using-chromepagecapturesaveasmhtml}
+## Using chrome.pageCapture.saveAsMHTML {#using-chromepagecapturesaveasmhtml}
 
 ```ts
 // content-script.ts
@@ -246,7 +246,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Canvas-to-PDF via Offscreen Document {#canvas-to-pdf-via-offscreen-document}
+## Canvas-to-PDF via Offscreen Document {#canvas-to-pdf-via-offscreen-document}
 
 ```ts
 // background.ts
@@ -268,7 +268,7 @@ async function generatePDFFromCanvas(canvasDataUrl: string): Promise<Blob> {
 }
 ```
 
-Using jsPDF in Extension Context {#using-jspdf-in-extension-context}
+## Using jsPDF in Extension Context {#using-jspdf-in-extension-context}
 
 ```ts
 // offscreen.ts
@@ -319,7 +319,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
 ---
 
-Pattern 5: Custom Print Styles {#pattern-5-custom-print-styles}
+## Pattern 5: Custom Print Styles {#pattern-5-custom-print-styles}
 
 Apply comprehensive print styles to hide controls, show print-only content, and manage page breaks.
 
@@ -358,7 +358,7 @@ function setPageBreak(element: HTMLElement, position: "before" | "after" | "insi
 
 ---
 
-Pattern 6: Print Selection Only {#pattern-6-print-selection-only}
+## Pattern 6: Print Selection Only {#pattern-6-print-selection-only}
 
 Capture user selection and generate printable documents from selected content.
 
@@ -426,7 +426,7 @@ chrome.contextMenus?.onClicked.addListener((info, tab) => {
 
 ---
 
-Pattern 7: Batch Printing {#pattern-7-batch-printing}
+## Pattern 7: Batch Printing {#pattern-7-batch-printing}
 
 Manage print queues for multiple documents with progress tracking and error handling.
 
@@ -489,7 +489,7 @@ export const printQueue = new PrintQueueManager();
 
 ---
 
-Pattern 8: Print Preview and Customization {#pattern-8-print-preview-and-customization}
+## Pattern 8: Print Preview and Customization {#pattern-8-print-preview-and-customization}
 
 Create custom print previews in extension side panels with user options for paper size, orientation, margins, and save preferences.
 
@@ -584,7 +584,7 @@ class PrintPreviewComponent {
 }
 ```
 
-Integration with @theluckystrike/webext-storage {#integration-with-theluckystrikewebext-storage}
+## Integration with @theluckystrike/webext-storage {#integration-with-theluckystrikewebext-storage}
 
 ```ts
 // utils/print-preferences.ts
@@ -613,7 +613,7 @@ export const printPreferences = new PrintPreferencesManager();
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Use Case | Key APIs |
 |---------|----------|----------|

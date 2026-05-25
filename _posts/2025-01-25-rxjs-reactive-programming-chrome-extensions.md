@@ -18,17 +18,17 @@ This comprehensive guide explores how to use RxJS in Chrome extensions to build 
 
 ---
 
-Why RxJS for Chrome Extensions? {#why-rxjs}
+## Why RxJS for Chrome Extensions? {#why-rxjs}
 
 Chrome extensions inherently deal with multiple sources of asynchronous events. From browser API callbacks to user interactions and cross-context messaging, the complexity grows rapidly. RxJS offers several compelling advantages that make it particularly well-suited for extension development.
 
-The Asynchronous Nature of Extensions
+### The Asynchronous Nature of Extensions
 
 Unlike traditional web applications, Chrome extensions must handle events from numerous sources simultaneously. The background service worker must respond to browser API events while content scripts communicate with the popup and options page. Each of these contexts generates streams of events that need to be coordinated, transformed, and reacted to appropriately.
 
 Traditional approaches using callbacks and promises often lead to callback hell, race conditions, and difficult-to-debug code. RxJS provides a unified API for handling these event streams, making your code more predictable and easier to reason about.
 
-Benefits of Reactive Programming in Extensions
+### Benefits of Reactive Programming in Extensions
 
 Declarative Code. RxJS allows you to express what you want to happen rather than how to make it happen. This leads to more readable and maintainable code that clearly expresses your intent.
 
@@ -40,11 +40,11 @@ Cross-Context Communication. RxJS Subjects and observables provide elegant patte
 
 ---
 
-Getting Started with RxJS in Chrome Extensions {#getting-started}
+## Getting Started with RxJS in Chrome Extensions {#getting-started}
 
 Setting up RxJS in your Chrome extension is straightforward. You can install it via npm or use a CDN for simpler projects.
 
-Installation
+### Installation
 
 For modern extension projects using bundlers like webpack or rollup:
 
@@ -58,7 +58,7 @@ For simpler projects without a build step, you can include RxJS via CDN in your 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.1/rxjs.umd.min.js"></script>
 ```
 
-Basic Setup in Background Script
+### Basic Setup in Background Script
 
 Here is a basic example of setting up RxJS in your background service worker:
 
@@ -73,11 +73,11 @@ console.log('RxJS background service worker initialized');
 
 ---
 
-Core RxJS Patterns for Chrome Extensions {#core-patterns}
+## Core RxJS Patterns for Chrome Extensions {#core-patterns}
 
 Understanding these fundamental patterns will enable you to build solid reactive extensions.
 
-Converting Chrome API Calls to Observables
+### Converting Chrome API Calls to Observables
 
 Chrome's callback-based APIs can be wrapped into observables for consistent reactive handling:
 
@@ -110,7 +110,7 @@ getActiveTab()
   });
 ```
 
-Creating Observables from Chrome Events
+### Creating Observables from Chrome Events
 
 Chrome APIs emit events that can be easily converted to RxJS observables:
 
@@ -132,7 +132,7 @@ pageLoads$.subscribe(({ tabId, changeInfo }) => {
 });
 ```
 
-Using Subjects for Cross-Context Communication
+### Using Subjects for Cross-Context Communication
 
 Subjects are powerful primitives for handling multicasting and manual event emission:
 
@@ -164,9 +164,9 @@ extensionState$.next({
 
 ---
 
-Real-World Examples and Patterns {#real-world-examples}
+## Real-World Examples and Patterns {#real-world-examples}
 
-Implementing a Tab Manager with RxJS
+### Implementing a Tab Manager with RxJS
 
 Building a tab management feature is a common extension use case that benefits greatly from reactive programming:
 
@@ -231,7 +231,7 @@ tabManager.getTabUpdates().subscribe(operation => {
 });
 ```
 
-Reactive Storage Synchronization
+### Reactive Storage Synchronization
 
 Implementing reactive storage that automatically syncs across extension contexts:
 
@@ -300,9 +300,9 @@ storage.observe$('userSettings').subscribe(settings => {
 storage.set('userSettings', { theme: 'dark', notifications: true });
 ```
 
-Handling User Input Reactively
+### Handling User Input Reactively
 
-Building responsive popup interfaces with proper input handling:
+### Building responsive popup interfaces with proper input handling:
 
 ```javascript
 import { fromEvent } from 'rxjs';
@@ -353,9 +353,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Advanced Patterns and Best Practices {#advanced-patterns}
+## Advanced Patterns and Best Practices {#advanced-patterns}
 
-Managing Subscription Lifecycle
+### Managing Subscription Lifecycle
 
 Proper subscription management is crucial to prevent memory leaks in long-running extensions:
 
@@ -407,7 +407,7 @@ chrome.runtime.onUpdateAvailable.addListener(() => {
 });
 ```
 
-Error Handling Strategies
+### Error Handling Strategies
 
 Implementing solid error handling in reactive extensions:
 
@@ -454,9 +454,9 @@ withErrorHandling(
 });
 ```
 
-Performance Optimization
+### Performance Optimization
 
-Optimizing RxJS performance in resource-constrained extension contexts:
+### Optimizing RxJS performance in resource-constrained extension contexts:
 
 ```javascript
 import { Subject } from 'rxjs';
@@ -499,7 +499,7 @@ optimizedUpdates$.subscribe(updates => {
 
 ---
 
-Testing RxJS Code in Extensions {#testing-rxjs-testing}
+## Testing RxJS Code in Extensions {#testing-rxjs-testing}
 
 Testing reactive code requires understanding how to work with observables in test scenarios:
 
@@ -541,7 +541,7 @@ describe('TabManager', () => {
 
 ---
 
-Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps {#conclusion}
 
 RxJS transforms how you build Chrome extensions by providing powerful tools for managing asynchronous events and data streams. Throughout this guide, we have explored fundamental patterns for wrapping Chrome APIs in observables, implementing cross-context communication with subjects, building reactive storage systems, and handling user input efficiently.
 
@@ -553,7 +553,7 @@ To continue learning, explore the official RxJS documentation, experiment with d
 
 ---
 
-Additional Resources
+### Additional Resources
 
 - [RxJS Official Documentation](https://rxjs.dev/)
 - [Chrome Extension APIs](https://developer.chrome.com/docs/extensions/reference/)

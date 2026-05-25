@@ -11,7 +11,7 @@ Automate your extension publishing workflow using CI/CD pipelines. This guide co
 
 ---
 
-Chrome Web Store API Setup {#chrome-web-store-api-setup}
+## Chrome Web Store API Setup {#chrome-web-store-api-setup}
 
 Before automating, set up API access in Google Cloud Console:
 
@@ -24,9 +24,9 @@ Before automating, set up API access in Google Cloud Console:
 
 ---
 
-Authentication {#authentication}
+## Authentication {#authentication}
 
-Store your CWS credentials securely in GitHub Secrets:
+### Store your CWS credentials securely in GitHub Secrets:
 
 | Secret | Description |
 |--------|-------------|
@@ -39,9 +39,9 @@ Store your CWS credentials securely in GitHub Secrets:
 
 ---
 
-CLI Tools {#cli-tools}
+## CLI Tools {#cli-tools}
 
-The `chrome-webstore-upload-cli` package provides easy CLI access:
+### The `chrome-webstore-upload-cli` package provides easy CLI access:
 
 ```bash
 Install globally or use npx
@@ -55,7 +55,7 @@ npx chrome-webstore-upload-cli upload \
 
 ---
 
-GitHub Actions Workflow {#github-actions-workflow}
+## GitHub Actions Workflow {#github-actions-workflow}
 
 Complete workflow that builds, packages, and publishes on tag push:
 
@@ -113,9 +113,9 @@ jobs:
 
 ---
 
-Versioning Automation {#versioning-automation}
+## Versioning Automation {#versioning-automation}
 
-Sync `manifest.json` version from `package.json` or git tags:
+### Sync `manifest.json` version from `package.json` or git tags:
 
 ```yaml
 - name: Bump version in manifest
@@ -125,7 +125,7 @@ Sync `manifest.json` version from `package.json` or git tags:
     mv tmp.json manifest.json
 ```
 
-Then create a tag to trigger the workflow:
+### Then create a tag to trigger the workflow:
 
 ```bash
 git tag v1.2.3 -m "Release 1.2.3"
@@ -134,9 +134,9 @@ git push origin v1.2.3
 
 ---
 
-Publishing Stages {#publishing-stages}
+## Publishing Stages {#publishing-stages}
 
-Control when your extension goes live:
+### Control when your extension goes live:
 
 | Stage | Description | Use Case |
 |-------|-------------|----------|
@@ -146,9 +146,9 @@ Control when your extension goes live:
 
 ---
 
-Pre-Publish Checks {#pre-publish-checks}
+## Pre-Publish Checks {#pre-publish-checks}
 
-Run these checks before uploading:
+### Run these checks before uploading:
 
 - Lint. `pnpm lint` for code quality
 - Test. `pnpm test` to verify functionality
@@ -157,15 +157,15 @@ Run these checks before uploading:
 
 ---
 
-Rollback {#rollback}
+## Rollback {#rollback}
 
-To rollback to a previous version:
+### To rollback to a previous version:
 
 1. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Select your extension > Files
 3. Click "Revert to previous version"
 
-Or upload a previous tagged version:
+### Or upload a previous tagged version:
 
 ```bash
 git checkout v1.2.2
@@ -175,7 +175,7 @@ git push origin v1.2.2
 
 ---
 
-Multi-Browser Publishing {#multi-browser-publishing}
+## Multi-Browser Publishing {#multi-browser-publishing}
 
 Publish to both Chrome Web Store and Firefox AMO in the same pipeline:
 
@@ -191,9 +191,9 @@ Publish to both Chrome Web Store and Firefox AMO in the same pipeline:
 
 ---
 
-Semantic Release Integration {#semantic-release-integration}
+## Semantic Release Integration {#semantic-release-integration}
 
-Automate changelog and version bumping with semantic-release:
+### Automate changelog and version bumping with semantic-release:
 
 ```yaml
 In package.json
@@ -209,7 +209,7 @@ In package.json
 }
 ```
 
-Configure to trigger CWS publish on release:
+### Configure to trigger CWS publish on release:
 
 ```yaml
 - name: Publish on release
@@ -219,16 +219,16 @@ Configure to trigger CWS publish on release:
 
 ---
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Publishing Guide](../publishing/publishing-guide.md). Manual publishing process
 - [CI/CD Pipeline](../guides/ci-cd-pipeline.md). Build automation
 - [Version Management](../publishing/version-management.md). Version strategies
 - [Chrome Web Store API](../guides/chrome-web-store-api.md). API reference
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [GitHub Actions CI/CD](../guides/github-actions-extension-ci-cd.md)
 - [Chrome Web Store API](../guides/chrome-web-store-api.md)

@@ -18,7 +18,7 @@ we will explore how to use Jest and Puppeteer to create a solid testing strategy
 
 ---
 
-Why Testing Chrome Extensions Matters
+### Why Testing Chrome Extensions Matters
 
 Chrome extensions have become integral to enhancing browser functionality for millions of users. When an extension fails, it can disrupt workflows, lose user trust, and result in negative reviews. Proper testing ensures that your extension functions correctly across different scenarios, browsers, and user interactions.
 
@@ -28,11 +28,11 @@ Automated testing with Jest and Puppeteer allows you to catch bugs early, verify
 
 ---
 
-Setting Up Your Testing Environment
+### Setting Up Your Testing Environment
 
 Before diving into tests, you need to configure your development environment properly. This section covers the essential setup steps for testing Chrome extensions with Jest and Puppeteer.
 
-Installing Required Dependencies
+### Installing Required Dependencies
 
 Start by installing the necessary packages in your extension project. You will need Jest for running tests, Puppeteer for browser automation, and several supporting libraries.
 
@@ -46,7 +46,7 @@ For TypeScript projects, you will also need the appropriate type definitions:
 npm install --save-dev @types/jest @types/puppeteer ts-jest
 ```
 
-Configuring Jest for Chrome Extension Testing
+### Configuring Jest for Chrome Extension Testing
 
 Create a Jest configuration file (`jest.config.js`) in your project root. This configuration needs to handle the unique aspects of Chrome extension testing, including special handling for extension-specific APIs and build outputs.
 
@@ -68,7 +68,7 @@ module.exports = {
 
 The `jest-puppeteer` preset simplifies the configuration by automatically setting up Puppeteer launch options and providing convenient globals for writing browser tests.
 
-Setting Up Puppeteer for Extension Testing
+### Setting Up Puppeteer for Extension Testing
 
 Create a `jest.setup.js` file to configure Puppeteer specifically for Chrome extension testing. This setup will launch Chrome with the appropriate flags to load your extension.
 
@@ -98,11 +98,11 @@ This configuration ensures that Puppeteer launches Chrome with your extension lo
 
 ---
 
-Writing Unit Tests with Jest
+### Writing Unit Tests with Jest
 
 Unit tests form the foundation of your testing strategy. They verify that individual functions and modules work correctly in isolation. For Chrome extensions, unit tests are particularly valuable for testing utility functions, data transformation logic, and business rules.
 
-Testing Background Script Logic
+### Testing Background Script Logic
 
 Background service workers handle events and manage extension state. While you cannot directly test the service worker in isolation (it runs in a special Chrome context), you can test the logic that the background script uses.
 
@@ -195,7 +195,7 @@ describe('ExtensionState', () => {
 });
 ```
 
-Mocking Chrome APIs in Tests
+### Mocking Chrome APIs in Tests
 
 Chrome extension APIs like `chrome.storage`, `chrome.runtime`, and `chrome.tabs` are not available in Node.js. You need to mock these APIs when testing components that depend on them.
 
@@ -251,11 +251,11 @@ jest.mock('chrome', () => require('./src/__mocks__/chrome'));
 
 ---
 
-Integration Testing with Jest and Puppeteer
+### Integration Testing with Jest and Puppeteer
 
 Integration tests verify that different components of your extension work correctly together. Puppeteer enables you to load your extension in a real Chrome browser and interact with it programmatically.
 
-Testing Popup Functionality
+### Testing Popup Functionality
 
 The popup is often the primary interface users interact with. Testing it ensures that user interactions produce expected results.
 
@@ -328,7 +328,7 @@ describe('Chrome Extension Popup Tests', () => {
 });
 ```
 
-Testing Content Script Injection
+### Testing Content Script Injection
 
 Content scripts run in the context of web pages and often need to interact with the page DOM. Testing these scripts ensures they work correctly on target websites.
 
@@ -389,11 +389,11 @@ describe('Content Script Tests', () => {
 
 ---
 
-End-to-End Testing with Puppeteer
+### End-to-End Testing with Puppeteer
 
 End-to-end tests simulate real user workflows, verifying that your entire extension functions correctly from the user's perspective.
 
-Testing Complete User Flows
+### Testing Complete User Flows
 
 ```javascript
 // tests/e2e/user-flows.test.js
@@ -457,7 +457,7 @@ describe('End-to-End User Flows', () => {
 });
 ```
 
-Testing Background Worker Behavior
+### Testing Background Worker Behavior
 
 Background service workers handle events even when the popup is not open. Testing these requires special techniques.
 
@@ -513,11 +513,11 @@ describe('Background Service Worker Tests', () => {
 
 ---
 
-Best Practices for Chrome Extension Testing
+### Best Practices for Chrome Extension Testing
 
 Implementing effective testing requires following established best practices that maximize test coverage while maintaining test maintainability.
 
-Organize Tests Logically
+### Organize Tests Logically
 
 Structure your tests to mirror your extension's architecture. Keep unit tests, integration tests, and end-to-end tests in separate directories. This organization makes it easier to run specific test suites and understand test failures.
 
@@ -534,11 +534,11 @@ tests/
     user-flows.test.js
 ```
 
-Use Appropriate Test Granularity
+### Use Appropriate Test Granularity
 
 Not every test needs to be an end-to-end test. Use unit tests for logic validation, integration tests for component interaction, and end-to-end tests only for critical user flows. This approach balances test execution speed with coverage depth.
 
-Handle Asynchronous Operations Properly
+### Handle Asynchronous Operations Properly
 
 Chrome extension APIs are asynchronous. Always use proper async/await patterns and wait for operations to complete before making assertions.
 
@@ -551,7 +551,7 @@ const text = await page.$eval('.element', el => el.textContent);
 const text = await page.$eval('.element', el => el.textContent);
 ```
 
-Test Error Conditions
+### Test Error Conditions
 
 Ensure your extension handles errors gracefully. Test scenarios like network failures, invalid user input, and API errors.
 
@@ -578,11 +578,11 @@ it('should handle network errors gracefully', async () => {
 
 ---
 
-Automating Tests in CI/CD Pipelines
+### Automating Tests in CI/CD Pipelines
 
 Continuous integration ensures that tests run automatically on every code change, catching regressions before they reach production.
 
-GitHub Actions Configuration
+### GitHub Actions Configuration
 
 ```yaml
 name: Chrome Extension Tests
@@ -617,7 +617,7 @@ jobs:
         run: npm run test:e2e
 ```
 
-Optimizing Test Execution
+### Optimizing Test Execution
 
 Running all tests on every commit can be slow. Consider parallelizing test execution and using test filtering:
 
@@ -634,7 +634,7 @@ npm test -- --maxWorkers=4
 
 ---
 
-Conclusion
+### Conclusion
 
 Testing Chrome extensions with Jest and Puppeteer provides a comprehensive solution for ensuring extension quality and reliability. Jest excels at unit testing, allowing you to verify individual components and logic in isolation. Puppeteer enables powerful integration and end-to-end testing that simulates real user interactions.
 

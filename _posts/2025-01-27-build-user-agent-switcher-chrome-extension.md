@@ -18,11 +18,11 @@ This guide assumes you have basic knowledge of HTML, CSS, and JavaScript. If you
 
 ---
 
-Understanding User Agents and Why They Matter {#understanding-user-agents}
+## Understanding User Agents and Why They Matter {#understanding-user-agents}
 
 Before we dive into the code, let us understand what user agents are and why building a user agent switcher extension is a valuable skill.
 
-What is a User Agent?
+### What is a User Agent?
 
 A user agent is a string of text that a web browser sends to web servers when requesting web pages. This string identifies the browser, its version, the operating system, and other technical details. Web servers use this information to:
 
@@ -39,7 +39,7 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like 
 
 This tells the server that the user is running Chrome 120 on macOS. By changing this string, you can make websites think you are using a different browser or device.
 
-Why Build a User Agent Switcher Extension?
+### Why Build a User Agent Switcher Extension?
 
 There are numerous practical applications for a user agent switcher extension:
 
@@ -53,7 +53,7 @@ Building this extension will teach you valuable skills including Chrome's declar
 
 ---
 
-Extension Architecture Overview {#architecture}
+## Extension Architecture Overview {#architecture}
 
 Our user agent switcher extension will consist of several components working together:
 
@@ -67,7 +67,7 @@ Let us build each component step by step.
 
 ---
 
-Step 1: Create the Manifest {#manifest}
+## Step 1: Create the Manifest {#manifest}
 
 The manifest file is the heart of every Chrome extension. For our user agent switcher, we need specific permissions to modify network requests.
 
@@ -104,7 +104,7 @@ The key permission here is `declarativeNetRequest`, which allows us to modify HT
 
 ---
 
-Step 2: Define User Agent Presets {#presets}
+## Step 2: Define User Agent Presets {#presets}
 
 Before building the UI, let us create a comprehensive list of user agent presets. This data will be used by both the popup and the background script.
 
@@ -202,7 +202,7 @@ You can expand this list with additional presets for specific browser versions, 
 
 ---
 
-Step 3: Build the Popup UI {#popup}
+## Step 3: Build the Popup UI {#popup}
 
 The popup is what users see when they click the extension icon. We will create a clean, intuitive interface for selecting user agents.
 
@@ -419,7 +419,7 @@ footer {
 
 ---
 
-Step 4: Implement Popup Logic {#popup-logic}
+## Step 4: Implement Popup Logic {#popup-logic}
 
 Now we need to write the JavaScript to handle user interactions in the popup:
 
@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Step 5: Background Service Worker {#service-worker}
+## Step 5: Background Service Worker {#service-worker}
 
 The background service worker handles extension lifecycle events and manages persistent settings:
 
@@ -600,7 +600,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Step 6: Loading and Testing the Extension {#testing}
+## Step 6: Loading and Testing the Extension {#testing}
 
 Now let us load the extension in Chrome and verify it works correctly:
 
@@ -609,9 +609,9 @@ Now let us load the extension in Chrome and verify it works correctly:
 3. Click "Load unpacked" and select your extension's root directory
 4. The extension icon should appear in your toolbar
 
-Testing the Extension
+### Testing the Extension
 
-To verify your user agent switcher is working:
+### To verify your user agent switcher is working:
 
 1. Click the extension icon in the toolbar
 2. Select a user agent (e.g., "iPhone 15 Pro")
@@ -622,11 +622,11 @@ You can also test by opening Chrome DevTools (F12), going to the Network tab, an
 
 ---
 
-Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 Once you have the basic extension working, consider adding these advanced features:
 
-Custom User Agent Support
+### Custom User Agent Support
 
 Allow users to add their own custom user agent strings:
 
@@ -646,7 +646,7 @@ manageBtn.addEventListener('click', () => {
 });
 ```
 
-URL-Specific Rules
+### URL-Specific Rules
 
 Implement different user agents for different websites:
 
@@ -658,7 +658,7 @@ const urlSpecificRules = {
 };
 ```
 
-Quick Toggle in Toolbar
+### Quick Toggle in Toolbar
 
 Add a keyboard shortcut for quick user agent switching:
 
@@ -677,11 +677,11 @@ Add a keyboard shortcut for quick user agent switching:
 
 ---
 
-Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues {#troubleshooting}
 
 Here are solutions to common problems you might encounter:
 
-Extension Not Modifying Requests
+### Extension Not Modifying Requests
 
 If the user agent is not being modified, check:
 
@@ -689,7 +689,7 @@ If the user agent is not being modified, check:
 2. Host permissions: Verify `<all_urls>` is in host_permissions
 3. Rule syntax: Make sure your declarative net request rule is properly formatted
 
-User Agent Not Persisting
+### User Agent Not Persisting
 
 If the selected user agent resets on page reload:
 
@@ -697,9 +697,9 @@ If the selected user agent resets on page reload:
 2. Verify the service worker is not being terminated unexpectedly
 3. Ensure rules are being set on session start if needed
 
-Conflicts with Other Extensions
+### Conflicts with Other Extensions
 
-If another extension is modifying headers:
+### If another extension is modifying headers:
 
 1. Adjust your rule priority to be higher
 2. Use the `tabId` condition to limit rules to specific tabs
@@ -707,7 +707,7 @@ If another extension is modifying headers:
 
 ---
 
-Security Considerations {#security}
+## Security Considerations {#security}
 
 When building a user agent switcher, keep these security best practices in mind:
 
@@ -718,7 +718,7 @@ When building a user agent switcher, keep these security best practices in mind:
 
 ---
 
-Publishing Your Extension {#publishing}
+## Publishing Your Extension {#publishing}
 
 Once your user agent switcher extension is complete and tested, you can publish it to the Chrome Web Store:
 
@@ -731,7 +731,7 @@ For a detailed guide to publishing, see our [Chrome Web Store publishing guide](
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You have now built a fully functional user agent switcher Chrome extension! This extension demonstrates several important concepts in Chrome extension development:
 
@@ -747,7 +747,7 @@ If you want to continue learning, explore our guides on [building other develope
 
 ---
 
-Next Steps
+### Next Steps
 
 Ready to take your extension to the better? Here are some ideas:
 

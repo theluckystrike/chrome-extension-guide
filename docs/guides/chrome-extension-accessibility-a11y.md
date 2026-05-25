@@ -10,7 +10,7 @@ Chrome Extension Accessibility: WCAG Compliance and a11y Best Practices
 
 Accessibility in Chrome extensions is not merely a nice-to-have feature, it's a critical aspect of inclusive design that ensures your extension serves all users, including those who rely on assistive technologies. With over 1 billion people worldwide living with some form of disability, making your extension accessible significantly expands your potential user base and often improves usability for everyone. This guide provides comprehensive coverage of WCAG compliance specifically tailored for Chrome extension UIs, including popup windows, options pages, and side panels.
 
-Understanding WCAG Compliance for Extension UIs
+### Understanding WCAG Compliance for Extension UIs
 
 The Web Content Accessibility Guidelines (WCAG) 2.1 provide the international standard for web accessibility, and these principles apply directly to Chrome extension interfaces. Chrome extensions must follow the same core principles as websites: content must be perceivable, operable, understandable, and solid (the POUR principles).
 
@@ -26,7 +26,7 @@ Understandable content demands that information and operation of the user interf
 
 Robust content must be compatible with current and future assistive technologies, which means maximizing compatibility with current and future user agents, including assistive technologies. This involves using valid HTML, properly implementing ARIA, and testing with actual assistive technologies.
 
-ARIA Roles in Popup and Options Pages
+### ARIA Roles in Popup and Options Pages
 
 Accessible Rich Internet Applications (ARIA) attributes bridge the gap where HTML's native semantics fall short, providing additional context to assistive technologies. However, the first rule of ARIA is simple: do not use ARIA if a native HTML element will suffice. Native elements come with built-in accessibility that you'd otherwise have to recreate manually.
 
@@ -54,7 +54,7 @@ Live regions are critical for extensions that update content dynamically. Use `r
 
 For complex data displays in your extension, consider roles like `role="grid"`, `role="treegrid"`, or `role="listbox"` to provide proper structural information to assistive technologies. However, always prefer simpler structures when possible, a well-structured list or table is more accessible than a poorly implemented grid.
 
-Keyboard Navigation Patterns
+### Keyboard Navigation Patterns
 
 Keyboard accessibility is foundational to extension usability, serving users who cannot use a mouse due to motor impairments, those who prefer keyboard efficiency, and power users who navigate extensively with keyboard shortcuts. Every interactive element in your extension must be keyboard-accessible, and the focus order must be logical and intuitive.
 
@@ -101,7 +101,7 @@ document.querySelector('.menu').addEventListener('keydown', (e) => {
 
 Ensure all keyboard shortcuts are documented and do not conflict with browser or assistive technology shortcuts. Avoid using single-character keys without modifier keys (like Ctrl or Alt) unless you're building an text input field where such shortcuts are expected. Consider providing a way for users to customize or disable shortcuts that conflict with their assistive technology.
 
-Screen Reader Compatibility
+### Screen Reader Compatibility
 
 Screen readers transform visual interfaces into spoken output, enabling blind and visually impaired users to interact with your extension. The major screen readers include NVDA (Windows), JAWS (Windows), VoiceOver (macOS/iOS), and Orca (Linux), each with distinct behaviors and quirks. Testing with multiple screen readers is essential for ensuring broad compatibility.
 
@@ -138,7 +138,7 @@ Images and icons require attention in extension contexts. Decorative images shou
 
 Test your extension with VoiceOver (built into macOS) or NVDA (free for Windows) to experience how screen reader users perceive your interface. Pay attention to whether the reading order makes sense, whether all interactive elements are announced, and whether the state changes are properly conveyed.
 
-High Contrast Mode Support
+### High Contrast Mode Support
 
 High contrast mode is used by users with low vision or color blindness to improve readability. Windows includes a high contrast mode that forces high contrast colors, while users on macOS and Linux may use system-level accessibility settings or browser extensions. Your extension must function properly in these environments.
 
@@ -188,7 +188,7 @@ The `prefers-contrast` media query detects when users have requested increased c
 
 Test your extension by enabling high contrast mode in your operating system and verify that all content remains readable and all interactive elements remain identifiable. Pay special attention to status indicators, error messages, and any content that relies on color alone to convey meaning.
 
-Focus Management in Popups
+### Focus Management in Popups
 
 Focus management in Chrome extension popups presents unique challenges due to their transient nature and limited lifecycle. When a popup opens, focus typically moves to the first focusable element, which is correct behavior. However, when the popup closes, whether through user action or clicking outside, focus should return to the trigger element in a predictable way.
 
@@ -257,7 +257,7 @@ Visual focus indicators are not optional, they're essential for keyboard users t
 }
 ```
 
-Color Contrast Requirements
+### Color Contrast Requirements
 
 WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18px regular or 14px bold). This applies to all text in your extension, including placeholder text, disabled text, and any text within interactive components.
 
@@ -283,7 +283,7 @@ Don't forget about contrast requirements for UI components (buttons, form inputs
 
 Consider users with color vision deficiency (affecting approximately 8% of men and 0.5% of women) by not using color alone to convey information. Use icons, text labels, or patterns alongside color to ensure all users can understand your interface.
 
-Testing with axe-core and Lighthouse
+### Testing with axe-core and Lighthouse
 
 Automated testing provides quick feedback on accessibility issues, catching many common problems before manual testing. However, automated testing can only detect approximately 30-50% of accessibility issues, so it should complement rather than replace manual testing and user testing.
 
@@ -349,7 +349,7 @@ async function runLighthouseAudit(url) {
 
 Combine automated testing with manual testing techniques. Use keyboard-only navigation to verify all functionality works without a mouse. Test with screen readers to understand the user experience. Review with users who have disabilities when possible. Accessibility is ultimately about human experience, not just passing automated checks.
 
-Accessible Notification Patterns
+### Accessible Notification Patterns
 
 Notifications in Chrome extensions, whether through chrome.notifications API, in-popup messages, or badge updates, must be accessible to all users. This means ensuring screen readers announce notifications and that users can perceive notifications regardless of their visual capabilities.
 
@@ -388,7 +388,7 @@ Avoid using only color to indicate notification status. Combine color changes wi
 
 Badge updates (shown on the extension icon) should be accompanied by accessible labels for screen readers when the popup is opened. Consider providing a way to view notification history for users who may miss time-sensitive alerts.
 
-Extension Accessibility Audit Checklist
+### Extension Accessibility Audit Checklist
 
 Use this checklist to verify your Chrome extension meets accessibility requirements. Review each item against your extension's implementation to identify areas for improvement.
 

@@ -18,7 +18,7 @@ This comprehensive guide teaches you how to mock Chrome APIs effectively, enabli
 
 ---
 
-Understanding the Challenge of Chrome Extension Testing {#understanding-challenge}
+## Understanding the Challenge of Chrome Extension Testing {#understanding-challenge}
 
 Chrome extensions operate in a privileged environment with access to APIs that regular web pages cannot use. These APIs enable extensions to read browser history, manage tabs, interact with downloads, modify network requests, and access user data. While powerful, this privileged access creates significant testing challenges.
 
@@ -28,7 +28,7 @@ The solution is mocking, creating fake implementations of Chrome APIs that behav
 
 ---
 
-Setting Up Your Testing Environment {#setting-up-environment}
+## Setting Up Your Testing Environment {#setting-up-environment}
 
 Before implementing mocks, you need to configure your testing environment properly. Most Chrome extension developers use Jest as their test runner due to its popularity, excellent mocking capabilities, and wide ecosystem of plugins.
 
@@ -77,11 +77,11 @@ For TypeScript projects, create a `tsconfig.json` for testing:
 
 ---
 
-Manual Chrome API Mocking {#manual-mocking}
+## Manual Chrome API Mocking {#manual-mocking}
 
 The most straightforward approach to mocking Chrome APIs is creating your own mock implementations. This gives you complete control over how the APIs behave and allows you to simulate any scenario your tests require.
 
-Creating a Basic Chrome Mock
+### Creating a Basic Chrome Mock
 
 Start by creating a mocks directory in your project:
 
@@ -154,7 +154,7 @@ export default {
 };
 ```
 
-Mocking Chrome Runtime API
+### Mocking Chrome Runtime API
 
 The chrome.runtime API is essential for extension communication and lifecycle management:
 
@@ -207,19 +207,19 @@ export default {
 
 ---
 
-Using the Jest-Chrome Library {#jest-chrome-library}
+## Using the Jest-Chrome Library {#jest-chrome-library}
 
 While manual mocking gives you complete control, the jest-chrome library provides pre-built mocks for most Chrome APIs, significantly reducing boilerplate code.
 
-Installation and Setup
+### Installation and Setup
 
-Install jest-chrome as a development dependency:
+### Install jest-chrome as a development dependency:
 
 ```bash
 npm install --save-dev jest-chrome
 ```
 
-Configure Jest to use jest-chrome in your configuration:
+### Configure Jest to use jest-chrome in your configuration:
 
 ```javascript
 // jest.config.js
@@ -232,14 +232,14 @@ module.exports = {
 };
 ```
 
-Create the setup file:
+### Create the setup file:
 
 ```javascript
 // jest-chrome-setup.js
 import 'jest-chrome/extend';
 ```
 
-Using Jest-Chrome Mocks
+### Using Jest-Chrome Mocks
 
 With jest-chrome configured, you can write tests that automatically have access to mocked Chrome APIs:
 
@@ -281,7 +281,7 @@ describe('StorageManager', () => {
 
 ---
 
-Mocking Chrome Tabs API {#mocking-tabs-api}
+## Mocking Chrome Tabs API {#mocking-tabs-api}
 
 The chrome.tabs API is frequently used in extensions for tab management and is essential to mock correctly for comprehensive testing.
 
@@ -365,7 +365,7 @@ export default {
 
 ---
 
-Testing Background Service Workers {#testing-service-workers}
+## Testing Background Service Workers {#testing-service-workers}
 
 Background service workers in Manifest V3 extensions handle events and manage extension state. Testing these requires careful mocking of the service worker context.
 
@@ -416,11 +416,11 @@ describe('Background Service Worker', () => {
 
 ---
 
-Simulating Edge Cases and Error Conditions {#simulating-edge-cases}
+## Simulating Edge Cases and Error Conditions {#simulating-edge-cases}
 
 One of the key benefits of mocking is the ability to test error handling and edge cases that would be difficult to reproduce with real Chrome APIs.
 
-Testing Error Handling
+### Testing Error Handling
 
 ```javascript
 // __tests__/error-handling.test.js
@@ -466,11 +466,11 @@ describe('Error Handling', () => {
 
 ---
 
-Best Practices for Chrome API Mocking {#best-practices}
+## Best Practices for Chrome API Mocking {#best-practices}
 
 Following these best practices ensures your mocks are reliable, maintainable, and accurately represent Chrome API behavior.
 
-Keep Mocks Synchronous When Possible
+### Keep Mocks Synchronous When Possible
 
 While some Chrome APIs are asynchronous (returning Promises or using callbacks), your mocks can often be synchronous for simpler testing:
 
@@ -485,7 +485,7 @@ storage: {
 }
 ```
 
-Reset Mocks Between Tests
+### Reset Mocks Between Tests
 
 Always clean up mock state between tests to prevent test pollution:
 
@@ -498,7 +498,7 @@ beforeEach(() => {
 });
 ```
 
-Use Mock Implementation Instead of Mock Return Value
+### Use Mock Implementation Instead of Mock Return Value
 
 For complex scenarios, use `mockImplementation` instead of `mockReturnValue`:
 
@@ -509,7 +509,7 @@ chrome.storage.local.get.mockImplementation((keys, callback) => {
 });
 ```
 
-Mock at the Module Level When Appropriate
+### Mock at the Module Level When Appropriate
 
 Mock Chrome APIs at the module level for cleaner tests:
 
@@ -519,7 +519,7 @@ jest.mock('chrome', () => require('../__mocks__/chrome'));
 
 ---
 
-Advanced: Type-Safe Mocks with TypeScript {#type-safe-mocks}
+## Advanced: Type-Safe Mocks with TypeScript {#type-safe-mocks}
 
 For TypeScript projects, create type-safe mocks that provide autocomplete and type checking:
 
@@ -538,7 +538,7 @@ declare module 'chrome-types' {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Mocking Chrome APIs is an essential skill for any Chrome extension developer who wants to write reliable, maintainable tests. By understanding the challenges of extension testing, implementing appropriate mocks, and following best practices, you can build a comprehensive test suite that catches bugs early and enables confident refactoring.
 
@@ -548,7 +548,7 @@ Remember that good mocks not only make tests pass, they also serve as documentat
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
 - [Chrome Extensions Documentation](https://developer.chrome.com/docs/extensions/)
@@ -557,11 +557,11 @@ Additional Resources {#resources}
 
 ---
 
-Common Pitfalls and How to Avoid Them {#common-pitfalls}
+## Common Pitfalls and How to Avoid Them {#common-pitfalls}
 
 Even experienced developers encounter challenges when mocking Chrome APIs. Understanding these common pitfalls will help you avoid them in your own projects.
 
-Pitfall 1: Not Matching Async Behavior
+### Pitfall 1: Not Matching Async Behavior
 
 Chrome APIs often use callbacks or return Promises, but many developers create synchronous mocks that don't accurately represent the asynchronous nature of the real APIs. This can lead to tests passing when they shouldn't, because race conditions are not properly tested.
 
@@ -584,7 +584,7 @@ storage: {
 }
 ```
 
-Pitfall 2: Forgetting to Reset State
+### Pitfall 2: Forgetting to Reset State
 
 Mock state can leak between tests if you don't properly reset it. This causes flaky tests that pass sometimes and fail other times, making debugging extremely difficult. Always use `beforeEach` hooks to reset mock state:
 
@@ -598,7 +598,7 @@ describe('StorageManager', () => {
 });
 ```
 
-Pitfall 3: Not Mocking All Required Methods
+### Pitfall 3: Not Mocking All Required Methods
 
 When you only mock the methods you think you're using, you might miss edge cases where other methods are called implicitly. For instance, the chrome.runtime.lastError property is often checked by Chrome APIs after asynchronous operations:
 
@@ -616,13 +616,13 @@ test('should handle runtime errors', () => {
 });
 ```
 
-Pitfall 4: Overly Complex Mocks
+### Pitfall 4: Overly Complex Mocks
 
 While it's important to accurately represent Chrome API behavior, creating mocks that are too complex defeats the purpose of unit testing. If your mock logic is nearly as complex as the code you're testing, consider refactoring either the mock or the code itself.
 
 ---
 
-Integration Testing with Mocks {#integration-testing}
+## Integration Testing with Mocks {#integration-testing}
 
 Beyond unit testing, mocks play a crucial role in integration testing scenarios where multiple components work together. Integration tests verify that your extension's various parts communicate correctly, even when the Chrome APIs they depend on are mocked.
 
@@ -675,11 +675,11 @@ describe('Popup to Background Communication', () => {
 
 ---
 
-Mocking for Different Testing Contexts {#different-contexts}
+## Mocking for Different Testing Contexts {#different-contexts}
 
 Chrome extensions run in multiple contexts, each with different API availability. Your mocks should reflect these differences.
 
-Content Script Mocks
+### Content Script Mocks
 
 Content scripts operate in the context of web pages but still have access to some Chrome APIs:
 
@@ -704,7 +704,7 @@ export default {
 };
 ```
 
-Popup Page Mocks
+### Popup Page Mocks
 
 Popups have access to most Chrome APIs but have a limited lifetime:
 
@@ -733,7 +733,7 @@ export default {
 
 ---
 
-Performance Considerations {#performance-considerations}
+## Performance Considerations {#performance-considerations}
 
 When writing tests that extensively use mocks, performance can become a concern, especially in large test suites. Here are some tips to keep your tests fast:
 
@@ -747,7 +747,7 @@ When writing tests that extensively use mocks, performance can become a concern,
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Mocking Chrome APIs is an essential skill for any Chrome extension developer who wants to write reliable, maintainable tests. By understanding the challenges of extension testing, implementing appropriate mocks, and following best practices, you can build a comprehensive test suite that catches bugs early and enables confident refactoring.
 

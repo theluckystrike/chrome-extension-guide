@@ -29,23 +29,23 @@ This comprehensive migration guide will walk you through every aspect of moving 
 
 ---
 
-Why Manifest V3 Matters {#why-manifest-v3}
+## Why Manifest V3 Matters {#why-manifest-v3}
 
 Manifest V3 is not merely an incremental update. it represents a fundamental shift in how Chrome extensions operate, with a primary focus on three core principles: security, performance, and user privacy.
 
-Enhanced Security
+### Enhanced Security
 
 Manifest V3 introduces stricter requirements that reduce the attack surface of extensions. The removal of remote code execution, tighter host permissions, and mandatory declarations for all capabilities mean users can have greater confidence in what extensions can access. Every permission your extension requests must now be explicitly declared in the manifest, and users can see exactly what data your extension can access before installation.
 
-Improved Performance
+### Improved Performance
 
 The transition from background pages to service workers brings significant performance benefits. Service workers are event-driven, lightweight, and can be terminated when not in use, reducing memory consumption dramatically. This is particularly important for users with many extensions installed, as Manifest V2 background pages remained active in memory constantly.
 
-User Privacy
+### User Privacy
 
 Manifest V3 gives users finer-grained control over their privacy. The new permissions system requires users to grant specific host permissions rather than broad access. Additionally, the `declarativeNetRequest` API replaces the `webRequest` API for network request modification, allowing extensions to block ads and trackers without reading user's browsing data.
 
-The Business Case for Migration
+### The Business Case for Migration
 
 Beyond the technical improvements, there are compelling business reasons to migrate:
 
@@ -55,11 +55,11 @@ Beyond the technical improvements, there are compelling business reasons to migr
 
 ---
 
-Key Differences Between Manifest V2 and V3 {#key-differences}
+## Key Differences Between Manifest V2 and V3 {#key-differences}
 
 Understanding the fundamental architectural differences is crucial for a successful migration. Here are the most significant changes you need to understand.
 
-Background Pages Become Service Workers
+### Background Pages Become Service Workers
 
 The most dramatic change is the replacement of persistent background pages with ephemeral service workers. In Manifest V2, your background script ran as a persistent HTML page that stayed loaded continuously. In Manifest V3, the background script runs as a service worker that activates only when needed and terminates when idle.
 
@@ -71,25 +71,25 @@ The powerful `webRequest` API that allowed extensions to analyze and modify netw
 
 This change improves privacy because your extension no longer needs to read the content of network requests. Instead, you specify rules like "block all requests to this domain," and Chrome enforces those rules without your extension ever seeing the request content.
 
-Host Permissions Are Now Runtime
+### Host Permissions Are Now Runtime
 
 In Manifest V2, host permissions were granted at installation time. In Manifest V3, many host permissions are requested at runtime using the `permissions` API. This means users can grant access to specific sites when needed rather than giving your extension blanket access to all websites.
 
-Remote Code Execution Removal
+### Remote Code Execution Removal
 
 Manifest V3 prohibits loading and executing remote code. All your extension's JavaScript must be bundled within the extension package. This is a significant security improvement but requires restructuring if your extension previously loaded scripts from external servers.
 
-Changes to Storage API
+### Changes to Storage API
 
 The storage API has been enhanced in Manifest V3 with new capabilities and improved performance. The `chrome.storage.session` API provides session-scoped storage that doesn't persist across browser restarts, perfect for temporary data. The `chrome.storage.managed` API allows administrators to configure extension settings via enterprise policies.
 
 ---
 
-Step-by-Step Migration Process {#step-by-step-migration}
+## Step-by-Step Migration Process {#step-by-step-migration}
 
 Now let's walk through the practical steps of migrating your extension from Manifest V2 to V3.
 
-Step 1: Update Your Manifest File
+### Step 1: Update Your Manifest File
 
 The first step is updating your `manifest.json` to use Manifest V3. Change the manifest version and review your permissions:
 
@@ -117,7 +117,7 @@ Key changes to make:
 - Move website URLs from `"permissions"` to `"host_permissions"`
 - Review and minimize your permissions list
 
-Step 2: Migrate Background Scripts to Service Workers
+### Step 2: Migrate Background Scripts to Service Workers
 
 Converting your background script to a service worker requires several adjustments:
 
@@ -154,7 +154,7 @@ Important service worker considerations:
 - Remove all direct DOM manipulation from background scripts
 - Handle the service worker lifecycle. it can terminate when idle
 
-Step 3: Replace webRequest with declarativeNetRequest
+### Step 3: Replace webRequest with declarativeNetRequest
 
 If your extension uses the `webRequest` API for blocking or modifying network requests, you need to migrate to `declarativeNetRequest`. This requires creating rule files and updating your manifest.
 
@@ -191,7 +191,7 @@ Create rules.json:
 
 The `declarativeNetRequest` API is more limited than `webRequest` but provides better privacy guarantees and performance.
 
-Step 4: Update Content Scripts
+### Step 4: Update Content Scripts
 
 Content scripts largely work the same in Manifest V3, but there are some changes:
 
@@ -218,7 +218,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Step 5: Update Action API
+### Step 5: Update Action API
 
 In Manifest V2, you used `chrome.browserAction` to control the extension's toolbar icon. In Manifest V3, this has been renamed to `chrome.action`. Update all references:
 
@@ -233,7 +233,7 @@ chrome.action.setBadgeText({ text: '5' });
 // Use the popup or listen to different events
 ```
 
-Step 6: Review and Update Permissions
+### Step 6: Review and Update Permissions
 
 Manifest V3 has a more granular permission system. Review each permission your extension uses:
 
@@ -245,11 +245,11 @@ Test your extension with the minimum necessary permissions. You may find that yo
 
 ---
 
-Storage Changes in Detail {#storage-changes}
+## Storage Changes in Detail {#storage-changes}
 
 Understanding the storage API changes is critical because state management is fundamental to most extensions.
 
-chrome.storage.local
+### chrome.storage.local
 
 This API works similarly to Manifest V2 but with improved performance. Data is stored as JSON and can be synced across devices if the user is signed into Chrome with sync enabled.
 
@@ -263,7 +263,7 @@ chrome.storage.local.get(['key']).then((result) => {
 });
 ```
 
-chrome.storage.session
+### chrome.storage.session
 
 New in Manifest V3, this provides session-scoped storage that clears when the browser closes. This is perfect for temporary data that doesn't need to persist:
 
@@ -273,17 +273,17 @@ chrome.storage.session.set({ temporaryData: 'value' });
 // Cleared when browser closes
 ```
 
-chrome.storage.managed
+### chrome.storage.managed
 
 This API allows enterprise administrators to push mandatory settings to extensions installed in managed environments. If your extension is used in enterprise settings, use this for configuration that users cannot change.
 
 ---
 
-Testing Your Migrated Extension {#testing}
+## Testing Your Migrated Extension {#testing}
 
 Thorough testing is essential before releasing your migrated extension. Here's how to approach it.
 
-Local Testing
+### Local Testing
 
 1. Load your extension in Chrome using the Extensions Management page (`chrome://extensions`)
 2. Enable Developer Mode
@@ -295,7 +295,7 @@ Local Testing
    - Storage persistence
    - Network request rules (if using declarativeNetRequest)
 
-Automated Testing
+### Automated Testing
 
 Consider using Playwright or Puppeteer to automate extension testing. These tools can:
 
@@ -319,7 +319,7 @@ const puppeteer = require('puppeteer');
 })();
 ```
 
-Common Migration Bugs to Watch For
+### Common Migration Bugs to Watch For
 
 - Service worker termination: If your extension stops working after being idle, you're likely not handling the service worker lifecycle correctly
 - Missing storage initialization: Always initialize default values in storage on first run
@@ -328,11 +328,11 @@ Common Migration Bugs to Watch For
 
 ---
 
-Common Migration Pitfalls and Solutions {#common-pitfalls}
+## Common Migration Pitfalls and Solutions {#common-pitfalls}
 
 Even experienced developers encounter challenges during Manifest V3 migration. Here are the most common issues and how to solve them.
 
-Pitfall 1: Losing State When Service Worker Restarts
+### Pitfall 1: Losing State When Service Worker Restarts
 
 Problem: Your extension loses track of important state when the service worker terminates.
 
@@ -351,11 +351,11 @@ async function init() {
 }
 ```
 
-Pitfall 2: Timers Not Firing
+### Pitfall 2: Timers Not Firing
 
 Problem: `setTimeout` and `setInterval` don't work reliably in service workers because the worker can terminate.
 
-Solution: Use the `chrome.alarms` API instead:
+### Solution: Use the `chrome.alarms` API instead:
 
 ```javascript
 chrome.alarms.create('myAlarm', { delayInMinutes: 5 });
@@ -367,7 +367,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Pitfall 3: declarativeNetRequest Rules Not Working
+### Pitfall 3: declarativeNetRequest Rules Not Working
 
 Problem: Your network request blocking rules don't seem to take effect.
 
@@ -377,7 +377,7 @@ Solution: Make sure:
 - Rules are enabled in the `declarative_net_request` manifest section
 - Check the extension service worker console for errors
 
-Pitfall 4: Host Permissions Denied
+### Pitfall 4: Host Permissions Denied
 
 Problem: Your extension can't access certain websites.
 
@@ -386,7 +386,7 @@ Solution:
 - Remember that some permissions now require user interaction to grant
 - Test with the extension's "Site Access" setting in chrome://extensions
 
-Pitfall 5: Content Script Communication Failures
+### Pitfall 5: Content Script Communication Failures
 
 Problem: Content scripts can't communicate with the background service worker.
 
@@ -397,11 +397,11 @@ Solution:
 
 ---
 
-Performance Optimization for Manifest V3 {#performance-optimization}
+## Performance Optimization for Manifest V3 {#performance-optimization}
 
 Manifest V3 service workers offer excellent performance potential, but you need to optimize your code to take advantage of it.
 
-Minimize Service Worker Wake-ups
+### Minimize Service Worker Wake-ups
 
 Every time your service worker wakes up, there's overhead. Group your event listeners efficiently:
 
@@ -418,7 +418,7 @@ chrome.tabs.onCreated.addListener(async (tab) => {
 });
 ```
 
-Use Storage Efficiently
+### Use Storage Efficiently
 
 Avoid excessive storage reads and writes. Batch operations when possible:
 
@@ -436,7 +436,7 @@ await chrome.storage.local.set({ setting2: value2 });
 await chrome.storage.local.set({ setting3: value3 });
 ```
 
-Lazy Load Content Scripts
+### Lazy Load Content Scripts
 
 Only inject content scripts when needed using the `matches` field in manifest.json or programmatic injection:
 
@@ -454,7 +454,7 @@ Only inject content scripts when needed using the `matches` field in manifest.js
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Migrating from Manifest V2 to V3 is a significant undertaking, but it's essential for the future of your Chrome extension. The changes bring meaningful improvements in security, performance, and user privacy that benefit both developers and users.
 
@@ -470,7 +470,7 @@ The Chrome extension ecosystem continues to evolve, and Manifest V3 represents a
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Manifest V3 Service Worker Patterns: Anti-Patterns to Avoid](/2025/01/30/manifest-v3-service-worker-patterns-anti-patterns/) - Learn common pitfalls and best practices for MV3 service workers.
 - [Declarative Net Request API Complete Tutorial](/2025/01/18/declarative-net-request-api-complete-tutorial/) - Master the declarativeNetRequest API for network request modification.
@@ -486,7 +486,7 @@ Ready to monetize? The Extension Monetization Playbook covers freemium models, S
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Development 2025 Complete Beginners Guide]({% post_url 2025-01-16-chrome-extension-development-2025-complete-beginners-guide %})
 - [Chrome Extension Security Best Practices]({% post_url 2025-01-16-chrome-extension-security-best-practices-2025 %})

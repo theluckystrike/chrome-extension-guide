@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build an Accessibility Checker Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - Scan any web page for common accessibility issues
 - Check alt text on images
 - Validate color contrast (WCAG AA/AAA)
@@ -19,7 +19,7 @@ What You'll Build {#what-youll-build}
 - Detect landmark regions
 - Generate accessibility reports with severity levels
 
-Manifest {#manifest}
+## Manifest {#manifest}
 - permissions: activeTab, scripting, storage
 - host_permissions: <all_urls>
 - content scripts for page scanning
@@ -27,9 +27,9 @@ Manifest {#manifest}
 
 ---
 
-Step 1: DOM Scanner {#step-1-dom-scanner}
+## Step 1: DOM Scanner {#step-1-dom-scanner}
 
-Scan the page for accessibility issues:
+### Scan the page for accessibility issues:
 
 ```javascript
 function scanPageForA11yIssues() {
@@ -91,9 +91,9 @@ function getSelector(el) {
 
 ---
 
-Step 2: Color Contrast Calculator {#step-2-color-contrast-calculator}
+## Step 2: Color Contrast Calculator {#step-2-color-contrast-calculator}
 
-Validate WCAG color contrast ratios:
+### Validate WCAG color contrast ratios:
 
 ```javascript
 function calculateContrastRatio(fgColor, bgColor) {
@@ -145,9 +145,9 @@ document.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li').forEach(el =
 
 ---
 
-Step 3: Issue Highlighter Overlay {#step-3-issue-highlighter-overlay}
+## Step 3: Issue Highlighter Overlay {#step-3-issue-highlighter-overlay}
 
-Visual overlay to highlight issues on page:
+### Visual overlay to highlight issues on page:
 
 ```javascript
 function createHighlightOverlay() {
@@ -189,9 +189,9 @@ function highlightIssues(issues) {
 
 ---
 
-Step 4: Report Generator {#step-4-report-generator}
+## Step 4: Report Generator {#step-4-report-generator}
 
-Create detailed accessibility report:
+### Create detailed accessibility report:
 
 ```javascript
 function generateReport(issues) {
@@ -257,7 +257,7 @@ function displayReport(report) {
 
 ---
 
-Testing {#testing}
+## Testing {#testing}
 
 ```javascript
 // Run accessibility check
@@ -284,7 +284,7 @@ document.getElementById('run-scan').addEventListener('click', async () => {
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 - [guides/accessibility.md](../guides/accessibility.md)
 - [guides/extension-a11y-testing.md](../guides/extension-a11y-testing.md)
 - [patterns/dom-observer-patterns.md](../patterns/dom-observer-patterns.md)

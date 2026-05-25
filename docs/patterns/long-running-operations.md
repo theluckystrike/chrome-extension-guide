@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/long-running-operation
 last_modified_at: 2026-01-15
 ---
 
-Long-Running Operations Patterns
+### Long-Running Operations Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 MV3 service workers have a strict 30-second idle timeout. Unlike MV2 background pages that could run indefinitely, your extension must plan for termination at any time. This guide covers patterns for handling tasks that exceed the service worker lifetime.
 
 ---
 
-Challenge: Service Worker Termination {#challenge-service-worker-termination}
+## Challenge: Service Worker Termination {#challenge-service-worker-termination}
 
 ```
 Service Worker Lifecycle:
@@ -42,7 +42,7 @@ Long-running tasks face these challenges:
 
 ---
 
-Pattern 1: Chunked Processing with Alarms {#pattern-1-chunked-processing-with-alarms}
+## Pattern 1: Chunked Processing with Alarms {#pattern-1-chunked-processing-with-alarms}
 
 Break large tasks into small chunks and process one chunk per wake cycle:
 
@@ -97,7 +97,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-Pattern 2: Offscreen Documents for Sustained Work {#pattern-2-offscreen-documents-for-sustained-work}
+## Pattern 2: Offscreen Documents for Sustained Work {#pattern-2-offscreen-documents-for-sustained-work}
 
 For tasks requiring longer execution, use an offscreen document:
 
@@ -132,7 +132,7 @@ self.onmessage = async (e) => {
 
 ---
 
-Pattern 3: Keep-Alive Heartbeat {#pattern-3-keep-alive-heartbeat}
+## Pattern 3: Keep-Alive Heartbeat {#pattern-3-keep-alive-heartbeat}
 
 For critical background tasks, keep the service worker alive:
 
@@ -151,9 +151,9 @@ Prefer alarms. they wake the service worker reliably without polling.
 
 ---
 
-Pattern 4: Resumable State Management {#pattern-4-resumable-state-management}
+## Pattern 4: Resumable State Management {#pattern-4-resumable-state-management}
 
-Always save state to `chrome.storage` for resumability:
+### Always save state to `chrome.storage` for resumability:
 
 ```ts
 interface TaskState {
@@ -181,9 +181,9 @@ async function resumeTask(taskId: string): Promise<void> {
 
 ---
 
-Progress Communication {#progress-communication}
+## Progress Communication {#progress-communication}
 
-Notify the UI via message passing:
+### Notify the UI via message passing:
 
 ```ts
 // background.ts
@@ -206,7 +206,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 ---
 
-Anti-Patterns to Avoid {#anti-patterns-to-avoid}
+## Anti-Patterns to Avoid {#anti-patterns-to-avoid}
 
 | Anti-Pattern | Problem | Solution |
 |--------------|---------|----------|
@@ -217,7 +217,7 @@ Anti-Patterns to Avoid {#anti-patterns-to-avoid}
 
 ---
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Service Worker Lifecycle](./service-worker-lifecycle.md). lifecycle detailed look
 - [Offscreen Documents](./offscreen-documents.md). sustained execution contexts
@@ -225,7 +225,7 @@ Related Patterns {#related-patterns}
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 1. Never assume the service worker stays alive. plan for termination
 2. Use chrome.alarms for periodic work (not `setInterval`)

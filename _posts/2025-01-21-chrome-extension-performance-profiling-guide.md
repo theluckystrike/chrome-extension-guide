@@ -17,13 +17,13 @@ This comprehensive guide teaches you how to profile Chrome extensions systematic
 
 ---
 
-Why Chrome Extension Performance Matters
+### Why Chrome Extension Performance Matters
 
 Chrome extensions operate in a unique environment that differs significantly from traditional web applications. Your extension code runs across multiple isolated contexts: the service worker (background script), content scripts injected into web pages, the popup UI, options page, and any additional windows you create. Each context has its own performance characteristics, memory constraints, and debugging workflows.
 
 The Manifest V3 transition brought significant changes to extension architecture. Service workers replaced background pages, introducing new performance considerations like the 30-second idle timeout and event-driven execution model. These changes require developers to rethink their approach to performance optimization.
 
-Poor extension performance manifests in several ways:
+### Poor extension performance manifests in several ways:
 
 - Battery drain: Extensions that frequently wake the service worker or run CPU-intensive tasks drain laptop batteries quickly
 - Memory bloat: Memory leaks in content scripts compound across dozens of open tabs
@@ -34,11 +34,11 @@ Understanding these challenges is the first step toward building performant exte
 
 ---
 
-Setting Up Your Profiling Environment
+### Setting Up Your Profiling Environment
 
 Before you can optimize, you need to measure. Chrome provides powerful DevTools specifically designed for extension debugging, but accessing them requires understanding the extension's multi-context architecture.
 
-Accessing Extension DevTools
+### Accessing Extension DevTools
 
 The primary entry point for extension debugging is the `chrome://extensions` page. Enable Developer mode in the top-right corner, then locate your extension in the list. The "Inspect views" section provides direct links to DevTools for each component:
 
@@ -49,7 +49,7 @@ The primary entry point for extension debugging is the `chrome://extensions` pag
 
 For content scripts, the process differs slightly. Open DevTools on any webpage where your content script runs, then look for your script listed under "Content scripts" in the Sources panel. The console context dropdown lets you switch between the page's JavaScript context and your extension's isolated world.
 
-Critical DevTools Panels for Extension Profiling
+### Critical DevTools Panels for Extension Profiling
 
 Several DevTools panels are particularly valuable for extension performance work:
 
@@ -65,11 +65,11 @@ Several DevTools panels are particularly valuable for extension performance work
 
 ---
 
-CPU Profiling: Identifying Execution Bottlenecks
+### CPU Profiling: Identifying Execution Bottlenecks
 
 CPU profiling reveals which functions consume the most processing time, helping you focus optimization efforts where they matter most. Chrome DevTools provides several CPU profiling modes suitable for different scenarios.
 
-Profiling Service Workers
+### Profiling Service Workers
 
 Service workers handle events, manage state, and coordinate between extension components. CPU bottlenecks here directly impact battery life and can cause missed events.
 
@@ -87,7 +87,7 @@ The flame graph displays JavaScript execution stacked by call depth. Wide bars i
 - Loops processing large datasets: Tab iteration, storage batch operations, or filtering
 - Synchronous APIs: Heavy synchronous operations block the entire service worker
 
-Common Service Worker CPU Pitfalls
+### Common Service Worker CPU Pitfalls
 
 One frequent issue involves sequential API calls that could be parallelized. Consider this inefficient pattern:
 
@@ -119,7 +119,7 @@ async function processAllTabs() {
 }
 ```
 
-Content Script CPU Optimization
+### Content Script CPU Optimization
 
 Content scripts run in the context of every webpage you inject into, making performance even more critical. A slow content script affects every page the user visits.
 
@@ -132,13 +132,13 @@ Profile content scripts by opening DevTools on a page where your script runs, th
 
 ---
 
-Memory Profiling: Detecting Leaks and Bloat
+### Memory Profiling: Detecting Leaks and Bloat
 
 Memory issues in Chrome extensions are particularly insidious because they compound over time. A small leak in a content script, when multiplied across dozens of open tabs, can consume gigabytes of RAM and crash the browser.
 
-Understanding Extension Memory Architecture
+### Understanding Extension Memory Architecture
 
-Chrome extensions have a complex memory architecture:
+### Chrome extensions have a complex memory architecture:
 
 - Service worker memory: Persists while the service worker is active but gets cleared on termination
 - Content script memory: Duplicated across every tab where the script runs
@@ -152,7 +152,7 @@ Memory leaks occur when your code retains references to objects that should be g
 - chrome.storage accumulation: Never clearing old data
 - Message port leaks: Failing to disconnect message channels
 
-Taking Heap Snapshots
+### Taking Heap Snapshots
 
 The Memory tab's heap snapshot feature helps identify memory leaks:
 
@@ -165,9 +165,9 @@ The Memory tab's heap snapshot feature helps identify memory leaks:
 
 Look for objects that accumulate between snapshots. The "Shallow Size" column shows object memory footprint, while "Retained Size" includes referenced objects.
 
-Memory Profiling Best Practices
+### Memory Profiling Best Practices
 
-For content scripts specifically:
+### For content scripts specifically:
 
 ```javascript
 //  Memory leak: Event listener on dynamic content
@@ -191,11 +191,11 @@ window.addEventListener('unload', () => observer.disconnect());
 
 ---
 
-Network Performance: Optimizing API Calls and Resource Loading
+### Network Performance: Optimizing API Calls and Resource Loading
 
 Extensions frequently make network requests for API calls, fetching resources, or communicating with backend services. Network inefficiencies can significantly impact perceived performance.
 
-Analyzing Network Activity
+### Analyzing Network Activity
 
 Use the Network tab to record and analyze all network requests from your extension:
 
@@ -205,14 +205,14 @@ Use the Network tab to record and analyze all network requests from your extensi
 4. Perform actions that trigger network requests
 5. Analyze the waterfall chart for bottlenecks
 
-Look for:
+### Look for:
 
 - Blocking requests: Synchronous XHR or fetch that delays other operations
 - Unnecessary requests: Cached data that could avoid network calls
 - Large payloads: Responses larger than necessary
 - Request chains: Sequential requests that could be parallelized or batched
 
-Caching Strategies
+### Caching Strategies
 
 Implement appropriate caching based on your data requirements:
 
@@ -243,7 +243,7 @@ async function setCachedData(key, value) {
 }
 ```
 
-Request Batching and Debouncing
+### Request Batching and Debouncing
 
 Reduce network overhead by batching requests and debouncing user input:
 
@@ -281,13 +281,13 @@ const debouncedSave = debounce(saveSettings, 500);
 
 ---
 
-Service Worker Lifecycle Optimization
+### Service Worker Lifecycle Optimization
 
 Manifest V3 service workers have strict lifecycle constraints that directly impact performance. Understanding this lifecycle is essential for building responsive extensions.
 
-Service Worker Lifecycle Basics
+### Service Worker Lifecycle Basics
 
-Service workers in extensions follow this lifecycle:
+### Service workers in extensions follow this lifecycle:
 
 1. Installation: Triggered when the extension updates or Chrome starts
 2. Activation: Runs after installation, used for cleanup
@@ -297,7 +297,7 @@ Service workers in extensions follow this lifecycle:
 
 This lifecycle means your extension must initialize quickly when woken and persist critical state externally.
 
-Optimization Strategies
+### Optimization Strategies
 
 ```javascript
 //  Persist state in chrome.storage, not memory
@@ -328,9 +328,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 ```
 
-Preventing Service Worker Termination
+### Preventing Service Worker Termination
 
-Keep your service worker alive during critical operations:
+### Keep your service worker alive during critical operations:
 
 ```javascript
 //  Send messages to keep service worker active
@@ -354,11 +354,11 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-Performance Monitoring in Production
+### Performance Monitoring in Production
 
 Lab testing reveals obvious issues, but real-world usage exposes different problems. Implementing performance monitoring helps you understand how your extension performs in the wild.
 
-Collecting Performance Metrics
+### Collecting Performance Metrics
 
 ```javascript
 //  Collect and report performance data
@@ -391,9 +391,9 @@ function trackEvent(eventName, data = {}) {
 }
 ```
 
-Performance Budgets
+### Performance Budgets
 
-Set and enforce performance budgets:
+### Set and enforce performance budgets:
 
 ```javascript
 //  Enforce memory limits
@@ -412,38 +412,38 @@ setInterval(() => {
 
 ---
 
-Putting It All Together: A Performance Optimization Workflow
+### Putting It All Together: A Performance Optimization Workflow
 
 Now that you understand the tools and techniques, here's a systematic approach to optimizing your extension:
 
-Step 1: Identify Performance Targets
+### Step 1: Identify Performance Targets
 
-Define clear performance objectives:
+### Define clear performance objectives:
 
 - Startup time: Service worker should respond to events within 100ms
 - Memory usage: Content scripts should use less than 10MB per tab
 - CPU usage: Background operations should use less than 1% CPU on average
 - Network efficiency: Minimize API calls through caching and batching
 
-Step 2: Profile in Realistic Scenarios
+### Step 2: Profile in Realistic Scenarios
 
-Test with realistic data volumes:
+### Test with realistic data volumes:
 
 - Simulate 50+ open tabs for tab-managing extensions
 - Test with slow network conditions (throttle in DevTools)
 - Profile on lower-end hardware to identify marginal performance issues
 
-Step 3: Prioritize Impactful Optimizations
+### Step 3: Prioritize Impactful Optimizations
 
-Focus on changes that provide the greatest improvement:
+### Focus on changes that provide the greatest improvement:
 
 1. High impact: Fix memory leaks, remove unnecessary content script injection
 2. Medium impact: Implement caching, batch API calls, optimize loops
 3. Low impact: Micro-optimizations like using const/let instead of var
 
-Step 4: Verify and Monitor
+### Step 4: Verify and Monitor
 
-After implementing optimizations:
+### After implementing optimizations:
 
 1. Retake profiles to confirm improvement
 2. Run automated tests to ensure functionality remains intact
@@ -451,7 +451,7 @@ After implementing optimizations:
 
 ---
 
-Conclusion
+### Conclusion
 
 Chrome extension performance profiling is an essential skill for building successful extensions. By understanding the unique challenges of extension architecture, multi-context execution, service worker lifecycles, and cross-tab memory implications, you can systematically identify and fix bottlenecks.
 

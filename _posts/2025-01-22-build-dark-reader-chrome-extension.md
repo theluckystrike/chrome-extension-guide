@@ -18,11 +18,11 @@ By the end of this guide, you'll have built a fully functional dark mode extensi
 
 ---
 
-Understanding Dark Mode Injection Architecture {#dark-mode-injection}
+## Understanding Dark Mode Injection Architecture {#dark-mode-injection}
 
 Before diving into code, it's essential to understand how dark mode injection works at a fundamental level. When you want to apply dark theme all sites across the web, you need to understand the browser's content script execution model and how CSS can be dynamically injected into web pages.
 
-How Content Scripts Work
+### How Content Scripts Work
 
 Chrome extensions use content scripts to interact with web page content. Unlike regular JavaScript that runs in the extension's isolated world, content scripts share the DOM with the page's own JavaScript but maintain their own JavaScript execution environment. This isolation is crucial for security and stability.
 
@@ -35,7 +35,7 @@ The key insight is that content scripts can:
 - Listen for DOM events
 - Communicate with the background script
 
-CSS Injection Strategies
+### CSS Injection Strategies
 
 There are multiple approaches to implementing dark mode injection, each with pros and cons:
 
@@ -48,7 +48,7 @@ For a universal dark reader that works on all sites, the most solid approach com
 
 ---
 
-Project Setup with Manifest V3 {#project-setup}
+## Project Setup with Manifest V3 {#project-setup}
 
 Every Chrome extension begins with the manifest.json file. This JSON configuration tells Chrome about your extension's capabilities, permissions, and the files it should load. For a dark mode extension, we need specific permissions to inject content scripts into web pages.
 
@@ -94,7 +94,7 @@ This manifest declares the critical permissions for our dark reader extension:
 - scripting: For dynamically executing content scripts
 - host_permissions: With `<all_urls>`, we can inject content scripts into any website
 
-Understanding Host Permissions
+### Understanding Host Permissions
 
 The `host_permissions` field is crucial for a universal dark reader. Unlike the `permissions` array which handles API access, host permissions specifically control which websites your extension can access and modify.
 
@@ -102,11 +102,11 @@ For production extensions, you should be transparent about why you need these pe
 
 ---
 
-Core Dark Mode Engine {#core-engine}
+## Core Dark Mode Engine {#core-engine}
 
 Now let's build the core dark mode engine that handles CSS injection and transformation. This is the heart of your dark reader extension.
 
-The Content Script Structure
+### The Content Script Structure
 
 Create a file named `content.js` in your project directory:
 
@@ -262,7 +262,7 @@ darkModeEngine.init();
 
 This core engine provides the foundation for dark mode injection. The key technique here is using CSS filters to invert colors and then re-invert images to restore their appearance. This approach works on virtually any website without requiring site-specific configurations.
 
-The CSS Filter Technique Explained
+### The CSS Filter Technique Explained
 
 The magic behind universal dark mode lies in CSS filters:
 
@@ -275,13 +275,13 @@ The double-inversion technique for images is crucial. When we invert the entire 
 
 ---
 
-Building the Popup Interface {#popup-ui}
+## Building the Popup Interface {#popup-ui}
 
 The popup is the user interface users interact with to toggle dark mode and adjust settings. Let's create a clean, intuitive popup.
 
-Popup HTML
+### Popup HTML
 
-Create `popup.html`:
+### Create `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -517,9 +517,9 @@ Create `popup.html`:
 </html>
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
-Create `popup.js` to handle user interactions:
+### Create `popup.js` to handle user interactions:
 
 ```javascript
 // popup.js - Popup interface logic
@@ -672,11 +672,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Advanced Dark Mode Techniques {#advanced-techniques}
+## Advanced Dark Mode Techniques {#advanced-techniques}
 
 Now that we have a working dark mode extension, let's explore advanced techniques that will make your extension stand out from the competition.
 
-Site-Specific Overrides
+### Site-Specific Overrides
 
 Different websites have different color schemes and structures. A solid dark reader extension needs the ability to apply custom styles to specific sites. Let's add this functionality:
 
@@ -729,7 +729,7 @@ class SiteSpecificOverrides {
 }
 ```
 
-Using CSS Variables for Better Compatibility
+### Using CSS Variables for Better Compatibility
 
 For more sophisticated dark mode implementations, CSS custom properties (variables) provide better control:
 
@@ -778,11 +778,11 @@ function generateCSSVariableMode(settings) {
 
 ---
 
-Background Script for State Management {#background-script}
+## Background Script for State Management {#background-script}
 
 The background script handles extension-wide state and can coordinate between different parts of the extension.
 
-Create `background.js`:
+### Create `background.js`:
 
 ```javascript
 // background.js - Background service worker
@@ -849,18 +849,18 @@ async function toggleDarkMode() {
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thorough testing is essential. Here's how to test your dark mode extension:
 
-Loading the Extension Locally
+### Loading the Extension Locally
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right corner
 3. Click "Load unpacked" and select your extension directory
 4. The extension icon should appear in your toolbar
 
-Testing Checklist
+### Testing Checklist
 
 Test these scenarios:
 - [ ] Toggle dark mode on and off
@@ -871,7 +871,7 @@ Test these scenarios:
 - [ ] Test keyboard shortcut if configured
 - [ ] Test that settings persist across page reloads
 
-Common Issues and Solutions
+### Common Issues and Solutions
 
 Images appearing as negatives:
 - Ensure the double-invert filter is applied to all image types
@@ -887,11 +887,11 @@ Performance issues:
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your extension is thoroughly tested, it's time to publish to the Chrome Web Store.
 
-Preparing for Publication
+### Preparing for Publication
 
 1. Create a ZIP file: Package your extension directory
 2. Prepare store assets:
@@ -899,7 +899,7 @@ Preparing for Publication
    - 440x280 promotional tile
    - Privacy policy (required for extensions accessing all URLs)
 
-Store Listing Best Practices
+### Store Listing Best Practices
 
 For your dark reader extension:
 
@@ -909,7 +909,7 @@ For your dark reader extension:
 
 ---
 
-Conclusion
+### Conclusion
 
 You now have a complete understanding of how to build a production-ready dark reader Chrome extension. We covered:
 
@@ -930,7 +930,7 @@ Dark mode extensions remain one of the most popular categories in the Chrome Web
 
 ---
 
-Next Steps
+### Next Steps
 
 1. Add more site overrides: Build out overrides for the top 100 websites
 2. Implement themes: Create preset themes (OLED black, sepia, etc.)

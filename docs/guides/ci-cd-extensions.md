@@ -50,9 +50,9 @@ jobs:
 
 ---
 
-Automated Building and Bundling
+### Automated Building and Bundling
 
-Build your extension in CI before any deployment:
+### Build your extension in CI before any deployment:
 
 ```yaml
 .github/workflows/build.yml
@@ -89,9 +89,9 @@ npx web-ext build --source-dir dist --artifacts-dir web-ext-build
 
 ---
 
-Automated Testing in CI
+### Automated Testing in CI
 
-Run unit and integration tests in your pipeline:
+### Run unit and integration tests in your pipeline:
 
 ```yaml
 - name: Test with coverage
@@ -103,7 +103,7 @@ Run unit and integration tests in your pipeline:
     files: ./coverage/lcov.info
 ```
 
-Test Configuration
+### Test Configuration
 
 ```json
 // package.json
@@ -118,9 +118,9 @@ Test Configuration
 
 ---
 
-Chrome Extension Linting
+### Chrome Extension Linting
 
-Use specialized linters for extension code:
+### Use specialized linters for extension code:
 
 ```yaml
 .github/workflows/lint.yml
@@ -139,7 +139,7 @@ jobs:
         run: npx @extensionjs/cli lint
 ```
 
-ESLint Configuration
+### ESLint Configuration
 
 ```javascript
 // .eslintrc.js
@@ -157,9 +157,9 @@ module.exports = {
 
 ---
 
-Manifest Validation in CI
+### Manifest Validation in CI
 
-Validate your manifest.json before building:
+### Validate your manifest.json before building:
 
 ```yaml
 - name: Validate manifest
@@ -171,7 +171,7 @@ Or use Chrome's official validator
   run: npx chrome-manifest-loader validate
 ```
 
-Manifest Validation Script
+### Manifest Validation Script
 
 ```javascript
 // scripts/validate-manifest.js
@@ -204,9 +204,9 @@ validateManifest();
 
 ---
 
-Version Bumping Automation
+### Version Bumping Automation
 
-Automate version updates using standard-version or semantic-release:
+### Automate version updates using standard-version or semantic-release:
 
 ```yaml
 .github/workflows/release.yml
@@ -238,7 +238,7 @@ jobs:
         run: git push origin main --follow-tags
 ```
 
-Version Bump Script
+### Version Bump Script
 
 ```yaml
 - name: Update manifest version
@@ -250,9 +250,9 @@ Version Bump Script
 
 ---
 
-Changelog Generation
+### Changelog Generation
 
-Generate changelogs automatically:
+### Generate changelogs automatically:
 
 ```yaml
 - name: Generate changelog
@@ -265,7 +265,7 @@ Generate changelogs automatically:
     git commit -m "docs: update changelog"
 ```
 
-Standard Version Configuration
+### Standard Version Configuration
 
 ```json
 // package.json
@@ -284,9 +284,9 @@ Standard Version Configuration
 
 ---
 
-Automated Chrome Web Store Upload
+### Automated Chrome Web Store Upload
 
-Using chrome-webstore-upload-cli
+### Using chrome-webstore-upload-cli
 
 ```bash
 Install the CLI
@@ -301,7 +301,7 @@ npx chrome-webstore-upload-cli upload \
   --upload-source dist/extension.zip
 ```
 
-GitHub Action for CWS Upload
+### GitHub Action for CWS Upload
 
 {% raw %}
 ```yaml
@@ -318,9 +318,9 @@ GitHub Action for CWS Upload
 
 ---
 
-Staged Rollout Automation
+### Staged Rollout Automation
 
-Control your rollout percentage:
+### Control your rollout percentage:
 
 ```yaml
 - name: Publish to percentage
@@ -333,7 +333,7 @@ Control your rollout percentage:
       --publish-target trustedTesters  # or public with rolloutPercentage
 ```
 
-Rollout Strategy
+### Rollout Strategy
 
 | Stage | Percentage | Use Case |
 |-------|------------|----------|
@@ -343,9 +343,9 @@ Rollout Strategy
 
 ---
 
-Firefox Add-on Store Automation
+### Firefox Add-on Store Automation
 
-Use web-ext for Firefox:
+### Use web-ext for Firefox:
 
 ```bash
 Install web-ext
@@ -358,7 +358,7 @@ web-ext sign \
   --api-secret $AMO_API_SECRET
 ```
 
-Firefox CI Configuration
+### Firefox CI Configuration
 
 ```yaml
 - name: Publish to Firefox
@@ -373,7 +373,7 @@ Firefox CI Configuration
 
 ---
 
-Edge Add-ons Store Automation
+### Edge Add-ons Store Automation
 
 ```yaml
 - name: Publish to Edge
@@ -388,9 +388,9 @@ Edge Add-ons Store Automation
 
 ---
 
-Multi-Browser CI Matrix
+### Multi-Browser CI Matrix
 
-Run builds for multiple browsers simultaneously:
+### Run builds for multiple browsers simultaneously:
 
 {% raw %}
 ```yaml
@@ -424,9 +424,9 @@ jobs:
 
 ---
 
-Release Branch Strategy
+### Release Branch Strategy
 
-Follow a structured release workflow:
+### Follow a structured release workflow:
 
 ```
 main (production)
@@ -440,7 +440,7 @@ main (production)
          hotfix/critical-fix
 ```
 
-Release Branch Workflow
+### Release Branch Workflow
 
 {% raw %}
 ```yaml
@@ -455,9 +455,9 @@ Create release branch
 
 ---
 
-Tag-Based Releases
+### Tag-Based Releases
 
-Trigger releases on git tags:
+### Trigger releases on git tags:
 
 ```yaml
 .github/workflows/publish.yml
@@ -491,9 +491,9 @@ jobs:
 
 ---
 
-Artifact Management
+### Artifact Management
 
-Store and manage build artifacts:
+### Store and manage build artifacts:
 
 ```yaml
 - name: Upload release artifacts
@@ -506,7 +506,7 @@ Store and manage build artifacts:
     retention-days: 90
 ```
 
-Download Artifacts in Subsequent Jobs
+### Download Artifacts in Subsequent Jobs
 
 ```yaml
 - name: Download artifacts
@@ -517,9 +517,9 @@ Download Artifacts in Subsequent Jobs
 
 ---
 
-E2E Tests in CI with Puppeteer
+### E2E Tests in CI with Puppeteer
 
-Test your extension in a real browser:
+### Test your extension in a real browser:
 
 ```yaml
 .github/workflows/e2e.yml
@@ -542,7 +542,7 @@ jobs:
         run: pnpm test:e2e
 ```
 
-Puppeteer Test Example
+### Puppeteer Test Example
 
 ```javascript
 // tests/e2e/extension.spec.js
@@ -563,9 +563,9 @@ test('extension popup loads', async ({ page }) => {
 
 ---
 
-Secret Management for Store Credentials
+### Secret Management for Store Credentials
 
-Store credentials securely in GitHub Secrets:
+### Store credentials securely in GitHub Secrets:
 
 | Secret | Description |
 |--------|-------------|
@@ -580,7 +580,7 @@ Store credentials securely in GitHub Secrets:
 
 ---
 
-Complete CI/CD Pipeline Example
+### Complete CI/CD Pipeline Example
 
 {% raw %}
 ```yaml
@@ -654,7 +654,7 @@ jobs:
 
 ---
 
-References
+### References
 
 - [Chrome Web Store Publishing API](https://developer.chrome.com/docs/webstore/using-api)
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
@@ -663,7 +663,7 @@ References
 
 ---
 
-Related Guides
+### Related Guides
 
 - [Publishing Guide](../publishing/publishing-guide.md). Manual publishing
 - [Version Management](../publishing/version-management.md). Version strategies

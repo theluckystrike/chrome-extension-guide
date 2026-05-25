@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/patterns/lazy-loading/"
 last_modified_at: 2026-01-15
 ---
 
-Chrome Extension Lazy Loading
+### Chrome Extension Lazy Loading
 
-Load Resources On Demand for Better Performance
+### Load Resources On Demand for Better Performance
 
 Lazy loading is a performance optimization technique that defers the loading of non-critical resources until they are actually needed. For Chrome Extensions, implementing lazy loading can significantly reduce initial load times, minimize memory consumption, and improve the overall user experience. This guide covers essential patterns for implementing lazy loading in your extension.
 
-Why Lazy Loading Matters {#why-lazy-loading}
+## Why Lazy Loading Matters {#why-lazy-loading}
 
 Chrome Extensions often suffer from over-inclusion, loading scripts, styles, and assets that users may never need. This happens especially with:
 
@@ -23,7 +23,7 @@ Chrome Extensions often suffer from over-inclusion, loading scripts, styles, and
 
 By implementing lazy loading, you can dramatically reduce the extension's footprint and improve performance metrics that matter to users.
 
-Dynamic Imports {#dynamic-imports}
+## Dynamic Imports {#dynamic-imports}
 
 Dynamic imports allow you to load JavaScript modules on-demand rather than including everything in the initial bundle. This is particularly useful for features that are rarely used or conditionally required.
 
@@ -41,13 +41,13 @@ async function handleUserAction() {
 
 The `import()` syntax returns a promise, making it easy to integrate with async/await patterns common in extension development. Chrome handles the network requests internally, and the module is cached after the first load.
 
-Use Cases for Dynamic Imports
+### Use Cases for Dynamic Imports
 
 - Optional features: Load advanced functionality only when users access it
 - Heavy dependencies: Defer large libraries like charting or PDF libraries
 - Conditional logic: Load different modules based on user preferences or context
 
-Conditional Script Loading {#conditional-script-loading}
+## Conditional Script Loading {#conditional-script-loading}
 
 Rather than registering all content scripts in the manifest, use the `chrome.scripting` API to inject scripts only when needed. This gives you fine-grained control over when and where scripts execute.
 
@@ -73,14 +73,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Programmatic vs Declarative
+### Programmatic vs Declarative
 
 | Approach | Use Case |
 |----------|----------|
 | Declarative (manifest.json) | Scripts needed on every page load for core functionality |
 | Programmatic (scripting API) | Scripts for user-triggered actions or conditional features |
 
-Deferred CSS Loading {#deferred-css-loading}
+## Deferred CSS Loading {#deferred-css-loading}
 
 Stylesheets can also be lazy loaded. This is especially useful for content scripts that inject UI elements only under certain conditions.
 
@@ -101,7 +101,7 @@ chrome.scripting.executeScript({
 });
 ```
 
-Critical CSS Pattern
+### Critical CSS Pattern
 
 For extensions that inject complex UIs, consider splitting styles into:
 - Critical CSS: Inline or load immediately (layout, colors)
@@ -117,11 +117,11 @@ async function loadFullStyles(tabId) {
 }
 ```
 
-Lazy Image Loading {#lazy-image-loading}
+## Lazy Image Loading {#lazy-image-loading}
 
 Extension icons and injected images should use lazy loading techniques to avoid consuming memory until needed.
 
-Extension Icons
+### Extension Icons
 
 Use the Declarative Net Request or runtime API to set icons dynamically:
 
@@ -141,7 +141,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-Injected Images
+### Injected Images
 
 For content scripts that add images to pages, use native lazy loading:
 
@@ -160,7 +160,7 @@ function injectLazyImage(tabId, imageUrl) {
 }
 ```
 
-Popup Optimization {#popup-optimization}
+## Popup Optimization {#popup-optimization}
 
 The extension popup is often over-optimized, loading everything upfront even when users might just want to check a badge or quickly interact. Here's how to optimize:
 
@@ -216,7 +216,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-Best Practices Summary {#best-practices}
+## Best Practices Summary {#best-practices}
 
 1. Analyze your bundle: Use Chrome DevTools to identify large, rarely-used code paths
 2. Start with critical path: Lazy load anything not immediately needed for the core feature
@@ -224,7 +224,7 @@ Best Practices Summary {#best-practices}
 4. Monitor memory: Verify that lazy-loaded code is properly garbage collected
 5. Test across scenarios: Ensure lazy-loaded features work correctly when triggered
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Lazy loading is essential for building performant Chrome Extensions. By strategically loading resources only when needed, you reduce initial load times, conserve memory, and provide a snappier experience for users. Start with the most impactful patterns, conditional script loading and popup optimization, and progressively add dynamic imports as your extension grows.
 

@@ -18,7 +18,7 @@ This comprehensive guide explores everything you need to know about the suspend 
 
 ---
 
-Understanding Tab Suspension and Memory Management {#understanding-tab-suspension}
+## Understanding Tab Suspension and Memory Management {#understanding-tab-suspension}
 
 Before diving into the specifics of the suspend all feature, it is essential to understand what happens when you suspend a tab and why this approach is so effective for memory management. Chrome, by design, keeps all open tabs active in memory to enable instant responsiveness when you switch between them. While this provides a smooth browsing experience, it comes at a significant memory cost that accumulates rapidly with each new tab you open.
 
@@ -28,7 +28,7 @@ This approach delivers remarkable memory savings because each suspended tab rele
 
 ---
 
-The Suspend All Feature: Bulk Suspension at Your Fingertips {#suspend-all-feature}
+## The Suspend All Feature: Bulk Suspension at Your Fingertips {#suspend-all-feature}
 
 The suspend all feature in Tab Suspender Pro represents one of the most powerful capabilities for users who need to quickly free up memory without manually selecting each tab to suspend. This feature allows you to suspend every tab in your current window with a single action, instantly freeing the memory consumed by all open tabs while maintaining your browsing session.
 
@@ -40,7 +40,7 @@ The feature also provides visual feedback throughout the process. As each tab is
 
 ---
 
-Keyboard Shortcut for Suspend All: Maximum Speed and Efficiency {#keyboard-shortcut}
+## Keyboard Shortcut for Suspend All: Maximum Speed and Efficiency {#keyboard-shortcut}
 
 For power users who need to suspend tabs frequently, Tab Suspender Pro provides a keyboard shortcut that makes bulk suspension instantaneous. Learning this shortcut transforms tab suspension from a multi-click process into a reflex action that takes less than a second to execute, making it practical to use throughout your workday whenever you need to free memory quickly.
 
@@ -52,7 +52,7 @@ Customization is available for users who prefer different shortcut combinations.
 
 ---
 
-Excluding the Active Tab from Bulk Suspension {#excluding-active-tab}
+## Excluding the Active Tab from Bulk Suspension {#excluding-active-tab}
 
 While the suspend all feature is designed to suspend every tab in your window, Tab Suspender Pro intelligently handles the tab you are currently viewing. By default, the extension respects your active workflow and does not suspend the tab you are currently using, ensuring you do not lose your place or experience interruption during important tasks.
 
@@ -64,7 +64,7 @@ The exclusion of the active tab extends to other user activity as well. If you a
 
 ---
 
-Excluding Pinned Tabs from Suspension {#excluding-pinned-tabs}
+## Excluding Pinned Tabs from Suspension {#excluding-pinned-tabs}
 
 Pinned tabs serve an important role in many users' workflows, providing quick access to frequently visited sites like email, calendars, or project management tools. Tab Suspender Pro recognizes this usage pattern and provides solid options for excluding pinned tabs from suspension, ensuring your essential reference points remain always available without requiring manual whitelisting.
 
@@ -76,7 +76,7 @@ For users who want different behavior, Tab Suspender Pro offers customization op
 
 ---
 
-Auto-Resume Behavior: Smooth Tab Restoration {#auto-resume-behavior}
+## Auto-Resume Behavior: Smooth Tab Restoration {#auto-resume-behavior}
 
 Understanding how suspended tabs resume is crucial for maximizing the benefits of bulk suspension while minimizing any disruption to your workflow. Tab Suspender Pro implements intelligent auto-resume behavior that makes returning to suspended tabs feel natural and automatic, often making you forget that tabs were ever suspended at all.
 
@@ -88,7 +88,7 @@ The auto-resume behavior works consistently across all suspension methods, wheth
 
 ---
 
-Memory Savings from Bulk Suspension: Quantifying the Impact {#memory-savings}
+## Memory Savings from Bulk Suspension: Quantifying the Impact {#memory-savings}
 
 The memory savings from using Tab Suspender Pro's suspend all feature can be substantial, often reaching into gigabytes for users who typically keep many tabs open. Understanding the scope of these savings helps you appreciate the real-world impact of regular bulk suspension and motivates more consistent use of the feature.
 
@@ -100,7 +100,7 @@ Tab Suspender Pro provides built-in statistics tracking that shows your cumulati
 
 ---
 
-Workflow Tips: Maximizing the Benefits of Suspend All {#workflow-tips}
+## Workflow Tips: Maximizing the Benefits of Suspend All {#workflow-tips}
 
 To get the most out of Tab Suspender Pro's suspend all feature, consider integrating it into your regular browsing workflow. These practical tips help you develop habits that maintain optimal system performance without adding significant cognitive overhead or disrupting your productivity.
 
@@ -116,7 +116,7 @@ Use pinned tabs as anchors. Use pinned tabs for your most essential, always-need
 
 ---
 
-Conclusion: Take Control of Your Browser Memory
+### Conclusion: Take Control of Your Browser Memory
 
 Tab Suspender Pro's suspend all feature represents a game-changing capability for anyone who struggles with browser memory management. By enabling bulk suspension of all tabs with a single click or keyboard shortcut, this feature transforms what used to be a tedious, time-consuming process into an instantaneous action that fits naturally into any workflow. The ability to exclude the active tab and pinned tabs ensures that your essential work remains uninterrupted while still achieving maximum memory savings.
 

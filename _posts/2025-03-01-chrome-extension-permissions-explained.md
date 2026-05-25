@@ -16,7 +16,7 @@ If you have developed or deployed a Chrome extension, you have inevitably encoun
 
 ---
 
-Understanding Chrome Extension Permissions {#understanding-permissions}
+## Understanding Chrome Extension Permissions {#understanding-permissions}
 
 Chrome extension permissions are declarations in your extension's manifest file that specify what capabilities your extension requires to function. These permissions serve as a security boundary, ensuring that extensions cannot access sensitive data or perform potentially harmful actions without explicit user consent. When a user installs an extension, Chrome presents them with a warning listing all requested permissions, giving users the information they need to make informed decisions about whether to trust that extension.
 
@@ -26,7 +26,7 @@ Permissions in Manifest V3 are categorized in several ways. There are required p
 
 ---
 
-Required Permissions vs Optional Permissions {#required-vs-optional}
+## Required Permissions vs Optional Permissions {#required-vs-optional}
 
 Understanding the distinction between required permissions and optional permissions is fundamental to building well-designed Chrome extensions. Required permissions are declared in the permissions array of your manifest and are requested at installation time. If any required permission is denied, the entire extension cannot be installed. This makes required permissions a critical consideration for user acquisition, as overly broad permission requests can significantly reduce installation rates.
 
@@ -38,7 +38,7 @@ Implementing optional permissions requires additional code in your extension's b
 
 ---
 
-Host Permissions in Manifest V3 {#host-permissions}
+## Host Permissions in Manifest V3 {#host-permissions}
 
 Host permissions represent one of the most significant changes in Manifest V3. These permissions determine which websites your extension can access and modify. In Manifest V2, host permissions could be declared in the permissions array alongside API permissions. In Manifest V3, host permissions should be declared in a separate host_permissions array in the manifest.
 
@@ -50,7 +50,7 @@ When you do need host permissions, consider making them optional. This allows us
 
 ---
 
-Chrome Extension Permission Warnings {#permission-warnings}
+## Chrome Extension Permission Warnings {#permission-warnings}
 
 When users visit the Chrome Web Store or attempt to install an extension, they see permission warnings that can dramatically impact installation rates. Understanding these warnings and how to minimize them is crucial for any extension developer. Chrome displays different warning messages depending on the specific permissions your extension requests, and some warnings can be quite alarming to average users.
 
@@ -62,7 +62,7 @@ When you must request permissions that trigger warnings, provide clear documenta
 
 ---
 
-Common Chrome Extension Required Permissions {#common-permissions}
+## Common Chrome Extension Required Permissions {#common-permissions}
 
 Several permissions are commonly requested in Chrome extensions, and understanding their implications helps you make better development decisions. The storage permission allows your extension to store data locally using the chrome.storage API, which is essential for saving user preferences, caching data, and maintaining state across sessions. Most extensions need this permission, and it triggers minimal warning.
 
@@ -74,7 +74,7 @@ The contextMenus permission enables your extension to add items to Chrome's righ
 
 ---
 
-Implementing Permissions in Your Extension {#implementation}
+## Implementing Permissions in Your Extension {#implementation}
 
 Proper implementation of chrome extension permissions requires careful attention to your manifest.json file and the code that interacts with permission-gated APIs. Your manifest must accurately declare all permissions your extension uses, and your code must handle permission-related errors gracefully. This section covers best practices for implementing permissions in your Manifest V3 extension.
 
@@ -86,7 +86,7 @@ Service workers in Manifest V3 add complexity to permission management because t
 
 ---
 
-Security Best Practices for Permissions {#security-best-practices}
+## Security Best Practices for Permissions {#security-best-practices}
 
 Security should be a primary concern when designing your extension's permission model. Extensions with excessive permissions represent a significant attack surface, and attackers who compromise your extension can potentially access sensitive user data or perform malicious actions. Following security best practices protects both your users and your reputation.
 
@@ -98,7 +98,7 @@ Third, keep your extension updated and monitor for security vulnerabilities in a
 
 ---
 
-Testing Your Permission Implementation {#testing-permissions}
+## Testing Your Permission Implementation {#testing-permissions}
 
 Thorough testing of your permission implementation ensures that your extension handles all permission-related scenarios correctly. Test both the happy path where permissions are granted and edge cases where permissions are denied or revoked. Users have diverse security preferences, and your extension must work correctly regardless of their choices.
 
@@ -110,7 +110,7 @@ Finally, test revocation of permissions. Users can revoke permissions at any tim
 
 ---
 
-Passing Chrome Web Store Review {#web-store-review}
+## Passing Chrome Web Store Review {#web-store-review}
 
 Getting your extension approved for the Chrome Web Store requires careful attention to your permission declarations. Google's review process evaluates whether your permission requests are appropriate for your extension's stated functionality. Extensions that request excessive permissions or fail to justify their permission needs may be rejected or suspended.
 
@@ -122,7 +122,7 @@ If your extension is rejected, carefully review the feedback provided and make t
 
 ---
 
-Migration from Manifest V2 to V3 {#migration}
+## Migration from Manifest V2 to V3 {#migration}
 
 Many developers are still migrating their extensions from Manifest V2 to Manifest V3, and the permission system changes are a significant part of this migration. Understanding what changed helps you plan your migration strategy and avoid common pitfalls. The most important changes include restrictions on remote code, modifications to host permission handling, and the transition from background pages to service workers.
 
@@ -134,7 +134,7 @@ The Chrome Web Store no longer accepts new extensions using Manifest V2, and exi
 
 ---
 
-Conclusion: Building Trust Through Responsible Permission Management
+### Conclusion: Building Trust Through Responsible Permission Management
 
 Chrome extension permissions are a critical aspect of extension development that directly impacts user trust, installation rates, and successful Chrome Web Store publication. By understanding the distinction between required and optional permissions, carefully scoping your host permissions, and implementing proper permission handling in your code, you create extensions that users can trust and that meet Google's security standards.
 

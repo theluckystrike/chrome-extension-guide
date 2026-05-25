@@ -442,7 +442,7 @@ Chrome Extension Permissions Best Practices. Minimize Permissions for Maximum Tr
 
 When building Chrome extensions, the permissions you request directly impact user trust, installation rates, and Chrome Web Store approval. Understanding how to properly manage permissions isn't just about following technical requirements, it's about respecting your users' privacy and security. This guide covers the essential best practices for handling permissions in your Chrome extension.
 
-The Principle of Least Privilege
+### The Principle of Least Privilege
 
 The principle of least privilege is a fundamental security concept that should guide every decision you make about permissions. Simply put, your extension should request only the minimum permissions necessary to function, and nothing more. This principle protects both your users and your extension from potential abuse.
 
@@ -450,7 +450,7 @@ When users install an extension, they're increasingly savvy about what permissio
 
 The principle extends beyond initial development. As your extension evolves, regularly audit your permissions. Features you planned might have been cut, or alternative APIs might have become available. A quarterly permissions review can reveal opportunities to reduce your permission footprint.
 
-Optional Permissions: A User-First Approach
+### Optional Permissions: A User-First Approach
 
 Optional permissions represent one of the most powerful tools in your toolkit for building trust. Unlike required permissions that block installation, optional permissions allow users to install your extension with minimal friction and then grant additional capabilities as needed.
 
@@ -484,7 +484,7 @@ async function enableCloudSync() {
 }
 ```
 
-Understanding Permission Warnings
+### Understanding Permission Warnings
 
 Chrome displays permission warnings when users attempt to install your extension, and these warnings can significantly impact installation rates. Understanding what triggers these warnings and how to minimize them is crucial for user adoption.
 
@@ -513,11 +513,11 @@ In most cases, prefer `activeTab` over host permissions. If your extension only 
 
 This minimal permission set clearly communicates to reviewers and users what the extension needs and why.
 
-User Trust and Permission Warnings
+### User Trust and Permission Warnings
 
 Permission warnings directly impact user decisions to install your extension. Understanding and mitigating these warnings is crucial for success.
 
-Understanding Warning Messages
+### Understanding Warning Messages
 
 Chrome displays warnings based on the permissions you request. Some generate significant warnings:
 
@@ -530,7 +530,7 @@ Chrome displays warnings based on the permissions you request. Some generate sig
 
 This combination shows multiple warnings including "Read and change your data on all websites" and "Read and change your browsing history."
 
-Strategies for Building Trust
+### Strategies for Building Trust
 
 1. Explain permissions in your extension: Use your popup or options page to explain why each permission is needed
 
@@ -589,17 +589,17 @@ async function safeUseFeature(): Promise<void> {
 }
 ```
 
-Typed Patterns with chrome-permissions-guard
+### Typed Patterns with chrome-permissions-guard
 
 For TypeScript projects, the `@theluckystrike/chrome-permissions-guard` package provides type-safe permission checking and request patterns. This helps prevent runtime errors and improves developer experience.
 
-Installation
+### Installation
 
 ```bash
 npm install @theluckystrike/chrome-permissions-guard
 ```
 
-Basic Usage
+### Basic Usage
 
 ```typescript
 import {
@@ -632,7 +632,7 @@ async function requestFeaturePermissions(): Promise<boolean> {
 
 The guard provides compile-time checking that you're only working with permissions your extension actually declares, preventing runtime errors from typos or invalid permission names.
 
-Advanced Patterns
+### Advanced Patterns
 
 ```typescript
 import {
@@ -710,7 +710,7 @@ class ExtensionPermissions {
 export const permissions = new ExtensionPermissions();
 ```
 
-Complete Example: Permission-Aware Extension
+### Complete Example: Permission-Aware Extension
 
 Here's a complete example demonstrating best practices in a real extension:
 
@@ -857,7 +857,7 @@ async function handleFeatureRequest(feature: string): Promise<boolean> {
 }
 ```
 
-Summary
+### Summary
 
 Effective permission management is critical for building successful Chrome extensions. Key takeaways:
 
@@ -872,7 +872,7 @@ Effective permission management is critical for building successful Chrome exten
 By following these best practices, you'll create extensions that users trust, that pass review smoothly, and that maintain strong security postures. Remember: every permission you don't request is a permission that can't be exploited.
 This configuration allows your extension to access the current tab when activated, but never automatically. Users maintain full control over when your extension can interact with their browsing.
 
-The Trust Impact of Permissions
+### The Trust Impact of Permissions
 
 User trust is the foundation of a successful Chrome extension. Every permission you request communicates something about your intentions, and excessive permissions signal potential problems to savvy users.
 
@@ -882,7 +882,7 @@ Beyond installation, permissions affect reviews and ratings. Users who feel an e
 
 For extensions distributed through the Chrome Web Store, permission choices also affect review outcomes. Google's review process examines whether your requested permissions are appropriate for your extension's functionality. Extensions that request more permissions than necessary may face longer review times or rejection.
 
-Conclusion
+### Conclusion
 
 Managing permissions effectively requires balancing functionality with respect for user privacy and security. By following the principle of least privilege, leveraging optional permissions wisely, understanding permission warnings, choosing `activeTab` over broad host permissions, and considering the trust impact of every permission request, you build extensions that users can trust.
 

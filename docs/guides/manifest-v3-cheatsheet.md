@@ -6,13 +6,13 @@ canonical_url: "https://bestchromeextensions.com/guides/manifest-v3-cheatsheet/"
 last_modified_at: 2026-01-15
 ---
 
-Manifest V3 Cheatsheet
+### Manifest V3 Cheatsheet
 
 Quick reference for Chrome Extension developers working with Manifest V3. This cheatsheet covers all essential manifest fields, permissions, and configurations.
 
 ---
 
-Required Fields {#required-fields}
+## Required Fields {#required-fields}
 
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
@@ -23,7 +23,7 @@ Required Fields {#required-fields}
 
 ---
 
-Extension Components {#extension-components}
+## Extension Components {#extension-components}
 
 | Component | Key | Required | Description |
 |-----------|-----|----------|-------------|
@@ -35,7 +35,7 @@ Extension Components {#extension-components}
 
 ---
 
-Common Permissions {#common-permissions}
+## Common Permissions {#common-permissions}
 
 | Permission | Use Case | Required Field |
 |------------|----------|----------------|
@@ -57,7 +57,7 @@ Common Permissions {#common-permissions}
 
 ---
 
-Host Permissions {#host-permissions}
+## Host Permissions {#host-permissions}
 
 | Pattern Type | Example | Matches |
 |--------------|---------|---------|
@@ -69,7 +69,7 @@ Host Permissions {#host-permissions}
 
 ---
 
-Action API (Toolbar Button) {#action-api}
+## Action API (Toolbar Button) {#action-api}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -80,7 +80,7 @@ Action API (Toolbar Button) {#action-api}
 
 ---
 
-Content Scripts Configuration {#content-scripts}
+## Content Scripts Configuration {#content-scripts}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -93,7 +93,7 @@ Content Scripts Configuration {#content-scripts}
 
 ---
 
-Web Accessible Resources {#web-accessible-resources}
+## Web Accessible Resources {#web-accessible-resources}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -113,7 +113,7 @@ Web Accessible Resources {#web-accessible-resources}
 
 ---
 
-File Restrictions (Security) {#file-restrictions}
+## File Restrictions (Security) {#file-restrictions}
 
 | Rule | Description |
 |------|-------------|
@@ -124,7 +124,7 @@ File Restrictions (Security) {#file-restrictions}
 
 ---
 
-Manifest V2 to V3 Key Differences {#mv2-vs-mv3}
+## Manifest V2 to V3 Key Differences {#mv2-vs-mv3}
 
 | MV2 | MV3 | Notes |
 |-----|-----|-------|
@@ -137,7 +137,7 @@ Manifest V2 to V3 Key Differences {#mv2-vs-mv3}
 
 ---
 
-Chrome Version Support {#chrome-version-support}
+## Chrome Version Support {#chrome-version-support}
 
 | Feature | Minimum Chrome Version |
 |---------|------------------------|
@@ -149,7 +149,7 @@ Chrome Version Support {#chrome-version-support}
 
 ---
 
-Testing Tips {#testing-tips}
+## Testing Tips {#testing-tips}
 
 | Action | How To |
 |--------|--------|
@@ -162,9 +162,9 @@ Testing Tips {#testing-tips}
 
 ---
 
-Quick Reference Snippets {#quick-reference}
+## Quick Reference Snippets {#quick-reference}
 
-Minimum Manifest V3
+### Minimum Manifest V3
 
 ```json
 {
@@ -181,7 +181,7 @@ Minimum Manifest V3
 }
 ```
 
-With Content Scripts
+### With Content Scripts
 
 ```json
 {
@@ -197,7 +197,7 @@ With Content Scripts
 
 ---
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Manifest V3 Migration Guide](/guides/mv2-to-mv3-migration/). Full migration checklist
 - [Permissions Reference](/permissions/). Detailed permission documentation

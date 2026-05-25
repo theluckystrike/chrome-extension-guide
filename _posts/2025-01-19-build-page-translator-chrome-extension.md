@@ -18,7 +18,7 @@ By the end of this guide, you will have created a production-ready translator ex
 
 ---
 
-Why Build a Translator Extension?
+### Why Build a Translator Extension?
 
 The demand for translator extension tools has skyrocketed in our globally connected world. Users constantly need to read content in foreign languages, whether for research, shopping, communication, or entertainment. Building a translate page chrome extension puts you in a position to serve this massive user base with a practical solution.
 
@@ -33,7 +33,7 @@ Let's start building your translation extension.
 
 ---
 
-Project Architecture Overview
+### Project Architecture Overview
 
 Before diving into code, let's outline our extension's architecture. A translator extension typically consists of three main components:
 
@@ -45,7 +45,7 @@ For this project, we'll use the LibreTranslate API as it's free and doesn't requ
 
 ---
 
-Setting Up the Project Structure
+### Setting Up the Project Structure
 
 Create a new directory for your extension project and set up the following file structure:
 
@@ -105,7 +105,7 @@ This manifest declares the permissions we need: storage for saving language pref
 
 ---
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup is the user interface that appears when users click your extension icon. It should allow users to select source and target languages and trigger translations. Let's create a clean, intuitive interface:
 
@@ -273,7 +273,7 @@ The popup interface provides a user-friendly way to select languages. Users can 
 
 ---
 
-Implementing the Popup Logic
+### Implementing the Popup Logic
 
 The popup JavaScript handles user interactions and coordinates with the content script to perform translations. Here's the implementation:
 
@@ -424,7 +424,7 @@ This popup script manages the translation workflow. It saves user preferences, h
 
 ---
 
-Creating the Content Script
+### Creating the Content Script
 
 The content script runs directly in the context of web pages and handles the actual translation work. While the popup initiates the translation, the content script performs the heavy lifting of identifying and replacing text:
 
@@ -517,7 +517,7 @@ The content script uses a TreeWalker to find all text nodes in the page while av
 
 ---
 
-Implementing the Background Service Worker
+### Implementing the Background Service Worker
 
 The background service worker handles API communication and can manage more complex translation logic. While our current implementation mostly uses the content script, the background worker provides a cleaner architecture for production extensions:
 
@@ -573,9 +573,9 @@ The background service worker provides a central hub for translation API calls. 
 
 ---
 
-Testing Your Extension
+### Testing Your Extension
 
-Before publishing, thoroughly test your extension:
+### Before publishing, thoroughly test your extension:
 
 1. Load the extension: Open Chrome and navigate to `chrome://extensions/`, enable Developer mode, click "Load unpacked," and select your extension directory.
 
@@ -591,7 +591,7 @@ Before publishing, thoroughly test your extension:
 
 ---
 
-Publishing to the Chrome Web Store
+### Publishing to the Chrome Web Store
 
 Once your extension is working correctly, follow these steps to publish:
 
@@ -614,7 +614,7 @@ Once your extension is working correctly, follow these steps to publish:
 
 ---
 
-Advanced Features to Consider
+### Advanced Features to Consider
 
 Once you have the basic translation working, consider adding these advanced features:
 
@@ -627,7 +627,7 @@ Once you have the basic translation working, consider adding these advanced feat
 
 ---
 
-Conclusion
+### Conclusion
 
 Congratulations! You've built a complete translator extension that can translate any web page. This project demonstrates the core concepts of Chrome extension development and provides a solid foundation for building more advanced features.
 

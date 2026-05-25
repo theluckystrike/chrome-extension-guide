@@ -18,13 +18,13 @@ This comprehensive guide covers everything you need to know about implementing s
 
 ---
 
-Understanding the Chrome Alarms API {#understanding-alarms-api}
+## Understanding the Chrome Alarms API {#understanding-alarms-api}
 
 The Chrome Alarms API, accessible through the `chrome.alarms` namespace, provides a way to schedule code to run at specific times or at regular intervals. This API is particularly valuable for extensions that need to perform periodic tasks such as data synchronization, cache refreshing, status checks, or sending timed notifications to users.
 
 Unlike traditional JavaScript timers that can be throttled when tabs are in the background, Chrome Alarms are designed to be reliable and persist even when the browser is closed and reopened. This makes them ideal for critical scheduled operations that must execute regardless of user activity.
 
-Why the Chrome Alarms API Matters
+### Why the Chrome Alarms API Matters
 
 In modern Chrome extension development, the Alarms API serves several important purposes that set it apart from other timing mechanisms.
 
@@ -34,7 +34,7 @@ Second, persistence means that alarms survive browser restarts. When you create 
 
 Third, efficiency comes from the browser's ability to optimize alarm firing. Chrome can batch multiple alarms together and wake up the extension only when needed, rather than having each extension maintain its own timer. This improves overall system performance and battery life.
 
-Common Use Cases for the Alarms API
+### Common Use Cases for the Alarms API
 
 There are numerous practical applications for the Chrome Alarms API in extension development. Here are some of the most common use cases that demonstrate its versatility.
 
@@ -48,11 +48,11 @@ Maintenance Tasks such as clearing old cache data, rotating logs, or cleaning up
 
 ---
 
-Setting Up Your Extension for Alarms {#manifest-configuration}
+## Setting Up Your Extension for Alarms {#manifest-configuration}
 
 Before you can use the Chrome Alarms API in your extension, you need to configure your manifest file properly and understand the permission requirements.
 
-Declaring Permissions in Manifest V3
+### Declaring Permissions in Manifest V3
 
 Open your extension's manifest.json file and add the required permissions. The Alarms API requires the `"alarms"` permission to create, manage, and respond to scheduled alarms.
 
@@ -76,17 +76,17 @@ Open your extension's manifest.json file and add the required permissions. The A
 
 Note that the Alarms API is one of the few APIs that work effectively in service workers, which are required for Manifest V3 extensions. Unlike some other Chrome APIs, alarms will fire even when the service worker has been terminated, ensuring your scheduled tasks execute reliably.
 
-Understanding Alarm Granularity
+### Understanding Alarm Granularity
 
 Chrome imposes some limitations on alarm granularity to balance precision with battery efficiency. The minimum interval for repeating alarms is one minute, and Chrome may clamp very short delays to a minimum of approximately 45 seconds. This means the Alarms API is not suitable for sub-minute precision timing, but it is perfect for most scheduled task use cases.
 
 ---
 
-Core Methods of the Chrome Alarms API {#core-methods}
+## Core Methods of the Chrome Alarms API {#core-methods}
 
 The Chrome Alarms API provides a straightforward set of methods for creating, managing, and responding to alarms.  each of these methods in detail.
 
-Creating Alarms
+### Creating Alarms
 
 The `chrome.alarms.create()` method is used to schedule new alarms. You can create both one-time alarms and repeating alarms.
 
@@ -113,7 +113,7 @@ chrome.alarms.create('daily-alarm', {
 
 The `create` method accepts a name for the alarm and a configuration object. You can specify either `delayInMinutes` for a one-time alarm with a relative delay, `when` for an absolute time in milliseconds since the epoch, or `periodInMinutes` to create a repeating alarm.
 
-Querying Alarms
+### Querying Alarms
 
 To retrieve information about existing alarms, use the `chrome.alarms.get()` or `chrome.alarms.getAll()` methods.
 
@@ -137,7 +137,7 @@ chrome.alarms.getAll((alarms) => {
 });
 ```
 
-Clearing Alarms
+### Clearing Alarms
 
 When you no longer need an alarm, you can clear it using the `chrome.alarms.clear()` or `chrome.alarms.clearAll()` methods.
 
@@ -155,11 +155,11 @@ chrome.alarms.clearAll(() => {
 
 ---
 
-Listening for Alarm Events {#alarm-listeners}
+## Listening for Alarm Events {#alarm-listeners}
 
 The most important part of using the Alarms API is setting up listeners to respond when alarms fire. In a service worker context, you use the `chrome.alarms.onAlarm` event.
 
-Setting Up the Alarm Listener
+### Setting Up the Alarm Listener
 
 ```javascript
 // background.js (service worker)
@@ -196,7 +196,7 @@ async function generateDailyReport() {
 }
 ```
 
-Best Practices for Alarm Listeners
+### Best Practices for Alarm Listeners
 
 When implementing alarm listeners in your extension, there are several best practices you should follow to ensure reliability and efficiency.
 
@@ -208,11 +208,11 @@ Use specific alarm names that clearly identify the purpose of each alarm. This m
 
 ---
 
-Practical Examples and Patterns {#practical-examples}
+## Practical Examples and Patterns {#practical-examples}
 
  some practical examples that demonstrate common patterns for using the Chrome Alarms API in real-world extensions.
 
-Example 1: Periodic Data Sync
+### Example 1: Periodic Data Sync
 
 This example demonstrates how to implement a reliable data synchronization mechanism that runs every hour.
 
@@ -261,7 +261,7 @@ async function performDataSync() {
 }
 ```
 
-Example 2: User-Configurable Reminders
+### Example 2: User-Configurable Reminders
 
 This example shows how to create alarms based on user preferences, allowing users to set their own reminder times.
 
@@ -312,7 +312,7 @@ async function showReminder(reminderId) {
 }
 ```
 
-Example 3: Smart Cache Expiration
+### Example 3: Smart Cache Expiration
 
 This example demonstrates how to use alarms to manage cached content and ensure fresh data.
 
@@ -351,11 +351,11 @@ async function expireCache(cacheKey) {
 
 ---
 
-Working with Manifest V3 Service Workers {#service-workers}
+## Working with Manifest V3 Service Workers {#service-workers}
 
 Understanding how alarms work with service workers is crucial for Manifest V3 extensions, as this affects how you implement and manage scheduled tasks.
 
-Service Worker Lifecycle Considerations
+### Service Worker Lifecycle Considerations
 
 Service workers in Manifest V3 have a lifecycle that can affect alarm behavior. When the service worker is not running, Chrome will start it when an alarm fires. This means your alarm handler must be able to initialize the service worker if necessary.
 
@@ -373,7 +373,7 @@ function handleAlarm(alarm) {
 console.log('Service worker started:', new Date().toISOString());
 ```
 
-Handling Service Worker Termination
+### Handling Service Worker Termination
 
 Service workers can be terminated when idle to save resources. When an alarm fires, Chrome will wake up the service worker, but you should design your handlers to be resilient to this lifecycle.
 
@@ -398,25 +398,25 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ---
 
-Debugging Alarms API Issues {#debugging}
+## Debugging Alarms API Issues {#debugging}
 
 When working with the Chrome Alarms API, you may encounter issues. Here are some common problems and how to resolve them.
 
-Alarms Not Firing
+### Alarms Not Firing
 
 If your alarms are not firing, check the following. First, ensure you have the `"alarms"` permission in your manifest. Second, verify that your service worker is registered correctly in the manifest. Third, check the Chrome extension service worker logs in chrome://extensions or chrome://serviceworker-internals. Fourth, make sure your delayInMinutes is at least 1 (the minimum granularity).
 
-Service Worker Not Starting
+### Service Worker Not Starting
 
 When alarms fail to trigger your service worker, the service worker might be disabled. Navigate to chrome://extensions, find your extension, and ensure the service worker is running. You can also check for JavaScript errors in the console that might be preventing execution.
 
-Alarms Cleared Unexpectedly
+### Alarms Cleared Unexpectedly
 
 If alarms are being cleared unexpectedly, review your code for any calls to `chrome.alarms.clear()` or `chrome.alarms.clearAll()`. Also check if the user has disabled or reinstalled the extension, which would clear all alarms.
 
 ---
 
-Performance and Best Practices {#best-practices}
+## Performance and Best Practices {#best-practices}
 
 To get the most out of the Chrome Alarms API while maintaining optimal performance, follow these best practices.
 
@@ -432,7 +432,7 @@ Use the `periodInMinutes` property for repeating alarms rather than creating new
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 The Chrome Alarms API is an indispensable tool for Chrome extension developers who need to implement scheduled tasks, periodic background operations, or time-based automation. Throughout this guide, we've explored the fundamental concepts of the API, from creating and managing alarms to handling alarm events in service workers.
 
@@ -444,7 +444,7 @@ Remember to test your alarm implementations thoroughly, especially across browse
 
 ---
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Notifications API Guide](/2025/01/17/chrome-extension-notifications-api-guide/) - Learn how to display notifications to users in your extension.
 - [Chrome Extension Service Worker Lifecycle detailed look](/2025/01/17/chrome-extension-state-management-patterns/) - Understand how service workers work with background tasks.

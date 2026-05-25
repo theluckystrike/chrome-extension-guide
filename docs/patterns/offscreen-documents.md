@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/offscreen-documents/"
 last_modified_at: 2026-01-15
 ---
 
-Offscreen Document Patterns
+### Offscreen Document Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The [offscreen documents reference](../mv3/offscreen-documents.md) covers the basics. This guide provides production-ready patterns for managing offscreen document lifecycle, typed communication, and real-world use cases like canvas processing, audio playback, clipboard access, and Web Worker delegation.
 
 ---
 
-Pattern 1: Singleton Manager {#pattern-1-singleton-manager}
+## Pattern 1: Singleton Manager {#pattern-1-singleton-manager}
 
 Only one offscreen document can exist at a time. Use a manager to handle creation, reuse, and cleanup:
 
@@ -78,7 +78,7 @@ class OffscreenManager {
 export const offscreen = new OffscreenManager();
 ```
 
-Usage:
+### Usage:
 
 ```ts
 // background.ts
@@ -95,7 +95,7 @@ const result = await offscreen.withDocument(
 
 ---
 
-Pattern 2: Typed Message Protocol {#pattern-2-typed-message-protocol}
+## Pattern 2: Typed Message Protocol {#pattern-2-typed-message-protocol}
 
 Define a typed protocol between the service worker and offscreen document:
 
@@ -158,7 +158,7 @@ messenger.onMessage("parse-html", async ({ html }) => {
 
 ---
 
-Pattern 3: Canvas Image Processing {#pattern-3-canvas-image-processing}
+## Pattern 3: Canvas Image Processing {#pattern-3-canvas-image-processing}
 
 Service workers can't use Canvas. Offscreen documents handle image manipulation:
 
@@ -250,7 +250,7 @@ async function annotateScreenshot(req: AnnotateRequest): Promise<string> {
 
 ---
 
-Pattern 4: Audio Playback {#pattern-4-audio-playback}
+## Pattern 4: Audio Playback {#pattern-4-audio-playback}
 
 Service workers can't use the Audio API. Offscreen documents handle sound:
 
@@ -302,7 +302,7 @@ async function playNotificationSound() {
 
 ---
 
-Pattern 5: Clipboard Access {#pattern-5-clipboard-access}
+## Pattern 5: Clipboard Access {#pattern-5-clipboard-access}
 
 ```ts
 // offscreen.ts. Clipboard operations
@@ -337,7 +337,7 @@ async function readClipboard(): Promise<string> {
 
 ---
 
-Pattern 6: Web Worker Delegation {#pattern-6-web-worker-delegation}
+## Pattern 6: Web Worker Delegation {#pattern-6-web-worker-delegation}
 
 Offscreen documents can spawn Web Workers for CPU-intensive tasks:
 
@@ -387,7 +387,7 @@ self.onmessage = (e) => {
 
 ---
 
-Pattern 7: Auto-Close Idle Documents {#pattern-7-auto-close-idle-documents}
+## Pattern 7: Auto-Close Idle Documents {#pattern-7-auto-close-idle-documents}
 
 Chrome may close offscreen documents after ~30 seconds of inactivity. Handle this gracefully:
 
@@ -417,7 +417,7 @@ async function sendToOffscreen<T>(
 
 ---
 
-Pattern 8: Multiple Reason Handling {#pattern-8-multiple-reason-handling}
+## Pattern 8: Multiple Reason Handling {#pattern-8-multiple-reason-handling}
 
 Only one offscreen document exists at a time, but it can handle multiple types of work:
 
@@ -468,7 +468,7 @@ const imageResult = await chrome.runtime.sendMessage({
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 | Pattern | Use Case |
 |---------|----------|

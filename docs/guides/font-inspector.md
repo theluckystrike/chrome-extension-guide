@@ -72,7 +72,7 @@ font-inspector/
 
 ---
 
-Manifest.json Setup
+### Manifest.json Setup
 
 The manifest defines the extension's capabilities and permissions. For a Font Inspector, we need access to active tabs, storage, and script injection.
 
@@ -127,9 +127,9 @@ The manifest defines the extension's capabilities and permissions. For a Font In
 
 ---
 
-Core Implementation with TypeScript
+### Core Implementation with TypeScript
 
-Shared Types
+### Shared Types
 
 Define TypeScript interfaces that are shared across all contexts:
 
@@ -187,7 +187,7 @@ export interface ExtensionMessage {
 }
 ```
 
-Content Script - Font Scanner
+### Content Script - Font Scanner
 
 The content script runs in the page context and extracts font information from DOM elements:
 
@@ -294,7 +294,7 @@ export class FontScanner {
 }
 ```
 
-Service Worker - Font Analyzer
+### Service Worker - Font Analyzer
 
 The background service worker coordinates font analysis and manages state:
 
@@ -398,9 +398,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 ---
 
-UI Design Patterns
+### UI Design Patterns
 
-Popup UI with React/Preact
+### Popup UI with React/Preact
 
 The popup provides quick access to font inspection tools:
 
@@ -532,7 +532,7 @@ function FontCard({ font }: { font: FontInfo }) {
 ```
 {% endraw %}
 
-Content Script Overlay
+### Content Script Overlay
 
 For interactive font inspection, inject an overlay directly into the page:
 
@@ -669,9 +669,9 @@ export class FontOverlay {
 
 ---
 
-Chrome APIs and Permissions
+### Chrome APIs and Permissions
 
-Required Permissions
+### Required Permissions
 
 | Permission | Purpose |
 |------------|---------|
@@ -680,7 +680,7 @@ Required Permissions
 | `scripting` | Execute scripts to analyze page fonts |
 | `tabs` | Get tab information for context |
 
-Host Permissions
+### Host Permissions
 
 ```json
 "host_permissions": ["<all_urls>"]
@@ -688,7 +688,7 @@ Host Permissions
 
 This is required to analyze fonts on any webpage. For stricter security, you can limit to specific domains.
 
-API Usage Patterns
+### API Usage Patterns
 
 ```typescript
 // Accessing tab information
@@ -710,11 +710,11 @@ const { key } = await chrome.storage.local.get('key');
 
 ---
 
-State Management
+### State Management
 
-Storage Patterns
+### Storage Patterns
 
-Use chrome.storage with typed wrappers:
+### Use chrome.storage with typed wrappers:
 
 ```typescript
 // src/background/storage.ts
@@ -764,9 +764,9 @@ export const storageManager = new StorageManager();
 
 ---
 
-Error Handling
+### Error Handling
 
-Content Script Error Handling
+### Content Script Error Handling
 
 ```typescript
 // src/content/index.ts
@@ -802,7 +802,7 @@ try {
 }
 ```
 
-Service Worker Error Handling
+### Service Worker Error Handling
 
 ```typescript
 // src/background/index.ts
@@ -822,9 +822,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Vitest
+### Unit Testing with Vitest
 
 ```typescript
 // tests/font-scanner.test.ts
@@ -858,7 +858,7 @@ describe('FontScanner', () => {
 });
 ```
 
-Integration Testing with Playwright
+### Integration Testing with Playwright
 
 ```typescript
 // tests/integration.spec.ts
@@ -884,9 +884,9 @@ test('extension popup displays fonts', async ({ page }) => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Optimize Font Scanning
+### Optimize Font Scanning
 
 1. Limit scanned elements: Only scan visible elements in viewport
 2. Debounce analysis: Don't re-scan on every DOM change
@@ -916,7 +916,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '100px' });
 ```
 
-Memory Management
+### Memory Management
 
 - Clean up event listeners when popup closes
 - Release references to DOM elements
@@ -924,9 +924,9 @@ Memory Management
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
-Before publishing to Chrome Web Store:
+### Before publishing to Chrome Web Store:
 
 1. Manifest Review
    - [ ] All permissions are necessary and minimal
@@ -953,7 +953,7 @@ Before publishing to Chrome Web Store:
    - [ ] Verify no source maps in production
    - [ ] Test packed .crx file
 
-Build Configuration
+### Build Configuration
 
 ```javascript
 // webpack.config.js
@@ -975,7 +975,7 @@ module.exports = {
 
 ---
 
-Summary
+### Summary
 
 Building a Font Inspector extension requires careful consideration of Chrome's extension architecture. Key takeaways:
 

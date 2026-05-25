@@ -18,7 +18,7 @@ This comprehensive guide walks you through creating a production-ready console l
 
 ---
 
-Why Build a Console Logger Extension {#why-build}
+## Why Build a Console Logger Extension {#why-build}
 
 The default Chrome DevTools console serves basic debugging needs, but it falls short in several important ways. A custom console logger extension provides significant advantages that enhance your development workflow.
 
@@ -32,7 +32,7 @@ Log Export and Sharing enables you to save debugging sessions to files, share lo
 
 ---
 
-Extension Architecture Overview {#architecture}
+## Extension Architecture Overview {#architecture}
 
 Before diving into code, let us understand the architecture of our console logger extension. A well-designed extension separates concerns across different components, each handling a specific responsibility.
 
@@ -48,7 +48,7 @@ This architecture follows Chrome extension best practices and ensures your exten
 
 ---
 
-Project Setup and Manifest Configuration {#manifest}
+## Project Setup and Manifest Configuration {#manifest}
 
 Every Chrome extension begins with the manifest file. Create a new directory for your extension and add the manifest.json file with the following configuration optimized for Manifest V3.
 
@@ -91,11 +91,11 @@ The manifest configures several critical permissions. The `storage` permission e
 
 ---
 
-Intercepting Console Methods in Content Scripts {#interception}
+## Intercepting Console Methods in Content Scripts {#interception}
 
 The heart of our extension lies in the content script that intercepts console methods. This technique, sometimes called "monkey patching," involves replacing the native console methods with our custom implementations that capture log data while preserving the original functionality.
 
-Create the content.js file with the following implementation:
+### Create the content.js file with the following implementation:
 
 ```javascript
 // Store original console methods
@@ -166,11 +166,11 @@ This content script preserves the original console functionality while capturing
 
 ---
 
-Background Service Worker Implementation {#background}
+## Background Service Worker Implementation {#background}
 
 The background service worker serves as the bridge between content scripts and the popup interface. It receives log entries from content scripts, stores them, and manages communication with the popup.
 
-Create background.js with this implementation:
+### Create background.js with this implementation:
 
 ```javascript
 // Store logs in memory for quick access
@@ -230,11 +230,11 @@ This background script maintains an in-memory cache of logs for fast access whil
 
 ---
 
-Building the Popup Interface {#popup}
+## Building the Popup Interface {#popup}
 
 The popup provides the user interface for viewing and managing captured logs. This HTML file displays the log viewer with filtering capabilities.
 
-Create popup.html:
+### Create popup.html:
 
 ```html
 <!DOCTYPE html>
@@ -425,7 +425,7 @@ The popup provides a dark-themed interface matching VS Code aesthetics. It inclu
 
 ---
 
-Popup JavaScript Logic {#popup-js}
+## Popup JavaScript Logic {#popup-js}
 
 The popup JavaScript handles rendering logs, filtering, and user interactions. Create popup.js:
 
@@ -530,7 +530,7 @@ This JavaScript handles all the interactive features: filtering by log level, te
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that you have built all the components, it is time to test your console logger extension. Follow these steps to load your extension in Chrome:
 
@@ -542,7 +542,7 @@ Test the filtering functionality by typing in the search box or clicking the lev
 
 ---
 
-Advanced Features to Consider {#advanced}
+## Advanced Features to Consider {#advanced}
 
 While the basic console logger extension is fully functional, several enhancements can make it even more powerful. Consider adding these features as you continue development.
 
@@ -558,7 +558,7 @@ Cloud Sync could synchronize logs across devices using Chrome's sync storage, th
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a console logger Chrome extension demonstrates fundamental concepts in Chrome extension development while creating a genuinely useful tool for your development workflow. You have learned how to intercept JavaScript console methods in content scripts, communicate between extension components using the message passing API, persist data using Chrome's storage system, and build a responsive popup interface.
 
@@ -568,7 +568,7 @@ The skills you have developed in this guide apply broadly to Chrome extension de
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 To continue learning and developing your extension further, consult these valuable resources. The official Chrome Extension Documentation provides comprehensive information on extension APIs, best practices, and security considerations. The Chrome Extension Samples repository contains numerous example extensions demonstrating various features and patterns.
 

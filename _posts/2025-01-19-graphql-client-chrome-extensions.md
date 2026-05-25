@@ -18,35 +18,35 @@ This comprehensive guide will walk you through implementing GraphQL clients in C
 
 ---
 
-Why GraphQL is Ideal for Chrome Extensions {#why-graphql-for-extensions}
+## Why GraphQL is Ideal for Chrome Extensions {#why-graphql-for-extensions}
 
 GraphQL offers several advantages that make it particularly well-suited for Chrome extension development. Understanding these benefits will help you make informed decisions about your extension architecture.
 
-Efficient Data Fetching
+### Efficient Data Fetching
 
 One of the primary advantages of GraphQL is its ability to fetch exactly the data needed in a single request. Chrome extensions often operate with limited resources and need to be lightweight. With GraphQL, you can request only the specific fields you need, reducing payload size and improving performance. This is especially important for extensions that run in the background or need to sync data frequently.
 
 Traditional REST APIs often require multiple endpoints to gather related data. For example, fetching user information along with their recent activities might require three or four separate API calls. With GraphQL, you can retrieve all this information in a single query, significantly reducing network overhead and improving the user experience.
 
-Type-Safe Development
+### Type-Safe Development
 
 GraphQL's schema-driven approach provides excellent developer experience through type safety. When you define your GraphQL schema, you get automatic type checking and IntelliSense support in your IDE. This becomes particularly valuable in Chrome extension development where debugging can be challenging due to the isolated execution environment.
 
-Caching Capabilities
+### Caching Capabilities
 
 Modern GraphQL clients like Apollo provide sophisticated caching mechanisms out of the box. In the context of Chrome extensions, where users may open and close popup windows frequently, efficient caching can dramatically improve perceived performance. The normalized cache in Apollo can store query results and automatically update components when cached data becomes stale.
 
-Real-Time Updates with Subscriptions
+### Real-Time Updates with Subscriptions
 
 Many modern applications use GraphQL subscriptions for real-time data updates. If your extension needs to display live data, such as notifications, collaborative editing status, or streaming information, GraphQL subscriptions provide an elegant solution. Chrome extensions can maintain persistent connections for real-time updates even when the popup is not open.
 
 ---
 
-Setting Up Your Chrome Extension for GraphQL {#setting-up-extension}
+## Setting Up Your Chrome Extension for GraphQL {#setting-up-extension}
 
 Before implementing a GraphQL client, you need to configure your Chrome extension properly. This section covers the essential setup steps and considerations specific to Manifest V3.
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 First, ensure your manifest.json includes the necessary permissions for making network requests:
 
@@ -70,7 +70,7 @@ First, ensure your manifest.json includes the necessary permissions for making n
 
 The `host_permissions` field is crucial for Chrome extensions using Manifest V3. You must explicitly declare all domains your extension will communicate with. This is a security enhancement over Manifest V2, where extensions could request broad permissions.
 
-Service Worker Considerations
+### Service Worker Considerations
 
 Chrome extensions with Manifest V3 use service workers in the background rather than background pages. This has important implications for GraphQL client setup:
 
@@ -84,11 +84,11 @@ To address these challenges, consider using Chrome's storage API for persistent 
 
 ---
 
-Implementing Apollo Client in Chrome Extensions {#apollo-client}
+## Implementing Apollo Client in Chrome Extensions {#apollo-client}
 
 Apollo Client is the most popular GraphQL client, offering comprehensive features including caching, state management, and developer tools. This section demonstrates how to integrate Apollo Client into your Chrome extension.
 
-Installing Dependencies
+### Installing Dependencies
 
 First, set up your extension's JavaScript environment. If you are using a bundler like webpack or Vite, install the necessary packages:
 
@@ -98,7 +98,7 @@ npm install @apollo/client graphql
 
 If you prefer not to use a bundler, you can use the CDN versions of Apollo Client in your extension. However, bundling is generally recommended for production extensions to ensure consistent behavior and reduce load times.
 
-Creating the Apollo Client
+### Creating the Apollo Client
 
 Here is a complete example of setting up Apollo Client in a Chrome extension's background service worker:
 
@@ -158,7 +158,7 @@ const apolloClient = new ApolloClient({
 export { apolloClient };
 ```
 
-Handling Authentication
+### Handling Authentication
 
 Many GraphQL APIs require authentication. In Chrome extensions, you can store authentication tokens securely and include them in your GraphQL requests:
 
@@ -189,7 +189,7 @@ const httpLink = new HttpLink({ uri: 'https://api.example.com/graphql' });
 const link = authLink.concat(httpLink);
 ```
 
-Querying Data from the Service Worker
+### Querying Data from the Service Worker
 
 You can execute GraphQL queries from your service worker and communicate results to other extension components:
 
@@ -236,11 +236,11 @@ export async function fetchUserData(userId) {
 
 ---
 
-Using URQL as a Lightweight Alternative {#urql-client}
+## Using URQL as a Lightweight Alternative {#urql-client}
 
 URQL (Universal React Query Library) offers a more lightweight alternative to Apollo Client while still providing powerful features. If your extension prioritizes bundle size, URQL might be the better choice.
 
-Setting Up URQL
+### Setting Up URQL
 
 ```bash
 npm install @urql/core graphql
@@ -268,7 +268,7 @@ const client = createClient({
 export { client };
 ```
 
-URQL vs Apollo: Performance Considerations
+### URQL vs Apollo: Performance Considerations
 
 When choosing between Apollo and URQL for your Chrome extension, consider the following:
 
@@ -283,11 +283,11 @@ For Chrome extensions that may not need all of Apollo's features, URQL's smaller
 
 ---
 
-Implementing GraphQL Subscriptions in Extensions {#graphql-subscriptions}
+## Implementing GraphQL Subscriptions in Extensions {#graphql-subscriptions}
 
 Real-time functionality is essential for many extensions. GraphQL subscriptions using WebSockets can be challenging in Chrome extensions due to service worker lifecycle management.
 
-Setting Up Subscriptions
+### Setting Up Subscriptions
 
 ```javascript
 // background/subscriptions.js
@@ -336,7 +336,7 @@ export const subscriptionClient = new ApolloClient({
 });
 ```
 
-Managing Subscription Lifecycle
+### Managing Subscription Lifecycle
 
 Because service workers can be terminated, you need to implement solid reconnection logic:
 
@@ -399,11 +399,11 @@ export const subscriptionManager = new SubscriptionManager();
 
 ---
 
-Best Practices for GraphQL in Chrome Extensions {#best-practices}
+## Best Practices for GraphQL in Chrome Extensions {#best-practices}
 
 Following these best practices will help you build reliable and performant Chrome extensions with GraphQL.
 
-Error Handling
+### Error Handling
 
 Always implement comprehensive error handling for GraphQL operations:
 
@@ -431,7 +431,7 @@ async function safeQuery(query, variables) {
 }
 ```
 
-Caching Strategy
+### Caching Strategy
 
 Choose the appropriate cache policy based on your data requirements:
 
@@ -440,7 +440,7 @@ Choose the appropriate cache policy based on your data requirements:
 - network-only: Use for sensitive data that should always be fresh
 - no-cache: Use for authentication queries or data that should never be cached
 
-Security Considerations
+### Security Considerations
 
 Never expose your GraphQL endpoint credentials in the extension code. Instead:
 
@@ -449,9 +449,9 @@ Never expose your GraphQL endpoint credentials in the extension code. Instead:
 3. Implement proper CORS handling
 4. Validate all data before rendering
 
-Performance Optimization
+### Performance Optimization
 
-To optimize your extension's performance:
+### To optimize your extension's performance:
 
 - Use fragments to share field selections between queries
 - Implement pagination for large datasets
@@ -460,7 +460,7 @@ To optimize your extension's performance:
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Implementing GraphQL clients in Chrome extensions requires careful consideration of Manifest V3's architecture and the unique challenges of extension development. Whether you choose Apollo Client for its comprehensive features or URQL for its lightweight footprint, proper implementation will result in efficient, maintainable extensions that provide excellent user experiences.
 

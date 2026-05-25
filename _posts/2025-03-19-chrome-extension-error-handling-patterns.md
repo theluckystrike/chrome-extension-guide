@@ -18,11 +18,11 @@ This comprehensive guide covers everything you need to know about implementing s
 
 ---
 
-Understanding Chrome Extension Error Architecture {#understanding-error-architecture}
+## Understanding Chrome Extension Error Architecture {#understanding-error-architecture}
 
 Before diving into specific error handling techniques, it's essential to understand how errors manifest in Chrome extensions and where they can occur. Chrome extensions consist of several distinct components, each with its own execution context and error characteristics.
 
-The Extension Component Ecosystem
+### The Extension Component Ecosystem
 
 A Chrome extension typically includes a background script (or service worker in Manifest V3), content scripts that run in web pages, popup scripts for the extension's UI, and potentially options pages and other HTML assets. Each of these components can encounter different types of errors, and how you handle them varies significantly.
 
@@ -30,7 +30,7 @@ Background scripts run in an isolated environment and can experience errors from
 
 Understanding this distributed architecture is crucial because traditional error handling approaches often fail to capture errors across all these contexts. A comprehensive error handling strategy must account for each component type and the communication channels between them.
 
-Common Error Sources in Extensions
+### Common Error Sources in Extensions
 
 Chrome extension errors typically fall into several categories. API-related errors occur when calling chrome.* APIs with invalid parameters, insufficient permissions, or when APIs are unavailable in certain contexts. Network errors emerge when extensions attempt to communicate with external servers or when content scripts interact with page APIs. Runtime errors happen when JavaScript execution encounters unexpected conditions, from type errors to reference errors.
 
@@ -38,11 +38,11 @@ Content script errors are particularly tricky because they occur within the cont
 
 ---
 
-Implementing Try-Catch Patterns in Extension Contexts {#try-catch-patterns}
+## Implementing Try-Catch Patterns in Extension Contexts {#try-catch-patterns}
 
 The fundamental building block of error handling is the try-catch statement. However, using try-catch effectively in Chrome extensions requires understanding where and how to apply it for maximum benefit.
 
-Strategic Try-Catch Placement
+### Strategic Try-Catch Placement
 
 Rather than wrapping everything in try-catch blocks, which can hide legitimate bugs and make debugging difficult, focus on strategic placement where errors are expected or where recovery is possible. The most important places to implement try-catch include chrome API calls, message passing between components, DOM manipulations in content scripts, and any asynchronous operations that might fail.
 
@@ -66,7 +66,7 @@ async function fetchExtensionData(url) {
 
 This pattern catches both network errors and HTTP error statuses, providing a central place to handle failures gracefully.
 
-Async/Await Error Handling
+### Async/Await Error Handling
 
 With the prevalence of asynchronous operations in modern extensions, proper async error handling becomes critical. Unhandled promise rejections can crash content scripts or terminate background service workers without any graceful degradation.
 
@@ -96,7 +96,7 @@ function handleGlobalError(errorInfo) {
 }
 ```
 
-Content Script Error Isolation
+### Content Script Error Isolation
 
 Content scripts run in the context of web pages, meaning errors can originate from either your code or the page itself. Wrapping content script operations in try-catch helps prevent your extension from interfering with page functionality:
 
@@ -126,11 +126,11 @@ Content scripts run in the context of web pages, meaning errors can originate fr
 
 ---
 
-Extension Error Logging Strategies {#error-logging-strategies}
+## Extension Error Logging Strategies {#error-logging-strategies}
 
 Effective error logging is the foundation of maintaining and debugging Chrome extensions. Without proper logging, you have no visibility into what goes wrong in your users' browsers.
 
-Structured Logging for Extensions
+### Structured Logging for Extensions
 
 Implement a logging utility that provides consistent, structured log entries across all extension components. This makes analyzing logs easier and helps identify patterns in errors:
 
@@ -188,7 +188,7 @@ class ExtensionLogger {
 }
 ```
 
-Persistent Logging with Storage
+### Persistent Logging with Storage
 
 Since service workers in Manifest V3 can be terminated after brief periods of inactivity, errors that occur between user interactions might be lost. Consider storing important logs locally and sending them when possible:
 
@@ -243,11 +243,11 @@ class PersistentLogger {
 
 ---
 
-Chrome Extension Crash Recovery Techniques {#crash-recovery}
+## Chrome Extension Crash Recovery Techniques {#crash-recovery}
 
 Even with excellent error handling, crashes can and will occur. How your extension recovers from crashes determines whether users experience a minor inconvenience or are forced to disable your extension.
 
-Service Worker Recovery
+### Service Worker Recovery
 
 Manifest V3 service workers can be terminated at any time by Chrome to save resources. Your extension must be able to handle this gracefully and resume operations when the service worker is restarted:
 
@@ -300,7 +300,7 @@ self.addEventListener('periodicsync', (event) => {
 });
 ```
 
-State Persistence and Recovery
+### State Persistence and Recovery
 
 Always persist critical state to chrome.storage so it can be recovered after a crash or service worker restart:
 
@@ -355,11 +355,11 @@ class StateManager {
 
 ---
 
-User Feedback and Error Communication {#user-feedback}
+## User Feedback and Error Communication {#user-feedback}
 
 How you communicate errors to users significantly impacts their perception of your extension. Well-designed error messages turn frustrating failures into manageable inconveniences.
 
-Toast Notifications for Non-Intrusive Feedback
+### Toast Notifications for Non-Intrusive Feedback
 
 Instead of interrupting users with alerts, use non-intrusive toast notifications that appear briefly and fade away:
 
@@ -435,7 +435,7 @@ class ErrorNotifier {
 }
 ```
 
-Fallback UI for Extension Failures
+### Fallback UI for Extension Failures
 
 When your extension cannot function, provide a clear fallback UI rather than silently failing:
 
@@ -492,11 +492,11 @@ class FallbackUI {
 
 ---
 
-Implementing Error Boundaries in Extension UI {#error-boundaries}
+## Implementing Error Boundaries in Extension UI {#error-boundaries}
 
 For extension popups and options pages, implementing error boundaries prevents a single component failure from breaking the entire UI.
 
-React-Style Error Boundaries
+### React-Style Error Boundaries
 
 Even if you're not using React, the error boundary pattern is valuable:
 
@@ -546,11 +546,11 @@ const safeRenderUserPanel = ErrorBoundary.wrap(
 
 ---
 
-Testing Error Handling {#testing-error-handling}
+## Testing Error Handling {#testing-error-handling}
 
 Robust error handling requires thorough testing. Create scenarios that trigger various error conditions to ensure your handling works correctly.
 
-Injecting Test Errors
+### Injecting Test Errors
 
 ```javascript
 // Test utility to simulate various error conditions
@@ -576,7 +576,7 @@ const ErrorSimulator = {
 
 ---
 
-Conclusion: Building Resilient Extensions
+### Conclusion: Building Resilient Extensions
 
 Chrome extension error handling is not optional, it's a critical component of professional extension development. By implementing comprehensive try-catch patterns, establishing effective logging strategies, preparing for crash recovery, communicating clearly with users, and thoroughly testing error scenarios, you create extensions that inspire confidence and maintain trust.
 

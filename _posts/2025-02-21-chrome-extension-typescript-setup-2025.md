@@ -18,11 +18,11 @@ This comprehensive guide walks you through setting up a production-ready Chrome 
 
 ---
 
-Why Use TypeScript for Chrome Extensions? {#why-typescript}
+## Why Use TypeScript for Chrome Extensions? {#why-typescript}
 
 The Chrome extension ecosystem has evolved significantly, and with Manifest V3 came increased complexity in extension architecture. Service workers, multiple content script contexts, message passing between components, and the chrome.runtime API all benefit tremendously from TypeScript's type definitions.
 
-Type Safety Catches Bugs Early
+### Type Safety Catches Bugs Early
 
 One of the most compelling reasons to adopt TypeScript is its ability to catch errors before runtime. Consider the difference between JavaScript and TypeScript when working with the Chrome Storage API:
 
@@ -48,25 +48,25 @@ chrome.storage.local.get('settings').then((result) => {
 
 With TypeScript, you get immediate feedback about potential null or undefined values, ensuring you handle edge cases before your users encounter them.
 
-Enhanced Developer Experience
+### Enhanced Developer Experience
 
 TypeScript dramatically improves the developer experience through intelligent autocomplete. The Chrome Types library provides comprehensive type definitions for every Chrome API, showing you available methods, parameters, and return types as you code. This turns what used to be a constant cycle of checking documentation into a fluid, efficient coding experience.
 
-Better Collaboration and Maintenance
+### Better Collaboration and Maintenance
 
 As extensions grow in complexity, especially in team settings, TypeScript's explicit type annotations serve as documentation. When you define interfaces for your extension's data structures, new developers can understand the data flow without reading through implementation details. This makes maintenance and feature additions significantly easier.
 
 ---
 
-Setting Up Your TypeScript Project {#project-setup}
+## Setting Up Your TypeScript Project {#project-setup}
 
 Let us walk through setting up a complete TypeScript project for Chrome extension development in 2025.
 
-Prerequisites
+### Prerequisites
 
 Before starting, ensure you have Node.js 18 or higher installed. You will also need npm or your preferred package manager. We will use Vite as our build tool because of its excellent support for Chrome extensions and fast development experience.
 
-Initialize the Project
+### Initialize the Project
 
 Create a new directory for your extension and initialize the project:
 
@@ -75,9 +75,9 @@ mkdir my-extension && cd my-extension
 npm init -y
 ```
 
-Install Dependencies
+### Install Dependencies
 
-Install the necessary development dependencies:
+### Install the necessary development dependencies:
 
 ```bash
 npm install -D typescript vite @types/chrome @types/node
@@ -85,7 +85,7 @@ npm install -D typescript vite @types/chrome @types/node
 
 The `@types/chrome` package provides TypeScript definitions for the Chrome extension API, while `@types/node` gives you type definitions for Node.js APIs used in your build process.
 
-Configure TypeScript
+### Configure TypeScript
 
 Create a `tsconfig.json` file optimized for Chrome extension development:
 
@@ -113,7 +113,7 @@ Create a `tsconfig.json` file optimized for Chrome extension development:
 
 The `strict: true` option enables all strict type-checking options, which is essential for catching potential issues early. The `DOM` and `ES2022` libraries ensure you have access to browser and modern JavaScript APIs.
 
-Set Up Vite for Extension Bundling
+### Set Up Vite for Extension Bundling
 
 Create a `vite.config.ts` file to handle the extension-specific build requirements:
 
@@ -142,11 +142,11 @@ export default defineConfig({
 
 ---
 
-Creating the Extension Structure {#extension-structure}
+## Creating the Extension Structure {#extension-structure}
 
 Organize your extension with a clear directory structure that separates concerns and makes maintenance straightforward.
 
-Recommended Directory Structure
+### Recommended Directory Structure
 
 ```
 my-extension/
@@ -174,7 +174,7 @@ my-extension/
  manifest.ts
 ```
 
-Defining the Manifest V3
+### Defining the Manifest V3
 
 Create your `manifest.ts` file that will be compiled to `manifest.json`:
 
@@ -212,11 +212,11 @@ This approach using the CRXJS Vite plugin ensures your manifest is properly type
 
 ---
 
-Writing Type-Safe Extension Code {#writing-type-safe-code}
+## Writing Type-Safe Extension Code {#writing-type-safe-code}
 
 Now let us explore how to write properly typed code for each component of your extension.
 
-Background Service Worker
+### Background Service Worker
 
 The service worker handles events and manages extension state. Here is how to write type-safe background scripts:
 
@@ -282,7 +282,7 @@ async function handleMessage(message: MessageType): Promise<MessageResponse<Mess
 }
 ```
 
-Content Scripts
+### Content Scripts
 
 Content scripts run in the context of web pages and need careful type handling:
 
@@ -330,7 +330,7 @@ function highlightElements(selector: string): void {
 }
 ```
 
-Popup Scripts
+### Popup Scripts
 
 The popup runs in its own context with access to the DOM:
 
@@ -373,11 +373,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ---
 
-Type-Safe Message Passing {#message-passing}
+## Type-Safe Message Passing {#message-passing}
 
 One of the most important aspects of extension development is communication between different components. TypeScript makes this significantly safer.
 
-Define Shared Types
+### Define Shared Types
 
 Create a shared types file that all components can import:
 
@@ -424,7 +424,7 @@ export interface StorageSchema {
 }
 ```
 
-Using the Shared Types
+### Using the Shared Types
 
 Import these types in your background, content, and popup scripts:
 
@@ -449,11 +449,11 @@ chrome.runtime.onMessage.addListener(
 
 ---
 
-Working with Chrome APIs {#chrome-apis}
+## Working with Chrome APIs {#chrome-apis}
 
 TypeScript provides excellent autocomplete and type safety for Chrome APIs through the `@types/chrome` package.
 
-Storage API
+### Storage API
 
 ```typescript
 // Fully typed storage operations
@@ -481,7 +481,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 ```
 
-Tabs API
+### Tabs API
 
 ```typescript
 // Query and manipulate tabs with full type safety
@@ -500,7 +500,7 @@ async function injectContentScript(tabId: number): Promise<void> {
 }
 ```
 
-Context Menus
+### Context Menus
 
 ```typescript
 // Create context menus with proper typing
@@ -524,9 +524,9 @@ function processSelectedText(text: string): void {
 
 ---
 
-Building and Testing {#building-testing}
+## Building and Testing {#building-testing}
 
-Development Mode
+### Development Mode
 
 Run your extension in development mode with hot reload:
 
@@ -536,7 +536,7 @@ npm run dev
 
 This starts Vite in watch mode, rebuilding your extension whenever you make changes. Use the "Load unpacked" option in Chrome's extension management page to load your `dist` folder.
 
-Production Build
+### Production Build
 
 Create a production build:
 
@@ -546,7 +546,7 @@ npm run build
 
 This generates optimized, minified files in the `dist` directory ready for publication.
 
-Testing Considerations
+### Testing Considerations
 
 While Chrome extension testing can be challenging, TypeScript helps significantly:
 
@@ -557,15 +557,15 @@ While Chrome extension testing can be challenging, TypeScript helps significantl
 
 ---
 
-Best Practices for Type-Safe Extensions {#best-practices}
+## Best Practices for Type-Safe Extensions {#best-practices}
 
 Follow these practices to maximize the benefits of TypeScript in your extension development:
 
-Enable Strict Mode
+### Enable Strict Mode
 
 Always enable strict mode in your `tsconfig.json`. This forces you to handle null and undefined values explicitly, preventing countless runtime errors.
 
-Use Type Inference
+### Use Type Inference
 
 Let TypeScript infer types when they are obvious. You do not need to annotate every variable:
 
@@ -580,9 +580,9 @@ function initializeExtension(config: ExtensionConfig): void {
 }
 ```
 
-Create Custom Type Definitions
+### Create Custom Type Definitions
 
-For complex extension features, create custom types:
+### For complex extension features, create custom types:
 
 ```typescript
 // For complex feature flags
@@ -603,7 +603,7 @@ interface ApiResponse<T> {
 }
 ```
 
-Document Untyped Libraries
+### Document Untyped Libraries
 
 When using libraries without type definitions, create declaration files:
 
@@ -620,7 +620,7 @@ declare module 'some-library' {
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 TypeScript has become an essential tool for Chrome extension development in 2025. The type safety it provides catches errors early, the intelligent autocomplete speeds up development significantly, and the explicit type annotations make your code more maintainable and easier to collaborate on.
 
@@ -632,7 +632,7 @@ Start your next Chrome extension project with TypeScript, and experience the dif
 
 ---
 
-Additional Resources {#resources}
+## Additional Resources {#resources}
 
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)

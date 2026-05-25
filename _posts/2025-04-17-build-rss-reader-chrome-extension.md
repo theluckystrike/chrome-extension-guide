@@ -18,7 +18,7 @@ In this comprehensive tutorial, we will walk through the complete process of bui
 
 ---
 
-Why Build an RSS Reader Chrome Extension? {#why-build-rss-reader}
+## Why Build an RSS Reader Chrome Extension? {#why-build-rss-reader}
 
 The demand for RSS reader Chrome extension solutions continues to grow for several compelling reasons. First, unlike social media platforms that curate content based on engagement algorithms, RSS provides a chronological, chronological feed that respects user choice. Users maintain complete control over what sources they subscribe to and when they consume that content.
 
@@ -28,7 +28,7 @@ Third, building an RSS reader demonstrates many fundamental Chrome extension dev
 
 ---
 
-Project Architecture Overview {#project-architecture}
+## Project Architecture Overview {#project-architecture}
 
 Before writing any code, let's establish the architecture for our RSS feed chrome extension. Our extension will consist of several key components working together to deliver a smooth reading experience.
 
@@ -42,7 +42,7 @@ The content script will be responsible for detecting RSS feeds on web pages, all
 
 ---
 
-Step 1: Creating the Manifest File {#creating-manifest}
+## Step 1: Creating the Manifest File {#creating-manifest}
 
 Every Chrome extension begins with a manifest.json file. This crucial file tells Chrome about your extension's capabilities, permissions, and structure. Let's create a manifest specifically designed for our RSS reader Chrome extension:
 
@@ -85,7 +85,7 @@ The `host_permissions` set to `<all_urls>` is necessary because RSS feeds can ex
 
 ---
 
-Step 2: Building the Popup Interface {#popup-interface}
+## Step 2: Building the Popup Interface {#popup-interface}
 
 The popup is the face of your RSS reader Chrome extension. It needs to be clean, responsive, and intuitive. Let's create the HTML structure:
 
@@ -286,7 +286,7 @@ h1 {
 
 ---
 
-Step 3: Implementing the Background Service Worker {#background-worker}
+## Step 3: Implementing the Background Service Worker {#background-worker}
 
 The background service worker is the engine of your RSS reader Chrome extension. It handles fetching feeds, parsing data, and managing storage. Here's a solid implementation:
 
@@ -490,7 +490,7 @@ async function detectFeedOnPage(tabId) {
 
 ---
 
-Step 4: Implementing the Popup Logic {#popup-logic}
+## Step 4: Implementing the Popup Logic {#popup-logic}
 
 Now let's connect the popup interface to our background service worker:
 
@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Step 5: Testing Your RSS Reader Chrome Extension {#testing-extension}
+## Step 5: Testing Your RSS Reader Chrome Extension {#testing-extension}
 
 Before publishing, thoroughly test your RSS reader chrome extension in development mode. Here's how to load your extension in Chrome:
 
@@ -676,7 +676,7 @@ Your RSS feed chrome extension should handle different feed formats, including R
 
 ---
 
-Step 6: Publishing to the Chrome Web Store {#publishing}
+## Step 6: Publishing to the Chrome Web Store {#publishing}
 
 Once your RSS reader chrome extension is working correctly, you can publish it to reach millions of users. Here's what you need to do:
 
@@ -692,7 +692,7 @@ When writing your description, naturally include phrases like "chrome extension 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an RSS reader Chrome extension is an excellent project that teaches valuable extension development skills while creating a genuinely useful tool. You've learned how to work with Manifest V3, create responsive popup interfaces, implement background service workers for data fetching, and handle RSS feed parsing.
 

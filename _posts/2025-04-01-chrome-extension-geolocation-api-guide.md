@@ -19,7 +19,7 @@ This guide covers the fundamentals of the Geolocation API, walks you through the
 
 ---
 
-Understanding the Geolocation API in Chrome Extensions {#understanding-geolocation-api}
+## Understanding the Geolocation API in Chrome Extensions {#understanding-geolocation-api}
 
 The Geolocation API is a web standard that provides location information to web applications. In the context of Chrome extensions, this API works similarly to how it operates in regular web pages, but with some additional considerations and permission requirements specific to the extension environment. Before diving into implementation details, it is crucial to understand the core concepts that govern how location data is accessed and used in Chrome extensions.
 
@@ -31,7 +31,7 @@ It is important to note that the Geolocation API is available in extension conte
 
 ---
 
-Setting Up Your Extension for Location Access {#setting-up-location-access}
+## Setting Up Your Extension for Location Access {#setting-up-location-access}
 
 Implementing location access in your Chrome extension requires careful attention to manifest configuration and permission handling. The setup process involves declaring the appropriate permissions in your manifest file, implementing proper error handling, and designing a user experience that clearly communicates why your extension needs location access and how it will use that information.
 
@@ -57,7 +57,7 @@ Consider implementing a permission request flow that explains to users why your 
 
 ---
 
-Implementing Basic Geolocation Features {#implementing-basic-geolocation}
+## Implementing Basic Geolocation Features {#implementing-basic-geolocation}
 
 With the proper permissions configured, you can now implement the core geolocation functionality in your extension. The fundamental approach involves using the navigator.geolocation object to request the user's position, handling the asynchronous response, and processing the coordinates to achieve your extension's purpose. Let us explore the implementation details for both one-time position requests and continuous position tracking.
 
@@ -112,7 +112,7 @@ For extensions that need continuous location updates, such as navigation tools o
 
 ---
 
-Advanced Geolocation Techniques {#advanced-techniques}
+## Advanced Geolocation Techniques {#advanced-techniques}
 
 Once you have mastered the basic implementation, several advanced techniques can improve the reliability, accuracy, and user experience of location-based features in your extension. These approaches address common challenges such as dealing with inaccurate positions, implementing intelligent caching, and gracefully handling location services that are unavailable or disabled.
 
@@ -124,7 +124,7 @@ Implementing a debouncing strategy for location requests can significantly impro
 
 ---
 
-Handling Permissions and User Privacy {#permissions-and-privacy}
+## Handling Permissions and User Privacy {#permissions-and-privacy}
 
 Respecting user privacy while providing valuable location-based features requires careful attention to permission handling and transparent communication about how you use location data. Chrome's permission system is designed to protect users, and building extensions that work within this system while still delivering functionality requires thoughtful implementation.
 
@@ -136,7 +136,7 @@ Transparency about how you use location data builds trust with your users. Consi
 
 ---
 
-Building Practical Location-Based Features {#practical-features}
+## Building Practical Location-Based Features {#practical-features}
 
 With the technical foundation in place, let us explore some practical features that you can implement using the geolocation API in your Chrome extensions. These examples demonstrate the versatility of location-aware functionality and provide inspiration for your own extension ideas.
 
@@ -148,7 +148,7 @@ Location-triggered reminders represent another powerful use case for geolocation
 
 ---
 
-Testing and Debugging Geolocation Features {#testing-debugging}
+## Testing and Debugging Geolocation Features {#testing-debugging}
 
 Developing location-aware extensions requires specific testing approaches to ensure reliable functionality across different environments and edge cases. Chrome provides developer tools that simulate location data, making it easier to test your extension without physically moving to different locations.
 
@@ -160,7 +160,7 @@ Pay particular attention to how your extension behaves when location data become
 
 ---
 
-Best Practices and Performance Considerations {#best-practices}
+## Best Practices and Performance Considerations {#best-practices}
 
 Building successful location-aware Chrome extensions requires balancing functionality with performance, battery efficiency, and user experience considerations. Following best practices ensures that your extension provides value without negatively impacting the user's browsing experience or device resources.
 
@@ -172,7 +172,7 @@ Finally, always provide meaningful feedback to users about what your extension i
 
 ---
 
-Conclusion
+### Conclusion
 
 The Chrome extension geolocation API provides a powerful foundation for building location-aware extensions that enhance user productivity and deliver personalized experiences. By understanding the permission model, implementing solid error handling, and following best practices for performance and privacy, you can create extensions that responsibly use location data to provide genuine value.
 

@@ -20,11 +20,11 @@ This comprehensive guide will teach you everything you need to know about implem
 
 ---
 
-Understanding Toast Notifications in Chrome Extensions {#understanding-toast-notifications}
+## Understanding Toast Notifications in Chrome Extensions {#understanding-toast-notifications}
 
 Toast notifications have become a standard UI pattern across modern web applications and browser extensions. They serve as a lightweight communication channel between your extension and the user, providing feedback without interrupting the user's workflow.
 
-What Makes Toast Notifications Effective
+### What Makes Toast Notifications Effective
 
 The effectiveness of a toast notification system lies in its ability to deliver information at the right moment without disrupting the user experience. When implemented correctly, toast notifications offer several key advantages over other notification methods.
 
@@ -34,7 +34,7 @@ Second, toast notifications are contextually appropriate. They appear within you
 
 Third, toast notifications are efficient. They require minimal screen real estate while still conveying meaningful information. A well-designed toast can communicate success, error, warning, or informational messages in a glance.
 
-Types of Toast Notifications
+### Types of Toast Notifications
 
 Toast notifications can serve different purposes depending on the type of information you need to communicate. Understanding these types helps you design more effective notification systems.
 
@@ -48,11 +48,11 @@ Informational toasts provide general information that does not require immediate
 
 ---
 
-Architecture of a Toast Notification System {#architecture}
+## Architecture of a Toast Notification System {#architecture}
 
 Before diving into code, it is essential to understand the architecture of a solid toast notification system. A well-designed system consists of several interconnected components that work together to deliver a smooth user experience.
 
-Core Components
+### Core Components
 
 The toast container serves as the anchor point for all toast notifications. This container is typically positioned at a consistent location within your extension's UI, such as the bottom-left or bottom-right corner. The container manages the positioning, stacking, and overall behavior of individual toasts.
 
@@ -62,7 +62,7 @@ The toast manager is the brain of the system. It handles creating new toasts, ma
 
 The styling layer applies visual design through CSS. This includes animations for appearing and disappearing, color schemes based on toast type, typography for readability, and responsive behavior for different screen sizes.
 
-Implementation Approaches
+### Implementation Approaches
 
 Chrome extensions offer multiple approaches to implementing toast notifications, each with its own trade-offs. Understanding these approaches helps you choose the right method for your specific use case.
 
@@ -74,11 +74,11 @@ The third approach uses the options page or dedicated UI page. For more complex 
 
 ---
 
-Building a Toast Notification System from Scratch {#building-toast-system}
+## Building a Toast Notification System from Scratch {#building-toast-system}
 
 Now let us build a complete toast notification system that you can integrate into your Chrome extension. We will create a flexible, reusable system using vanilla JavaScript and CSS that works with Manifest V3.
 
-Creating the HTML Structure
+### Creating the HTML Structure
 
 First, we need to create the HTML structure for our toast system. Add this to your extension's popup HTML or content script HTML:
 
@@ -88,7 +88,7 @@ First, we need to create the HTML structure for our toast system. Add this to yo
 
 The container is intentionally simple, containing only the minimal structure needed. All individual toasts will be created dynamically through JavaScript.
 
-Styling the Toast System
+### Styling the Toast System
 
 Next, we need comprehensive CSS to style our toast notifications. Add this to your extension's stylesheet:
 
@@ -220,7 +220,7 @@ Next, we need comprehensive CSS to style our toast notifications. Add this to yo
 
 This CSS provides a solid foundation for your toast system. It includes smooth animations, distinct styling for different toast types, support for icons and actions, and responsive behavior for mobile devices.
 
-Implementing the Toast Manager
+### Implementing the Toast Manager
 
 Now we need the JavaScript to make our toast system functional. Here is a comprehensive ToastManager class:
 
@@ -382,11 +382,11 @@ This ToastManager class provides a complete solution for managing toast notifica
 
 ---
 
-Using Toast Notifications in Your Extension {#using-toast-notifications}
+## Using Toast Notifications in Your Extension {#using-toast-notifications}
 
 Now that we have our toast system built, let us explore how to use it effectively in different parts of your Chrome extension.
 
-Using Toasts in Extension Popups
+### Using Toasts in Extension Popups
 
 The most common use case for toast notifications is within your extension's popup. Here is how to integrate the toast system:
 
@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Using Toasts in Content Scripts
+### Using Toasts in Content Scripts
 
 You can also use toast notifications on web pages through content scripts. This is useful for providing feedback about actions that relate to the current page:
 
@@ -447,7 +447,7 @@ document.addEventListener('click', (event) => {
 });
 ```
 
-Using Toasts with Message Passing
+### Using Toasts with Message Passing
 
 For more complex extensions, you might need to show toasts in response to background script events. This requires message passing between your background script and popup or content script:
 
@@ -478,11 +478,11 @@ chrome.runtime.onMessage.addListener((message) => {
 
 ---
 
-Best Practices for Toast Notifications {#best-practices}
+## Best Practices for Toast Notifications {#best-practices}
 
 Implementing toast notifications is only the beginning. To create truly effective notifications, you need to follow best practices that enhance usability, accessibility, and user experience.
 
-Timing and Duration
+### Timing and Duration
 
 The duration of your toast notifications significantly impacts user experience. Too short, and users might miss the message. Too long, and notifications become annoying.
 
@@ -494,7 +494,7 @@ For informational messages, use the default 4,000 milliseconds unless the messag
 
 Never make toast notifications permanent unless they require explicit user action. Permanent notifications should use a different UI pattern, such as inline alerts or modal dialogs.
 
-Positioning
+### Positioning
 
 Position toast notifications where they are visible but not obstructive. The bottom-left corner is a common choice because it aligns with reading direction for most users and avoids the top area where browser UI elements reside.
 
@@ -502,7 +502,7 @@ However, consider your specific use case. If your extension displays a lot of co
 
 Ensure your toast container does not overlap with other important UI elements. Use adequate spacing and consider responsive positioning for different screen sizes.
 
-Accessibility Considerations
+### Accessibility Considerations
 
 Accessibility is crucial for creating inclusive extensions. Toast notifications must be accessible to users with disabilities.
 
@@ -528,7 +528,7 @@ document.addEventListener('keydown', (event) => {
 });
 ```
 
-Stacking Multiple Toasts
+### Stacking Multiple Toasts
 
 When multiple toasts appear simultaneously, they should stack neatly without overlapping or becoming unmanageable. Our CSS already handles this through flexbox, but you should also consider the order in which toasts appear.
 
@@ -538,11 +538,11 @@ Consider implementing a maximum number of visible toasts. If many notifications 
 
 ---
 
-Advanced Toast Notification Patterns {#advanced-patterns}
+## Advanced Toast Notification Patterns {#advanced-patterns}
 
 Once you have the basics working, consider implementing advanced patterns that further enhance your toast notification system.
 
-Progress Toasts
+### Progress Toasts
 
 For long-running operations, progress toasts provide valuable feedback about ongoing processes:
 
@@ -572,7 +572,7 @@ updateProgress(toast, percent) {
 }
 ```
 
-Queued Notifications
+### Queued Notifications
 
 For extensions that generate many notifications, a queue system prevents overwhelming the user:
 
@@ -606,7 +606,7 @@ class QueuedToastManager extends ToastManager {
 }
 ```
 
-Persistent Toasts with Action Required
+### Persistent Toasts with Action Required
 
 Some notifications require user attention until they take action. Use persistent toasts for these cases:
 
@@ -624,11 +624,11 @@ persistent(message, options = {}) {
 
 ---
 
-Testing Your Toast Implementation {#testing}
+## Testing Your Toast Implementation {#testing}
 
 Thorough testing ensures your toast notification system works reliably across different scenarios and edge cases.
 
-Functional Testing
+### Functional Testing
 
 Test each toast type (success, error, warning, info) to verify correct styling and behavior. Ensure icons display properly and colors match your design specifications.
 
@@ -636,7 +636,7 @@ Test the dismiss functionality. Clicking the close button should remove the toas
 
 Test auto-dismiss timing. Toasts should disappear after the specified duration, not before or after.
 
-Accessibility Testing
+### Accessibility Testing
 
 Navigate through your extension using only keyboard controls. Verify that toasts can be closed and action buttons activated via keyboard.
 
@@ -644,7 +644,7 @@ Test with screen readers. Ensure toast messages are announced correctly and at a
 
 Test with browser zoom enabled. Toasts should remain visible and properly positioned at different zoom levels.
 
-Performance Testing
+### Performance Testing
 
 Monitor how your toast system performs when many toasts appear rapidly. The system should handle bursts of notifications without freezing or crashing.
 
@@ -652,7 +652,7 @@ Check memory usage over time. Ensure toasts are properly removed from the DOM af
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Toast notification systems are essential for creating polished, user-friendly Chrome extensions. They provide immediate, contextual feedback that helps users understand what is happening in your extension without disrupting their workflow.
 

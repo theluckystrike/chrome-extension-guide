@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/api-reference/bookmarks-api/"
 last_modified_at: 2026-01-15
 ---
 
-Chrome Bookmarks API Reference
+### Chrome Bookmarks API Reference
 
 The `chrome.bookmarks` API lets you create, read, update, delete, search, and organize bookmarks. Bookmarks are stored in a tree structure with folders and bookmark nodes.
 
-Permissions {#permissions}
+## Permissions {#permissions}
 
 ```json
 {
@@ -22,7 +22,7 @@ The `bookmarks` permission triggers a "Read and change your bookmarks" warning i
 
 See the [bookmarks permission reference](../permissions/bookmarks.md) for details.
 
-BookmarkTreeNode Object {#bookmarktreenode-object}
+## BookmarkTreeNode Object {#bookmarktreenode-object}
 
 Every bookmark or folder is represented as a `BookmarkTreeNode`:
 
@@ -39,7 +39,7 @@ Every bookmark or folder is represented as a `BookmarkTreeNode`:
 | `children` | `BookmarkTreeNode[]` | Child nodes (present only when using `getTree()` or `getSubTree()`) |
 | `unmodifiable` | `"managed"` | Present if the bookmark is managed by policy |
 
-Tree Structure {#tree-structure}
+## Tree Structure {#tree-structure}
 
 Chrome's bookmark tree has a fixed root structure:
 
@@ -52,9 +52,9 @@ Root (id: "0")
 
 You cannot create, modify, or delete the root node or these top-level folders.
 
-Core Methods {#core-methods}
+## Core Methods {#core-methods}
 
-chrome.bookmarks.getTree() {#chromebookmarksgettree}
+## chrome.bookmarks.getTree() {#chromebookmarksgettree}
 
 Get the entire bookmark tree.
 
@@ -76,7 +76,7 @@ function walkTree(nodes: chrome.bookmarks.BookmarkTreeNode[], depth = 0) {
 walkTree(root.children!);
 ```
 
-chrome.bookmarks.getSubTree(id) {#chromebookmarksgetsubtreeid}
+## chrome.bookmarks.getSubTree(id) {#chromebookmarksgetsubtreeid}
 
 Get a subtree starting from a specific node.
 
@@ -86,7 +86,7 @@ const [bar] = await chrome.bookmarks.getSubTree("1");
 console.log(bar.children); // direct children of the bar
 ```
 
-chrome.bookmarks.get(idOrIds) {#chromebookmarksgetidorids}
+## chrome.bookmarks.get(idOrIds) {#chromebookmarksgetidorids}
 
 Get specific bookmark nodes by ID.
 
@@ -98,7 +98,7 @@ console.log(bookmark.title, bookmark.url);
 const bookmarks = await chrome.bookmarks.get(["42", "43", "44"]);
 ```
 
-chrome.bookmarks.getChildren(id) {#chromebookmarksgetchildrenid}
+## chrome.bookmarks.getChildren(id) {#chromebookmarksgetchildrenid}
 
 Get the direct children of a folder.
 
@@ -110,7 +110,7 @@ children.forEach((child) => {
 });
 ```
 
-chrome.bookmarks.getRecent(numberOfItems) {#chromebookmarksgetrecentnumberofitems}
+## chrome.bookmarks.getRecent(numberOfItems) {#chromebookmarksgetrecentnumberofitems}
 
 Get the most recently added bookmarks.
 
@@ -119,7 +119,7 @@ const recent = await chrome.bookmarks.getRecent(10);
 recent.forEach((b) => console.log(b.title, b.dateAdded));
 ```
 
-chrome.bookmarks.search(query) {#chromebookmarkssearchquery}
+## chrome.bookmarks.search(query) {#chromebookmarkssearchquery}
 
 Search bookmarks by title, URL, or both.
 
@@ -143,7 +143,7 @@ async function isBookmarked(url: string): Promise<boolean> {
 }
 ```
 
-chrome.bookmarks.create(bookmark) {#chromebookmarkscreatebookmark}
+## chrome.bookmarks.create(bookmark) {#chromebookmarkscreatebookmark}
 
 Create a new bookmark or folder.
 
@@ -178,7 +178,7 @@ await chrome.bookmarks.create({
 });
 ```
 
-chrome.bookmarks.update(id, changes) {#chromebookmarksupdateid-changes}
+## chrome.bookmarks.update(id, changes) {#chromebookmarksupdateid-changes}
 
 Update a bookmark's title or URL.
 
@@ -200,7 +200,7 @@ await chrome.bookmarks.update(bookmarkId, {
 });
 ```
 
-chrome.bookmarks.move(id, destination) {#chromebookmarksmoveid-destination}
+## chrome.bookmarks.move(id, destination) {#chromebookmarksmoveid-destination}
 
 Move a bookmark to a different folder or position.
 
@@ -222,7 +222,7 @@ await chrome.bookmarks.move(bookmarkId, {
 });
 ```
 
-chrome.bookmarks.remove(id) / chrome.bookmarks.removeTree(id) {#chromebookmarksremoveid-chromebookmarksremovetreeid}
+## chrome.bookmarks.remove(id) / chrome.bookmarks.removeTree(id) {#chromebookmarksremoveid-chromebookmarksremovetreeid}
 
 Delete a bookmark or folder.
 
@@ -234,9 +234,9 @@ await chrome.bookmarks.remove(bookmarkId);
 await chrome.bookmarks.removeTree(folderId);
 ```
 
-Events {#events}
+## Events {#events}
 
-chrome.bookmarks.onCreated {#chromebookmarksoncreated}
+## chrome.bookmarks.onCreated {#chromebookmarksoncreated}
 
 ```ts
 chrome.bookmarks.onCreated.addListener((id, bookmark) => {
@@ -244,7 +244,7 @@ chrome.bookmarks.onCreated.addListener((id, bookmark) => {
 });
 ```
 
-chrome.bookmarks.onRemoved {#chromebookmarksonremoved}
+## chrome.bookmarks.onRemoved {#chromebookmarksonremoved}
 
 ```ts
 chrome.bookmarks.onRemoved.addListener((id, removeInfo) => {
@@ -253,7 +253,7 @@ chrome.bookmarks.onRemoved.addListener((id, removeInfo) => {
 });
 ```
 
-chrome.bookmarks.onChanged {#chromebookmarksonchanged}
+## chrome.bookmarks.onChanged {#chromebookmarksonchanged}
 
 Fires when a bookmark's title or URL is updated.
 
@@ -263,7 +263,7 @@ chrome.bookmarks.onChanged.addListener((id, changeInfo) => {
 });
 ```
 
-chrome.bookmarks.onMoved {#chromebookmarksonmoved}
+## chrome.bookmarks.onMoved {#chromebookmarksonmoved}
 
 ```ts
 chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
@@ -271,7 +271,7 @@ chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
 });
 ```
 
-chrome.bookmarks.onChildrenReordered {#chromebookmarksonchildrenreordered}
+## chrome.bookmarks.onChildrenReordered {#chromebookmarksonchildrenreordered}
 
 Fires when the children of a folder are reordered (e.g. sorted by the user).
 
@@ -281,7 +281,7 @@ chrome.bookmarks.onChildrenReordered.addListener((id, reorderInfo) => {
 });
 ```
 
-chrome.bookmarks.onImportBegan / chrome.bookmarks.onImportEnded {#chromebookmarksonimportbegan-chromebookmarksonimportended}
+## chrome.bookmarks.onImportBegan / chrome.bookmarks.onImportEnded {#chromebookmarksonimportbegan-chromebookmarksonimportended}
 
 Fires when the user imports bookmarks. Use these to suppress your event handlers during bulk import.
 
@@ -303,7 +303,7 @@ chrome.bookmarks.onCreated.addListener((id, bookmark) => {
 });
 ```
 
-Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
+## Using with @theluckystrike/webext-messaging {#using-with-theluckystrikewebext-messaging}
 
 Build a bookmark manager with background handling and popup UI:
 
@@ -357,9 +357,9 @@ msg.onMessage({
 });
 ```
 
-Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
+## Using with @theluckystrike/webext-storage {#using-with-theluckystrikewebext-storage}
 
-Track bookmark statistics and user preferences:
+### Track bookmark statistics and user preferences:
 
 ```ts
 import { defineSchema, createStorage } from "@theluckystrike/webext-storage";
@@ -395,9 +395,9 @@ chrome.bookmarks.onCreated.addListener(async (id, bookmark) => {
 });
 ```
 
-Common Patterns {#common-patterns}
+## Common Patterns {#common-patterns}
 
-Bookmark the current page with one click {#bookmark-the-current-page-with-one-click}
+## Bookmark the current page with one click {#bookmark-the-current-page-with-one-click}
 
 ```ts
 chrome.action.onClicked.addListener(async (tab) => {
@@ -416,7 +416,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Export bookmarks as JSON {#export-bookmarks-as-json}
+## Export bookmarks as JSON {#export-bookmarks-as-json}
 
 ```ts
 async function exportBookmarks(): Promise<string> {
@@ -425,7 +425,7 @@ async function exportBookmarks(): Promise<string> {
 }
 ```
 
-Find duplicate bookmarks {#find-duplicate-bookmarks}
+## Find duplicate bookmarks {#find-duplicate-bookmarks}
 
 ```ts
 async function findDuplicates() {
@@ -450,7 +450,7 @@ async function findDuplicates() {
 }
 ```
 
-Gotchas {#gotchas}
+## Gotchas {#gotchas}
 
 1. IDs are strings, not numbers. Always treat bookmark IDs as strings.
 
@@ -464,7 +464,7 @@ Gotchas {#gotchas}
 
 6. Events fire during sync. If the user has Chrome Sync enabled, remote bookmark changes will trigger local events. Use `onImportBegan`/`onImportEnded` to batch handle these.
 
-Related {#related}
+## Related {#related}
 
 - [bookmarks permission](../permissions/bookmarks.md)
 - [History API](history-api.md)

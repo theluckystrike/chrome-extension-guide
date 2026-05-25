@@ -12,7 +12,7 @@ Complete reference for all Chrome Extension permissions. Use this cheatsheet to 
 
 ---
 
-Core Permissions {#core-permissions}
+## Core Permissions {#core-permissions}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -29,7 +29,7 @@ Core Permissions {#core-permissions}
 
 ---
 
-Network & Requests {#network-requests}
+## Network & Requests {#network-requests}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -42,7 +42,7 @@ Network & Requests {#network-requests}
 
 ---
 
-Data & Privacy APIs {#data-privacy}
+## Data & Privacy APIs {#data-privacy}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -57,7 +57,7 @@ Data & Privacy APIs {#data-privacy}
 
 ---
 
-Identity & Authentication {#identity-auth}
+## Identity & Authentication {#identity-auth}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -67,7 +67,7 @@ Identity & Authentication {#identity-auth}
 
 ---
 
-System & Hardware {#system-hardware}
+## System & Hardware {#system-hardware}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -84,7 +84,7 @@ System & Hardware {#system-hardware}
 
 ---
 
-Content & Page Access {#content-page}
+## Content & Page Access {#content-page}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -98,7 +98,7 @@ Content & Page Access {#content-page}
 
 ---
 
-Search & Navigation {#search-navigation}
+## Search & Navigation {#search-navigation}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -109,7 +109,7 @@ Search & Navigation {#search-navigation}
 
 ---
 
-Special APIs {#special-apis}
+## Special APIs {#special-apis}
 
 | Permission | API Namespace | Use Case | Sensitivity |
 |------------|---------------|----------|-------------|
@@ -126,7 +126,7 @@ Special APIs {#special-apis}
 
 ---
 
-Optional Permissions {#optional-permissions}
+## Optional Permissions {#optional-permissions}
 
 | Permission | Description | Trigger |
 |------------|-------------|---------|
@@ -142,7 +142,7 @@ Optional Permissions {#optional-permissions}
 
 ---
 
-Manifest V2 vs V3 Permissions {#mv2-mv3}
+## Manifest V2 vs V3 Permissions {#mv2-mv3}
 
 | Category | MV2 | MV3 | Notes |
 |----------|-----|-----|-------|
@@ -153,7 +153,7 @@ Manifest V2 vs V3 Permissions {#mv2-mv3}
 
 ---
 
-Permission Risks & Best Practices {#best-practices}
+## Permission Risks & Best Practices {#best-practices}
 
 | Risk Level | Permissions | Recommendation |
 |------------|-------------|-----------------|
@@ -161,7 +161,7 @@ Permission Risks & Best Practices {#best-practices}
 | Medium | `tabs`, `bookmarks`, `downloads`, `scripting` | Request only what's needed |
 | Low | `storage`, `alarms`, `i18n`, `contextMenus` | Generally safe to use |
 
-Security Tips
+### Security Tips
 
 - Request permissions dynamically when needed, not at install
 - Use `activeTab` instead of `tabs` when possible
@@ -171,7 +171,7 @@ Security Tips
 
 ---
 
-Quick Lookup Table {#quick-lookup}
+## Quick Lookup Table {#quick-lookup}
 
 | Need To... | Use Permission |
 |------------|-----------------|
@@ -191,7 +191,7 @@ Quick Lookup Table {#quick-lookup}
 
 ---
 
-Related Resources {#related-resources}
+## Related Resources {#related-resources}
 
 - [Permissions detailed look](/permissions/permissions-deep detailed look/). Detailed permission explanations
 - [Permission Strategy](/guides/extension-permissions-strategy/). Best practices for permission requests

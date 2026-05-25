@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Link Saver Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 
 In this tutorial, you'll create a Chrome extension that lets users save links with tags and notes for later reference. The extension will allow one-click saving of the current page, right-click saving of any link, and powerful organization features.
 
@@ -17,7 +17,7 @@ Features:
 - Organize by categories/tags
 - Search saved links
 
-Manifest Configuration {#manifest-configuration}
+## Manifest Configuration {#manifest-configuration}
 
 First, configure the required permissions in your `manifest.json`:
 
@@ -37,7 +37,7 @@ For more details on these permissions, see:
 - [permissions/activeTab.md](../permissions/activeTab.md)
 - [permissions/contextMenus.md](../permissions/contextMenus.md)
 
-Step 1: Save Current Page {#step-1-save-current-page}
+## Step 1: Save Current Page {#step-1-save-current-page}
 
 When the user clicks the extension icon, save the current tab's URL, title, and favicon:
 
@@ -76,7 +76,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 ```
 
-Step 2: Context Menu Save {#step-2-context-menu-save}
+## Step 2: Context Menu Save {#step-2-context-menu-save}
 
 Add right-click functionality to save any link on any page:
 
@@ -108,7 +108,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-Step 3: Popup UI {#step-3-popup-ui}
+## Step 3: Popup UI {#step-3-popup-ui}
 
 Create an interactive popup to manage saved links:
 
@@ -176,7 +176,7 @@ function renderLinks(links) {
 }
 ```
 
-Step 4: Tags and Categories {#step-4-tags-and-categories}
+## Step 4: Tags and Categories {#step-4-tags-and-categories}
 
 Add tag support when saving links:
 
@@ -200,7 +200,7 @@ async function getAllTags() {
 }
 ```
 
-Step 5: Notes {#step-5-notes}
+## Step 5: Notes {#step-5-notes}
 
 Add optional notes to saved links:
 
@@ -214,7 +214,7 @@ async function editNote(linkIndex) {
 }
 ```
 
-Step 6: Import/Export {#step-6-importexport}
+## Step 6: Import/Export {#step-6-importexport}
 
 Add import/export functionality for backups:
 
@@ -263,7 +263,7 @@ async function importBookmarks(file) {
 
 For syncing across devices, consider using `chrome.storage.sync` instead of `storage.local`, but be aware of the [size limits](https://developer.chrome.com/docs/extensions/mv3/storage/#property-sync).
 
-Summary {#summary}
+## Summary {#summary}
 
 You've built a complete link saver extension with:
 - One-click page saving with badge confirmation

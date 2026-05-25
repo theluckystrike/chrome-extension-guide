@@ -63,7 +63,7 @@ url-shortener/
 
 ---
 
-Manifest Configuration
+### Manifest Configuration
 
 The manifest.json defines the extension's capabilities and permissions. For a URL shortener using external APIs, you'll need careful permission configuration.
 
@@ -109,7 +109,7 @@ The manifest.json defines the extension's capabilities and permissions. For a UR
 }
 ```
 
-Permission Explanation
+### Permission Explanation
 
 | Permission | Purpose |
 |------------|---------|
@@ -121,11 +121,11 @@ Permission Explanation
 
 ---
 
-Core TypeScript Implementation
+### Core TypeScript Implementation
 
-Shared Types
+### Shared Types
 
-Define TypeScript interfaces for type safety across contexts:
+### Define TypeScript interfaces for type safety across contexts:
 
 ```typescript
 // src/shared/types.ts
@@ -167,9 +167,9 @@ export interface MessageResponse {
 }
 ```
 
-Background Service Worker
+### Background Service Worker
 
-The service worker handles API calls and storage:
+### The service worker handles API calls and storage:
 
 ```typescript
 // src/background/index.ts
@@ -265,7 +265,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 ```
 
-URL Shortening Logic
+### URL Shortening Logic
 
 ```typescript
 // src/background/shorten.ts
@@ -311,7 +311,7 @@ export async function shortenUrl(
 }
 ```
 
-Storage Management
+### Storage Management
 
 ```typescript
 // src/background/storage.ts
@@ -366,9 +366,9 @@ function extractShortCode(url: string): string {
 
 ---
 
-UI Design Patterns
+### UI Design Patterns
 
-Popup Component Structure
+### Popup Component Structure
 
 ```typescript
 // src/popup/popup.ts
@@ -405,7 +405,7 @@ async function loadHistory(): Promise<unknown[]> {
 }
 ```
 
-Form Component
+### Form Component
 
 ```typescript
 // src/popup/components/ShortenerForm.ts
@@ -529,7 +529,7 @@ export class ShortenerForm {
 }
 ```
 
-Content Script Overlay
+### Content Script Overlay
 
 For an in-page overlay that appears when text is selected:
 
@@ -619,9 +619,9 @@ function isValidUrl(text: string): boolean {
 
 ---
 
-State Management
+### State Management
 
-Using Chrome Storage API
+### Using Chrome Storage API
 
 The Chrome Storage API provides automatic synchronization across contexts:
 
@@ -651,9 +651,9 @@ export async function saveSettings(settings: Partial<ExtensionSettings>): Promis
 
 ---
 
-Error Handling
+### Error Handling
 
-Service Worker Error Handling
+### Service Worker Error Handling
 
 ```typescript
 // Global error handler for service worker
@@ -683,7 +683,7 @@ self.onunhandledrejection = (event) => {
 };
 ```
 
-Network Error Handling
+### Network Error Handling
 
 ```typescript
 async function shortenWithRetry(
@@ -711,9 +711,9 @@ async function shortenWithRetry(
 
 ---
 
-Testing Approach
+### Testing Approach
 
-Unit Testing with Vitest
+### Unit Testing with Vitest
 
 ```typescript
 // tests/storage.test.ts
@@ -753,9 +753,9 @@ describe('Storage', () => {
 });
 ```
 
-Integration Testing
+### Integration Testing
 
-Use Playwright to test the popup UI:
+### Use Playwright to test the popup UI:
 
 ```typescript
 // tests/popup.test.ts
@@ -783,9 +783,9 @@ test('popup shortens URL', async ({ page }) => {
 
 ---
 
-Performance Considerations
+### Performance Considerations
 
-Service Worker Lifecycle
+### Service Worker Lifecycle
 
 The Manifest V3 service worker has a lifetime of about 30 seconds of idle time. Handle this carefully:
 
@@ -808,7 +808,7 @@ export function keepAlive(): void {
 }
 ```
 
-Memory Management
+### Memory Management
 
 ```typescript
 // Clean up listeners and DOM references in content scripts
@@ -826,7 +826,7 @@ navigation.addEventListener('navigate', cleanup);
 
 ---
 
-Publishing Checklist
+### Publishing Checklist
 
 Before publishing to the Chrome Web Store, ensure:
 
@@ -864,7 +864,7 @@ Submission
 
 ---
 
-Conclusion
+### Conclusion
 
 Building a URL shortener extension demonstrates core Chrome extension development concepts including:
 

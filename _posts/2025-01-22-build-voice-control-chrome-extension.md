@@ -20,7 +20,7 @@ In this tutorial, we'll walk through the complete process of building a voice co
 
 ---
 
-Understanding Voice Control in Chrome Extensions
+### Understanding Voice Control in Chrome Extensions
 
 Before we dive into the implementation details, it's essential to understand the technology that powers voice control in Chrome extensions. The Web Speech API provides the foundation for all voice recognition capabilities within Chrome extensions, offering both speech synthesis (text-to-speech) and speech recognition (voice-to-text) functionality. For voice control extensions, we primarily focus on the speech recognition portion of this API.
 
@@ -32,7 +32,7 @@ However, there are important limitations to consider when building voice control
 
 ---
 
-Project Setup and Extension Structure
+### Project Setup and Extension Structure
 
 Every Chrome extension begins with a well-structured project layout, and voice control extensions are no different. We'll organize our project to separate the popup interface, background service worker, content scripts, and shared utilities. This modular approach makes the code maintainable and easier to extend with additional voice commands.
 
@@ -98,7 +98,7 @@ Notice that we're using Manifest V3, which is the current standard for Chrome ex
 
 ---
 
-Implementing the Voice Recognition Core
+### Implementing the Voice Recognition Core
 
 The core of any voice control extension is the speech recognition system. We'll create a solid recognition engine that can handle continuous listening, command matching, and error recovery. This component lives in our background service worker, where it can maintain state across browser sessions and communicate with other parts of the extension.
 
@@ -231,7 +231,7 @@ This voice recognition engine provides several important features that make it s
 
 ---
 
-Defining Voice Commands and Action Handlers
+### Defining Voice Commands and Action Handlers
 
 Now that we have the recognition engine in place, we need to define the actual commands our extension will respond to and implement the corresponding action handlers. A well-designed voice control extension should support a variety of commands covering navigation, tab management, page interaction, and extension-specific actions.
 
@@ -393,7 +393,7 @@ This command structure provides a comprehensive set of voice commands covering t
 
 ---
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup interface provides users with visual feedback about the voice control status and allows them to configure settings. A well-designed popup should show whether the extension is currently listening, display recognized commands in real-time, and provide access to settings like language selection and command customization.
 
@@ -478,7 +478,7 @@ The popup includes visual feedback elements that update in real-time as the voic
 
 ---
 
-Connecting the Components
+### Connecting the Components
 
 Now we need to connect all the components together through the background service worker and message passing system. The service worker acts as the central hub that coordinates the voice recognition engine, command handlers, and communication with the popup and content scripts.
 
@@ -673,7 +673,7 @@ The popup JavaScript handles user interactions, updates the UI based on the voic
 
 ---
 
-Testing and Deployment
+### Testing and Deployment
 
 Once you've implemented all the components, it's time to test your voice control extension and prepare it for deployment to the Chrome Web Store. Testing voice control extensions requires careful attention to both the recognition accuracy and the user experience flow.
 
@@ -693,7 +693,7 @@ For deployment to the Chrome Web Store, you'll need to create a zip file of your
 
 ---
 
-Advanced Features and Customization
+### Advanced Features and Customization
 
 Once you have the basic voice control extension working, there are numerous ways to enhance and customize it for specific use cases. Consider implementing custom command grammars for precise matching, integrating with external APIs for natural language processing, or adding support for custom voice shortcuts that trigger complex workflows.
 

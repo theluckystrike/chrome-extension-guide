@@ -17,7 +17,7 @@ By the end of this guide, you'll have a fully functional extension that allows u
 
 ---
 
-Project Setup with Manifest V3 {#manifest-v3-setup}
+## Project Setup with Manifest V3 {#manifest-v3-setup}
 
 Every Chrome extension begins with the manifest file, which declares the extension's permissions, capabilities, and entry points. For a tab manager in 2025, we'll use Manifest V3, which offers improved security and performance over its predecessor.
 
@@ -61,11 +61,11 @@ For a detailed breakdown of all available permissions, check out our [Chrome Ext
 
 ---
 
-Chrome Tabs API detailed look {#chrome-tabs-api}
+## Chrome Tabs API detailed look {#chrome-tabs-api}
 
 The `chrome.tabs` API is the foundation of any tab management extension. This powerful API provides methods for creating, querying, updating, and manipulating browser tabs.
 
-Understanding Tab Objects
+### Understanding Tab Objects
 
 Each tab in Chrome is represented by a `Tab` object containing numerous properties. The most important ones for our extension include:
 
@@ -78,7 +78,7 @@ Each tab in Chrome is represented by a `Tab` object containing numerous properti
 - pinned: Whether the tab is pinned
 - groupId: The ID of the tab's group (if any)
 
-Core Tab Operations
+### Core Tab Operations
 
 Here's how to perform essential tab operations:
 
@@ -103,11 +103,11 @@ The `chrome.tabs.query()` method is particularly powerful as it allows filtering
 
 ---
 
-Tab Querying and Filtering {#tab-querying}
+## Tab Querying and Filtering {#tab-querying}
 
 Building an effective tab manager requires sophisticated querying capabilities. Users need to find tabs quickly across potentially hundreds of open pages.
 
-Advanced Query Patterns
+### Advanced Query Patterns
 
 Chrome's tab query system supports numerous filtering options:
 
@@ -140,7 +140,7 @@ function searchTabs(query) {
 }
 ```
 
-Building a Search Feature
+### Building a Search Feature
 
 For your popup UI, implement a real-time search that filters tabs as the user types:
 
@@ -162,11 +162,11 @@ This approach ensures users can quickly locate any tab regardless of how many wi
 
 ---
 
-Tab Groups API {#tab-groups-api}
+## Tab Groups API {#tab-groups-api}
 
 Chrome's Tab Groups API (introduced in Chrome 87) allows users to visually organize tabs with color-coded groups. This feature is essential for any modern tab manager.
 
-Creating and Managing Groups
+### Creating and Managing Groups
 
 ```javascript
 // Create a new tab group
@@ -197,11 +197,11 @@ The Tab Groups API provides a visual organization system that users love. By ass
 
 ---
 
-Suspend and Restore with chrome.tabs.discard {#suspend-restore}
+## Suspend and Restore with chrome.tabs.discard {#suspend-restore}
 
 Memory management is crucial for power users with many tabs. Chrome provides the `chrome.tabs.discard` API to suspend tabs without closing them, releasing their memory while preserving their state.
 
-How Tab Discarding Works
+### How Tab Discarding Works
 
 ```javascript
 // Discard a specific tab (suspend it)
@@ -231,7 +231,7 @@ chrome.tabs.update(tabId, { active: true });
 
 When a tab is discarded, Chrome releases the memory used by its content while keeping the tab in the tab strip. The tab appears grayed out, and clicking it automatically reloads the page. This provides significant memory savings, each discarded tab can free up 50MB to 500MB depending on the page content.
 
-Intelligent Suspension Logic
+### Intelligent Suspension Logic
 
 For a production-ready tab manager, implement smart suspension rules:
 
@@ -257,11 +257,11 @@ This ensures critical applications remain active while non-essential tabs get su
 
 ---
 
-Popup UI with Tab List {#popup-ui}
+## Popup UI with Tab List {#popup-ui}
 
 The popup interface is the primary interaction point for most users. Let's build a clean, functional tab list UI.
 
-HTML Structure
+### HTML Structure
 
 ```html
 <!-- popup.html -->
@@ -290,7 +290,7 @@ HTML Structure
 </html>
 ```
 
-JavaScript Logic
+### JavaScript Logic
 
 ```javascript
 // popup.js
@@ -345,11 +345,11 @@ For styling guidance, check out our [Chrome Extension UI Patterns](/docs/pattern
 
 ---
 
-Keyboard Shortcuts {#keyboard-shortcuts}
+## Keyboard Shortcuts {#keyboard-shortcuts}
 
 Keyboard shortcuts dramatically improve productivity for power users. Manifest V3 provides a built-in commands API for this purpose.
 
-Defining Shortcuts in Manifest
+### Defining Shortcuts in Manifest
 
 ```json
 {
@@ -370,7 +370,7 @@ Defining Shortcuts in Manifest
 }
 ```
 
-Handling Commands in Background
+### Handling Commands in Background
 
 ```javascript
 // background.js
@@ -400,11 +400,11 @@ Users can also customize these shortcuts via `chrome://extensions/shortcuts`.
 
 ---
 
-Storage for Saved Sessions {#storage}
+## Storage for Saved Sessions {#storage}
 
 Persisting user sessions and preferences requires Chrome's storage API. This allows users to save and restore tab configurations across browser restarts.
 
-Saving Sessions
+### Saving Sessions
 
 ```javascript
 // storage.js
@@ -460,11 +460,11 @@ The storage API provides both `local` (persistent, unlimited) and `sync` (synced
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once your extension is complete, it's time to publish it. The Chrome Web Store provides access to millions of potential users.
 
-Preparing for Publication
+### Preparing for Publication
 
 1. Create store listing assets:
    - Screenshots (1280x800 or 640x400)
@@ -490,7 +490,7 @@ Preparing for Publication
    zip -r extension.zip manifest.json popup.html popup.css popup.js background.js icons/ storage.js
    ```
 
-Publishing Process
+### Publishing Process
 
 1. Navigate to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
 2. Click "New Item" and upload your ZIP file
@@ -507,18 +507,18 @@ For a comprehensive guide to the publishing process, see our [Chrome Extension P
 
 ---
 
-Monetization Options {#monetization}
+## Monetization Options {#monetization}
 
 Building a successful extension isn't just about coding, it's also about creating a sustainable business. There are several proven monetization strategies for tab managers.
 
-Monetization Strategies
+### Monetization Strategies
 
 1. Freemium Model: Offer basic features for free with premium upgrades
 2. One-time Purchase: Full features with single payment
 3. Subscription: Monthly/yearly access to premium features
 4. Affiliate Integration: Earn commissions from recommended products
 
-Premium Feature Ideas
+### Premium Feature Ideas
 
 Consider these premium features for your tab manager:
 
@@ -530,7 +530,7 @@ Consider these premium features for your tab manager:
 
 For detailed monetization strategies, see our [Extension Monetization Playbook](/docs/guides/extension-monetization.md).
 
-Tab Suspender Pro: A Successful Example
+### Tab Suspender Pro: A Successful Example
 
 [Tab Suspender Pro](https://chromewebstore.google.com/detail/tab-suspender-pro/dedhmikogfenolhffljmpgcfcgbgelkm) demonstrates effective monetization of tab management features. The extension offers automatic tab suspension as a free core feature while monetizing advanced capabilities like custom suspension rules, detailed analytics, and priority support.
 
@@ -538,7 +538,7 @@ This approach, free basic functionality with premium upgrades, has proven highly
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a tab manager Chrome extension is an excellent project that combines practical utility with valuable development skills. You've learned how to:
 

@@ -10,7 +10,7 @@ Chrome Extension Dependency Injection
 
 Dependency injection (DI) is a design pattern that helps you write loosely coupled, testable code by inverting the control of dependencies. In Chrome extensions, where you deal with browser APIs, background scripts, and content scripts, applying DI can dramatically improve your code's maintainability and testability.
 
-Why Dependency Injection Matters in Extensions {#why-di-matters}
+## Why Dependency Injection Matters in Extensions {#why-di-matters}
 
 Chrome extensions present unique challenges that make dependency injection particularly valuable:
 
@@ -20,7 +20,7 @@ Chrome extensions present unique challenges that make dependency injection parti
 
 Without DI, your business logic becomes tightly coupled to Chrome's APIs, making it impossible to run automated tests without launching a full browser instance.
 
-The Problem: Tightly Coupled Code {#the-problem}
+## The Problem: Tightly Coupled Code {#the-problem}
 
 Consider this typical extension service without dependency injection:
 
@@ -41,7 +41,7 @@ class BookmarkService {
 
 This code cannot be tested without mocking Chrome's global objects, which is fragile and error-prone.
 
-Solution: Inject Dependencies {#solution-inject-dependencies}
+## Solution: Inject Dependencies {#solution-inject-dependencies}
 
 The solution is to define interfaces for your dependencies and inject them:
 
@@ -73,7 +73,7 @@ class BookmarkService {
 
 Now you can easily test `BookmarkService` by passing mock implementations.
 
-Factory Patterns for Extension Contexts {#factory-patterns}
+## Factory Patterns for Extension Contexts {#factory-patterns}
 
 Chrome extensions run in multiple contexts, each with different API availability. Use factory functions to create context-appropriate implementations:
 
@@ -100,7 +100,7 @@ class ChromeBookmarkStorage implements BookmarkStorage {
 
 This approach lets you use real Chrome APIs in the background context while providing test doubles for popups or options pages.
 
-Service Layers with DI {#service-layers}
+## Service Layers with DI {#service-layers}
 
 Organize your extension into clear service layers:
 
@@ -147,7 +147,7 @@ function createBackgroundServices() {
 
 This layered architecture makes it trivial to swap implementations or add new features.
 
-Mocking Chrome APIs for Testing {#mocking-chrome-apis}
+## Mocking Chrome APIs for Testing {#mocking-chrome-apis}
 
 Create a test utilities module that provides mock implementations:
 
@@ -207,9 +207,9 @@ describe('BookmarkService', () => {
 });
 ```
 
-Module Boundaries {#module-boundaries}
+## Module Boundaries {#module-boundaries}
 
-Define clear boundaries between your extension's modules:
+### Define clear boundaries between your extension's modules:
 
 | Layer | Responsibility | Dependencies |
 |-------|---------------|--------------|
@@ -218,7 +218,7 @@ Define clear boundaries between your extension's modules:
 | Controllers | Handle user input | Services |
 | Composers | Wire everything together | All above |
 
-Keep these boundaries explicit in your file structure:
+### Keep these boundaries explicit in your file structure:
 
 ```
 src/
@@ -234,7 +234,7 @@ src/
      background-compose.ts
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Always use interfaces for your dependencies, never concrete types
 2. Inject at construction. pass dependencies through constructors
@@ -242,6 +242,6 @@ Best Practices {#best-practices}
 4. Keep adapters thin. adapters should only translate API calls, not contain business logic
 5. Name dependencies clearly. use descriptive names like `bookmarkStorage` rather than `storage`
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Dependency injection transforms Chrome extension development from writing untestable scripts to building maintainable applications. By abstracting Chrome APIs behind interfaces, you gain the ability to thoroughly test your business logic without browser dependencies. The initial setup cost pays dividends in code quality, refactoring confidence, and team productivity.

@@ -6,15 +6,15 @@ canonical_url: "https://bestchromeextensions.com/patterns/content-script-react/"
 last_modified_at: 2026-01-15
 ---
 
-Integrating React into Chrome Extension Content Scripts
+### Integrating React into Chrome Extension Content Scripts
 
-The Challenge {#the-challenge}
+## The Challenge {#the-challenge}
 
 Content scripts run in the context of the web page, not the extension. The page already has its own DOM, and injecting React directly into the page DOM creates two problems: style leakage (your CSS affects the page, page CSS affects your UI) and potential conflicts if the page already uses React.
 
 ---
 
-Shadow DOM Mounting {#shadow-dom-mounting}
+## Shadow DOM Mounting {#shadow-dom-mounting}
 
 React needs a DOM root to render into. For content scripts, create a Shadow DOM host element:
 
@@ -44,7 +44,7 @@ The Shadow DOM provides style isolation. global page CSS won't affect your React
 
 ---
 
-CSS-in-JS with Shadow DOM {#css-in-js-with-shadow-dom}
+## CSS-in-JS with Shadow DOM {#css-in-js-with-shadow-dom}
 
 Use Emotion or styled-components with the `container` option to inject styles into Shadow DOM:
 
@@ -69,7 +69,7 @@ const cache = createCache({ container: shadowRoot });
 
 ---
 
-Bundling Configuration {#bundling-configuration}
+## Bundling Configuration {#bundling-configuration}
 
 Content scripts must be bundled as standalone IIFE (Immediately Invoked Function Expression). they can't use ES modules. Configure your bundler:
 
@@ -90,7 +90,7 @@ export default defineConfig({
 });
 ```
 
-In `manifest.json`, reference the bundled file:
+### In `manifest.json`, reference the bundled file:
 
 ```json
 {
@@ -104,7 +104,7 @@ In `manifest.json`, reference the bundled file:
 
 ---
 
-State Management {#state-management}
+## State Management {#state-management}
 
 For content scripts, avoid Redux/Context. they add overhead. Use lightweight alternatives:
 
@@ -128,7 +128,7 @@ Jotai is another excellent choice for atomic state management.
 
 ---
 
-Communicating with Background {#communicating-with-background}
+## Communicating with Background {#communicating-with-background}
 
 ```typescript
 // content/hooks/useBackgroundMessage.ts
@@ -154,19 +154,19 @@ export function useBackgroundMessage(channel: string) {
 
 ---
 
-Hot Module Replacement {#hot-module-replacement}
+## Hot Module Replacement {#hot-module-replacement}
 
 HMR doesn't work reliably in content scripts. the script executes in the page context, not the extension. Each reload requires re-injecting into the page. Use standard development patterns: build → reload extension → refresh page.
 
 ---
 
-Avoiding React Conflicts {#avoiding-react-conflicts}
+## Avoiding React Conflicts {#avoiding-react-conflicts}
 
 If the page uses React, your content script's React instance could conflict. Shadow DOM isolation prevents this. each React instance is entirely separate. The page's React won't mount into your Shadow DOM, and your React won't be affected by the page's React.
 
 ---
 
-Bundle Size {#bundle-size}
+## Bundle Size {#bundle-size}
 
 React adds ~40KB (minified) to your content script. Consider alternatives:
 
@@ -186,7 +186,7 @@ export default defineConfig({
 
 ---
 
-Cross-References {#cross-references}
+## Cross-References {#cross-references}
 
 - [Building Chrome Extensions with React](/docs/patterns/building-with-react.md). Full React extension architecture
 - [Shadow DOM Advanced](/docs/patterns/shadow-dom-advanced.md). Detailed look on Shadow DOM patterns

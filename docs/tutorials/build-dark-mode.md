@@ -9,7 +9,7 @@ Build a Dark Mode Toggle Extension. Full Tutorial
 
 Creating a dark mode extension is one of the most practical projects you can build for Chrome. This tutorial walks you through building a complete dark mode toggle that works on any website, respects per-site preferences, and provides a smooth user experience. By the end, you'll understand how to use the Chrome Scripting API, manage per-site storage, and handle real-time updates across extension contexts.
 
-What We're Building
+### What We're Building
 
 We'll create a Chrome extension that provides one-click dark mode for any website using CSS filters. The extension will:
 
@@ -21,7 +21,7 @@ We'll create a Chrome extension that provides one-click dark mode for any websit
 
 The extension uses `activeTab`, `scripting`, and `storage` permissions, making it a great example of practical extension development.
 
-Prerequisites
+### Prerequisites
 
 Before starting, ensure you have:
 - Chrome or Chromium-based browser (Edge, Brave, etc.)
@@ -64,7 +64,7 @@ Create your manifest file with the necessary permissions and configuration:
 }
 ```
 
-Step 1: Toggle on Icon Click
+### Step 1: Toggle on Icon Click
 
 The toolbar icon click handler is the entry point for the extension. When clicked, it checks the current site status and toggles accordingly:
 
@@ -105,7 +105,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 The icon changes to reflect the current state for the active tab, giving users immediate visual feedback.
 
-Step 2: CSS Filter Dark Mode
+### Step 2: CSS Filter Dark Mode
 
 The core of dark mode implementation uses CSS filters to invert colors and shift hues. This approach works on any website without requiring site-specific styles:
 
@@ -159,7 +159,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 The CSS filter approach inverts all colors and then rotates the hue by 180 degrees to maintain color relationships. Images and videos need to be re-inverted to appear normal.
 
-Step 3: Auto-Apply on Navigation
+### Step 3: Auto-Apply on Navigation
 
 Content scripts need to check storage for domain preferences when the page loads. Using `@theluckystrike/webext-storage` simplifies this with its watch functionality:
 
@@ -200,7 +200,7 @@ initializeDarkMode();
 
 The MutationObserver handles Single Page Applications (SPAs) that change content without full page reloads.
 
-Step 4: Options Page
+### Step 4: Options Page
 
 The options page allows users to customize dark mode behavior, including brightness adjustments, contrast controls, and site-specific exceptions:
 
@@ -295,7 +295,7 @@ document.getElementById('save').addEventListener('click', saveSettings);
 loadSettings();
 ```
 
-Step 5: Badge Indicator
+### Step 5: Badge Indicator
 
 Show the current state in the extension badge for quick visual feedback:
 
@@ -311,7 +311,7 @@ async function updateBadge(tabId, enabled) {
 }
 ```
 
-Alternative: Custom Stylesheet Injection
+### Alternative: Custom Stylesheet Injection
 
 For more control over the dark mode appearance, inject custom stylesheets per domain. This approach provides better visual results but requires more maintenance:
 
@@ -339,9 +339,9 @@ async function injectCustomStyles(hostname) {
 
 Create site-specific CSS files in the `styles/` directory and reference them in `web_accessible_resources` in the manifest.
 
-Testing Your Extension
+### Testing Your Extension
 
-Test thoroughly across different types of websites:
+### Test thoroughly across different types of websites:
 
 1. Image-heavy sites: Verify images are properly re-inverted
 2. Video sites: Check video playback and controls
@@ -362,7 +362,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-Common Use Cases
+### Common Use Cases
 
 1. Quick Dark Mode Toggle
 The most common use case is toggling dark mode with a single click on the toolbar icon. Users browse their favorite sites and want instant dark mode without configuration.
@@ -379,7 +379,7 @@ Some users with light sensitivity or visual impairments benefit from dark mode o
 5. Reading Mode
 Dark mode serves as a reading mode for content-heavy sites, reducing eye strain during extended reading sessions.
 
-Best Practices
+### Best Practices
 
 1. Use CSS filters over custom styles: Filters work universally without site-specific CSS
 2. Respect user preferences: Store per-site settings and honor them automatically
@@ -390,7 +390,7 @@ Best Practices
 7. Handle edge cases: Gracefully handle sites with complex CSS or frames
 8. Test extensively: Verify behavior across different site types and browsers
 
-What You Learned
+### What You Learned
 
 In this tutorial, you built a complete dark mode extension that demonstrates:
 
@@ -404,40 +404,40 @@ In this tutorial, you built a complete dark mode extension that demonstrates:
 
 This foundation can be extended with advanced features like custom themes, scheduled dark mode (follow system preference), or site-specific CSS overrides for better visual results.
 
-What We're Building {#what-were-building}
+## What We're Building {#what-were-building}
 - One-click dark mode for any website using CSS filters
 - Per-site preferences stored with `@theluckystrike/webext-storage`
 - Toggle via toolbar icon, auto-apply on navigation
 - Uses `activeTab`, `scripting`, `storage` permissions
 
-manifest.json. MV3, activeTab + scripting + storage, action with icon, background SW {#manifestjson-mv3-activetab-scripting-storage-action-with-icon-background-sw}
+## manifest.json. MV3, activeTab + scripting + storage, action with icon, background SW {#manifestjson-mv3-activetab-scripting-storage-action-with-icon-background-sw}
 
-Step 1: Toggle on Icon Click {#step-1-toggle-on-icon-click}
+## Step 1: Toggle on Icon Click {#step-1-toggle-on-icon-click}
 - `chrome.action.onClicked` listener in background
 - Check domain state from storage, toggle, inject CSS via `chrome.scripting.executeScript`
 - Update icon to show dark/light state
 
-Step 2: CSS Filter Dark Mode {#step-2-css-filter-dark-mode}
+## Step 2: CSS Filter Dark Mode {#step-2-css-filter-dark-mode}
 - `html { filter: invert(1) hue-rotate(180deg); }`
 - Re-invert images/videos: `img, video, canvas, svg { filter: invert(1) hue-rotate(180deg); }`
 - Insert/remove `<style>` element with unique ID
 
-Step 3: Auto-Apply on Navigation {#step-3-auto-apply-on-navigation}
+## Step 3: Auto-Apply on Navigation {#step-3-auto-apply-on-navigation}
 - Content script checks storage for domain preference on load
 - `storage.watch('darkSites', ...)` for real-time toggle from background/popup
 - Uses `@theluckystrike/webext-messaging` for background <-> content communication
 
-Step 4: Options Page {#step-4-options-page}
+## Step 4: Options Page {#step-4-options-page}
 - Brightness/contrast sliders, exclude list, custom CSS per domain
 - All preferences in `@theluckystrike/webext-storage` sync storage
 
-Step 5: Badge Indicator. show "ON" when dark mode active on current tab {#step-5-badge-indicator-show-on-when-dark-mode-active-on-current-tab}
+## Step 5: Badge Indicator. show "ON" when dark mode active on current tab {#step-5-badge-indicator-show-on-when-dark-mode-active-on-current-tab}
 
-Alternative: Custom Stylesheet Injection. more control, per-site CSS files via web_accessible_resources {#alternative-custom-stylesheet-injection-more-control-per-site-css-files-via-web-accessible-resources}
+## Alternative: Custom Stylesheet Injection. more control, per-site CSS files via web_accessible_resources {#alternative-custom-stylesheet-injection-more-control-per-site-css-files-via-web-accessible-resources}
 
-Testing. various site types, image handling, per-site persistence, sync across devices {#testing-various-site-types-image-handling-per-site-persistence-sync-across-devices}
+## Testing. various site types, image handling, per-site persistence, sync across devices {#testing-various-site-types-image-handling-per-site-persistence-sync-across-devices}
 
-What You Learned. scripting.executeScript, activeTab pattern, per-site preferences, CSS filters, storage.watch {#what-you-learned-scriptingexecutescript-activetab-pattern-per-site-preferences-css-filters-storagewatch}
+## What You Learned. scripting.executeScript, activeTab pattern, per-site preferences, CSS filters, storage.watch {#what-you-learned-scriptingexecutescript-activetab-pattern-per-site-preferences-css-filters-storagewatch}
 What You Learned. scripting.executeScript, activeTab pattern, per-site preferences, CSS filters, storage.watch
 ---
 

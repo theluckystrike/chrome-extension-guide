@@ -19,7 +19,7 @@ For a detailed look into Tab Suspender Pro specifically, see the [Tab Suspender 
 
 ---
 
-Quick Comparison Overview
+### Quick Comparison Overview
 
 Before diving into the details, here is the high-level picture:
 
@@ -37,9 +37,9 @@ Before diving into the details, here is the high-level picture:
 
 ---
 
-The Contenders
+### The Contenders
 
-Tab Suspender Pro
+### Tab Suspender Pro
 
 Tab Suspender Pro is a modern tab suspension extension built from the ground up on Chrome's Manifest V3 platform. It takes the "suspend in-place" approach, meaning your tabs remain in the tab bar but their content is replaced with a lightweight placeholder. This preserves your workflow layout while dramatically reducing memory usage.
 
@@ -55,7 +55,7 @@ Key strengths:
 
 Developed by: [Zovo](https://zovo.one)
 
-OneTab
+### OneTab
 
 OneTab takes a fundamentally different approach to tab management. Instead of suspending tabs in place, it collapses all your open tabs into a single list page. Your tabs are closed and their URLs are saved in a list that you can restore individually or all at once.
 
@@ -72,7 +72,7 @@ Key weaknesses:
 - No per-tab control.
 - Limited development activity in recent years.
 
-The Great Suspender (Original and Forks)
+### The Great Suspender (Original and Forks)
 
 The Great Suspender was once the gold standard for tab suspension. It pioneered many of the features that modern tab suspenders now include. However, in late 2020, the extension was sold to an unknown entity, and in early 2021, Google removed it from the Chrome Web Store after discovering it had been turned into malware (tracking users and injecting ads).
 
@@ -84,7 +84,7 @@ Key issues:
 - Most forks have limited or no active development.
 - The codebase was written for an older version of Chrome and may have compatibility issues with modern features like tab groups, side panels, and enhanced security policies.
 
-Auto Tab Discard
+### Auto Tab Discard
 
 Auto Tab Discard uses Chrome's native tab discard API to unload inactive tabs. When a tab is discarded, Chrome releases its renderer process and memory while keeping the tab visible in the tab bar. Clicking a discarded tab triggers a full page reload.
 
@@ -100,7 +100,7 @@ Key weaknesses:
 - Basic whitelist (domain and pinned tab only).
 - Sporadic development schedule.
 
-Chrome's Built-in Memory Saver
+### Chrome's Built-in Memory Saver
 
 Chrome introduced its own memory management feature called "Memory Saver" (also known as "Performance" settings). When enabled, Chrome automatically discards tabs that have been inactive for a period.
 
@@ -120,9 +120,9 @@ Key weaknesses:
 
 ---
 
-Detailed Feature Comparison
+### Detailed Feature Comparison
 
-Automatic Suspension
+### Automatic Suspension
 
 | Feature | Tab Suspender Pro | OneTab | Great Suspender | Auto Tab Discard | Chrome Memory Saver |
 |---|---|---|---|---|---|
@@ -134,7 +134,7 @@ Automatic Suspension
 
 Analysis: Tab Suspender Pro offers the most granular control over automatic suspension. The per-tab-group timeout and battery-aware features are unique. OneTab does not compete here since it requires manual activation. Chrome's Memory Saver works automatically but offers no user control over timing.
 
-Whitelist and Exclusions
+### Whitelist and Exclusions
 
 | Feature | Tab Suspender Pro | OneTab | Great Suspender | Auto Tab Discard | Chrome Memory Saver |
 |---|---|---|---|---|---|
@@ -148,7 +148,7 @@ Whitelist and Exclusions
 
 Analysis: Tab Suspender Pro's whitelist system is significantly more powerful than any competitor. The URL pattern matching and regex support allow developers and power users to create precise rules. For example, you can whitelist `github.com/*/pull/*` to protect only pull request pages while allowing other GitHub pages to be suspended. No other extension offers this level of granularity.
 
-User Interface and Controls
+### User Interface and Controls
 
 | Feature | Tab Suspender Pro | OneTab | Great Suspender | Auto Tab Discard | Chrome Memory Saver |
 |---|---|---|---|---|---|
@@ -162,7 +162,7 @@ User Interface and Controls
 
 Analysis: Tab Suspender Pro provides the most complete user interface. The memory dashboard is a standout feature. no other tool shows you exactly how much memory you are saving. Screenshot previews help you identify suspended tabs at a glance, which is valuable when you have many tabs. OneTab's interface is clean but limited by its different paradigm.
 
-Technical Architecture
+### Technical Architecture
 
 | Feature | Tab Suspender Pro | OneTab | Great Suspender | Auto Tab Discard | Chrome Memory Saver |
 |---|---|---|---|---|---|
@@ -176,7 +176,7 @@ Analysis: Manifest V3 is the current standard for Chrome extensions. Tab Suspend
 
 The suspension method matters: Tab Suspender Pro and The Great Suspender use "page replacement" (replacing the tab content with a lightweight placeholder), while Auto Tab Discard and Chrome's Memory Saver use Chrome's native `tabs.discard()` API. The discard API is cleaner but offers less control and no screenshot preview capability.
 
-Privacy and Security
+### Privacy and Security
 
 | Feature | Tab Suspender Pro | OneTab | Great Suspender | Auto Tab Discard | Chrome Memory Saver |
 |---|---|---|---|---|---|
@@ -191,7 +191,7 @@ Analysis: Privacy is where The Great Suspender catastrophically fails. After bei
 
 ---
 
-Performance Benchmarks
+### Performance Benchmarks
 
 We tested each solution with 50 identical tabs (a mix of news sites, documentation pages, web applications, and media sites) on a machine with 16 GB of RAM.
 
@@ -210,7 +210,7 @@ Notes:
 - Tab Suspender Pro and Auto Tab Discard achieve similar memory savings since both effectively unload tab content.
 - Chrome's Memory Saver saves less because it uses a more conservative approach and may keep some tab data in memory for faster restoration.
 
-Tab Restoration Speed
+### Tab Restoration Speed
 
 | Solution | Average Restore Time | Notes |
 |---|---|---|
@@ -224,7 +224,7 @@ Notes:
 - Tab Suspender Pro is slightly faster than OneTab because the tab is already in position (no new tab creation needed).
 - All solutions are fast enough that the difference is negligible in practice.
 
-Extension Overhead
+### Extension Overhead
 
 | Solution | Extension Memory Usage | CPU Usage (Idle) |
 |---|---|---|
@@ -237,33 +237,33 @@ All extensions have minimal overhead. Chrome's built-in solution has zero overhe
 
 ---
 
-Use Case Recommendations
+### Use Case Recommendations
 
-Best for Developers: Tab Suspender Pro
+### Best for Developers: Tab Suspender Pro
 
 Developers need granular control, and Tab Suspender Pro delivers. The URL pattern whitelist lets you protect `localhost:*` while suspending everything else. The per-tab-group configuration lets you keep your active project group loaded while suspending tabs from other projects. The memory dashboard helps you understand the impact on your development environment. Read our [developer-specific guide](/2025/01/24/tab-suspender-pro-for-developers/) for detailed configuration.
 
-Best for Casual Users: Chrome Memory Saver
+### Best for Casual Users: Chrome Memory Saver
 
 If you keep 10-20 tabs open and just want things to work without thinking about it, Chrome's built-in Memory Saver is the simplest choice. Enable it in `chrome://settings/performance` and forget about it. No extension to install, no configuration to manage.
 
-Best for Tab Hoarders Who Want a Fresh Start: OneTab
+### Best for Tab Hoarders Who Want a Fresh Start: OneTab
 
 If your tab management strategy is "accumulate 100 tabs, then declare tab bankruptcy and start over," OneTab is useful. Click the button, and all your tabs collapse into a list. You get a clean browser, and you can restore individual tabs later if needed. It is not tab management so much as tab archiving.
 
-Best for Minimalists: Auto Tab Discard
+### Best for Minimalists: Auto Tab Discard
 
 If you want automatic tab suspension with minimal UI and configuration, Auto Tab Discard is a solid, lightweight choice. It uses Chrome's native discard API and stays out of your way. The trade-off is fewer features and less control.
 
-Never Recommended: The Great Suspender (Original)
+### Never Recommended: The Great Suspender (Original)
 
 The original Great Suspender should never be installed. It was removed from the Chrome Web Store for containing malware. If you have it installed, remove it immediately and change any passwords you have entered while it was active. The community forks are safer but still run on outdated Manifest V2 architecture.
 
 ---
 
-Migration Guides
+### Migration Guides
 
-Migrating from The Great Suspender
+### Migrating from The Great Suspender
 
 If you are coming from The Great Suspender (or one of its forks), migrating to Tab Suspender Pro is straightforward:
 
@@ -274,7 +274,7 @@ If you are coming from The Great Suspender (or one of its forks), migrating to T
 5. Remove The Great Suspender from Chrome.
 6. Configure Tab Suspender Pro with your preferred timeout and settings.
 
-Migrating from OneTab
+### Migrating from OneTab
 
 Migrating from OneTab is slightly different since OneTab and Tab Suspender Pro solve different problems:
 
@@ -283,7 +283,7 @@ Migrating from OneTab is slightly different since OneTab and Tab Suspender Pro s
 3. Let Tab Suspender Pro manage the restored tabs automatically.
 4. You may choose to keep OneTab installed for its "collapse to list" functionality, as it does not conflict with Tab Suspender Pro.
 
-Migrating from Auto Tab Discard
+### Migrating from Auto Tab Discard
 
 1. Install Tab Suspender Pro.
 2. Transfer your whitelist from Auto Tab Discard's settings.
@@ -292,7 +292,7 @@ Migrating from Auto Tab Discard
 
 ---
 
-The Great Suspender Controversy: What Happened
+### The Great Suspender Controversy: What Happened
 
 The Great Suspender's story is a cautionary tale for the Chrome extension ecosystem. Originally developed by Dean Oemcke as an open-source project, it grew to over 2 million users and was widely regarded as the best tab suspension extension available.
 
@@ -310,17 +310,17 @@ Tab Suspender Pro, developed by [Zovo](https://zovo.one), is built with these le
 
 ---
 
-Future Outlook
+### Future Outlook
 
-Chrome's Evolving Tab Management
+### Chrome's Evolving Tab Management
 
 Google continues to invest in built-in tab management features. Memory Saver, tab groups, tab search, and the upcoming "Tabs AI" features all aim to reduce the need for third-party extensions. However, power users consistently need more control than Chrome's built-in features provide, which is why extensions like Tab Suspender Pro continue to be valuable.
 
-Manifest V3 Transition
+### Manifest V3 Transition
 
 As Google phases out Manifest V2, extensions that have not migrated will stop working. This affects The Great Suspender and its forks most directly. Tab Suspender Pro, OneTab, and Auto Tab Discard are already on V3 and are not affected.
 
-Tab Suspender Pro Roadmap
+### Tab Suspender Pro Roadmap
 
 Tab Suspender Pro continues to add features based on user feedback. Upcoming capabilities include:
 
@@ -331,7 +331,7 @@ Tab Suspender Pro continues to add features based on user feedback. Upcoming cap
 
 ---
 
-Conclusion
+### Conclusion
 
 The tab management extension space has clear winners and losers in 2025:
 
@@ -343,7 +343,7 @@ The tab management extension space has clear winners and losers in 2025:
 
 For most users reading this comparison, Tab Suspender Pro is the recommended choice. It combines the power that heavy tab users need with the simplicity that everyone appreciates.
 
-Further Reading
+### Further Reading
 
 - [Tab Suspender Pro: The Ultimate Guide](/2025/01/24/tab-suspender-pro-ultimate-guide/). everything you need to know.
 - [Tab Suspender Pro for Developers](/2025/01/24/tab-suspender-pro-for-developers/). developer workflow optimization.

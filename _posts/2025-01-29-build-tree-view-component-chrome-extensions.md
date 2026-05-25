@@ -18,27 +18,27 @@ In this tutorial, you'll learn how to create a fully functional tree view compon
 
 ---
 
-Understanding Tree View Components in Chrome Extensions {#understanding-tree-view}
+## Understanding Tree View Components in Chrome Extensions {#understanding-tree-view}
 
 A tree view component, also known as a hierarchical tree or collapsible tree, is a UI element that displays data in a parent-child relationship structure. Each item in the tree can contain child items, which can be expanded or collapsed to show or hide their contents. This pattern is particularly useful in Chrome extensions because it allows users to navigate complex, multi-level data structures without overwhelming the interface.
 
-Why Tree Views Matter for Extension Development
+### Why Tree Views Matter for Extension Development
 
 Chrome extensions frequently deal with hierarchical data. Consider some common use cases: managing bookmarks (which naturally form a tree structure), organizing tab groups, displaying file system navigation, showing nested settings configurations, or presenting organizational charts. In all these scenarios, a well-designed tree view component makes it easy for users to understand and interact with complex data.
 
 The Chrome Bookmarks API, for instance, returns bookmark data as a tree structure with folders containing other folders and bookmarks. Similarly, the Tab Groups API organizes tabs into hierarchical groups. Without a proper tree view component, displaying this data would be cluttered and confusing. A tree view provides visual clarity by showing relationships between items and allowing users to focus on specific branches of the hierarchy.
 
-Key Features of a Professional Tree View
+### Key Features of a Professional Tree View
 
 Before diving into implementation, let's outline the features that distinguish a professional tree view component from a basic nested list. First, you need expand and collapse functionality that allows users to show or hide child items. Second, proper indentation and visual lines help users understand the hierarchy at a glance. Third, icons differentiate between different node types like folders, files, or other data types. Fourth, selection state management lets users know which item is currently selected. Fifth, keyboard navigation enables power users to navigate the tree without a mouse. Finally, smooth animations make the expand/collapse transitions feel polished and modern.
 
 ---
 
-Setting Up Your Chrome Extension Project {#setting-up-project}
+## Setting Up Your Chrome Extension Project {#setting-up-project}
 
 Before implementing the tree view component, let's set up a basic Chrome extension project structure. You'll need a manifest.json file, an HTML file for the popup or options page, a CSS file for styling, and a JavaScript file for the tree view logic.
 
-Creating the Manifest
+### Creating the Manifest
 
 For our tree view component demonstration, we'll create a simple Chrome extension that displays a sample hierarchical data structure. Here's a basic manifest.json file:
 
@@ -58,7 +58,7 @@ For our tree view component demonstration, we'll create a simple Chrome extensio
 
 This manifest uses Manifest V3, which is the current standard for Chrome extension development. The extension will display a popup with our tree view component. You can adapt this structure for other extension entry points like options pages or content scripts.
 
-HTML Structure
+### HTML Structure
 
 Now let's create the popup.html file that will host our tree view component:
 
@@ -82,11 +82,11 @@ The HTML is intentionally simple. The tree view will be rendered dynamically int
 
 ---
 
-Implementing the Tree View JavaScript {#implementing-javascript}
+## Implementing the Tree View JavaScript {#implementing-javascript}
 
 Now comes the core of our implementation: the JavaScript that renders and manages the tree view. We'll create a flexible, reusable TreeView class that handles all aspects of tree rendering and user interaction.
 
-The Tree Data Structure
+### The Tree Data Structure
 
 First, let's define the data structure our tree view will display. We'll use a simple recursive structure where each node can have a `children` array:
 
@@ -142,7 +142,7 @@ const sampleData = {
 
 Each node has an ID for identification, a name for display, a type that determines the icon, and optionally a children array for nested items. This structure mirrors the data you'll receive from Chrome APIs like chrome.bookmarks.getTree().
 
-The TreeView Class
+### The TreeView Class
 
 Now let's implement the main TreeView class:
 
@@ -317,7 +317,7 @@ class TreeView {
 
 This TreeView class provides a comprehensive set of features. The constructor accepts a container element and optional configuration. The render method creates the complete tree from the data structure. The createNodeElement method recursively builds each node with proper indentation. The toggleNode method handles expand/collapse with optional animations. The selectNode method manages selection state. Finally, the expandAll and collapseAll methods provide bulk operations.
 
-Initializing the Tree View
+### Initializing the Tree View
 
 Now let's initialize our tree view in the popup:
 
@@ -344,7 +344,7 @@ This initialization code waits for the DOM to load, then creates a TreeView inst
 
 ---
 
-Styling the Tree View Component {#styling-tree-view}
+## Styling the Tree View Component {#styling-tree-view}
 
 Now let's create the CSS to make our tree view look professional and polished:
 
@@ -439,11 +439,11 @@ This CSS provides a clean, modern appearance for the tree view. The styling incl
 
 ---
 
-Advanced Features and Optimizations {#advanced-features}
+## Advanced Features and Optimizations {#advanced-features}
 
 Now that we have a working tree view component, let's explore some advanced features and optimizations that will make it even more professional.
 
-Keyboard Navigation
+### Keyboard Navigation
 
 Power users expect keyboard navigation in tree views. Let's add keyboard support:
 
@@ -500,7 +500,7 @@ addKeyboardNavigation() {
 
 This keyboard navigation enables users to move through the tree using arrow keys, expand or collapse nodes with left/right arrows, and toggle visibility with Enter. The navigation respects the visual order of nodes, so users can efficiently browse through the entire tree without using a mouse.
 
-Virtual Scrolling for Large Trees
+### Virtual Scrolling for Large Trees
 
 For trees with hundreds or thousands of nodes, rendering all elements at once can cause performance issues. Virtual scrolling solves this by only rendering the visible portion of the tree:
 
@@ -553,7 +553,7 @@ class VirtualTreeView extends TreeView {
 
 This virtual scrolling implementation calculates which nodes should be visible based on the scroll position and only renders those nodes. This dramatically improves performance for large trees while maintaining the same user experience.
 
-Integrating with Chrome APIs
+### Integrating with Chrome APIs
 
 Now let's look at how to integrate our tree view with real Chrome APIs. The chrome.bookmarks API is a perfect example:
 
@@ -601,11 +601,11 @@ This integration code transforms the Chrome bookmarks tree structure into the fo
 
 ---
 
-Best Practices and Performance Tips {#best-practices}
+## Best Practices and Performance Tips {#best-practices}
 
 When implementing tree view components in Chrome extensions, keep these best practices in mind for the best user experience and performance.
 
-Performance Optimization
+### Performance Optimization
 
 For large trees, consider lazy loading child nodes. Instead of loading all children upfront, you can load them when a parent is first expanded. This reduces initial load time and memory usage, especially for deep hierarchies. Use document fragments when rendering many nodes at once to minimize reflows:
 
@@ -619,17 +619,17 @@ renderNodes(nodes, container) {
 }
 ```
 
-Accessibility
+### Accessibility
 
 Ensure your tree view is accessible to all users by using proper ARIA attributes. Add role="tree" to the container, role="treeitem" to each node, and aria-expanded to toggle buttons. This enables screen reader users to navigate your tree view effectively.
 
-User Experience
+### User Experience
 
 Consider adding features like search filtering, which allows users to quickly find nodes in large trees. Add drag-and-drop support for reordering nodes if your use case requires it. Implement context menus for common actions like delete, rename, or add child. These features transform a basic tree view into a fully functional component that meets professional expectations.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building a tree view component for Chrome extensions doesn't have to be complicated. With the techniques and code examples in this guide, you now have everything you need to create professional, performant tree views that integrate smoothly with Chrome's APIs.
 

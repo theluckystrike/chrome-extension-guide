@@ -18,19 +18,19 @@ The demand for real-time Chrome extension functionality has surged dramatically 
 
 ---
 
-Understanding Streaming in the Context of Chrome Extensions
+### Understanding Streaming in the Context of Chrome Extensions
 
 Before diving into implementation details, it's crucial to understand what makes streaming unique in Chrome extensions. Unlike regular web pages, extensions operate within a multi-context architecture consisting of background service workers, popup pages, options pages, and content scripts. Each of these contexts has its own lifecycle, permissions, and constraints that affect how streaming data is handled.
 
 Chrome extensions run with elevated privileges compared to regular web pages, giving them access to powerful APIs like `chrome.storage`, `chrome.alarms`, and `chrome.runtime`. However, these privileges come with responsibilities. Your extension must manage its network requests carefully, respect user privacy, and handle the ephemeral nature of service workers in Manifest V3.
 
-The Evolution from Manifest V2 to Manifest V3
+### The Evolution from Manifest V2 to Manifest V3
 
 If you're migrating from Manifest V2 to Manifest V3, you'll notice significant changes in how streaming is handled. The transition from persistent background pages to ephemeral service workers introduces new challenges. Service workers can be terminated after periods of inactivity, meaning your streaming connections must be resilient enough to handle disconnection and reconnection gracefully.
 
 This architectural change necessitates a different approach to streaming implementation. You can no longer rely on long-lived background pages to maintain persistent connections. Instead, you must implement proper connection management, implement heartbeats to keep service workers alive, and design your extension to handle the asynchronous nature of service worker lifecycle events.
 
-Service Worker Streaming Architecture
+### Service Worker Streaming Architecture
 
 Here's a solid architecture for handling streaming in MV3:
 
@@ -85,9 +85,9 @@ class StreamingOrchestrator {
 }
 ```
 
-Connection State Management
+### Connection State Management
 
-Manage connection state across service worker restarts:
+### Manage connection state across service worker restarts:
 
 ```javascript
 // background/connection-state.js
@@ -131,11 +131,11 @@ class ConnectionStateManager {
 
 ---
 
-Server-Sent Events (SSE) in Chrome Extensions
+### Server-Sent Events (SSE) in Chrome Extensions
 
 Server-Sent Events represent one of the simplest ways to implement unidirectional streaming in your Chrome extension. SSE allows servers to push updates to your extension over a single, long-lived HTTP connection. This makes it ideal for scenarios where your extension only needs to receive data from a server, such as news feeds, notification systems, or live score updates.
 
-Implementing SSE in Background Service Workers
+### Implementing SSE in Background Service Workers
 
 To implement SSE in a Manifest V3 service worker, you'll need to establish the connection and manage it carefully. Here's a practical implementation:
 
@@ -198,7 +198,7 @@ class SSEManager {
 }
 ```
 
-Important Considerations for SSE in Extensions
+### Important Considerations for SSE in Extensions
 
 When implementing Server-Sent Events in your Chrome extension, there are several critical factors to consider. First, remember that service workers have a limited lifetime. They can be terminated after 30 seconds of inactivity, so you must implement heartbeat mechanisms to keep your connection alive. You can use `chrome.alarms` to periodically trigger your service worker and prevent it from going dormant.
 
@@ -218,11 +218,11 @@ Second, Chrome extensions are subject to Content Security Policy (CSP) restricti
 
 ---
 
-WebSocket Connections for Bidirectional Streaming
+### WebSocket Connections for Bidirectional Streaming
 
 For scenarios requiring bidirectional streaming, where both your extension and the server need to send messages, WebSocket connections provide a solid solution. WebSockets maintain a persistent, full-duplex communication channel over a single TCP connection, making them perfect for real-time collaboration tools, chat applications, and live gaming extensions.
 
-Building a WebSocket Manager
+### Building a WebSocket Manager
 
 A well-designed WebSocket manager for Chrome extensions should handle connection lifecycle, reconnection logic, message queuing, and proper cleanup. Here's a comprehensive implementation:
 
@@ -378,11 +378,11 @@ class WebSocketManager {
 
 ---
 
-Streaming Fetch Requests for Large Data
+### Streaming Fetch Requests for Large Data
 
 Sometimes your extension needs to handle large data downloads or process streaming responses from REST APIs. The Fetch API with its streaming capabilities provides an efficient solution for these scenarios. Unlike traditional download methods, streaming allows you to process data incrementally as it arrives, reducing memory usage and improving perceived performance.
 
-Implementing Streaming Fetch
+### Implementing Streaming Fetch
 
 Here's how to implement streaming fetch in your Chrome extension:
 
@@ -437,7 +437,7 @@ This implementation is particularly useful for processing Server-Sent Events fro
 
 ---
 
-Best Practices for Real-Time Data in Chrome Extensions
+### Best Practices for Real-Time Data in Chrome Extensions
 
 Implementing streaming in Chrome extensions requires careful attention to security, performance, and reliability. Here are the essential best practices you should follow:
 
@@ -467,7 +467,7 @@ Your streaming implementation must work correctly across all extension contexts:
 
 ---
 
-Advanced: Combining Streaming with Chrome APIs
+### Advanced: Combining Streaming with Chrome APIs
 
 One of the powerful aspects of Chrome extensions is the ability to combine streaming data with native Chrome APIs. You can trigger notifications based on streaming data, update badge text with real-time counts, synchronize data across devices using `chrome.storage.sync`, and interact with tabs and windows based on streaming events.
 
@@ -504,13 +504,13 @@ function handleStreamingAlert(data) {
 
 ---
 
-Conclusion
+### Conclusion
 
 Implementing streaming API responses in Chrome extensions opens up possibilities for creating dynamic, real-time experiences that keep users engaged and informed. Whether you choose Server-Sent Events for simple unidirectional updates, WebSockets for bidirectional communication, or streaming fetch for large data processing, the key to success lies in understanding the unique constraints of the Chrome extension environment.
 
 ---
 
-Real-World Use Cases
+### Real-World Use Cases
 
 Here are practical examples of streaming implementations in production extensions:
 
@@ -618,9 +618,9 @@ class PortfolioTracker {
 
 ---
 
-Testing Streaming Implementations
+### Testing Streaming Implementations
 
-Testing streaming functionality requires special considerations:
+### Testing streaming functionality requires special considerations:
 
 ```javascript
 // Test SSE reconnection
@@ -657,9 +657,9 @@ async function testWebSocket() {
 
 ---
 
-Performance Monitoring
+### Performance Monitoring
 
-Track your streaming implementation's performance:
+### Track your streaming implementation's performance:
 
 ```javascript
 class StreamMetrics {
@@ -700,13 +700,13 @@ The streaming capabilities you've learned in this guide form the foundation for 
 
 ---
 
-Real-World Use Cases for Streaming {#use-cases}
+## Real-World Use Cases for Streaming {#use-cases}
 
 Streaming APIs enable various practical extension applications.
 
-Live Collaborative Editing
+### Live Collaborative Editing
 
-Build real-time document collaboration tools:
+### Build real-time document collaboration tools:
 
 ```javascript
 // Real-time document sync
@@ -741,9 +741,9 @@ class CollaborativeEditor {
 }
 ```
 
-Stock Market Dashboard
+### Stock Market Dashboard
 
-Create real-time stock tracking extensions:
+### Create real-time stock tracking extensions:
 
 ```javascript
 // Stock price streaming
@@ -780,9 +780,9 @@ class StockStream {
 }
 ```
 
-Live Sports Scores
+### Live Sports Scores
 
-Track sports events in real-time:
+### Track sports events in real-time:
 
 ```javascript
 // Sports score streaming
@@ -825,11 +825,11 @@ class SportsTracker {
 
 ---
 
-Security Best Practices {#security}
+## Security Best Practices {#security}
 
 Secure your streaming implementations against common vulnerabilities.
 
-Validate All Incoming Data
+### Validate All Incoming Data
 
 ```javascript
 // Input validation for streaming data
@@ -861,7 +861,7 @@ function validateStockUpdate(data) {
 }
 ```
 
-Secure WebSocket Connections
+### Secure WebSocket Connections
 
 ```javascript
 // Use secure WebSocket connections
@@ -883,7 +883,7 @@ function createSecureWebSocket(url) {
 }
 ```
 
-Rate Limiting Implementation
+### Rate Limiting Implementation
 
 ```javascript
 // Rate limiting for outgoing requests
@@ -913,11 +913,11 @@ class RateLimiter {
 
 ---
 
-Performance Monitoring {#monitoring}
+## Performance Monitoring {#monitoring}
 
 Track and optimize your streaming implementation's performance.
 
-Connection Health Metrics
+### Connection Health Metrics
 
 ```javascript
 class StreamMetrics {
@@ -974,7 +974,7 @@ class StreamMetrics {
 
 ---
 
-Conclusion
+### Conclusion
 
 Mastering streaming APIs in Chrome extensions enables you to build sophisticated real-time applications. Key takeaways:
 

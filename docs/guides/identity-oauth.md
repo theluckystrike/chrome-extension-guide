@@ -7,17 +7,17 @@ last_modified_at: 2026-01-15
 ---
 Identity & OAuth Guide
 
-Overview {#overview}
+## Overview {#overview}
 - `chrome.identity` API for authentication in extensions
 - Requires `"identity"` permission (cross-ref `docs/permissions/identity.md`)
 - Two main flows: Google OAuth (`getAuthToken`) and third-party OAuth (`launchWebAuthFlow`)
 
-Google OAuth with getAuthToken {#google-oauth-with-getauthtoken}
+## Google OAuth with getAuthToken {#google-oauth-with-getauthtoken}
 Chrome Identity & OAuth Guide
 
 This guide covers authentication for Chrome Extensions using the `chrome.identity` API, which provides Google OAuth and custom OAuth flows.
 
-Overview
+### Overview
 
 The `chrome.identity` API provides methods for obtaining OAuth2 access tokens:
 
@@ -35,9 +35,9 @@ Add `"identity"` permission to manifest:
 { "permissions": ["identity"] }
 ```
 
-Setting Up OAuth in manifest.json
+### Setting Up OAuth in manifest.json
 
-Configure the `oauth2` section for Google OAuth:
+### Configure the `oauth2` section for Google OAuth:
 
 ```json
 {
@@ -54,7 +54,7 @@ Configure the `oauth2` section for Google OAuth:
 
 Request only the minimum scopes needed.
 
-Google API Console Configuration
+### Google API Console Configuration
 
 1. Create a project at [Google Cloud Console](https://console.cloud.google.com/)
 2. Enable APIs in "APIs & Services" > "Library" (e.g., Google Drive API)
@@ -62,9 +62,9 @@ Google API Console Configuration
 4. Create credentials: "OAuth client ID" > "Chrome App"
 5. Enter your extension ID (from `chrome://extensions`)
 
-Client ID format: `123456789-abc.apps.googleusercontent.com`
+### Client ID format: `123456789-abc.apps.googleusercontent.com`
 
-chrome.identity.getAuthToken
+### chrome.identity.getAuthToken
 
 Gets an OAuth2 access token for the signed-in user:
 
@@ -84,10 +84,10 @@ chrome.identity.getAuthToken({ interactive: false }, (token) => {
 });
 ```
 
-Token Management {#token-management}
+## Token Management {#token-management}
 chrome.identity.getProfileUserInfo
 
-Gets email and ID without full OAuth scopes:
+### Gets email and ID without full OAuth scopes:
 
 ```javascript
 chrome.identity.getProfileUserInfo({ accountStatus: 'ANY' }, (userInfo) => {
@@ -96,10 +96,10 @@ chrome.identity.getProfileUserInfo({ accountStatus: 'ANY' }, (userInfo) => {
 });
 ```
 
-Third-Party OAuth with launchWebAuthFlow {#third-party-oauth-with-launchwebauthflow}
+## Third-Party OAuth with launchWebAuthFlow {#third-party-oauth-with-launchwebauthflow}
 chrome.identity.removeCachedAuthToken
 
-Removes a token from Chrome's cache:
+### Removes a token from Chrome's cache:
 
 ```javascript
 // Remove cached token
@@ -115,9 +115,9 @@ function revokeToken(token) {
 }
 ```
 
-chrome.identity.onSignInChanged
+### chrome.identity.onSignInChanged
 
-Listen for sign-in state changes:
+### Listen for sign-in state changes:
 
 ```javascript
 chrome.identity.onSignInChanged.addListener((account, signedIn) => {
@@ -126,9 +126,9 @@ chrome.identity.onSignInChanged.addListener((account, signedIn) => {
 });
 ```
 
-chrome.identity.launchWebAuthFlow
+### chrome.identity.launchWebAuthFlow
 
-Use for non-Google OAuth providers:
+### Use for non-Google OAuth providers:
 
 ```javascript
 function startAuthFlow() {
@@ -151,7 +151,7 @@ function startAuthFlow() {
 }
 ```
 
-PKCE Flow (Recommended for Public Clients) {#pkce-flow-recommended-for-public-clients}
+## PKCE Flow (Recommended for Public Clients) {#pkce-flow-recommended-for-public-clients}
 Microsoft OAuth
 
 ```javascript
@@ -173,7 +173,7 @@ function authenticateWithMicrosoft() {
 }
 ```
 
-Storing Auth State {#storing-auth-state}
+## Storing Auth State {#storing-auth-state}
 ```typescript
 import { createStorage, defineSchema } from '@theluckystrike/webext-storage';
 Using Tokens with Google APIs
@@ -198,7 +198,7 @@ async function clearAuth() {
 }
 ```
 
-Token Refresh Pattern {#token-refresh-pattern}
+## Token Refresh Pattern {#token-refresh-pattern}
 ```javascript
 function getUserProfile(token) {
   fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -209,7 +209,7 @@ function getUserProfile(token) {
 }
 ```
 
-Common Mistakes {#common-mistakes}
+## Common Mistakes {#common-mistakes}
 - Not handling `chrome.runtime.lastError` in callbacks
 - Storing tokens in `chrome.storage.sync` (quota too small, security risk)
 - Not implementing token refresh. tokens expire
@@ -217,9 +217,9 @@ Common Mistakes {#common-mistakes}
 - Forgetting `interactive: false` for silent auth checks
 - Not revoking tokens on uninstall (use `chrome.runtime.setUninstallURL()` to redirect to a server-side revocation endpoint)
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [OAuth Identity Patterns](../patterns/oauth-identity.md)
 - [Identity API Reference](../api-reference/identity-api.md)
@@ -247,9 +247,9 @@ function listDriveFiles(token, folderId = 'root') {
 }
 ```
 
-Token Expiry and Refresh
+### Token Expiry and Refresh
 
-Google tokens expire after 1 hour:
+### Google tokens expire after 1 hour:
 
 ```javascript
 class TokenManager {
@@ -307,9 +307,9 @@ async function safeApiCall(url, options = {}) {
 }
 ```
 
-Non-Google OAuth: GitHub with PKCE
+### Non-Google OAuth: GitHub with PKCE
 
-Always use PKCE for public clients:
+### Always use PKCE for public clients:
 
 ```javascript
 class GitHubAuth {
@@ -364,7 +364,7 @@ class GitHubAuth {
 }
 ```
 
-Building a Google Drive File Picker
+### Building a Google Drive File Picker
 
 ```javascript
 class DriveFilePicker {
@@ -408,7 +408,7 @@ class DriveFilePicker {
 }
 ```
 
-Security Best Practices
+### Security Best Practices
 
 1. Store Tokens Securely
 
@@ -445,7 +445,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 ```
 
-Reference
+### Reference
 
 - [Chrome Identity API](https://developer.chrome.com/docs/extensions/reference/api/identity)
 - [Google Identity Services](https://developers.google.com/identity)

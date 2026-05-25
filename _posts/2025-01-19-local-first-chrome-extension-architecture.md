@@ -18,11 +18,11 @@ This comprehensive guide explores the fundamental concepts of local-first chrome
 
 ---
 
-Understanding Local-First Architecture {#understanding-local-first}
+## Understanding Local-First Architecture {#understanding-local-first}
 
 Local-first software development is an approach where applications are designed to function primarily using local data, with network connectivity treated as an enhancement rather than a requirement. This philosophy flips the traditional cloud-centric model on its head, instead of assuming a constant connection to a server, local-first applications assume the user may be offline at any time and design their data flow accordingly.
 
-The Case for Local-First Chrome Extensions
+### The Case for Local-First Chrome Extensions
 
 Chrome extensions occupy a unique position in the browser ecosystem. They often need to interact with web pages in real-time, respond to user actions immediately, and maintain state across browser sessions. When network connectivity is unreliable or nonexistent, traditional extension architectures that rely on server-side processing can become severely degraded or completely non-functional.
 
@@ -30,17 +30,17 @@ Consider a practical scenario: a user is working on a flight with no Wi-Fi and n
 
 The benefits extend beyond just offline functionality. Local-first architectures typically offer superior performance because data operations happen immediately on the user's device without network latency. This is particularly valuable for extensions that process large amounts of data or require real-time responsiveness.
 
-Core Principles of Local-First Development
+### Core Principles of Local-First Development
 
 There are several foundational principles that guide local-first extension development. First, the application should be usable without any network connection, performing all essential functions using local data. Second, data should always be immediately available for reading and writing, providing a snappy user experience regardless of network status. Third, synchronization should happen in the background when connectivity is available, handling conflicts gracefully. Fourth, the application must handle conflict resolution transparently when multiple devices or sessions modify the same data.
 
 ---
 
-Chrome Extension Storage Options {#storage-options}
+## Chrome Extension Storage Options {#storage-options}
 
 Chrome extensions have access to several storage mechanisms, each with distinct characteristics that make them suitable for different use cases. Understanding these options is crucial for implementing effective local-first architecture.
 
-chrome.storage: The Extension-Specific Solution
+### chrome.storage: The Extension-Specific Solution
 
 The chrome.storage API is specifically designed for extensions and provides the most straightforward path to implementing local-first functionality. It automatically synchronizes data across all extension contexts, background scripts, content scripts, popups, and options pages, making it ideal for sharing state across your extension's various components.
 
@@ -66,7 +66,7 @@ async function getUserPreferences() {
 }
 ```
 
-IndexedDB: For Complex Data Structures
+### IndexedDB: For Complex Data Structures
 
 While chrome.storage is excellent for simple key-value data, IndexedDB provides a more powerful solution for complex data structures and larger datasets. IndexedDB is a transactional, object-oriented database that runs directly in the user's browser, offering query capabilities and indexing that chrome.storage cannot match.
 
@@ -114,17 +114,17 @@ async function addTask(task) {
 }
 ```
 
-Choosing the Right Storage Strategy
+### Choosing the Right Storage Strategy
 
 For most extensions, a hybrid approach works best. Use chrome.storage.sync for user settings and preferences that should follow the user across devices. Use chrome.storage.local for cached data and temporary state that does not need synchronization. Use IndexedDB for complex data structures, large datasets, or when you need query capabilities.
 
 ---
 
-Implementing Offline Detection and Network Handling {#network-handling}
+## Implementing Offline Detection and Network Handling {#network-handling}
 
 A solid local-first extension must be able to detect network status and respond appropriately to connectivity changes. The Navigator.onLine property and online/offline events provide the foundation for this functionality.
 
-Detecting Network Status
+### Detecting Network Status
 
 Chrome extensions can monitor network connectivity using the navigator.onLine property and event listeners for the online and offline events. This allows your extension to adjust its behavior based on whether the user has an active connection.
 
@@ -191,7 +191,7 @@ class NetworkStatusManager {
 const networkManager = new NetworkStatusManager();
 ```
 
-Queueing Operations for Later Sync
+### Queueing Operations for Later Sync
 
 When the user is offline, your extension should queue operations that require network access and execute them when connectivity is restored. This is essential for maintaining the illusion of continuous operation.
 
@@ -268,17 +268,17 @@ class OfflineQueue {
 
 ---
 
-CRDT Extension Implementation {#crdt-implementation}
+## CRDT Extension Implementation {#crdt-implementation}
 
 Conflict-free Replicated Data Types (CRDTs) represent the gold standard for maintaining data consistency in distributed systems where multiple clients can modify data independently. For Chrome extensions that sync across devices, CRDTs eliminate the complexity of conflict resolution by ensuring that concurrent modifications can be merged automatically without conflicts.
 
-Understanding CRDTs for Extension Development
+### Understanding CRDTs for Extension Development
 
 CRDTs are data structures that can be replicated across multiple nodes in a network, where each node can operate independently without coordinating with other nodes, and the data can be merged automatically to produce a consistent state. This makes them ideal for local-first chrome extension development.
 
 There are two main categories of CRDTs: CmRDTs (Communication-based CRDTs) that operate as operation-based updates, and CvRDTs (State-based CRDTs) that merge entire states. For browser extensions, state-based CRDTs are typically easier to implement because they do not require reliable message delivery.
 
-Implementing a Simple CRDT Counter
+### Implementing a Simple CRDT Counter
 
 The simplest CRDT is a counter that can be incremented or decremented from multiple sources. A Grow-only Counter allows increments from any source but cannot be decremented, while a PN-Counter supports both increments and decrements.
 
@@ -350,7 +350,7 @@ async function demonstrateCounter() {
 }
 ```
 
-Implementing a CRDT Map for Complex Data
+### Implementing a CRDT Map for Complex Data
 
 For more complex scenarios where you need to store and synchronize objects, a CRDT Map (specifically an LWW-Register Map) allows you to store key-value pairs where the most recently written value wins based on timestamp.
 
@@ -454,15 +454,15 @@ async function demonstrateCRDTMap() {
 
 ---
 
-Building a Complete Local-First Extension Example {#complete-example}
+## Building a Complete Local-First Extension Example {#complete-example}
 
 Putting all these concepts together, let's examine how to build a practical local-first Chrome extension that manages notes and syncs across devices when online.
 
-Extension Structure
+### Extension Structure
 
 A well-organized local-first extension typically separates concerns into distinct modules. The storage layer handles all data persistence, the sync layer manages network synchronization, the conflict resolution layer handles merging, and the UI layer provides user interaction.
 
-Complete Implementation
+### Complete Implementation
 
 ```javascript
 // storage/notes-store.js - The core storage layer
@@ -690,7 +690,7 @@ chrome.runtime.onInstalled.addListener(initializeExtension);
 
 ---
 
-Best Practices for Local-First Extension Development {#best-practices}
+## Best Practices for Local-First Extension Development {#best-practices}
 
 When building local-first chrome extensions, several best practices will help ensure your extension provides a reliable and performant user experience.
 
@@ -706,7 +706,7 @@ Consider data migration. As your extension evolves, you may need to modify data 
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building local-first chrome extensions requires a fundamentally different approach than traditional cloud-centric development. By understanding the available storage mechanisms, implementing proper network handling, and leveraging CRDTs for conflict resolution, you can create extensions that provide excellent user experiences regardless of network connectivity.
 

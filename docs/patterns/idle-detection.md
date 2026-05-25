@@ -8,7 +8,7 @@ last_modified_at: 2026-01-15
 
 Chrome Extension Idle Detection API Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Idle Detection API enables extensions to monitor user activity and respond to periods of inactivity. This is essential for building power-efficient extensions, auto-save functionality, session security, and background task scheduling. This guide covers eight practical patterns for leveraging the `chrome.idle` API effectively in production extensions.
 
@@ -16,11 +16,11 @@ The idle detection API operates in the background service worker and does not re
 
 ---
 
-Pattern 1: Idle API Basics {#pattern-1-idle-api-basics}
+## Pattern 1: Idle API Basics {#pattern-1-idle-api-basics}
 
 The Chrome Idle API provides four core methods for detecting and responding to user inactivity. Understanding these fundamentals is essential before implementing more complex patterns.
 
-Required Permission {#required-permission}
+## Required Permission {#required-permission}
 
 Add `"idle"` to your `manifest.json` permissions:
 
@@ -30,7 +30,7 @@ Add `"idle"` to your `manifest.json` permissions:
 }
 ```
 
-Querying Current State {#querying-current-state}
+## Querying Current State {#querying-current-state}
 
 The `chrome.idle.queryState()` method returns the current idle state synchronously:
 
@@ -60,7 +60,7 @@ export class IdleService {
 export const idleService = new IdleService();
 ```
 
-Listening for State Changes {#listening-for-state-changes}
+## Listening for State Changes {#listening-for-state-changes}
 
 The `chrome.idle.onStateChanged` event fires when the user enters or leaves an idle state:
 
@@ -86,7 +86,7 @@ export class IdleService {
 }
 ```
 
-Detection Interval Constraints {#detection-interval-constraints}
+## Detection Interval Constraints {#detection-interval-constraints}
 
 Chrome enforces a minimum detection interval of 15 seconds. Setting a lower value will be ignored:
 
@@ -101,7 +101,7 @@ export function setSafeDetectionInterval(seconds: number): void {
 }
 ```
 
-Basic Usage Example {#basic-usage-example}
+## Basic Usage Example {#basic-usage-example}
 
 ```ts
 // background/service-worker.ts
@@ -122,11 +122,11 @@ The basic pattern establishes the foundation for all subsequent patterns. The ke
 
 ---
 
-Pattern 2: Auto-Save on Idle {#pattern-2-auto-save-on-idle}
+## Pattern 2: Auto-Save on Idle {#pattern-2-auto-save-on-idle}
 
 Auto-saving data when the user becomes idle prevents data loss without interrupting workflow. This pattern is particularly useful for extensions that collect user input across multiple pages.
 
-Implementing Auto-Save {#implementing-auto-save}
+## Implementing Auto-Save {#implementing-auto-save}
 
 ```ts
 // lib/auto-save.ts
@@ -202,7 +202,7 @@ export class AutoSaveManager {
 }
 ```
 
-Debouncing Considerations {#debouncing-considerations}
+## Debouncing Considerations {#debouncing-considerations}
 
 Debouncing saves while the user is active prevents excessive writes during rapid typing or interaction. However, when the user goes idle, you should save immediately rather than waiting for the debounce timer:
 
@@ -241,7 +241,7 @@ export class SmartAutoSave {
 }
 ```
 
-Recovery on Return {#recovery-on-return}
+## Recovery on Return {#recovery-on-return}
 
 When the user returns to active state, check for any unsaved changes and offer recovery options:
 
@@ -270,11 +270,11 @@ export class AutoSaveRecovery {
 
 ---
 
-Pattern 3: Session Timeout {#pattern-3-session-timeout}
+## Pattern 3: Session Timeout {#pattern-3-session-timeout}
 
 Security-sensitive extensions should lock after periods of inactivity, requiring re-authentication when the user returns. This pattern is essential for extensions handling sensitive data or performing privileged operations.
 
-Session Timeout Implementation {#session-timeout-implementation}
+## Session Timeout Implementation {#session-timeout-implementation}
 
 ```ts
 // lib/session-manager.ts
@@ -399,7 +399,7 @@ export class SessionManager {
 }
 ```
 
-Re-Authentication UI {#re-authentication-ui}
+## Re-Authentication UI {#re-authentication-ui}
 
 ```ts
 // components/lock-screen.ts
@@ -458,11 +458,11 @@ export class LockScreen {
 
 ---
 
-Pattern 4: Idle-Based Background Tasks {#pattern-4-idle-based-background-tasks}
+## Pattern 4: Idle-Based Background Tasks {#pattern-4-idle-based-background-tasks}
 
 Running resource-intensive operations during idle periods improves performance and reduces impact on user experience. This pattern combines idle detection with `chrome.alarms` for reliable scheduling.
 
-Background Task Scheduler {#background-task-scheduler}
+## Background Task Scheduler {#background-task-scheduler}
 
 ```ts
 // lib/idle-task-scheduler.ts
@@ -546,7 +546,7 @@ export class IdleTaskScheduler {
 }
 ```
 
-Combining with Chrome Alarms {#combining-with-chrome-alarms}
+## Combining with Chrome Alarms {#combining-with-chrome-alarms}
 
 Use chrome.alarms for periodic checks that survive service worker restarts:
 
@@ -582,7 +582,7 @@ export class AlarmScheduler {
 }
 ```
 
-Data Sync Task {#example-data-sync-task}
+## Data Sync Task {#example-data-sync-task}
 
 ```ts
 // lib/tasks/sync-task.ts
@@ -623,11 +623,11 @@ export class SyncTask implements BackgroundTask {
 
 ---
 
-Pattern 5: Activity Tracking Dashboard {#pattern-5-activity-tracking-dashboard}
+## Pattern 5: Activity Tracking Dashboard {#pattern-5-activity-tracking-dashboard}
 
 Tracking user activity helps understand engagement and identify patterns. This pattern implements a comprehensive activity tracking system with session data and visualization.
 
-Activity Tracking Service {#activity-tracking-service}
+## Activity Tracking Service {#activity-tracking-service}
 
 ```ts
 // lib/activity-tracker.ts
@@ -777,7 +777,7 @@ export class ActivityTracker {
 }
 ```
 
-Dashboard Component {#dashboard-component}
+## Dashboard Component {#dashboard-component}
 
 ```ts
 // components/activity-dashboard.ts
@@ -856,11 +856,11 @@ export class ActivityDashboard {
 
 ---
 
-Pattern 6: Smart Notifications {#pattern-6-smart-notifications}
+## Pattern 6: Smart Notifications {#pattern-6-smart-notifications}
 
 Intelligent notification handling based on idle state improves user experience by avoiding interruptions and ensuring important messages aren't missed.
 
-Notification Queue Manager {#notification-queue-manager}
+## Notification Queue Manager {#notification-queue-manager}
 
 ```ts
 // lib/smart-notifications.ts
@@ -978,7 +978,7 @@ export class SmartNotificationManager {
 }
 ```
 
-Different Behavior for Locked vs Idle {#different-behavior-for-locked-vs-idle}
+## Different Behavior for Locked vs Idle {#different-behavior-for-locked-vs-idle}
 
 ```ts
 // lib/notification-strategies.ts
@@ -1019,11 +1019,11 @@ export class ConservativeNotificationStrategy implements NotificationStrategy {
 
 ---
 
-Pattern 7: Power-Aware Extensions {#pattern-7-power-aware-extensions}
+## Pattern 7: Power-Aware Extensions {#pattern-7-power-aware-extensions}
 
 Extensions should be mindful of system resources, reducing activity during idle periods to conserve battery and system performance.
 
-Power State Manager {#power-state-manager}
+## Power State Manager {#power-state-manager}
 
 ```ts
 // lib/power-manager.ts
@@ -1105,7 +1105,7 @@ export class PowerManager {
 }
 ```
 
-WebSocket Integration {#websocket-integration}
+## WebSocket Integration {#websocket-integration}
 
 ```ts
 // lib/power-websocket.ts
@@ -1182,11 +1182,11 @@ export class PowerAwareWebSocket {
 
 ---
 
-Pattern 8: Multi-Device Idle Awareness {#pattern-8-multi-device-idle-awareness}
+## Pattern 8: Multi-Device Idle Awareness {#pattern-8-multi-device-idle-awareness}
 
 For users with multiple devices, sharing idle state enables coordinated behavior across all their installations.
 
-Multi-Device State Sync {#multi-device-state-sync}
+## Multi-Device State Sync {#multi-device-state-sync}
 
 ```ts
 // lib/multi-device-idle.ts
@@ -1301,7 +1301,7 @@ export class MultiDeviceIdleManager {
 }
 ```
 
-Device Status Display {#device-status-display}
+## Device Status Display {#device-status-display}
 
 ```ts
 // components/device-status.ts
@@ -1366,7 +1366,7 @@ export class DeviceStatusPanel {
 
 ---
 
-Summary Table {#summary-table}
+## Summary Table {#summary-table}
 
 | Pattern | Use Case | Key API Methods | Dependencies |
 |---------|----------|-----------------|---------------|
@@ -1379,7 +1379,7 @@ Summary Table {#summary-table}
 | 7: Power-Aware | Battery optimization | Dynamic polling intervals, WebSocket pause | None |
 | 8: Multi-Device | Cross-device coordination | `chrome.storage.sync` | `@theluckystrike/webext-storage`, `@theluckystrike/webext-messaging` |
 
-Common Considerations {#common-considerations}
+## Common Considerations {#common-considerations}
 
 - Minimum detection interval: Chrome enforces 15 seconds minimum for `setDetectionInterval()`
 - Permission requirement: All patterns require `"idle"` in manifest permissions

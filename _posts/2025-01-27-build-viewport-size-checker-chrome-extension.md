@@ -16,7 +16,7 @@ In the world of modern web development, understanding how your website renders a
 
 The demand for responsive web design has never been higher. With users accessing websites from an ever-growing variety of devices. from large desktop monitors to small mobile phones. developers need solid tools to ensure their designs work smoothly across all screen sizes. A custom viewport checker extension gives you instant access to viewport information without relying on browser DevTools, making it an essential addition to any developer's toolkit.
 
-Why Build a Viewport Checker Extension?
+### Why Build a Viewport Checker Extension?
 
 Before diving into the code, let's explore why a viewport checker extension is valuable for web developers. Traditional methods of checking viewport sizes involve opening Chrome DevTools, toggling the device toolbar, and manually reading dimensions. While DevTools is powerful, having a dedicated extension provides several advantages:
 
@@ -28,7 +28,7 @@ Custom Features: Building your own extension allows you to add features tailored
 
 Learning Opportunity: Creating a Chrome extension is an excellent way to learn the extension development workflow, manifest versioning, and browser API usage. skills that transfer to many other extension projects.
 
-Project Architecture and File Structure
+### Project Architecture and File Structure
 
 Our viewport checker extension will consist of several key components working together to provide a smooth user experience. Let's examine the file structure we'll create:
 
@@ -48,7 +48,7 @@ viewport-checker/
 
 Each file serves a specific purpose in our extension architecture. The manifest.json defines our extension's capabilities and permissions, while the popup files handle the user interface. Content scripts allow us to interact with web pages, and the background service worker manages communication between components.
 
-Creating the Manifest File
+### Creating the Manifest File
 
 Every Chrome extension begins with a manifest.json file that declares the extension's configuration, permissions, and capabilities. For our viewport checker, we'll use Manifest V3, which is the current standard and provides improved security and performance.
 
@@ -90,7 +90,7 @@ Every Chrome extension begins with a manifest.json file that declares the extens
 
 This manifest declares the essential permissions our extension needs. We request "activeTab" permission to access information about the current tab, and "storage" permission to save user preferences. The "action" key defines our popup, and "content_scripts" allows us to inject JavaScript into web pages to measure viewport dimensions.
 
-Building the Content Script
+### Building the Content Script
 
 The content script is the heart of our viewport measurement logic. It runs in the context of web pages and can access the DOM to retrieve accurate viewport information. Let's create a solid content script:
 
@@ -208,7 +208,7 @@ The content script is the heart of our viewport measurement logic. It runs in th
 
 This content script provides comprehensive viewport information including not just the basic innerWidth and innerHeight, but also screen dimensions, device pixel ratio for retina displays, breakpoint detection based on common responsive frameworks, and orientation information. The resize listener includes debouncing to prevent excessive updates during window dragging.
 
-Creating the Background Service Worker
+### Creating the Background Service Worker
 
 The background service worker acts as a central hub for communication between our extension's components. It manages state and facilitates message passing:
 
@@ -252,7 +252,7 @@ chrome.runtime.onUpdateAvailable.addListener(() => {
 
 The background service worker caches viewport information for quick access and updates the extension badge to show the current viewport width at a glance. This provides immediate feedback even before clicking on the extension.
 
-Building the Popup Interface
+### Building the Popup Interface
 
 The popup provides the main user interface for our extension. Let's create an attractive and functional popup:
 
@@ -336,7 +336,7 @@ The popup provides the main user interface for our extension. Let's create an at
 
 The popup presents information in a clear, organized layout with primary dimensions prominently displayed, device information in a grid format, and a visual representation of the viewport relative to the screen.
 
-Styling the Popup
+### Styling the Popup
 
 Let's create attractive CSS styling for our popup:
 
@@ -545,7 +545,7 @@ body {
 
 The styling creates a modern, visually appealing popup with a gradient header, organized information sections, and interactive buttons with hover effects.
 
-Implementing Popup Logic
+### Implementing Popup Logic
 
 Finally, let's create the JavaScript for the popup:
 
@@ -654,7 +654,7 @@ Orientation: ${info.orientation}`;
 
 The popup JavaScript handles retrieving viewport information, updating the UI dynamically, copying information to the clipboard, and refreshing the current tab.
 
-Testing Your Extension
+### Testing Your Extension
 
 Now that we've created all the necessary files, let's test our extension:
 
@@ -670,7 +670,7 @@ Now that we've created all the necessary files, let's test our extension:
 
 You should see the popup displaying real-time viewport dimensions, device information, and breakpoint detection. The extension badge will show the current viewport width.
 
-Enhancements and Future Improvements
+### Enhancements and Future Improvements
 
 This viewport checker extension provides a solid foundation that you can extend with additional features:
 
@@ -686,7 +686,7 @@ Export Functionality: Export viewport data in various formats (JSON, CSV) for te
 
 Integration with Design Tools: Export dimensions directly to Figma, Sketch, or other design tools.
 
-Conclusion
+### Conclusion
 
 Building a viewport checker extension is an excellent project that combines practical utility with valuable learning opportunities. You've learned how to create a Manifest V3 extension, implement content scripts for DOM access, build background service workers for state management, and design attractive popup interfaces.
 

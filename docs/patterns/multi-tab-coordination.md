@@ -6,9 +6,9 @@ canonical_url: "https://bestchromeextensions.com/patterns/multi-tab-coordination
 last_modified_at: 2026-01-15
 ---
 
-Multi-Tab Coordination Patterns
+### Multi-Tab Coordination Patterns
 
-Overview {#overview}
+## Overview {#overview}
 
 Coordinating behavior across multiple tabs is a common extension pattern. The background service worker acts as the central coordinator, broadcasting events, managing shared state, and ensuring consistency. This guide covers production patterns for tab coordination.
 
@@ -16,7 +16,7 @@ Coordinating behavior across multiple tabs is a common extension pattern. The ba
 
 ---
 
-Pattern 1: Broadcast to All Tabs {#pattern-1-broadcast-to-all-tabs}
+## Pattern 1: Broadcast to All Tabs {#pattern-1-broadcast-to-all-tabs}
 
 The background script can send messages to all extension tabs:
 
@@ -40,9 +40,9 @@ export function broadcastStateUpdate(state: AppState): void {
 
 ---
 
-Pattern 2: Selective Broadcast by URL Pattern {#pattern-2-selective-broadcast-by-url-pattern}
+## Pattern 2: Selective Broadcast by URL Pattern {#pattern-2-selective-broadcast-by-url-pattern}
 
-Filter tabs by URL before broadcasting:
+### Filter tabs by URL before broadcasting:
 
 ```ts
 async function broadcastByPattern(pattern: string, message: object): Promise<void> {
@@ -59,9 +59,9 @@ broadcastByPattern("*://*.example.com/*", { type: "REFRESH_DATA" });
 
 ---
 
-Pattern 3: Tab-Specific State with tabId Keys {#pattern-3-tab-specific-state-with-tabid-keys}
+## Pattern 3: Tab-Specific State with tabId Keys {#pattern-3-tab-specific-state-with-tabid-keys}
 
-Store per-tab state using `tabId` as the key:
+### Store per-tab state using `tabId` as the key:
 
 ```ts
 // background.ts
@@ -84,9 +84,9 @@ function getTabContext(tabId: number): TabContext | undefined {
 
 ---
 
-Pattern 4: Leader Election for Exclusive Operations {#pattern-4-leader-election-for-exclusive-operations}
+## Pattern 4: Leader Election for Exclusive Operations {#pattern-4-leader-election-for-exclusive-operations}
 
-Ensure only one tab performs an exclusive operation:
+### Ensure only one tab performs an exclusive operation:
 
 ```ts
 // background.ts
@@ -112,7 +112,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 ---
 
-Pattern 5: Cross-Tab State Synchronization {#pattern-5-cross-tab-state-synchronization}
+## Pattern 5: Cross-Tab State Synchronization {#pattern-5-cross-tab-state-synchronization}
 
 Use `storage.onChanged` to sync state across all contexts:
 
@@ -134,9 +134,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ---
 
-Pattern 6: Tab Counting & Duplicate Detection {#pattern-6-tab-counting-duplicate-detection}
+## Pattern 6: Tab Counting & Duplicate Detection {#pattern-6-tab-counting-duplicate-detection}
 
-Track tabs per domain and detect duplicates:
+### Track tabs per domain and detect duplicates:
 
 ```ts
 async function getTabCountByDomain(): Promise<Map<string, number>> {
@@ -162,9 +162,9 @@ async function hasDuplicate(url: string): Promise<boolean> {
 
 ---
 
-Pattern 7: Focus Management {#pattern-7-focus-management}
+## Pattern 7: Focus Management {#pattern-7-focus-management}
 
-Coordinate tab focus across the extension:
+### Coordinate tab focus across the extension:
 
 ```ts
 async function focusTabByUrl(pattern: string): Promise<void> {
@@ -181,7 +181,7 @@ async function focusTabByUrl(pattern: string): Promise<void> {
 
 ---
 
-Related Patterns {#related-patterns}
+## Related Patterns {#related-patterns}
 
 - [Tabs API](../api-reference/tabs-api.md) - Full tabs API reference
 - [Tab Management](./tab-management.md) - Basic tab operations

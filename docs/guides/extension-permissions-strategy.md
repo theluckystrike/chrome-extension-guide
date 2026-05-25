@@ -9,11 +9,11 @@ Extension Permissions Strategy
 
 A strategic approach to Chrome extension permissions that balances functionality with user trust and install conversion.
 
-Principle of Least Privilege {#principle-of-least-privilege}
+## Principle of Least Privilege {#principle-of-least-privilege}
 
 Request only the minimum permissions your extension needs to function. Users and Chrome are increasingly security-conscious, and every requested permission signals risk. Design your extension architecture around minimal access, break features into modules that request permissions only when those specific features are invoked.
 
-Required vs Optional Permissions {#required-vs-optional-permissions}
+## Required vs Optional Permissions {#required-vs-optional-permissions}
 
 Required permissions go in the `permissions` array in manifest.json. These are granted at install time and cannot be revoked by users without uninstalling. Use required permissions only for core functionality that the extension cannot work without.
 
@@ -25,11 +25,11 @@ Optional permissions go in `optional_permissions` and are requested at runtime v
 }
 ```
 
-Impact on Install Rate {#impact-on-install-rate}
+## Impact on Install Rate {#impact-on-install-rate}
 
 Fewer permissions directly correlate with higher install conversion rates. Extensions requesting broad host permissions (`<all_urls>` or `*://*/*`) display alarming warnings that can reduce installs by 50% or more. Users are increasingly educated about permission risks and will abandon extensions that request more than they need.
 
-Permission Warnings: What Triggers What {#permission-warnings-what-triggers-what}
+## Permission Warnings: What Triggers What {#permission-warnings-what-triggers-what}
 
 Certain permissions trigger prominent warnings in the Chrome Web Store:
 - "Read and change all your data on all websites". broad host permissions like `<all_urls>`, `*://*/*`
@@ -43,7 +43,7 @@ Minimize warnings by:
 3. Moving permissions to optional when possible
 4. Avoiding host permissions entirely when `activeTab` suffices
 
-Using activeTab Instead of Broad Host Permissions {#using-activetab-instead-of-broad-host-permissions}
+## Using activeTab Instead of Broad Host Permissions {#using-activetab-instead-of-broad-host-permissions}
 
 The `activeTab` permission grants temporary access to the current tab only when the user invokes your extension (clicks the icon or uses a keyboard shortcut). This displays no scary warnings and provides a user-initiated trust model:
 
@@ -60,9 +60,9 @@ When granted, `activeTab` provides access to:
 
 This is ideal for most content manipulation extensions that only need to act on the current page.
 
-Optional Permissions with chrome.permissions.request() {#optional-permissions-with-chromepermissionsrequest}
+## Optional Permissions with chrome.permissions.request() {#optional-permissions-with-chromepermissionsrequest}
 
-Request optional permissions dynamically when features are used:
+### Request optional permissions dynamically when features are used:
 
 ```javascript
 async function enableFeature(feature) {
@@ -81,7 +81,7 @@ async function enableFeature(feature) {
 
 Always explain why you need the permission before requesting, use a modal or prompt that describes the benefit.
 
-Permission Groups: Silent vs Approved {#permission-groups-silent-vs-approved}
+## Permission Groups: Silent vs Approved {#permission-groups-silent-vs-approved}
 
 Silently granted (no prompt):
 - `storage`
@@ -96,7 +96,7 @@ Require user approval:
 - `bookmarks`, `history`, `downloads`
 - Optional permissions requested at runtime
 
-Runtime Permission Checking {#runtime-permission-checking}
+## Runtime Permission Checking {#runtime-permission-checking}
 
 Always check if you have the permissions you need before performing actions:
 
@@ -113,7 +113,7 @@ if (!hasTabs) {
 }
 ```
 
-Graceful Degradation When Permissions Denied {#graceful-degradation-when-permissions-denied}
+## Graceful Degradation When Permissions Denied {#graceful-degradation-when-permissions-denied}
 
 Design your extension to function (albeit with reduced features) when permissions are denied:
 
@@ -129,7 +129,7 @@ async function performAction() {
 
 Provide clear UI paths for users to grant permissions later via `chrome.runtime.openOptionsPage()`.
 
-Permission Removal for Unused Permissions {#permission-removal-for-unused-permissions}
+## Permission Removal for Unused Permissions {#permission-removal-for-unused-permissions}
 
 Release permissions when they're no longer needed to maintain user trust:
 
@@ -143,7 +143,7 @@ chrome.permissions.remove({ permissions: ['tabs'] }, (removed) => {
 
 This is rare but useful when features are disabled or uninstalled.
 
-Enterprise Permissions via Policy {#enterprise-permissions-via-policy}
+## Enterprise Permissions via Policy {#enterprise-permissions-via-policy}
 
 Organizations can push permissions via enterprise policy that users cannot revoke. If your extension targets enterprise deployment, document which permissions require policy enforcement:
 
@@ -152,7 +152,7 @@ Organizations can push permissions via enterprise policy that users cannot revok
 
 See [enterprise-extensions](./enterprise-extensions.md) for implementation details.
 
-Permission Justification for Chrome Web Store Review {#permission-justification-for-chrome-web-store-review}
+## Permission Justification for Chrome Web Store Review {#permission-justification-for-chrome-web-store-review}
 
 During Chrome Web Store review, be prepared to justify:
 1. Why each permission is necessary for core functionality
@@ -162,15 +162,15 @@ During Chrome Web Store review, be prepared to justify:
 
 Provide clear, honest descriptions in your store listing and extension settings.
 
-Related Guides {#related-guides}
+## Related Guides {#related-guides}
 
 - [Permissions Model](./permissions-model.md). Detailed look into Manifest V3 permissions
 - [Advanced Permissions](../tutorials/advanced-permissions.md). Complex permission patterns
 - [Common Rejections](../publishing/common-rejections.md). Avoiding review issues
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
-Related Articles
+### Related Articles
 
 - [Permissions Model](../guides/permissions-model.md)
 - [Permission Gating](../patterns/permission-gating.md)

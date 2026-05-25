@@ -10,13 +10,13 @@ Mastering Content Scripts in Chrome Extensions
 
 Content scripts are the bridge between your Chrome extension and web pages. They run in the context of web pages, allowing you to read and modify the DOM, respond to user interactions, and inject custom styles. This guide covers everything you need to become proficient with content scripts in Chrome extensions.
 
-Overview {#overview}
+## Overview {#overview}
 
 Content scripts are JavaScript files that execute within the context of web pages. They can access the DOM, modify page content, and respond to user actions, but they run in an isolated environment separate from the page's JavaScript and other extensions.
 
-Injection Methods {#injection-methods}
+## Injection Methods {#injection-methods}
 
-Manifest-Based (Static) Injection {#manifest-injection}
+## Manifest-Based (Static) Injection {#manifest-injection}
 
 The simplest approach declares scripts in `manifest.json` under the `content_scripts` key. These scripts automatically execute on matching pages.
 
@@ -42,7 +42,7 @@ Key properties:
 - `css`: Array of CSS files to inject
 - `run_at`: When to inject the script
 
-Programmatic Injection {#programmatic-injection}
+## Programmatic Injection {#programmatic-injection}
 
 For dynamic control, use the `chrome.scripting` API. This requires the `scripting` permission.
 
@@ -78,11 +78,11 @@ await chrome.scripting.executeScript({
 });
 ```
 
-Isolated Worlds {#isolated-worlds}
+## Isolated Worlds {#isolated-worlds}
 
-Chrome extensions operate in two distinct JavaScript worlds:
+### Chrome extensions operate in two distinct JavaScript worlds:
 
-Isolated World (Default) {#isolated-world}
+## Isolated World (Default) {#isolated-world}
 
 Content scripts run in an isolated environment by default. They cannot access page variables, and the page cannot access extension variables.
 
@@ -92,7 +92,7 @@ const pageTitle = document.title;  // Works - can read DOM
 // const pageVariable = window.pageVariable;  // Would fail - can't access page JS
 ```
 
-Main World {#main-world}
+## Main World {#main-world}
 
 The `world` property allows scripts to run in the same context as the page:
 
@@ -113,9 +113,9 @@ const pageVariable = window.somePageFunction();
 
 Running in the main world exposes your extension code to the page and vice versa. Use this only when necessary and sanitize all inputs.
 
-DOM Access Patterns {#dom-access-patterns}
+## DOM Access Patterns {#dom-access-patterns}
 
-Basic DOM Manipulation {#basic-dom}
+## Basic DOM Manipulation {#basic-dom}
 
 ```javascript
 // Reading DOM content
@@ -134,7 +134,7 @@ document.addEventListener('click', (event) => {
 });
 ```
 
-Waiting for Elements {#waiting-for-elements}
+## Waiting for Elements {#waiting-for-elements}
 
 ```javascript
 // MutationObserver for dynamic content
@@ -178,7 +178,7 @@ async function waitForSelector(selector, timeout = 5000) {
 const element = await waitForSelector('.lazy-loaded-content');
 ```
 
-Handling Shadow DOM {#handling-shadow-dom}
+## Handling Shadow DOM {#handling-shadow-dom}
 
 Content scripts can access elements inside open shadow DOM:
 
@@ -209,9 +209,9 @@ shadowRoot.appendChild(style);
 shadowRoot.appendChild(newElement);
 ```
 
-CSS Injection {#css-injection}
+## CSS Injection {#css-injection}
 
-Static CSS via Manifest {#static-css}
+## Static CSS via Manifest {#static-css}
 
 ```json
 {
@@ -222,7 +222,7 @@ Static CSS via Manifest {#static-css}
 }
 ```
 
-Programmatic CSS Injection {#programmatic-css}
+## Programmatic CSS Injection {#programmatic-css}
 
 ```javascript
 await chrome.scripting.insertCSS({
@@ -236,7 +236,7 @@ await chrome.scripting.insertCSS({
 });
 ```
 
-Dynamic Style Management {#dynamic-styles}
+## Dynamic Style Management {#dynamic-styles}
 
 ```javascript
 // Inject styles dynamically
@@ -256,9 +256,9 @@ function removeStyles() {
 }
 ```
 
-Run_at Timing {#run-at-timing}
+## Run_at Timing {#run-at-timing}
 
-The `run_at` property controls when content scripts execute:
+### The `run_at` property controls when content scripts execute:
 
 | Value | Timing |
 |-------|--------|
@@ -283,9 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-Matching Patterns {#matching-patterns}
+## Matching Patterns {#matching-patterns}
 
-Basic Patterns {#basic-patterns}
+## Basic Patterns {#basic-patterns}
 
 ```json
 {
@@ -301,7 +301,7 @@ Basic Patterns {#basic-patterns}
 }
 ```
 
-Exclude Patterns {#exclude-patterns}
+## Exclude Patterns {#exclude-patterns}
 
 ```json
 {
@@ -312,7 +312,7 @@ Exclude Patterns {#exclude-patterns}
 }
 ```
 
-Match Origin and Paths {#match-origin-and-paths}
+## Match Origin and Paths {#match-origin-and-paths}
 
 ```json
 {
@@ -323,9 +323,9 @@ Match Origin and Paths {#match-origin-and-paths}
 }
 ```
 
-Dynamic Content Script Registration {#dynamic-registration}
+## Dynamic Content Script Registration {#dynamic-registration}
 
-Register content scripts dynamically at runtime:
+### Register content scripts dynamically at runtime:
 
 ```javascript
 // Register a dynamic content script
@@ -351,11 +351,11 @@ async function getRegisteredScripts() {
 }
 ```
 
-Communicating with the Page Context {#communicating-page-context}
+## Communicating with the Page Context {#communicating-page-context}
 
-Using window.postMessage {#using-postmessage}
+## Using window.postMessage {#using-postmessage}
 
-From content script to page:
+### From content script to page:
 
 ```javascript
 // Content script - send message to page
@@ -372,7 +372,7 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-In page script (injected):
+### In page script (injected):
 
 ```javascript
 // Page script - receive from extension
@@ -389,7 +389,7 @@ window.postMessage({
 }, '*');
 ```
 
-Using Custom Events {#using-custom-events}
+## Using Custom Events {#using-custom-events}
 
 ```javascript
 // Content script - dispatch custom event
@@ -404,7 +404,7 @@ document.addEventListener('extension-action', (e) => {
 });
 ```
 
-Injecting a Script for Communication {#injecting-for-communication}
+## Injecting a Script for Communication {#injecting-for-communication}
 
 ```javascript
 // Inject a bridge script into the main world
@@ -431,7 +431,7 @@ await chrome.scripting.executeScript({
 });
 ```
 
-Best Practices {#best-practices}
+## Best Practices {#best-practices}
 
 1. Use isolated worlds by default - Only use `world: "MAIN"` when necessary
 2. Minimize manifest permissions - Request only what's needed
@@ -439,7 +439,7 @@ Best Practices {#best-practices}
 4. Clean up properly - Remove injected styles, event listeners, and observers when no longer needed
 5. Avoid conflicts - Use unique class names and IDs with prefixes
 
-Common Pitfalls {#common-pitfalls}
+## Common Pitfalls {#common-pitfalls}
 
 - Assuming page is static - Use observers for SPAs
 - Memory leaks - Always disconnect observers and clean up
@@ -448,7 +448,7 @@ Common Pitfalls {#common-pitfalls}
 
 ---
 
-Related Articles {#related-articles}
+## Related Articles {#related-articles}
 
 - [Content Script Injection](/guides/content-script-injection/). Detailed look into static vs programmatic injection
 - [Content Script Isolation](/guides/content-script-isolation/). Understanding isolated vs main worlds

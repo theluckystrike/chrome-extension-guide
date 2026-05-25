@@ -18,7 +18,7 @@ This comprehensive guide will walk you through building a fully functional audio
 
 ---
 
-Why Build an Audio Recorder Extension? {#why-build-audio-recorder}
+## Why Build an Audio Recorder Extension? {#why-build-audio-recorder}
 
 The demand for browser-based audio recording solutions continues to grow across multiple use cases. Professionals need to record meeting notes, students want to capture lecture audio, content creators require voice-over tools, and developers need to document bug reports with verbal explanations. An audio recorder extension provides these capabilities directly within the browser, eliminating the need for separate applications or online services.
 
@@ -28,7 +28,7 @@ From a development perspective, an audio recorder extension is an excellent proj
 
 ---
 
-Prerequisites and Project Setup {#prerequisites}
+## Prerequisites and Project Setup {#prerequisites}
 
 Before we begin building the audio recorder extension, ensure you have a basic understanding of HTML, CSS, and JavaScript. You do not need prior experience with Chrome extension development, but familiarity with these web technologies is essential. You will also need Google Chrome installed on your development machine and a code editor like Visual Studio Code.
 
@@ -68,11 +68,11 @@ The manifest file declares the extension name, version, and description that use
 
 ---
 
-Creating the User Interface {#user-interface}
+## Creating the User Interface {#user-interface}
 
 The popup interface serves as the main interaction point for your audio recorder extension. It needs to display recording controls, show the current recording status, indicate audio levels, and provide options for saving or discarding recordings. Keep the design clean and intuitive since users will interact with it primarily through clicks and taps.
 
-Create the popup.html file with the following structure:
+### Create the popup.html file with the following structure:
 
 ```html
 <!DOCTYPE html>
@@ -127,11 +127,11 @@ The interface includes a status indicator that changes color based on recording 
 
 ---
 
-Styling Your Extension {#styling}
+## Styling Your Extension {#styling}
 
 The CSS file transforms the basic HTML structure into an attractive, professional-looking interface. Use a color scheme that clearly communicates the recording state. typically green for ready, red for recording, and neutral gray for disabled states. Apply consistent spacing and clear visual hierarchy so users can quickly understand the current state and available actions.
 
-Create popup.css with these styles:
+### Create popup.css with these styles:
 
 ```css
 * {
@@ -283,11 +283,11 @@ These styles create a modern dark theme with smooth transitions and clear visual
 
 ---
 
-Implementing Recording Logic {#recording-logic}
+## Implementing Recording Logic {#recording-logic}
 
 The JavaScript file contains the core functionality of your audio recorder extension. It handles microphone access, starts and stops recordings, processes audio data, and manages the user interface updates. Understanding each component is essential for building a reliable recording experience.
 
-Create popup.js with the following implementation:
+### Create popup.js with the following implementation:
 
 ```javascript
 let mediaRecorder = null;
@@ -475,7 +475,7 @@ The stopRecording function properly terminates the recording session, releases t
 
 ---
 
-Adding Icon Files {#icons}
+## Adding Icon Files {#icons}
 
 Your extension needs icon files to display in the Chrome toolbar and Chrome Web Store. Create a simple icons directory with PNG images at the required sizes: 16x16, 48x48, and 128x128 pixels. You can use any image editing tool to create basic icons, or generate them programmatically. For development purposes, you can use placeholder images, but replace them with professional designs before publishing.
 
@@ -483,7 +483,7 @@ The icons should clearly represent audio recording. a microphone design works we
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Before publishing, thoroughly test your extension to ensure it works correctly in various scenarios. Load your extension in Chrome by navigating to chrome://extensions/, enabling Developer mode, and clicking "Load unpacked". Select your extension directory to install it temporarily for testing.
 
@@ -493,7 +493,7 @@ Check for any console errors during operation and verify that the extension beha
 
 ---
 
-Publishing to Chrome Web Store {#publishing}
+## Publishing to Chrome Web Store {#publishing}
 
 Once testing is complete and you are satisfied with your extension, prepare it for publication. Create a detailed product listing with an appealing description, screenshots demonstrating the extension in action, and appropriate category tags. The Chrome Web Store has specific guidelines for extension descriptions. ensure yours is clear, accurate, and free of promotional language.
 
@@ -503,7 +503,7 @@ Consider implementing analytics to track installation numbers and user behavior.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Building an audio recorder Chrome extension is an excellent project that teaches you fundamental skills applicable to many other extension types. You have learned how to request and manage microphone permissions, use the MediaRecorder API for audio capture, process and visualize audio data, save recordings using the Chrome downloads API, and package everything for distribution through the Chrome Web Store.
 

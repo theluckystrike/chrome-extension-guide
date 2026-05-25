@@ -6,18 +6,18 @@ canonical_url: "https://bestchromeextensions.com/api-reference/management-api/"
 last_modified_at: 2026-01-15
 ---
 
-chrome.management API Reference
+### chrome.management API Reference
 
-Overview {#overview}
+## Overview {#overview}
 
 The `chrome.management` API manages installed extensions and apps.
 
 - Permission: `"management"`
 - Availability: Chrome, Edge, Opera
 
-API Methods {#api-methods}
+## API Methods {#api-methods}
 
-Query Extensions {#query-extensions}
+## Query Extensions {#query-extensions}
 
 `chrome.management.getAll(callback)` - List all extensions/apps. Returns ExtensionInfo[].
 
@@ -35,7 +35,7 @@ chrome.management.getAll(e => e.forEach(x => console.log(x.name)));
 
 ---
 
-Control Extensions {#control-extensions}
+## Control Extensions {#control-extensions}
 
 `chrome.management.setEnabled(id, enabled, callback)` - Enable/disable extension.
 
@@ -53,7 +53,7 @@ chrome.management.uninstall('ext-id', { showConfirmDialog: true }, () => {});
 
 ---
 
-ExtensionInfo Type {#extensioninfo-type}
+## ExtensionInfo Type {#extensioninfo-type}
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -76,7 +76,7 @@ ExtensionInfo Type {#extensioninfo-type}
 
 ---
 
-Events {#events}
+## Events {#events}
 
 `chrome.management.onInstalled` - Extension installed.
 
@@ -96,29 +96,29 @@ chrome.management.onUninstalled.addListener(id => console.log(id));
 
 ---
 
-Code Examples {#code-examples}
+## Code Examples {#code-examples}
 
-List Extensions {#list-extensions}
+## List Extensions {#list-extensions}
 
 ```javascript
 chrome.management.getAll(e => e.filter(x => x.type === 'extension')
   .forEach(x => console.log(x.name, x.enabled)));
 ```
 
-Disable Extension {#disable-extension}
+## Disable Extension {#disable-extension}
 
 ```javascript
 chrome.management.setEnabled('ext-id', false, () => 
   console.log(chrome.runtime.lastError ? 'Error' : 'Disabled'));
 ```
 
-Self-Uninstall {#self-uninstall}
+## Self-Uninstall {#self-uninstall}
 
 ```javascript
 chrome.management.uninstallSelf({ showConfirmDialog: true }, () => {});
 ```
 
-Monitor Events {#monitor-events}
+## Monitor Events {#monitor-events}
 
 ```javascript
 chrome.management.onInstalled.addListener(console.log);
@@ -129,7 +129,7 @@ chrome.management.onDisabled.addListener(console.log);
 
 ---
 
-Cross-references {#cross-references}
+## Cross-references {#cross-references}
 
 - [Management Permission](../permissions/management.md)
 - [Management API Guide](../guides/management-api.md)

@@ -16,7 +16,7 @@ This guide covers every proven monetization model available to Chrome extension 
 
 ---
 
-Freemium Model
+### Freemium Model
 
 The freemium model is the dominant strategy for Chrome extensions and for good reason. Browser users expect free. They install extensions casually, try them for a few minutes, and decide quickly whether to keep them. Asking for money before they experience value is a losing proposition in this environment.
 
@@ -34,7 +34,7 @@ When to avoid freemium:
 - Products where the value proposition is binary (it either works or it does not)
 - Very niche tools where the total addressable market is too small for conversion math to work
 
-Implementation: Feature gating with Chrome Storage API
+### Implementation: Feature gating with Chrome Storage API
 
 ```javascript
 // Check premium status before enabling features
@@ -66,7 +66,7 @@ Detailed look: Read the full [Freemium Model Guide](https://bestchromeextensions
 
 ---
 
-Subscription Model
+### Subscription Model
 
 Subscriptions create predictable recurring revenue, which is the foundation of a sustainable extension business. Monthly or annual billing smooths out the revenue curve, improves cash flow, and lets you invest confidently in product development because you know what next month looks like.
 
@@ -79,7 +79,7 @@ Pricing psychology for extensions:
 - Annual at a 20-30% discount improves retention and lifetime value
 - Offering both lets users self-select based on their commitment level
 
-Implementation: Stripe Checkout integration
+### Implementation: Stripe Checkout integration
 
 ```javascript
 // Open Stripe Checkout from extension popup
@@ -113,7 +113,7 @@ Detailed look: The [Subscription Model Guide](https://bestchromeextensions.com/e
 
 ---
 
-One-Time Purchase
+### One-Time Purchase
 
 One-time purchases appeal to users who dislike recurring charges. Pay once, own forever. The simplicity is attractive, and it eliminates the friction of subscription management. For extensions that deliver a complete tool without ongoing server costs, one-time pricing can work well.
 
@@ -126,7 +126,7 @@ Price anchoring strategy:
 - Offer a "lifetime" label to emphasize long-term savings versus subscriptions
 - Consider version-gated upgrades for major new releases
 
-Implementation: License key validation
+### Implementation: License key validation
 
 ```javascript
 // Validate a license key against your server
@@ -155,7 +155,7 @@ Detailed look: The [One-Time Purchase Guide](https://bestchromeextensions.com/ex
 
 ---
 
-Affiliate Revenue
+### Affiliate Revenue
 
 Affiliate revenue works as a passive supplement layered on top of your primary monetization model. You earn commissions by recommending relevant products or services to your users through contextual links and suggestions within your extension.
 
@@ -167,7 +167,7 @@ Where affiliate links work in extensions:
 - Post-install onboarding screens that recommend complementary products
 - Resource pages within your extension that link to paid tools
 
-Implementation: Contextual affiliate suggestions
+### Implementation: Contextual affiliate suggestions
 
 ```javascript
 // Show relevant affiliate suggestions based on user context
@@ -190,7 +190,7 @@ Detailed look: The [Affiliate Revenue Guide](https://bestchromeextensions.com/ex
 
 ---
 
-Sponsorship Model
+### Sponsorship Model
 
 Sponsorship is the monetization channel most extension developers overlook. Instead of charging users, you partner with companies that want to reach your audience. Sponsors pay for placement in your extension, on your website, or in your communications. Users get a free product, sponsors get targeted exposure, and you get predictable revenue.
 
@@ -211,7 +211,7 @@ Detailed look: The [Sponsorship Model Guide](https://bestchromeextensions.com/ex
 
 ---
 
-Extension as a Service (SaaS)
+### Extension as a Service (SaaS)
 
 The SaaS model treats your extension as a client for a backend service. Instead of selling the extension itself, you sell access to server-side capabilities that the extension consumes. This is the most lucrative monetization model and the one that scales best, but it requires the most infrastructure.
 
@@ -219,7 +219,7 @@ The mental shift is critical. The extension is not the product. The backend is t
 
 SaaS pricing works for extensions that do server-side processing, AI inference, data aggregation, cross-device synchronization, or any capability that requires compute beyond what the browser provides. Users understand that they are paying for a service, not a file, and service pricing supports monthly charges of $10-50 or more.
 
-Implementation: Metered API access
+### Implementation: Metered API access
 
 ```javascript
 // Check API quota before making server calls
@@ -259,7 +259,7 @@ Detailed look: The [Extension as a Service Guide](https://bestchromeextensions.c
 
 ---
 
-Case Study: Tab Suspender Pro
+### Case Study: Tab Suspender Pro
 
 Tab Suspender Pro is a smaller extension in the Zovo portfolio with 442 users, built to manage browser memory by suspending inactive tabs. It entered a crowded market after The Great Suspender was removed from the Chrome Web Store over security concerns.
 
@@ -275,7 +275,7 @@ Read the full case study: [Tab Suspender Pro: Competing in a Crowded Market](htt
 
 ---
 
-Choosing the Right Model
+### Choosing the Right Model
 
 No single model works for every extension. The right choice depends on your product's characteristics, your audience's expectations, and your willingness to build and maintain infrastructure.
 
@@ -290,7 +290,7 @@ No single model works for every extension. The right choice depends on your prod
 
 Many successful extensions combine models. A freemium base with affiliate links in the free tier and subscriptions for premium features is a common and effective combination.
 
-Payment Integration Resources
+### Payment Integration Resources
 
 Implementing payments in Chrome extensions presents unique challenges due to Content Security Policy restrictions, sandboxed environments, and the absence of native payment support since Google deprecated Chrome Web Store payments in 2020. These resources cover the technical foundations:
 
@@ -300,7 +300,7 @@ Implementing payments in Chrome extensions presents unique challenges due to Con
 - [Server-Side Validation](https://bestchromeextensions.com/extension-monetization-playbook/articles/server-side-validation/). Prevent license circumvention with proper backend validation
 - [Paywall Patterns](https://bestchromeextensions.com/extension-monetization-playbook/articles/paywall-patterns/). UI patterns for upgrade prompts that convert without annoying users
 
-Related Articles
+### Related Articles
 
 - [Extension Monetization Guide](../guides/extension-monetization.md). Quick-reference monetization patterns with code snippets
 - [SaaS Pricing Strategies](../monetization/saas-pricing.md). Detailed look into pricing tiers, trial periods, and pricing psychology
@@ -313,7 +313,7 @@ Related Articles
 - [Chrome Web Store Listing Optimization](../publishing/listing-optimization.md). Optimize your listing to drive installs into your monetization funnel
 - [User Onboarding](../guides/extension-onboarding.md). Design onboarding that leads users toward premium value
 
-Further Reading
+### Further Reading
 
 The [Extension Monetization Playbook](https://bestchromeextensions.com/extension-monetization-playbook/) covers every aspect of building a revenue-generating extension business, from choosing your first model to scaling as a solo developer. Start with the [Monetization Strategies Overview](https://bestchromeextensions.com/extension-monetization-playbook/articles/monetization-strategies-overview/) for the complete picture. The source code is available on [GitHub](https://github.com/theluckystrike/extension-monetization-playbook).
 

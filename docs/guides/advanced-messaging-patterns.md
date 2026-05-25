@@ -9,7 +9,7 @@ Advanced Messaging Patterns in Chrome Extensions
 
 Building Chrome extensions that communicate reliably across multiple contexts requires more than basic message passing. As extensions grow in complexity, with service workers, content scripts, popups, side panels, and offscreen documents, developers need sophisticated messaging architectures that handle connection lifecycle management, type safety, error recovery, and high-throughput scenarios. This guide dives deep into production-ready patterns used by mature extensions handling millions of users.
 
-Table of Contents
+### Table of Contents
 
 - [Chrome Extension Messaging Architecture detailed look](#chrome-extension-messaging-architecture-deep detailed look)
 - [Port-Based Long-Lived Connections](#port-based-long-lived-connections)
@@ -21,11 +21,11 @@ Table of Contents
 
 ---
 
-Chrome Extension Messaging Architecture detailed look
+### Chrome Extension Messaging Architecture detailed look
 
 Chrome extensions operate across multiple isolated contexts, each with different capabilities and lifecycle characteristics. Understanding these contexts is essential for building reliable messaging systems.
 
-Extension Contexts and Their Characteristics
+### Extension Contexts and Their Characteristics
 
 The Chrome extension architecture comprises five primary contexts, each requiring different communication strategies:
 
@@ -39,7 +39,7 @@ Side Panels (Manifest V3) provide persistent UI alongside the browser window, ma
 
 Offscreen Documents (Manifest V3) handle long-running tasks like audio processing or file operations without blocking the service worker. They communicate exclusively through message passing.
 
-The Two Messaging Paradigms
+### The Two Messaging Paradigms
 
 Chrome provides two fundamental messaging mechanisms, each suited to different scenarios:
 
@@ -51,11 +51,11 @@ The architecture decision between these paradigms significantly impacts extensio
 
 ---
 
-Port-Based Long-Lived Connections
+### Port-Based Long-Lived Connections
 
 Port-based connections provide persistent, bidirectional communication channels that survive service worker restarts and handle streaming data efficiently. Mastering port connections is essential for building responsive, production-grade extensions.
 
-Establishing and Managing Ports
+### Establishing and Managing Ports
 
 Ports are created from either end of a communication channel. The typical pattern establishes a connection from a content script to the background service worker:
 
@@ -107,7 +107,7 @@ class StreamClient {
 }
 ```
 
-Port Lifecycle Management in Service Workers
+### Port Lifecycle Management in Service Workers
 
 The service worker must handle multiple concurrent port connections from different tabs and contexts. Solid connection management prevents memory leaks and ensures clean shutdown:
 
@@ -190,11 +190,11 @@ class PortManager {
 
 ---
 
-Message Routing Patterns for Complex Extensions
+### Message Routing Patterns for Complex Extensions
 
 As extensions scale, simple message handlers become unwieldy. A router pattern provides maintainable, extensible message handling across multiple components.
 
-Centralized Message Router
+### Centralized Message Router
 
 A well-designed router decouples message types from handlers, enabling easy addition of new message types without modifying existing code:
 
@@ -276,7 +276,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Pub/Sub for Decoupled Communication
+### Pub/Sub for Decoupled Communication
 
 For complex extensions with many independent components, publish-subscribe patterns reduce coupling and improve maintainability:
 
@@ -352,11 +352,11 @@ class CrossContextEventBus {
 
 ---
 
-Typed Message Protocols with TypeScript
+### Typed Message Protocols with TypeScript
 
 Type safety transforms message passing from runtime guesswork into compile-time verification, catching errors before deployment and enabling confident refactoring.
 
-Defining Message Contracts
+### Defining Message Contracts
 
 Centralize all message type definitions in a shared package accessible to all extension contexts:
 
@@ -425,7 +425,7 @@ function createTypedSender(context: 'content' | 'popup' | 'background') {
 }
 ```
 
-Type-Safe Message Handler with Validation
+### Type-Safe Message Handler with Validation
 
 Combine TypeScript types with runtime validation for defense in depth:
 
@@ -499,11 +499,11 @@ handler.register(
 
 ---
 
-Error Handling and Retry Strategies
+### Error Handling and Retry Strategies
 
 Production extensions must handle network failures, context disconnections, and unexpected errors gracefully. Solid error handling prevents extension failures from affecting user experience.
 
-Retry Logic with Exponential Backoff
+### Retry Logic with Exponential Backoff
 
 ```typescript
 // shared/messaging/retry.ts
@@ -570,7 +570,7 @@ async function sendMessageWithRetry(
 }
 ```
 
-Connection Health Monitoring
+### Connection Health Monitoring
 
 ```typescript
 // shared/messaging/health-monitor.ts
@@ -643,11 +643,11 @@ class ConnectionHealthMonitor {
 
 ---
 
-Performance Optimization for High-Frequency Messaging
+### Performance Optimization for High-Frequency Messaging
 
 Extensions handling real-time data, continuous monitoring, or bulk operations require optimized messaging to maintain performance and responsiveness.
 
-Message Batching and Throttling
+### Message Batching and Throttling
 
 ```typescript
 // shared/messaging/batcher.ts
@@ -717,7 +717,7 @@ const analyticsBatcher = new MessageBatcher<AnalyticsEvent>({
 });
 ```
 
-Efficient Port Communication
+### Efficient Port Communication
 
 ```typescript
 // shared/messaging/port-stream.ts
@@ -771,9 +771,9 @@ class PortStream<T> {
 
 ---
 
-Real-World Examples from Production Extensions
+### Real-World Examples from Production Extensions
 
-Example 1: Collaborative Editing Extension
+### Example 1: Collaborative Editing Extension
 
 A real-time collaboration extension uses port-based connections with operational transformation:
 
@@ -828,7 +828,7 @@ class CollaborationManager {
 }
 ```
 
-Example 2: Data Sync Extension
+### Example 2: Data Sync Extension
 
 An extension synchronizing data across tabs implements connection pooling and message prioritization:
 
@@ -885,7 +885,7 @@ class PriorityMessageRouter {
 
 ---
 
-Conclusion
+### Conclusion
 
 Building production-grade Chrome extensions requires thoughtful messaging architecture that accounts for context isolation, connection lifecycle management, type safety, error recovery, and performance optimization. The patterns presented in this guide represent battle-tested approaches used in extensions serving millions of users.
 
@@ -895,7 +895,7 @@ As Chrome extension capabilities continue to evolve, particularly with newoffscr
 
 ---
 
-Cross-References
+### Cross-References
 
 - [Message Passing Best Practices](/guides/message-passing-best-practices.md)
 - [Message Passing Fundamentals](/guides/message-passing.md)
@@ -903,7 +903,7 @@ Cross-References
 - [Background Service Worker Patterns](/guides/background-patterns.md)
 - [Content Scripts detailed look](/guides/content-scripts-deep detailed look.md)
 
-Related Articles
+### Related Articles
 
 - [Chrome Extension Architecture Patterns](/guides/architecture-patterns.md)
 - [Service Worker Lifecycle](/guides/service-worker-lifecycle.md)

@@ -18,7 +18,7 @@ Whether you're a seasoned Chrome extension developer looking to expand into secu
 
 ---
 
-Understanding End-to-End Encryption Fundamentals
+### Understanding End-to-End Encryption Fundamentals
 
 Before diving into code, it's essential to understand what makes end-to-end encryption truly secure and why it matters for your Chrome extension. Traditional messaging systems store messages on central servers in plain text, meaning anyone with server access, hackers, government agencies, or even the company running the service, can read your messages. This represents a fundamental privacy vulnerability that E2E encryption aims to solve.
 
@@ -30,7 +30,7 @@ For your Chrome extension, you'll need to understand several cryptographic primi
 
 ---
 
-Setting Up Your Chrome Extension Project
+### Setting Up Your Chrome Extension Project
 
 Let's start building your encrypted messaging extension by setting up the project structure. Create a new directory for your extension and initialize the essential files. The manifest version 3 is the current standard, so we'll use that throughout this tutorial.
 
@@ -64,7 +64,7 @@ The architecture of your extension will follow a modular design pattern. The bac
 
 ---
 
-Implementing Cryptographic Key Management
+### Implementing Cryptographic Key Management
 
 The cornerstone of any E2E encryption system is proper key management. Your Chrome extension needs to generate, store, and handle cryptographic keys securely. We'll use the Web Crypto API, which provides native cryptographic operations in modern browsers without requiring external libraries.
 
@@ -92,7 +92,7 @@ Storage of these keys requires careful consideration. The private keys must neve
 
 ---
 
-Building the Signal Protocol Implementation
+### Building the Signal Protocol Implementation
 
 Implementing the full Signal Protocol from scratch is complex and error-prone. For a production extension, consider using libraries like `libsignal-protocol-javascript` or similar maintained cryptographic libraries. However, understanding the protocol's core concepts will help you integrate these libraries effectively.
 
@@ -104,7 +104,7 @@ When implementing this in your extension, you'll need to handle several edge cas
 
 ---
 
-Creating the User Interface Components
+### Creating the User Interface Components
 
 The user interface of your secure chat extension needs to balance functionality with the security-focused nature of the application. Users should have clear indicators of whether their conversations are encrypted and should be able to verify encryption keys manually if desired.
 
@@ -128,7 +128,7 @@ Design considerations extend beyond aesthetics. Your UI should clearly display w
 
 ---
 
-Handling Message Storage and Synchronization
+### Handling Message Storage and Synchronization
 
 One of the trickiest aspects of building an encrypted messaging extension is managing message storage securely. Messages should be stored encrypted on the local device, and if you implement cloud synchronization, it must be done in a way that maintains E2E encryption.
 
@@ -138,7 +138,7 @@ Synchronization across devices requires careful architectural decisions. The nai
 
 ---
 
-Security Best Practices for Production Extensions
+### Security Best Practices for Production Extensions
 
 When preparing your encrypted messaging extension for production deployment, several security considerations become critical. First, implement certificate pinning to prevent man-in-the-middle attacks where an attacker might try to intercept and modify your extension's network requests.
 
@@ -150,7 +150,7 @@ Regular security audits should be part of your development lifecycle. Consider u
 
 ---
 
-Testing Your Encrypted Messaging Extension
+### Testing Your Encrypted Messaging Extension
 
 Comprehensive testing is essential for any security-critical application. Your testing strategy should include unit tests for cryptographic functions, integration tests for the full message flow, and end-to-end tests that simulate real-world usage scenarios.
 
@@ -160,7 +160,7 @@ Integration tests should verify that messages can be sent from one browser insta
 
 ---
 
-Deployment and Maintenance
+### Deployment and Maintenance
 
 Once your extension is ready, the Chrome Web Store submission process requires careful preparation. Your store listing should accurately describe your extension's features, including how encryption works and what data your extension accesses. Google has specific policies around security extensions, and being transparent about your encryption implementation helps avoid rejection.
 
@@ -170,7 +170,7 @@ Consider implementing automatic updates so users receive security patches automa
 
 ---
 
-Conclusion
+### Conclusion
 
 Building an end-to-end encrypted messaging Chrome extension is a challenging but rewarding project that teaches you valuable skills in cryptography, browser security, and distributed systems design. The principles you learn, key management, secure communication protocols, and defense-in-depth security, apply broadly to many types of security-critical applications.
 

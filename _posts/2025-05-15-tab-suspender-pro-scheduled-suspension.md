@@ -15,7 +15,7 @@ If you use Chrome with dozens of open tabs, you already know how quickly browser
 
 we will explore every aspect of scheduling in Tab Suspender Pro, from basic setup to advanced configurations that can dramatically improve your productivity and browser performance. Whether you need to automatically suspend tabs during your lunch break, maintain different suspension rules for work and personal hours, or handle complex timezone scenarios, this article will walk you through each scenario with detailed instructions and best practices.
 
-Understanding Tab Suspender Pro's Scheduling Architecture
+### Understanding Tab Suspender Pro's Scheduling Architecture
 
 Before diving into specific configurations, it is essential to understand how Tab Suspender Pro's scheduling system works under the hood. The extension uses a flexible rules engine that evaluates multiple conditions before deciding whether to suspend a tab. These conditions include inactivity duration, tab type, URL patterns, and critically, time-based criteria.
 
@@ -23,7 +23,7 @@ The scheduling system operates on two primary levels: global schedules and indiv
 
 When you enable scheduling, Tab Suspender Pro runs background checks at regular intervals to determine which tabs should be suspended based on your active rules. The extension considers your current time, day of the week, and any timezone settings you have configured. This means your tab management can automatically shift gears as you move through your day without requiring manual intervention.
 
-Setting Up Time-Based Suspension Rules
+### Setting Up Time-Based Suspension Rules
 
 Setting up your first time-based suspension rule in Tab Suspender Pro is straightforward, but understanding the available options will help you create more effective configurations. To begin, open the Tab Suspender Pro options page and navigate to the Scheduling section. Here you will find the primary interface for creating and managing time-based rules.
 
@@ -33,7 +33,7 @@ However, time-based rules in Tab Suspender Pro offer much more granularity than 
 
 To create a more sophisticated schedule, consider using the extension's profile feature. Profiles allow you to switch between different rule sets with a single click, making it easy to adapt your tab management to different contexts. You might create a "Work" profile with strict suspension rules, a "Research" profile with relaxed settings for deep work sessions, and a "Personal" profile optimized for evening browsing.
 
-Configuring Work Hours vs Personal Hours
+### Configuring Work Hours vs Personal Hours
 
 One of the most common scheduling scenarios is maintaining different tab suspension rules for work hours versus personal time. This approach recognizes that your browsing needs change dramatically depending on whether you are focused on professional tasks or relaxing in the evening.
 
@@ -45,7 +45,7 @@ For personal hours, typically evenings and weekends, you can afford to be more l
 
 Tab Suspender Pro allows you to create distinct rule sets for work and personal hours that you can activate manually or switch automatically based on the time of day. The automatic switching feature is particularly powerful because it eliminates the need to remember to change profiles when transitioning between work and personal time.
 
-Implementing Lunch Break Auto-Suspend
+### Implementing Lunch Break Auto-Suspend
 
 Lunch breaks represent a unique scheduling opportunity that many professionals overlook. When you step away from your computer for 30 minutes to an hour, your browser continues running all those tabs in the background, consuming memory and resources unnecessarily. Configuring Tab Suspender Pro to automatically suspend tabs during your lunch break ensures you return to a lean, responsive browser.
 
@@ -57,7 +57,7 @@ Some users prefer to create a "deep suspend" mode for lunch breaks that not only
 
 The lunch break feature becomes even more powerful when combined with Tab Suspender Pro's whitelisting capabilities. Create a whitelist of critical applications that should never be suspended during lunch, such as your email client or communication tools that might receive urgent messages. This way, you get the resource benefits of mass suspension while maintaining access to essential services.
 
-End-of-Day Cleanup Automation
+### End-of-Day Cleanup Automation
 
 The end of your workday is an ideal time for aggressive tab cleanup, and Tab Suspender Pro's scheduling can automate this process completely. Rather than manually closing tabs or worrying about what you left open overnight, you can configure the extension to automatically suspend or even close tabs when your workday ends.
 
@@ -69,7 +69,7 @@ For maximum productivity, consider combining end-of-day cleanup with Tab Suspend
 
 Some users also configure a morning "warm-up" rule that automatically restores suspended tabs at the start of their workday. This creates a smooth workflow where tabs from the previous day are available when you need them, but the browser remains responsive throughout the night and weekend periods when those tabs are not being used.
 
-Weekend vs Weekday Schedule Differentiation
+### Weekend vs Weekday Schedule Differentiation
 
 Your browser usage patterns likely differ significantly between weekdays and weekends, and Tab Suspender Pro's scheduling can accommodate these differences automatically. Weekends typically involve more casual browsing, longer reading sessions, and different timing overall compared to structured workdays.
 
@@ -81,7 +81,7 @@ The day-of-week differentiation also handles special scenarios automatically. Yo
 
 Consider creating a "weekend profile" that you can manually activate on days when you are working from home or taking a personal day. This profile would use more relaxed settings than your standard work profile while still providing some level of tab management. The ability to quickly switch between predefined profiles makes it easy to adapt to changing circumstances without reconfiguring individual rules.
 
-Handling Timezone Considerations
+### Handling Timezone Considerations
 
 For users who work across timezones or travel frequently, Tab Suspender Pro's timezone handling capabilities become essential. The extension provides several options for configuring timezone-aware schedules that ensure your tab management follows the correct local time regardless of your location or the timezone configured on your computer.
 
@@ -93,7 +93,7 @@ Timezone handling becomes particularly important when creating rules that span m
 
 For frequent travelers, Tab Suspender Pro offers options to either maintain your home timezone schedule regardless of where you are, or to automatically adapt to the local timezone of your current location. The choice depends on whether you want consistency with your home schedule or alignment with local business hours in your destination timezone.
 
-Advanced Scheduling Tips and Best Practices
+### Advanced Scheduling Tips and Best Practices
 
 Now that you understand the core scheduling features, consider these advanced tips to get the most out of Tab Suspender Pro's time-based capabilities. First, always test new scheduling rules before relying on them in production. Create a test rule with a short time window and verify that tabs are suspended exactly when you expect.
 
@@ -103,7 +103,7 @@ Third, regularly review and adjust your scheduling rules as your work patterns e
 
 Finally, take advantage of Tab Suspender Pro's import and export features to backup your scheduling configuration. This is particularly valuable if you use the extension across multiple computers and want to maintain consistent rules, or if you need to reinstall the extension and want to quickly restore your setup.
 
-Conclusion
+### Conclusion
 
 Tab Suspender Pro's scheduled suspension capabilities transform it from a simple tab management tool into an intelligent system that adapts to your daily workflow. By implementing time-based rules for work hours, personal time, lunch breaks, end-of-day cleanup, and weekend usage, you can dramatically improve both browser performance and your own productivity.
 

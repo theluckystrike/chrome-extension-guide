@@ -20,17 +20,17 @@ This tutorial assumes you have basic knowledge of HTML, CSS, and JavaScript. We 
 
 ---
 
-Understanding the Problem Space {#understanding-problem}
+## Understanding the Problem Space {#understanding-problem}
 
 Before we dive into code, let us take a moment to understand what makes an effective site blocker. The best site blocker extensions share several key characteristics that distinguish them from simple URL blockers.
 
-Why Generic Blockers Fall Short
+### Why Generic Blockers Fall Short
 
 Many site blockers fail because they are too rigid or too permissive. A good site blocker needs to handle multiple scenarios: blocking specific sites completely, allowing temporary access for emergencies, implementing scheduled blocking sessions, and providing clear feedback when a site is blocked. Users also need the ability to customize their block lists easily without diving into configuration files.
 
 The most effective approach combines multiple blocking mechanisms. URL pattern matching catches direct navigation, content script injection handles sites that load dynamically, and the declarative net request API provides network-level blocking. Each layer adds robustness to your solution.
 
-The Psychology of Focus Mode
+### The Psychology of Focus Mode
 
 Implementing a true focus mode requires understanding why people get distracted in the first place. The key insight is that willpower is a finite resource. When you constantly resist the urge to check social media or news sites, you deplete your mental energy for actual work. A site blocker removes these decisions from your day entirely.
 
@@ -38,11 +38,11 @@ Effective focus mode implementations go beyond simple blocking. They provide pos
 
 ---
 
-Project Setup and Structure {#project-setup}
+## Project Setup and Structure {#project-setup}
 
 Let us start by setting up our project structure. Create a new folder for your extension and add the following files and directories.
 
-Directory Structure
+### Directory Structure
 
 Create a folder named `site-blocker-extension` and set up this structure inside:
 
@@ -69,7 +69,7 @@ site-blocker-extension/
 
 This structure separates concerns cleanly: the popup handles quick interactions, the background service worker manages core logic and storage, content scripts handle page-level blocking, and the options page provides configuration.
 
-Manifest V3 Configuration
+### Manifest V3 Configuration
 
 The manifest file defines your extension capabilities and permissions. Here is our complete manifest:
 
@@ -112,13 +112,13 @@ Note the critical permissions we are using. The `storage` permission lets us sav
 
 ---
 
-Implementing the Background Service Worker {#background-worker}
+## Implementing the Background Service Worker {#background-worker}
 
 The background service worker is the brain of your extension. It manages the block list, handles focus mode logic, and coordinates between different parts of your extension.
 
-Core Blocking Logic
+### Core Blocking Logic
 
-Create `background/background.js` with the following implementation:
+### Create `background/background.js` with the following implementation:
 
 ```javascript
 // Default blocked sites
@@ -204,13 +204,13 @@ The background worker handles focus mode toggling with automatic timeout. When a
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides quick access to essential features without requiring users to open a separate options page.
 
-HTML Structure
+### HTML Structure
 
-Create `popup/popup.html`:
+### Create `popup/popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -260,9 +260,9 @@ Create `popup/popup.html`:
 </html>
 ```
 
-Styling the Popup
+### Styling the Popup
 
-Create `popup/popup.css`:
+### Create `popup/popup.css`:
 
 ```css
 * {
@@ -390,9 +390,9 @@ body {
 }
 ```
 
-Popup JavaScript
+### Popup JavaScript
 
-Create `popup/popup.js`:
+### Create `popup/popup.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -445,13 +445,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Creating the Options Page {#options-page}
+## Creating the Options Page {#options-page}
 
 The options page gives users full control over their blocking preferences.
 
-Options HTML
+### Options HTML
 
-Create `options/options.html`:
+### Create `options/options.html`:
 
 ```html
 <!DOCTYPE html>
@@ -523,9 +523,9 @@ Create `options/options.html`:
 </html>
 ```
 
-Options JavaScript
+### Options JavaScript
 
-Create `options/options.js`:
+### Create `options/options.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
@@ -624,11 +624,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-Content Script for Enhanced Blocking {#content-script}
+## Content Script for Enhanced Blocking {#content-script}
 
 While the declarativeNetRequest API handles most blocking at the network level, adding a content script provides an additional layer of protection and allows for custom blocked page experiences.
 
-Create `content/content.js`:
+### Create `content/content.js`:
 
 ```javascript
 // Check if current site is blocked
@@ -677,26 +677,26 @@ This content script provides a polished fallback when focus mode is active. It c
 
 ---
 
-Adding Basic Icons {#icons}
+## Adding Basic Icons {#icons}
 
 For a production extension, you would create proper icon files. For now, you can use placeholder icons or generate simple ones using online tools. The icons directory should contain three sizes: 16x16, 48x48, and 128x128 pixels.
 
 ---
 
-Testing Your Extension {#testing}
+## Testing Your Extension {#testing}
 
 Now that we have built all the components, let us test the extension in Chrome.
 
-Loading the Extension
+### Loading the Extension
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" using the toggle in the top right
 3. Click "Load unpacked" and select your extension folder
 4. The extension icon should appear in your toolbar
 
-Verifying Functionality
+### Verifying Functionality
 
-Test these scenarios:
+### Test these scenarios:
 
 1. Click the extension icon to see the popup
 2. Try starting a focus session
@@ -706,47 +706,47 @@ Test these scenarios:
 
 ---
 
-Advanced Features to Consider {#advanced-features}
+## Advanced Features to Consider {#advanced-features}
 
 This basic implementation provides a solid foundation, but there are many ways to enhance it.
 
-Pomodoro Timer Integration
+### Pomodoro Timer Integration
 
 Consider adding a built-in Pomodoro timer that automatically starts focus sessions. The classic Pomodoro technique uses 25-minute work sessions followed by 5-minute breaks, which aligns perfectly with focus mode.
 
-Statistics and Analytics
+### Statistics and Analytics
 
 Track user productivity over time. Store data about how many times focus mode was activated, average session length, and which sites were most frequently blocked. Display this information in the popup or a dedicated statistics page.
 
-Password Protection
+### Password Protection
 
 Add an optional password requirement to disable focus mode or modify settings. This prevents users from giving in to temptations too easily.
 
-Cloud Sync
+### Cloud Sync
 
 Implement Chrome Storage sync to share settings across devices. This requires minimal additional code since Chrome provides built-in sync capabilities.
 
-Whitelist for Exceptions
+### Whitelist for Exceptions
 
 Allow users to create a whitelist of sites that should never be blocked, even during focus mode. This is important for sites needed for work.
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once you have tested your extension thoroughly, you can publish it to reach millions of users.
 
-Preparing for Publication
+### Preparing for Publication
 
 Before publishing, ensure you have created proper icons (at least 128x128 pixels), written a compelling description, and tested the extension extensively. Create a compressed zip file of your extension folder.
 
-Developer Dashboard
+### Developer Dashboard
 
 Sign up for a developer account at the Chrome Web Store developer dashboard. There is a one-time registration fee. Upload your zip file, fill in the store listing details, and submit for review. Google typically reviews extensions within a few days.
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 You have now built a complete, functional site blocker extension using Chrome's modern Manifest V3 architecture. This extension demonstrates core concepts that apply to almost any Chrome extension project: popup interfaces, background service workers, content scripts, persistent storage, and the declarativeNetRequest API.
 

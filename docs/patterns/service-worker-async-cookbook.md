@@ -6,11 +6,11 @@ canonical_url: "https://bestchromeextensions.com/patterns/service-worker-async-c
 last_modified_at: 2026-01-15
 ---
 
-Service Worker Async Patterns Cookbook
+### Service Worker Async Patterns Cookbook
 
 This guide covers practical async patterns for Chrome extension service workers. These patterns help you write reliable, performant code that handles Chrome's unique execution environment.
 
-Async Message Handler Pattern
+### Async Message Handler Pattern
 
 The fundamental pattern for handling messages with async operations. Your handler must return true to keep the message channel open while the promise resolves.
 
@@ -23,7 +23,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 Returning true signals Chrome to hold the response channel open until you call sendResponse.
 
-Promise-Based API Wrappers
+### Promise-Based API Wrappers
 
 Chrome APIs are callback-based. Wrapping them in promises makes your code cleaner.
 
@@ -35,7 +35,7 @@ function getStorage(keys) {
 
 Now you can chain operations with async/await naturally.
 
-Sequential Async Operations Surviving Termination
+### Sequential Async Operations Surviving Termination
 
 Service workers terminate after idle periods. When chaining operations, each step must persist state so the next wake-up can continue.
 
@@ -69,13 +69,13 @@ async function gatherTabInfo() {
 
 Parallel execution reduces total latency significantly.
 
-Retry with Backoff Using Alarms
+### Retry with Backoff Using Alarms
 
 Network calls fail. Using chrome.alarms provides reliable retry scheduling.
 
-chrome.alarms.create('retry', { delayInMinutes: Math.pow(2, attempt) });
+### chrome.alarms.create('retry', { delayInMinutes: Math.pow(2, attempt) });
 
-Async Initialization on Wake-Up
+### Async Initialization on Wake-Up
 
 When the service worker wakes, verify your state before processing.
 
@@ -86,7 +86,7 @@ chrome.runtime.onStartup.addListener(async () => {
   }
 });
 
-Long-Running Operations Split Across Alarms
+### Long-Running Operations Split Across Alarms
 
 Large tasks cannot complete in one execution. Break them into chunks.
 
@@ -108,7 +108,7 @@ async function processLargeDataset() {
   }
 }
 
-Error Boundaries
+### Error Boundaries
 
 Wrap async operations in try-catch to prevent unhandled rejections from terminating your worker.
 
@@ -124,7 +124,7 @@ async function safeFetch(url) {
 
 Logging errors to storage helps debug issues that occur while the worker is not running.
 
-Debouncing Rapid Events
+### Debouncing Rapid Events
 
 Events like onChanged can fire rapidly. Debounce to batch operations.
 

@@ -18,9 +18,9 @@ This comprehensive guide walks you through every aspect of the service worker mi
 
 ---
 
-Understanding the Background Script to Service Worker Transition {#understanding-the-transition}
+## Understanding the Background Script to Service Worker Transition {#understanding-the-transition}
 
-Why Google Made This Change
+### Why Google Made This Change
 
 Chrome extensions have evolved significantly since their introduction. The original background script model, while functional, presented several challenges that Google sought to address with the service worker implementation. Background scripts ran continuously in the extension's background context, consuming memory and CPU resources even when the extension was not actively performing useful work. This constant execution model made extensions heavier and more resource-intensive than necessary.
 
@@ -28,7 +28,7 @@ Service workers, by contrast, are event-driven entities that load when needed an
 
 Beyond resource efficiency, service workers provide improved security through their ephemeral lifecycle. Because service workers do not persist in memory between events, they present a smaller attack surface for malicious actors. The Chrome team also implemented additional security measures that are easier to enforce with the service worker model, including stricter content security policy enforcement and better isolation between extension components.
 
-Key Architectural Differences
+### Key Architectural Differences
 
 Understanding the architectural differences between background scripts and service workers is crucial for successful migration. The most fundamental change is persistence: background scripts remained loaded indefinitely, while service workers terminate after completing their tasks and can be awakened again when new events arrive.
 
@@ -81,9 +81,9 @@ The code appears similar, but the implications are profound. In the background s
 
 ---
 
-Implementing Service Workers in Manifest V3 {#implementing-service-workers}
+## Implementing Service Workers in Manifest V3 {#implementing-service-workers}
 
-Configuring Your Manifest File
+### Configuring Your Manifest File
 
 Migrating your extension begins with updating your manifest.json file. You need to replace the background key with the new service_worker configuration. Here is a comprehensive example:
 
@@ -119,11 +119,11 @@ Note the addition of the "type": "module" field. This enables ES module support 
 
 You also need to declare the host_permissions field separately from regular permissions. Host permissions control access to website content, while regular permissions control Chrome APIs. This separation provides users with clearer information about what your extension can access.
 
-Event Handling Patterns
+### Event Handling Patterns
 
 Service workers in Chrome extensions use the same event-based architecture as web service workers. Chrome dispatches events to your service worker, which handles them and then can terminate. Understanding this lifecycle is essential for writing correct extension code.
 
-The most commonly used events include:
+### The most commonly used events include:
 
 ```javascript
 // Service worker lifecycle events
@@ -171,9 +171,9 @@ One critical aspect of event handling in service workers is the requirement to r
 
 ---
 
-State Management in Service Workers {#state-management}
+## State Management in Service Workers {#state-management}
 
-The Challenge of Ephemeral State
+### The Challenge of Ephemeral State
 
 Because service workers terminate between events, you cannot rely on in-memory variables to store state. Any data your extension needs to persist must be stored externally using chrome.storage, IndexedDB, or a combination of both. This represents the most significant architectural change when migrating from background scripts.
 
@@ -218,7 +218,7 @@ async function getCachedData(url) {
 
 For more complex data structures or when you need better query capabilities, IndexedDB provides a more powerful solution. While more complex to implement, IndexedDB offers better performance for large datasets and supports more sophisticated queries.
 
-Managing State Between Components
+### Managing State Between Components
 
 Chrome extensions typically consist of multiple components: the service worker, popup, options page, and content scripts. These components need to share state and communicate with each other. Here are the recommended patterns:
 
@@ -267,9 +267,9 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
 ---
 
-Debugging Service Workers {#debugging-service-workers}
+## Debugging Service Workers {#debugging-service-workers}
 
-Chrome DevTools Integration
+### Chrome DevTools Integration
 
 Debugging service workers requires a different approach than debugging background scripts. Chrome provides dedicated tools for service worker inspection that are accessible through the Chrome DevTools.
 
@@ -286,7 +286,7 @@ The most useful debugging technique is often forcing the service worker to updat
 
 You can also open the service worker in a dedicated DevTools window by clicking the link in the Service Workers panel. This opens a new DevTools instance specifically for the service worker, making it easier to set breakpoints and step through code.
 
-Common Debugging Challenges
+### Common Debugging Challenges
 
 Service worker termination creates unique debugging challenges. Because your service worker can terminate at any time after completing its work, you cannot simply set a breakpoint and expect your extension state to remain intact. Here are strategies for dealing with this:
 
@@ -325,9 +325,9 @@ Another common issue is the "Service Worker registration failed" error, which ty
 
 ---
 
-Performance Optimization {#performance-optimization}
+## Performance Optimization {#performance-optimization}
 
-Lazy Loading and Event Coalescing
+### Lazy Loading and Event Coalescing
 
 Service workers terminate when idle, which means they reload for each event. While this improves memory efficiency, it can introduce latency if not handled properly. Understanding how to optimize for this model is crucial for building responsive extensions.
 
@@ -359,7 +359,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 
 Event coalescing is another important optimization. Chrome may batch multiple events of the same type together, reducing the number of times your service worker needs to wake up. For example, if your extension monitors network requests, Chrome may coalesce multiple webRequest events into a single dispatch. Design your handlers to process all pending events rather than assuming one event equals one handler invocation.
 
-Using Alarms for Periodic Tasks
+### Using Alarms for Periodic Tasks
 
 For tasks that need to run periodically, use the chrome.alarms API rather than setInterval or setTimeout. The alarms API is specifically designed to work with the service worker lifecycle:
 
@@ -387,9 +387,9 @@ Unlike setInterval, which would not persist across service worker terminations, 
 
 ---
 
-Best Practices for 2025 {#best-practices}
+## Best Practices for 2025 {#best-practices}
 
-Security Considerations
+### Security Considerations
 
 Manifest V3 brings enhanced security requirements that you must address in your service worker implementation. Always follow the principle of least privilege when requesting permissions, only request the permissions your extension actually needs.
 
@@ -416,7 +416,7 @@ Use declarative net request rules instead of the webRequest blocking API for net
 
 Always validate any data received from external sources, including messages from content scripts. Never assume that data from web pages or user input is safe.
 
-Testing Your Extension
+### Testing Your Extension
 
 Comprehensive testing is essential for reliable extension operation. Test your extension under various scenarios:
 
@@ -429,7 +429,7 @@ Use Chrome's built-in extension testing features by enabling "Developer mode" in
 
 ---
 
-Conclusion {#conclusion}
+## Conclusion {#conclusion}
 
 Migrating from background scripts to service workers represents a fundamental shift in Chrome extension architecture, but it is a change that ultimately leads to better, more efficient extensions. The ephemeral nature of service workers requires different thinking about state management and event handling, but it also delivers significant benefits in memory usage, security, and alignment with modern web standards.
 

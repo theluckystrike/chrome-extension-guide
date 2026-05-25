@@ -7,7 +7,7 @@ last_modified_at: 2026-01-15
 ---
 Build a Pomodoro Timer Extension
 
-What You'll Build {#what-youll-build}
+## What You'll Build {#what-youll-build}
 - 25-minute work sessions with 5-minute breaks
 - Badge countdown showing minutes remaining
 - Desktop notifications when timer ends
@@ -15,14 +15,14 @@ What You'll Build {#what-youll-build}
 - Session tracking and statistics
 - Customizable durations and auto-start options
 
-Manifest {#manifest}
+## Manifest {#manifest}
 - permissions: alarms, notifications, offscreen, storage
 - action with popup
 - background service worker for timing
 
 ---
 
-Step 1: Timer State Management {#step-1-timer-state-management}
+## Step 1: Timer State Management {#step-1-timer-state-management}
 
 Create a state object to track the timer:
 
@@ -47,7 +47,7 @@ let timerState = {
 
 ---
 
-Step 2: Alarm-Based Timing {#step-2-alarm-based-timing}
+## Step 2: Alarm-Based Timing {#step-2-alarm-based-timing}
 
 Use chrome.alarms for reliable timing in the service worker:
 
@@ -77,9 +77,9 @@ See [permissions/alarms.md](../permissions/alarms.md) for more details.
 
 ---
 
-Step 3: Notification Alerts {#step-3-notification-alerts}
+## Step 3: Notification Alerts {#step-3-notification-alerts}
 
-Notify users when sessions complete:
+### Notify users when sessions complete:
 
 ```javascript
 // background/notifications.js
@@ -102,13 +102,13 @@ function notifySessionComplete() {
 }
 ```
 
-See [permissions/notifications.md](../permissions/notifications.md).
+### See [permissions/notifications.md](../permissions/notifications.md).
 
 ---
 
-Step 4: Sound Alerts via Offscreen Document {#step-4-sound-alerts-via-offscreen-document}
+## Step 4: Sound Alerts via Offscreen Document {#step-4-sound-alerts-via-offscreen-document}
 
-Play audio using an offscreen document for AUDIO_PLAYBACK:
+### Play audio using an offscreen document for AUDIO_PLAYBACK:
 
 ```javascript
 // background/audio-manager.js
@@ -131,13 +131,13 @@ async function playAlertSound() {
 <audio id="alert" src="alert.mp3" autoplay></audio>
 ```
 
-See [permissions/offscreen.md](../permissions/offscreen.md).
+### See [permissions/offscreen.md](../permissions/offscreen.md).
 
 ---
 
-Step 5: Popup UI {#step-5-popup-ui}
+## Step 5: Popup UI {#step-5-popup-ui}
 
-Create the popup interface:
+### Create the popup interface:
 
 ```html
 <!-- popup.html -->
@@ -160,9 +160,9 @@ Create the popup interface:
 
 ---
 
-Step 6: Statistics Storage {#step-6-statistics-storage}
+## Step 6: Statistics Storage {#step-6-statistics-storage}
 
-Track completed pomodoros using webext-storage patterns:
+### Track completed pomodoros using webext-storage patterns:
 
 ```javascript
 // background/statistics.js
@@ -185,9 +185,9 @@ function getWeeklyStats() {
 
 ---
 
-Step 7: Options Page {#step-7-options-page}
+## Step 7: Options Page {#step-7-options-page}
 
-Allow customizable durations:
+### Allow customizable durations:
 
 ```html
 <!-- options.html -->
@@ -218,13 +218,13 @@ Allow customizable durations:
 
 ---
 
-Step 8: Badge Management {#step-8-badge-management}
+## Step 8: Badge Management {#step-8-badge-management}
 
 See [patterns/badge-management.md](../patterns/badge-management.md) for advanced badge patterns including color changes for different session types.
 
 ---
 
-Summary {#summary}
+## Summary {#summary}
 
 You now have a complete Pomodoro timer extension with:
 - Reliable timing via chrome.alarms

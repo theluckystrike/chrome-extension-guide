@@ -18,7 +18,7 @@ In this comprehensive tutorial, we will walk through the complete process of bui
 
 ---
 
-Why Build a Citation Manager Extension? {#why-build-citation-manager}
+## Why Build a Citation Manager Extension? {#why-build-citation-manager}
 
 The demand for citation management tools continues to grow as academic publishing expands and digital content becomes increasingly complex. Researchers and students frequently encounter valuable sources while browsing the web, but the process of capturing these references and formatting them correctly is often so cumbersome that many simply bookmark the page and hope they remember where they found the information later.
 
@@ -28,7 +28,7 @@ The citation manager extension market presents a significant opportunity for dev
 
 ---
 
-Project Architecture and Features {#project-architecture}
+## Project Architecture and Features {#project-architecture}
 
 Before writing any code, let us establish the architecture and feature set for our citation manager extension. A production-quality citation manager should include several core capabilities.
 
@@ -44,7 +44,7 @@ Finally, the extension should synchronize data across devices. Using Chrome's st
 
 ---
 
-Setting Up the Project Structure {#project-structure}
+## Setting Up the Project Structure {#project-structure}
 
 Let us begin by creating the project structure. We will use Manifest V3, the current standard for Chrome extensions, and organize our code into logical modules.
 
@@ -76,7 +76,7 @@ This structure separates concerns between the popup interface, content scripts t
 
 ---
 
-Creating the Manifest File {#manifest-file}
+## Creating the Manifest File {#manifest-file}
 
 The manifest.json file defines our extension and its capabilities. For a citation manager, we need specific permissions to access web page content, store data, and interact with external APIs.
 
@@ -123,7 +123,7 @@ This manifest declares that our extension needs to read page content, store data
 
 ---
 
-Building the Content Script for Citation Detection {#content-script}
+## Building the Content Script for Citation Detection {#content-script}
 
 The content script is the heart of citation detection. It runs on every webpage and looks for signs of scholarly content. Modern academic websites typically embed citation metadata in several standard formats, and our content script needs to detect and extract all of them.
 
@@ -258,7 +258,7 @@ This content script provides a solid foundation for detecting citations across d
 
 ---
 
-Building the Popup Interface {#popup-interface}
+## Building the Popup Interface {#popup-interface}
 
 The popup provides the user interface for interacting with the extension. It should allow users to save citations, browse their library, and export formatted references.
 
@@ -316,7 +316,7 @@ The popup interface provides a clean, functional design for managing citations. 
 
 ---
 
-Implementing Popup Logic and Storage {#popup-logic}
+## Implementing Popup Logic and Storage {#popup-logic}
 
 The popup JavaScript coordinates between the user interface and Chrome's storage system. It retrieves detected citations from the content script, saves them to persistent storage, and handles export functionality.
 
@@ -429,7 +429,7 @@ This popup logic connects all the pieces together, handling user interactions an
 
 ---
 
-Citation Formatting Engine {#citation-formatter}
+## Citation Formatting Engine {#citation-formatter}
 
 The citation formatter is responsible for converting stored citation data into properly formatted bibliographies. Different citation styles have specific rules for punctuation, ordering, and capitalization.
 
@@ -518,7 +518,7 @@ This formatter provides support for four common citation styles plus BibTeX, whi
 
 ---
 
-Styling the Extension {#extension-styling}
+## Styling the Extension {#extension-styling}
 
 The visual design should be clean and professional, matching the academic nature of the tool while remaining easy to use.
 
@@ -701,7 +701,7 @@ This styling creates a professional, usable interface that fits smoothly with Ch
 
 ---
 
-Testing and Loading Your Extension {#testing-extension}
+## Testing and Loading Your Extension {#testing-extension}
 
 Before publishing, thoroughly test your extension in development mode. Load it into Chrome by navigating to chrome://extensions, enabling Developer mode, and clicking "Load unpacked." Select your extension directory.
 
@@ -711,7 +711,7 @@ Pay special attention to edge cases. Some websites may have incomplete metadata,
 
 ---
 
-Publishing to the Chrome Web Store {#publishing}
+## Publishing to the Chrome Web Store {#publishing}
 
 Once your extension is thoroughly tested, you can publish it to the Chrome Web Store. Prepare your store listing with a compelling description that highlights the key features and benefits. Use screenshots to demonstrate the extension in action.
 
@@ -721,7 +721,7 @@ For your citation manager extension, emphasize features like automatic detection
 
 ---
 
-Conclusion and Future Enhancements {#conclusion}
+## Conclusion and Future Enhancements {#conclusion}
 
 Building a citation manager Chrome extension is an excellent project that combines practical utility with meaningful technical challenges. The skills you develop, working with content scripts, managing persistent storage, parsing complex metadata formats, and implementing export functionality, transfer directly to many other extension projects.
 

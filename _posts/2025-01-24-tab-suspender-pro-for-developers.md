@@ -21,9 +21,9 @@ For a broader overview of the extension's features, see the [Tab Suspender Pro U
 
 ---
 
-The Developer Tab Problem
+### The Developer Tab Problem
 
-Why Developers Have So Many Tabs
+### Why Developers Have So Many Tabs
 
 Software development is inherently reference-heavy. Unlike many professions where you can close a resource after reading it, developers need to keep references accessible because:
 
@@ -33,7 +33,7 @@ Software development is inherently reference-heavy. Unlike many professions wher
 4. Debugging chains. Following a bug from the error log to the stack trace to the source code to the related GitHub issue creates a chain of tabs you do not want to lose.
 5. Project parallelism. Most developers work on multiple projects or features simultaneously, each with its own set of reference tabs.
 
-The Memory Math
+### The Memory Math
 
 Let us do the math for a typical developer workstation with 16 GB of RAM:
 
@@ -51,7 +51,7 @@ With 1-5 GB available for Chrome tabs and each tab consuming 50-300 MB, you can 
 
 Without a tab suspender, your operating system starts swapping to disk, which makes everything dramatically slower. Your IDE becomes laggy, builds take longer, and even typing feels unresponsive.
 
-The Impact on Development Velocity
+### The Impact on Development Velocity
 
 The performance impact is not just about comfort. it directly affects your productivity:
 
@@ -63,9 +63,9 @@ The performance impact is not just about comfort. it directly affects your produ
 
 ---
 
-How Tab Suspender Pro Helps Developers
+### How Tab Suspender Pro Helps Developers
 
-Intelligent Background Suspension
+### Intelligent Background Suspension
 
 Tab Suspender Pro monitors your tab activity and automatically suspends tabs that have been inactive for a configurable period. For developers, this means:
 
@@ -76,11 +76,11 @@ Tab Suspender Pro monitors your tab activity and automatically suspends tabs tha
 
 The result: you keep all your context. every tab exactly where you left it. while running as if you only had 5 tabs open. When you click a suspended tab, it reloads in 1-3 seconds, and you are right back to the content you needed.
 
-Developer-Specific Configuration
+### Developer-Specific Configuration
 
 Tab Suspender Pro's whitelist system is particularly powerful for developer workflows. Here is the configuration we recommend:
 
-Essential Whitelist Entries for Developers
+### Essential Whitelist Entries for Developers
 
 ```
 localhost:*          # All local development servers
@@ -92,11 +92,11 @@ mail.google.com     # Email
 github.com/notifications  # Stay on top of mentions
 ```
 
-Recommended Timeout: 15-20 Minutes
+### Recommended Timeout: 15-20 Minutes
 
 Developers switch contexts frequently but often return to the same references. A 15-20 minute timeout balances memory savings with tab restoration convenience. It is long enough that you will not constantly see tabs suspending while you are reading code, but short enough to catch the tabs you have genuinely moved on from.
 
-Pinned Tab Strategy
+### Pinned Tab Strategy
 
 Pin your essential tabs and enable "protect pinned tabs" in Tab Suspender Pro:
 
@@ -109,9 +109,9 @@ Everything else can be suspended freely. This creates a natural tier system: pin
 
 ---
 
-Developer Workflow Integrations
+### Developer Workflow Integrations
 
-Working with Local Development Servers
+### Working with Local Development Servers
 
 One of the biggest concerns developers have about tab suspenders is: "Will it break my hot-reload dev server?" The answer with Tab Suspender Pro is no. here is why:
 
@@ -119,17 +119,17 @@ One of the biggest concerns developers have about tab suspenders is: "Will it br
 2. WebSocket connections: Your hot-reload WebSocket connection stays active because the tab stays active.
 3. Multiple ports: If you run multiple services (frontend on 3000, API on 8080, database UI on 8088), the wildcard whitelist covers all of them.
 
-Managing API Documentation Tabs
+### Managing API Documentation Tabs
 
 API docs are the quintessential "open, read, leave open just in case" tabs. You might have the Stripe API docs, the AWS SDK reference, your internal API swagger docs, and MDN Web Docs all open simultaneously.
 
-Tab Suspender Pro handles this perfectly:
+### Tab Suspender Pro handles this perfectly:
 
 - Let them suspend. API docs are static content that loads quickly. A suspended API doc tab uses 5 MB instead of 150 MB, and it reloads in under a second.
 - Use tab groups. Create a "Docs" tab group for all your documentation tabs. Tab Suspender Pro can manage the group as a unit.
 - Screenshot preview. Enable screenshot previews so you can visually identify which doc page is which without restoring the tab.
 
-Stack Overflow Research Sessions
+### Stack Overflow Research Sessions
 
 A typical debugging session might involve opening 5-15 Stack Overflow tabs, reading through them, finding the answer in tab number 7, and then leaving the other 14 open "just in case." With Tab Suspender Pro:
 
@@ -138,7 +138,7 @@ A typical debugging session might involve opening 5-15 Stack Overflow tabs, read
 - If you need to revisit any of them, a single click restores the tab.
 - The Stack Overflow answer you are actually implementing stays active because you are switching back to it regularly.
 
-GitHub Code Review Workflow
+### GitHub Code Review Workflow
 
 Code review involves many tabs: the PR diff, the related issue, the CI check results, the deployed preview, and sometimes the code files themselves for context. Here is how to optimize with Tab Suspender Pro:
 
@@ -146,7 +146,7 @@ Code review involves many tabs: the PR diff, the related issue, the CI check res
 2. Let supporting tabs suspend: The issue description, CI logs from previous runs, and related documentation can be safely suspended.
 3. Use "suspend all others" after review: Once you have submitted your review, use the manual "suspend all other tabs" command to immediately free the memory from all those review-related tabs.
 
-CI/CD Dashboard Monitoring
+### CI/CD Dashboard Monitoring
 
 If you need real-time visibility into your CI pipeline, whitelist your CI/CD URLs:
 
@@ -161,9 +161,9 @@ However, consider this: do you really need real-time monitoring, or do you just 
 
 ---
 
-Optimizing Your Development Environment with Tab Suspender Pro
+### Optimizing Your Development Environment with Tab Suspender Pro
 
-The Memory Recovery Strategy
+### The Memory Recovery Strategy
 
 Here is a practical approach to reclaiming memory for your development tools:
 
@@ -176,7 +176,7 @@ Step 2: Categorize tabs into tiers:
 
 Step 3: Measure the impact. Use Tab Suspender Pro's memory dashboard to see how much RAM you are recovering. Compare your IDE performance and build times before and after.
 
-Combining with VS Code Settings
+### Combining with VS Code Settings
 
 If VS Code is also consuming too much memory, pair Tab Suspender Pro with VS Code memory optimizations:
 
@@ -186,7 +186,7 @@ If VS Code is also consuming too much memory, pair Tab Suspender Pro with VS Cod
 
 The combination of Tab Suspender Pro managing browser memory and VS Code settings managing IDE memory can free up 2-5 GB on a typical development workstation.
 
-Docker and Container Considerations
+### Docker and Container Considerations
 
 If you run Docker alongside Chrome, memory management becomes critical. Tab Suspender Pro helps by ensuring Chrome does not claim more than its fair share:
 
@@ -197,9 +197,9 @@ Consider setting Docker's memory limit (in Docker Desktop preferences) and then 
 
 ---
 
-Real-World Developer Scenarios
+### Real-World Developer Scenarios
 
-Scenario 1: Full-Stack Feature Development
+### Scenario 1: Full-Stack Feature Development
 
 You are building a new feature. Your tab inventory:
 
@@ -217,7 +217,7 @@ You are building a new feature. Your tab inventory:
 - AWS Console
 - 2 internal wiki pages
 
-Total: 19 tabs
+### Total: 19 tabs
 
 With Tab Suspender Pro configured:
 - localhost tabs, Slack, and Gmail are whitelisted (always active).
@@ -225,7 +225,7 @@ With Tab Suspender Pro configured:
 - React docs, Node docs, Stack Overflow, Figma, AWS, and wiki pages get suspended after 15 minutes of inactivity.
 - Memory saved: approximately 2-3 GB.
 
-Scenario 2: Debugging a Production Issue
+### Scenario 2: Debugging a Production Issue
 
 You are in incident response mode. Tabs are multiplying fast:
 
@@ -238,14 +238,14 @@ You are in incident response mode. Tabs are multiplying fast:
 - Slack incident channel
 - Status page
 
-Total: 14 tabs, but growing
+### Total: 14 tabs, but growing
 
 Configuration approach:
 - Whitelist your monitoring tool (Datadog/Sentry) and Slack.
 - Let everything else be managed by Tab Suspender Pro.
 - As you close in on the root cause, the early investigation tabs (wrong hypotheses, irrelevant Stack Overflow answers) get automatically suspended, keeping your memory usage stable even as you open new tabs.
 
-Scenario 3: Onboarding to a New Codebase
+### Scenario 3: Onboarding to a New Codebase
 
 You just joined a new team and you are reading everything:
 
@@ -263,7 +263,7 @@ Tab Suspender Pro is perfect here. You read one doc, move to the next, and the p
 
 ---
 
-Keyboard Shortcuts for Developer Productivity
+### Keyboard Shortcuts for Developer Productivity
 
 Developers live on the keyboard. Configure these shortcuts in Chrome's extension shortcuts settings (`chrome://extensions/shortcuts`):
 
@@ -278,9 +278,9 @@ These shortcuts save 3-5 seconds per action compared to using the mouse. Over th
 
 ---
 
-Tips and Best Practices
+### Tips and Best Practices
 
-Do Not Fear the Reload
+### Do Not Fear the Reload
 
 One of the biggest psychological barriers to tab suspension is the fear of losing your place. In practice:
 
@@ -291,7 +291,7 @@ One of the biggest psychological barriers to tab suspension is the fear of losin
 
 The 1-3 second reload is almost always faster than the performance degradation you experience from having too many active tabs.
 
-Use Window Organization
+### Use Window Organization
 
 Create separate Chrome windows for different projects. This works synergistically with Tab Suspender Pro because:
 
@@ -299,21 +299,21 @@ Create separate Chrome windows for different projects. This works synergisticall
 - Each window's tabs have independent inactivity timers.
 - You can close an entire project window without affecting other projects.
 
-Monitor Your Memory
+### Monitor Your Memory
 
 Get in the habit of checking Tab Suspender Pro's memory dashboard periodically. It helps you understand your browsing patterns and identify which types of tabs consume the most memory. You might discover that a single web app is consuming 800 MB and decide to find a lighter alternative.
 
-Combine with Bookmarks for Deep Reference
+### Combine with Bookmarks for Deep Reference
 
 If you find yourself re-opening the same reference tabs day after day, bookmark them in a dedicated folder. Use Tab Suspender Pro for your active session, but rely on bookmarks for persistent references. This prevents the tab count from growing unboundedly across days and weeks.
 
 ---
 
-Conclusion
+### Conclusion
 
 For developers, Tab Suspender Pro is not a luxury. it is a essential development tool, as important as a good terminal or a well-configured linter. It solves the fundamental tension between needing dozens of reference tabs and needing memory for your actual development tools.
 
-The key takeaways:
+### The key takeaways:
 
 1. Whitelist your dev servers and communication tools. Everything else can be suspended.
 2. Use a 15-20 minute timeout for the best balance of memory savings and convenience.
@@ -323,7 +323,7 @@ The key takeaways:
 
 With Tab Suspender Pro configured for your workflow, you can keep 50, 75, or even 100+ tabs open without your machine slowing down. Your IDE stays responsive, your builds run fast, and your Docker containers have room to breathe.
 
-Further Reading
+### Further Reading
 
 - [Tab Suspender Pro: The Ultimate Guide](/2025/01/24/tab-suspender-pro-ultimate-guide/). comprehensive overview of all features.
 - [Tab Suspender Pro vs OneTab vs The Great Suspender](/2025/01/24/tab-suspender-pro-vs-competitors-2025/). detailed comparison with alternatives.

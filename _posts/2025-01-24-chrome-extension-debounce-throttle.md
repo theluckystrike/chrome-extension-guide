@@ -18,7 +18,7 @@ This comprehensive guide explores how debounce and throttle patterns can dramati
 
 ---
 
-Understanding the Problem: Why Event Optimization Matters in Extensions
+### Understanding the Problem: Why Event Optimization Matters in Extensions
 
 Chrome extensions face unique performance challenges that differ from traditional web applications. Your extension might be running across multiple tabs simultaneously, monitoring browser events in the background, or processing user inputs in a popup that needs to remain responsive at all times.
 
@@ -36,11 +36,11 @@ Debounce and throttle provide elegant solutions to these problems by controlling
 
 ---
 
-Debounce: Waiting for Calm Waters
+### Debounce: Waiting for Calm Waters
 
 Debounce is a technique that ensures a function is only called after a specified period of inactivity. Think of it like an elevator that waits a few seconds before closing its doors after someone walks through, if someone else enters within that waiting period, the timer resets. This pattern is perfect for scenarios where you want to wait until the user "finishes" an action before responding.
 
-How Debounce Works
+### How Debounce Works
 
 The debounce pattern works by delaying function execution until a specified wait time has elapsed since the last invocation. If the function is called again before the wait time expires, the timer resets. Only when the calls stop for the full duration does the function execute.
 
@@ -51,7 +51,7 @@ This is particularly useful for:
 - Form validation: Validate after the user stops typing
 - Auto-save: Save user input after they've stopped typing
 
-Implementing Debounce in Chrome Extensions
+### Implementing Debounce in Chrome Extensions
 
 Here's a practical implementation of debounce for your Chrome extension:
 
@@ -95,7 +95,7 @@ function debounce(func, wait = 300, immediate = false) {
 export default debounce;
 ```
 
-Using Debounce in Content Scripts
+### Using Debounce in Content Scripts
 
 Here's how to apply debounce in a content script for optimal performance:
 
@@ -135,9 +135,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-Advanced Debounce Options
+### Advanced Debounce Options
 
-For more complex scenarios, consider these variations:
+### For more complex scenarios, consider these variations:
 
 Trailing Debounce (Default): Function executes after the wait period following the last call.
 
@@ -174,20 +174,20 @@ class DebouncedSearch {
 
 ---
 
-Throttle: Consistent Execution at Controlled Intervals
+### Throttle: Consistent Execution at Controlled Intervals
 
 While debounce waits for inactivity, throttle ensures a function is called at most once per specified time interval. Think of it like a machine gun with a rate limiter, it can only fire at specific intervals regardless of how many times you pull the trigger. This pattern is ideal for scenarios where you need regular updates but want to limit the frequency.
 
-When to Use Throttle
+### When to Use Throttle
 
-Throttle is the right choice when you need:
+### Throttle is the right choice when you need:
 
 - Real-time updates at intervals: Monitoring mouse position, tracking analytics, updating UI elements
 - Scroll tracking: Tracking scroll progress without overwhelming the system
 - Game loop implementations: Games running in extensions need consistent frame rates
 - Background monitoring: Regular health checks or status updates
 
-Implementing Throttle in Chrome Extensions
+### Implementing Throttle in Chrome Extensions
 
 ```javascript
 // utils/throttle.js
@@ -255,7 +255,7 @@ function throttle(func, wait = 300, options = {}) {
 export default throttle;
 ```
 
-Throttle in Action: Mouse Tracking Extension
+### Throttle in Action: Mouse Tracking Extension
 
 Here's a practical example building a mouse tracking feature:
 
@@ -288,7 +288,7 @@ const throttledMouseTrack = throttle(trackMouseMovement, 100);
 document.addEventListener('mousemove', throttledMouseTrack, { passive: true });
 ```
 
-Combining Debounce and Throttle: The Best of Both Worlds
+### Combining Debounce and Throttle: The Best of Both Worlds
 
 Sometimes you need both patterns together. Consider a live search that updates results as you type but also refreshes periodically:
 
@@ -332,9 +332,9 @@ function debounceThrottle(func, wait = 300) {
 
 ---
 
-Performance Comparison: Debounce vs Throttle
+### Performance Comparison: Debounce vs Throttle
 
-Understanding when to use each pattern is crucial:
+### Understanding when to use each pattern is crucial:
 
 | Scenario | Pattern | Wait Time | Notes |
 |----------|---------|-----------|-------|
@@ -348,9 +348,9 @@ Understanding when to use each pattern is crucial:
 
 ---
 
-Real-World Extension Examples
+### Real-World Extension Examples
 
-Example 1: Tab Manager with Debounced Search
+### Example 1: Tab Manager with Debounced Search
 
 ```javascript
 // popup-search.js
@@ -400,7 +400,7 @@ class TabSearchManager {
 new TabSearchManager();
 ```
 
-Example 2: Background Sync with Throttled Updates
+### Example 2: Background Sync with Throttled Updates
 
 ```javascript
 // background-sync-manager.js
@@ -469,7 +469,7 @@ new BackgroundSyncManager();
 
 ---
 
-Best Practices for Chrome Extensions
+### Best Practices for Chrome Extensions
 
 1. Use Passive Event Listeners
 
@@ -492,7 +492,7 @@ The optimal wait time depends on your use case:
 
 3. Consider Using Chrome's Built-in APIs
 
-For certain scenarios, Chrome provides built-in mechanisms:
+### For certain scenarios, Chrome provides built-in mechanisms:
 
 ```javascript
 // Use chrome.alarms for periodic background tasks
@@ -509,7 +509,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 4. Monitor Performance Impact
 
-Always measure the impact of your optimizations:
+### Always measure the impact of your optimizations:
 
 ```javascript
 // Performance monitoring utility
@@ -543,7 +543,7 @@ class PerformanceMonitor {
 
 5. Test Across Different Scenarios
 
-Your extension should handle various user behaviors:
+### Your extension should handle various user behaviors:
 
 - Rapid clicking: User clicks buttons quickly
 - Long sessions: Extension runs for hours without issues
@@ -553,11 +553,11 @@ Your extension should handle various user behaviors:
 
 ---
 
-Common Pitfalls to Avoid
+### Common Pitfalls to Avoid
 
-Pitfall 1: Not Cleaning Up Event Listeners
+### Pitfall 1: Not Cleaning Up Event Listeners
 
-Always remove listeners when they're no longer needed:
+### Always remove listeners when they're no longer needed:
 
 ```javascript
 // Don't forget cleanup in content scripts
@@ -576,9 +576,9 @@ document.addEventListener('visibilitychange', () => {
 });
 ```
 
-Pitfall 2: Memory Leaks from Closures
+### Pitfall 2: Memory Leaks from Closures
 
-Be careful with closures in debounced/throttled functions:
+### Be careful with closures in debounced/throttled functions:
 
 ```javascript
 // Problem: Closure retains references to large objects
@@ -592,7 +592,7 @@ const largeData = loadLargeData();
 const safeHandler = throttle(() => process(largeData), 100);
 ```
 
-Pitfall 3: Ignoring the Leading/Trailing Edge
+### Pitfall 3: Ignoring the Leading/Trailing Edge
 
 Choose the right edge based on your needs:
 
@@ -606,11 +606,11 @@ const searchHandler = debounce(searchAPI, 300, { leading: false });
 
 ---
 
-Conclusion
+### Conclusion
 
 Debounce and throttle are essential tools in your Chrome extension development toolkit. By understanding when and how to apply these patterns, you can create extensions that are responsive, efficient, and respectful of system resources.
 
-Remember these key points:
+### Remember these key points:
 
 - Debounce waits for activity to stop before executing, perfect for search, form validation, and resize handlers
 - Throttle limits execution to regular intervals, ideal for tracking, monitoring, and real-time updates

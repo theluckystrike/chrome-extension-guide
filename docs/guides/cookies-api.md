@@ -7,13 +7,13 @@ last_modified_at: 2026-01-15
 ---
 Chrome Extension Cookies API. How to Read, Set, and Delete Browser Cookies
 
-Overview {#overview}
+## Overview {#overview}
 
 The Chrome Extensions Cookies API (`chrome.cookies`) provides powerful capabilities for reading, creating, modifying, and deleting browser cookies from your extension. This API is essential for building authentication managers, session handlers, privacy tools, and cross-site tracking utilities. However, working with cookies in extensions requires understanding several important concepts including permissions, cookie attributes, and modern browser privacy features like partitioned cookies.
 
 To use the Cookies API, your extension manifest must declare the `"cookies"` permission alongside host permissions for the specific domains you want to access. Without proper host permissions, the API will fail silently or return empty results.
 
-Required Permissions {#required-permissions}
+## Required Permissions {#required-permissions}
 
 ```json
 {
@@ -27,7 +27,7 @@ Required Permissions {#required-permissions}
 
 The `"cookies"` permission alone is insufficient, you must also include host permissions for each domain whose cookies you intend to read or modify. This is a security measure to prevent extensions from accessing cookies without explicit user consent through host permissions. For debugging purposes, you can use `"<all_urls>"` to grant access to all websites, though this triggers additional review during Chrome Web Store submission.
 
-Reading Cookies {#reading-cookies}
+## Reading Cookies {#reading-cookies}
 
 The `chrome.cookies.get()` method retrieves a single cookie by name and URL, while `chrome.cookies.getAll()` allows retrieving multiple cookies based on filter criteria. Understanding the difference between these methods is crucial for building efficient cookie management features.
 
@@ -77,7 +77,7 @@ chrome.cookies.getAll({
 });
 ```
 
-Setting Cookies {#setting-cookies}
+## Setting Cookies {#setting-cookies}
 
 Creating and updating cookies uses the `chrome.cookies.set()` method with an options object containing the cookie's attributes. Modern cookies support several important attributes that control their behavior and security.
 
@@ -112,7 +112,7 @@ chrome.cookies.set({
 
 The `sameSite` attribute is particularly important for modern web development. The `no_restriction` value (equivalent to "none" in JavaScript) requires the `secure` flag to be true. The `lax` value provides reasonable security while allowing cookies on normal navigation, while `strict` blocks cookies in all cross-site contexts.
 
-Removing Cookies {#removing-cookies}
+## Removing Cookies {#removing-cookies}
 
 Deleting cookies requires matching the exact URL, name, and store ID used when the cookie was set. The `chrome.cookies.remove()` method accepts these parameters and returns details about the removed cookie.
 
@@ -139,7 +139,7 @@ function clearDomainCookies(domain) {
 }
 ```
 
-Cookie Change Events {#cookie-change-events}
+## Cookie Change Events {#cookie-change-events}
 
 The `chrome.cookies.onChanged` event listener allows your extension to monitor all cookie modifications in real-time. This is invaluable for building session monitors, privacy dashboards, and debugging tools.
 
@@ -160,7 +160,7 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
 
 The event fires for both explicit user actions and automatic browser operations. The `cause` property helps distinguish between user-initiated changes and automatic cookie management.
 
-Partitioned Cookies {#partitioned-cookies}
+## Partitioned Cookies {#partitioned-cookies}
 
 Chrome's Privacy Sandbox introduces partitioned cookies, which isolate cookies based on the top-level site to prevent cross-site tracking while preserving legitimate use cases. Extensions must handle partitioned cookies correctly to work with modern browser behavior.
 
@@ -189,7 +189,7 @@ chrome.cookies.getAll({ partitioned: true }, (cookies) => {
 
 When `partitioned: true` is set, the cookie is stored with a partition key based on the top-level site URL. This means the same cookie name can exist multiple times for the same domain, each associated with different top-level sites. Extensions must account for this when managing cookies across different contexts.
 
-Cookie Stores and Incognito Mode {#cookie-stores-incognito}
+## Cookie Stores and Incognito Mode {#cookie-stores-incognito}
 
 Chrome manages cookies in separate stores for regular and incognito profiles. Extensions can access both but must explicitly handle each store.
 
@@ -212,7 +212,7 @@ chrome.cookies.getAll({
 
 Note that incognito cookies are cleared when the incognito window closes, and extensions cannot create persistent cookies in the incognito store unless explicitly authorized.
 
-Privacy Considerations {#privacy-considerations}
+## Privacy Considerations {#privacy-considerations}
 
 When building extension cookie functionality, you must consider user privacy implications. Extensions have elevated access to cookies compared to regular web pages, which brings responsibilities:
 
