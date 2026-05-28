@@ -788,6 +788,6 @@ Building a writing assistant Chrome extension is an excellent project that combi
 
 The skills you developed in this tutorial, working with content scripts, managing browser storage, handling asynchronous operations, and creating polished user interfaces, are directly applicable to countless other Chrome extension projects.
 
-Remember, this is just the beginning. The writing assistant framework you've built can be extended with AI-powered analysis, integration with third-party services, and advanced features like tone detection and plagiarism checking. The possibilities are endless, and the Chrome Web Store awaits your creativity.
+Remember, this is just the beginning. The writing assistant framework you've built can be extended with AI-powered analysis, integration with third-party services, and advanced features like tone detection and plagiarism checking. For a real-world example of a production writing extension, see our [BeLikeNative review](/docs/belikenative-grammar-ai-humanizer-review/), which covers how an AI grammar checker and humanizer works at scale with 10,000+ active users. The possibilities are endless, and the Chrome Web Store awaits your creativity.
 
 Start building today, and help writers around the world create better content with your extension!

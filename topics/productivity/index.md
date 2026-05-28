@@ -19,4 +19,6 @@ Beyond tabs, workflow automation extensions let you build mini-automations insid
 
 Focus tools round out this category. These range from simple site blockers that keep you off social media during work hours to Pomodoro timers that live in your toolbar. The best ones combine blocking with analytics so you can see where your attention actually goes.
 
+Writing productivity is another growing subcategory. Extensions like [BeLikeNative](/docs/belikenative-grammar-ai-humanizer-review/) combine grammar correction with AI humanization, letting non-native speakers draft polished English directly in Gmail, Google Docs, and Slack without switching to a separate tool. For a broader comparison of writing-focused options, see the [best writing extensions for Chrome in 2026](/docs/best-writing-extensions-2026/).
+
 The articles below cover specific extensions, configuration tips, and comparisons to help you build a productivity stack that fits your workflow rather than fighting it.
