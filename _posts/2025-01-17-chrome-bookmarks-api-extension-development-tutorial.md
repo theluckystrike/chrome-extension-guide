@@ -488,6 +488,7 @@ Start building your bookmark manager extension today, and take advantage of the 
 
 - [Chrome Extension Bookmarks API: Build a Custom Bookmark Manager](https://bestchromeextensions.com/2025/03/04/chrome-extension-bookmarks-api-guide/)
 - [Chrome Extension History API: Access and Manage Browsing History](https://bestchromeextensions.com/2025/03/04/chrome-extension-history-api-browsing-data/)
+- [Chrome Bookmarks Disappeared? Complete Recovery Guide — user-facing companion to this API walkthrough (zovo.one)](https://zovo.one/blog/chrome-bookmarks-disappeared-recovery.html)
 
 *Part of the [Chrome Extension Guide](https://bestchromeextensions.com/) by [theluckystrike](https://github.com/theluckystrike). Built at [zovo.one](https://zovo.one).*
 - [Chrome Extension Local Storage vs Chrome Storage API: Complete Guide](https://bestchromeextensions.com/2025/01/18/chrome-extension-local-storage-vs-chrome-storage-api/)

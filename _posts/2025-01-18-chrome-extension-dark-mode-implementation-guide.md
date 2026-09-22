@@ -839,6 +839,7 @@ Start building your dark mode extension today and join the thousands of develope
 - [Chrome Extension Popup Design Best Practices]({% post_url 2025-01-18-chrome-extension-popup-design-best-practices %})
 - [Chrome Extension Web Accessibility A11y Guide]({% post_url 2025-01-18-chrome-extension-accessibility-a11y-guide %})
 - [Chrome Extension Custom Fonts Loading]({% post_url 2025-03-22-chrome-extension-custom-fonts-loading %})
+- [Chrome Dark Mode Complete Guide — force dark mode on any website, not just extensions (zovo.one)](https://zovo.one/blog/chrome-dark-mode-complete-guide.html)
 
 ---
 
