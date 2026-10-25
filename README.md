@@ -1,8 +1,12 @@
 # Chrome Extension Guide
 
-1,500+ guides for Chrome extension development, Manifest V3 migration, and best practices.
+Free, MIT-licensed guides for building Chrome extensions with Manifest V3: APIs, migration, publishing, security and performance.
 
-**Browse:** [theluckystrike.github.io/chrome-extension-guide](https://bestchromeextensions.com/)
+**Browse:** [bestchromeextensions.com](https://bestchromeextensions.com/) (also served at [theluckystrike.github.io/chrome-extension-guide](https://theluckystrike.github.io/chrome-extension-guide/))
+
+**Start here:** [Getting started](docs/getting-started.md) · [Guides](docs/guides/) · [API reference](docs/api-reference/) · [Permissions](docs/permissions/)
+
+The repository holds about 1,500 Markdown files: 718 in `_posts/` and 790 in `docs/`.
 
 ### Topics
 
@@ -14,13 +18,13 @@
 
 ### Packages
 
-- [@theluckystrike/webext-storage](https://www.npmjs.com/package/@theluckystrike/webext-storage) -- Typed storage with schema validation
-- [@theluckystrike/webext-messaging](https://www.npmjs.com/package/@theluckystrike/webext-messaging) -- Promise-based typed message passing
-- [@theluckystrike/webext-permissions](https://www.npmjs.com/package/@theluckystrike/webext-permissions) -- Runtime permission helpers
+- [webext-storage](https://github.com/theluckystrike/webext-storage) -- Type-safe storage API wrapper
+- [webext-messaging](https://github.com/theluckystrike/webext-messaging) -- Promise-based typed message passing
+- [webext-permissions](https://github.com/theluckystrike/webext-permissions) -- Runtime permission checking and requesting
 
 ### Built with
 
-Jekyll on GitHub Pages. Requires Chrome 116+ and TypeScript 5.0+.
+Jekyll on GitHub Pages.
 
 ### Contributing
 
